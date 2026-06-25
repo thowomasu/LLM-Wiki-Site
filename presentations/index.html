@@ -4,6 +4,235 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Presentations | LLM Wiki Research Outputs</title>
+  <style>:root {
+  --ink: #17202a;
+  --muted: #5f6b76;
+  --line: #d9e0e6;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --blue: #225f9f;
+  --green: #137458;
+  --orange: #b85f17;
+  --red: #a83d4a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+.site-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+}
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 18px 14px;
+  background: #fff;
+  border-right: 1px solid var(--line);
+}
+.brand {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.15;
+}
+.brand span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.side-section {
+  margin: 18px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.side-link {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  margin: 6px 0;
+  padding: 7px 9px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.side-link:hover {
+  border-color: var(--line);
+  background: var(--paper);
+}
+.page-content {
+  min-width: 0;
+}
+header {
+  padding: 38px min(6vw, 64px) 24px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px min(5vw, 48px) 56px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 8px 12px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 20px;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 8px 14px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+.tab.active {
+  color: #fff;
+  border-color: var(--blue);
+  background: var(--blue);
+}
+a { color: var(--blue); }
+h1, h2, h3 { margin: 0; line-height: 1.12; letter-spacing: 0; }
+h1 { max-width: 980px; font-size: clamp(38px, 6vw, 76px); }
+h2 { margin-top: 30px; margin-bottom: 14px; font-size: clamp(26px, 3.5vw, 42px); }
+h3 { margin-top: 18px; margin-bottom: 8px; font-size: 21px; }
+p { max-width: 900px; font-size: 18px; }
+code {
+  font-family: Consolas, Monaco, monospace;
+  background: #eef2f5;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.kicker {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.lead { max-width: 980px; color: var(--muted); font-size: 22px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.metric {
+  display: block;
+  margin: 8px 0;
+  font-size: clamp(30px, 5vw, 54px);
+  line-height: 1;
+  font-weight: 800;
+}
+.good { color: var(--green); }
+.warn { color: var(--orange); }
+.bad { color: var(--red); }
+.label { color: var(--muted); font-size: 15px; }
+.note {
+  margin: 22px 0;
+  padding: 15px 17px;
+  border-left: 5px solid var(--orange);
+  background: #fff8f0;
+}
+.source-list {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 28px;
+}
+.source-item {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+.source-item code { word-break: break-word; }
+.source-kind {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: #fff;
+}
+th, td {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+th { background: #edf3f8; }
+.presentation-frame {
+  width: 100%;
+  height: 78vh;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+footer {
+  padding: 22px min(7vw, 72px);
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  background: #fff;
+}
+@media (max-width: 850px) {
+  .site-shell { display: block; }
+  .sidebar {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .grid, .grid.two { grid-template-columns: 1fr; }
+  p { font-size: 17px; }
+}</style>
   <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -11,6 +240,7 @@
     <aside class="sidebar"><a class="brand" href="../index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a><div class="side-section">Project</div>
 <a class="side-link" href="../index.html">Overview</a>
 <a class="side-link" href="../presentations/">Presentations</a>
+<a class="side-link" href="../datasets/">Datasets</a>
 <a class="side-link" href="../sources/">Sources</a>
 <a class="side-link" href="../glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
@@ -33,7 +263,7 @@
     <section class="note">
       <strong>Purpose:</strong> this is the public reading shelf for the project. It is generated from presentation-like HTML files under <code>40 Outputs</code>, so future presentation files are picked up by the site build.
     </section>
-    <h2 id="drt-pipeline">DRT (Distribution of Relaxation Times) Pipeline</h2><section class="grid"><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>00 Read First</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/00_Read_First/MINI_PRESENTATION.html</code></p><p><a class="button" href="drt-pipeline-00-read-first/">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>01 Method And Math</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/01_Method_And_Math/MINI_PRESENTATION.html</code></p><p><a class="button" href="drt-pipeline-01-method-and-math/">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>02 Key Results</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/MINI_PRESENTATION.html</code></p><p><a class="button" href="drt-pipeline-02-key-results/">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>03 Key Plots</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/MINI_PRESENTATION.html</code></p><p><a class="button" href="drt-pipeline-03-key-plots/">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>04 Code</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/04_Code/MINI_PRESENTATION.html</code></p><p><a class="button" href="drt-pipeline-04-code/">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>05 Reproduction</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/05_Reproduction/MINI_PRESENTATION.html</code></p><p><a class="button" href="drt-pipeline-05-reproduction/">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>Read Me For Professor</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/README_FOR_PROFESSOR.html</code></p><p><a class="button" href="drt-pipeline-read-me-for-professor/">Open presentation</a></p></article></section><h2 id="dib-data">DIB (Data in Brief) Data</h2><section class="grid"><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>Professor Brief</h3><p><code>40 Outputs/Experiments/Zenodo Expt4/02_Time_Series_DRT_Pipeline/00_Docs/PROFESSOR_BRIEF.html</code></p><p><a class="button" href="dib-data-professor-brief/">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>00 Read First</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/00_Read_First/MINI_PRESENTATION.html</code></p><p><a class="button" href="dib-data-00-read-first/">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>01 Dataset Map</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/01_Dataset_Map/MINI_PRESENTATION.html</code></p><p><a class="button" href="dib-data-01-dataset-map/">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>02 Pipeline Report</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/02_Pipeline_Report/MINI_PRESENTATION.html</code></p><p><a class="button" href="dib-data-02-pipeline-report/">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>03 Key Plots</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/03_Key_Plots/MINI_PRESENTATION.html</code></p><p><a class="button" href="dib-data-03-key-plots/">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>04 Validation Audit</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/04_Validation_Audit/MINI_PRESENTATION.html</code></p><p><a class="button" href="dib-data-04-validation-audit/">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>05 Code</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/05_Code/MINI_PRESENTATION.html</code></p><p><a class="button" href="dib-data-05-code/">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>06 Reproduction</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/06_Reproduction/MINI_PRESENTATION.html</code></p><p><a class="button" href="dib-data-06-reproduction/">Open presentation</a></p></article></section><h2 id="calb-dataset">CALB (China Aviation Lithium Battery) Dataset</h2><section class="grid"><article class="card"><div class="kicker">CALB (China Aviation Lithium Battery) Dataset</div><h3>CALB L148N58A Dataset Validation Brief</h3><p><code>40 Outputs/Experiments/CALB L148N58A/03_Professor_Report/calb_l148n58a_professor_report.html</code></p><p><a class="button" href="calb-dataset-calb-l148n58a-dataset-validation-brief/">Open presentation</a></p></article><article class="card"><div class="kicker">CALB (China Aviation Lithium Battery) Dataset</div><h3>CALB L148N58A Viability Presentation</h3><p><code>40 Outputs/Experiments/CALB L148N58A/03_Professor_Report/calb_l148n58a_viability_presentation.html</code></p><p><a class="button" href="calb-dataset-calb-l148n58a-viability-presentation/">Open presentation</a></p></article></section>
+    <h2 id="drt-pipeline">DRT (Distribution of Relaxation Times) Pipeline</h2><section class="grid"><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>Time-Series DRT Pipeline Using DIB Dataset: 00 Read First</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/00_Read_First/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-time-series-drt-pipeline-2026-06-15/00_Read_First/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>Time-Series DRT Pipeline Using DIB Dataset: 01 Method And Math</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/01_Method_And_Math/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-time-series-drt-pipeline-2026-06-15/01_Method_And_Math/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>Time-Series DRT Pipeline Using DIB Dataset: 02 Key Results</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-time-series-drt-pipeline-2026-06-15/02_Key_Results/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>Time-Series DRT Pipeline Using DIB Dataset: 03 Key Plots</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-time-series-drt-pipeline-2026-06-15/03_Key_Plots/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>Time-Series DRT Pipeline Using DIB Dataset: 04 Code</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/04_Code/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-time-series-drt-pipeline-2026-06-15/04_Code/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>Time-Series DRT Pipeline Using DIB Dataset: 05 Reproduction</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/05_Reproduction/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-time-series-drt-pipeline-2026-06-15/05_Reproduction/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DRT (Distribution of Relaxation Times) Pipeline</div><h3>Time-Series DRT Pipeline Using DIB Dataset: Read Me For Professor</h3><p><code>40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/README_FOR_PROFESSOR.html</code></p><p><a class="button" href="library/professor-packages-time-series-drt-pipeline-2026-06-15/README_FOR_PROFESSOR.html">Open presentation</a></p></article></section><h2 id="dib-data">DIB (Data in Brief) Data</h2><section class="grid"><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>Time-Series DRT Pipeline Using Zenodo Experiment 4 DIB Dataset: Professor Brief</h3><p><code>40 Outputs/Experiments/Zenodo Expt4/02_Time_Series_DRT_Pipeline/00_Docs/PROFESSOR_BRIEF.html</code></p><p><a class="button" href="library/experiments-zenodo-expt4-02-time-series-drt-pipeline/00_Docs/PROFESSOR_BRIEF.html">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>Time-Series DRT Pipeline Using Zenodo Experiment 4 DIB Dataset: 00 Read First</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/00_Read_First/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-zenodo-expt4-dataset-handoff-2026-06-19/00_Read_First/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>Time-Series DRT Pipeline Using Zenodo Experiment 4 DIB Dataset: 01 Dataset Map</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/01_Dataset_Map/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-zenodo-expt4-dataset-handoff-2026-06-19/01_Dataset_Map/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>Time-Series DRT Pipeline Using Zenodo Experiment 4 DIB Dataset: 02 Pipeline Report</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/02_Pipeline_Report/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-zenodo-expt4-dataset-handoff-2026-06-19/02_Pipeline_Report/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>Time-Series DRT Pipeline Using Zenodo Experiment 4 DIB Dataset: 03 Key Plots</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/03_Key_Plots/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-zenodo-expt4-dataset-handoff-2026-06-19/03_Key_Plots/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>Time-Series DRT Pipeline Using Zenodo Experiment 4 DIB Dataset: 04 Validation Audit</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/04_Validation_Audit/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-zenodo-expt4-dataset-handoff-2026-06-19/04_Validation_Audit/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>Time-Series DRT Pipeline Using Zenodo Experiment 4 DIB Dataset: 05 Code</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/05_Code/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-zenodo-expt4-dataset-handoff-2026-06-19/05_Code/MINI_PRESENTATION.html">Open presentation</a></p></article><article class="card"><div class="kicker">DIB (Data in Brief) Data</div><h3>Time-Series DRT Pipeline Using Zenodo Experiment 4 DIB Dataset: 06 Reproduction</h3><p><code>40 Outputs/Professor Packages/Zenodo Expt4 Dataset Handoff - 2026-06-19/06_Reproduction/MINI_PRESENTATION.html</code></p><p><a class="button" href="library/professor-packages-zenodo-expt4-dataset-handoff-2026-06-19/06_Reproduction/MINI_PRESENTATION.html">Open presentation</a></p></article></section><h2 id="calb-dataset">CALB (China Aviation Lithium Battery) Dataset</h2><section class="grid"><article class="card"><div class="kicker">CALB (China Aviation Lithium Battery) Dataset</div><h3>Time-Series DRT Pipeline Using CALB L148N58A Dataset: Dataset Validation Brief</h3><p><code>40 Outputs/Experiments/CALB L148N58A/03_Professor_Report/calb_l148n58a_professor_report.html</code></p><p><a class="button" href="../calb/03_Professor_Report/calb_l148n58a_professor_report.html">Open presentation</a></p></article><article class="card"><div class="kicker">CALB (China Aviation Lithium Battery) Dataset</div><h3>Time-Series DRT Pipeline Using CALB L148N58A Dataset: Viability Presentation</h3><p><code>40 Outputs/Experiments/CALB L148N58A/03_Professor_Report/calb_l148n58a_viability_presentation.html</code></p><p><a class="button" href="../calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open presentation</a></p></article></section>
 
       </main>
       <footer>

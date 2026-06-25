@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>External Validation Dataset Qualification | LLM Wiki Research Outputs</title>
+  <title>Dataset Exploration | LLM Wiki Research Outputs</title>
   <style>:root {
   --ink: #17202a;
   --muted: #5f6b76;
@@ -255,62 +255,18 @@ footer {
     <div class="page-content">
       <header>
         <div class="kicker">LLM Wiki Research Outputs</div>
-        <h1>External Validation Dataset Qualification</h1>
-
+        <h1>Dataset Exploration</h1>
+        <p class="lead">Every dataset currently used or screened by the LLM Toolkit work.</p>
       </header>
       <main>
-<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab active" href="./">Dataset comparison</a><a class="tab" href="calce/">CALCE (Center for Advanced Life Cycle Engineering)</a><a class="tab" href="nasa/">NASA Battery</a><a class="tab" href="../sources/external/">Sources</a></div><h2>External Validation Dataset Qualification</h2>
-<h2>Scope</h2>
-<p>This is dataset qualification, not validation.</p>
-<p>The frozen CALB rule has not been externally validated here. These manifests only answer whether the local NASA and CALCE downloads have enough same-cell evidence to justify the next adapter.</p>
-<h2>Inputs Reviewed</h2>
-<ul>
-<li>NASA wrapper ZIP: <code>[local path redacted]</code></li>
-<li>CALCE Storage folder: <code>[local path redacted]</code></li>
-<li>NASA manifest output: <code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/</code></li>
-<li>CALCE manifest output: <code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/</code></li>
-</ul>
-<h2>Comparison</h2>
-<table>
-<tr><th>Criterion</th><th>NASA Battery Data Set</th><th>CALCE Storage 25 C</th></tr>
-<tr><td>Files inspected</td><td>6 inner BatteryAgingARC ZIPs, 38 MAT files</td><td>5 requested Storage archives only</td></tr>
-<tr><td>Same-cell EIS</td><td>Yes, 34 unique cells with charge, discharge, and impedance</td><td>Yes, same PLN capacity and impedance candidates</td></tr>
-<tr><td>Time-domain evidence</td><td>Charge and discharge cycling</td><td>Capacity workbooks tied to PLN IDs</td></tr>
-<tr><td>Explicit SOC labels</td><td>Weak for bridge alignment</td><td>Strong: 0, 50, and 100 percent SOC metadata</td></tr>
-<tr><td>25 C subset</td><td>Present, but mixed with other ambient conditions</td><td>Direct target subset</td></tr>
-<tr><td>Candidate pairings</td><td>68 same-cell impedance plus charge/discharge rows</td><td>24 same-PLN capacity plus EIS rows at 25 C</td></tr>
-<tr><td>Fit to CALB failure mode</td><td>Weak, not drive-cycle or pulse-aligned</td><td>Better SOC and same-cell metadata, still not drive-cycle</td></tr>
-</table>
-<h2>Recommendation</h2>
-<p>Use CALCE Storage 25 C first.</p>
-<p>Reason: CALCE has the cleaner external qualification path for the frozen CALB rule because it exposes PLN IDs, SOC labels, 25 C conditions, capacity workbooks, and same-cell impedance CSVs. The next adapter can make explicit same-PLN, same-SOC, same-temperature joins without playing games.</p>
-<p>NASA should be second. It is not useless, but it is the wrong first fight. It has same-cell impedance plus charge/discharge cycling, not the pulse or drive-cycle structure that already broke confidence in Sections 36, 37, 40, and 42. If you start with NASA because it has more rows, you are optimizing for comfort instead of the actual failure mode. That would be bad science.</p>
-<h2>Claim Boundary</h2>
-<p>Allowed:</p>
-<ul>
-<li>CALCE Storage 25 C is the better first external dataset for same-cell capacity plus EIS qualification.</li>
-<li>NASA is usable later as a same-cell impedance plus charge/discharge robustness check.</li>
-</ul>
-<p>Not allowed:</p>
-<ul>
-<li>The CALB rule is externally validated.</li>
-<li>NASA validates the drive-cycle bridge.</li>
-<li>CALCE validates drive-cycle behavior. It does not.</li>
-</ul>
-<h2>Next Step</h2>
-<p>Build the CALCE adapter first:</p>
-<p>1. Join <code>pln_metadata.csv</code>, <code>capacity_workbook_channels.csv</code>, and <code>impedance_csv_manifest.csv</code>.</p>
-<p>2. Freeze the join keys before modeling: <code>pln_id</code>, <code>temperature_c</code>, <code>storage_period</code>, and <code>soc_percent</code>.</p>
-<p>3. Start with the 24 candidate 25 C PLN IDs from <code>summary.json</code>.</p>
-<p>4. Run the frozen CALB rule unchanged, then compare against a boring ECM baseline.</p>
-<p>5. If DRT loses or the join is dirty, say that. Do not massage it into validation.</p>
-<h2>Generated Artifacts</h2>
-<ul>
-<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/README.md</code></li>
-<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/summary.json</code></li>
-<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/README.md</code></li>
-<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/summary.json</code></li>
-</ul>
+
+    <section class="note">
+      <strong>Purpose:</strong> this page lists every dataset currently used or explicitly screened by the public project outputs. It separates current evidence from future validation targets.
+    </section>
+    <section class="grid two">
+      <article class="card"><h3>CALB L148N58A Dataset</h3><p>China Aviation Lithium Battery L148N58A large-prismatic-cell dataset used for the current EIS (Electrochemical Impedance Spectroscopy), HPPC (Hybrid Pulse Power Characterization), and drive-cycle evidence package.</p><span class="metric good">246 / 246</span><div class="label">Internal pulse-bridge quality-pass rows. This is the strongest current local result.</div><p><a class="button" href="../calb/data/">View CALB data</a> <a class="button" href="../calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB presentation</a></p></article><article class="card"><h3>Zenodo Experiment 4 DIB Dataset</h3><p>Data in Brief style ageing dataset used for the time-series DRT pipeline, feature extraction, held-out-cell checks, and negative-control audits.</p><span class="metric good">1,106</span><div class="label">Local files inspected for same-cell EIS evidence. The result was zero EIS-like hits, so this stays a health-feature dataset, not EIS validation.</div><p><a class="button" href="../presentations/#dib-data">Open DIB presentations</a></p></article><article class="card"><h3>CALCE Storage 25 C Dataset</h3><p>Center for Advanced Life Cycle Engineering storage dataset screened as the first external EIS validation candidate.</p><span class="metric good">24</span><div class="label">Same-PLN candidate rows at 25 C. PLN means the CALCE cell identifier used to join capacity and impedance records.</div><p><a class="button" href="../external-validation/calce/">Open CALCE report</a> <a class="button" href="../external-validation/calce/data/candidate_pairings.csv">View CALCE pairings</a></p></article><article class="card"><h3>NASA Battery Dataset</h3><p>National Aeronautics and Space Administration battery dataset screened as a later validation candidate.</p><span class="metric good">34</span><div class="label">Unique cells with charge, discharge, and impedance evidence. Useful later, but weaker than CALCE for the next step.</div><p><a class="button" href="../external-validation/nasa/">Open NASA report</a> <a class="button" href="../external-validation/nasa/data/candidate_pairings.csv">View NASA pairings</a></p></article><article class="card"><h3>KIT RADAR4KIT Dataset</h3><p>Comprehensive battery ageing dataset with capacity and impedance fade measurements. Selected as the better second-dataset candidate after the Zenodo Experiment 4 audit.</p><span class="metric good">21</span><div class="label">Local DOI 10.35097/1947 cell_eisv2.zip is incomplete; use corrected EIS addendum before validation.</div><p><a class="button" href="../sources/external/">Open external sources</a></p></article>
+    </section>
+
       </main>
       <footer>
         Public-facing static site generated from curated vault outputs. This is not the raw vault.
