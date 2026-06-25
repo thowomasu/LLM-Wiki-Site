@@ -8,10 +8,10 @@
 </head>
 <body>
   <header>
+    <div class="topbar"><a class="button" href="index.html">Home</a></div>
     <div class="kicker">LLM Wiki Research Outputs</div>
     <h1>CALB DRT Research Outputs</h1>
     <p class="lead">A curated GitHub Pages front door for the professor-facing outputs.</p>
-    <nav><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Presentation</a><a class="button" href="external-validation/">External validation</a><a class="button" href="external-validation/calce/">CALCE</a><a class="button" href="external-validation/nasa/">NASA</a></nav>
   </header>
   <main>
 
@@ -19,13 +19,24 @@
       <strong>Claim boundary:</strong> this site is for easy viewing. It does not turn internal results into external validation.
       The clean next step is a frozen-rule CALCE run with an ECM baseline.
     </section>
-    <section class="grid">
+    <section class="grid two">
       <article class="card">
         <h3>CALB viability presentation</h3>
         <span class="metric good">246 / 246</span>
         <div class="label">Internal pulse bridge pass rows. Strong result, narrow claim.</div>
         <p><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open presentation</a></p>
       </article>
+      <article class="card">
+        <h3>All sources</h3>
+        <span class="metric warn">3</span>
+        <div class="label">Source pages: full index, CALB pipeline evidence, and external dataset qualification.</div>
+        <p><a class="button" href="sources/">Open sources</a></p>
+      </article>
+    </section>
+    <section>
+      <h2>Dataset Exploration Pipeline</h2>
+      <nav class="tabs" aria-label="Section tabs"><a class="tab active" href="external-validation/">Dataset comparison</a><a class="tab" href="external-validation/calce/">CALCE Storage 25 C</a><a class="tab" href="external-validation/nasa/">NASA Battery</a></nav>
+      <div class="grid">
       <article class="card">
         <h3>CALCE first</h3>
         <span class="metric good">24</span>
@@ -38,21 +49,31 @@
         <div class="label">Unique cells with charge, discharge, and impedance. Useful later, not the first validation target.</div>
         <p><a class="button" href="external-validation/nasa/">Open NASA report</a></p>
       </article>
-    </section>
-    <section class="grid two">
       <article class="card">
-        <h2>External validation package</h2>
+        <h3>Dataset comparison</h3>
         <p>NASA and CALCE are now organized into one qualification package. The recommendation is blunt: CALCE first, NASA second.</p>
         <p><a class="button" href="external-validation/">Open dataset comparison</a></p>
       </article>
+      </div>
+    </section>
+    <section>
+      <h2>Source Pages</h2>
+      <nav class="tabs" aria-label="Section tabs"><a class="tab active" href="sources/">Everything</a><a class="tab" href="sources/calb/">CALB pipeline</a><a class="tab" href="sources/external/">External datasets</a></nav>
+      <div class="grid two">
       <article class="card">
-        <h2>What not to say</h2>
+        <h3>Sources for everything</h3>
+        <p>One index for the published site inputs: reports, summaries, manifests, plots, public data artifacts, and literature links.</p>
+        <p><a class="button" href="sources/">Open all sources</a></p>
+      </article>
+      <article class="card">
+        <h3>What not to say</h3>
         <ul>
           <li>Do not say the CALB rule is externally validated.</li>
           <li>Do not present Section 34 alone as drive-cycle proof.</li>
           <li>Do not publish raw sources or local private data paths as the product.</li>
         </ul>
       </article>
+      </div>
     </section>
 
   </main>

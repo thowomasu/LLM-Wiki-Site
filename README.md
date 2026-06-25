@@ -4,7 +4,7 @@ This folder is the curated public site for the LLM Wiki research outputs.
 
 Expected project URL after GitHub Pages is enabled:
 
-`https://thowomasu.github.io/LLM-Wiki/`
+`https://thowomasu.github.io/LLM-Wiki-Site/`
 
 Recommended GitHub Pages setting:
 

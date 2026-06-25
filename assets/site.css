@@ -45,6 +45,35 @@ nav a, .button {
   background: #fff;
   font-size: 14px;
 }
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 28px;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 20px;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 8px 14px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+.tab.active {
+  color: #fff;
+  border-color: var(--blue);
+  background: var(--blue);
+}
 a { color: var(--blue); }
 h1, h2, h3 { margin: 0; line-height: 1.12; letter-spacing: 0; }
 h1 { max-width: 980px; font-size: clamp(38px, 6vw, 76px); }
@@ -94,6 +123,26 @@ code {
   padding: 15px 17px;
   border-left: 5px solid var(--orange);
   background: #fff8f0;
+}
+.source-list {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 28px;
+}
+.source-item {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+.source-item code { word-break: break-word; }
+.source-kind {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 table {
   width: 100%;
