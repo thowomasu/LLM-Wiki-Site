@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CALB Data Explorer | LLM Wiki Research Outputs</title>
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+  <header>
+    <div class="topbar"><a class="button" href="../../index.html">Home</a></div>
+    <div class="kicker">LLM Wiki Research Outputs</div>
+    <h1>CALB Data Explorer</h1>
+    <p class="lead">View and download the public CALB evidence files.</p>
+  </header>
+  <main>
+
+    <section class="note">
+      <strong>Official raw data:</strong> download the full CALB L148N58A source dataset from <a href="https://data.mendeley.com/datasets/ycx459r5c3/2">Mendeley Data version 2</a>. This page publishes only curated, lightweight local outputs for review.
+    </section>
+    <section class="grid two">
+      <article class="card"><h3>Paper</h3><p>Fasolato et al., Data in Brief 58, 111301, 2025.</p><p><a class="button" href="https://www.sciencedirect.com/science/article/pii/S2352340925000332">Open paper</a></p></article>
+      <article class="card"><h3>Dataset repository</h3><p>Mendeley Data version 2, DOI 10.17632/ycx459r5c3.2.</p><p><a class="button" href="https://data.mendeley.com/datasets/ycx459r5c3/2">Open repository</a></p></article>
+    </section>
+    <h2>Downloadable Files</h2>
+    <table>
+      <thead><tr><th>File</th><th>Label</th><th>What it contains</th><th>Action</th></tr></thead>
+      <tbody><tr><td><code>manifest.csv</code></td><td>Processed file manifest</td><td>Parsed index of local CALB MAT files by cell, temperature, protocol, and data stage.</td><td><a class="button" href="manifest.csv">View/download</a></td></tr>
+<tr><td><code>protocol_summary.csv</code></td><td>Protocol coverage</td><td>Counts by temperature, protocol, file count, and cell count.</td><td><a class="button" href="protocol_summary.csv">View/download</a></td></tr>
+<tr><td><code>summary.json</code></td><td>Manifest summary</td><td>Machine-readable overview of archive size, parsed rows, cells, temperatures, and protocols.</td><td><a class="button" href="summary.json">View/download</a></td></tr>
+<tr><td><code>EIS_test.csv</code></td><td>EIS first-slice data</td><td>Electrochemical Impedance Spectroscopy for cell 59294 at 25 C.</td><td><a class="button" href="EIS_test.csv">View/download</a></td></tr>
+<tr><td><code>C20_Discharge.csv</code></td><td>C/20 capacity context</td><td>Low-rate discharge trace for cell 59294 at 25 C. This is capacity context, not ageing-by-cycle validation.</td><td><a class="button" href="C20_Discharge.csv">View/download</a></td></tr>
+<tr><td><code>DV_WLTP.csv</code></td><td>Dynamic cycle example</td><td>WLTP drive-cycle current and voltage trace for cell 59294 at 25 C.</td><td><a class="button" href="DV_WLTP.csv">View/download</a></td></tr>
+<tr><td><code>section_1_protocol_inventory.csv</code></td><td>Exploration inventory</td><td>First-slice protocol rows, durations, sample spacing, and current span.</td><td><a class="button" href="section_1_protocol_inventory.csv">View/download</a></td></tr>
+<tr><td><code>section_33_adaptive_final_rule_rows.csv</code></td><td>Main bridge result</td><td>Final adaptive pulse-bridge rows behind the 246/246 internal pass claim.</td><td><a class="button" href="section_33_adaptive_final_rule_rows.csv">View/download</a></td></tr>
+<tr><td><code>section_34_drive_cycle_rows.csv</code></td><td>Drive-cycle transfer rows</td><td>Rows behind the dynamic-cycle transfer audit.</td><td><a class="button" href="section_34_drive_cycle_rows.csv">View/download</a></td></tr></tbody>
+    </table>
+    <h2>What Is Missing</h2>
+    <p>There is no honest capacity-vs-age-by-cycle plot in this local CALB package. The current CALB work is fresh-cell characterization. Use the C/20 discharge file for capacity context only, and use a true ageing dataset for cycle-age capacity validation.</p>
+
+  </main>
+  <footer>
+    Public-facing static site generated from curated vault outputs. This is not the raw vault.
+  </footer>
+</body>
+</html>

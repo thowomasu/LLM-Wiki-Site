@@ -1,0 +1,18 @@
+{
+  "section": 37,
+  "c20_curve_count": 33,
+  "bridge_row_count": 246,
+  "drive_row_count": 198,
+  "error_count": 0,
+  "median_bridge_abs_soc_delta": 0.004556003613014614,
+  "p95_bridge_abs_soc_delta": 0.010119652664487264,
+  "bridge_rows_soc_delta_gt_2pct": 0,
+  "bridge_rows_soc_delta_gt_5pct": 0,
+  "bridge_flagged_rows": 0,
+  "median_drive_abs_soc_delta": 0.0637559086707088,
+  "p95_drive_abs_soc_delta": 0.10274714623982303,
+  "drive_rows_soc_delta_gt_5pct": 182,
+  "drive_rows_soc_delta_gt_10pct": 40,
+  "drive_flagged_rows": 182,
+  "verdict": "soc_alignment_audit_complete"
+}

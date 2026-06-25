@@ -21,29 +21,33 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
+      padding-left: 220px;
       color: var(--ink);
       background: var(--paper);
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.45;
     }
     nav {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      bottom: 0;
+      width: 220px;
       z-index: 10;
       display: flex;
+      flex-direction: column;
       gap: 10px;
-      align-items: center;
-      overflow-x: auto;
-      padding: 10px 18px;
+      align-items: stretch;
+      overflow-y: auto;
+      padding: 18px 14px;
       background: rgba(255, 255, 255, 0.96);
-      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
     }
     nav a {
-      flex: 0 0 auto;
       color: var(--ink);
       text-decoration: none;
       font-size: 13px;
-      padding: 6px 9px;
+      padding: 8px 9px;
       border: 1px solid var(--line);
       border-radius: 6px;
       background: #fff;
@@ -192,6 +196,25 @@
       font-size: 14px;
       margin-top: 8px;
     }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 6px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
     .roadmap {
       counter-reset: step;
       display: grid;
@@ -233,6 +256,17 @@
     }
     a { color: var(--blue); }
     @media (max-width: 900px) {
+      body { padding-left: 0; }
+      nav {
+        position: sticky;
+        bottom: auto;
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+        overflow-x: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
       section { padding: 42px 22px; }
       .grid, .grid.two, .roadmap { grid-template-columns: 1fr; }
       table { font-size: 14px; }
@@ -253,8 +287,10 @@
   <a class="site-home" href="../../index.html">Home</a>
   <nav aria-label="Presentation navigation">
     <a href="#title">Title</a>
+    <a href="#manual">Manual</a>
     <a href="#claim">Claim</a>
     <a href="#dataset">Dataset</a>
+    <a href="#downloads">Data</a>
     <a href="#data-exploration">Exploration</a>
     <a href="#pipeline">Pipeline</a>
     <a href="#failure">Failure</a>
@@ -268,6 +304,7 @@
     <a href="#combined">Combined</a>
     <a href="#limits">Limits</a>
     <a href="#roadmap">Roadmap</a>
+    <a href="#glossary">Glossary</a>
     <a href="#sources">Sources</a>
   </nav>
 
@@ -276,7 +313,37 @@
       <div class="kicker">CALB L148N58A dataset pipeline</div>
       <h1>Internal pulse bridge is strong. External validation is not done.</h1>
       <p class="large">Result: the final adaptive tau-constrained pulse bridge passes the declared internal EIS/TDM DRT gate across 10 C, 25 C, and 40 C. Drive-cycle and external validation remain the hard part.</p>
-      <p class="muted">Prepared from local CALB archive runs, Sections 1 to 42, plus NASA and CALCE dataset qualification. Current file: <code>calb_l148n58a_viability_presentation.html</code>.</p>
+      <p class="muted">Prepared from local CALB archive runs, Sections 1 to 42, plus NASA and CALCE dataset qualification. The corresponding public paper is the Data in Brief article by Fasolato et al. and the dataset repository is Mendeley Data version 2.</p>
+      <div class="button-row">
+        <a class="button" href="#downloads">View and download data</a>
+        <a class="button" href="../manual/">Open manual</a>
+        <a class="button" href="https://www.sciencedirect.com/science/article/pii/S2352340925000332">Open paper</a>
+        <a class="button" href="https://data.mendeley.com/datasets/ycx459r5c3/2">Open dataset repository</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="manual">
+    <div class="slide">
+      <div class="kicker">Manual</div>
+      <h2>How to use this CALB website.</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1. Start with the claim</h3>
+          <p class="small">Use the first two sections to see the claim boundary: the pulse bridge passes internally, but drive-cycle transfer and external validation are not solved.</p>
+        </div>
+        <div class="card">
+          <h3>2. Open the data</h3>
+          <p class="small">Use the Data section buttons to view CSV and JSON files directly in the browser. Download the same files if you want to inspect them in Python, Excel, or MATLAB.</p>
+        </div>
+        <div class="card">
+          <h3>3. Check the figures</h3>
+          <p class="small">Use the figures as entry points, not proof by themselves. Each figure has a CSV or JSON link beside it where practical.</p>
+        </div>
+      </div>
+      <div class="truth">
+        Example case: open <code>EIS_test.csv</code> for cell 59294 at 25 C, compare it with the Section 33 bridge rows, then open the drive-cycle rows to see why pulse success does not automatically prove drive-cycle success.
+      </div>
     </div>
   </section>
 
@@ -344,6 +411,12 @@
       <div class="truth">
         The useful structure is same cell, same temperature, multiple test types. That is why EIS, HPPC pulse relaxation, low-rate capacity context, and drive-cycle voltage can be compared without mixing different cells.
       </div>
+      <div class="button-row">
+        <a class="button" href="../data/">View data index</a>
+        <a class="button" href="../data/manifest.csv">Download manifest CSV</a>
+        <a class="button" href="../data/summary.json">Download manifest JSON</a>
+        <a class="button" href="https://data.mendeley.com/datasets/ycx459r5c3/2">Download full raw dataset from Mendeley</a>
+      </div>
       <table>
         <thead>
           <tr>
@@ -356,12 +429,12 @@
           <tr>
             <td>EIS</td>
             <td><code>EIS_test</code></td>
-            <td>Frequency-domain DRT target.</td>
+            <td>Electrochemical Impedance Spectroscopy. This is the frequency-domain DRT target.</td>
           </tr>
           <tr>
             <td>Pulse tests</td>
             <td><code>HPPC_1C</code>, <code>HPPC_C3</code></td>
-            <td>Time-domain pulse relaxation source.</td>
+            <td>Hybrid Pulse Power Characterization at 1C and C/3. These files supply pulse relaxation data for time-domain DRT.</td>
           </tr>
           <tr>
             <td>Low-rate capacity</td>
@@ -371,7 +444,7 @@
           <tr>
             <td>Dynamic operation</td>
             <td><code>DV_UDDS</code>, <code>DV_US06</code>, <code>DV_WLTP</code></td>
-            <td>Drive-cycle transfer validation target.</td>
+            <td>Dynamic voltage/current drive-cycle tests: UDDS, US06, and WLTP driving profiles.</td>
           </tr>
         </tbody>
       </table>
@@ -381,14 +454,55 @@
     </div>
   </section>
 
+  <section id="downloads">
+    <div class="slide">
+      <div class="kicker">View and download data</div>
+      <h2>The evidence is available as browser-viewable files, not just claims.</h2>
+      <p>These are curated public copies of local CALB outputs. The full raw source archive should be downloaded from Mendeley Data because it is large and is the official repository.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Source dataset</h3>
+          <p class="small">Official CALB L148N58A repository, version 2, DOI 10.17632/ycx459r5c3.2.</p>
+          <div class="button-row"><a class="button" href="https://data.mendeley.com/datasets/ycx459r5c3/2">Open Mendeley repository</a></div>
+        </div>
+        <div class="card">
+          <h3>Processed manifest</h3>
+          <p class="small">Parsed local index of 264 processed MAT files by cell, temperature, protocol, and stage.</p>
+          <div class="button-row"><a class="button" href="../data/manifest.csv">View CSV</a><a class="button" href="../data/summary.json">View JSON</a></div>
+        </div>
+        <div class="card">
+          <h3>Representative slice</h3>
+          <p class="small">Cell 59294 at 25 C: EIS, C/20 discharge, and WLTP dynamic cycle preview files.</p>
+          <div class="button-row"><a class="button" href="../data/EIS_test.csv">View EIS</a><a class="button" href="../data/C20_Discharge.csv">View C/20</a><a class="button" href="../data/DV_WLTP.csv">View WLTP</a></div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>File</th><th>What it contains</th><th>Use</th><th>Link</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>section_33_adaptive_final_rule_rows.csv</code></td><td>Final pulse-bridge rows across 10 C, 25 C, and 40 C.</td><td>Audit the main 246/246 pass claim.</td><td><a href="../data/section_33_adaptive_final_rule_rows.csv">View/download</a></td></tr>
+          <tr><td><code>section_34_drive_cycle_rows.csv</code></td><td>Drive-cycle transfer rows for UDDS, US06, and WLTP.</td><td>Check why drive-cycle validation is weaker.</td><td><a href="../data/section_34_drive_cycle_rows.csv">View/download</a></td></tr>
+          <tr><td><code>section_1_protocol_inventory.csv</code></td><td>First-slice file inventory and row counts.</td><td>Understand what files exist before modeling.</td><td><a href="../data/section_1_protocol_inventory.csv">View/download</a></td></tr>
+          <tr><td><code>protocol_summary.csv</code></td><td>Coverage by temperature, protocol, file count, and cell count.</td><td>Check data coverage without opening the archive.</td><td><a href="../data/protocol_summary.csv">View/download</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <section id="data-exploration">
     <div class="slide">
       <div class="kicker">Data exploration</div>
       <h2>One representative slice shows why the dataset can be confusing at first.</h2>
       <p>Section 1 audits cell <code>59294</code> at <code>25 C</code>. It is small enough to explain, but still contains the important pieces: low-rate capacity, drive cycles, pulse tests, and EIS.</p>
+      <div class="button-row">
+        <a class="button" href="../data/section_1_protocol_inventory.csv">View protocol inventory</a>
+        <a class="button" href="../data/EIS_test.csv">View EIS data</a>
+        <a class="button" href="../data/DV_WLTP.csv">View dynamic cycle data</a>
+      </div>
       <div class="figure">
         <img src="../01_Graphs/Section_01_Data_Audit/section_1_data_audit.png" alt="Section 1 CALB first-slice protocol coverage">
-        <div class="caption">Section 1: the first slice is uneven. C/20 is long and gentle. Drive cycles and HPPC are dense 0.1 s time series. EIS is tiny in row count but is the impedance target.</div>
+        <div class="caption">Section 1: protocol coverage for cell 59294 at 25 C. C/20 is long and gentle, drive cycles and HPPC are dense 0.1 s time series, and EIS is small in row count but is the impedance target. Download: <a href="../01_Graphs/Section_01_Data_Audit/section_1_data_audit.png">PNG</a>.</div>
       </div>
       <table>
         <thead>
@@ -716,7 +830,7 @@
       </div>
       <div class="figure">
         <img src="../01_Graphs/Section_33_Final_Rule_Adaptive_MultiTemp/section_33_adaptive_final_rule_multitemp.png" alt="Section 33 adaptive final rule multi-temperature validation">
-        <div class="caption">Section 33: all temperatures pass. Red fallback points are limited to the two 40 C correlation-only rows.</div>
+        <div class="caption">Section 33: EIS and HPPC pulse bridge result across 10 C, 25 C, and 40 C. All temperatures pass the internal gate. Red fallback points are limited to two 40 C correlation-only rows. View data: <a href="../data/section_33_adaptive_final_rule_rows.csv">CSV</a>. Download figure: <a href="../01_Graphs/Section_33_Final_Rule_Adaptive_MultiTemp/section_33_adaptive_final_rule_multitemp.png">PNG</a>.</div>
       </div>
     </div>
   </section>
@@ -746,7 +860,7 @@
       </div>
       <div class="figure">
         <img src="../01_Graphs/Section_34_Drive_Cycle_Validation/section_34_drive_cycle_validation.png" alt="Section 34 drive-cycle validation">
-        <div class="caption">Section 34 is useful, but not the final word. It used a weaker baseline than Section 36.</div>
+        <div class="caption">Section 34: example dynamic-cycle transfer using UDDS, US06, and WLTP drive profiles. It is useful for seeing what test was performed, but it used a weaker baseline than Section 36. View data: <a href="../data/section_34_drive_cycle_rows.csv">CSV</a>. Download figure: <a href="../01_Graphs/Section_34_Drive_Cycle_Validation/section_34_drive_cycle_validation.png">PNG</a>.</div>
       </div>
       <div class="note">
         Blunt version: the pulse bridge is real internally. The drive-cycle validation claim is not clean. If you present Section 34 alone, you are cherry-picking.
@@ -768,12 +882,12 @@
         <div class="card">
           <h3>CALCE Storage 25 C</h3>
           <span class="metric good">24</span>
-          <div class="label">Same-PLN 25 C capacity plus EIS candidates with SOC metadata.</div>
+          <div class="label">Same-PLN 25 C capacity plus EIS candidates with SOC metadata. PLN means pouch laminate nickel-manganese-cobalt cell identifier in the CALCE storage files.</div>
         </div>
         <div class="card">
           <h3>Recommendation</h3>
           <span class="metric warn">CALCE</span>
-          <div class="label">Cleaner first adapter because it has PLN IDs, SOC labels, capacity, and EIS joins.</div>
+          <div class="label">Cleaner first adapter because it has explicit cell IDs, SOC labels, capacity, and EIS joins.</div>
         </div>
       </div>
       <table>
@@ -794,14 +908,14 @@
           </tr>
           <tr>
             <td>CALCE Storage 25 C</td>
-            <td>PLN IDs, SOC labels, 25 C storage periods, capacity workbooks, and impedance CSVs.</td>
+            <td>PLN cell identifiers, SOC labels, 25 C storage periods, capacity workbooks, and impedance CSVs.</td>
             <td>Storage/calendar ageing, not drive-cycle behavior.</td>
             <td>Yes</td>
           </tr>
         </tbody>
       </table>
       <div class="note">
-        More NASA rows do not make NASA the better first choice. Protocol fit beats row count. The next adapter should freeze the CALCE join keys before modeling: PLN, temperature, storage period, and SOC.
+        More NASA rows do not make NASA the better first choice. Protocol fit beats row count. The next adapter should freeze the CALCE join keys before modeling: PLN cell identifier, temperature, storage period, and SOC.
       </div>
     </div>
   </section>
@@ -862,7 +976,7 @@
         </div>
         <div class="step">
           <h3>Run CALCE first</h3>
-          <p class="small">Use the 24 25 C PLN candidates. Freeze the join keys before modeling: PLN, temperature, storage period, and SOC.</p>
+          <p class="small">Use the 24 25 C PLN cell candidates. Freeze the join keys before modeling: cell identifier, temperature, storage period, and SOC.</p>
         </div>
         <div class="step">
           <h3>Keep NASA second</h3>
@@ -876,6 +990,32 @@
       <div class="note">
         The next professor-facing milestone is not another internal rescue plot. It is a frozen-rule CALCE run with ECM baselines and honest failure reporting.
       </div>
+    </div>
+  </section>
+
+  <section id="glossary">
+    <div class="slide">
+      <div class="kicker">Glossary</div>
+      <h2>Acronyms and codes used on this site.</h2>
+      <table>
+        <thead>
+          <tr><th>Code</th><th>Meaning</th><th>Why it matters here</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CALB</td><td>China Aviation Lithium Battery, the manufacturer of the L148N58A cell.</td><td>Names the prismatic lithium-ion cell family used in the dataset.</td></tr>
+          <tr><td>L148N58A</td><td>Large prismatic lithium-ion cell model with 58 Ah nominal capacity.</td><td>The paper and Mendeley repository are for this exact cell type.</td></tr>
+          <tr><td>EIS</td><td>Electrochemical Impedance Spectroscopy.</td><td>Frequency-domain impedance target used to fit or compare DRT curves.</td></tr>
+          <tr><td>DRT</td><td>Distribution of Relaxation Times.</td><td>Transforms impedance or pulse relaxation into a relaxation-time spectrum.</td></tr>
+          <tr><td>HPPC</td><td>Hybrid Pulse Power Characterization.</td><td>Pulse test used as the time-domain source for DRT fitting.</td></tr>
+          <tr><td>SOC</td><td>State of Charge.</td><td>Battery charge level. Bad SOC alignment is why drive-cycle claims are weak.</td></tr>
+          <tr><td>SOH</td><td>State of Health.</td><td>Not validated here. The CALB local work is fresh-cell characterization, not ageing prediction.</td></tr>
+          <tr><td>OCV</td><td>Open Circuit Voltage.</td><td>Voltage used to match HPPC pulse candidates with EIS records.</td></tr>
+          <tr><td>ECM</td><td>Equivalent Circuit Model.</td><td>Baseline model used in the drive-cycle audit.</td></tr>
+          <tr><td>PLN</td><td>CALCE storage dataset cell identifier used in external qualification files.</td><td>Join key for capacity, SOC, temperature, storage period, and EIS records in the CALCE candidate dataset.</td></tr>
+          <tr><td>UDDS, US06, WLTP</td><td>Standard dynamic driving profiles.</td><td>These are the dynamic cycle tests used to stress drive-cycle transfer.</td></tr>
+          <tr><td>Cycle number</td><td>Count or identifier of repeated battery test cycles.</td><td>The local CALB work has EIS cycle IDs in the EIS slice, but it does not contain ageing-by-cycle capacity validation.</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
@@ -981,6 +1121,8 @@
       <div class="kicker">Sources</div>
       <h2>Evidence and references.</h2>
       <ul>
+        <li>Corresponding paper: <a href="https://www.sciencedirect.com/science/article/pii/S2352340925000332">Fasolato, Blasuttigh, Galuppini, and Raimondo, Data in Brief 58, 111301, 2025</a>, DOI <a href="https://doi.org/10.1016/j.dib.2025.111301">10.1016/j.dib.2025.111301</a>.</li>
+        <li>Corresponding dataset repository: <a href="https://data.mendeley.com/datasets/ycx459r5c3/2">Mendeley Data version 2</a>, DOI <a href="https://doi.org/10.17632/ycx459r5c3.2">10.17632/ycx459r5c3.2</a>.</li>
         <li>Local CALB archive: <code>[local path redacted]</code>.</li>
         <li>Local manifest: <code>40 Outputs/Experiments/CALB L148N58A/01_Manifest/summary.json</code>.</li>
         <li>Local first-slice audit: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_01_Data_Audit/section_1_summary.json</code> and <code>section_1_protocol_inventory.csv</code>.</li>

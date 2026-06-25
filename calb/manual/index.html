@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CALB Web Manual | LLM Wiki Research Outputs</title>
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+  <header>
+    <div class="topbar"><a class="button" href="../../index.html">Home</a></div>
+    <div class="kicker">LLM Wiki Research Outputs</div>
+    <h1>CALB Web Manual</h1>
+    <p class="lead">How to use the website, data files, and pipeline without guessing.</p>
+  </header>
+  <main>
+
+    <section class="grid two">
+      <article class="card">
+        <h3>Use the website</h3>
+        <ol>
+          <li>Open the presentation and read the first claim boundary.</li>
+          <li>Use the left navigation to jump to Data, Exploration, Drive cycles, Limits, and Glossary.</li>
+          <li>Open the data explorer when a section references a CSV or JSON file.</li>
+          <li>Use the source links to compare local outputs with the paper and Mendeley repository.</li>
+        </ol>
+        <p><a class="button" href="../03_Professor_Report/calb_l148n58a_viability_presentation.html">Open presentation</a> <a class="button" href="../data/">Open data explorer</a></p>
+      </article>
+      <article class="card">
+        <h3>Use the pipeline</h3>
+        <p>Run scripts from the repository root with the DRT conda interpreter. The main guardrail is the regression check. Do not change claims until it still passes.</p>
+        <p><code>&amp; "E:\anaconda\envs\DRT\python.exe" -B scripts\experiments\calb_l148n58a\calb_l148n58a_regression_checks.py</code></p>
+      </article>
+    </section>
+    <h2>Example Case</h2>
+    <table>
+      <thead><tr><th>Step</th><th>Open</th><th>What to check</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><a class="button" href="../data/EIS_test.csv">EIS_test.csv</a></td><td>Three EIS records for cell 59294 at 25 C, each with frequency, real impedance, and imaginary impedance.</td></tr>
+        <tr><td>2</td><td><a class="button" href="../data/DV_WLTP.csv">DV_WLTP.csv</a></td><td>Example dynamic WLTP voltage and current trace. This shows what a drive-cycle test looks like.</td></tr>
+        <tr><td>3</td><td><a class="button" href="../data/section_33_adaptive_final_rule_rows.csv">Section 33 rows</a></td><td>Main internal pulse-bridge result. Check cell, temperature, HPPC protocol, EIS record, correlation, RMSE, and pass flag.</td></tr>
+        <tr><td>4</td><td><a class="button" href="../data/section_34_drive_cycle_rows.csv">Section 34 rows</a></td><td>Drive-cycle transfer rows. Compare with the claim boundary, because this part is weaker.</td></tr>
+      </tbody>
+    </table>
+    <h2>What Has Been Done So Far</h2>
+    <ul>
+      <li>Parsed the CALB archive into a manifest covering 11 cells, three temperatures, and eight protocol folders.</li>
+      <li>Built a same-cell EIS and HPPC pulse bridge pipeline.</li>
+      <li>Produced final Section 33 internal bridge rows with 246 of 246 quality-pass rows.</li>
+      <li>Audited dynamic-cycle transfer and found the fixed DRT claim loses to a stronger ECM baseline.</li>
+      <li>Published curated CSV, JSON, plot, source, manual, and presentation pages for review.</li>
+    </ul>
+    <h2>Glossary Reminder</h2>
+    <p>EIS means Electrochemical Impedance Spectroscopy. HPPC means Hybrid Pulse Power Characterization. DRT means Distribution of Relaxation Times. SOC means State of Charge. OCV means Open Circuit Voltage. ECM means Equivalent Circuit Model. PLN is a CALCE external-dataset cell identifier, not a CALB cell ID.</p>
+
+  </main>
+  <footer>
+    Public-facing static site generated from curated vault outputs. This is not the raw vault.
+  </footer>
+</body>
+</html>

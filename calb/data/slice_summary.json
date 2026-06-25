@@ -1,0 +1,92 @@
+{
+  "zip_path": "[local path redacted]",
+  "cell_id": "59294",
+  "temperature_c": 25,
+  "protocols": {
+    "C20_Discharge": {
+      "rows": 1104,
+      "duration_s": 66145.7155,
+      "time_step_median_s": 60.0,
+      "current_min_a": -2.900212,
+      "current_max_a": -2.90005,
+      "current_std_a": 2.1546190875647272e-05,
+      "voltage_min_v": 2.499986,
+      "voltage_max_v": 4.191873,
+      "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/C20_discharge/59294.mat",
+      "csv": "[local path redacted]"
+    },
+    "DV_WLTP": {
+      "rows": 221437,
+      "duration_s": 27001.506800000003,
+      "time_step_median_s": 0.10000000000218279,
+      "current_min_a": -60.08051,
+      "current_max_a": 19.42142,
+      "current_std_a": 13.115603169785599,
+      "voltage_min_v": 3.37707,
+      "voltage_max_v": 4.199734,
+      "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/DV_WLTP/59294.mat",
+      "csv": "[local path redacted]"
+    },
+    "DV_UDDS": {
+      "rows": 239440,
+      "duration_s": 28801.642799999994,
+      "time_step_median_s": 0.10000000000582077,
+      "current_min_a": -59.37879,
+      "current_max_a": 36.16817,
+      "current_std_a": 11.992540025488733,
+      "voltage_min_v": 3.478829,
+      "voltage_max_v": 4.018364,
+      "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/DV_UDDS/59294.mat",
+      "csv": "[local path redacted]"
+    },
+    "DV_US06": {
+      "rows": 119243,
+      "duration_s": 16781.04130000001,
+      "time_step_median_s": 0.10000000000582077,
+      "current_min_a": -59.9935,
+      "current_max_a": 26.98949,
+      "current_std_a": 16.291161390800553,
+      "voltage_min_v": 2.499848,
+      "voltage_max_v": 3.806077,
+      "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/DV_US06/59294.mat",
+      "csv": "[local path redacted]"
+    },
+    "HPPC_1C": {
+      "rows": 172269,
+      "duration_s": 44762.710699999996,
+      "time_step_median_s": 0.10009999999965657,
+      "current_min_a": -58.00464,
+      "current_max_a": 37.70427,
+      "current_std_a": 23.010433453373736,
+      "voltage_min_v": 2.499992,
+      "voltage_max_v": 4.25577,
+      "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/HPPC_1C/59294.mat",
+      "csv": "[local path redacted]"
+    },
+    "HPPC_C3": {
+      "rows": 172850,
+      "duration_s": 44820.8873,
+      "time_step_median_s": 0.10009999999965657,
+      "current_min_a": -58.00565,
+      "current_max_a": 37.70327,
+      "current_std_a": 22.887891521700624,
+      "voltage_min_v": 2.49996,
+      "voltage_max_v": 4.258051,
+      "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/HPPC_C3/59294.mat",
+      "csv": "[local path redacted]"
+    },
+    "EIS_test": {
+      "rows": 120,
+      "eis_records": 3,
+      "frequency_min_hz": 0.010001099668443203,
+      "frequency_max_hz": 3722.427001953125,
+      "ocv_values": [
+        3.630812168121338,
+        3.722273349761963,
+        3.959110736846924
+      ],
+      "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/EIS_test/59294.mat",
+      "csv": "[local path redacted]"
+    }
+  }
+}

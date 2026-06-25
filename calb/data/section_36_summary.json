@@ -1,0 +1,21 @@
+{
+  "section": 36,
+  "source_section": 34,
+  "source_section34_verdict": "drive_cycle_transfer_supports_hppc_drt",
+  "source_section34_row_count": 198,
+  "calibration_fraction": 0.2,
+  "min_calibration_s": 300.0,
+  "max_calibration_fraction": 0.5,
+  "source_rows": 198,
+  "row_count": 198,
+  "variant_row_count": 990,
+  "error_count": 0,
+  "variant_count": 5,
+  "median_drt_holdout_rmse_mv": 150.9172295922953,
+  "median_best_ecm_holdout_rmse_mv": 134.8626012268972,
+  "median_drt_minus_best_ecm_rmse_mv": 3.0704702158353285,
+  "drt_win_fraction_vs_best_ecm": 0.12121212121212122,
+  "best_median_variant": "ohmic_2rc_10_300s",
+  "best_median_variant_rmse_mv": 134.8626012268972,
+  "verdict": "drive_cycle_ecm_baseline_beats_fixed_drt"
+}
