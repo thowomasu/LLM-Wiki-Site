@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Dataset Map</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Dataset Map</h1>
+  <p class="meta">Zenodo Expt4 Dataset Handoff, professor handoff, 2026-06-19</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>This folder explains what Zenodo Expt4 contains, where it came from, and how the processed files relate.</li>
+      <li>Expt4 is the 0 to 100 percent drive-cycle discharge ageing case.</li>
+      <li>The handoff identifies the Zenodo record, DOI, Expt4 zip name, and published MD5.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="../03_Key_Plots/01_Graphs/section_1_data_audit.png" alt="Data audit view for the processed Expt4 files."><figcaption>Data audit view for the processed Expt4 files.</figcaption></figure>
+      <figure><img src="../03_Key_Plots/01_Graphs/section_2_file_screen.png" alt="File screening shows which processed files entered the pipeline."><figcaption>File screening shows which processed files entered the pipeline.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>Dataset provenance is documented separately from model results.</li>
+      <li>Column guidance makes the processed files easier to audit.</li>
+      <li>The package avoids copying the full raw dataset into the handoff.</li>
+      <li>The checksum note ties the local source back to the published archive.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>The full raw dataset is external and large.</li>
+      <li>The map does not prove the extracted features are scientifically valid.</li>
+      <li>Any local rerun still needs the same source archive and extraction structure.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Keep DOI, checksum, and source-file identity attached to every future result.</li>
+      <li>Add any professor-confirmed dataset interpretation here first.</li>
+      <li>Record any changes to extraction paths or column assumptions.</li>
+      <li>Use this folder as the first stop when source provenance is questioned.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

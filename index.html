@@ -3,82 +3,104 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CALB DRT Research Outputs | LLM Wiki Research Outputs</title>
+  <title>LLM Toolkit Wiki | LLM Wiki Research Outputs</title>
   <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-  <header>
-    <div class="topbar"><a class="button" href="index.html">Home</a></div>
-    <div class="kicker">LLM Wiki Research Outputs</div>
-    <h1>CALB DRT Research Outputs</h1>
-    <p class="lead">A curated GitHub Pages front door for the professor-facing outputs.</p>
-  </header>
-  <main>
+  <div class="site-shell">
+    <aside class="sidebar"><a class="brand" href="index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a><div class="side-section">Project</div>
+<a class="side-link" href="index.html">Overview</a>
+<a class="side-link" href="presentations/">Presentations</a>
+<a class="side-link" href="sources/">Sources</a>
+<a class="side-link" href="glossary/">Glossary</a>
+<div class="side-section">Workstreams</div>
+<a class="side-link" href="presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
+<a class="side-link" href="presentations/#dib-data">DIB (Data in Brief) Data</a>
+<a class="side-link" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">CALB (China Aviation Lithium Battery)</a>
+<a class="side-link" href="external-validation/">External Dataset Checks</a>
+<div class="side-section">CALB Package</div>
+<a class="side-link" href="calb/data/">View CALB Data</a>
+<a class="side-link" href="calb/manual/">CALB Manual</a>
+<a class="side-link" href="sources/calb/">CALB Sources</a></aside>
+    <div class="page-content">
+      <header>
+        <div class="kicker">LLM Wiki Research Outputs</div>
+        <h1>LLM Toolkit Wiki</h1>
+        <p class="lead">A public front door for the project: presentations, data, sources, and blunt claim boundaries.</p>
+      </header>
+      <main>
 
-    <section class="note">
-      <strong>Claim boundary:</strong> this site is for easy viewing. It does not turn internal results into external validation.
-      The clean next step is a frozen-rule CALCE run with an ECM baseline.
+    <section>
+      <h2>What This Project Is</h2>
+      <p>This is the front-facing part of the LLM (Large Language Model) toolkit wiki. It collects the work done so far on battery-data pipelines, DRT (Distribution of Relaxation Times) modeling, dataset qualification, professor-facing reports, source traces, and downloadable evidence.</p>
+      <p>The goal is simple: a new reader should be able to open this site, understand what was built, inspect the actual data and plots, and see the limits without digging through the private vault.</p>
     </section>
-    <section class="grid two">
+    <section class="note">
+      <strong>Claim boundary:</strong> this site is for clear review, not hype. It does not turn internal results into external validation. The strongest CALB (China Aviation Lithium Battery) result is internal pulse-bridge evidence, and the clean next step is a frozen-rule CALCE (Center for Advanced Life Cycle Engineering) run with an ECM (Equivalent Circuit Model) baseline.
+    </section>
+    <section class="grid">
       <article class="card">
-        <h3>CALB viability presentation</h3>
+        <h3>Presentations</h3>
+        <span class="metric good">17</span>
+        <div class="label">Presentation-like HTML files found under <code>40 Outputs</code>. Future presentation files are picked up by the site build.</div>
+        <p><a class="button" href="presentations/">Open presentations</a></p>
+      </article>
+      <article class="card">
+        <h3>CALB (China Aviation Lithium Battery)</h3>
         <span class="metric good">246 / 246</span>
-        <div class="label">Internal pulse bridge pass rows. Strong result, narrow claim.</div>
+        <div class="label">Internal EIS (Electrochemical Impedance Spectroscopy) and HPPC (Hybrid Pulse Power Characterization) pulse-bridge pass rows.</div>
         <p><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open presentation</a> <a class="button" href="calb/data/">View CALB data</a> <a class="button" href="calb/manual/">Open manual</a></p>
       </article>
       <article class="card">
-        <h3>All sources</h3>
-        <span class="metric warn">3</span>
-        <div class="label">Source pages: full index, CALB pipeline evidence, and external dataset qualification.</div>
+        <h3>Sources</h3>
+        <span class="metric warn">trace</span>
+        <div class="label">Public provenance pages for reports, summaries, manifests, plots, data artifacts, and literature links.</div>
         <p><a class="button" href="sources/">Open sources</a></p>
       </article>
     </section>
     <section>
-      <h2>Dataset Exploration Pipeline</h2>
-      <nav class="tabs" aria-label="Section tabs"><a class="tab active" href="external-validation/">Dataset comparison</a><a class="tab" href="external-validation/calce/">CALCE Storage 25 C</a><a class="tab" href="external-validation/nasa/">NASA Battery</a></nav>
+      <h2>What Has Been Done So Far</h2>
       <div class="grid">
       <article class="card">
-        <h3>CALCE first</h3>
-        <span class="metric good">24</span>
-        <div class="label">25 C same-PLN capacity plus EIS candidates.</div>
-        <p><a class="button" href="external-validation/calce/">Open CALCE report</a></p>
+        <h3>DRT (Distribution of Relaxation Times) pipeline</h3>
+        <p>Built a time-domain battery pipeline that finds pulse/rest windows, fits DRT-like relaxation curves, compares against EIS (Electrochemical Impedance Spectroscopy), and reports where voltage fitting can mislead.</p>
+        <p><a class="button" href="presentations/#drt-pipeline">Open DRT presentations</a></p>
       </article>
       <article class="card">
-        <h3>NASA second</h3>
-        <span class="metric warn">34</span>
-        <div class="label">Unique cells with charge, discharge, and impedance. Useful later, not the first validation target.</div>
-        <p><a class="button" href="external-validation/nasa/">Open NASA report</a></p>
+        <h3>DIB (Data in Brief) dataset work</h3>
+        <p>Mapped and tested the Zenodo Experiment 4 / DIB-style dataset package, including data audit, feature extraction, held-out-cell checks, and reproducibility material.</p>
+        <p><a class="button" href="presentations/#dib-data">Open DIB presentations</a></p>
       </article>
       <article class="card">
-        <h3>Dataset comparison</h3>
-        <p>NASA and CALCE are now organized into one qualification package. The recommendation is blunt: CALCE first, NASA second.</p>
-        <p><a class="button" href="external-validation/">Open dataset comparison</a></p>
+        <h3>CALB dataset work</h3>
+        <p>Parsed the CALB L148N58A archive, published viewable data files, built the pulse-bridge evidence package, and kept the drive-cycle limitation visible.</p>
+        <p><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB work</a></p>
       </article>
       </div>
     </section>
     <section>
-      <h2>Source Pages</h2>
-      <nav class="tabs" aria-label="Section tabs"><a class="tab active" href="sources/">Everything</a><a class="tab" href="sources/calb/">CALB pipeline</a><a class="tab" href="sources/external/">External datasets</a></nav>
+      <h2>Dataset Exploration</h2>
       <div class="grid two">
       <article class="card">
-        <h3>Sources for everything</h3>
-        <p>One index for the published site inputs: reports, summaries, manifests, plots, public data artifacts, and literature links.</p>
-        <p><a class="button" href="sources/">Open all sources</a></p>
+        <h3>CALCE (Center for Advanced Life Cycle Engineering) first</h3>
+        <span class="metric good">24</span>
+        <div class="label">25 C same-PLN candidate rows. PLN means the CALCE cell identifier used to join capacity and impedance records.</div>
+        <p><a class="button" href="external-validation/calce/">Open CALCE report</a></p>
       </article>
       <article class="card">
-        <h3>What not to say</h3>
-        <ul>
-          <li>Do not say the CALB rule is externally validated.</li>
-          <li>Do not present Section 34 alone as drive-cycle proof.</li>
-          <li>Do not publish raw sources or local private data paths as the product.</li>
-        </ul>
+        <h3>NASA battery dataset second</h3>
+        <span class="metric warn">34</span>
+        <div class="label">Unique cells with charge, discharge, and impedance. Useful later, but not the first validation target.</div>
+        <p><a class="button" href="external-validation/nasa/">Open NASA report</a></p>
       </article>
       </div>
     </section>
 
-  </main>
-  <footer>
-    Public-facing static site generated from curated vault outputs. This is not the raw vault.
-  </footer>
+      </main>
+      <footer>
+        Public-facing static site generated from curated vault outputs. This is not the raw vault.
+      </footer>
+    </div>
+  </div>
 </body>
 </html>

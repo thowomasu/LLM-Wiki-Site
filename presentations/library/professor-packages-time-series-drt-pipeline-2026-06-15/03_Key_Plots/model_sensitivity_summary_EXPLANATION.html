@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graph Explanation: Model Sensitivity Summary</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/model_sensitivity_summary_EXPLANATION.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Graph Explanation: Model Sensitivity Summary</h1>
+<p>Graph file: <code>model_sensitivity_summary.png</code></p>
+<p>Folder: <code>Package_Key_Plots</code></p>
+<h2>What This Figure Shows</h2>
+<p>This figure shows how baseline mode and lambda change the validation metrics.</p>
+<p>Baseline mode controls what slow voltage drift the model is allowed to explain outside gamma. Lambda controls how smooth gamma must be.</p>
+<p>The panels usually compare:</p>
+<ul><li>EIS/time-domain correlation</li></ul>
+<ul><li>normalized shape error</li></ul>
+<ul><li>voltage RMSE</li></ul>
+<ul><li>gamma area or gamma stability</li></ul>
+<h2>How To Read It</h2>
+<p>Look for metric spread across settings. If voltage RMSE barely changes while EIS correlation changes a lot, the recovered gamma is model-sensitive. That means the voltage signal alone is not forcing one stable DRT answer.</p>
+<p>Also compare baseline modes. If <code>offset</code>, <code>charge</code>, and <code>time_charge</code> lead to different conclusions, then baseline/OCV handling is not a small detail. It is a core uncertainty.</p>
+<h2>What We Can Learn</h2>
+<p>The current result is sensitive to modeling choices. That is one of the biggest weaknesses in the project. It means the method is not robust enough for a final scientific claim.</p>
+<h2>Why It Matters</h2>
+<p>This plot is the one that should make you uncomfortable. If the result improves only after choosing a convenient baseline or lambda, that is not validation. That is tuning.</p>
+<h2>Caveat</h2>
+<p>Do not pick the setting that looks best after seeing EIS. The rule must be chosen before EIS scoring.</p>
+<h2>What To Check Next</h2>
+<p>Use the pre-declared model-rule plot. Model sensitivity tells us where the method can be tuned. The model rule tests what happens when we stop tuning against EIS.</p>
+    </article>
+  </main>
+</body>
+</html>

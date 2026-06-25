@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SOC Mapping Sensitivity</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/SOC Mapping Sensitivity/soc_mapping_sensitivity_report.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>SOC Mapping Sensitivity</h1>
+<h2>Purpose</h2>
+<p>This run treats SOC mapping as an assumption layer. It reruns the same DIB cases under multiple SOC mapping rules and checks whether the comparison metrics change.</p>
+<h2>Run Settings</h2>
+<ul><li>Modes: voltage, coulomb, endpoint, linear</li></ul>
+<ul><li>Max cases: 3</li></ul>
+<ul><li>Temperature: 25 C</li></ul>
+<ul><li>Cycle rule: earliest</li></ul>
+<ul><li>Lambda value: 0.001</li></ul>
+<ul><li>Selected capacity cases: 3</li></ul>
+<h2>Mode Summary</h2>
+<ul><li>coulomb: comparisons=15, errors=0, median RMSE=1.5860375265071827 mV, median corr=0.10456968399932068, median normalized RMSE=0.8655229771443936, median abs SOC error=3.0040876726529575</li></ul>
+<ul><li>endpoint: comparisons=15, errors=0, median RMSE=1.5860375265071827 mV, median corr=0.10456968399932068, median normalized RMSE=0.8655229771443936, median abs SOC error=0.6863347295694382</li></ul>
+<ul><li>linear: comparisons=15, errors=0, median RMSE=1.5860375265071827 mV, median corr=0.10456968399932068, median normalized RMSE=0.8655229771443936, median abs SOC error=2.445991031022345</li></ul>
+<ul><li>voltage: comparisons=15, errors=0, median RMSE=1.5860375265071827 mV, median corr=0.10456968399932068, median normalized RMSE=0.8655229771443936, median abs SOC error=None</li></ul>
+<h2>Stability Summary</h2>
+<ul><li>Targets with different candidate IDs across modes: 0</li></ul>
+<ul><li>Targets with correlation range above 0.1 across modes: 0</li></ul>
+<h2>Interpretation</h2>
+<p>If the same conclusion only appears under one SOC mapping mode, it is fragile. If weak EIS agreement persists across all modes, the mismatch is probably not only an SOC-mapping artifact.</p>
+<p>Blunt warning: this does not create ground truth. It only tells us whether our assumptions are steering the result.</p>
+<h2>Outputs</h2>
+<ul><li><code>soc_mapping_sensitivity_results.csv</code></li></ul>
+<ul><li><code>soc_mapping_sensitivity_mode_summary.csv</code></li></ul>
+<ul><li><code>soc_mapping_sensitivity_by_target.csv</code></li></ul>
+<ul><li><code>soc_mapping_sensitivity_case_summaries.json</code></li></ul>
+<ul><li><code>soc_mapping_sensitivity_errors.csv</code></li></ul>
+<ul><li><code>soc_mapping_sensitivity_report.md</code></li></ul>
+<p>&lt;!-- BEGIN BEGINNER_MATH_EXPLANATION --&gt;</p>
+<h2>How This Section Works, Plain Math</h2>
+<p>This section tests SOC assignment assumptions.</p>
+<h3>The modes</h3>
+<p><code>voltage</code> sorts candidates by pre-rest voltage.</p>
+<p><code>coulomb</code> uses current integration from a high-SOC anchor.</p>
+<p><code>endpoint</code> forces the highest-voltage and lowest-voltage candidates to match endpoint SOC labels.</p>
+<p><code>linear</code> fits a straight line between integrated charge and SOC labels.</p>
+<h3>Why this matters</h3>
+<p>If changing SOC mode changes the EIS comparison a lot, then SOC matching is a major uncertainty.</p>
+<p>If the result barely changes, then SOC mapping is probably not the main reason for the mismatch in this small run.</p>
+<h3>Actual Equations Used</h3>
+<p>Voltage-order mapping sorts windows by pre-rest voltage:</p>
+<div class="math-display">$$
+V_{\text{pre},k}=\operatorname{median}(V_{\text{rest before window }k})
+$$</div>
+<p>Coulomb mapping uses integrated charge:</p>
+<div class="math-display">$$
+Q_k = \frac{1}{3600}\int_{t_{\text{anchor}}}^{t_k} I(t)\,dt
+$$</div>
+<div class="math-display">$$
+\widehat{\mathrm{SOC}}_k
+=
+\mathrm{SOC}_{\text{anchor}}
+-100\frac{Q_k}{C_{\text{Ah}}}
+$$</div>
+<p>Linear mapping fits a line from integrated charge to SOC:</p>
+<div class="math-display">$$
+\widehat{\mathrm{SOC}}_k = aQ_k+b
+$$</div>
+<p>The sensitivity question is whether changing this mapping changes the EIS comparison metrics. &lt;!-- END BEGINNER_MATH_EXPLANATION --&gt;</p>
+    </article>
+  </main>
+</body>
+</html>

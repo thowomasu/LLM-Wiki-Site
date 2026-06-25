@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time-Series To DRT Pipeline Package</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/README_FOR_PROFESSOR.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Time-Series To DRT Pipeline Package</h1>
+<p>Prepared: 2026-06-15</p>
+<h2>Short Version</h2>
+<p>This package contains a research prototype for estimating a DRT-like relaxation spectrum from current-voltage-time pulse/rest data, then comparing that result against EIS-derived DRT.</p>
+<p>Current status:</p>
+<ul><li>Engineering scaffold: viable for research iteration.</li></ul>
+<ul><li>Scientific method: not validated.</li></ul>
+<ul><li>Current rule-selected median EIS correlation: about 0.141.</li></ul>
+<p>Plainly: the pipeline runs, produces auditable outputs, and is now structured well enough to discuss. It is not yet strong enough to use as a ground-truth label generator.</p>
+<h2>What To Read First</h2>
+<p>1. <code>00_Read_First/PLAIN_ENGLISH_OVERVIEW.md</code> 2. <code>00_Read_First/DRIVE_CYCLE_DATASET_RECOMMENDATION.md</code> 3. <code>00_Read_First/VIABILITY_REPORT.md</code> 4. <code>00_Read_First/MEETING_WALKTHROUGH.md</code> 5. <code>01_Method_And_Math/CODE_WALKTHROUGH_FOR_PROFESSOR.md</code> 6. <code>03_Key_Plots/PLOT_GUIDE.md</code> 7. <code>02_Key_Results/Model Rule/model_rule_report.md</code></p>
+<p>Use the <code>.html</code> files for easier reading. The Markdown files are included so the source text remains editable and inspectable.</p>
+<h2>Main Claim</h2>
+<p>The prototype can:</p>
+<ul><li>load DIB-style battery time-series CSV files</li></ul>
+<ul><li>find pulse/rest windows</li></ul>
+<ul><li>fit a time-domain DRT-like tau/gamma curve</li></ul>
+<ul><li>compare the time-domain curve against EIS-derived DRT</li></ul>
+<ul><li>test SOC mapping assumptions</li></ul>
+<ul><li>test baseline and regularization assumptions</li></ul>
+<ul><li>apply a pre-declared model-selection rule before looking at EIS metrics</li></ul>
+<p>The prototype cannot yet claim:</p>
+<ul><li>time-domain DRT is validated against EIS</li></ul>
+<ul><li>the selected pulse windows are exact SOC matches</li></ul>
+<ul><li>the fitted DRT curves are safe training labels</li></ul>
+<ul><li>good voltage reconstruction proves correct gamma shape</li></ul>
+<ul><li>the DIB dataset is a proper drive-cycle dataset</li></ul>
+<h2>What I Need Feedback On</h2>
+<p>The biggest open questions are experimental, not just coding:</p>
+<ul><li>Does the project require a real drive-cycle dataset, such as FUDS, US06, UDDS,</li></ul>
+<p>HWFET, LA92, or WLTP?</p>
+<ul><li>Which exact pulse windows correspond to the EIS SOC labels?</li></ul>
+<ul><li>What is the current sign convention in the time-series files?</li></ul>
+<ul><li>What nominal or measured capacity should be used for SOC reconstruction?</li></ul>
+<ul><li>Are the low-current capacity-check pulses intended to be comparable to EIS?</li></ul>
+<ul><li>Which EIS preprocessing and DRT method should be treated as the reference?</li></ul>
+<ul><li>Can you provide one cell/SOC/temp/SOH example that should be considered a</li></ul>
+<p>trusted matched validation case?</p>
+<h2>Reproduction</h2>
+<p>The code is included in <code>04_Code/</code>.</p>
+<p>The commands below assume the full project repo layout. The copied code in this package is mainly for review.</p>
+<p>The plotting layer uses Matplotlib with a headless backend. Use a Python environment with <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>, and <code>openpyxl</code> installed.</p>
+<p>The main runner is:</p>
+<pre><code>python scripts/experiments/run_time_domain_rough_prototype.py</code></pre>
+<p>For machines without the DIB dataset:</p>
+<pre><code>python scripts/experiments/run_time_domain_rough_prototype.py --synthetic-only</code></pre>
+<p>The pre-declared rule can also be applied to the included saved model-sensitivity summary:</p>
+<pre><code>python scripts/experiments/time_domain_model_rule.py --from-existing-sensitivity</code></pre>
+<p>The real-data run expects these environment variables when the DIB dataset is not in the default location:</p>
+<pre><code>$env:DIB_DATA_ROOT = &quot;path\to\DIB_Data&quot;
+$env:DIB_CAPACITY_ROOT = &quot;path\to\DIB_Data\.csvfiles\Capacity_Check&quot;
+$env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code></pre>
+<h2>What Is Not Included</h2>
+<p>This package does not include the raw DIB dataset or the full set of large selected-window CSVs. That is deliberate. The goal is a reviewable handoff, not a raw data dump.</p>
+<h2>Blunt Warning</h2>
+<p>Do not use these time-domain DRT outputs as labels for model training yet. The current results are useful for research iteration, but the EIS agreement is too weak and the SOC/window matching still needs protocol confirmation.</p>
+<p>Also: if the professor&#x27;s requirement is drive-cycle loading, do not defend DIB as the main dataset. Use DIB for the EIS/pulse prototype only, then switch the drive-cycle part to a dataset such as CALCE dynamic profiles.</p>
+    </article>
+  </main>
+</body>
+</html>

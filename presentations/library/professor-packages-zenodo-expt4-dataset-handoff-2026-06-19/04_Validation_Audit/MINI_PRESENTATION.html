@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Validation Audit</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Validation Audit</h1>
+  <p class="meta">Zenodo Expt4 Dataset Handoff, professor handoff, 2026-06-19</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>This is the most important folder for judging scientific strength.</li>
+      <li>The audit found that some features leak or proxy the target, especially capacity, duration, and same-test resistance features.</li>
+      <li>Safer claim: Expt4 supports internal battery health-feature benchmarking, and GITT-derived resistance features are informative for resistance-like labels.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="../03_Key_Plots/01_Graphs/section_9_held_out_cell_validation.png" alt="Grouped validation is useful, but it is not the final truth if leakage remains."><figcaption>Grouped validation is useful, but it is not the final truth if leakage remains.</figcaption></figure>
+      <figure><img src="../03_Key_Plots/01_Graphs/section_13_multi_protocol_validation.png" alt="Use stricter leakage-aware comparisons before making claims."><figcaption>Use stricter leakage-aware comparisons before making claims.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>The package includes grouped validation metrics after stricter checks.</li>
+      <li>It includes a leakage feature audit and a feature-target correlation scan.</li>
+      <li>It separates raw score strength from scientific claim strength.</li>
+      <li>It explicitly blocks overclaims about EIS validation and physically validated DRT peaks.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>The modeling claim is weaker than raw scores suggest.</li>
+      <li>Leave-one-cell-out can still be too friendly.</li>
+      <li>Leave-one-temperature-out is harsher and should be treated as the headline test.</li>
+      <li>DRT bands alone have not yet been proven to explain the result.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Run the locked comparison: R0 only, DRT bands without R0, R0 plus DRT bands.</li>
+      <li>Remove target-proxy features before making any prediction claim.</li>
+      <li>Prefer leave-one-temperature-out for headline claims.</li>
+      <li>Bring in measured EIS DRT if the goal is real DRT physics validation.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

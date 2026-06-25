@@ -17,8 +17,65 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
 }
+.site-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+}
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 18px 14px;
+  background: #fff;
+  border-right: 1px solid var(--line);
+}
+.brand {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.15;
+}
+.brand span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.side-section {
+  margin: 18px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.side-link {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  margin: 6px 0;
+  padding: 7px 9px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.side-link:hover {
+  border-color: var(--line);
+  background: var(--paper);
+}
+.page-content {
+  min-width: 0;
+}
 header {
-  padding: 44px min(7vw, 72px) 28px;
+  padding: 38px min(6vw, 64px) 24px;
   background: #fff;
   border-bottom: 1px solid var(--line);
 }
@@ -27,13 +84,7 @@ main {
   margin: 0 auto;
   padding: 28px min(5vw, 48px) 56px;
 }
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 22px;
-}
-nav a, .button {
+.button {
   display: inline-flex;
   align-items: center;
   min-height: 36px;
@@ -44,11 +95,6 @@ nav a, .button {
   border-radius: 6px;
   background: #fff;
   font-size: 14px;
-}
-.topbar {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 28px;
 }
 .tabs {
   display: flex;
@@ -157,6 +203,13 @@ th, td {
   vertical-align: top;
 }
 th { background: #edf3f8; }
+.presentation-frame {
+  width: 100%;
+  height: 78vh;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
 footer {
   padding: 22px min(7vw, 72px);
   color: var(--muted);
@@ -164,6 +217,13 @@ footer {
   background: #fff;
 }
 @media (max-width: 850px) {
+  .site-shell { display: block; }
+  .sidebar {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
   .grid, .grid.two { grid-template-columns: 1fr; }
   p { font-size: 17px; }
 }

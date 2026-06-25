@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meeting Walkthrough: Time-Series To DRT Pipeline</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/00_Read_First/MEETING_WALKTHROUGH.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Meeting Walkthrough: Time-Series To DRT Pipeline</h1>
+<p>Use this as a live walkthrough path. Do not treat it like slides. Open the files in this order and talk through the evidence.</p>
+<h2>Goal For The Meeting</h2>
+<p>Show that the pipeline is now a serious research scaffold, then ask for the protocol information needed to validate it properly.</p>
+<p>The main message:</p>
+<p>The code works mechanically. The science is not validated yet. I need your help checking whether the time-series pulse windows are truly comparable to the EIS conditions.</p>
+<h2>0. Start With The Honest Status</h2>
+<p>Open:</p>
+<pre><code>00_Read_First/VIABILITY_REPORT.md</code></pre>
+<p>Say:</p>
+<p>I built a pipeline that can go from current-voltage-time data to a DRT-like curve, then compare that curve against EIS-derived DRT. The engineering scaffold is viable, but the method is not validated yet.</p>
+<p>Point to:</p>
+<ul><li>synthetic inverse check passes</li></ul>
+<ul><li>DIB batch runner passes</li></ul>
+<ul><li>SOC mapping sensitivity passes</li></ul>
+<ul><li>model sensitivity runs</li></ul>
+<ul><li>pre-declared model rule runs</li></ul>
+<ul><li>scientific verdict is still <code>not_validated</code></li></ul>
+<p>Key number to say:</p>
+<p>The current pre-declared rule-selected median EIS correlation is only about 0.141. So I am not claiming success yet.</p>
+<p>What to ask:</p>
+<p>Does this framing sound scientifically honest to you?</p>
+<h2>1. Show The Pipeline Map</h2>
+<p>Open:</p>
+<pre><code>00_Read_First/ROUGH_PROTOTYPE_HANDOFF.md</code></pre>
+<p>Show this path:</p>
+<pre><code>time series CSV
+-&gt; column normalization
+-&gt; pulse/rest window finder
+-&gt; candidate window fit
+-&gt; time-domain DRT-like tau/gamma curve
+-&gt; EIS-derived DRT comparison
+-&gt; sensitivity checks
+-&gt; pre-declared model rule</code></pre>
+<p>Say:</p>
+<p>I did not just fit one hand-picked curve. I built the checks around the curve: window detection, SOC alignment diagnostics, batch testing, SOC mapping sensitivity, model sensitivity, and a rule that chooses lambda before EIS scoring.</p>
+<p>Achievement to highlight:</p>
+<p>The pipeline is no longer just plotting. It has diagnostics and failure modes.</p>
+<p>What to ask:</p>
+<p>Which part of this workflow seems scientifically weakest to you?</p>
+<h2>2. Show The Math</h2>
+<p>Open:</p>
+<pre><code>01_Method_And_Math/TIME_DOMAIN_DRT_MATH.html</code></pre>
+<p>Show these sections:</p>
+<ul><li>Forward Model</li></ul>
+<ul><li>Discrete RC Kernel</li></ul>
+<ul><li>Optimization Problem</li></ul>
+<ul><li>Why Gamma Is Fragile</li></ul>
+<p>Say:</p>
+<p>The model reconstructs voltage as baseline plus instantaneous resistance plus a sum of RC relaxation responses. The gamma curve is constrained nonnegative and smoothed, but I am treating it as fragile because many gamma shapes can explain similar voltage.</p>
+<p>Achievement to highlight:</p>
+<p>I separated baseline drift from DRT resistance so slow OCV movement does not automatically become fake slow gamma.</p>
+<p>What to ask:</p>
+<p>Is this baseline treatment acceptable as a first approximation, or should the OCV/baseline model be more protocol-aware?</p>
+<h2>3. Show The Synthetic Sanity Check</h2>
+<p>Open plot:</p>
+<pre><code>03_Key_Plots/synthetic_section_1_plots.png</code></pre>
+<p>Open report if needed:</p>
+<pre><code>02_Key_Results/../00_Read_First/README.md</code></pre>
+<p>Say:</p>
+<p>Before using real data, I tested the inverse on synthetic data with known RC branches. It reconstructs voltage near the injected noise level, about 0.8 mV RMSE.</p>
+<p>Achievement to highlight:</p>
+<p>The math and code pass a controlled inverse check.</p>
+<p>Weakness to say out loud:</p>
+<p>The slow branch is still fragile. Even synthetic data shows exact peak position is not fully trustworthy.</p>
+<p>What to ask:</p>
+<p>For this project, should we care about exact DRT peak locations, or should we focus on broad tau-band areas?</p>
+<h2>4. Show Real Cell28 Sweep</h2>
+<p>Open plot:</p>
+<pre><code>03_Key_Plots/section_8_cell28_soc_sweep_summary.png</code></pre>
+<p>Open table:</p>
+<pre><code>02_Key_Results/section_8_cell28_soc_sweep_summary.csv</code></pre>
+<p>Say:</p>
+<p>I tested Cell28 across multiple SOC labels. Voltage reconstruction is good, but EIS agreement is weak.</p>
+<p>Achievement to highlight:</p>
+<p>This is not one cherry-picked SOC. It runs across 95, 70, 50, 20, and 5 percent SOC.</p>
+<p>Weakness to say out loud:</p>
+<p>Good voltage reconstruction does not mean the DRT shape is correct.</p>
+<p>What to ask:</p>
+<p>Are these Cell28 pulse windows actually the right windows to compare against the EIS SOC labels?</p>
+<h2>5. Show SOC Alignment Problem</h2>
+<p>Open plot:</p>
+<pre><code>03_Key_Plots/section_10_soc_alignment.png</code></pre>
+<p>Open table:</p>
+<pre><code>02_Key_Results/section_10_matched_soc_alignment.csv</code></pre>
+<p>Say:</p>
+<p>I added coulomb-counting checks. The nominal 70 percent case looks closer to about 76 percent under the simple anchor method. That contaminates the matched validation story.</p>
+<p>Achievement to highlight:</p>
+<p>I did not just trust pre-rest voltage. I checked SOC alignment using integrated current and capacity clues.</p>
+<p>What to ask:</p>
+<p>Can you provide protocol annotations that map exact time-series steps to exact SOC targets?</p>
+<h2>6. Show Generalized Batch Result</h2>
+<p>Open:</p>
+<pre><code>02_Key_Results/DIB Batch/dib_batch_report.md
+02_Key_Results/DIB Batch/dib_batch_results.csv</code></pre>
+<p>Say:</p>
+<p>I generalized beyond Cell28. The first batch processed cells 15, 18, and 20, with 15 SOC comparisons and no errors. Median voltage RMSE is about 1.586 mV, but median EIS correlation is only about 0.105.</p>
+<p>Achievement to highlight:</p>
+<p>The code runs across multiple cells and exports quality flags.</p>
+<p>Weakness to say out loud:</p>
+<p>The method still does not agree with EIS strongly.</p>
+<p>What to ask:</p>
+<p>Does weak EIS agreement surprise you, given the difference between pulse relaxation and frequency-domain EIS?</p>
+<h2>7. Show Sensitivity Checks</h2>
+<p>Open:</p>
+<pre><code>02_Key_Results/SOC Mapping Sensitivity/soc_mapping_sensitivity_report.md
+02_Key_Results/Model Sensitivity/model_sensitivity_report.md</code></pre>
+<p>Say:</p>
+<p>SOC mapping was not the easy explanation in the first sensitivity run. Different SOC mapping modes selected the same windows. But model sensitivity showed baseline and lambda choices change the EIS comparison a lot.</p>
+<p>Achievement to highlight:</p>
+<p>I tested assumptions instead of hiding them.</p>
+<p>Weakness to say out loud:</p>
+<p>Baseline and regularization are currently the biggest modeling risk.</p>
+<p>What to ask:</p>
+<p>What baseline or OCV correction would you consider scientifically defensible for these pulse windows?</p>
+<h2>8. Show The Pre-Declared Model Rule</h2>
+<p>Open:</p>
+<pre><code>02_Key_Results/Model Rule/model_rule_report.md</code></pre>
+<p>Say:</p>
+<p>To avoid cherry-picking, I added a rule that selects lambda before looking at EIS metrics. It chooses from voltage RMSE, gamma roughness, and broad-band stability. Only after selection does it report EIS agreement.</p>
+<p>Achievement to highlight:</p>
+<p>This blocks validation leakage.</p>
+<p>Weakness to say out loud:</p>
+<p>Even with the honest rule, EIS agreement is still weak. That is important.</p>
+<p>What to ask:</p>
+<p>Should the model-selection rule use repeated-pulse stability, EIS agreement, or some other criterion?</p>
+<h2>9. End With The Concrete Ask</h2>
+<p>Open:</p>
+<pre><code>00_Read_First/QUESTIONS_FOR_PROFESSOR.md</code></pre>
+<p>Say:</p>
+<p>The next step is not training a model. The next step is validating the experimental alignment.</p>
+<p>Ask for:</p>
+<ul><li>exact protocol annotations tying time-series pulse windows to SOC targets</li></ul>
+<ul><li>current sign convention</li></ul>
+<ul><li>measured capacity rule</li></ul>
+<ul><li>whether low-current pulses are comparable to EIS</li></ul>
+<ul><li>reference EIS preprocessing and DRT method</li></ul>
+<ul><li>one trusted matched validation example</li></ul>
+<h2>If He Only Has 5 Minutes</h2>
+<p>Show only:</p>
+<p>1. <code>00_Read_First/VIABILITY_REPORT.md</code> 2. <code>01_Method_And_Math/TIME_DOMAIN_DRT_MATH.html</code> 3. <code>02_Key_Results/Model Rule/model_rule_report.md</code> 4. <code>00_Read_First/QUESTIONS_FOR_PROFESSOR.md</code></p>
+<p>Say:</p>
+<p>I built the scaffold. It runs. It is honest about not being validated. I need your protocol knowledge to decide whether the mismatch is a modeling problem or an experimental-comparability problem.</p>
+<h2>What Not To Say</h2>
+<p>Do not say:</p>
+<ul><li>I solved time-series DRT.</li></ul>
+<ul><li>This replaces EIS.</li></ul>
+<ul><li>These are training labels.</li></ul>
+<ul><li>The model works because voltage RMSE is low.</li></ul>
+<p>Say instead:</p>
+<ul><li>I built a reproducible research scaffold.</li></ul>
+<ul><li>The first validation comparison is weak.</li></ul>
+<ul><li>The next step is protocol-confirmed matching and baseline modeling.</li></ul>
+<ul><li>I want your feedback on the experimental assumptions.</li></ul>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plot Guide</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/PLOT_GUIDE.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Plot Guide</h1>
+<p>Prepared: 2026-06-15</p>
+<p>All plots in this folder were regenerated with Matplotlib from saved CSV and JSON outputs. The raw DIB dataset was not present in this workspace, so plots that need raw DIB files were rebuilt from exported result tables, not from original raw measurements.</p>
+<p>Each PNG also has a matching <code>*_EXPLANATION.md</code> file. Read that sidecar file when you want the plain-language interpretation of the figure, the main takeaway, and the limitation that should not be overclaimed.</p>
+<h2>Existing Key Plots</h2>
+<table>
+<tr><th>Plot</th><th>What It Shows</th><th>Units</th></tr>
+<tr><td><code>synthetic_section_1_plots.png</code></td><td>Synthetic current input, voltage fit, recovered DRT, and residuals.</td><td>Current A, voltage V, residual mV, tau s, gamma mOhm</td></tr>
+<tr><td><code>section_2_window_plot.png</code></td><td>Accepted pulse/rest windows on synthetic current and voltage.</td><td>Time s, current A, voltage V</td></tr>
+<tr><td><code>section_3_candidate_fit_plot.png</code></td><td>Selected-window fit and recovered DRT.</td><td>Local time s, current A, voltage V, residual mV, tau s, gamma mOhm</td></tr>
+<tr><td><code>section_8_cell28_soc_sweep_summary.png</code></td><td>Cell28 comparison across SOC labels.</td><td>SOC %, RMSE mV, DRT area Ohm</td></tr>
+<tr><td><code>section_9_validation_diagnostics.png</code></td><td>Scale and lambda diagnostics.</td><td>SOC %, lambda, correlation, normalized RMSE</td></tr>
+<tr><td><code>section_10_soc_alignment.png</code></td><td>SOC label versus coulomb-counted SOC.</td><td>SOC %, voltage V, error percentage points</td></tr>
+<tr><td><code>dib_batch_summary.png</code></td><td>Generalized DIB batch validation across cells.</td><td>SOC %, RMSE mV, correlation, normalized RMSE, area ratio</td></tr>
+</table>
+<h2>Added Summary Plots</h2>
+<table>
+<tr><th>Plot</th><th>What It Shows</th><th>Why It Matters</th></tr>
+<tr><td><code>soc_mapping_sensitivity_summary.png</code></td><td>Whether different SOC mapping assumptions change metrics.</td><td>They did not explain the weak EIS match in this small run.</td></tr>
+<tr><td><code>model_sensitivity_summary.png</code></td><td>How baseline and lambda choices affect metrics.</td><td>This is a major weak point.</td></tr>
+<tr><td><code>model_rule_summary.png</code></td><td>Result after the pre-declared model rule.</td><td>The honest rule still gives weak EIS agreement.</td></tr>
+</table>
+<h2>Blunt Reading</h2>
+<p>The plots are now readable, but the scientific result did not become prettier. That is good. The figures should not hide the problem.</p>
+<p>The story is:</p>
+<p>1. The pipeline reconstructs voltage well. 2. The DRT-like shape does not match EIS strongly. 3. SOC uncertainty exists. 4. Model assumptions matter. 5. A drive-cycle dataset is needed if the project claim is about drive-cycle behavior.</p>
+    </article>
+  </main>
+</body>
+</html>

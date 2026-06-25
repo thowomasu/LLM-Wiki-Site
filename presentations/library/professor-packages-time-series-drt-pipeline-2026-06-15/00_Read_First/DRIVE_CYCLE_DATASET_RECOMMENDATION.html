@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drive-Cycle Dataset Recommendation</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/00_Read_First/DRIVE_CYCLE_DATASET_RECOMMENDATION.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Drive-Cycle Dataset Recommendation</h1>
+<p>Prepared: 2026-06-15</p>
+<h2>Blunt Decision</h2>
+<p>Do not defend DIB as the main dataset if the project requirement is drive-cycle battery behavior.</p>
+<p>DIB is useful for the current prototype because it has pulse/rest capacity-check files and EIS rows. But that is not the same thing as a battery being run under a real drive-cycle profile. If the professor wants drive-cycle loading, DIB is the wrong main dataset.</p>
+<h2>What A Drive-Cycle Dataset Needs</h2>
+<p>Minimum columns:</p>
+<ul><li>time in seconds</li></ul>
+<ul><li>current in amps</li></ul>
+<ul><li>voltage in volts</li></ul>
+<ul><li>temperature in C, strongly preferred</li></ul>
+<ul><li>SOC label or enough information for coulomb counting</li></ul>
+<ul><li>cell chemistry and capacity</li></ul>
+<ul><li>named drive-cycle profile, for example FUDS, US06, UDDS, HWFET, LA92, WLTP, DST, or BJDST</li></ul>
+<p>Nice to have:</p>
+<ul><li>repeated cycles over aging</li></ul>
+<ul><li>SOH labels</li></ul>
+<ul><li>impedance or EIS data</li></ul>
+<ul><li>multiple temperatures</li></ul>
+<ul><li>multiple cells</li></ul>
+<p>The hard truth: datasets with drive cycles plus clean matching EIS are harder to find. If the professor requires both, the project scope is bigger than the current package.</p>
+<h2>Best Immediate Replacement: CALCE Battery Data</h2>
+<p>Use the CALCE battery data page first: <a href="https://calce.umd.edu/battery-data">CALCE Battery Data</a>.</p>
+<p>Why this is the best first choice:</p>
+<ul><li>CALCE says it provides open access lithium-ion test data including dynamic driving profiles, OCV measurements, impedance measurements, multiple form factors, and LCO, LFP, and NMC chemistries: <a href="https://calce.umd.edu/battery-data">CALCE Battery Data</a>.</li></ul>
+<ul><li>For the INR 18650-20R battery, CALCE lists dynamic current profiles including DST, FUDS, US06, and BJDST, tested at 80 percent and 50 percent battery level and at 0 C, 25 C, and 45 C: <a href="https://calce.umd.edu/battery-data">CALCE dynamic test profile section</a>.</li></ul>
+<ul><li>For the A123 battery, CALCE says the dynamic profile files contain DST, US06, and FUDS measurements, and the page lists temperature-specific downloads from -10 C to 50 C: <a href="https://calce.umd.edu/battery-data">CALCE A123 dynamic profile section</a>.</li></ul>
+<p>Recommended starting point:</p>
+<p>1. Start with CALCE INR 18650-20R dynamic profiles at 25 C. 2. Use US06 and FUDS first. 3. Keep A123 as a second chemistry check if the project needs LFP behavior.</p>
+<p>Why not start with A123? It is useful, but the 18650-20R page is closer to the common cylindrical EV-cell story and includes the named dynamic profiles clearly.</p>
+<h2>What The Drive-Cycle Names Mean</h2>
+<p>The EPA page is useful for defining the profiles, even when the battery data comes from CALCE: <a href="https://www.epa.gov/vehicle-and-fuel-emissions-testing/dynamometer-drive-schedules">EPA Dynamometer Drive Schedules</a>.</p>
+<p>Key points from EPA:</p>
+<ul><li>EPA says the page provides chassis dynamometer driving schedules and downloadable tab-delimited ASCII files used for emissions and fuel economy testing: <a href="https://www.epa.gov/vehicle-and-fuel-emissions-testing/dynamometer-drive-schedules">EPA drive schedules</a>.</li></ul>
+<ul><li>UDDS represents city driving conditions: <a href="https://www.epa.gov/vehicle-and-fuel-emissions-testing/dynamometer-drive-schedules">EPA UDDS section</a>.</li></ul>
+<ul><li>HWFET represents highway driving under 60 mph: <a href="https://www.epa.gov/vehicle-and-fuel-emissions-testing/dynamometer-drive-schedules">EPA HWFET section</a>.</li></ul>
+<ul><li>US06 is a high-acceleration aggressive driving schedule: <a href="https://www.epa.gov/vehicle-and-fuel-emissions-testing/dynamometer-drive-schedules">EPA US06 section</a>.</li></ul>
+<ul><li>LA-92 is also listed as a heavy-duty driving schedule: <a href="https://www.epa.gov/vehicle-and-fuel-emissions-testing/dynamometer-drive-schedules">EPA LA-92 section</a>.</li></ul>
+<p>Use EPA to explain the drive-cycle profile. Use CALCE for actual battery current, voltage, and temperature data.</p>
+<h2>Secondary Candidate: Panasonic 18650PF Drive-Cycle Data</h2>
+<p>There is a public Panasonic 18650PF drive-cycle dataset used in SOC-estimation literature, but I would not make it the first recommendation until the official download source is confirmed.</p>
+<p>Why it is relevant:</p>
+<ul><li>A 2020 NARXNN paper says the dataset used a Panasonic 18650PF cell and tested drive cycles including HWFET, LA92, US06, and UDDS at 25 C: <a href="https://arxiv.org/abs/2012.10725">NARXNN paper</a>.</li></ul>
+<ul><li>The same paper says the dataset contains voltage, current, temperature, and SOC information, and notes the current sensor error for the data collection: <a href="https://arxiv.org/abs/2012.10725">NARXNN paper dataset section</a>.</li></ul>
+<ul><li>A 2026 voltage-prediction paper also refers to a public Panasonic 18650PF dataset with UDDS, US06, LA92, and HWFET comparisons: <a href="https://arxiv.org/abs/2605.06419">2026 paper</a>.</li></ul>
+<p>Weakness:</p>
+<p>The papers confirm the dataset is used, but the direct official dataset download was not cleanly verified from the search results I found. Do not tell the professor &quot;we have this dataset&quot; until the download path is confirmed.</p>
+<h2>Dataset Choice</h2>
+<p>Use this decision rule:</p>
+<table>
+<tr><th>Requirement</th><th>Dataset Choice</th></tr>
+<tr><td>Need named drive-cycle current profiles now</td><td>CALCE INR 18650-20R dynamic profiles</td></tr>
+<tr><td>Need LFP chemistry</td><td>CALCE A123 dynamic profiles</td></tr>
+<tr><td>Need HWFET, LA92, US06, UDDS in one SOC-estimation-style dataset</td><td>Panasonic 18650PF, but confirm official download first</td></tr>
+<tr><td>Need drive-cycle definitions only</td><td>EPA drive schedule files</td></tr>
+<tr><td>Need EIS-matched validation</td><td>DIB remains useful, but not as the drive-cycle dataset</td></tr>
+</table>
+<h2>How The Project Should Change</h2>
+<p>Use two tracks:</p>
+<p>1. Drive-cycle track:</p>
+<ul><li>Use CALCE dynamic profiles.</li></ul>
+<ul><li>Fit or test time-domain models on real dynamic current profiles.</li></ul>
+<ul><li>Report voltage prediction, SOC behavior, thermal drift, and robustness.</li></ul>
+<p>2. EIS/DRT track:</p>
+<ul><li>Keep DIB only for pulse/rest plus EIS comparison.</li></ul>
+<ul><li>Be honest that this is not the same as drive-cycle loading.</li></ul>
+<p>Do not mix the claims. That is the blind spot. If the dataset is pulse/rest, call it pulse/rest. If the dataset is drive-cycle, call it drive-cycle. The professor noticed the mismatch because it is real.</p>
+<h2>Source List</h2>
+<ul><li><a href="https://calce.umd.edu/battery-data">CALCE Battery Data</a></li></ul>
+<ul><li><a href="https://www.epa.gov/vehicle-and-fuel-emissions-testing/dynamometer-drive-schedules">EPA Dynamometer Drive Schedules</a></li></ul>
+<ul><li><a href="https://arxiv.org/abs/2012.10725">Analysis of NARXNN for State of Charge Estimation for Li-ion Batteries on various Drive Cycles</a></li></ul>
+<ul><li><a href="https://arxiv.org/abs/2605.06419">Residual-Corrected Equivalent-Circuit Model with Universal Differential Equations for Robust Battery Voltage Prediction under Operating-Condition Shift</a></li></ul>
+    </article>
+  </main>
+</body>
+</html>

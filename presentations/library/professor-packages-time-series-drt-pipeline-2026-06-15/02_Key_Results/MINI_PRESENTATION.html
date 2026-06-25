@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Key Results</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Key Results</h1>
+  <p class="meta">Time-Series DRT Pipeline, professor handoff, 2026-06-15</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>Generalized DIB batch: 15 SOC comparisons, no batch errors, median voltage RMSE about 1.586 mV, median EIS correlation about 0.105.</li>
+      <li>SOC mapping sensitivity did not explain the weak EIS agreement in the small run.</li>
+      <li>Pre-declared model rule: 10 selected comparisons, 0 errors, median voltage RMSE about 1.711 mV, median EIS correlation about 0.141.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="../03_Key_Plots/dib_batch_summary.png" alt="Batch behavior across cells and SOC points."><figcaption>Batch behavior across cells and SOC points.</figcaption></figure>
+      <figure><img src="../03_Key_Plots/model_rule_summary.png" alt="Pre-declared model rule result. Honest, but still weak."><figcaption>Pre-declared model rule result. Honest, but still weak.</figcaption></figure>
+      <figure><img src="../03_Key_Plots/section_10_soc_alignment.png" alt="SOC assignment is still an assumption that needs protocol confirmation."><figcaption>SOC assignment is still an assumption that needs protocol confirmation.</figcaption></figure>
+      <figure><img src="../03_Key_Plots/section_9_validation_diagnostics.png" alt="Diagnostics show why scale and lambda do not magically fix the mismatch."><figcaption>Diagnostics show why scale and lambda do not magically fix the mismatch.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>Results are saved as reports, CSV summaries, JSON summaries, and plots.</li>
+      <li>The package tests more than one case instead of relying on one hand-picked example.</li>
+      <li>Sensitivity checks separate SOC mapping uncertainty from model-setting uncertainty.</li>
+      <li>The model-rule report makes validation leakage harder to hide.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>EIS agreement is still weak after the honest model rule.</li>
+      <li>Quality-pass voltage reconstruction does not mean EIS validation passed.</li>
+      <li>Model sensitivity shows baseline and lambda choices matter.</li>
+      <li>SOC alignment, especially around the 70 percent case, remains uncertain.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Expand the rule-selected validation to more protocol-confirmed cases.</li>
+      <li>Use professor-confirmed matched examples as the benchmark.</li>
+      <li>Treat weak EIS agreement as a model or data-match problem, not a plotting problem.</li>
+      <li>Stop before using time-domain DRT outputs as labels unless validation improves.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

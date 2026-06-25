@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Notes</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/04_Code/README_CODE.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Code Notes</h1>
+<p>The scripts are copied here for review in their original relative layout:</p>
+<pre><code>scripts/experiments/</code></pre>
+<p>They are not meant to make this package a fully standalone runnable repository. The full run expects the original project layout plus the DIB data paths.</p>
+<p>For a plain-language walkthrough of the important scripts, read:</p>
+<pre><code>../01_Method_And_Math/CODE_WALKTHROUGH_FOR_PROFESSOR.md</code></pre>
+<p>For regenerated plot details, read:</p>
+<pre><code>../03_Key_Plots/PLOT_GUIDE.md</code></pre>
+<p>Main entry points:</p>
+<ul><li><code>scripts/experiments/run_time_domain_rough_prototype.py</code></li></ul>
+<ul><li><code>scripts/experiments/time_domain_model_rule.py</code></li></ul>
+<ul><li><code>scripts/experiments/time_domain_viability_report.py</code></li></ul>
+<ul><li><code>scripts/experiments/time_domain_export_html.py</code></li></ul>
+<ul><li><code>scripts/experiments/time_domain_package_plots.py</code></li></ul>
+<ul><li><code>scripts/experiments/time_domain_regenerate_all_plots.py</code></li></ul>
+<ul><li><code>scripts/experiments/time_domain_explain_outputs.py</code></li></ul>
+<p>The core solver is:</p>
+<ul><li><code>scripts/experiments/time_domain_drt_pilot.py</code></li></ul>
+<p>The pulse/window and fit stages are:</p>
+<ul><li><code>scripts/experiments/time_domain_window_finder.py</code></li></ul>
+<ul><li><code>scripts/experiments/time_domain_candidate_fit.py</code></li></ul>
+<p>The batch and sensitivity stages are:</p>
+<ul><li><code>scripts/experiments/time_domain_dib_batch.py</code></li></ul>
+<ul><li><code>scripts/experiments/time_domain_soc_mapping_sensitivity.py</code></li></ul>
+<ul><li><code>scripts/experiments/time_domain_model_sensitivity.py</code></li></ul>
+    </article>
+  </main>
+</body>
+</html>

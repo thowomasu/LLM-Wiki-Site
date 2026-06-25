@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Key Plots</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Key Plots</h1>
+  <p class="meta">Zenodo Expt4 Dataset Handoff, professor handoff, 2026-06-19</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>This folder collects the visual evidence from the Zenodo Expt4 pipeline.</li>
+      <li>The plots summarize data audit, GITT windows, fits, batch behavior, model sensitivity, raw conversion, health labels, validation, trend consistency, discharge features, hybrid features, and multi-protocol validation.</li>
+      <li>The visuals support fast review without opening every CSV.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>Key figures are separated from the full report tree.</li>
+      <li>Sidecar explanations and graph indexes make each plot easier to interpret.</li>
+      <li>The folder helps a professor quickly see what worked and where the claims weaken.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="01_Graphs/section_1_data_audit.png" alt="Data audit."><figcaption>Data audit.</figcaption></figure>
+      <figure><img src="01_Graphs/section_2_file_screen.png" alt="File screen."><figcaption>File screen.</figcaption></figure>
+      <figure><img src="01_Graphs/section_3_gitt_window_plot.png" alt="GITT window finder."><figcaption>GITT window finder.</figcaption></figure>
+      <figure><img src="01_Graphs/section_4_gitt_candidate_fit_plot.png" alt="GITT candidate fit."><figcaption>GITT candidate fit.</figcaption></figure>
+      <figure><img src="01_Graphs/section_5_gitt_batch_summary.png" alt="GITT batch summary."><figcaption>GITT batch summary.</figcaption></figure>
+      <figure><img src="01_Graphs/section_6_model_sensitivity.png" alt="Model sensitivity."><figcaption>Model sensitivity.</figcaption></figure>
+      <figure><img src="01_Graphs/section_7_raw_window_plot.png" alt="Raw conversion window check."><figcaption>Raw conversion window check.</figcaption></figure>
+      <figure><img src="01_Graphs/section_8_health_label_join.png" alt="Health label join."><figcaption>Health label join.</figcaption></figure>
+      <figure><img src="01_Graphs/section_9_held_out_cell_validation.png" alt="Held-out cell validation."><figcaption>Held-out cell validation.</figcaption></figure>
+      <figure><img src="01_Graphs/section_10_trend_consistency.png" alt="Trend consistency."><figcaption>Trend consistency.</figcaption></figure>
+      <figure><img src="01_Graphs/section_11_discharge_curve_features.png" alt="Discharge curve features."><figcaption>Discharge curve features.</figcaption></figure>
+      <figure><img src="01_Graphs/section_12_hybrid_pulse_features.png" alt="Hybrid pulse features."><figcaption>Hybrid pulse features.</figcaption></figure>
+      <figure><img src="01_Graphs/section_13_multi_protocol_validation.png" alt="Multi-protocol validation."><figcaption>Multi-protocol validation.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>Plots do not remove leakage risk.</li>
+      <li>Good-looking prediction plots can still be scientifically weak if target proxies are included.</li>
+      <li>No plot here proves EIS-validated DRT peaks.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Keep plot explanations paired with every new figure.</li>
+      <li>Add plots for leakage-cleaned feature sets.</li>
+      <li>Highlight leave-one-temperature-out results over easier grouped splits.</li>
+      <li>Use figures to separate R0 effects from DRT-band effects.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

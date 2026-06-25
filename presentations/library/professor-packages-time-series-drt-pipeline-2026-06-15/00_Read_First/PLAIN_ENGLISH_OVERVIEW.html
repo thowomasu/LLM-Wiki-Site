@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plain English Overview</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/00_Read_First/PLAIN_ENGLISH_OVERVIEW.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Plain English Overview</h1>
+<p>Prepared: 2026-06-15</p>
+<h2>What This Package Is</h2>
+<p>This package is a research prototype. It tries to estimate a DRT-like relaxation curve from battery current, voltage, and time data. Then it compares that time-domain curve against an EIS-derived DRT curve when matching EIS data exists.</p>
+<p>Plain version:</p>
+<ul><li>Current goes into the battery.</li></ul>
+<ul><li>Voltage comes out of the battery.</li></ul>
+<ul><li>The code tries to explain the voltage response as a mix of fast, medium, and slow relaxation processes.</li></ul>
+<ul><li>Those relaxation processes are plotted over tau, which means time constant in seconds.</li></ul>
+<ul><li>The result is called DRT-like because it behaves like a DRT curve, but it is not validated as a true EIS replacement yet.</li></ul>
+<h2>What The Code Does</h2>
+<p>1. It creates a synthetic battery signal where the true answer is known. 2. It checks whether the solver can recover that known answer. 3. It loads battery CSV files and finds pulse/rest windows. 4. It fits one selected pulse/rest window. 5. It compares the fitted time-domain DRT against an EIS-derived DRT. 6. It repeats that comparison across SOC points and cells. 7. It tests whether SOC mapping, baseline choices, and lambda smoothing change the result. 8. It writes plots, CSV summaries, reports, and HTML copies.</p>
+<h2>What The Plots Mean</h2>
+<ul><li>Current plots use amps, A.</li></ul>
+<ul><li>Voltage plots use volts, V.</li></ul>
+<ul><li>Voltage error plots use millivolts, mV.</li></ul>
+<ul><li>Tau plots use seconds on a log scale, because relaxation can happen over very different time ranges.</li></ul>
+<ul><li>Gamma or resistance-weight plots use Ohm or milliohm, mOhm.</li></ul>
+<ul><li>SOC plots use percent.</li></ul>
+<ul><li>Temperature drift uses C.</li></ul>
+<h2>What The Results Say</h2>
+<p>The engineering pipeline works. The code loads data, finds windows, fits curves, compares against EIS, and produces repeatable outputs.</p>
+<p>The scientific claim is not proven. The EIS/time-domain DRT agreement is weak. The current rule-selected median EIS correlation is only about 0.141. That is too low to claim this is a valid EIS replacement.</p>
+<p>The blunt version:</p>
+<p>Do not train a model using these fitted DRT curves as final labels yet. That would be pretending the method is validated when it is not.</p>
+<h2>The Main Weak Spots</h2>
+<p>1. The DIB data is not a clean drive-cycle dataset. 2. SOC matching is approximate, especially near the 70 percent case. 3. Baseline and lambda choices change the DRT comparison. 4. Good voltage reconstruction does not prove the recovered gamma shape is correct. 5. EIS and pulse/rest time-domain excitation may not be measuring the same process under the current assumptions.</p>
+<h2>What To Ask In The Meeting</h2>
+<p>Ask these first:</p>
+<p>1. Does the project require real drive-cycle profiles, such as FUDS, US06, UDDS, HWFET, or WLTP? 2. Is the goal SOC estimation, SOH estimation, EIS replacement, or DRT label generation? 3. Does the professor need drive-cycle data only, or drive-cycle data plus matching EIS? 4. Which current sign convention should be used? 5. Which exact SOC labels should be trusted?</p>
+<p>If the answer is &quot;we need drive cycles,&quot; then DIB should not be defended as the main dataset. Use DIB only for the EIS/pulse prototype, and switch the main experiment to a drive-cycle dataset.</p>
+    </article>
+  </main>
+</body>
+</html>

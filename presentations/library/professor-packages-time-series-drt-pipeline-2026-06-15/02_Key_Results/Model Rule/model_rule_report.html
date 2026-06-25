@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pre-Declared Model Rule</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/Model Rule/model_rule_report.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Pre-Declared Model Rule</h1>
+<h2>Purpose</h2>
+<p>This section selects the time-domain model setting before looking at EIS agreement. That matters because choosing lambda or baseline after seeing EIS is validation leakage.</p>
+<h2>Rule</h2>
+<ul><li>Baseline mode is fixed at <code>time_charge</code>.</li></ul>
+<ul><li>SOC selection is <code>coulomb</code> when raw data is available.</li></ul>
+<ul><li>Tested lambda values: 0.001, 0.1, 1.0, 3.0</li></ul>
+<ul><li>Lambda must stay within best voltage RMSE plus max 5% or 0.25 mV.</li></ul>
+<ul><li>Within that RMSE band, prefer lower gamma roughness and more stable fast/mid/slow band areas.</li></ul>
+<ul><li>EIS metrics are reported after selection. They are not allowed into the selection score.</li></ul>
+<h2>Run Summary</h2>
+<ul><li>Input mode: existing model-sensitivity CSV</li></ul>
+<ul><li>Discovery: {&quot;source_rows&quot;: 40, &quot;selected_case_count&quot;: 10, &quot;target_count&quot;: 10}</li></ul>
+<ul><li>Selected comparisons: 10</li></ul>
+<ul><li>Lambda candidates scored: 40</li></ul>
+<ul><li>Errors: 0</li></ul>
+<ul><li>Quality-pass comparisons: 10 of 10</li></ul>
+<ul><li>Median voltage RMSE: 1.7106937066290135 mV</li></ul>
+<ul><li>Median EIS correlation after rule selection: 0.1406798483387754</li></ul>
+<ul><li>Median normalized RMSE after rule selection: 0.978374331390654</li></ul>
+<h2>Selected Settings</h2>
+<ul><li>Cell 15, SOH 80, SOC 5: lambda 0.001, RMSE 2.453939421743068 mV, corr -0.1265397461419299, norm_RMSE 0.8348886970647139</li></ul>
+<ul><li>Cell 15, SOH 80, SOC 20: lambda 0.001, RMSE 1.7602909654926566 mV, corr 0.1711563289826563, norm_RMSE 0.963384725467954</li></ul>
+<ul><li>Cell 15, SOH 80, SOC 50: lambda 0.001, RMSE 1.707345639066683 mV, corr 0.1235206298583345, norm_RMSE 1.1449411226020272</li></ul>
+<ul><li>Cell 15, SOH 80, SOC 70: lambda 0.001, RMSE 1.7140417741913443 mV, corr 0.1431196141299693, norm_RMSE 0.993363937313354</li></ul>
+<ul><li>Cell 15, SOH 80, SOC 95: lambda 0.001, RMSE 1.843328008934464 mV, corr 0.1205178183642547, norm_RMSE 1.148760961863879</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 5: lambda 0.001, RMSE 2.2677522881010104 mV, corr -0.0966331156982791, norm_RMSE 1.0599420440685534</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 20: lambda 0.001, RMSE 1.5860296058503212 mV, corr 0.1813068040303565, norm_RMSE 0.918411490941448</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 50: lambda 0.001, RMSE 1.5106343240204447 mV, corr 0.1382400825475815, norm_RMSE 1.0545358802461242</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 70: lambda 0.001, RMSE 1.5052806002076426 mV, corr 0.157819597243833, norm_RMSE 0.9111891114649304</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 95: lambda 0.001, RMSE 1.544494474143958 mV, corr 0.1720153824416916, norm_RMSE 0.8136607016125303</li></ul>
+<h2>Selection Diagnostics</h2>
+<ul><li>Selected lambda values: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001]</li></ul>
+<ul><li>Median selection score: 1.4</li></ul>
+<h2>Interpretation</h2>
+<p>This improves the pipeline because the model choice is now explicit and reproducible. It still does not validate time-domain DRT as a substitute for EIS. If the post-selection EIS metrics remain weak, believe the weakness.</p>
+<p>Blunt takeaway: this script makes the pipeline more honest. It does not make the science magically true.</p>
+<h2>Outputs</h2>
+<ul><li><code>model_rule_results.csv</code>: one selected setting per target with EIS metrics added afterward.</li></ul>
+<ul><li><code>model_rule_lambda_candidates.csv</code>: every lambda candidate and internal selection score.</li></ul>
+<ul><li><code>model_rule_errors.csv</code>: failures.</li></ul>
+<ul><li><code>model_rule_case_summaries.json</code>: raw-case or existing-output run metadata.</li></ul>
+<ul><li><code>model_rule_report.md</code>: this report.</li></ul>
+<p>&lt;!-- BEGIN BEGINNER_MATH_EXPLANATION --&gt;</p>
+<h2>How This Section Works, Plain Math</h2>
+<p>This section uses a pre-declared rule to choose model settings before looking at EIS agreement.</p>
+<h3>Why this matters</h3>
+<p>If we choose lambda after seeing EIS, we are tuning to the answer key. That makes the validation look better than it really is.</p>
+<h3>The rule</h3>
+<p>The rule prefers candidates with:</p>
+<ul><li>low voltage RMSE</li></ul>
+<ul><li>smoother gamma</li></ul>
+<ul><li>stable broad-band areas</li></ul>
+<ul><li>enough nonzero gamma points</li></ul>
+<p>It does not use EIS correlation while choosing.</p>
+<h3>What this section proves</h3>
+<p>It gives a more honest validation check. In the current result, the honest rule still gives weak EIS agreement. That is bad news scientifically, but useful because it prevents false confidence.</p>
+<h3>Actual Equations Used</h3>
+<p>The model rule chooses settings before looking at EIS agreement. It combines voltage fit, roughness, and stability:</p>
+<div class="math-display">$$
+\mathrm{score}
+=
+w_1\,\widetilde{\mathrm{RMSE}}
++w_2\,\widetilde{\left\|L\gamma\right\|_2}
++w_3\,\widetilde{\mathrm{band\ instability}}
++w_4\,\widetilde{\mathrm{sparsity\ penalty}}
+$$</div>
+<p>The selected model is:</p>
+<div class="math-display">$$
+\theta^*
+=
+\arg\min_{\theta\in\Theta}\mathrm{score}(\theta)
+$$</div>
+<p>\(\theta\) represents choices like baseline mode and \(\lambda\). EIS correlation is not part of the selection score.</p>
+<p>After choosing \(\theta^*\), the report computes:</p>
+<div class="math-display">$$
+r_{\text{held-out style}}
+=
+\operatorname{corr}
+\left(\gamma_{\text{TD}}(\tau;\theta^*),\gamma_{\text{EIS}}(\tau)\right)
+$$</div>
+<p>That is the honest check. If it is weak, the method is weak under the declared rule. &lt;!-- END BEGINNER_MATH_EXPLANATION --&gt;</p>
+    </article>
+  </main>
+</body>
+</html>

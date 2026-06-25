@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rough Prototype Handoff</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/00_Read_First/ROUGH_PROTOTYPE_HANDOFF.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Rough Prototype Handoff</h1>
+<h2>Status</h2>
+<ul><li>Runner mode: synthetic only</li></ul>
+<ul><li>Steps run: 4</li></ul>
+<ul><li>Failed steps: 0</li></ul>
+<ul><li>Total runner time: 3.01 seconds</li></ul>
+<h2>What Exists Now</h2>
+<ul><li>A synthetic time-domain DRT sanity check.</li></ul>
+<ul><li>A CSV loader that handles DIB-style metadata headers.</li></ul>
+<ul><li>A pulse/rest window finder.</li></ul>
+<ul><li>A candidate-window time-domain DRT fitter.</li></ul>
+<ul><li>A pyDRTtools-based EIS comparison path.</li></ul>
+<ul><li>A multi-SOC Cell28 validation sweep.</li></ul>
+<ul><li>Scale, regularization, and SOC-alignment diagnostics.</li></ul>
+<ul><li>A generalized DIB batch runner tested on multiple cells.</li></ul>
+<ul><li>SOC-mapping, model-assumption, and viability reports when those outputs exist.</li></ul>
+<ul><li>A pre-declared model-rule step that selects lambda before EIS scoring.</li></ul>
+<ul><li>HTML mirrors of the main handoff docs when the export step has run.</li></ul>
+<h2>Reproduction Command</h2>
+<pre><code>python &quot;scripts\experiments\run_time_domain_rough_prototype.py&quot;</code></pre>
+<p>Use <code>--synthetic-only</code> if the local DIB folder is not available.</p>
+<h2>Synthetic Check</h2>
+<ul><li>R0 truth: 0.002 ohm</li></ul>
+<ul><li>R0 recovered: 0.001814 ohm</li></ul>
+<ul><li>Voltage RMSE: 0.8007 mV</li></ul>
+<p>Interpretation: the inverse math works on a controlled synthetic case, but exact peak recovery is fragile.</p>
+<h2>Real Cell28 Sweep</h2>
+<table>
+<tr><th>SOC label</th><th>Candidate</th><th>Time RMSE mV</th><th>Corr</th><th>Time area</th><th>EIS area</th></tr>
+<tr><td>95</td><td>6</td><td>1.492</td><td>-0.04173</td><td>0.001387</td><td>0.0122</td></tr>
+<tr><td>70</td><td>10</td><td>1.437</td><td>0.1209</td><td>0.001913</td><td>0.01705</td></tr>
+<tr><td>50</td><td>14</td><td>1.427</td><td>0.08484</td><td>0.00128</td><td>0.01233</td></tr>
+<tr><td>20</td><td>20</td><td>1.493</td><td>0.1907</td><td>0.001052</td><td>0.04803</td></tr>
+<tr><td>5</td><td>24</td><td>2.277</td><td>0.1092</td><td>0.001853</td><td>0.07002</td></tr>
+</table>
+<p>Interpretation: voltage reconstruction is good, but EIS agreement is weak. This is not a validated substitute for EIS-derived DRT.</p>
+<h2>Scale And Regularization</h2>
+<ul><li>Best scale factor spread across SOC: 8.731x</li></ul>
+<ul><li>Best 70 percent SOC normalized-RMSE lambda: 3.0</li></ul>
+<ul><li>Best 70 percent SOC correlation lambda: 0.3</li></ul>
+<p>Interpretation: stronger smoothing improves one case, but it is not a clean fix. A tuning rule is needed before any claim is credible.</p>
+<h2>SOC Alignment</h2>
+<table>
+<tr><th>EIS SOC label</th><th>Candidate</th><th>Coulomb-count SOC</th><th>Error percentage points</th></tr>
+<tr><td>95</td><td>6</td><td>95</td><td>0</td></tr>
+<tr><td>70</td><td>10</td><td>76.07</td><td>6.07</td></tr>
+<tr><td>50</td><td>14</td><td>46.55</td><td>-3.446</td></tr>
+<tr><td>20</td><td>20</td><td>17.03</td><td>-2.968</td></tr>
+<tr><td>5</td><td>24</td><td>2.279</td><td>-2.721</td></tr>
+</table>
+<ul><li>Max absolute SOC error from simple anchor method: 6.07 percentage points</li></ul>
+<p>Interpretation: the current matched validation is contaminated by SOC uncertainty, especially the nominal 70 percent case.</p>
+<h2>Generalized DIB Batch</h2>
+<ul><li>SOC comparisons produced: 15</li></ul>
+<ul><li>Errors: 0</li></ul>
+<ul><li>Quality-pass comparisons: 15 of 15</li></ul>
+<ul><li>Median voltage RMSE: 1.586 mV</li></ul>
+<ul><li>Median EIS correlation: 0.1046</li></ul>
+<ul><li>Cells processed: 15, 18, 20</li></ul>
+<ul><li>SOH labels processed: 80, 85</li></ul>
+<p>Interpretation: the generalized DIB pipeline works mechanically across cells, but EIS agreement remains weak.</p>
+<h2>SOC Mapping Sensitivity</h2>
+<ul><li>Modes tested: coulomb, endpoint, linear, voltage</li></ul>
+<ul><li>Total comparisons: 60</li></ul>
+<ul><li>Errors: 0</li></ul>
+<ul><li>Targets with different selected candidates across modes: 0</li></ul>
+<ul><li>Targets with correlation range above 0.1 across modes: 0</li></ul>
+<ul><li>Median EIS correlation across mode summaries: 0.1046</li></ul>
+<p>Interpretation: SOC mapping did not explain the weak EIS agreement in the first sensitivity run.</p>
+<h2>Model Sensitivity</h2>
+<ul><li>Total comparisons: 120</li></ul>
+<ul><li>Errors: 0</li></ul>
+<ul><li>Quality-pass comparisons: 112 of 120</li></ul>
+<ul><li>Targets with correlation range above 0.1 across model settings: 10</li></ul>
+<ul><li>Best median normalized RMSE: time_charge, lambda 3.0, value 0.3011</li></ul>
+<ul><li>Best median correlation: offset, lambda 3.0, value 0.3738</li></ul>
+<p>Interpretation: baseline and lambda choices change the EIS shape comparison a lot. This is the current strongest warning sign.</p>
+<h2>Pre-Declared Model Rule</h2>
+<ul><li>Selected comparisons: 10</li></ul>
+<ul><li>Lambda candidates scored: 40</li></ul>
+<ul><li>Errors: 0</li></ul>
+<ul><li>Quality-pass comparisons: 10 of 10</li></ul>
+<ul><li>Selected lambda values: 0.001</li></ul>
+<ul><li>Median EIS correlation after rule selection: 0.1407</li></ul>
+<ul><li>Median normalized RMSE after rule selection: 0.9784</li></ul>
+<p>Interpretation: this is the honest model-selection gate. It picks settings from time-domain fit quality and stability before EIS metrics are read.</p>
+<h2>Viability Report</h2>
+<ul><li>Engineering scaffold: research_scaffold_viable</li></ul>
+<ul><li>Scientific method: not_validated</li></ul>
+<ul><li>Batch median EIS correlation: 0.1046</li></ul>
+<ul><li>Rule-selected median EIS correlation: 0.1407</li></ul>
+<ul><li>Model-sensitive targets: 10</li></ul>
+<p>Interpretation: the prototype is useful for research iteration. It is not safe as a training-label generator.</p>
+<h2>Rough Prototype Verdict</h2>
+<p>The rough prototype is complete as a research scaffold. It can load time-series data, find pulse windows, estimate a time-domain DRT-like spectrum, compare against EIS-derived DRT, run diagnostics, batch-test multiple DIB cells, flag obvious low-quality windows, test assumption sensitivity, and apply a pre-declared model-selection rule.</p>
+<p>It is not complete as a scientific method. The main blockers are baseline/OCV handling, EIS/time-domain comparability, pre-declared regularization, and stronger quality gates for selecting valid pulse windows.</p>
+<h2>What To Ask The Professor For</h2>
+<ul><li>Exact protocol annotations tying time-series steps to SOC targets.</li></ul>
+<ul><li>Current sign convention and whether discharge current is positive or negative.</li></ul>
+<ul><li>Nominal and measured cell capacity for each test.</li></ul>
+<ul><li>Whether the low-current capacity-check pulses are intended to be comparable to EIS.</li></ul>
+<ul><li>The exact EIS preprocessing and DRT method used in the prior master&#x27;s thesis.</li></ul>
+<ul><li>A matched cell/SOC/temp/SOH example that the professor considers ground truth.</li></ul>
+<h2>Next Engineering Step</h2>
+<p>Run the pre-declared model-selection rule on more protocol-confirmed cases. If rule-selected outputs still do not match EIS, stop pretending the problem is presentation. The model assumptions need work.</p>
+<p>Blunt warning: do not train any model yet. Training now would teach the model your preprocessing uncertainty.</p>
+    </article>
+  </main>
+</body>
+</html>

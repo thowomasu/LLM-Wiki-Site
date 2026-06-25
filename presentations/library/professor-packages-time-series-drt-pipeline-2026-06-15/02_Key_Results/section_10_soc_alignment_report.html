@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time-Domain DRT Pilot, Section 10</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/section_10_soc_alignment_report.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Time-Domain DRT Pilot, Section 10</h1>
+<h2>Purpose</h2>
+<p>This section checks whether the pulse windows used for EIS matching actually line up with the requested SOC labels. The previous sections used pre-rest voltage as the main clue. This section adds coulomb counting from the current time series.</p>
+<h2>Capacity Clues From Raw CSV</h2>
+<ul><li>AhAccu_max_abs: 4.95561</li></ul>
+<ul><li>AhAccu_max: 4.61182</li></ul>
+<ul><li>AhAccu_min: -4.95561</li></ul>
+<ul><li>AhPrev_max_abs: 4.96156</li></ul>
+<ul><li>AhPrev_max: 4.96156</li></ul>
+<ul><li>AhPrev_min: 0.0</li></ul>
+<h2>SOC Alignment Results</h2>
+<ul><li>label 95 percent, candidate 6: pre-rest V=4.1647, SOC from 95 anchor=95, error=0 percentage points, endpoint-fit SOC=95</li></ul>
+<ul><li>label 70 percent, candidate 10: pre-rest V=4.0106, SOC from 95 anchor=76.1, error=6.07 percentage points, endpoint-fit SOC=76.6</li></ul>
+<ul><li>label 50 percent, candidate 14: pre-rest V=3.7029, SOC from 95 anchor=46.6, error=-3.45 percentage points, endpoint-fit SOC=48</li></ul>
+<ul><li>label 20 percent, candidate 20: pre-rest V=3.4611, SOC from 95 anchor=17, error=-2.97 percentage points, endpoint-fit SOC=19.3</li></ul>
+<ul><li>label 5 percent, candidate 24: pre-rest V=3.1803, SOC from 95 anchor=2.28, error=-2.72 percentage points, endpoint-fit SOC=5</li></ul>
+<h2>Summary</h2>
+<ul><li>Capacity used from raw columns: 4.96156 Ah</li></ul>
+<ul><li>Endpoint capacity implied by 95 to 5 percent cases: 5.111550165177415 Ah</li></ul>
+<ul><li>Max absolute error using 95 anchor and raw capacity: 6.069810835845232 percentage points</li></ul>
+<ul><li>Max absolute error using 95 to 5 endpoint fit: 6.625286593261137 percentage points</li></ul>
+<ul><li>Max absolute error using all-label linear fit: 4.833788266328355 percentage points</li></ul>
+<h2>Interpretation</h2>
+<p>The SOC labels are plausible but not exact under simple coulomb counting. The 70 percent case is the biggest problem: it lands closer to the mid-70s by coulomb counting from the 95 percent anchor.</p>
+<p>Blunt takeaway: the matched validation is contaminated by SOC uncertainty. Before claiming time-domain DRT disagrees with EIS, we need either exact protocol SOC annotations or a defensible SOC reconstruction rule.</p>
+<h2>Outputs</h2>
+<ul><li><code>section_10_soc_alignment_report.md</code></li></ul>
+<ul><li><code>section_10_matched_soc_alignment.csv</code></li></ul>
+<ul><li><code>section_10_all_candidate_soc_alignment.csv</code></li></ul>
+<ul><li><code>section_10_soc_alignment_summary.json</code></li></ul>
+<ul><li><code>section_10_soc_alignment.png</code></li></ul>
+<p>&lt;!-- BEGIN BEGINNER_MATH_EXPLANATION --&gt;</p>
+<h2>How This Section Works, Plain Math</h2>
+<p>This section checks whether the selected pulse windows really match the target EIS SOC labels.</p>
+<h3>Coulomb counting</h3>
+<p>SOC can be estimated by integrating current over time:</p>
+<pre><code>charge moved in Ah = integral(current over time) / 3600</code></pre>
+<p>Then SOC changes according to capacity:</p>
+<pre><code>SOC change in percent = 100 * charge moved / capacity Ah</code></pre>
+<p>The script anchors one high-SOC candidate, then estimates the rest relative to that anchor.</p>
+<h3>SOC error</h3>
+<p>The error is:</p>
+<pre><code>SOC error = estimated SOC - EIS SOC label</code></pre>
+<p>Positive error means the selected pulse looks higher SOC than the EIS label. Negative error means it looks lower.</p>
+<h3>What this section proves</h3>
+<p>It checks the matched-pair story. If SOC alignment is off, a weak EIS comparison may be caused partly by bad matching.</p>
+<p>In the current result, the 70 percent case is approximate, not exact.</p>
+<h3>Actual Equations Used</h3>
+<p>Coulomb counting estimates charge moved:</p>
+<div class="math-display">$$
+Q(t) = \frac{1}{3600}\int_{t_0}^{t} I(u)\,du
+$$</div>
+<p>The estimated SOC is:</p>
+<div class="math-display">$$
+\widehat{\mathrm{SOC}}(t)
+=
+\mathrm{SOC}_{\text{anchor}}
+-100\frac{Q(t)-Q(t_{\text{anchor}})}{C_{\text{Ah}}}
+$$</div>
+<p>\(C_{\text{Ah}}\) is the assumed cell capacity in amp-hours.</p>
+<p>The SOC matching error is:</p>
+<div class="math-display">$$
+e_{\text{SOC}}
+=
+\widehat{\mathrm{SOC}}_{\text{candidate}}
+- \mathrm{SOC}_{\text{EIS label}}
+$$</div>
+<p>Large \(|e_{\text{SOC}}|\) means the pulse window may not match the EIS condition well. &lt;!-- END BEGINNER_MATH_EXPLANATION --&gt;</p>
+    </article>
+  </main>
+</body>
+</html>

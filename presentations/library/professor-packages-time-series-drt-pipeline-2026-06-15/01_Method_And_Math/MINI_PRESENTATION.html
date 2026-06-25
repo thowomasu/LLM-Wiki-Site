@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Method And Math</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Method And Math</h1>
+  <p class="meta">Time-Series DRT Pipeline, professor handoff, 2026-06-15</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>The method maps current history into a tau-grid response and fits nonnegative DRT-like gamma weights.</li>
+      <li>It separates baseline drift, ohmic resistance, and relaxation terms.</li>
+      <li>The math and code walkthrough make the assumptions reviewable instead of hidden inside scripts.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="../03_Key_Plots/synthetic_section_1_plots.png" alt="Synthetic sanity check with known behavior before real-data claims."><figcaption>Synthetic sanity check with known behavior before real-data claims.</figcaption></figure>
+      <figure><img src="../03_Key_Plots/model_sensitivity_summary.png" alt="Model sensitivity changes the comparison, so it is not a cosmetic detail."><figcaption>Model sensitivity changes the comparison, so it is not a cosmetic detail.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>Synthetic validation exists before real-data claims.</li>
+      <li>Time units, current units, voltage units, tau units, gamma units, and comparison metrics are defined.</li>
+      <li>The code walkthrough maps the main scripts in execution order.</li>
+      <li>The pre-declared model rule blocks tuning lambda after seeing EIS agreement.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>Nonnegative smooth gamma is a modeling assumption, not proof of true DRT physics.</li>
+      <li>Baseline and lambda choices still affect the comparison.</li>
+      <li>The current method may fit voltage while recovering a weak or wrong gamma shape.</li>
+      <li>EIS-derived reference settings still need professor-level agreement.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Lock the baseline and lambda rule before broader validation.</li>
+      <li>Compare broad tau-band areas, not only exact peak locations.</li>
+      <li>Confirm the EIS preprocessing and DRT reference method.</li>
+      <li>Add repeated-pulse or repeated-case stability checks before claiming robustness.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

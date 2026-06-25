@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zenodo Expt4 Time-Series DRT Pipeline</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f5f7f6;
+  --paper: #ffffff;
+  --ink: #182026;
+  --muted: #5a6975;
+  --line: #d8dfdf;
+  --accent: #0d766d;
+  --warn: #a5481a;
+  --code: #edf2f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 34px 22px 70px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 34px;
+  box-shadow: 0 14px 34px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.14;
+}
+
+h2 {
+  margin: 32px 0 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 24px 0 8px;
+  color: var(--warn);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+a { color: var(--accent); }
+ul, ol { padding-left: 24px; }
+li { margin: 5px 0; }
+
+code {
+  background: var(--code);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.95em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: #edf2f1; }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.meta {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 18px 0 28px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fbfcfb;
+}
+
+.card h3 { margin-top: 0; }
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <h1>Zenodo Expt4 Time-Series DRT Pipeline</h1>
+      <p class="meta">Browser entry point for the generated report package. Markdown remains the source of truth.</p>
+      <h2>Blunt Verdict</h2>
+      <p>The pipeline runs on processed Zenodo Expt4 GITT, discharge-curve, and hybrid-pulse data.</p>
+      <p>GITT is the DRT-like feature track. Discharge and hybrid traces are health-feature tracks, not DRT proof.</p>
+      <p>It still does not provide EIS-derived DRT validation. Do not sell it as validated physics.</p>
+      <h2>Read First</h2>
+      <ul><li><a href="00_Docs/README.html">Documentation map</a></li></ul>
+      <ul><li><a href="00_Docs/METHOD_AND_LIMITS.html">Method and limits</a></li></ul>
+      <ul><li><a href="00_Docs/VIABILITY_REPORT.html">Viability report</a></li></ul>
+      <ul><li><a href="00_Docs/REPORT_INDEX.html">Report index</a></li></ul>
+      <ul><li><a href="00_Docs/REPRODUCIBILITY.html">Reproducibility</a></li></ul>
+      <h2>Section Reports</h2>
+      <div class="grid">
+<section class="card">
+<h3>Section 1</h3>
+<p><a href="02_Section_Results/Section_01_Data_Audit/section_1_data_audit_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 1</a></p>
+<p><a href="02_Section_Results/Section_01_Data_Audit/section_1_data_audit_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_1_data_audit.png"><img src="01_Graphs/section_1_data_audit.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 1 graph"></a>
+</section>
+<section class="card">
+<h3>Section 2</h3>
+<p><a href="02_Section_Results/Section_02_File_Screen/section_2_file_screen_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 2</a></p>
+<p><a href="02_Section_Results/Section_02_File_Screen/section_2_file_screen_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_2_file_screen.png"><img src="01_Graphs/section_2_file_screen.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 2 graph"></a>
+</section>
+<section class="card">
+<h3>Section 3</h3>
+<p><a href="02_Section_Results/Section_03_GITT_Window_Finder/section_3_gitt_window_finder_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 3</a></p>
+<p><a href="02_Section_Results/Section_03_GITT_Window_Finder/section_3_gitt_window_finder_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_3_gitt_window_plot.png"><img src="01_Graphs/section_3_gitt_window_plot.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 3 graph"></a>
+</section>
+<section class="card">
+<h3>Section 4</h3>
+<p><a href="02_Section_Results/Section_04_GITT_Candidate_Fit/section_4_gitt_candidate_fit_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 4</a></p>
+<p><a href="02_Section_Results/Section_04_GITT_Candidate_Fit/section_4_gitt_candidate_fit_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_4_gitt_candidate_fit_plot.png"><img src="01_Graphs/section_4_gitt_candidate_fit_plot.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 4 graph"></a>
+</section>
+<section class="card">
+<h3>Section 5</h3>
+<p><a href="02_Section_Results/Section_05_GITT_Batch/section_5_gitt_batch_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 5</a></p>
+<p><a href="02_Section_Results/Section_05_GITT_Batch/section_5_gitt_batch_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_5_gitt_batch_summary.png"><img src="01_Graphs/section_5_gitt_batch_summary.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 5 graph"></a>
+</section>
+<section class="card">
+<h3>Section 6</h3>
+<p><a href="02_Section_Results/Section_06_Model_Sensitivity/section_6_model_sensitivity_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 6</a></p>
+<p><a href="02_Section_Results/Section_06_Model_Sensitivity/section_6_model_sensitivity_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_6_model_sensitivity.png"><img src="01_Graphs/section_6_model_sensitivity.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 6 graph"></a>
+</section>
+<section class="card">
+<h3>Section 7</h3>
+<p><a href="02_Section_Results/Section_07_Raw_Conversion_Check/section_7_raw_conversion_check_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 7</a></p>
+<p><a href="02_Section_Results/Section_07_Raw_Conversion_Check/section_7_raw_conversion_check_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_7_raw_window_plot.png"><img src="01_Graphs/section_7_raw_window_plot.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 7 graph"></a>
+</section>
+<section class="card">
+<h3>Section 8</h3>
+<p><a href="02_Section_Results/Section_08_Health_Label_Join/section_8_health_label_join_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 8</a></p>
+<p><a href="02_Section_Results/Section_08_Health_Label_Join/section_8_health_label_join_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_8_health_label_join.png"><img src="01_Graphs/section_8_health_label_join.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 8 graph"></a>
+</section>
+<section class="card">
+<h3>Section 9</h3>
+<p><a href="02_Section_Results/Section_09_Held_Out_Cell_Validation/section_9_held_out_cell_validation_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 9</a></p>
+<p><a href="02_Section_Results/Section_09_Held_Out_Cell_Validation/section_9_held_out_cell_validation_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_9_held_out_cell_validation.png"><img src="01_Graphs/section_9_held_out_cell_validation.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 9 graph"></a>
+</section>
+<section class="card">
+<h3>Section 10</h3>
+<p><a href="02_Section_Results/Section_10_Trend_Consistency/section_10_trend_consistency_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 10</a></p>
+<p><a href="02_Section_Results/Section_10_Trend_Consistency/section_10_trend_consistency_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_10_trend_consistency.png"><img src="01_Graphs/section_10_trend_consistency.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 10 graph"></a>
+</section>
+<section class="card">
+<h3>Section 11</h3>
+<p><a href="02_Section_Results/Section_11_Discharge_Curve_Features/section_11_discharge_curve_features_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 11</a></p>
+<p><a href="02_Section_Results/Section_11_Discharge_Curve_Features/section_11_discharge_curve_features_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_11_discharge_curve_features.png"><img src="01_Graphs/section_11_discharge_curve_features.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 11 graph"></a>
+</section>
+<section class="card">
+<h3>Section 12</h3>
+<p><a href="02_Section_Results/Section_12_Hybrid_Pulse_Features/section_12_hybrid_pulse_features_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 12</a></p>
+<p><a href="02_Section_Results/Section_12_Hybrid_Pulse_Features/section_12_hybrid_pulse_features_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_12_hybrid_pulse_features.png"><img src="01_Graphs/section_12_hybrid_pulse_features.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 12 graph"></a>
+</section>
+<section class="card">
+<h3>Section 13</h3>
+<p><a href="02_Section_Results/Section_13_Multi_Protocol_Validation/section_13_multi_protocol_validation_report.html">Zenodo Expt4 Time-Series DRT Pipeline, Section 13</a></p>
+<p><a href="02_Section_Results/Section_13_Multi_Protocol_Validation/section_13_multi_protocol_validation_report.md">Markdown source</a></p>
+<a href="01_Graphs/section_13_multi_protocol_validation.png"><img src="01_Graphs/section_13_multi_protocol_validation.png" alt="Zenodo Expt4 Time-Series DRT Pipeline, Section 13 graph"></a>
+</section>
+      </div>
+      <h2>Run Summary</h2>
+      <pre><code>{
+  &quot;section_1_data_audit&quot;: {
+    &quot;converted_root&quot;: &quot;[local path redacted]
+    &quot;raw_root&quot;: &quot;[local path redacted]
+    &quot;conversion_manifest_rows&quot;: 305,
+    &quot;converted_status_counts&quot;: {
+      &quot;converted_existing&quot;: 305
+    },
+    &quot;converted_extension_counts&quot;: {
+      &quot;.mpt&quot;: 304,
+      &quot;.csv&quot;: 1
+    },
+    &quot;processed_timeseries_files&quot;: 280,
+    &quot;processed_family_counts&quot;: {
+      &quot;0.1C Voltage Curves&quot;: 80,
+      &quot;GITT Voltage Curves&quot;: 80,
+      &quot;Hybrid CC-Pulse Voltage Curves&quot;: 80,
+      &quot;0.5C Voltage Curves&quot;: 40
+    },
+    &quot;performance_summary_rows&quot;: 80,
+    &quot;raw_performance_check_file_count&quot;: 666
+  },
+  &quot;section_2_file_screen&quot;: {
+    &quot;files_screened&quot;: 5,
+    &quot;files_completed&quot;: 5,
+    &quot;files_errored&quot;: 0
+  },
+  &quot;section_3_gitt_window_finder&quot;: {
+    &quot;input_path&quot;: &quot;[local path redacted]
+    &quot;relative_path&quot;: &quot;[local path redacted]
+    &quot;columns&quot;: {
+      &quot;time_s&quot;: &quot;Time (s)&quot;,
+      &quot;current_a&quot;: &quot;Current (mA)&quot;,
+      &quot;voltage_v&quot;: &quot;Voltage (V)&quot;,
+      &quot;temperature_c&quot;: &quot;Temperature (degC)&quot;
+    },
+    &quot;rows_loaded_after_cleaning&quot;: 176270,
+    &quot;time_start_s&quot;: 0.0,
+    &quot;time_stop_s&quot;: 116442.71814585019,
+    &quot;duration_s&quot;: 116442.71814585019,
+    &quot;median_dt_s&quot;: 1.0000001042790245,
+    &quot;rest_current_threshold_a&quot;: 0.05,
+    &quot;step_current_threshold_a&quot;: 0.12496340499999999,
+    &quot;current_min_a&quot;: -2.5004492,
+    &quot;current_max_a&quot;: 0.0,
+    &quot;voltage_min_v&quot;: 2.4999781,
+    &quot;voltage_max_v&quot;: 4.1849165,
+    &quot;candidate_count&quot;: 25,
+    &quot;accepted_count&quot;: 25
+  },
+  &quot;section_4_gitt_candidate_fit&quot;: {
+    &quot;input_path&quot;: &quot;[local path redacted]
+    &quot;relative_path&quot;: &quot;[local path redacted]
+    &quot;column_mapping&quot;: {
+      &quot;time_s&quot;: &quot;Time (s)&quot;,
+      &quot;current_a&quot;: &quot;Current (mA)&quot;,
+      &quot;voltage_v&quot;: &quot;Voltage (V)&quot;,
+      &quot;temperature_c&quot;: &quot;Temperature (degC)&quot;
+    },
+    &quot;candidate&quot;: {
+      &quot;candidate_id&quot;: 13,
+      &quot;accepted&quot;: true,
+      &quot;start_idx&quot;: 85218,
+      &quot;end_idx&quot;: 88101,
+      &quot;start_time_s&quot;: 47400.016944171,
+      &quot;end_time_s&quot;: 47688.196974228194,
+      &quot;pulse_duration_s&quot;: 288.1800300571995,
+      &quot;pre_rest_s&quot;: 3660.084381773202,
+      &quot;post_rest_s&quot;: 3659.8223817484095,
+      &quot;median_current_a&quot;: -2.4984810000000004,
+      &quot;current_step_a&quot;: -2.4992681,
+      &quot;max_abs_step_a&quot;: 2.4992681,
+      &quot;voltage_span_v&quot;: 0.0882582000000002,
+      &quot;temperature_drift_c&quot;: 2.3799680000000016,
+      &quot;median_dt_s&quot;: 1.0000001042790243,
+      &quot;tau_min_s&quot;: 2.000000208558049,
+      &quot;tau_max_s&quot;: 1316.0008039352033,
+      &quot;excitation_score&quot;: 77.24067149793954
+    },
+    &quot;include_pre_s&quot;: 120.0,
+    &quot;include_post_s&quot;: 900.0,
+    &quot;lambda_value&quot;: 0.001,
+    &quot;baseline_mode&quot;: &quot;charge&quot;,
+    &quot;fit_rows&quot;: 4444,
+    &quot;trend_info&quot;: {
+      &quot;offset_v&quot;: 3.642289425091754,
+      &quot;drift_v_per_as&quot;: 5.3574392947077525e-05
+    },
+    &quot;r0_ohm&quot;: 0.027539871739480894,
+    &quot;rmse_v&quot;: 0.0002815649580452951,
+    &quot;rmse_mv&quot;: 0.2815649580452951,
+    &quot;tau_min_s&quot;: 0.2000000211846782,
+    &quot;tau_max_s&quot;: 435.44804541954124,
+    &quot;n_tau&quot;: 72,
+    &quot;top_recovered_peaks&quot;: [
+      {
+        &quot;tau_s&quot;: 44.84027669205974,
+        &quot;gamma_ohm&quot;: 0.007962807989804309
+      },
+      {
+        &quot;tau_s&quot;: 227.43628686742406,
+        &quot;gamma_ohm&quot;: 0.004507490977217634
+      },
+      {
+        &quot;tau_s&quot;: 253.43846018505087,
+        &quot;gamma_ohm&quot;: 0.004421721893289679
+      },
+      {
+        &quot;tau_s&quot;: 40.2397727065717,
+        &quot;gamma_ohm&quot;: 0.003975629172133104
+      },
+      {
+        &quot;tau_s&quot;: 4.143691908066363,
+        &quot;gamma_ohm&quot;: 0.0011254117430638318
+      },
+      {
+        &quot;tau_s&quot;: 0.6579160101623993,
+        &quot;gamma_ohm&quot;: 0.0009518749025284338
+      }
+    ],
+    &quot;broad_band_summary&quot;: [
+      {
+        &quot;band&quot;: &quot;fast_band_4_to_16_s&quot;,
+        &quot;tau_start_s&quot;: 4.0,
+        &quot;tau_stop_s&quot;: 16.0,
+        &quot;gamma_sum_ohm&quot;: 0.00200597151971256
+      },
+      {
+        &quot;band&quot;: &quot;mid_band_25_to_90_s&quot;,
+        &quot;tau_start_s&quot;: 25.0,
+        &quot;tau_stop_s&quot;: 90.0,
+        &quot;gamma_sum_ohm&quot;: 0.011938437161937413
+      },
+      {
+        &quot;band&quot;: &quot;slow_band_90_to_450_s&quot;,
+        &quot;tau_start_s&quot;: 90.0,
+        &quot;tau_stop_s&quot;: 450.0,
+        &quot;gamma_sum_ohm&quot;: 0.008929212870507314
+      }
+    ]
+  },
+  &quot;section_5_gitt_batch&quot;: {
+    &quot;files_requested&quot;: 40,
+    &quot;files_completed&quot;: 40,
+    &quot;files_errored&quot;: 0,
+    &quot;median_rmse_mv&quot;: 1.307120059971468,
+    &quot;median_r0_ohm&quot;: 0.02901738837426835
+  },
+  &quot;section_6_model_sensitivity&quot;: {
+    &quot;settings_tested&quot;: 12,
+    &quot;rmse_min_mv&quot;: 0.24348731932838874,
+    &quot;rmse_max_mv&quot;: 6.052494669656816,
+    &quot;main_peak_tau_min_s&quot;: 44.84027669205974,
+    &quot;main_peak_tau_max_s&quot;: 435.44804541954124
+  },
+  &quot;section_7_raw_conversion_check&quot;: {
+    &quot;input_path&quot;: &quot;[local path redacted]
+    &quot;relative_path&quot;: &quot;40 Outputs/Experiments/Zenodo Expt4/01_Raw_Converted_CSV/Raw Data/Performance Checks/RPT1/NDK - LG M50 deg - exp 4 - rig 2 - 10degC - cell A - RPT1_01_MB_CC1.mpt.csv&quot;,
+    &quot;columns&quot;: {
+      &quot;time_s&quot;: &quot;time/s&quot;,
+      &quot;current_a&quot;: &quot;I/mA&quot;,
+      &quot;voltage_v&quot;: &quot;Ecell/V&quot;,
+      &quot;temperature_c&quot;: &quot;Temperature/\u00b0C&quot;
+    },
+    &quot;rows_loaded_after_cleaning&quot;: 78183,
+    &quot;time_start_s&quot;: 0.0,
+    &quot;time_stop_s&quot;: 104736.1930842283,
+    &quot;duration_s&quot;: 104736.1930842283,
+    &quot;median_dt_s&quot;: 1.0000000475047273,
+    &quot;rest_current_threshold_a&quot;: 0.05,
+    &quot;step_current_threshold_a&quot;: 0.100038545,
+    &quot;current_min_a&quot;: -0.50021991,
+    &quot;current_max_a&quot;: 1.5074998,
+    &quot;voltage_min_v&quot;: 2.4999781,
+    &quot;voltage_max_v&quot;: 4.2002296,
+    &quot;candidate_count&quot;: 3,
+    &quot;accepted_count&quot;: 3
+  },
+  &quot;section_8_health_label_join&quot;: {
+    &quot;rows&quot;: 40,
+    &quot;cells&quot;: [
+      &quot;A&quot;,
+      &quot;B&quot;,
+      &quot;C&quot;,
+      &quot;D&quot;,
+      &quot;E&quot;,
+      &quot;F&quot;,
+      &quot;G&quot;,
+      &quot;H&quot;
+    ],
+    &quot;rpts&quot;: [
+      0,
+      2,
+      4,
+      6,
+      8
+    ],
+    &quot;temperature_groups_c&quot;: [
+      10.0,
+      25.0,
+      40.0
+    ],
+    &quot;correlations_computed&quot;: 63,
+    &quot;strongest_abs_spearman&quot;: [
+      {
+        &quot;feature&quot;: &quot;r0_ohm&quot;,
+        &quot;label&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;n&quot;: 40,
+        &quot;pearson_r&quot;: 0.972369609316321,
+        &quot;spearman_r&quot;: 0.9705440900562854
+      },
+      {
+        &quot;feature&quot;: &quot;r0_ohm&quot;,
+        &quot;label&quot;: &quot;soh&quot;,
+        &quot;n&quot;: 40,
+        &quot;pearson_r&quot;: -0.7877936360070606,
+        &quot;spearman_r&quot;: -0.8773849012591797
+      },
+      {
+        &quot;feature&quot;: &quot;r0_ohm&quot;,
+        &quot;label&quot;: &quot;charge_throughput_ah&quot;,
+        &quot;n&quot;: 40,
+        &quot;pearson_r&quot;: 0.7415176595716029,
+        &quot;spearman_r&quot;: 0.8602440626987277
+      },
+      {
+        &quot;feature&quot;: &quot;r0_ohm&quot;,
+        &quot;label&quot;: &quot;energy_throughput_wh&quot;,
+        &quot;n&quot;: 40,
+        &quot;pearson_r&quot;: 0.741785557947841,
+        &quot;spearman_r&quot;: 0.859490619245521
+      },
+      {
+        &quot;feature&quot;: &quot;r0_ohm&quot;,
+        &quot;label&quot;: &quot;days_degradation&quot;,
+        &quot;n&quot;: 40,
+        &quot;pearson_r&quot;: 0.7466538568904338,
+        &quot;spearman_r&quot;: 0.8526309607265051
+      },
+      {
+        &quot;feature&quot;: &quot;r0_ohm&quot;,
+        &quot;label&quot;: &quot;c2_capacity_mah&quot;,
+        &quot;n&quot;: 40,
+        &quot;pearson_r&quot;: -0.7625064692926606,
+        &quot;spearman_r&quot;: -0.8467166979362103
+      },
+      {
+        &quot;feature&quot;: &quot;r0_ohm&quot;,
+        &quot;label&quot;: &quot;c10_capacity_mah&quot;,
+        &quot;n&quot;: 40,
+        &quot;pearson_r&quot;: -0.7761201171423007,
+        &quot;spearman_r&quot;: -0.8463414634146341
+      },
+      {
+        &quot;feature&quot;: &quot;rmse_mv&quot;,
+        &quot;label&quot;: &quot;days_degradation&quot;,
+        &quot;n&quot;: 40,
+        &quot;pearson_r&quot;: 0.42968003789852177,
+        &quot;spearman_r&quot;: 0.5224704689481778
+      }
+    ]
+  },
+  &quot;section_9_held_out_cell_validation&quot;: {
+    &quot;input_rows&quot;: 40,
+    &quot;prediction_rows&quot;: 1260,
+    &quot;metric_rows&quot;: 36,
+    &quot;incremental_value_rows&quot;: 18,
+    &quot;drt_increment_positive_rows&quot;: 2,
+    &quot;best_skill_rows&quot;: [
+      {
+        &quot;n&quot;: 30,
+        &quot;mae&quot;: 0.0003941186895813733,
+        &quot;rmse&quot;: 0.0005243616532040845,
+        &quot;baseline_mae&quot;: 0.0020566307296713124,
+        &quot;skill_vs_baseline_mae&quot;: 0.8083668186537499,
+        &quot;validation_scope&quot;: &quot;within_temperature&quot;,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;r0_only&quot;
+      },
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 0.0004248195400360027,
+        &quot;rmse&quot;: 0.00059751521680821,
+        &quot;baseline_mae&quot;: 0.001851219321297414,
+        &quot;skill_vs_baseline_mae&quot;: 0.7705190653810425,
+        &quot;validation_scope&quot;: &quot;global&quot;,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;drt_plus_r0_voltage&quot;
+      },
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 0.00046443503587959933,
+        &quot;rmse&quot;: 0.0006753409680029884,
+        &quot;baseline_mae&quot;: 0.001851219321297414,
+        &quot;skill_vs_baseline_mae&quot;: 0.7491193882126818,
+        &quot;validation_scope&quot;: &quot;global&quot;,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;r0_only&quot;
+      },
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 0.0004699134558686157,
+        &quot;rmse&quot;: 0.0007278553496397069,
+        &quot;baseline_mae&quot;: 0.001851219321297414,
+        &quot;skill_vs_baseline_mae&quot;: 0.7461600306011931,
+        &quot;validation_scope&quot;: &quot;global&quot;,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;r0_plus_voltage&quot;
+      },
+      {
+        &quot;n&quot;: 30,
+        &quot;mae&quot;: 0.0005231097591477729,
+        &quot;rmse&quot;: 0.0007921142194088795,
+        &quot;baseline_mae&quot;: 0.0020566307296713124,
+        &quot;skill_vs_baseline_mae&quot;: 0.7456472124038643,
+        &quot;validation_scope&quot;: &quot;within_temperature&quot;,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;drt_plus_r0&quot;
+      },
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 0.0005212062949559277,
+        &quot;rmse&quot;: 0.0007437069748530873,
+        &quot;baseline_mae&quot;: 0.001851219321297414,
+        &quot;skill_vs_baseline_mae&quot;: 0.7184524335070985,
+        &quot;validation_scope&quot;: &quot;global&quot;,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;drt_plus_r0&quot;
+      },
+      {
+        &quot;n&quot;: 30,
+        &quot;mae&quot;: 0.0010761549407767306,
+        &quot;rmse&quot;: 0.0019197751078375632,
+        &quot;baseline_mae&quot;: 0.0020566307296713124,
+        &quot;skill_vs_baseline_mae&quot;: 0.47673885970345287,
+        &quot;validation_scope&quot;: &quot;within_temperature&quot;,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;drt_plus_r0_voltage&quot;
+      },
+      {
+        &quot;n&quot;: 30,
+        &quot;mae&quot;: 147.43836372675528,
+        &quot;rmse&quot;: 183.20429890355965,
+        &quot;baseline_mae&quot;: 277.3071962062775,
+        &quot;skill_vs_baseline_mae&quot;: 0.4683211768616279,
+        &quot;validation_scope&quot;: &quot;within_temperature&quot;,
+        &quot;target&quot;: &quot;c10_capacity_mah&quot;,
+        &quot;feature_set&quot;: &quot;drt_plus_r0&quot;
+      }
+    ]
+  },
+  &quot;section_10_trend_consistency&quot;: {
+    &quot;input_rows&quot;: 40,
+    &quot;correlation_rows&quot;: 160,
+    &quot;expected_direction_checks&quot;: 32,
+    &quot;expected_direction_pass&quot;: 28,
+    &quot;expected_direction_pass_ratio&quot;: 0.875
+  },
+  &quot;section_11_discharge_curve_features&quot;: {
+    &quot;files_requested&quot;: 120,
+    &quot;files_completed&quot;: 120,
+    &quot;files_errored&quot;: 0,
+    &quot;family_counts&quot;: {
+      &quot;0.1C Voltage Curves&quot;: 80,
+      &quot;0.5C Voltage Curves&quot;: 40
+    }
+  },
+  &quot;section_12_hybrid_pulse_features&quot;: {
+    &quot;files_requested&quot;: 80,
+    &quot;files_completed&quot;: 80,
+    &quot;files_errored&quot;: 0,
+    &quot;rate_counts&quot;: {
+      &quot;0p5c&quot;: 40,
+      &quot;1c&quot;: 40
+    }
+  },
+  &quot;section_13_multi_protocol_validation&quot;: {
+    &quot;feature_table_rows&quot;: 80,
+    &quot;prediction_rows&quot;: 600,
+    &quot;metric_rows&quot;: 11,
+    &quot;feature_counts&quot;: {
+      &quot;discharge_only&quot;: 10,
+      &quot;hybrid_only&quot;: 10,
+      &quot;gitt_only&quot;: 6,
+      &quot;all_protocols&quot;: 26
+    },
+    &quot;leakage_audit_rows&quot;: 156,
+    &quot;excluded_target_proxy_features&quot;: 16,
+    &quot;best_skill_rows&quot;: [
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 25.557902173964827,
+        &quot;rmse&quot;: 35.59900870531325,
+        &quot;baseline_mae&quot;: 248.66738596206355,
+        &quot;skill_vs_baseline_mae&quot;: 0.8972205298451807,
+        &quot;target&quot;: &quot;c10_capacity_mah&quot;,
+        &quot;feature_set&quot;: &quot;hybrid_only&quot;
+      },
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 0.006115478363409236,
+        &quot;rmse&quot;: 0.008797741865084831,
+        &quot;baseline_mae&quot;: 0.05018015767251797,
+        &quot;skill_vs_baseline_mae&quot;: 0.878129550661845,
+        &quot;target&quot;: &quot;soh&quot;,
+        &quot;feature_set&quot;: &quot;hybrid_only&quot;
+      },
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 0.0005195353105595518,
+        &quot;rmse&quot;: 0.0007387346964850724,
+        &quot;baseline_mae&quot;: 0.0018512193212974156,
+        &quot;skill_vs_baseline_mae&quot;: 0.7193550733926877,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;gitt_only&quot;
+      },
+      {
+        &quot;n&quot;: 80,
+        &quot;mae&quot;: 0.017547621735121813,
+        &quot;rmse&quot;: 0.042774619671119764,
+        &quot;baseline_mae&quot;: 0.049466686789073344,
+        &quot;skill_vs_baseline_mae&quot;: 0.645263855856263,
+        &quot;target&quot;: &quot;soh&quot;,
+        &quot;feature_set&quot;: &quot;all_protocols&quot;
+      },
+      {
+        &quot;n&quot;: 80,
+        &quot;mae&quot;: 88.00491015398875,
+        &quot;rmse&quot;: 194.4335689319517,
+        &quot;baseline_mae&quot;: 244.71141392915052,
+        &quot;skill_vs_baseline_mae&quot;: 0.6403726792266904,
+        &quot;target&quot;: &quot;c10_capacity_mah&quot;,
+        &quot;feature_set&quot;: &quot;all_protocols&quot;
+      },
+      {
+        &quot;n&quot;: 80,
+        &quot;mae&quot;: 130.43841789535657,
+        &quot;rmse&quot;: 272.4271773754325,
+        &quot;baseline_mae&quot;: 244.71141392915052,
+        &quot;skill_vs_baseline_mae&quot;: 0.466970437541089,
+        &quot;target&quot;: &quot;c10_capacity_mah&quot;,
+        &quot;feature_set&quot;: &quot;discharge_only&quot;
+      },
+      {
+        &quot;n&quot;: 80,
+        &quot;mae&quot;: 0.026668795968955033,
+        &quot;rmse&quot;: 0.0584750187767346,
+        &quot;baseline_mae&quot;: 0.049466686789073344,
+        &quot;skill_vs_baseline_mae&quot;: 0.46087361616371925,
+        &quot;target&quot;: &quot;soh&quot;,
+        &quot;feature_set&quot;: &quot;discharge_only&quot;
+      },
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 0.001012132792978033,
+        &quot;rmse&quot;: 0.0021971727739351988,
+        &quot;baseline_mae&quot;: 0.0018512193212974156,
+        &quot;skill_vs_baseline_mae&quot;: 0.45326154425144716,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;all_protocols&quot;
+      },
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 0.02840071168477169,
+        &quot;rmse&quot;: 0.04239079471043588,
+        &quot;baseline_mae&quot;: 0.04925979949220335,
+        &quot;skill_vs_baseline_mae&quot;: 0.42345052197650856,
+        &quot;target&quot;: &quot;soh&quot;,
+        &quot;feature_set&quot;: &quot;gitt_only&quot;
+      },
+      {
+        &quot;n&quot;: 40,
+        &quot;mae&quot;: 0.001081053795835112,
+        &quot;rmse&quot;: 0.0018608897746645906,
+        &quot;baseline_mae&quot;: 0.0018512193212974156,
+        &quot;skill_vs_baseline_mae&quot;: 0.41603148616801267,
+        &quot;target&quot;: &quot;resistance_0p1s_ohm&quot;,
+        &quot;feature_set&quot;: &quot;discharge_only&quot;
+      }
+    ]
+  }
+}</code></pre>
+      <p>HTML files exported: 33</p>
+    </article>
+  </main>
+</body>
+</html>

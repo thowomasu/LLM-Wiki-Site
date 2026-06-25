@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Code</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Code</h1>
+  <p class="meta">Time-Series DRT Pipeline, professor handoff, 2026-06-15</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>The folder contains the scripts needed to inspect or rerun the pipeline logic.</li>
+      <li>Main workflow scripts cover synthetic testing, window finding, candidate fitting, EIS comparison, batch processing, sensitivity, model rule, viability reporting, plotting, and HTML export.</li>
+      <li>The copied code is mainly for review inside the professor package.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="../03_Key_Plots/section_3_candidate_fit_plot.png" alt="The code produces inspectable plots and tables, not only terminal output."><figcaption>The code produces inspectable plots and tables, not only terminal output.</figcaption></figure>
+      <figure><img src="../03_Key_Plots/model_rule_summary.png" alt="The model-rule script reports EIS metrics only after model selection."><figcaption>The model-rule script reports EIS metrics only after model selection.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>The pipeline is modular enough to audit one step at a time.</li>
+      <li>Outputs are written as reports, CSVs, JSON, logs, plots, and HTML mirrors.</li>
+      <li>The model-rule code keeps EIS metrics out of model selection.</li>
+      <li>Logs scrub local absolute paths where the runner supports it.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>Full real-data reruns still need the external DIB dataset and EIS workbook.</li>
+      <li>The package does not vendor every dependency.</li>
+      <li>Code portability depends on path configuration and the correct Python environment.</li>
+      <li>Scientific validity is not solved by code organization.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Keep scripts runnable from the full project repo.</li>
+      <li>Add command-line arguments where paths are still hard-coded.</li>
+      <li>Add stricter tests around SOC mapping and model-rule selection.</li>
+      <li>Freeze a validation protocol before expanding results.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

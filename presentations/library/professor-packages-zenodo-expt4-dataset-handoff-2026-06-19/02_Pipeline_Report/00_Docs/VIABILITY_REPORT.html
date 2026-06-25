@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zenodo Expt4 Viability Report</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f5f7f6;
+  --paper: #ffffff;
+  --ink: #182026;
+  --muted: #5a6975;
+  --line: #d8dfdf;
+  --accent: #0d766d;
+  --warn: #a5481a;
+  --code: #edf2f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 34px 22px 70px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 34px;
+  box-shadow: 0 14px 34px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.14;
+}
+
+h2 {
+  margin: 32px 0 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 24px 0 8px;
+  color: var(--warn);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+a { color: var(--accent); }
+ul, ol { padding-left: 24px; }
+li { margin: 5px 0; }
+
+code {
+  background: var(--code);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.95em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: #edf2f1; }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.meta {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 18px 0 28px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fbfcfb;
+}
+
+.card h3 { margin-top: 0; }
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 00_Docs/VIABILITY_REPORT.md. Edit the Markdown source, then rerun the Zenodo pipeline.</div>
+<h1>Zenodo Expt4 Viability Report</h1>
+<h2>Verdict</h2>
+<ul><li>Engineering scaffold: health_feature_scaffold_viable</li></ul>
+<ul><li>Scientific method: not_eis_validated</li></ul>
+<p>Plain English: this package is now viable as a multi-protocol health-feature pipeline on Zenodo Expt4 data. It is not viable as EIS-validated DRT physics, because this dataset track still lacks paired EIS-derived DRT targets.</p>
+<h2>What Passes</h2>
+<ul><li>Full 25-pulse GITT batch: 40 files completed, 0 errors.</li></ul>
+<ul><li>Discharge-curve feature extraction: 120 files completed, 0 errors.</li></ul>
+<ul><li>Hybrid-pulse feature extraction: 80 files completed, 0 errors.</li></ul>
+<ul><li>Health-label join: 40 rows across cells A-H and RPT 0, 2, 4, 6, 8.</li></ul>
+<ul><li>GITT held-out-cell validation: 1260 prediction rows.</li></ul>
+<ul><li>Multi-protocol held-out-cell validation: 600 prediction rows.</li></ul>
+<ul><li>Leakage guard: 16 target-proxy feature uses excluded from Section 13.</li></ul>
+<ul><li>Trend consistency: expected-direction pass ratio 0.875.</li></ul>
+<h2>Best GITT Held-Out Signals</h2>
+<ul><li>within_temperature / resistance_0p1s_ohm / r0_only: MAE 0.0003941, baseline MAE 0.002057, skill 0.808</li></ul>
+<ul><li>global / resistance_0p1s_ohm / drt_plus_r0_voltage: MAE 0.0004248, baseline MAE 0.001851, skill 0.771</li></ul>
+<ul><li>global / resistance_0p1s_ohm / r0_only: MAE 0.0004644, baseline MAE 0.001851, skill 0.749</li></ul>
+<ul><li>global / resistance_0p1s_ohm / r0_plus_voltage: MAE 0.0004699, baseline MAE 0.001851, skill 0.746</li></ul>
+<ul><li>within_temperature / resistance_0p1s_ohm / drt_plus_r0: MAE 0.0005231, baseline MAE 0.002057, skill 0.746</li></ul>
+<ul><li>global / resistance_0p1s_ohm / drt_plus_r0: MAE 0.0005212, baseline MAE 0.001851, skill 0.718</li></ul>
+<ul><li>within_temperature / resistance_0p1s_ohm / drt_plus_r0_voltage: MAE 0.001076, baseline MAE 0.002057, skill 0.477</li></ul>
+<ul><li>within_temperature / c10_capacity_mah / drt_plus_r0: MAE 147.4, baseline MAE 277.3, skill 0.468</li></ul>
+<h2>DRT Incremental Value</h2>
+<ul><li>DRT bands improved over R0 plus simple voltage features in 2 of 6 target/scope checks.</li></ul>
+<ul><li>global / soh: MAE delta -0.003602, skill delta -0.0731, augmented better=False</li></ul>
+<ul><li>global / resistance_0p1s_ohm: MAE delta 4.509e-05, skill delta 0.0244, augmented better=True</li></ul>
+<ul><li>global / c10_capacity_mah: MAE delta -15.91, skill delta -0.0655, augmented better=False</li></ul>
+<ul><li>within_temperature / soh: MAE delta -0.065, skill delta -1.16, augmented better=False</li></ul>
+<ul><li>within_temperature / resistance_0p1s_ohm: MAE delta 7.339e-05, skill delta 0.0357, augmented better=True</li></ul>
+<ul><li>within_temperature / c10_capacity_mah: MAE delta -333, skill delta -1.2, augmented better=False</li></ul>
+<h2>Best Multi-Protocol Held-Out Signals</h2>
+<ul><li>c10_capacity_mah / hybrid_only: MAE 25.56, baseline MAE 248.7, skill 0.897</li></ul>
+<ul><li>soh / hybrid_only: MAE 0.006115, baseline MAE 0.05018, skill 0.878</li></ul>
+<ul><li>resistance_0p1s_ohm / gitt_only: MAE 0.0005195, baseline MAE 0.001851, skill 0.719</li></ul>
+<ul><li>soh / all_protocols: MAE 0.01755, baseline MAE 0.04947, skill 0.645</li></ul>
+<ul><li>c10_capacity_mah / all_protocols: MAE 88, baseline MAE 244.7, skill 0.64</li></ul>
+<ul><li>c10_capacity_mah / discharge_only: MAE 130.4, baseline MAE 244.7, skill 0.467</li></ul>
+<ul><li>soh / discharge_only: MAE 0.02667, baseline MAE 0.04947, skill 0.461</li></ul>
+<ul><li>resistance_0p1s_ohm / all_protocols: MAE 0.001012, baseline MAE 0.001851, skill 0.453</li></ul>
+<h2>What Still Fails Scientifically</h2>
+<ul><li>No EIS-derived DRT comparison target was found in the inspected Expt4 folders.</li></ul>
+<ul><li>The strongest held-out result is mostly R0 predicting the 0.1s resistance label. Useful, but not surprising.</li></ul>
+<ul><li>Discharge-derived capacity features are excluded for SOH and C10 capacity targets because they are target proxies. Good science sometimes means deleting your best-looking number.</li></ul>
+<ul><li>DRT band features only beat R0 plus simple voltage features in 2 of 6 checked cases. That is weak, not a green light.</li></ul>
+<ul><li>Discharge and hybrid features help make the Zenodo package usable, but they are not DRT evidence.</li></ul>
+<ul><li>Temperature grouping can create fake-looking global structure. Within-temperature validation matters more.</li></ul>
+<h2>Do Next</h2>
+<ol><li>Do not train a larger model yet. The DRT-band incremental signal is too inconsistent.</li></ol>
+<ol><li>Fit all accepted GITT pulses per file, then aggregate by SOC/pulse index instead of relying on one selected pulse.</li></ol>
+<ol><li>Upgrade hybrid pulse segmentation before trying hybrid DRT.</li></ol>
+<ol><li>Only claim DRT physics if a matched EIS source is added later.</li></ol>
+<p>Blunt version: Zenodo Expt4 is now a real multi-protocol health-feature scaffold. It is still not a substitute for the DIB EIS validation track.</p>
+    </article>
+  </main>
+</body>
+</html>

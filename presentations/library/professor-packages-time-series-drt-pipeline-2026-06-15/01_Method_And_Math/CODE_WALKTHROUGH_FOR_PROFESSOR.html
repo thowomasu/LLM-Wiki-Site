@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Walkthrough For Professor</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/01_Method_And_Math/CODE_WALKTHROUGH_FOR_PROFESSOR.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Code Walkthrough For Professor</h1>
+<p>Prepared: 2026-06-15</p>
+<h2>How To Read This</h2>
+<p>This is a line-by-line style map of the main scripts. It uses line ranges instead of repeating every source line in full. That is intentional. Explaining every import, blank line, and closing parenthesis separately would add bulk without adding understanding.</p>
+<p>The useful question is: what does each block do, what units does it use, and what assumption does it make?</p>
+<h2>Execution Order</h2>
+<p>Use this order when reviewing the package:</p>
+<p>1. <code>run_time_domain_rough_prototype.py</code> 2. <code>time_domain_drt_pilot.py</code> 3. <code>time_domain_window_finder.py</code> 4. <code>time_domain_candidate_fit.py</code> 5. <code>time_domain_eis_compare.py</code> 6. <code>time_domain_cell28_soc_sweep.py</code> 7. <code>time_domain_soc_alignment.py</code> 8. <code>time_domain_dib_batch.py</code> 9. <code>time_domain_soc_mapping_sensitivity.py</code> 10. <code>time_domain_model_sensitivity.py</code> 11. <code>time_domain_model_rule.py</code> 12. <code>time_domain_viability_report.py</code> 13. <code>time_domain_package_plots.py</code></p>
+<h2>Shared Vocabulary</h2>
+<table>
+<tr><th>Name</th><th>Unit</th><th>Meaning</th></tr>
+<tr><td><code>time_s</code></td><td>s</td><td>Continuous elapsed time. For DIB files this must be <code>Prog Time</code>, not <code>Step Time</code>, because <code>Step Time</code> resets at each protocol step.</td></tr>
+<tr><td><code>current_a</code></td><td>A</td><td>Applied current. Sign convention still needs protocol confirmation.</td></tr>
+<tr><td><code>voltage_v</code></td><td>V</td><td>Measured terminal voltage. This is the signal the model reconstructs.</td></tr>
+<tr><td><code>temperature_c</code></td><td>C</td><td>Measured cell temperature. High drift weakens the comparison to EIS.</td></tr>
+<tr><td><code>tau_s</code></td><td>s</td><td>Relaxation time constant. Plotted on a log scale.</td></tr>
+<tr><td><code>gamma_ohm</code></td><td>Ohm</td><td>DRT-like resistance weight at each tau.</td></tr>
+<tr><td><code>R0</code></td><td>Ohm</td><td>Instantaneous ohmic resistance term.</td></tr>
+<tr><td><code>lambda_value</code></td><td>none</td><td>Smoothness strength. Larger values make gamma smoother.</td></tr>
+<tr><td><code>rmse_mv</code></td><td>mV</td><td>Voltage reconstruction error. Good RMSE does not prove the DRT shape is correct.</td></tr>
+<tr><td><code>overlap_corr_gamma</code></td><td>none</td><td>Shape correlation between time-domain gamma and EIS gamma on the shared tau range.</td></tr>
+<tr><td><code>normalized_rmse</code></td><td>none</td><td>Shape error after scaling the time-domain gamma to EIS.</td></tr>
+</table>
+<h2>Main Runner</h2>
+<p>File: <code>scripts/experiments/run_time_domain_rough_prototype.py</code></p>
+<table>
+<tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
+<tr><td>1-24</td><td>Imports standard libraries and shared path helpers.</td><td>Keeps the runner portable inside the repo.</td></tr>
+<tr><td>27-28</td><td>Defines <code>PROJECT_ROOT</code> and <code>OUTPUT_DIR</code>.</td><td>Every output is written under the experiment folder.</td></tr>
+<tr><td>31-66</td><td><code>run_step</code> runs one script as a subprocess, captures output, records exit code, and writes a log entry.</td><td>This is the audit trail. If one step fails, the log says which one.</td></tr>
+<tr><td>68-77</td><td><code>scrub_log_text</code> removes local absolute paths from logs.</td><td>Prevents private local folder paths from leaking into the professor package.</td></tr>
+<tr><td>79-97</td><td>Loads JSON and CSV result files.</td><td>Used later to build a readable final summary.</td></tr>
+<tr><td>99-126</td><td>Converts values to floats, computes medians, counts boolean values, and formats numbers.</td><td>Keeps the summary stable even when files contain missing values.</td></tr>
+<tr><td>128-393</td><td><code>write_final_summary</code> reads all output summaries and writes the handoff report.</td><td>This is where results become a readable narrative.</td></tr>
+<tr><td>396-512</td><td><code>main</code> parses flags, decides whether raw DIB data is available, runs each pipeline section, and writes logs.</td><td>This is the full workflow controller.</td></tr>
+<tr><td>514</td><td>Calls <code>main</code> when the script is run directly.</td><td>Standard Python entry point.</td></tr>
+</table>
+<h2>Synthetic Solver</h2>
+<p>File: <code>scripts/experiments/time_domain_drt_pilot.py</code></p>
+<table>
+<tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
+<tr><td>52-60</td><td>Defines <code>SyntheticCell</code>, including R0 and true RC branches.</td><td>This creates a known answer. Without a known answer, the first validation would be circular.</td></tr>
+<tr><td>63-80</td><td>Builds the synthetic pulse-current pattern.</td><td>Creates step-like current excitation in amps.</td></tr>
+<tr><td>83-97</td><td>Computes exact RC voltage response for a tau value.</td><td>This simulates physical relaxation after current changes.</td></tr>
+<tr><td>100-138</td><td>Builds voltage from baseline, R0, RC branches, and noise.</td><td>Produces the synthetic current-voltage-time dataset.</td></tr>
+<tr><td>141-197</td><td>Builds integration utilities, tau grid, and kernel matrix.</td><td>Converts current history into candidate relaxation responses.</td></tr>
+<tr><td>199-267</td><td>Builds smoothness penalty and nonnegative least-squares solver.</td><td>Enforces gamma to be physically nonnegative and not absurdly jagged.</td></tr>
+<tr><td>269-363</td><td>Handles baseline terms and free coefficients.</td><td>Separates slow voltage drift from relaxation behavior.</td></tr>
+<tr><td>365-414</td><td>Fits the time-domain DRT.</td><td>Main inverse step: current and voltage in, tau/gamma curve out.</td></tr>
+<tr><td>416-447</td><td>Summarizes peaks and broad tau bands.</td><td>Makes the DRT result readable without inspecting every tau point.</td></tr>
+<tr><td>449-594</td><td>Writes CSVs and Matplotlib plots.</td><td>Saves evidence, not just terminal output.</td></tr>
+<tr><td>597-656</td><td>Writes the Section 1 report.</td><td>Explains whether the synthetic sanity check passed.</td></tr>
+<tr><td>659-726</td><td>Main workflow for Section 1.</td><td>Runs simulation, fit, plots, and report.</td></tr>
+</table>
+<h2>Window Finder</h2>
+<p>File: <code>scripts/experiments/time_domain_window_finder.py</code></p>
+<table>
+<tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
+<tr><td>48-62</td><td>Sets project paths and acceptable column names.</td><td>Allows messy CSVs to be mapped into a standard schema.</td></tr>
+<tr><td>68-82</td><td>Finds the first matching column for each logical name.</td><td>Example: <code>Prog Time</code> can become <code>time_s</code>.</td></tr>
+<tr><td>84-102</td><td>Detects where the real CSV header starts.</td><td>DIB files have metadata rows before the table.</td></tr>
+<tr><td>104-126</td><td>Converts time columns into seconds.</td><td>Required because time can appear as numeric seconds or clock-like strings.</td></tr>
+<tr><td>128-159</td><td>Loads a time-series CSV and returns standardized columns.</td><td>Produces <code>time_s</code>, <code>current_a</code>, <code>voltage_v</code>, and optional <code>temperature_c</code>.</td></tr>
+<tr><td>161-173</td><td>Removes rows with missing core values and estimates sample interval.</td><td>Prevents bad rows from entering the detector.</td></tr>
+<tr><td>175-185</td><td>Defines rest and step thresholds from the current signal.</td><td>Avoids hard-coding one current threshold for every dataset.</td></tr>
+<tr><td>187-217</td><td>Finds contiguous active-current regions and rest durations before and after them.</td><td>This is how pulse/rest windows are discovered.</td></tr>
+<tr><td>219-228</td><td>Scores a window by current step size, pulse length, and rest length.</td><td>Better windows should have stronger excitation and enough relaxation time.</td></tr>
+<tr><td>230-326</td><td>Builds the candidate window table and quality summary.</td><td>This is the core detector.</td></tr>
+<tr><td>328-391</td><td>Writes CSV and Matplotlib window plot.</td><td>Makes the detector auditable.</td></tr>
+<tr><td>394-458</td><td>Writes a plain report explaining accepted and rejected windows.</td><td>The professor can see why a window was chosen.</td></tr>
+<tr><td>460-478</td><td>Parses command-line arguments and runs the finder.</td><td>Lets the same script run on synthetic, DIB, or future drive-cycle CSVs.</td></tr>
+</table>
+<h2>Candidate Fit</h2>
+<p>File: <code>scripts/experiments/time_domain_candidate_fit.py</code></p>
+<table>
+<tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
+<tr><td>54-62</td><td>Sets paths for default input and candidate files.</td><td>Default mode uses the synthetic outputs from Sections 1 and 2.</td></tr>
+<tr><td>65-90</td><td>Loads accepted candidates and chooses one candidate by ID or score.</td><td>Prevents fitting rejected windows.</td></tr>
+<tr><td>92-108</td><td>Slices the time-series data around the chosen pulse.</td><td>Adds pre-rest and post-rest context around the pulse.</td></tr>
+<tr><td>110-128</td><td>Estimates a simple voltage trend.</td><td>Helps separate baseline drift from relaxation.</td></tr>
+<tr><td>130-161</td><td>Calls the DRT fitter and attaches metadata.</td><td>This is the actual selected-window inverse fit.</td></tr>
+<tr><td>163-171</td><td>Writes CSV rows.</td><td>Saves selected window data and DRT curve.</td></tr>
+<tr><td>173-242</td><td>Writes the candidate-fit plot.</td><td>Shows current, measured voltage, fitted voltage, DRT weights, and residuals.</td></tr>
+<tr><td>245-312</td><td>Writes the candidate-fit report.</td><td>Explains fit quality and tau limits.</td></tr>
+<tr><td>314-328</td><td>Converts numpy values into JSON-safe values.</td><td>Prevents broken JSON files.</td></tr>
+<tr><td>330-409</td><td>Parses command-line options and writes all outputs.</td><td>Makes the fit reproducible from the terminal.</td></tr>
+</table>
+<h2>EIS Comparison</h2>
+<p>File: <code>scripts/experiments/time_domain_eis_compare.py</code></p>
+<table>
+<tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
+<tr><td>25-38</td><td>Loads the matching EIS row for cell, SOH, temperature, and SOC.</td><td>This defines the comparison target.</td></tr>
+<tr><td>40-50</td><td>Loads the time-domain DRT CSV.</td><td>Brings in the fitted tau/gamma curve.</td></tr>
+<tr><td>52-76</td><td>Computes an EIS-derived DRT using the selected method.</td><td>Creates the reference curve.</td></tr>
+<tr><td>78-122</td><td>Interpolates both curves on shared log-tau points and computes shape metrics.</td><td>Comparison is only fair over the overlap range.</td></tr>
+<tr><td>124-177</td><td>Writes comparison CSV and plot.</td><td>Saves the evidence behind the correlation number.</td></tr>
+<tr><td>180-230</td><td>Writes the comparison report.</td><td>Makes clear whether the match is strong or weak.</td></tr>
+<tr><td>232-269</td><td>Parses command-line inputs and runs the comparison.</td><td>Allows repeated comparisons across SOC.</td></tr>
+</table>
+<h2>DIB Batch Runner</h2>
+<p>File: <code>scripts/experiments/time_domain_dib_batch.py</code></p>
+<table>
+<tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
+<tr><td>54-70</td><td>Defines paths for raw DIB data, capacity CSVs, EIS workbook, and batch outputs.</td><td>These are not stored in the repo, so paths must be configurable.</td></tr>
+<tr><td>74-88</td><td>Defines target SOC values and quality thresholds.</td><td>These thresholds decide what is a rough engineering pass.</td></tr>
+<tr><td>91-119</td><td>Writes CSV/JSON-safe values.</td><td>Keeps batch outputs machine-readable.</td></tr>
+<tr><td>121-160</td><td>Discovers capacity files and EIS metadata.</td><td>Finds possible matched cases.</td></tr>
+<tr><td>162-187</td><td>Matches capacity files to EIS rows by cell, SOH, temperature, and cycle rule.</td><td>Prevents comparing unrelated files.</td></tr>
+<tr><td>189-250</td><td>Computes pre-rest voltage, capacity clues, and cumulative Ah.</td><td>Needed for SOC assignment.</td></tr>
+<tr><td>252-302</td><td>Builds the eligible pulse-window pool.</td><td>Filters out windows that are wrong current direction or too weak.</td></tr>
+<tr><td>304-543</td><td>Implements four SOC selection modes: voltage, coulomb, endpoint, and linear.</td><td>SOC matching is treated as an assumption, not as guaranteed truth.</td></tr>
+<tr><td>545-561</td><td>Dispatches to the requested SOC selection mode.</td><td>Makes sensitivity testing possible.</td></tr>
+<tr><td>563-624</td><td>Computes shape metrics and compares a fitted result to EIS.</td><td>Produces correlation, area ratio, scale, and normalized error.</td></tr>
+<tr><td>626-661</td><td>Computes broad-band values and quality flags.</td><td>Makes triage explicit.</td></tr>
+<tr><td>663-765</td><td>Processes one matched case end to end.</td><td>Loads CSV, finds windows, selects SOC candidates, fits, compares, and records results.</td></tr>
+<tr><td>767-806</td><td>Writes the batch plot.</td><td>Summarizes many cell/SOC comparisons.</td></tr>
+<tr><td>809-900</td><td>Writes the batch report.</td><td>Explains batch counts, errors, and interpretation.</td></tr>
+<tr><td>902-981</td><td>Parses command-line flags and runs all selected cases.</td><td>Lets the user limit cells, cases, and SOC selection method.</td></tr>
+</table>
+<h2>Model Rule</h2>
+<p>File: <code>scripts/experiments/time_domain_model_rule.py</code></p>
+<table>
+<tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
+<tr><td>39-54</td><td>Sets output path, lambda candidates, baseline mode, RMSE slack, and band labels.</td><td>This defines the rule before EIS scoring.</td></tr>
+<tr><td>61-105</td><td>Writes CSVs, parses cell filters, ranks values, and cleans numbers.</td><td>Utility layer for robust reports.</td></tr>
+<tr><td>107-137</td><td>Computes gamma roughness and band-area changes.</td><td>Measures whether a DRT curve is too jagged or unstable.</td></tr>
+<tr><td>139-157</td><td>Attaches band-stability metrics to lambda candidates.</td><td>Helps the rule avoid unstable curves.</td></tr>
+<tr><td>159-217</td><td>Selects lambda using voltage RMSE, roughness, band stability, and penalties.</td><td>This is the pre-declared model-selection rule. It must not use EIS agreement.</td></tr>
+<tr><td>219-257</td><td>Fits all lambda candidates for one case.</td><td>Builds the candidate set the rule will choose from.</td></tr>
+<tr><td>259-288</td><td>Adds EIS comparison only after the rule has selected a candidate.</td><td>This is the honesty guardrail.</td></tr>
+<tr><td>290-397</td><td>Selects cases and processes raw DIB files.</td><td>Full-data mode.</td></tr>
+<tr><td>399-430</td><td>Runs from raw DIB files.</td><td>Requires local DIB data.</td></tr>
+<tr><td>432-544</td><td>Runs from existing sensitivity outputs.</td><td>Allows review when raw DIB data is missing.</td></tr>
+<tr><td>546-640</td><td>Writes the model-rule report.</td><td>States whether the pre-declared rule actually improved validation.</td></tr>
+<tr><td>642-681</td><td>Parses arguments and chooses raw mode or existing-output mode.</td><td>Makes the script usable in both environments.</td></tr>
+</table>
+<h2>Package Plot Regenerator</h2>
+<p>File: <code>scripts/experiments/time_domain_package_plots.py</code></p>
+<table>
+<tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
+<tr><td>1-21</td><td>Imports plotting, data, and path libraries, then forces Matplotlib <code>Agg</code>.</td><td>Plots can render without opening a GUI.</td></tr>
+<tr><td>23-32</td><td>Defines experiment, package-result, and package-plot folders.</td><td>The script knows where to read tables and where to save PNGs.</td></tr>
+<tr><td>35-68</td><td>Defines colors and plot style.</td><td>Keeps all graphs readable and consistent.</td></tr>
+<tr><td>70-100</td><td>Reads JSON/CSV, cleans axes, saves plots to both experiment and package folders.</td><td>Prevents manual copying mistakes.</td></tr>
+<tr><td>104-181</td><td>Redraws the synthetic sanity-check plot.</td><td>Shows current, voltage, DRT, and residuals with units.</td></tr>
+<tr><td>183-218</td><td>Redraws the window-finder plot.</td><td>Shows accepted windows clearly.</td></tr>
+<tr><td>220-279</td><td>Redraws the candidate-fit plot.</td><td>Shows the selected pulse fit and DRT curve.</td></tr>
+<tr><td>281-314</td><td>Redraws the Cell28 SOC sweep summary.</td><td>Makes the weak EIS agreement obvious.</td></tr>
+<tr><td>316-378</td><td>Redraws the validation diagnostics.</td><td>Shows why scale and lambda do not magically solve the mismatch.</td></tr>
+<tr><td>380-434</td><td>Redraws the SOC-alignment diagnostic.</td><td>Shows the 70 percent SOC uncertainty plainly.</td></tr>
+<tr><td>436-471</td><td>Redraws the generalized DIB batch plot.</td><td>Shows spread across cells instead of one cherry-picked case.</td></tr>
+<tr><td>473-547</td><td>Adds SOC mapping and model sensitivity plots.</td><td>Turns important CSV-only evidence into figures.</td></tr>
+<tr><td>549-584</td><td>Adds the pre-declared model-rule plot.</td><td>Shows that the honest rule still has weak agreement.</td></tr>
+<tr><td>586-596</td><td>Runs every plot function.</td><td>One command refreshes the whole package plot set.</td></tr>
+</table>
+<h2>What To Say Out Loud</h2>
+<p>The code is not the problem anymore. The weak point is the experiment design and dataset match.</p>
+<p>If the project requires a battery under drive-cycle loading, then the DIB dataset should not be the main dataset. It can still be useful for EIS and pulse/rest experiments, but it does not carry the main drive-cycle claim.</p>
+    </article>
+  </main>
+</body>
+</html>

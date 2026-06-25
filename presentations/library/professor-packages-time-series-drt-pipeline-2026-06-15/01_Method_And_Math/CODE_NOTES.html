@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototype Code Notes</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/01_Method_And_Math/CODE_NOTES.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Prototype Code Notes</h1>
+<p>For a more detailed professor-facing walkthrough, read <code>CODE_WALKTHROUGH_FOR_PROFESSOR.md</code>. That file explains the main scripts by line range, units, assumptions, and why each block exists.</p>
+<h2>Why These Packages</h2>
+<ul><li><code>numpy</code>: core numerical arrays, least-squares solving, interpolation, tau integration, and correlations.</li></ul>
+<ul><li><code>pandas</code>: CSV and Excel tables. The DIB data is table-shaped and has messy headers, so pandas is the practical choice.</li></ul>
+<ul><li><code>matplotlib</code>: report-quality PNG plots using the headless <code>Agg</code> backend, so the scripts can render readable analysis figures without opening a GUI.</li></ul>
+<ul><li><code>argparse</code>: command-line flags for repeatable runs.</li></ul>
+<ul><li><code>csv</code>, <code>json</code>, and <code>pathlib</code>: standard-library output files, metadata, and paths.</li></ul>
+<h2>Main Scripts</h2>
+<ul><li><code>scripts/experiments/time_domain_drt_pilot.py</code>: synthetic sanity check and core time-domain DRT solver.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_window_finder.py</code>: loads messy battery CSVs and finds pulse/rest windows.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_candidate_fit.py</code>: fits one selected pulse window into a DRT-like tau/gamma curve.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_eis_compare.py</code>: derives an EIS DRT and compares it against a time-domain DRT.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_dib_batch.py</code>: discovers multiple DIB cells, runs the pipeline, and writes batch summaries.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_soc_mapping_sensitivity.py</code>: reruns the same cases under multiple SOC mapping assumptions.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_model_sensitivity.py</code>: reruns matched cases across baseline modes and lambda values.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_model_rule.py</code>: applies the pre-declared model-selection rule before EIS scoring.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_viability_report.py</code>: reads the latest outputs and writes a blunt viability report.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_export_html.py</code>: writes HTML viewing copies of the main Markdown reports.</li></ul>
+<h2>Important Variables</h2>
+<ul><li><code>time_s</code>: elapsed time in seconds. For DIB files, this must be <code>Prog Time</code>, not <code>Step Time</code>, because <code>Step Time</code> resets.</li></ul>
+<ul><li><code>current_a</code>: applied current in amps. The first batch pass uses low-current discharge pulses because they are closer to small-signal behavior.</li></ul>
+<ul><li><code>voltage_v</code>: measured terminal voltage in volts. The fitter reconstructs this signal.</li></ul>
+<ul><li><code>temperature_c</code>: measured cell temperature. Large drift means the pulse is less comparable to EIS.</li></ul>
+<ul><li><code>tau_s</code>: relaxation time constants in seconds.</li></ul>
+<ul><li><code>gamma_ohm</code>: DRT-like resistance weight at each tau.</li></ul>
+<ul><li><code>R0</code>: instantaneous ohmic resistance.</li></ul>
+<ul><li><code>lambda_value</code>: smoothness strength. Higher values make gamma smoother, but too much smoothing can hide real structure.</li></ul>
+<ul><li><code>estimated_soc</code>: SOC estimate from anchored coulomb counting.</li></ul>
+<ul><li><code>soc_error_percent</code>: <code>estimated_soc</code> minus the target EIS SOC label.</li></ul>
+<ul><li><code>capacity_ah_used</code>: capacity estimate read from DIB <code>AhPrev</code> or <code>AhAccu</code>.</li></ul>
+<ul><li><code>cumulative_ah_start</code>: integrated current at the selected pulse start.</li></ul>
+<ul><li><code>quality_pass</code>: rough engineering triage. It is not scientific validation.</li></ul>
+<ul><li><code>quality_flags</code>: why a row failed triage, such as high voltage RMSE or temperature drift.</li></ul>
+<ul><li><code>baseline_mode</code>: free voltage-baseline model used by the fitter. Options are <code>offset</code>, <code>time</code>, <code>charge</code>, and <code>time_charge</code>.</li></ul>
+<ul><li><code>time_drift_v_per_s</code>: linear voltage drift term when a time baseline is enabled.</li></ul>
+<ul><li><code>charge_drift_v_per_as</code>: voltage drift per amp-second, used as a local OCV-change proxy.</li></ul>
+<ul><li><code>normalized_rmse</code>: shape error after normalizing DRT areas, useful when raw EIS and time-domain gamma scales differ.</li></ul>
+<ul><li><code>gamma_roughness</code>: normalized second-difference curvature of the gamma curve. Lower is smoother, not automatically better.</li></ul>
+<ul><li><code>band_stability</code>: how much fast/mid/slow band areas change near a lambda value.</li></ul>
+<ul><li><code>selection_score</code>: internal score used by the model rule. It must not include EIS metrics.</li></ul>
+<ul><li><code>model_selection_rule</code>: explanation of the lambda/baseline rule used after the candidate window is already selected.</li></ul>
+<ul><li><code>candidate_selection_rule</code>: explanation of how the pulse window was selected.</li></ul>
+<h2>Current Weak Point</h2>
+<p>The code can fit and compare curves now. That is not the same as proving the method. The weak point is still experimental alignment: SOC labels, baseline/OCV handling, and whether the selected pulses really excite the same processes as EIS.</p>
+<p>The batch runner now uses anchored coulomb counting by default. This is better than pure pre-rest voltage sorting, but it still assumes the highest-voltage selected pulse is the high-SOC anchor and that the raw capacity column is the right scale. Treat it as a useful prototype rule, not ground truth.</p>
+<p>The sensitivity runner tests four SOC modes: <code>voltage</code>, <code>coulomb</code>, <code>endpoint</code>, and <code>linear</code>. On the first three DIB cases, all four modes selected the same pulse windows, so SOC mapping did not explain the weak EIS agreement.</p>
+<p>The model sensitivity runner tests baseline and lambda assumptions. On the first two DIB cases, every target changed correlation by more than 0.1 across model settings. That means baseline/regularization is now the main engineering weak point.</p>
+<p>The model-rule runner fixes <code>time_charge</code> baseline and chooses lambda from voltage RMSE, gamma roughness, and broad-band stability before EIS metrics are read. On the saved run, it selected 10 rows with 0 errors and 10 quality-pass rows, but median EIS correlation stayed weak at about 0.141.</p>
+<p>The viability report currently says <code>research_scaffold_viable</code> and <code>not_validated</code>. That is the right level of confidence. Use the code to test assumptions. Do not use it yet to generate final training labels.</p>
+<h2>Commenting Rule For Future Code</h2>
+<p>When adding pipeline variables, explain them at the point where they are created:</p>
+<ul><li>unit</li></ul>
+<ul><li>source</li></ul>
+<ul><li>whether it is a measured value, fitted value, assumption, or diagnostic</li></ul>
+<ul><li>whether downstream code treats it as evidence or only as a triage flag</li></ul>
+<p>Do not make the next reader reverse-engineer a variable from a CSV column name.</p>
+    </article>
+  </main>
+</body>
+</html>

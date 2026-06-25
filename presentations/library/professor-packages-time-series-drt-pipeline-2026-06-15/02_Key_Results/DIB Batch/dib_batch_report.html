@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generalized DIB Batch Prototype</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/DIB Batch/dib_batch_report.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Generalized DIB Batch Prototype</h1>
+<h2>Purpose</h2>
+<p>This section tests whether the time-domain DRT prototype can run on multiple DIB cells instead of one hand-picked Cell28 case.</p>
+<h2>Run Settings</h2>
+<ul><li>SOH filter: all</li></ul>
+<ul><li>Cell filter: auto</li></ul>
+<ul><li>Temperature: 25 C</li></ul>
+<ul><li>Max cases: 3</li></ul>
+<ul><li>Capacity file rule: earliest cycle per cell/SOH/temp</li></ul>
+<ul><li>SOC selection method: coulomb</li></ul>
+<ul><li>Baseline mode: charge</li></ul>
+<ul><li>Lambda value: 0.001</li></ul>
+<ul><li>SOC quality threshold: 8.0 percentage points</li></ul>
+<h2>Outputs</h2>
+<ul><li><code>dib_batch_results.csv</code></li></ul>
+<ul><li><code>dib_batch_errors.csv</code></li></ul>
+<ul><li><code>dib_batch_case_summaries.json</code></li></ul>
+<ul><li><code>dib_batch_summary.png</code></li></ul>
+<ul><li><code>dib_batch_report.md</code></li></ul>
+<h2>Result Summary</h2>
+<ul><li>Capacity cases attempted: 3</li></ul>
+<ul><li>Matched SOC comparisons produced: 15</li></ul>
+<ul><li>Errors: 0</li></ul>
+<ul><li>Median voltage RMSE: 1.586 mV</li></ul>
+<ul><li>Median EIS correlation: 0.1046</li></ul>
+<ul><li>Quality-pass comparisons: 15 of 15</li></ul>
+<ul><li>Quality flag counts: none</li></ul>
+<ul><li>Cells processed: [15, 18, 20]</li></ul>
+<ul><li>SOH labels processed: [80, 85]</li></ul>
+<ul><li>Median absolute SOC selection error: 3.004 percentage points</li></ul>
+<ul><li>Max absolute SOC selection error: 6.069 percentage points</li></ul>
+<h2>Per-Cell Snapshot</h2>
+<ul><li>Cell 15, SOH 80, cycle 0: 5 SOC comparisons, median RMSE 1.76 mV, median corr 0.1135</li></ul>
+<ul><li>Cell 18, SOH 80, cycle 0: 5 SOC comparisons, median RMSE 1.547 mV, median corr 0.1046</li></ul>
+<ul><li>Cell 20, SOH 85, cycle 0: 5 SOC comparisons, median RMSE 1.491 mV, median corr 0.09531</li></ul>
+<h2>Interpretation</h2>
+<p>The generalized batch runner is a pipeline test, not proof of electrochemical validity. It checks whether discovery, window selection, DRT fitting, and EIS comparison work across DIB cells.</p>
+<p>Blunt warning: candidate selection is still assumption-driven. The batch runner supports voltage, coulomb, endpoint, and linear SOC mapping modes because none of them is protocol ground truth. The <code>quality_pass</code> column is only a triage flag. Passing it means the row cleared basic engineering checks, not that the DRT is scientifically valid.</p>
+<h2>Next Fix</h2>
+<p>Use this batch output with the SOC-mapping and model-sensitivity runners. If SOC mapping does not change the selected windows, move the pressure to baseline/OCV handling and lambda selection. A conclusion that only exists under one baseline or lambda setting is not robust enough to claim.</p>
+<p>&lt;!-- BEGIN BEGINNER_MATH_EXPLANATION --&gt;</p>
+<h2>How This Section Works, Plain Math</h2>
+<p>This section generalizes the pipeline beyond one hand-picked Cell28 case.</p>
+<h3>Workflow</h3>
+<p>For each matched case:</p>
+<pre><code>1. find capacity-check CSV
+2. find matching EIS row
+3. detect pulse windows
+4. assign likely SOC windows
+5. fit time-domain DRT
+6. compare to EIS-derived DRT
+7. apply quality flags</code></pre>
+<h3>Quality flags</h3>
+<p>A quality pass means the row is not obviously broken. It checks practical things like voltage RMSE, temperature drift, current size, SOC error, and overlap points.</p>
+<h3>What this section proves</h3>
+<p>It proves the code can run across multiple cells. It does not prove the method is scientifically valid. Batch success is engineering evidence, not physics validation.</p>
+<h3>Actual Equations Used</h3>
+<p>Each batch case repeats the same core metrics:</p>
+<div class="math-display">$$
+\mathrm{RMSE}_{\mathrm{mV}}
+=1000\sqrt{\frac{1}{N}\sum_{n=1}^{N}
+\left(V_n-\hat{V}_n\right)^2}
+$$</div>
+<div class="math-display">$$
+r=\operatorname{corr}
+\left(\gamma_{\text{TD}}(\tau),\gamma_{\text{EIS}}(\tau)\right)
+$$</div>
+<div class="math-display">$$
+\rho_A
+=
+\frac{\int \gamma_{\text{TD}}(\tau)\,d\log\tau}
+{\int \gamma_{\text{EIS}}(\tau)\,d\log\tau}
+$$</div>
+<p>A row passes quality gates only if practical checks are acceptable:</p>
+<div class="math-display">$$
+\mathrm{pass}
+=
+\left[
+\mathrm{RMSE}_{\mathrm{mV}} \le R_{\max}
+\right]
+\land
+\left[
+|\Delta T| \le T_{\max}
+\right]
+\land
+\left[
+N_{\text{overlap}} \ge N_{\min}
+\right]
+$$</div>
+<p>The exact thresholds are stored in the corresponding JSON and CSV outputs. &lt;!-- END BEGINNER_MATH_EXPLANATION --&gt;</p>
+    </article>
+  </main>
+</body>
+</html>

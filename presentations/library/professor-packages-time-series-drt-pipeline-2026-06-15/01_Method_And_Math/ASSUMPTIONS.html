@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time-Domain DRT Prototype Assumptions</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/01_Method_And_Math/ASSUMPTIONS.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Time-Domain DRT Prototype Assumptions</h1>
+<h2>Read This First</h2>
+<p>This project tries to estimate DRT-like information from pulse/rest time-series battery data.</p>
+<p>That is not the same thing as doing EIS.</p>
+<p>EIS directly measures impedance under a controlled small-signal frequency sweep. This prototype uses ordinary time-series data: time, current, voltage, temperature, and some nearby EIS labels. The pipeline then asks a risky question:</p>
+<p>Can a carefully chosen pulse/rest window produce a relaxation spectrum that is meaningfully comparable to an EIS-derived DRT curve?</p>
+<p>The honest answer right now is:</p>
+<ul><li>The engineering scaffold works.</li></ul>
+<ul><li>The method is not scientifically validated.</li></ul>
+<ul><li>The largest current weakness is not code execution. It is whether the assumptions are true enough.</li></ul>
+<p>If you only take one thing from this file, take this:</p>
+<p>&gt; A clean voltage fit does not prove the recovered DRT is correct.</p>
+<p>The solver can reconstruct voltage while assigning the wrong resistance to the wrong time constants. That is the central danger.</p>
+<h2>What The Pipeline Is Assuming</h2>
+<p>The core assumption is:</p>
+<p>Given one DIB capacity-check time-series file and nearby EIS metadata, selected low-current pulse/rest windows can be compared against EIS-derived DRT at the same cell, SOH label, temperature, and approximate SOC.</p>
+<p>That sentence hides a lot. It assumes:</p>
+<ul><li>the capacity CSV and EIS row describe the same battery state closely enough</li></ul>
+<ul><li>the selected pulse is near the EIS SOC label</li></ul>
+<ul><li>the pulse excites relaxation processes that overlap with EIS processes</li></ul>
+<ul><li>baseline voltage drift is not being mistaken for DRT resistance</li></ul>
+<ul><li>the regularization setting is not chosen after seeing the EIS answer</li></ul>
+<ul><li>the time-domain and EIS gamma curves are comparable over their shared tau range</li></ul>
+<p>Each one can fail.</p>
+<h2>The Pipeline In Plain English</h2>
+<p>The current flow is:</p>
+<p>1. Find a capacity-check CSV with matching EIS metadata. 2. Load time, current, voltage, and temperature. 3. Detect pulse/rest windows. 4. Prefer low-current discharge pulses, because they are less aggressive than high-current capacity segments. 5. Assign selected pulse windows to EIS SOC labels: 95, 70, 50, 20, and 5 percent. 6. Fit a DRT-like time-domain model to each selected window. 7. Compare the fitted time-domain gamma curve against the matched EIS-derived gamma curve over the tau range they share. 8. Stress-test the result under different SOC mapping modes, baseline modes, and lambda values.</p>
+<p>That last step matters. A result that only works under one convenient assumption is weak.</p>
+<h2>Assumption Map</h2>
+<table>
+<tr><th>ID</th><th>Assumption</th><th>What It Means</th><th>Why We Use It</th><th>Main Failure Mode</th></tr>
+<tr><td>A1</td><td>Matching by cell, SOH label, and temperature is enough for a first comparison.</td><td>A capacity file and an EIS row are treated as comparable if they share those metadata fields.</td><td>Those fields exist in the DIB filenames and EIS workbook.</td><td>The battery may be at a different protocol step, history state, or true SOC even when the metadata matches.</td></tr>
+<tr><td>A2</td><td>EIS SOC labels are the comparison targets.</td><td>The target SOC labels are 95, 70, 50, 20, and 5 percent because those labels exist in the EIS data.</td><td>The EIS workbook and filenames expose these SOC labels.</td><td>The capacity CSV does not directly mark which pulse is exactly 70 percent SOC, 50 percent SOC, and so on.</td></tr>
+<tr><td>A3</td><td>Low-current discharge pulses are the best first windows.</td><td>The selector prefers discharge pulses with moderate current, short duration, stable temperature, and rest context.</td><td>These are closer to small-signal behavior than high-current charge/discharge segments.</td><td>A pulse is still not EIS. It may excite different dynamics, nonlinear behavior, or SOC drift.</td></tr>
+<tr><td>A4</td><td><code>Prog Time</code> is the correct time axis for DIB capacity CSVs.</td><td>Use the continuous program clock instead of <code>Step Time</code>, which resets every protocol step.</td><td>The DRT window needs continuous timing before, during, and after the pulse.</td><td>If a file has malformed <code>Prog Time</code>, the fit window and tau grid become wrong. Checked files have not shown that issue yet.</td></tr>
+<tr><td>A5</td><td>SOC can be approximated from current integration.</td><td>Current is integrated over time to estimate how far the file has moved through charge.</td><td>The CSV contains current and capacity-like Ah columns.</td><td>SOC depends on sign convention, capacity scale, anchor point, OCV hysteresis, and protocol details.</td></tr>
+<tr><td>A6</td><td>Time-domain gamma and EIS gamma can be compared over shared tau.</td><td>The code compares only tau values visible to both curves.</td><td>Both methods output a tau-indexed gamma-like curve.</td><td>The two inverse problems use different kernels and regularization, so equal tau does not guarantee equal physics or equal scale.</td></tr>
+<tr><td>A7</td><td>Good voltage reconstruction is necessary but not sufficient.</td><td>High voltage RMSE means the fit is bad. Low voltage RMSE only means the model can reconstruct voltage.</td><td>Voltage is the measured signal. If the model cannot fit it, gamma is useless.</td><td>Many gamma curves can fit nearly the same voltage. Low RMSE can hide a wrong DRT shape.</td></tr>
+<tr><td>A8</td><td>Baseline/OCV drift can be separated from DRT resistance.</td><td>The fit includes free offset, time drift, and charge drift terms so gamma does not absorb slow voltage drift.</td><td>Pulse windows include slow voltage movement that is not all relaxation resistance.</td><td>Baseline terms can steal real slow relaxation, or weak baseline terms can force OCV drift into gamma.</td></tr>
+<tr><td>A9</td><td>Lambda must be selected without looking at EIS agreement.</td><td>Lambda controls gamma smoothness. It should be chosen from time-domain fit quality and stability first.</td><td>Picking lambda after seeing EIS is validation leakage.</td><td>The chosen lambda may still be wrong, but at least the validation is less contaminated.</td></tr>
+<tr><td>A10</td><td>A pre-declared model rule is more honest than picking the prettiest plot.</td><td>The model rule fixes baseline mode, tests a lambda grid, and selects lambda before EIS metrics are used.</td><td>This blocks the easiest way to fool ourselves.</td><td>The rule can still select a poor model if its internal criteria are weak.</td></tr>
+<tr><td>A11</td><td>Quality flags are triage, not proof.</td><td>Rows pass checks for current range, temperature drift, voltage RMSE, tau overlap, correlation, and SOC error.</td><td>The flags keep suspicious rows visible.</td><td>A row can pass all flags and still be scientifically wrong.</td></tr>
+<tr><td>A12</td><td>Synthetic recovery does not validate real data.</td><td>The synthetic case checks whether the inverse code can recover a controlled RC-like signal.</td><td>It catches broken math before touching real DIB files.</td><td>Real batteries have OCV drift, hysteresis, temperature effects, protocol artifacts, and unknown state history.</td></tr>
+</table>
+<h2>The Most Important Blind Spot</h2>
+<p>The old version of this document made all assumptions look equally risky. They are not.</p>
+<p>Right now, the evidence says:</p>
+<ul><li>SOC mapping was not the main driver in the first small sensitivity run.</li></ul>
+<ul><li>Baseline handling and lambda choice were much more dangerous.</li></ul>
+<ul><li>The pre-declared rule made the validation more honest, but it did not make EIS agreement good.</li></ul>
+<p>That is a useful result. It narrows the problem.</p>
+<p>The next pressure point is baseline/OCV modeling and whether pulse relaxation is comparable to EIS-derived DRT at all.</p>
+<h2>SOC Mapping Assumptions</h2>
+<p>The capacity file does not directly say, &quot;this pulse is the 70 percent SOC EIS match.&quot;</p>
+<p>So the batch runner supports four SOC mapping modes. These are not four truths. They are four stress tests.</p>
+<table>
+<tr><th>Mode</th><th>Rule</th><th>What It Tests</th><th>Weak Spot</th></tr>
+<tr><td><code>voltage</code></td><td>Sort candidate pulses by pre-rest voltage and assign SOC labels from high voltage to low voltage.</td><td>Does a simple voltage-order assumption change the result?</td><td>Voltage is not exact SOC, especially under hysteresis, rest-time differences, and aging.</td></tr>
+<tr><td><code>coulomb</code></td><td>Treat the highest-voltage selected pulse as the high-SOC anchor, then use integrated current and the raw capacity scale to estimate later SOC.</td><td>Does current integration plus a capacity scale give stable matches?</td><td>Depends on capacity column quality, sign convention, and the anchor being correct.</td></tr>
+<tr><td><code>endpoint</code></td><td>Treat the highest-voltage selected pulse as 95 percent and the lowest-voltage selected pulse as 5 percent, then interpolate SOC by integrated current.</td><td>Does the result survive without trusting one raw capacity column?</td><td>Forces endpoints to be true even if the selected endpoint pulses are not true 95 and 5 percent SOC.</td></tr>
+<tr><td><code>linear</code></td><td>Use voltage-ranked candidates as provisional labels, fit a linear SOC-vs-Ah map, then reselect nearest pulses.</td><td>Does a label-informed linear correction change the conclusion?</td><td>It is closer to fitting the labels, so it can look cleaner without being more true.</td></tr>
+</table>
+<p>The current default is <code>coulomb</code> when raw DIB data is available.</p>
+<h2>What The SOC Sensitivity Run Actually Said</h2>
+<p>The first SOC sensitivity run used:</p>
+<ul><li>3 DIB capacity cases</li></ul>
+<ul><li>4 SOC mapping modes: <code>voltage</code>, <code>coulomb</code>, <code>endpoint</code>, and <code>linear</code></li></ul>
+<ul><li>60 total comparisons</li></ul>
+<ul><li>0 errors</li></ul>
+<p>Result:</p>
+<table>
+<tr><th>Check</th><th>Result</th></tr>
+<tr><td>Unique time-domain fits after caching</td><td>15</td></tr>
+<tr><td>Targets with different candidate IDs across modes</td><td>0</td></tr>
+<tr><td>Targets with correlation range above 0.1 across modes</td><td>0</td></tr>
+<tr><td>Median EIS correlation under every mode</td><td>about 0.105</td></tr>
+<tr><td>Median normalized RMSE under every mode</td><td>about 0.866</td></tr>
+</table>
+<p>Interpretation:</p>
+<p>In this small run, changing SOC mapping did not change which low-current pulse windows were selected. The weak EIS agreement stayed weak.</p>
+<p>Do not overclaim this. It does not prove SOC is solved. It only says SOC mapping is not the easiest explanation for the current weak match.</p>
+<h2>Baseline Assumptions</h2>
+<p>The measured terminal voltage contains more than relaxation resistance.</p>
+<p>It also contains:</p>
+<ul><li>a voltage offset</li></ul>
+<ul><li>slow OCV movement as charge moves</li></ul>
+<ul><li>possible time drift</li></ul>
+<ul><li>temperature and protocol artifacts</li></ul>
+<p>If the model does not include baseline terms, gamma may fake slow voltage drift by creating a slow tau peak. That looks scientific, but it can be garbage.</p>
+<p>The fitter supports these baseline modes:</p>
+<table>
+<tr><th>Mode</th><th>Free Terms</th><th>Why It Exists</th><th>Main Risk</th></tr>
+<tr><td><code>offset</code></td><td>constant voltage offset</td><td>Minimal baseline.</td><td>Can force slow OCV drift into gamma.</td></tr>
+<tr><td><code>time</code></td><td>constant offset plus linear time drift</td><td>Allows slow drift unrelated to current throughput.</td><td>Can absorb real slow relaxation.</td></tr>
+<tr><td><code>charge</code></td><td>constant offset plus integrated-current drift</td><td>Represents local OCV change from charge moved.</td><td>Depends on current sign and assumes local OCV is linear in charge.</td></tr>
+<tr><td><code>time_charge</code></td><td>constant offset, integrated-current drift, and time drift</td><td>Most flexible first-pass baseline.</td><td>Can hide model error by absorbing too much voltage structure.</td></tr>
+</table>
+<p>The model sensitivity run showed this layer is dangerous.</p>
+<h2>What The Model Sensitivity Run Actually Said</h2>
+<p>The first model sensitivity run used:</p>
+<ul><li>2 DIB capacity cases</li></ul>
+<ul><li>3 baseline modes: <code>offset</code>, <code>charge</code>, and <code>time_charge</code></li></ul>
+<ul><li>4 lambda values: <code>0.001</code>, <code>0.1</code>, <code>1.0</code>, and <code>3.0</code></li></ul>
+<ul><li>120 comparisons</li></ul>
+<ul><li>0 errors</li></ul>
+<ul><li>112 quality-pass comparisons</li></ul>
+<p>Best summary values:</p>
+<table>
+<tr><th>Criterion</th><th>Best Setting</th><th>Value</th></tr>
+<tr><td>Best median normalized RMSE</td><td><code>time_charge</code>, lambda <code>3.0</code></td><td>about 0.301</td></tr>
+<tr><td>Best median correlation</td><td><code>offset</code>, lambda <code>3.0</code></td><td>about 0.374</td></tr>
+<tr><td>Targets with correlation range above 0.1 across settings</td><td>10 of 10</td><td>all tested targets</td></tr>
+</table>
+<p>Interpretation:</p>
+<p>The result is model-sensitive. Baseline and lambda choices can move EIS agreement a lot while voltage RMSE barely changes.</p>
+<p>That is the problem. If you let yourself choose the best baseline or lambda after seeing EIS, you are tuning on the validation target.</p>
+<h2>Lambda Assumption</h2>
+<p>Lambda controls gamma smoothness.</p>
+<p>Low lambda lets gamma become more flexible and jagged. High lambda forces gamma to be smoother. Neither is automatically correct.</p>
+<p>The danger:</p>
+<ul><li>low lambda can overfit voltage noise</li></ul>
+<ul><li>high lambda can blur separate processes together</li></ul>
+<ul><li>EIS agreement can improve simply because smoothing makes curves look more similar</li></ul>
+<ul><li>choosing lambda after looking at EIS makes the validation dishonest</li></ul>
+<p>So the model rule chooses lambda before EIS scoring.</p>
+<h2>Pre-Declared Model Rule</h2>
+<p>The current rule is:</p>
+<ul><li>use <code>coulomb</code> SOC selection when raw DIB data is available</li></ul>
+<ul><li>use low-current discharge windows from the candidate selector</li></ul>
+<ul><li>fix <code>baseline_mode = time_charge</code></li></ul>
+<ul><li>test a lambda grid</li></ul>
+<ul><li>keep lambda values within best voltage RMSE plus max 5 percent or 0.25 mV</li></ul>
+<ul><li>prefer lower gamma roughness</li></ul>
+<ul><li>prefer more stable fast/mid/slow band areas across neighboring lambdas</li></ul>
+<ul><li>add EIS metrics only after lambda is selected</li></ul>
+<p>This rule is not magic. It does one specific job:</p>
+<p>It prevents lambda selection from using EIS as the answer key.</p>
+<h2>What The Pre-Declared Rule Actually Said</h2>
+<p>The first saved model-rule result used existing model-sensitivity output:</p>
+<ul><li>selected comparisons: 10</li></ul>
+<ul><li>lambda candidates scored: 40</li></ul>
+<ul><li>errors: 0</li></ul>
+<ul><li>quality-pass comparisons: 10 of 10</li></ul>
+<ul><li>median voltage RMSE: about 1.711 mV</li></ul>
+<ul><li>median EIS correlation after rule selection: about 0.141</li></ul>
+<ul><li>median normalized RMSE after rule selection: about 0.978</li></ul>
+<ul><li>selected lambda values: all <code>0.001</code></li></ul>
+<p>Interpretation:</p>
+<p>The rule improved honesty, not scientific agreement.</p>
+<p>That is not a failure of the rule. That is the rule doing its job. It stopped the pipeline from quietly selecting settings that make EIS agreement look better after the fact.</p>
+<p>Bluntly: if the honest rule gives weak EIS agreement, believe the weakness.</p>
+<h2>What Counts As Robust</h2>
+<p>A result is more believable if it survives changes in assumptions.</p>
+<p>Useful robustness signs:</p>
+<ul><li>the selected pulse windows stay similar across SOC mapping modes</li></ul>
+<ul><li>voltage RMSE stays low without extreme baseline flexibility</li></ul>
+<ul><li>broad fast/mid/slow gamma areas stay stable across neighboring lambda values</li></ul>
+<ul><li>EIS shape correlation stays reasonable after the model rule, not only after hand-tuning</li></ul>
+<ul><li>tau overlap is large enough to compare the curves</li></ul>
+<ul><li>results repeat across cells, SOH labels, temperatures, and cycles</li></ul>
+<p>Weak signs:</p>
+<ul><li>only one lambda value gives a pretty EIS comparison</li></ul>
+<ul><li>voltage fit is good but EIS shape correlation is weak</li></ul>
+<ul><li>a gamma peak sits at the tau boundary</li></ul>
+<ul><li>baseline mode changes the conclusion</li></ul>
+<ul><li>a single selected pulse carries the whole claim</li></ul>
+<ul><li>quality flags pass, but sensitivity tests fail</li></ul>
+<h2>What We Must Not Claim Yet</h2>
+<p>Do not claim:</p>
+<ul><li>time-domain DRT is a validated substitute for EIS-derived DRT</li></ul>
+<ul><li>selected time-domain windows are true SOC matches</li></ul>
+<ul><li>low voltage RMSE proves the recovered gamma curve is physically correct</li></ul>
+<ul><li>the EIS labels are ground truth for pulse windows</li></ul>
+<ul><li>lambda or baseline can be chosen by whichever EIS plot looks best</li></ul>
+<ul><li>these labels are ready for training a final health model</li></ul>
+<p>If you make those claims right now, you are overreaching.</p>
+<h2>Current Honest Claim</h2>
+<p>The prototype can:</p>
+<ul><li>find pulse/rest windows in time-series battery data</li></ul>
+<ul><li>fit a DRT-like relaxation spectrum from those windows</li></ul>
+<ul><li>compare the result against EIS-derived DRT over shared tau</li></ul>
+<ul><li>test sensitivity to SOC mapping, baseline handling, and lambda</li></ul>
+<ul><li>enforce a pre-declared model-selection rule before EIS scoring</li></ul>
+<p>That is enough for a research scaffold.</p>
+<p>It is not enough for a final scientific claim.</p>
+<h2>What Would Make The Assumptions Stronger</h2>
+<p>The next work should focus on evidence, not prettier plots.</p>
+<p>Needed evidence:</p>
+<ul><li>protocol annotations that tie pulse windows to SOC targets</li></ul>
+<ul><li>confirmed current sign conventions and capacity scales</li></ul>
+<ul><li>repeated pulse windows at the same nominal condition</li></ul>
+<ul><li>better OCV/baseline handling, ideally protocol-aware</li></ul>
+<ul><li>validation on synthetic data with known OCV drift, temperature drift, and SOC drift</li></ul>
+<ul><li>model-rule results across more cells and SOH labels</li></ul>
+<ul><li>agreement that survives new data, not just the current run</li></ul>
+<p>The brutal version:</p>
+<p>The code is now useful. The science is still on probation.</p>
+    </article>
+  </main>
+</body>
+</html>

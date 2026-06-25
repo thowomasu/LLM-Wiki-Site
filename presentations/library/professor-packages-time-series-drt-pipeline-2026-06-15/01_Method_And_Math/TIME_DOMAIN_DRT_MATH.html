@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time-Series To DRT Math</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/01_Method_And_Math/TIME_DOMAIN_DRT_MATH.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Time-Series To DRT Math</h1>
+<h2>Purpose</h2>
+<p>This document explains the math used by the current time-domain DRT prototype.</p>
+<p>It is written for code review and research discussion, not publication.</p>
+<p>Blunt warning: this is a DRT-like inverse model for pulse/rest time-series data. It is not a validated replacement for EIS-derived DRT.</p>
+<p>The goal is to explain what the equations mean, how they map to the code, and where they can fool you.</p>
+<h2>One-Screen Summary</h2>
+<p>The model tries to reconstruct measured terminal voltage from four pieces:</p>
+<p>1. a free voltage baseline 2. an instantaneous ohmic term 3. many delayed RC-like relaxation terms 4. residual error</p>
+<p>In compact form:</p>
+<div class="math-display">$$
+v_n \approx b_n + R_0 i_n + \sum_{k=1}^{K}\gamma_k x_{k,n}
+$$</div>
+<p>The fitted DRT-like curve is the set of nonnegative weights:</p>
+<div class="math-display">$$
+\gamma_1,\gamma_2,\ldots,\gamma_K
+$$</div>
+<p>Each gamma value says how much resistance the solver assigns to one relaxation time constant.</p>
+<p>The dangerous part is that voltage reconstruction can be good even when the gamma distribution is wrong.</p>
+<h2>Variables</h2>
+<table>
+<tr><th>Symbol or Name</th><th>Unit</th><th>Meaning</th></tr>
+<tr><td><code>n</code></td><td>index</td><td>Time sample number inside one selected fit window.</td></tr>
+<tr><td><code>k</code></td><td>index</td><td>Tau-grid index. One <code>k</code> means one virtual RC branch.</td></tr>
+<tr><td><code>t_n</code> or <code>time_s</code></td><td>s</td><td>Time inside the selected window. The code resets each fit window to start at zero.</td></tr>
+<tr><td><code>i_n</code> or <code>current_a</code></td><td>A</td><td>Measured current at sample <code>n</code>. The sign convention comes from the source CSV.</td></tr>
+<tr><td><code>v_n</code> or <code>voltage_v</code></td><td>V</td><td>Measured terminal voltage at sample <code>n</code>. This is what the solver reconstructs.</td></tr>
+<tr><td><code>q_n</code> or <code>charge_as</code></td><td>A s</td><td>Integrated current through time. Used as a local OCV drift proxy.</td></tr>
+<tr><td><code>R0</code></td><td>ohm</td><td>Instantaneous ohmic resistance. It multiplies current directly.</td></tr>
+<tr><td><code>tau_k</code> or <code>tau_s</code></td><td>s</td><td>Relaxation time constant for virtual RC branch <code>k</code>.</td></tr>
+<tr><td><code>x_{k,n}</code></td><td>A</td><td>Current-like state of virtual RC branch <code>k</code> at sample <code>n</code>.</td></tr>
+<tr><td><code>gamma_k</code> or <code>gamma_ohm</code></td><td>ohm</td><td>Nonnegative resistance weight assigned to <code>tau_k</code>.</td></tr>
+<tr><td><code>b_n</code></td><td>V</td><td>Baseline voltage at sample <code>n</code>, including offset and optional drift terms.</td></tr>
+<tr><td><code>lambda_value</code></td><td>local tuning value</td><td>Smoothness strength. Higher values punish jagged gamma curves more.</td></tr>
+<tr><td><code>D2</code></td><td>matrix</td><td>Second-difference operator used to measure gamma curvature.</td></tr>
+<tr><td><code>A</code></td><td>matrix</td><td>Nonnegative design matrix: current column plus RC-kernel columns.</td></tr>
+<tr><td><code>F</code></td><td>matrix</td><td>Free baseline matrix: offset, charge drift, and/or time drift columns.</td></tr>
+</table>
+<h2>Step 1: The Fit Window</h2>
+<p>The solver does not fit the whole capacity CSV at once.</p>
+<p>It first selects one pulse/rest window, then expands the slice to include rest before and after the pulse. In the batch runs, the real-data slice includes:</p>
+<ul><li>120 seconds before the pulse</li></ul>
+<ul><li>1200 seconds after the pulse</li></ul>
+<p>The local time axis is reset:</p>
+<div class="math-display">$$
+t_0 = 0
+$$</div>
+<p>This matters because the baseline and tau grid are local to one window, not global to the whole experiment.</p>
+<h2>Step 2: Integrated Charge</h2>
+<p>The code computes integrated current using the trapezoid rule:</p>
+<div class="math-display">$$
+q_0 = 0
+$$</div>
+<div class="math-display">$$
+q_n =
+q_{n-1}
++
+\frac{1}{2}
+\left(t_n-t_{n-1}\right)
+\left(i_n+i_{n-1}\right)
+$$</div>
+<p>Plain meaning:</p>
+<ul><li><code>q_n</code> is charge moved since the start of the selected window.</li></ul>
+<ul><li>It is measured in amp-seconds.</li></ul>
+<ul><li>It is not automatically true SOC.</li></ul>
+<ul><li>The model uses it as a local baseline/OCV drift clue.</li></ul>
+<p>The same idea is also used in SOC selection, after converting amp-seconds to amp-hours:</p>
+<div class="math-display">$$
+Q_{\mathrm{Ah}} = \frac{q}{3600}
+$$</div>
+<p>Do not confuse local charge movement with ground-truth SOC. That would be sloppy.</p>
+<h2>Step 3: Continuous-Time Idea</h2>
+<p>A current pulse creates two broad voltage effects:</p>
+<ul><li>an immediate jump from ohmic resistance</li></ul>
+<ul><li>a delayed relaxation response from slower processes</li></ul>
+<p>The continuous-time idea is:</p>
+<div class="math-display">$$
+v(t)
+=
+b(t)
++ R_0 i(t)
++ \int \gamma(\tau)x_{\tau}(t)\,d\log(\tau)
++ \varepsilon(t)
+$$</div>
+<p>Where:</p>
+<ul><li><code>b(t)</code> is baseline voltage.</li></ul>
+<ul><li><code>R0 i(t)</code> is the instant ohmic voltage response.</li></ul>
+<ul><li><code>x_tau(t)</code> is current passed through a virtual RC process with time constant <code>tau</code>.</li></ul>
+<ul><li><code>gamma(tau)</code> says how much resistance is assigned to that time scale.</li></ul>
+<ul><li><code>epsilon(t)</code> is whatever the model fails to explain.</li></ul>
+<p>The code does not solve the integral directly. It replaces the integral with a finite tau grid.</p>
+<h2>Step 4: Discrete Forward Model</h2>
+<p>The code version is:</p>
+<div class="math-display">$$
+v_n =
+b_n
++ R_0 i_n
++ \sum_{k=1}^{K}\gamma_k x_{k,n}
++ \varepsilon_n
+$$</div>
+<p>Read this slowly:</p>
+<ul><li><code>v_n</code> is the measured voltage at one time sample.</li></ul>
+<ul><li><code>b_n</code> is the free baseline at that sample.</li></ul>
+<ul><li><code>R0 i_n</code> is the instant current-proportional voltage term.</li></ul>
+<ul><li>Each <code>x_{k,n}</code> is the current history filtered at one tau.</li></ul>
+<ul><li>Each <code>gamma_k</code> is the fitted resistance weight for that tau.</li></ul>
+<ul><li>The sum adds all delayed relaxation contributions.</li></ul>
+<p>Units check:</p>
+<div class="math-display">$$
+\gamma_k x_{k,n}
+=
+\mathrm{ohm}\cdot\mathrm{amp}
+=
+\mathrm{volt}
+$$</div>
+<p>That is why <code>x</code> is current-like and <code>gamma</code> is resistance-like.</p>
+<h2>Step 5: Virtual RC Branches</h2>
+<p>For each tau value, the hidden branch state obeys:</p>
+<div class="math-display">$$
+\frac{d x_k(t)}{dt}
+=
+\frac{-x_k(t)+i(t)}{\tau_k}
+$$</div>
+<p>Plain meaning:</p>
+<ul><li><code>x_k</code> chases the measured current.</li></ul>
+<ul><li>If current stays constant, <code>x_k</code> slowly approaches that current.</li></ul>
+<ul><li>If current returns to zero, <code>x_k</code> decays back toward zero.</li></ul>
+<ul><li>Small tau follows current quickly.</li></ul>
+<ul><li>Large tau reacts slowly and keeps memory longer.</li></ul>
+<p>So each tau column is a different smoothed version of the current history.</p>
+<h2>Step 6: Discrete RC Update</h2>
+<p>For sample <code>n</code>, define:</p>
+<div class="math-display">$$
+\Delta t_n = t_n - t_{n-1}
+$$</div>
+<p>The code uses a trapezoidal, bilinear update:</p>
+<div class="math-display">$$
+c_{k,n}
+=
+\frac{2\tau_k-\Delta t_n}{2\tau_k+\Delta t_n}
+$$</div>
+<div class="math-display">$$
+d_{k,n}
+=
+\frac{\Delta t_n}{2\tau_k+\Delta t_n}
+$$</div>
+<div class="math-display">$$
+x_{k,n}
+=
+c_{k,n}x_{k,n-1}
++ d_{k,n}(i_n+i_{n-1})
+$$</div>
+<p>What the pieces mean:</p>
+<ul><li><code>c</code> carries forward the previous RC state.</li></ul>
+<ul><li><code>d</code> controls how much the current samples at both ends of the interval affect the new state.</li></ul>
+<ul><li>The update uses both <code>i_n</code> and <code>i_{n-1}</code>, so it is less crude than forward Euler.</li></ul>
+<ul><li>This is more stable when tau is close to the sample interval.</li></ul>
+<p>If <code>tau_k</code> is very small, the branch follows current quickly. If <code>tau_k</code> is very large, the branch moves slowly and remembers earlier current.</p>
+<h2>Step 7: Kernel Matrix</h2>
+<p>After computing all virtual RC states, the code builds a kernel matrix:</p>
+<div class="math-display">$$
+K_{n,k} = x_{k,n}
+$$</div>
+<p>Rows are time samples.</p>
+<p>Columns are tau values.</p>
+<p>Then the nonnegative design matrix is:</p>
+<div class="math-display">$$
+A =
+\begin{bmatrix}
+i &amp; K_{\tau_1} &amp; K_{\tau_2} &amp; \cdots &amp; K_{\tau_K}
+\end{bmatrix}
+$$</div>
+<p>The first column is measured current. Its coefficient is <code>R0</code>.</p>
+<p>The remaining columns are RC-kernel columns. Their coefficients are gamma values.</p>
+<p>So:</p>
+<div class="math-display">$$
+A\theta
+=
+R_0 i
++ K\gamma
+$$</div>
+<p>Where:</p>
+<div class="math-display">$$
+\theta =
+\begin{bmatrix}
+R_0 &amp; \gamma_1 &amp; \gamma_2 &amp; \cdots &amp; \gamma_K
+\end{bmatrix}^{T}
+$$</div>
+<h2>Step 8: Tau Grid</h2>
+<p>The solver uses 72 tau values on a log-spaced grid.</p>
+<p>The lower end is:</p>
+<div class="math-display">$$
+\tau_{\min}
+=
+\max\left(2\,\mathrm{median}(\Delta t),10^{-3}\right)
+$$</div>
+<p>The upper end is:</p>
+<div class="math-display">$$
+\tau_{\max}
+=
+\max\left(20\tau_{\min},\frac{T_{\mathrm{window}}}{3}\right)
+$$</div>
+<p>Where:</p>
+<div class="math-display">$$
+T_{\mathrm{window}} = t_{N-1}-t_0
+$$</div>
+<p>Why this exists:</p>
+<ul><li><code>tau_min</code> needs more than one sample per relaxation.</li></ul>
+<ul><li><code>tau_max</code> should stay tied to the visible window duration.</li></ul>
+<ul><li>A short window cannot honestly recover a very slow process.</li></ul>
+<ul><li>Log spacing gives coverage across fast, mid, and slow time scales.</li></ul>
+<p>If a recovered peak lands at the maximum tau boundary, treat it as suspicious. It often means the window is too short or the baseline is leaking into gamma.</p>
+<h2>Step 9: Baseline Terms</h2>
+<p>The solver separates resistance terms from baseline terms.</p>
+<p>Resistance terms are constrained nonnegative:</p>
+<div class="math-display">$$
+\theta \ge 0
+$$</div>
+<p>Baseline terms are free to be positive or negative:</p>
+<div class="math-display">$$
+Fz
+$$</div>
+<p>The full fitted voltage is:</p>
+<div class="math-display">$$
+\widehat{v}
+=
+A\theta + Fz
+$$</div>
+<p>The baseline matrix <code>F</code> depends on <code>baseline_mode</code>.</p>
+<h3>Offset Mode</h3>
+<div class="math-display">$$
+b_n = z_0
+$$</div>
+<p>This allows only a constant voltage offset.</p>
+<h3>Time Mode</h3>
+<div class="math-display">$$
+b_n = z_0 + z_t(t_n-\overline{t})
+$$</div>
+<p>This allows a constant offset plus linear time drift.</p>
+<h3>Charge Mode</h3>
+<div class="math-display">$$
+b_n = z_0 + z_q q_n
+$$</div>
+<p>This allows local OCV-like movement with charge throughput.</p>
+<h3>Time-Charge Mode</h3>
+<div class="math-display">$$
+b_n
+=
+z_0
++ z_q q_n
++ z_t(t_n-\overline{t})
+$$</div>
+<p>This is the most flexible current first-pass baseline.</p>
+<p>The baseline is not DRT resistance. It exists because terminal voltage can drift for reasons that are not relaxation resistance.</p>
+<h2>Step 10: Smoothness Penalty</h2>
+<p>DRT inversion is ill-conditioned. Many gamma curves can fit almost the same voltage.</p>
+<p>So the solver penalizes jagged gamma curves.</p>
+<p>The second-difference operator is:</p>
+<div class="math-display">$$
+(D_2\gamma)_j
+=
+\gamma_j - 2\gamma_{j+1} + \gamma_{j+2}
+$$</div>
+<p>If gamma bends sharply from one tau point to the next, this value is large.</p>
+<p>If gamma is smooth, this value is small.</p>
+<p>The smoothness penalty is:</p>
+<div class="math-display">$$
+\lambda^2\left\|D_2\gamma\right\|_2^2
+$$</div>
+<p>Important:</p>
+<ul><li><code>R0</code> is not smoothed.</li></ul>
+<ul><li>Only the gamma vector is smoothed.</li></ul>
+<ul><li>Higher lambda makes gamma smoother.</li></ul>
+<ul><li>Smoother does not automatically mean more true.</li></ul>
+<h2>Step 11: Optimization Problem</h2>
+<p>The code solves:</p>
+<div class="math-display">$$
+\min_{\theta,z}
+\left\|A\theta + Fz - v\right\|_2^2
++
+\lambda^2\left\|D_2\gamma\right\|_2^2
+$$</div>
+<p>Subject to:</p>
+<div class="math-display">$$
+\theta \ge 0
+$$</div>
+<p>Where:</p>
+<ul><li><code>theta</code> contains <code>R0</code> and all gamma values.</li></ul>
+<ul><li><code>z</code> contains free baseline coefficients.</li></ul>
+<ul><li><code>A theta</code> is the nonnegative resistance part.</li></ul>
+<ul><li><code>F z</code> is the free baseline part.</li></ul>
+<ul><li><code>v</code> is measured voltage.</li></ul>
+<ul><li><code>D2 gamma</code> measures gamma roughness.</li></ul>
+<p>The nonnegativity constraint means:</p>
+<div class="math-display">$$
+R_0 \ge 0
+$$</div>
+<div class="math-display">$$
+\gamma_k \ge 0
+\quad
+\mathrm{for\ all}\ k
+$$</div>
+<p>This is physically motivated. Negative resistance weights would make the curve easier to fit, but harder to defend.</p>
+<h2>Step 12: How The Solver Handles Free Baseline Terms</h2>
+<p>The active-set NNLS solver can handle nonnegative coefficients, but baseline terms must be allowed to go positive or negative.</p>
+<p>So the implementation does this:</p>
+<p>1. Project the voltage vector and nonnegative design matrix against the free baseline space <code>F</code>. 2. Solve the regularized nonnegative least-squares problem for <code>theta</code>. 3. Fit the free baseline coefficients <code>z</code> by ordinary least squares after <code>theta</code> is chosen.</p>
+<p>In plain language:</p>
+<ul><li>First remove what the baseline could explain.</li></ul>
+<ul><li>Fit nonnegative resistance terms to what is left.</li></ul>
+<ul><li>Then add the best baseline back.</li></ul>
+<p>This keeps gamma from being forced to explain every slow voltage movement.</p>
+<h2>Step 13: Reconstructed Voltage And RMSE</h2>
+<p>After fitting, reconstructed voltage is:</p>
+<div class="math-display">$$
+\widehat{v}
+=
+A\widehat{\theta}
++ F\widehat{z}
+$$</div>
+<p>Residual voltage is:</p>
+<div class="math-display">$$
+r_n = v_n-\widehat{v}_n
+$$</div>
+<p>Voltage RMSE is:</p>
+<div class="math-display">$$
+\mathrm{RMSE}_{V}
+=
+\sqrt{
+\frac{1}{N}
+\sum_{n=0}^{N-1}
+\left(v_n-\widehat{v}_n\right)^2
+}
+$$</div>
+<p>The reports usually show millivolts:</p>
+<div class="math-display">$$
+\mathrm{RMSE}_{mV}
+=
+1000\,\mathrm{RMSE}_{V}
+$$</div>
+<p>Low RMSE is required. It is not enough.</p>
+<p>A low RMSE only says the model can reconstruct terminal voltage. It does not prove the tau distribution is physically right.</p>
+<h2>Step 14: Broad Tau Bands</h2>
+<p>Exact DRT peak locations are fragile, especially for pulse data.</p>
+<p>So the reports also summarize broad tau bands:</p>
+<table>
+<tr><th>Band</th><th>Tau Range</th></tr>
+<tr><td>Fast</td><td>4 to 16 s</td></tr>
+<tr><td>Mid</td><td>25 to 90 s</td></tr>
+<tr><td>Slow</td><td>90 to 450 s</td></tr>
+</table>
+<p>Each band is currently summarized by summing gamma values in that tau interval:</p>
+<div class="math-display">$$
+G_{\mathrm{band}}
+=
+\sum_{\tau_k\in\mathrm{band}}\gamma_k
+$$</div>
+<p>This is not a final electrochemical feature. It is a stability diagnostic.</p>
+<p>If the broad bands jump wildly when lambda changes slightly, the fitted gamma is fragile.</p>
+<h2>Step 15: EIS Comparison</h2>
+<p>The time-domain fit gives:</p>
+<div class="math-display">$$
+\gamma_{\mathrm{TD}}(\tau)
+$$</div>
+<p>The EIS pipeline gives:</p>
+<div class="math-display">$$
+\gamma_{\mathrm{EIS}}(\tau)
+$$</div>
+<p>They usually do not share the exact same tau grid. The code compares only the overlap:</p>
+<div class="math-display">$$
+\tau_{\mathrm{overlap,min}}
+=
+\max(\tau_{\mathrm{TD,min}},\tau_{\mathrm{EIS,min}})
+$$</div>
+<div class="math-display">$$
+\tau_{\mathrm{overlap,max}}
+=
+\min(\tau_{\mathrm{TD,max}},\tau_{\mathrm{EIS,max}})
+$$</div>
+<p>Then EIS gamma is interpolated onto the time-domain tau grid in log-tau space.</p>
+<p>Correlation is computed over the overlap:</p>
+<div class="math-display">$$
+\rho
+=
+\operatorname{corr}
+\left(
+\gamma_{\mathrm{TD}}(\tau),
+\gamma_{\mathrm{EIS}}(\tau)
+\right)
+$$</div>
+<p>What correlation means:</p>
+<ul><li>High positive correlation means similar shape over shared tau.</li></ul>
+<ul><li>Near-zero correlation means weak shape agreement.</li></ul>
+<ul><li>Negative correlation means the curves move in opposite directions.</li></ul>
+<p>Correlation does not fix magnitude mismatch.</p>
+<h2>Step 16: Area And Shape Metrics</h2>
+<p>The comparison also computes log-tau area:</p>
+<div class="math-display">$$
+A_{\mathrm{TD}}
+=
+\int
+\gamma_{\mathrm{TD}}(\tau)
+\,d\log(\tau)
+$$</div>
+<div class="math-display">$$
+A_{\mathrm{EIS}}
+=
+\int
+\gamma_{\mathrm{EIS}}(\tau)
+\,d\log(\tau)
+$$</div>
+<p>The area ratio is:</p>
+<div class="math-display">$$
+\frac{A_{\mathrm{EIS}}}{A_{\mathrm{TD}}}
+$$</div>
+<p>The code also asks:</p>
+<p>What scale factor best maps the time-domain gamma curve onto the EIS gamma curve?</p>
+<div class="math-display">$$
+s^*
+=
+\frac{
+\gamma_{\mathrm{TD}}^{T}\gamma_{\mathrm{EIS}}
+}{
+\gamma_{\mathrm{TD}}^{T}\gamma_{\mathrm{TD}}
+}
+$$</div>
+<p>Then scaled RMSE is:</p>
+<div class="math-display">$$
+\mathrm{RMSE}_{\mathrm{scaled}}
+=
+\sqrt{
+\frac{1}{M}
+\sum_{m=1}^{M}
+\left(
+s^*\gamma_{\mathrm{TD},m}
+-
+\gamma_{\mathrm{EIS},m}
+\right)^2
+}
+$$</div>
+<p>The normalized RMSE compares shapes after area normalization:</p>
+<div class="math-display">$$
+\mathrm{NRMSE}
+=
+\sqrt{
+\frac{1}{M}
+\sum_{m=1}^{M}
+\left(
+\frac{\gamma_{\mathrm{TD},m}}{|A_{\mathrm{TD}}|}
+-
+\frac{\gamma_{\mathrm{EIS},m}}{|A_{\mathrm{EIS}}|}
+\right)^2
+}
+$$</div>
+<p>Plain meaning:</p>
+<ul><li>Correlation checks shape direction.</li></ul>
+<ul><li>Area ratio checks total gamma scale.</li></ul>
+<ul><li>Best scale checks whether one curve is mostly a scaled version of the other.</li></ul>
+<ul><li>Normalized RMSE checks shape mismatch after removing total area.</li></ul>
+<h2>Step 17: Model-Rule Selection</h2>
+<p>The sensitivity runs showed that lambda and baseline choices can change EIS agreement.</p>
+<p>So the model-rule script chooses lambda before EIS scoring.</p>
+<p>The current rule:</p>
+<p>1. Fix <code>baseline_mode = time_charge</code>. 2. Fit the same window across a lambda grid. 3. Find the best voltage RMSE. 4. Keep lambdas within best RMSE plus max 5 percent or 0.25 mV. 5. Prefer lower gamma roughness. 6. Prefer stable fast/mid/slow band areas across neighboring lambdas. 7. Penalize edge lambda values and nearly flat gamma curves. 8. Only after lambda is selected, compare against EIS.</p>
+<p>Gamma roughness is:</p>
+<div class="math-display">$$
+\mathrm{roughness}
+=
+\frac{
+\left\|\Delta^2\gamma\right\|_2
+}{
+\max\left(\left\|\gamma\right\|_2,10^{-15}\right)
+}
+$$</div>
+<p>The selection score is rank-based in the code:</p>
+<div class="math-display">$$
+\mathrm{score}
+=
+2r_{\mathrm{RMSE}}
++ r_{\mathrm{roughness}}
++ r_{\mathrm{band}}
++ p_{\mathrm{boundary}}
++ p_{\mathrm{flat}}
+$$</div>
+<p>Where:</p>
+<ul><li><code>r_RMSE</code> ranks voltage RMSE, lower is better.</li></ul>
+<ul><li><code>r_roughness</code> ranks gamma roughness, lower is better.</li></ul>
+<ul><li><code>r_band</code> ranks band instability, lower is better.</li></ul>
+<ul><li><code>p_boundary</code> penalizes the smallest or largest tested lambda.</li></ul>
+<ul><li><code>p_flat</code> penalizes gamma curves with too few nonzero points.</li></ul>
+<p>EIS correlation is not part of this score.</p>
+<p>That is the point.</p>
+<h2>Why Gamma Is Fragile</h2>
+<p>Gamma is fragile because this is an inverse problem.</p>
+<p>Common failure modes:</p>
+<ul><li>Many gamma curves can explain nearly the same voltage.</li></ul>
+<ul><li>Short windows cannot resolve long tau values.</li></ul>
+<ul><li>Baseline terms can compete with slow gamma.</li></ul>
+<ul><li>Strong smoothing can make curves look cleaner without making them truer.</li></ul>
+<ul><li>Weak smoothing can fit noise.</li></ul>
+<ul><li>EIS and pulse/rest data may not excite the same processes.</li></ul>
+<ul><li>SOC mismatch can compare the time-domain curve against the wrong EIS row.</li></ul>
+<ul><li>Temperature drift can move voltage for reasons unrelated to relaxation resistance.</li></ul>
+<p>That is why the pipeline reports more than one metric.</p>
+<h2>What The Current Numbers Mean</h2>
+<p>The current viability report says:</p>
+<ul><li>synthetic inverse check passes, RMSE about 0.801 mV</li></ul>
+<ul><li>DIB batch runner produces 15 rows with 0 errors</li></ul>
+<ul><li>SOC mapping sensitivity produces 60 comparisons with 0 errors</li></ul>
+<ul><li>model sensitivity produces 120 comparisons with 0 errors</li></ul>
+<ul><li>pre-declared model rule produces 10 selected comparisons with 0 errors</li></ul>
+<p>But the science is still weak:</p>
+<ul><li>first DIB batch median EIS correlation is about 0.105</li></ul>
+<ul><li>pre-declared rule median EIS correlation is about 0.141</li></ul>
+<ul><li>pre-declared rule median normalized RMSE is about 0.978</li></ul>
+<ul><li>model sensitivity found 10 of 10 targets where correlation range changed by more than 0.1 across settings</li></ul>
+<p>Translation:</p>
+<p>The code can fit voltage and generate curves. The recovered DRT shape is still too assumption-sensitive to call validated.</p>
+<h2>What Would Make The Math More Defensible</h2>
+<p>The math gets stronger only if the assumptions get stronger.</p>
+<p>Needed next steps:</p>
+<ul><li>confirm protocol annotations tying pulse windows to SOC targets</li></ul>
+<ul><li>validate synthetic cases with known baseline drift, SOC drift, and temperature drift</li></ul>
+<ul><li>compare repeated pulse windows at the same condition</li></ul>
+<ul><li>improve OCV/baseline modeling</li></ul>
+<ul><li>choose lambda by a rule that survives new cells</li></ul>
+<ul><li>test the pre-declared rule on more cells and SOH labels</li></ul>
+<ul><li>report failures instead of tuning around them</li></ul>
+<p>Blunt version:</p>
+<p>The math is good enough to investigate. It is not good enough to claim victory.</p>
+    </article>
+  </main>
+</body>
+</html>

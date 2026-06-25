@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graph Explanation: Section 9 Validation Diagnostics</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/section_9_validation_diagnostics_EXPLANATION.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Graph Explanation: Section 9 Validation Diagnostics</h1>
+<p>Graph file: <code>section_9_validation_diagnostics.png</code></p>
+<p>Folder: <code>Package_Key_Plots</code></p>
+<h2>What This Figure Shows</h2>
+<p>This figure asks whether weak EIS agreement is just a scale problem or a deeper shape problem. It also shows how lambda, the smoothness setting, changes the comparison.</p>
+<p>Typical panels include:</p>
+<ul><li>best scale factors between time-domain and EIS gamma</li></ul>
+<ul><li>normalized shape error after scaling</li></ul>
+<ul><li>correlation or RMSE across lambda values</li></ul>
+<ul><li>diagnostics for the 70 percent SOC case</li></ul>
+<h2>What We Can Learn</h2>
+<p>If one constant scale factor fixed the mismatch, the problem might be a simple magnitude calibration issue. The current diagnostics suggest it is not that simple. Shape disagreement remains important.</p>
+<p>Lambda matters too. Smoothing can make a curve look more EIS-like, but that does not prove the smoother curve is more true. If lambda is picked after looking at EIS, validation is biased.</p>
+<h2>Why It Matters</h2>
+<p>This plot is a guard against a lazy explanation. It stops us from saying &quot;the curves only need rescaling&quot; when the shape evidence does not support that.</p>
+<h2>Caveat</h2>
+<p>Smoother is not automatically more correct. Heavy smoothing can hide real structure.</p>
+<h2>What To Check Next</h2>
+<p>Use the pre-declared model-rule plot. Sensitivity diagnostics can teach us where the method is weak, but the model rule is the more honest validation check because it selects settings before EIS scoring.</p>
+    </article>
+  </main>
+</body>
+</html>

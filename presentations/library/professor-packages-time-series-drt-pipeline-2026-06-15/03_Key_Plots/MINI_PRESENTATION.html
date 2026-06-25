@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Key Plots</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Key Plots</h1>
+  <p class="meta">Time-Series DRT Pipeline, professor handoff, 2026-06-15</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>The plots show synthetic recovery, window selection, selected-window fit, SOC sweep, validation diagnostics, SOC alignment, batch behavior, sensitivity, and model-rule output.</li>
+      <li>The visual story is consistent with the reports: voltage fits are decent, EIS shape agreement is weak.</li>
+      <li>Each major PNG has a sidecar explanation file.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>Plots were regenerated from saved CSV and JSON outputs.</li>
+      <li>The package avoids relying on screenshots or manual chart edits.</li>
+      <li>The visual set makes the weak results easier to see, not easier to hide.</li>
+      <li><code>PLOT_GUIDE.md</code> explains what each plot shows and what not to overclaim.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="synthetic_section_1_plots.png" alt="Synthetic sanity check."><figcaption>Synthetic sanity check.</figcaption></figure>
+      <figure><img src="section_2_window_plot.png" alt="Window finder output."><figcaption>Window finder output.</figcaption></figure>
+      <figure><img src="section_3_candidate_fit_plot.png" alt="Selected pulse fit and DRT-like curve."><figcaption>Selected pulse fit and DRT-like curve.</figcaption></figure>
+      <figure><img src="section_8_cell28_soc_sweep_summary.png" alt="Cell28 SOC sweep."><figcaption>Cell28 SOC sweep.</figcaption></figure>
+      <figure><img src="section_9_validation_diagnostics.png" alt="Validation diagnostics."><figcaption>Validation diagnostics.</figcaption></figure>
+      <figure><img src="section_10_soc_alignment.png" alt="SOC alignment check."><figcaption>SOC alignment check.</figcaption></figure>
+      <figure><img src="dib_batch_summary.png" alt="DIB batch summary."><figcaption>DIB batch summary.</figcaption></figure>
+      <figure><img src="soc_mapping_sensitivity_summary.png" alt="SOC mapping sensitivity."><figcaption>SOC mapping sensitivity.</figcaption></figure>
+      <figure><img src="model_sensitivity_summary.png" alt="Model sensitivity."><figcaption>Model sensitivity.</figcaption></figure>
+      <figure><img src="model_rule_summary.png" alt="Pre-declared model rule."><figcaption>Pre-declared model rule.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>Plots cannot fix weak validation.</li>
+      <li>Raw DIB files were not present for every regeneration path, so some plots were rebuilt from exported result tables.</li>
+      <li>The figures still depend on the correctness of the earlier window, SOC, and model assumptions.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Add plots for professor-confirmed validation cases once available.</li>
+      <li>Keep every plot tied to a CSV or JSON source.</li>
+      <li>Add before-and-after plots only when a new rule is locked before EIS scoring.</li>
+      <li>Use plots to expose failure modes, not to decorate the package.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

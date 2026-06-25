@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graph Explanation: Synthetic Section 1 Plots</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/synthetic_section_1_plots_EXPLANATION.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Graph Explanation: Synthetic Section 1 Plots</h1>
+<p>Graph file: <code>synthetic_section_1_plots.png</code></p>
+<p>Folder: <code>Package_Key_Plots</code></p>
+<h2>What This Figure Shows</h2>
+<p>This figure is the controlled test case. The data is synthetic, so the true resistance branches are known before the solver runs.</p>
+<p>Read it panel by panel:</p>
+<ul><li>Panel A shows the current input in amps. The current steps are the excitation that creates voltage relaxation.</li></ul>
+<ul><li>Panel B compares measured synthetic voltage with reconstructed voltage. This is the first sanity check.</li></ul>
+<ul><li>Panel C shows recovered DRT-like resistance weights across tau. Tau is relaxation time in seconds on a log scale.</li></ul>
+<ul><li>Panel D shows voltage residual in millivolts, meaning measured minus fitted voltage.</li></ul>
+<ul><li>Panel E shows the same residual as a signed percentage of measured voltage.</li></ul>
+<p>The top current and voltage panels use the same time span. That lets you line up each current step with the voltage response directly.</p>
+<h2>How To Read It</h2>
+<p>Start with Panel B. If the orange fitted voltage misses the measured voltage badly, the solver has already failed. Then check Panel D. Residuals should look small and patternless, not like a hidden pulse response that the model failed to capture.</p>
+<p>Only after that should you look at Panel C. A peak at small tau means the solver used fast relaxation. A peak at larger tau means slower relaxation. In the synthetic case, the red markers show the known truth, so the recovered curve can be judged against an actual answer key.</p>
+<h2>What We Can Learn</h2>
+<p>This graph tells us whether the inverse math is broken before we touch real battery data. If the solver cannot recover a controlled synthetic response, it has no business being trusted on DIB data.</p>
+<p>The important lesson is mixed. The voltage reconstruction can be strong, while the DRT recovery can still smear or shift peaks. Slow components are especially fragile because the window must be long enough to observe slow relaxation.</p>
+<h2>Why It Matters</h2>
+<p>This is the minimum credibility test for the pipeline. Passing it does not validate the science, but failing it would kill the whole approach immediately.</p>
+<h2>Caveat</h2>
+<p>This is a sanity check, not proof on real battery data. Synthetic data is easier because the model that generates it is close to the model used to fit it.</p>
+<h2>What To Check Next</h2>
+<p>Use this plot to check whether the solver behaves under controlled conditions. Then move to real-data plots and ask a harsher question: does the same voltage-fitting machinery produce DRT shapes that agree with EIS without tuning after the fact?</p>
+    </article>
+  </main>
+</body>
+</html>

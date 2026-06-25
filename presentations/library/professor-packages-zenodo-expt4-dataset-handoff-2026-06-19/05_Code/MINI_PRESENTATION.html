@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Code</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Code</h1>
+  <p class="meta">Zenodo Expt4 Dataset Handoff, professor handoff, 2026-06-19</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>This folder contains the scripts used for Zenodo Expt4 conversion, pipeline generation, visualization, and validation audit.</li>
+      <li>The code supports review and rerun when the external dataset is available.</li>
+      <li>It is the implementation record behind the handoff reports.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="../03_Key_Plots/01_Graphs/section_6_model_sensitivity.png" alt="The code exposes model sensitivity instead of hiding it."><figcaption>The code exposes model sensitivity instead of hiding it.</figcaption></figure>
+      <figure><img src="../03_Key_Plots/01_Graphs/section_13_multi_protocol_validation.png" alt="Generated validation outputs are reviewable."><figcaption>Generated validation outputs are reviewable.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>The scripts generate reports, plots, CSVs, JSON summaries, and validation audit outputs.</li>
+      <li>The workflow is split into source conversion, feature extraction, report generation, and stricter validation.</li>
+      <li>The code makes the handoff reproducible enough to inspect instead of trusting a static report.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>Full reruns need the original Zenodo Expt4 dataset outside this package.</li>
+      <li>Some paths or assumptions may still reflect the local experiment environment.</li>
+      <li>Code can reproduce the current analysis, but it cannot prove the physics by itself.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Parameterize any remaining local paths.</li>
+      <li>Keep validation-audit logic close to the pipeline so leakage checks are not optional.</li>
+      <li>Add a locked R0 versus DRT-band comparison script if it is not already separated enough.</li>
+      <li>Treat code review as necessary but not sufficient for scientific acceptance.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

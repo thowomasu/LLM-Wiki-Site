@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Pipeline Report</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Pipeline Report</h1>
+  <p class="meta">Zenodo Expt4 Dataset Handoff, professor handoff, 2026-06-19</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>The pipeline report contains the main generated workflow outputs for Zenodo Expt4.</li>
+      <li>It covers data audit, file screening, GITT window finding, GITT fitting, batch fitting, model sensitivity, raw conversion checks, health-label joins, held-out validation, trend checks, discharge features, hybrid-pulse features, and multi-protocol validation.</li>
+      <li>It shows a working internal health-feature pipeline.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="01_Graphs/section_3_gitt_window_plot.png" alt="GITT window detection."><figcaption>GITT window detection.</figcaption></figure>
+      <figure><img src="01_Graphs/section_4_gitt_candidate_fit_plot.png" alt="GITT candidate fit."><figcaption>GITT candidate fit.</figcaption></figure>
+      <figure><img src="01_Graphs/section_9_held_out_cell_validation.png" alt="Held-out cell validation."><figcaption>Held-out cell validation.</figcaption></figure>
+      <figure><img src="01_Graphs/section_13_multi_protocol_validation.png" alt="Multi-protocol validation summary."><figcaption>Multi-protocol validation summary.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>Reports, CSVs, JSON summaries, plots, and a browser index are packaged together.</li>
+      <li>The workflow covers three evidence tracks: GITT, discharge, and hybrid pulse.</li>
+      <li>The pipeline can parse, align, summarize, and validate multiple protocol families.</li>
+      <li>Section reports explain what each stage means in plain language.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>The report does not include measured EIS-derived DRT validation.</li>
+      <li>Some strong-looking prediction results may be inflated by target proxies.</li>
+      <li>Discharge and hybrid features are health features, not DRT evidence.</li>
+      <li>DRT-like bands still need isolation from R0 and proxy features.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Treat the pipeline report as the engineering record.</li>
+      <li>Treat the validation audit as the scientific strength check.</li>
+      <li>Re-run the locked R0 versus DRT-band comparison.</li>
+      <li>Promote only results that survive stricter grouped validation.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

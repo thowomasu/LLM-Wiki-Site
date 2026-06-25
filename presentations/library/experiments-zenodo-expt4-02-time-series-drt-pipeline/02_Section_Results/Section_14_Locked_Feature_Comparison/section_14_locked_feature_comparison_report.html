@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zenodo Expt4 Time-Series DRT Pipeline, Section 14</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f5f7f6;
+  --paper: #ffffff;
+  --ink: #182026;
+  --muted: #5a6975;
+  --line: #d8dfdf;
+  --accent: #0d766d;
+  --warn: #a5481a;
+  --code: #edf2f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 34px 22px 70px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 34px;
+  box-shadow: 0 14px 34px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.14;
+}
+
+h2 {
+  margin: 32px 0 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 24px 0 8px;
+  color: var(--warn);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+a { color: var(--accent); }
+ul, ol { padding-left: 24px; }
+li { margin: 5px 0; }
+
+code {
+  background: var(--code);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.95em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: #edf2f1; }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.meta {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 18px 0 28px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fbfcfb;
+}
+
+.card h3 { margin-top: 0; }
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 02_Section_Results/Section_14_Locked_Feature_Comparison/section_14_locked_feature_comparison_report.md. Edit the Markdown source, then rerun the Zenodo pipeline.</div>
+<h1>Zenodo Expt4 Time-Series DRT Pipeline, Section 14</h1>
+<h2>Purpose</h2>
+<p>This section is the locked comparison the rest of the package needs. It compares three feature sets only: R0, DRT bands without R0, and R0 plus DRT bands. No voltage features, capacity features, hybrid features, or SOC-bucket aggregate features are allowed here.</p>
+<h2>Results</h2>
+<ul><li>Feature table rows: 80</li></ul>
+<ul><li>Prediction rows: 720</li></ul>
+<ul><li>Metric rows: 18</li></ul>
+<ul><li>DRT-band-only positive skill rows: 6</li></ul>
+<ul><li>R0 plus DRT beats R0 alone: 4 of 6 target/split checks.</li></ul>
+<h2>Locked Metrics</h2>
+<ul><li>leave_one_cell_out / c10_capacity_mah / drt_bands_only: MAE 140.5, baseline MAE 242.9, skill 0.421, n=40</li></ul>
+<ul><li>leave_one_cell_out / c10_capacity_mah / r0_only: MAE 153.4, baseline MAE 242.9, skill 0.368, n=40</li></ul>
+<ul><li>leave_one_cell_out / c10_capacity_mah / r0_plus_drt_bands: MAE 124.9, baseline MAE 242.9, skill 0.486, n=40</li></ul>
+<ul><li>leave_one_cell_out / resistance_0p1s_ohm / drt_bands_only: MAE 0.001403, baseline MAE 0.001851, skill 0.242, n=40</li></ul>
+<ul><li>leave_one_cell_out / resistance_0p1s_ohm / r0_only: MAE 0.000284, baseline MAE 0.001851, skill 0.847, n=40</li></ul>
+<ul><li>leave_one_cell_out / resistance_0p1s_ohm / r0_plus_drt_bands: MAE 0.0003306, baseline MAE 0.001851, skill 0.821, n=40</li></ul>
+<ul><li>leave_one_cell_out / soh / drt_bands_only: MAE 0.02854, baseline MAE 0.04926, skill 0.421, n=40</li></ul>
+<ul><li>leave_one_cell_out / soh / r0_only: MAE 0.02964, baseline MAE 0.04926, skill 0.398, n=40</li></ul>
+<ul><li>leave_one_cell_out / soh / r0_plus_drt_bands: MAE 0.02487, baseline MAE 0.04926, skill 0.495, n=40</li></ul>
+<ul><li>leave_one_temperature_out / c10_capacity_mah / drt_bands_only: MAE 166.2, baseline MAE 242.1, skill 0.314, n=40</li></ul>
+<ul><li>leave_one_temperature_out / c10_capacity_mah / r0_only: MAE 149.9, baseline MAE 242.1, skill 0.381, n=40</li></ul>
+<ul><li>leave_one_temperature_out / c10_capacity_mah / r0_plus_drt_bands: MAE 141.5, baseline MAE 242.1, skill 0.415, n=40</li></ul>
+<ul><li>leave_one_temperature_out / resistance_0p1s_ohm / drt_bands_only: MAE 0.001601, baseline MAE 0.001899, skill 0.157, n=40</li></ul>
+<ul><li>leave_one_temperature_out / resistance_0p1s_ohm / r0_only: MAE 0.0003856, baseline MAE 0.001899, skill 0.797, n=40</li></ul>
+<ul><li>leave_one_temperature_out / resistance_0p1s_ohm / r0_plus_drt_bands: MAE 0.0004061, baseline MAE 0.001899, skill 0.786, n=40</li></ul>
+<ul><li>leave_one_temperature_out / soh / drt_bands_only: MAE 0.03411, baseline MAE 0.04928, skill 0.308, n=40</li></ul>
+<ul><li>leave_one_temperature_out / soh / r0_only: MAE 0.02885, baseline MAE 0.04928, skill 0.415, n=40</li></ul>
+<ul><li>leave_one_temperature_out / soh / r0_plus_drt_bands: MAE 0.02859, baseline MAE 0.04928, skill 0.42, n=40</li></ul>
+<h2>Incremental DRT Over R0</h2>
+<ul><li>leave_one_cell_out / soh: MAE delta 0.00477, skill delta 0.0968, R0 plus DRT better=True</li></ul>
+<ul><li>leave_one_cell_out / resistance_0p1s_ohm: MAE delta -4.659e-05, skill delta -0.0252, R0 plus DRT better=False</li></ul>
+<ul><li>leave_one_cell_out / c10_capacity_mah: MAE delta 28.52, skill delta 0.117, R0 plus DRT better=True</li></ul>
+<ul><li>leave_one_temperature_out / soh: MAE delta 0.0002532, skill delta 0.00514, R0 plus DRT better=True</li></ul>
+<ul><li>leave_one_temperature_out / resistance_0p1s_ohm: MAE delta -2.051e-05, skill delta -0.0108, R0 plus DRT better=False</li></ul>
+<ul><li>leave_one_temperature_out / c10_capacity_mah: MAE delta 8.365, skill delta 0.0346, R0 plus DRT better=True</li></ul>
+<h2>Interpretation</h2>
+<p>This is the cleanest answer to whether the fitted DRT bands add value beyond R0. The result is target-dependent: DRT bands help SOH and C10 capacity more than R0 alone, but they do not help the resistance target. If this section is mixed, do not rescue the claim with a larger model or extra proxy features. <code>gitt_r0_ohm</code> is still a same-test resistance-like feature for <code>resistance_0p1s_ohm</code>, so even the good R0 result is internal benchmarking, not external physics validation. The current Expt4 package still cannot claim EIS-validated DRT.</p>
+<h2>Linked Graph</h2>
+<img src="../../01_Graphs/section_14_locked_feature_comparison.png" alt="section 14 locked feature comparison">
+    </article>
+  </main>
+</body>
+</html>

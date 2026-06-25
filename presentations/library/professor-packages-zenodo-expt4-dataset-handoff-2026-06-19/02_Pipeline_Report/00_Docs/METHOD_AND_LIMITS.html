@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Method And Limits</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f5f7f6;
+  --paper: #ffffff;
+  --ink: #182026;
+  --muted: #5a6975;
+  --line: #d8dfdf;
+  --accent: #0d766d;
+  --warn: #a5481a;
+  --code: #edf2f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 34px 22px 70px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 34px;
+  box-shadow: 0 14px 34px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.14;
+}
+
+h2 {
+  margin: 32px 0 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 24px 0 8px;
+  color: var(--warn);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+a { color: var(--accent); }
+ul, ol { padding-left: 24px; }
+li { margin: 5px 0; }
+
+code {
+  background: var(--code);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.95em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: #edf2f1; }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.meta {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 18px 0 28px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fbfcfb;
+}
+
+.card h3 { margin-top: 0; }
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 00_Docs/METHOD_AND_LIMITS.md. Edit the Markdown source, then rerun the Zenodo pipeline.</div>
+<h1>Method And Limits</h1>
+<h2>What The Pipeline Does</h2>
+<p>The script scans Zenodo Experiment 4 processed time-series files, selects GITT pulse/rest windows, fits a time-domain RC-kernel DRT-like model, extracts discharge-curve and hybrid-pulse health features, and exports reports, plots, CSV tables, and JSON summaries.</p>
+<h2>What The Pipeline Does Not Prove</h2>
+<ul><li>It does not prove that the recovered gamma curve equals an EIS-derived DRT curve.</li></ul>
+<ul><li>It does not prove that every peak maps to one physical electrochemical process.</li></ul>
+<ul><li>It does not make raw BioLogic files the main analysis track yet.</li></ul>
+<ul><li>It does not make constant-current discharge files good DRT inputs.</li></ul>
+<ul><li>It does not call hybrid pulse summaries DRT unless the pulse/rest segmentation is upgraded and validated.</li></ul>
+<ul><li>It does not make held-out health-label prediction equivalent to EIS validation.</li></ul>
+<h2>Why GITT Is The DRT Track</h2>
+<p>GITT has clearer pulse and rest structure than drive-cycle traces. That structure gives the window finder and RC relaxation model something identifiable to fit. Constant-current discharge has ageing value, but weak pulse/rest excitation. Hybrid pulse traces have dynamic-response value, but they need their own segmentation and validation before DRT claims are safe.</p>
+<h2>How To Read The DRT Outputs</h2>
+<p>Use voltage RMSE as a basic fit check. Then inspect model sensitivity before trusting peak tau. Broad tau-band sums are safer than single peak stories because peak locations can move with baseline and regularization.</p>
+<h2>Weak Spot You Should Not Hide</h2>
+<p>No EIS-derived comparison target was found in the inspected Expt4 folders. That means the current claim is engineering feasibility and feature extraction, not full validation. The strongest honest validation inside Expt4 is whether the combined GITT, discharge, and hybrid features predict held-out health labels and trend consistently across ageing.</p>
+    </article>
+  </main>
+</body>
+</html>

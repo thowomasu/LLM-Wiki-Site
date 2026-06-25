@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graph Explanation: Section 3 Candidate Fit Plot</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/section_3_candidate_fit_plot_EXPLANATION.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Graph Explanation: Section 3 Candidate Fit Plot</h1>
+<p>Graph file: <code>section_3_candidate_fit_plot.png</code></p>
+<p>Folder: <code>Package_Key_Plots</code></p>
+<h2>What This Figure Shows</h2>
+<p>This figure shows the actual time-domain fit for one selected pulse/rest window.</p>
+<p>Read it panel by panel:</p>
+<ul><li>The current panel shows the excitation the solver sees.</li></ul>
+<ul><li>The voltage panel compares measured voltage against reconstructed voltage.</li></ul>
+<ul><li>The DRT panel shows resistance weight versus tau.</li></ul>
+<ul><li>The residual panel shows measured minus fitted voltage in millivolts.</li></ul>
+<p>This is where the pipeline moves from &quot;this window looks usable&quot; to &quot;the solver can or cannot explain this voltage response.&quot;</p>
+<h2>How To Read It</h2>
+<p>Start with current. If the current does not contain a clear pulse/rest event, the DRT fit is weak before it starts.</p>
+<p>Then look at voltage reconstruction. The fitted voltage should follow the measured voltage through the pulse and the relaxation period. Next look at the residual. A good residual should be small and not show obvious leftover pulse structure.</p>
+<p>Finally, read the DRT curve. A peak at small tau means fast relaxation. A peak at larger tau means slower relaxation. A boundary peak near the maximum tau is suspicious because it may mean the window is too short or the baseline is leaking into gamma.</p>
+<h2>What We Can Learn</h2>
+<p>This graph tells us whether the local voltage fit is mechanically credible. If voltage RMSE is bad, the DRT curve should not be trusted at all.</p>
+<p>If voltage RMSE is good, the result is only partly encouraging. It means the model can reconstruct voltage, not that the gamma shape is physically correct. Baseline terms and lambda can still move resistance between fast, mid, and slow tau ranges.</p>
+<h2>Why It Matters</h2>
+<p>This is the most tempting plot to overread. A smooth DRT curve next to a nice voltage fit feels convincing. Do not fall for that. The real validation question comes later: does this gamma shape agree with EIS under a pre-declared model rule?</p>
+<h2>Caveat</h2>
+<p>Small voltage error is necessary, but not sufficient. A model can fit voltage well while still assigning the wrong gamma shape, especially if baseline drift or regularization is wrong.</p>
+<h2>What To Check Next</h2>
+<p>Compare this graph with the EIS comparison plot for the same cell, SOC, and condition. If the voltage fit is good but the EIS shape match is weak, the honest conclusion is that voltage fitting alone is not enough.</p>
+    </article>
+  </main>
+</body>
+</html>

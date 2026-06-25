@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Model Sensitivity</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/Model Sensitivity/model_sensitivity_report.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Model Sensitivity</h1>
+<h2>Purpose</h2>
+<p>This section tests whether the weak EIS agreement is sensitive to baseline/OCV handling or regularization strength.</p>
+<h2>Run Settings</h2>
+<ul><li>Baseline modes: offset, charge, time_charge</li></ul>
+<ul><li>Lambda values: 0.001, 0.1, 1.0, 3.0</li></ul>
+<ul><li>SOC selection: coulomb</li></ul>
+<ul><li>Max cases: 2</li></ul>
+<ul><li>Selected cases: 2</li></ul>
+<h2>Best Settings</h2>
+<ul><li>Best median normalized RMSE: baseline=time_charge, lambda=3.0, value=0.3011107720820195, median corr=0.14760612639932447</li></ul>
+<ul><li>Best median correlation: baseline=offset, lambda=3.0, value=0.3738388077129163, median normalized RMSE=0.33418999009003286</li></ul>
+<h2>Setting Summary</h2>
+<ul><li>charge, lambda=0.001: median RMSE=1.7113682815841929 mV, median corr=0.10902106758239541, median norm RMSE=0.8896191162514121, median gamma sum=0.04398831696234896</li></ul>
+<ul><li>charge, lambda=0.1: median RMSE=1.7113834873969909 mV, median corr=0.22974845371424693, median norm RMSE=0.44111572047914127, median gamma sum=0.043122020476219776</li></ul>
+<ul><li>charge, lambda=1.0: median RMSE=1.7114833431352077 mV, median corr=0.17372090679326743, median norm RMSE=0.3053339546990582, median gamma sum=0.04181652872559176</li></ul>
+<ul><li>charge, lambda=3.0: median RMSE=1.7115899287271688 mV, median corr=0.03087938421115595, median norm RMSE=0.30499663318792514, median gamma sum=0.04105738360499571</li></ul>
+<ul><li>offset, lambda=0.001: median RMSE=1.8396118788544007 mV, median corr=0.13054111148537278, median norm RMSE=1.0923426244253451, median gamma sum=0.05903835220789183</li></ul>
+<ul><li>offset, lambda=0.1: median RMSE=1.8405363429824861 mV, median corr=0.2304372052848756, median norm RMSE=0.6828498958427484, median gamma sum=0.05876880201908978</li></ul>
+<ul><li>offset, lambda=1.0: median RMSE=1.8461854797710933 mV, median corr=0.3450617377692924, median norm RMSE=0.42963791968252635, median gamma sum=0.05608056146075951</li></ul>
+<ul><li>offset, lambda=3.0: median RMSE=1.850768963763851 mV, median corr=0.3738388077129163, median norm RMSE=0.33418999009003286, median gamma sum=0.05400920662461784</li></ul>
+<ul><li>time_charge, lambda=0.001: median RMSE=1.7106937066290135 mV, median corr=0.14067984833877545, median norm RMSE=0.978374331390654, median gamma sum=0.055231280679961664</li></ul>
+<ul><li>time_charge, lambda=0.1: median RMSE=1.7108166299677716 mV, median corr=0.2572686504096158, median norm RMSE=0.5208833137625286, median gamma sum=0.05228274278776213</li></ul>
+<ul><li>time_charge, lambda=1.0: median RMSE=1.7111486859282312 mV, median corr=0.30332558661224873, median norm RMSE=0.3417273586545014, median gamma sum=0.0469592902291226</li></ul>
+<ul><li>time_charge, lambda=3.0: median RMSE=1.7114262270499985 mV, median corr=0.14760612639932447, median norm RMSE=0.3011107720820195, median gamma sum=0.04328637375438954</li></ul>
+<h2>Stability Summary</h2>
+<ul><li>Targets with correlation range above 0.1 across model settings: 10</li></ul>
+<ul><li>Errors: 0</li></ul>
+<h2>Interpretation</h2>
+<p>A viable research pipeline should not rely on one lucky baseline or lambda setting. If stronger smoothing improves EIS agreement without hurting voltage reconstruction too much, the next step is to define a pre-declared lambda rule. If baseline mode changes the result a lot, the next step is OCV/baseline modeling, not model training.</p>
+<p>Blunt warning: picking the best setting after looking at EIS is tuning on the validation target. Use this to learn, not to claim final performance.</p>
+<h2>Outputs</h2>
+<ul><li><code>model_sensitivity_results.csv</code></li></ul>
+<ul><li><code>model_sensitivity_setting_summary.csv</code></li></ul>
+<ul><li><code>model_sensitivity_by_target.csv</code></li></ul>
+<ul><li><code>model_sensitivity_case_summaries.json</code></li></ul>
+<ul><li><code>model_sensitivity_errors.csv</code></li></ul>
+<ul><li><code>model_sensitivity_report.md</code></li></ul>
+<p>&lt;!-- BEGIN BEGINNER_MATH_EXPLANATION --&gt;</p>
+<h2>How This Section Works, Plain Math</h2>
+<p>This section changes model assumptions to see whether the result is stable.</p>
+<h3>Baseline modes</h3>
+<p>The baseline is the slow voltage level underneath the relaxation response.</p>
+<p>Different baseline modes allow different drift terms:</p>
+<pre><code>offset       constant baseline
+charge       baseline changes with charge moved
+time_charge  baseline changes with time and charge</code></pre>
+<h3>Lambda values</h3>
+<p>Lambda controls gamma smoothness. If EIS agreement changes a lot with lambda, the result is model-sensitive.</p>
+<h3>What this section proves</h3>
+<p>It identifies weak assumptions. The current result is sensitive to baseline and lambda, so the method is not robust yet.</p>
+<h3>Actual Equations Used</h3>
+<p>The baseline mode changes \(\mathbf{b}\) in the voltage model:</p>
+<div class="math-display">$$
+\hat{\mathbf{V}} = \mathbf{b} + R_0\mathbf{I} + K\gamma
+$$</div>
+<p>Offset baseline:</p>
+<div class="math-display">$$
+b_n = b_0
+$$</div>
+<p>Charge baseline:</p>
+<div class="math-display">$$
+b_n = b_0 + b_q q_n
+$$</div>
+<p>Time-charge baseline:</p>
+<div class="math-display">$$
+b_n = b_0 + b_t t_n + b_q q_n
+$$</div>
+<p>The smoothness setting stays:</p>
+<div class="math-display">$$
+\min_{\gamma \ge 0}
+\left\|\mathbf{V}-\hat{\mathbf{V}}\right\|_2^2
++ \lambda\left\|L\gamma\right\|_2^2
+$$</div>
+<p>If metrics change strongly across baseline modes or \(\lambda\), the method is model-sensitive. &lt;!-- END BEGINNER_MATH_EXPLANATION --&gt;</p>
+    </article>
+  </main>
+</body>
+</html>

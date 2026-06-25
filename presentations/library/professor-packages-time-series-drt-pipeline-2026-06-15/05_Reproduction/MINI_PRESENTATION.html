@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Presentation: Reproduction</title>
+  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
+</head>
+<body>
+<main>
+  <h1>Mini Presentation: Reproduction</h1>
+  <p class="meta">Time-Series DRT Pipeline, professor handoff, 2026-06-15</p>
+
+  <section class="slide">
+    <h2>Slide 1: Results</h2>
+    <ul>
+      <li>The package documents how to run a synthetic smoke test without raw DIB data.</li>
+      <li>Full pipeline reproduction requires DIB capacity CSVs and the EIS workbook.</li>
+      <li>Expected saved verdict is <code>research_scaffold_viable</code>, <code>not_validated</code>, and median EIS correlation about 0.141.</li>
+    </ul>
+    <div class="graphs">
+      <figure><img src="../03_Key_Plots/model_rule_summary.png" alt="Use this as the expected honest-result shape when checking reruns."><figcaption>Use this as the expected honest-result shape when checking reruns.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: Achievements</h2>
+    <ul>
+      <li>Reproduction commands are separated into synthetic, full pipeline, model rule, and HTML rebuild paths.</li>
+      <li>The expected result is stated, so a suspiciously strong rerun can be challenged.</li>
+      <li>Environment variables are documented for non-default DIB locations.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 3: Open Issues</h2>
+    <ul>
+      <li>This is not a standalone raw-data package.</li>
+      <li>The full pipeline cannot be fairly rerun without the original DIB files.</li>
+      <li>A stronger result after rerun may indicate validation leakage if lambda or baseline was chosen after seeing EIS.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 4: Roadmap</h2>
+    <ul>
+      <li>Verify the Python environment and dependency versions before rerunning.</li>
+      <li>Run synthetic-only first, then full data.</li>
+      <li>Rebuild HTML after Markdown updates.</li>
+      <li>Compare rerun outputs against the saved expected verdict before presenting.</li>
+    </ul>
+  </section>
+
+
+</main>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time-Domain DRT Pilot, Section 8</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f7f2;
+  --paper: #ffffff;
+  --ink: #1d2329;
+  --muted: #60717f;
+  --line: #d9e0df;
+  --accent: #007c78;
+  --accent-2: #9b4d18;
+  --code-bg: #eef3f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 16px 36px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 34px 0 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 26px 0 8px;
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+
+a { color: var(--accent); }
+
+ul, ol { padding-left: 24px; }
+
+li { margin: 5px 0; }
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.96em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef3f1;
+  color: #142c2f;
+}
+
+.meta {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.math-display {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background: #fbfcfa;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/section_8_cell28_soc_sweep_report.md. Edit the Markdown source, then rerun the exporter.</div>
+<h1>Time-Domain DRT Pilot, Section 8</h1>
+<h2>Purpose</h2>
+<p>This section repeats the matched-pair comparison across Cell28 SOC points using the lower-current pulse windows. The goal is not to declare success. The goal is to see whether the comparison behaves consistently enough to deserve more work.</p>
+<h2>Cases</h2>
+<ul><li>SOC 95 percent, candidate 6, pre-rest V 4.1647, RMSE 1.492 mV, corr -0.04172860596212766, time area 0.0013867039131956322, EIS area 0.012195073716696127</li></ul>
+<ul><li>SOC 70 percent, candidate 10, pre-rest V 4.0106, RMSE 1.437 mV, corr 0.12090836447803378, time area 0.001912685167764021, EIS area 0.01704595838692804</li></ul>
+<ul><li>SOC 50 percent, candidate 14, pre-rest V 3.7029, RMSE 1.427 mV, corr 0.08483606676782145, time area 0.0012801401061692812, EIS area 0.012325637164550778</li></ul>
+<ul><li>SOC 20 percent, candidate 20, pre-rest V 3.4611, RMSE 1.493 mV, corr 0.19066266200150614, time area 0.0010519013202975173, EIS area 0.04802585997259331</li></ul>
+<ul><li>SOC 5 percent, candidate 24, pre-rest V 3.1803, RMSE 2.277 mV, corr 0.10918997059877449, time area 0.0018530087312008787, EIS area 0.07002205926142595</li></ul>
+<h2>Interpretation</h2>
+<p>This is the first real validation table. Treat it as a stress test. If correlations and band areas jump around with no SOC pattern, the pipeline is still not validated. If broad band trends are repeatable across SOC, then the next step is tuning regularization and reporting band-level features instead of peak-level claims.</p>
+<p>Blunt warning: matching by pre-rest voltage is only an approximation. Proper validation needs exact SOC labels from the protocol or a capacity-integrated SOC estimate.</p>
+<h2>Outputs</h2>
+<ul><li><code>section_8_cell28_soc_sweep_summary.csv</code></li></ul>
+<ul><li><code>section_8_cell28_soc_sweep_summary.json</code></li></ul>
+<ul><li><code>section_8_cell28_soc_sweep_summary.png</code></li></ul>
+<p>&lt;!-- BEGIN BEGINNER_MATH_EXPLANATION --&gt;</p>
+<h2>How This Section Works, Plain Math</h2>
+<p>This section repeats the same fit-and-compare process across SOC labels.</p>
+<h3>Why a sweep is better than one plot</h3>
+<p>One comparison can be lucky. A sweep asks whether the method behaves consistently across 95, 70, 50, 20, and 5 percent SOC.</p>
+<p>For each SOC:</p>
+<pre><code>1. choose a pulse window
+2. fit time-domain DRT
+3. compute EIS-derived DRT
+4. compare both curves on shared tau
+5. store voltage RMSE, correlation, and area</code></pre>
+<h3>What the metrics mean</h3>
+<p>Voltage RMSE says whether the local voltage fit is good.</p>
+<p>Correlation says whether time-domain and EIS DRT shapes agree.</p>
+<p>Area ratio says whether one curve has much more total resistance weight than the other.</p>
+<h3>What this section proves</h3>
+<p>It gives repeatability evidence. In the current run, voltage fits are good, but EIS agreement is weak. That means the code is working mechanically, but the scientific method is not validated.</p>
+<h3>Actual Equations Used</h3>
+<p>For each SOC label \(s\), the pipeline stores:</p>
+<div class="math-display">$$
+\mathrm{RMSE}_{\mathrm{mV}}(s)
+=1000\sqrt{\frac{1}{N_s}\sum_{n=1}^{N_s}
+\left(V_{s,n}-\hat{V}_{s,n}\right)^2}
+$$</div>
+<p>The shape agreement with EIS is:</p>
+<div class="math-display">$$
+r(s)=\operatorname{corr}
+\left(\gamma_{\text{TD}}(\tau,s),\gamma_{\text{EIS}}(\tau,s)\right)
+$$</div>
+<p>The area ratio is:</p>
+<div class="math-display">$$
+\rho_A(s)
+=
+\frac{\int \gamma_{\text{TD}}(\tau,s)\,d\log\tau}
+{\int \gamma_{\text{EIS}}(\tau,s)\,d\log\tau}
+$$</div>
+<p>If voltage RMSE is low but \(r(s)\) is weak, the voltage fit is good but the DRT validation is weak. &lt;!-- END BEGINNER_MATH_EXPLANATION --&gt;</p>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zenodo Expt4 Time-Series DRT Pipeline, Section 13</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f5f7f6;
+  --paper: #ffffff;
+  --ink: #182026;
+  --muted: #5a6975;
+  --line: #d8dfdf;
+  --accent: #0d766d;
+  --warn: #a5481a;
+  --code: #edf2f1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.58;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 34px 22px 70px;
+}
+
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 34px;
+  box-shadow: 0 14px 34px rgba(31, 47, 52, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  color: #102326;
+  font-size: 34px;
+  line-height: 1.14;
+}
+
+h2 {
+  margin: 32px 0 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  color: #153134;
+  font-size: 23px;
+}
+
+h3 {
+  margin: 24px 0 8px;
+  color: var(--warn);
+  font-size: 18px;
+}
+
+p { margin: 10px 0; }
+a { color: var(--accent); }
+ul, ol { padding-left: 24px; }
+li { margin: 5px 0; }
+
+code {
+  background: var(--code);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.94em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #132025;
+  color: #eff8f5;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 0.95em;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: #edf2f1; }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.meta {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 18px 0 28px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fbfcfb;
+}
+
+.card h3 { margin-top: 0; }
+
+@media (max-width: 720px) {
+  main { padding: 16px 10px 40px; }
+  article { padding: 22px 16px; }
+  h1 { font-size: 28px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="meta">Generated HTML mirror from 02_Section_Results/Section_13_Multi_Protocol_Validation/section_13_multi_protocol_validation_report.md. Edit the Markdown source, then rerun the Zenodo pipeline.</div>
+<h1>Zenodo Expt4 Time-Series DRT Pipeline, Section 13</h1>
+<h2>Purpose</h2>
+<p>This section combines GITT, discharge-curve, and hybrid-pulse features into one held-out-cell health-label validation table.</p>
+<h2>Results</h2>
+<ul><li>Feature table rows: 80</li></ul>
+<ul><li>Prediction rows: 600</li></ul>
+<ul><li>Metric rows: 11</li></ul>
+<ul><li>Feature counts: <code>{&quot;all_protocols&quot;: 26, &quot;discharge_only&quot;: 10, &quot;gitt_only&quot;: 6, &quot;hybrid_only&quot;: 10}</code></li></ul>
+<ul><li>Target-proxy features excluded: 16</li></ul>
+<ul><li>Leakage audit: <code>section_13_feature_leakage_audit.csv</code></li></ul>
+<h2>Best Skill Rows</h2>
+<ul><li>c10_capacity_mah / hybrid_only: MAE 25.56, baseline MAE 248.7, skill 0.897</li></ul>
+<ul><li>soh / hybrid_only: MAE 0.006115, baseline MAE 0.05018, skill 0.878</li></ul>
+<ul><li>resistance_0p1s_ohm / gitt_only: MAE 0.0005195, baseline MAE 0.001851, skill 0.719</li></ul>
+<ul><li>soh / all_protocols: MAE 0.01755, baseline MAE 0.04947, skill 0.645</li></ul>
+<ul><li>c10_capacity_mah / all_protocols: MAE 88, baseline MAE 244.7, skill 0.64</li></ul>
+<ul><li>c10_capacity_mah / discharge_only: MAE 130.4, baseline MAE 244.7, skill 0.467</li></ul>
+<ul><li>soh / discharge_only: MAE 0.02667, baseline MAE 0.04947, skill 0.461</li></ul>
+<ul><li>resistance_0p1s_ohm / all_protocols: MAE 0.001012, baseline MAE 0.001851, skill 0.453</li></ul>
+<ul><li>soh / gitt_only: MAE 0.0284, baseline MAE 0.04926, skill 0.423</li></ul>
+<ul><li>resistance_0p1s_ohm / discharge_only: MAE 0.001081, baseline MAE 0.001851, skill 0.416</li></ul>
+<h2>Interpretation</h2>
+<p>This is the closest version of a full Zenodo Expt4 pipeline so far. It uses all processed families, but it still keeps DRT claims limited to the GITT-derived track. If all-protocol features beat GITT-only and discharge-only features, then the rest of the Zenodo package is adding real value. Capacity-proxy discharge features are now excluded when the target is <code>soh</code> or <code>c10_capacity_mah</code>. The old near-perfect C10 result was leakage-shaped, not impressive.</p>
+<h2>Linked Graph</h2>
+<img src="../../01_Graphs/section_13_multi_protocol_validation.png" alt="section 13 multi protocol validation">
+    </article>
+  </main>
+</body>
+</html>
