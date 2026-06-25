@@ -6,16 +6,40 @@
   <title>CALB L148N58A DRT Pipeline Viability Presentation</title>
   <style>
     :root {
+      color-scheme: light;
       --ink: #18202a;
       --muted: #5d6670;
       --line: #d8e0e6;
       --paper: #f7f8fa;
       --panel: #ffffff;
+      --panel-strong: #ffffff;
+      --note-bg: #fff8f2;
+      --truth-bg: #f3fbf7;
+      --code-bg: #eef2f5;
+      --table-head: #edf3f8;
       --blue: #2468a7;
       --orange: #c75c1b;
       --green: #16805a;
       --red: #b23a48;
       --purple: #7453a6;
+    }
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #e6edf3;
+      --muted: #a7b3bf;
+      --line: #2d3844;
+      --paper: #0f141a;
+      --panel: #151c24;
+      --panel-strong: #10161d;
+      --note-bg: #241b12;
+      --truth-bg: #12231b;
+      --code-bg: #1f2a35;
+      --table-head: #1c2a36;
+      --blue: #78b7ff;
+      --orange: #f0a35a;
+      --green: #58d39d;
+      --red: #f08490;
+      --purple: #b59cff;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -40,7 +64,7 @@
       align-items: stretch;
       overflow-y: auto;
       padding: 18px 14px;
-      background: rgba(255, 255, 255, 0.96);
+      background: var(--panel-strong);
       border-right: 1px solid var(--line);
     }
     .deck-nav a {
@@ -50,22 +74,37 @@
       padding: 8px 9px;
       border: 1px solid var(--line);
       border-radius: 6px;
-      background: #fff;
+      background: var(--panel);
     }
-    .site-home {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 20;
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 13px;
+    .deck-nav a:hover {
+      background: var(--paper);
+    }
+    .deck-nav .nav-primary {
       font-weight: 700;
-      padding: 8px 12px;
+      border-color: var(--blue);
+    }
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 36px;
+      padding: 8px 9px;
+      color: var(--ink);
+      font-size: 13px;
       border: 1px solid var(--line);
       border-radius: 6px;
-      background: #fff;
-      box-shadow: 0 6px 18px rgba(24, 32, 42, 0.12);
+      background: var(--panel);
+      cursor: pointer;
+    }
+    .theme-toggle:hover {
+      background: var(--paper);
+    }
+    .theme-toggle .toggle-state {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
     section {
       min-height: 100vh;
@@ -73,7 +112,7 @@
       border-bottom: 1px solid var(--line);
       background: var(--panel);
     }
-    section:nth-child(odd) { background: #fbfcfd; }
+    section:nth-child(odd) { background: var(--paper); }
     .slide {
       max-width: 1180px;
       margin: 0 auto;
@@ -121,7 +160,7 @@
     .card {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fff;
+      background: var(--panel);
       padding: 18px;
     }
     .metric {
@@ -143,7 +182,7 @@
       max-width: 1040px;
       padding: 16px 18px;
       border-left: 5px solid var(--orange);
-      background: #fff8f2;
+      background: var(--note-bg);
       font-size: 19px;
       margin: 24px 0;
     }
@@ -151,7 +190,7 @@
       max-width: 1040px;
       padding: 18px;
       border-left: 5px solid var(--green);
-      background: #f3fbf7;
+      background: var(--truth-bg);
       font-size: 20px;
       margin: 24px 0;
     }
@@ -166,7 +205,7 @@
       border-collapse: collapse;
       margin: 24px 0;
       font-size: 16px;
-      background: #fff;
+      background: var(--panel);
     }
     th, td {
       padding: 10px 12px;
@@ -175,14 +214,14 @@
       vertical-align: top;
     }
     th {
-      background: #edf3f8;
+      background: var(--table-head);
       font-weight: 700;
     }
     .figure {
       margin: 26px 0 8px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fff;
+      background: var(--panel);
       padding: 10px;
     }
     .figure img {
@@ -211,7 +250,7 @@
       text-decoration: none;
       border: 1px solid var(--line);
       border-radius: 6px;
-      background: #fff;
+      background: var(--panel);
       font-size: 14px;
       font-weight: 700;
     }
@@ -227,7 +266,7 @@
       min-height: 190px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fff;
+      background: var(--panel);
       padding: 18px;
     }
     .step::before {
@@ -250,7 +289,7 @@
     code {
       font-family: Consolas, Monaco, monospace;
       font-size: 0.9em;
-      background: #eef2f5;
+      background: var(--code-bg);
       padding: 2px 5px;
       border-radius: 4px;
     }
@@ -282,10 +321,41 @@
       body { background: #fff; }
     }
   </style>
+  <script>
+    (function () {
+      var key = "llm-wiki-theme";
+      function preferredTheme() {
+        try {
+          var saved = localStorage.getItem(key);
+          if (saved === "dark" || saved === "light") return saved;
+        } catch (error) {}
+        return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      function applyTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        var label = document.querySelector("[data-theme-label]");
+        if (label) label.textContent = theme === "dark" ? "On" : "Off";
+      }
+      applyTheme(preferredTheme());
+      window.addEventListener("DOMContentLoaded", function () {
+        var toggle = document.querySelector("[data-theme-toggle]");
+        if (!toggle) return;
+        toggle.addEventListener("click", function () {
+          var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+          try { localStorage.setItem(key, next); } catch (error) {}
+          applyTheme(next);
+        });
+      });
+    })();
+  </script>
 </head>
 <body>
-  <a class="site-home" href="../../index.html">Home</a>
   <aside class="deck-nav" aria-label="Presentation navigation">
+    <a class="nav-primary" href="../../presentations/#calb-dataset">Back to CALB workstream</a>
+    <a href="../../index.html">Project overview</a>
+    <a href="../data/">CALB data explorer</a>
+    <a href="../manual/">CALB manual</a>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
     <a href="#title">Title</a>
     <a href="#manual">Manual</a>
     <a href="#claim">Claim</a>
