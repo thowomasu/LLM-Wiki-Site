@@ -361,8 +361,10 @@
         var label = document.querySelector("[data-theme-label]");
         if (label) label.textContent = theme === "dark" ? "On" : "Off";
       }
-      applyTheme(preferredTheme());
+      var initialTheme = preferredTheme();
+      applyTheme(initialTheme);
       window.addEventListener("DOMContentLoaded", function () {
+        applyTheme(document.documentElement.dataset.theme || initialTheme);
         var toggle = document.querySelector("[data-theme-toggle]");
         if (!toggle) return;
         toggle.addEventListener("click", function () {
