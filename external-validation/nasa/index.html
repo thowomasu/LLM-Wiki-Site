@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NASA Battery Manifest | LLM Wiki Research Outputs</title>
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+  <header>
+    <div class="kicker">LLM Wiki Research Outputs</div>
+    <h1>NASA Battery Manifest</h1>
+
+    <nav><a class="button" href="/LLM-Wiki/">Home</a><a class="button" href="/LLM-Wiki/external-validation/">Dataset comparison</a></nav>
+  </header>
+  <main>
+<h2>NASA Battery External Validation Manifest</h2>
+<h2>Scope</h2>
+<p>This is dataset qualification only. It does not validate the frozen CALB rule.</p>
+<p>The script inspected the wrapper ZIP and inner BatteryAgingARC ZIPs in memory. It did not bulk-extract the archive.</p>
+<h2>Input</h2>
+<ul>
+<li>Archive: <code>[local path redacted]</code></li>
+<li>Archive size: 200.0 MB</li>
+</ul>
+<h2>Coverage</h2>
+<ul>
+<li>Inner ZIPs: 6</li>
+<li>MAT files parsed: 38</li>
+<li>Unique cells: 34</li>
+<li>Unique cells with charge: 34</li>
+<li>Unique cells with discharge: 34</li>
+<li>Unique cells with impedance: 34</li>
+<li>Ambient temperatures: 4 C, 22 C, 24 C, 43 C, 44 C</li>
+<li>Discharge capacity range: 0.0 to 2.6401491157387014 Ah</li>
+</ul>
+<h2>Impedance Fields</h2>
+<ul>
+<li>Fields seen: <code>Battery_current; Battery_impedance; Current_ratio; Rct; Re; Rectified_Impedance; Sense_current</code></li>
+<li>The common fields include <code>Battery_impedance</code>, <code>Rectified_Impedance</code>, <code>Re</code>, and <code>Rct</code>.</li>
+<li>The README says the EIS sweep is 0.1 Hz to 5 kHz, but the MAT records do not expose a plain <code>Frequency</code> vector in the sampled schema.</li>
+</ul>
+<h2>Candidate Pairings</h2>
+<ul>
+<li>Same-cell impedance plus charge/discharge pairing rows: 68</li>
+<li>These are candidates only. NASA has repeated same-cell charge/discharge/impedance operations, but not drive-cycle operation coverage like the CALB drive-cycle question needs.</li>
+</ul>
+<h2>Blunt Read</h2>
+<p>NASA is useful for checking whether a time-domain bridge can survive on a classic same-cell impedance/cycling dataset. It is weak for the frozen CALB rule first pass because the time-domain side is mostly charge/discharge cycling, not drive-cycle or HPPC-like pulse validation.</p>
+<h2>Outputs</h2>
+<ul>
+<li><code>zip_listing.csv</code></li>
+<li><code>cell_manifest.csv</code></li>
+<li><code>operation_counts.csv</code></li>
+<li><code>capacity_summary.csv</code></li>
+<li><code>impedance_schema.csv</code></li>
+<li><code>candidate_pairings.csv</code></li>
+<li><code>summary.json</code></li>
+</ul>
+  </main>
+  <footer>
+    Public-facing static site generated from curated vault outputs. This is not the raw vault.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CALCE Storage 25 C Manifest | LLM Wiki Research Outputs</title>
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+  <header>
+    <div class="kicker">LLM Wiki Research Outputs</div>
+    <h1>CALCE Storage 25 C Manifest</h1>
+
+    <nav><a class="button" href="/LLM-Wiki/">Home</a><a class="button" href="/LLM-Wiki/external-validation/">Dataset comparison</a></nav>
+  </header>
+  <main>
+<h2>CALCE Storage 25 C External Validation Manifest</h2>
+<h2>Scope</h2>
+<p>This is dataset qualification only. It does not validate the frozen CALB rule.</p>
+<p>The script inspected only the five requested Storage archives and did not bulk-extract them.</p>
+<h2>Input</h2>
+<ul>
+<li>CALCE folder: <code>[local path redacted]</code></li>
+<li>Archives inspected:</li>
+<li><code>PLN_Number_SOC_Temp_StoragePeriod.zip</code></li>
+<li><code>Capacity Characterization_Initialization.zip</code></li>
+<li><code>Impedance Characterization_Initialization.zip</code></li>
+<li><code>Capacity_25C.zip</code></li>
+<li><code>Impedance_25C.zip</code></li>
+</ul>
+<h2>Coverage</h2>
+<ul>
+<li>PLN metadata rows: 150</li>
+<li>Capacity channel rows: 295</li>
+<li>Mapped capacity channel rows: 294</li>
+<li>Impedance CSV files: 282</li>
+<li>Same-PLN capacity plus EIS pairing rows: 24</li>
+<li>25 C candidate PLN IDs: PLN45, PLN46, PLN47, PLN48, PLN51, PLN52, PLN53, PLN54, PLN59, PLN63, PLN64, PLN65, PLN67, PLN68, PLN69, PLN70, PLN71, PLN72, PLN73, PLN74, PLN75, PLN76, PLN77, PLN78</li>
+</ul>
+<h2>Blunt Read</h2>
+<p>CALCE Storage 25 C is the better first external target for the frozen CALB rule qualification. It has explicit PLN IDs, SOC labels, 25 C storage conditions, capacity workbooks, and same-cell impedance CSVs. The cost is that it is storage/calendar ageing, not drive-cycle validation.</p>
+<p>NASA is still useful, but it is the weaker first target because its same-cell time-domain side is ordinary charge/discharge cycling. That is too far from the CALB pulse/drive-cycle failure mode we already exposed.</p>
+<h2>Outputs</h2>
+<ul>
+<li><code>zip_listing.csv</code></li>
+<li><code>pln_metadata.csv</code></li>
+<li><code>capacity_workbook_channels.csv</code></li>
+<li><code>impedance_csv_manifest.csv</code></li>
+<li><code>candidate_pairings.csv</code></li>
+<li><code>summary.json</code></li>
+</ul>
+  </main>
+  <footer>
+    Public-facing static site generated from curated vault outputs. This is not the raw vault.
+  </footer>
+</body>
+</html>

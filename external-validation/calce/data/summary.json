@@ -1,0 +1,66 @@
+{
+  "dataset": "CALCE Storage 25 C subset",
+  "calce_dir": "[local path redacted]",
+  "archives_inspected": [
+    "PLN_Number_SOC_Temp_StoragePeriod.zip",
+    "Capacity Characterization_Initialization.zip",
+    "Impedance Characterization_Initialization.zip",
+    "Capacity_25C.zip",
+    "Impedance_25C.zip"
+  ],
+  "zip_listing_rows": 330,
+  "pln_metadata_rows": 150,
+  "metadata_soc_counts": {
+    "0": 48,
+    "100": 48,
+    "50": 48,
+    "NA": 4,
+    "None": 2
+  },
+  "metadata_temperature_counts": {
+    "-40": 36,
+    "-5": 36,
+    "25": 36,
+    "50": 36,
+    "NA": 4,
+    "None": 2
+  },
+  "metadata_storage_period_counts": {
+    "3M": 48,
+    "3W": 48,
+    "6M": 48,
+    "NA": 4,
+    "None": 2
+  },
+  "capacity_channel_rows": 295,
+  "mapped_capacity_channel_rows": 294,
+  "impedance_csv_files": 282,
+  "pairing_rows": 24,
+  "candidate_25c_pln_ids": [
+    "PLN45",
+    "PLN46",
+    "PLN47",
+    "PLN48",
+    "PLN51",
+    "PLN52",
+    "PLN53",
+    "PLN54",
+    "PLN59",
+    "PLN63",
+    "PLN64",
+    "PLN65",
+    "PLN67",
+    "PLN68",
+    "PLN69",
+    "PLN70",
+    "PLN71",
+    "PLN72",
+    "PLN73",
+    "PLN74",
+    "PLN75",
+    "PLN76",
+    "PLN77",
+    "PLN78"
+  ],
+  "qualification_verdict": "best_first_external_dataset_for_same_cell_capacity_eis_qualification_not_drive_cycle_validation"
+}

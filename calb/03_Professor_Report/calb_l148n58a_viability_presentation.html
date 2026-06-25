@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CALB L148N58A DRT Pipeline Viability Presentation</title>
+  <style>
+    :root {
+      --ink: #18202a;
+      --muted: #5d6670;
+      --line: #d8e0e6;
+      --paper: #f7f8fa;
+      --panel: #ffffff;
+      --blue: #2468a7;
+      --orange: #c75c1b;
+      --green: #16805a;
+      --red: #b23a48;
+      --purple: #7453a6;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      overflow-x: auto;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+    }
+    nav a {
+      flex: 0 0 auto;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+    }
+    section {
+      min-height: 100vh;
+      padding: 58px 7vw 48px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    section:nth-child(odd) { background: #fbfcfd; }
+    .slide {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .kicker {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin-bottom: 14px;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.1; letter-spacing: 0; }
+    h1 {
+      font-size: clamp(40px, 7vw, 86px);
+      max-width: 980px;
+    }
+    h2 {
+      font-size: clamp(30px, 4.5vw, 56px);
+      max-width: 980px;
+      margin-bottom: 22px;
+    }
+    h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    p {
+      max-width: 900px;
+      font-size: 20px;
+      margin: 16px 0;
+    }
+    .large {
+      font-size: clamp(24px, 3vw, 38px);
+      max-width: 1040px;
+      line-height: 1.22;
+    }
+    .muted { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 18px;
+    }
+    .metric {
+      display: block;
+      font-size: clamp(28px, 4.5vw, 54px);
+      line-height: 1;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .good { color: var(--green); }
+    .bad { color: var(--red); }
+    .warn { color: var(--orange); }
+    .note {
+      max-width: 1040px;
+      padding: 16px 18px;
+      border-left: 5px solid var(--orange);
+      background: #fff8f2;
+      font-size: 19px;
+      margin: 24px 0;
+    }
+    .truth {
+      max-width: 1040px;
+      padding: 18px;
+      border-left: 5px solid var(--green);
+      background: #f3fbf7;
+      font-size: 20px;
+      margin: 24px 0;
+    }
+    ul {
+      max-width: 980px;
+      padding-left: 24px;
+      font-size: 20px;
+    }
+    li { margin: 10px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 16px;
+      background: #fff;
+    }
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #edf3f8;
+      font-weight: 700;
+    }
+    .figure {
+      margin: 26px 0 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px;
+    }
+    .figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .caption {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .roadmap {
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .step {
+      position: relative;
+      min-height: 190px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 18px;
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 14px;
+      color: #fff;
+      background: var(--blue);
+      border-radius: 50%;
+      font-weight: 700;
+    }
+    .small {
+      font-size: 15px;
+      color: var(--muted);
+    }
+    code {
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.9em;
+      background: #eef2f5;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    a { color: var(--blue); }
+    @media (max-width: 900px) {
+      section { padding: 42px 22px; }
+      .grid, .grid.two, .roadmap { grid-template-columns: 1fr; }
+      table { font-size: 14px; }
+      p, ul { font-size: 18px; }
+    }
+    @media print {
+      nav { display: none; }
+      section {
+        min-height: auto;
+        page-break-after: always;
+        padding: 28px;
+      }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <nav aria-label="Presentation navigation">
+    <a href="#title">Title</a>
+    <a href="#claim">Claim</a>
+    <a href="#dataset">Dataset</a>
+    <a href="#data-exploration">Exploration</a>
+    <a href="#pipeline">Pipeline</a>
+    <a href="#failure">Failure</a>
+    <a href="#breakthrough">Breakthrough</a>
+    <a href="#replication">Replication</a>
+    <a href="#temperature">Temperature</a>
+    <a href="#cold-diagnosis">Final 10 C</a>
+    <a href="#cold-regularization">Adaptive rule</a>
+    <a href="#drive-cycle">Drive cycles</a>
+    <a href="#external-validation">External data</a>
+    <a href="#combined">Combined</a>
+    <a href="#limits">Limits</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#sources">Sources</a>
+  </nav>
+
+  <section id="title">
+    <div class="slide">
+      <div class="kicker">CALB L148N58A dataset pipeline</div>
+      <h1>Internal pulse bridge is strong. External validation is not done.</h1>
+      <p class="large">Result: the final adaptive tau-constrained pulse bridge passes the declared internal EIS/TDM DRT gate across 10 C, 25 C, and 40 C. Drive-cycle and external validation remain the hard part.</p>
+      <p class="muted">Prepared from local CALB archive runs, Sections 1 to 42, plus NASA and CALCE dataset qualification. Current file: <code>calb_l148n58a_viability_presentation.html</code>.</p>
+    </div>
+  </section>
+
+  <section id="claim">
+    <div class="slide">
+      <div class="kicker">Main claim</div>
+      <h2>The pulse bridge is solved internally, but the scientific claim must stay narrow.</h2>
+      <div class="truth">
+        Viable: EIS and HPPC pulse data can be bridged through DRT across the CALB fresh-cell temperature grid when the time-domain fit is restricted to EIS-observable relaxation times and the final adaptive rule is used.
+      </div>
+      <div class="note">
+        The internal pulse bridge is the strongest result. Section 33 passes 246 of 246 rows. But Section 36 shows fixed HPPC-derived DRT loses to a stronger ECM baseline on drive cycles, and Section 42 shows the SOC-aligned drive-cycle subset is tiny and unfavorable. Do not call this clean held-out validation.
+      </div>
+      <div class="grid">
+        <div class="card">
+          <span class="metric good">246 / 246</span>
+          <div class="label">Section 33 quality-pass rows across 10 C, 25 C, and 40 C</div>
+        </div>
+        <div class="card">
+          <span class="metric good">0.928</span>
+          <div class="label">Median Section 33 quality-pass gamma correlation</div>
+        </div>
+        <div class="card">
+          <span class="metric warn">2</span>
+          <div class="label">Rows using the narrow EIS lambda 0.1 fallback</div>
+        </div>
+        <div class="card">
+          <span class="metric bad">0.0</span>
+          <div class="label">Section 42 DRT win fraction against best ECM inside the 5 percent SOC-aligned drive-cycle subset</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dataset">
+    <div class="slide">
+      <div class="kicker">Dataset coverage</div>
+      <h2>CALB is not just one file. It is a same-cell test matrix.</h2>
+      <div class="grid">
+        <div class="card">
+          <span class="metric">11</span>
+          <div class="label">Processed fresh cells in the manifest</div>
+        </div>
+        <div class="card">
+          <span class="metric">3</span>
+          <div class="label">Temperatures: 10 C, 25 C, 40 C</div>
+        </div>
+        <div class="card">
+          <span class="metric">8</span>
+          <div class="label">Protocol folders: C/20, EIS, HPPC, and drive cycles</div>
+        </div>
+        <div class="card">
+          <span class="metric">264</span>
+          <div class="label">Manifest rows across processed files</div>
+        </div>
+        <div class="card">
+          <span class="metric">466</span>
+          <div class="label">ZIP entries in the local archive</div>
+        </div>
+        <div class="card">
+          <span class="metric">6.96 GB</span>
+          <div class="label">Local archive size before extraction</div>
+        </div>
+      </div>
+      <div class="truth">
+        The useful structure is same cell, same temperature, multiple test types. That is why EIS, HPPC pulse relaxation, low-rate capacity context, and drive-cycle voltage can be compared without mixing different cells.
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Data type</th>
+            <th>CALB protocol</th>
+            <th>Role in this pipeline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EIS</td>
+            <td><code>EIS_test</code></td>
+            <td>Frequency-domain DRT target.</td>
+          </tr>
+          <tr>
+            <td>Pulse tests</td>
+            <td><code>HPPC_1C</code>, <code>HPPC_C3</code></td>
+            <td>Time-domain pulse relaxation source.</td>
+          </tr>
+          <tr>
+            <td>Low-rate capacity</td>
+            <td><code>C20_Charge</code>, <code>C20_Discharge</code></td>
+            <td>OCV and capacity context.</td>
+          </tr>
+          <tr>
+            <td>Dynamic operation</td>
+            <td><code>DV_UDDS</code>, <code>DV_US06</code>, <code>DV_WLTP</code></td>
+            <td>Drive-cycle transfer validation target.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        Do not oversell this. CALB is excellent for bridge mechanics on fresh cells. It is still not an aging or SOH dataset.
+      </div>
+    </div>
+  </section>
+
+  <section id="data-exploration">
+    <div class="slide">
+      <div class="kicker">Data exploration</div>
+      <h2>One representative slice shows why the dataset can be confusing at first.</h2>
+      <p>Section 1 audits cell <code>59294</code> at <code>25 C</code>. It is small enough to explain, but still contains the important pieces: low-rate capacity, drive cycles, pulse tests, and EIS.</p>
+      <div class="figure">
+        <img src="../01_Graphs/Section_01_Data_Audit/section_1_data_audit.png" alt="Section 1 CALB first-slice protocol coverage">
+        <div class="caption">Section 1: the first slice is uneven. C/20 is long and gentle. Drive cycles and HPPC are dense 0.1 s time series. EIS is tiny in row count but is the impedance target.</div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>First-slice file</th>
+            <th>Rows</th>
+            <th>Duration</th>
+            <th>Median dt</th>
+            <th>Current span</th>
+            <th>What it tells us</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>C20_Discharge</code></td>
+            <td>1,104</td>
+            <td>18.37 h</td>
+            <td>60.0 s</td>
+            <td>0.00016 A</td>
+            <td>Low-rate capacity and OCV context.</td>
+          </tr>
+          <tr>
+            <td><code>DV_WLTP</code></td>
+            <td>221,437</td>
+            <td>7.50 h</td>
+            <td>0.1 s</td>
+            <td>79.50 A</td>
+            <td>Dynamic driving profile for transfer checks.</td>
+          </tr>
+          <tr>
+            <td><code>DV_UDDS</code></td>
+            <td>239,440</td>
+            <td>8.00 h</td>
+            <td>0.1 s</td>
+            <td>95.55 A</td>
+            <td>Largest drive-cycle file in the first slice.</td>
+          </tr>
+          <tr>
+            <td><code>DV_US06</code></td>
+            <td>119,243</td>
+            <td>4.66 h</td>
+            <td>0.1 s</td>
+            <td>86.98 A</td>
+            <td>More aggressive dynamic profile.</td>
+          </tr>
+          <tr>
+            <td><code>HPPC_1C</code></td>
+            <td>172,269</td>
+            <td>12.43 h</td>
+            <td>0.1001 s</td>
+            <td>95.71 A</td>
+            <td>Pulse relaxation source for time-domain DRT.</td>
+          </tr>
+          <tr>
+            <td><code>HPPC_C3</code></td>
+            <td>172,850</td>
+            <td>12.45 h</td>
+            <td>0.1001 s</td>
+            <td>95.71 A</td>
+            <td>Independent pulse protocol replication.</td>
+          </tr>
+          <tr>
+            <td><code>EIS_test</code></td>
+            <td>120</td>
+            <td>3 OCV records</td>
+            <td>40 frequencies each</td>
+            <td>0.010 Hz to 3722 Hz</td>
+            <td>Frequency-domain DRT target.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        The trap is row count. EIS looks tiny, but it is the target. The huge drive-cycle and HPPC files are input signals. More rows does not mean more truth.
+      </div>
+    </div>
+  </section>
+
+  <section id="pipeline">
+    <div class="slide">
+      <div class="kicker">What was built</div>
+      <h2>The work turned a raw archive into a repeatable DRT experiment package.</h2>
+      <ul>
+        <li>Built a CALB manifest without extracting the full 6.96 GB archive.</li>
+        <li>Loaded HPPC and EIS MAT files directly from the ZIP by cell, protocol, and temperature.</li>
+        <li>Found long HPPC discharge pulse windows and matched them to EIS records by nearest OCV.</li>
+        <li>Fit separate EIS DRT and time-domain DRT curves with non-negative regularized fits.</li>
+        <li>Compared gamma-shape agreement on overlapping tau support.</li>
+        <li>Added batch sections, failure audits, weighting probes, target-variant probes, tau coverage audits, tau-constrained fits, and protocol replication.</li>
+      </ul>
+      <div class="note">
+        The useful part is not the code existing. The useful part is that the pipeline produced negative results first, isolated the failure mode, then produced a replicated fix.
+      </div>
+    </div>
+  </section>
+
+  <section id="failure">
+    <div class="slide">
+      <div class="kicker">What failed first</div>
+      <h2>The naive bridge was not good.</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Post-hoc comparison</h3>
+          <span class="metric bad">-0.048</span>
+          <div class="label">Median separate time-vs-EIS correlation before tau constraint.</div>
+        </div>
+        <div class="card">
+          <h3>Combined objective</h3>
+          <span class="metric bad">-0.016</span>
+          <div class="label">Median equal-weight combined correlation in Section 14.</div>
+        </div>
+        <div class="card">
+          <h3>Weighting probe</h3>
+          <span class="metric warn">weak</span>
+          <div class="label">Changing EIS/TDM weights helped only slightly, not enough to validate the method.</div>
+        </div>
+      </div>
+      <p>Candidate alignment was not the main problem. Nearby OCV matching did not improve over the nearest OCV candidate. The failure was deeper.</p>
+      <div class="figure">
+        <img src="../01_Graphs/Section_18_EIS_Robustness_Audit/section_18_eis_robustness_audit.png" alt="Section 18 EIS robustness audit">
+        <div class="caption">Section 18: EIS DRT depends strongly on low-frequency coverage. Dropping high-frequency points was stable, but dropping low-frequency points broke agreement.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tau">
+    <div class="slide">
+      <div class="kicker">Failure mode</div>
+      <h2>The time-domain fit was spending gamma outside the EIS tau window.</h2>
+      <p>That means the default time-domain DRT could fit voltage while placing relaxation mass where the EIS target could not confirm it. Comparing those shapes was structurally unfair.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="metric warn">27.3%</span>
+          <div class="label">Median time gamma fraction above EIS tau max, Section 20.</div>
+        </div>
+        <div class="card">
+          <span class="metric">71.0%</span>
+          <div class="label">Median time gamma fraction inside EIS tau window.</div>
+        </div>
+        <div class="card">
+          <span class="metric bad">record 2</span>
+          <div class="label">Worst low-OCV case: much more time-domain gamma beyond EIS support.</div>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="../01_Graphs/Section_20_Tau_Coverage_Audit/section_20_tau_coverage_audit.png" alt="Section 20 tau coverage audit">
+        <div class="caption">Section 20: tau support mismatch explained why the default comparison was weak, especially at lower OCV.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="breakthrough">
+    <div class="slide">
+      <div class="kicker">Breakthrough</div>
+      <h2>Constraining time-domain tau support changed the result.</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Default fit</h3>
+          <span class="metric bad">-0.049</span>
+          <div class="label">Median quality-pass correlation, Section 21.</div>
+        </div>
+        <div class="card">
+          <h3>Tau-constrained fit</h3>
+          <span class="metric good">0.896</span>
+          <div class="label">Median quality-pass correlation, Section 21.</div>
+        </div>
+        <div class="card">
+          <h3>Rows improved</h3>
+          <span class="metric good">97 / 99</span>
+          <div class="label">Quality-pass rows where constrained fit beat default.</div>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="../01_Graphs/Section_21_Tau_Constrained_Fit/section_21_tau_constrained_fit.png" alt="Section 21 tau-constrained fit">
+        <div class="caption">Section 21: forcing the time-domain DRT grid into EIS tau support moved the comparison from mostly failed to strongly positive.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="replication">
+    <div class="slide">
+      <div class="kicker">Replication test</div>
+      <h2>The fix replicated on HPPC_C3.</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Protocol</th>
+            <th>Rows</th>
+            <th>Quality-pass rows</th>
+            <th>Median default corr</th>
+            <th>Median constrained corr</th>
+            <th>Rows improved</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>HPPC_1C</code></td>
+            <td>123</td>
+            <td>99</td>
+            <td>-0.0486</td>
+            <td class="good">0.8956</td>
+            <td>97</td>
+          </tr>
+          <tr>
+            <td><code>HPPC_C3</code></td>
+            <td>123</td>
+            <td>104</td>
+            <td>-0.0481</td>
+            <td class="good">0.8889</td>
+            <td>103</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="truth">
+        Section 23 proved the tau-constrained idea was worth taking seriously. Sections 30 to 33 are stronger: they close the 10 C gap and pass the full fresh-cell temperature grid under a declared rule.
+      </div>
+      <div class="figure">
+        <img src="../01_Graphs/Section_23_Protocol_Replication/section_23_protocol_replication.png" alt="Section 23 protocol replication">
+        <div class="caption">Section 23: protocol replication across HPPC_1C and HPPC_C3, all 11 cells and all 3 temperatures.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="temperature">
+    <div class="slide">
+      <div class="kicker">Temperature read</div>
+      <h2>All three temperatures pass under the final adaptive rule.</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Temperature</th>
+            <th>Rows</th>
+            <th>Pass rows</th>
+            <th>Median corr</th>
+            <th>Median OCV delta</th>
+            <th>Median RMSE</th>
+            <th>Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>10 C</td>
+            <td>82</td>
+            <td class="good">82</td>
+            <td class="good">0.9282</td>
+            <td>3.48 mV</td>
+            <td>5.39 mV</td>
+            <td>Solved by the Section 30 record-aware candidate rule.</td>
+          </tr>
+          <tr>
+            <td>25 C</td>
+            <td>76</td>
+            <td class="good">76</td>
+            <td class="good">0.9286</td>
+            <td>3.12 mV</td>
+            <td>3.43 mV</td>
+            <td>Passes with the primary rule.</td>
+          </tr>
+          <tr>
+            <td>40 C</td>
+            <td>88</td>
+            <td class="good">88</td>
+            <td class="good">0.9280</td>
+            <td>3.73 mV</td>
+            <td>2.63 mV</td>
+            <td>Passes with 2 correlation-only lambda fallback rows.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        This matters. If the professor asks whether the whole fresh-cell temperature bridge is solved, the answer is yes under the Section 33 gate. If the question is drive-cycle transfer, Section 34 is only the weaker baseline-only result, and Sections 36 and 42 are the harder claim boundary. If the question is SOH or aging, the answer is still no.
+      </div>
+    </div>
+  </section>
+
+  <section id="cold-diagnosis">
+    <div class="slide">
+      <div class="kicker">Final 10 C rule</div>
+      <h2>10 C was solved by fixing candidate selection, not by cheating OCV.</h2>
+      <p>Section 24 correctly showed that far-OCV candidates were fake rescues. Sections 27 and 28 fixed records 0 to 2 with a cold-specific EIS window and time baseline. Section 29 showed record 3 needed short HPPC pulse candidates. Section 30 consolidated that into one reproducible 10 C rule.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Rows</h3>
+          <span class="metric good">82 / 82</span>
+          <div class="label">Final 10 C quality-pass rows, Section 30.</div>
+        </div>
+        <div class="card">
+          <h3>Median corr</h3>
+          <span class="metric good">0.928</span>
+          <div class="label">Quality-pass gamma correlation.</div>
+        </div>
+        <div class="card">
+          <h3>Record 3</h3>
+          <span class="metric good">16 / 16</span>
+          <div class="label">Solved with short accepted HPPC candidates.</div>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="../01_Graphs/Section_30_Final_10C_Pipeline/section_30_final_10c_pipeline.png" alt="Section 30 final 10 C pipeline">
+        <div class="caption">Section 30: the final 10 C rule passes all records across HPPC_1C and HPPC_C3.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cold-regularization">
+    <div class="slide">
+      <div class="kicker">Adaptive final rule</div>
+      <h2>The last two failures were correlation-only EIS regularization edge cases.</h2>
+      <p>Section 31 passed 244 of 246 rows. The two failures were the same 40 C cell 59861, EIS record 1 case under both HPPC protocols. OCV and time RMSE already passed; only correlation failed under EIS lambda 3. Section 33 retries EIS lambda 0.1 only for that exact failure mode.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Section 31</h3>
+          <span class="metric warn">244 / 246</span>
+          <div class="label">Primary final rule before fallback.</div>
+        </div>
+        <div class="card">
+          <h3>Fallback rows</h3>
+          <span class="metric warn">2</span>
+          <div class="label">Only correlation-only failures use EIS lambda 0.1.</div>
+        </div>
+        <div class="card">
+          <h3>Section 33</h3>
+          <span class="metric good">246 / 246</span>
+          <div class="label">Final adaptive multi-temperature pass count.</div>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="../01_Graphs/Section_33_Final_Rule_Adaptive_MultiTemp/section_33_adaptive_final_rule_multitemp.png" alt="Section 33 adaptive final rule multi-temperature validation">
+        <div class="caption">Section 33: all temperatures pass. Red fallback points are limited to the two 40 C correlation-only rows.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="drive-cycle">
+    <div class="slide">
+      <div class="kicker">Drive-cycle validation</div>
+      <h2>Drive-cycle transfer is where the story gets worse.</h2>
+      <p>Section 34 looked good against a baseline-only drift model. Then Section 36 used a stronger calibrated ECM-style baseline, and fixed HPPC-derived DRT lost. Section 37 found pulse SOC alignment is tight but drive-cycle SOC alignment is bad. Section 42 then showed only a tiny aligned drive-cycle subset survives.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Section 34 rows</h3>
+          <span class="metric">198</span>
+          <div class="label">Drive-cycle transfer rows across DV_UDDS, DV_US06, and DV_WLTP.</div>
+        </div>
+        <div class="card">
+          <h3>Section 36 result</h3>
+          <span class="metric bad">loses</span>
+          <div class="label">Fixed DRT loses to the stronger calibrated ECM-style baseline.</div>
+        </div>
+        <div class="card">
+          <h3>Section 42 aligned subset</h3>
+          <span class="metric bad">16 / 198</span>
+          <div class="label">Rows within 5 percent SOC delta. DRT win fraction versus best ECM: 0.0.</div>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="../01_Graphs/Section_34_Drive_Cycle_Validation/section_34_drive_cycle_validation.png" alt="Section 34 drive-cycle validation">
+        <div class="caption">Section 34 is useful, but not the final word. It used a weaker baseline than Section 36.</div>
+      </div>
+      <div class="note">
+        Blunt version: the pulse bridge is real internally. The drive-cycle validation claim is not clean. If you present Section 34 alone, you are cherry-picking.
+      </div>
+    </div>
+  </section>
+
+  <section id="external-validation">
+    <div class="slide">
+      <div class="kicker">External dataset qualification</div>
+      <h2>Use CALCE first. NASA is second.</h2>
+      <p>The external work qualified datasets only. It did not validate the frozen CALB rule.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>NASA</h3>
+          <span class="metric">34</span>
+          <div class="label">Unique cells with charge, discharge, and impedance. Useful later, but not drive-cycle aligned.</div>
+        </div>
+        <div class="card">
+          <h3>CALCE Storage 25 C</h3>
+          <span class="metric good">24</span>
+          <div class="label">Same-PLN 25 C capacity plus EIS candidates with SOC metadata.</div>
+        </div>
+        <div class="card">
+          <h3>Recommendation</h3>
+          <span class="metric warn">CALCE</span>
+          <div class="label">Cleaner first adapter because it has PLN IDs, SOC labels, capacity, and EIS joins.</div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Dataset</th>
+            <th>Strength</th>
+            <th>Weak spot</th>
+            <th>Use first?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NASA Battery Data Set</td>
+            <td>Same-cell EIS plus charge/discharge cycling across 34 unique cells.</td>
+            <td>Wrong first fight: not pulse or drive-cycle aligned.</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>CALCE Storage 25 C</td>
+            <td>PLN IDs, SOC labels, 25 C storage periods, capacity workbooks, and impedance CSVs.</td>
+            <td>Storage/calendar ageing, not drive-cycle behavior.</td>
+            <td>Yes</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        More NASA rows do not make NASA the better first choice. Protocol fit beats row count. The next adapter should freeze the CALCE join keys before modeling: PLN, temperature, storage period, and SOC.
+      </div>
+    </div>
+  </section>
+
+  <section id="combined">
+    <div class="slide">
+      <div class="kicker">Mirror version of the paper method</div>
+      <h2>The combined EIS plus TDM objective is not better yet.</h2>
+      <p>We built a mirror version inspired by the study's combined EIS/TDM DRT idea. It changed the output, but after the tau-support fix, the combined version still underperformed the separate tau-constrained fit.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Separate tau-constrained</h3>
+          <span class="metric good">0.902</span>
+          <div class="label">Median correlation, Section 22 quality-pass rows.</div>
+        </div>
+        <div class="card">
+          <h3>Combined tau-constrained</h3>
+          <span class="metric warn">0.477</span>
+          <div class="label">Median correlation, equal-weight combined objective.</div>
+        </div>
+        <div class="card">
+          <h3>Verdict</h3>
+          <span class="metric bad">not final</span>
+          <div class="label">Combined objective needs redesigned weighting, scaling, and regularization.</div>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="../01_Graphs/Section_22_Tau_Constrained_Combined/section_22_tau_constrained_combined.png" alt="Section 22 tau-constrained combined fit">
+        <div class="caption">Section 22: combined fitting is promising as a research direction, but it is not the current best pipeline.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="limits">
+    <div class="slide">
+      <div class="kicker">What is missing</div>
+      <h2>The weak spots are clear now.</h2>
+      <ul>
+        <li>The pulse-test bridge gate is solved internally, but only for this fresh-cell CALB grid.</li>
+        <li>Drive-cycle protocols are tested in Section 34 against baseline-only drift, then stress-tested in Section 36 against a stronger calibrated ECM-style baseline. Fixed DRT loses that stronger audit: median 150.9172295922953 mV versus best ECM 134.8626012268972 mV.</li>
+        <li>The combined EIS/TDM objective needs better scaling. Equal weighting is too crude.</li>
+        <li>OCV and SOC alignment are still rule-based voltage matching, not a full state estimator. Section 37 says pulse alignment is tight, but drive-cycle SOC alignment is bad.</li>
+        <li>Section 42 makes the drive-cycle problem sharper: only 16 of 198 rows are within 5 percent SOC delta, and DRT wins 0.0 against best ECM in that aligned subset.</li>
+        <li>No aging or SOH claim has been proven. The current archive is characterization-rich, but this pipeline has not been converted into an aging predictor.</li>
+        <li>NASA and CALCE have now been qualified as external candidates. They have not validated the CALB rule.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="slide">
+      <div class="kicker">Roadmap</div>
+      <h2>Next work should be disciplined, not random.</h2>
+      <div class="roadmap">
+        <div class="step">
+          <h3>Core locked</h3>
+          <p class="small">Regression currently passes 49 of 49 checks. Keep this as the guardrail before changing the rule.</p>
+        </div>
+        <div class="step">
+          <h3>Run CALCE first</h3>
+          <p class="small">Use the 24 25 C PLN candidates. Freeze the join keys before modeling: PLN, temperature, storage period, and SOC.</p>
+        </div>
+        <div class="step">
+          <h3>Keep NASA second</h3>
+          <p class="small">NASA has same-cell EIS plus charge/discharge cycling. Useful robustness check, weak first validation target.</p>
+        </div>
+        <div class="step">
+          <h3>Rebuild combined fitting</h3>
+          <p class="small">Try scale-normalized residuals, adaptive EIS/TDM weights, and protocol-aware regularization. Keep separate tau-constrained as the baseline to beat.</p>
+        </div>
+      </div>
+      <div class="note">
+        The next professor-facing milestone is not another internal rescue plot. It is a frozen-rule CALCE run with ECM baselines and honest failure reporting.
+      </div>
+    </div>
+  </section>
+
+  <section id="files">
+    <div class="slide">
+      <div class="kicker">Generated artifacts</div>
+      <h2>Where the evidence lives.</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Artifact</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Section_21_Tau_Constrained_Fit</code></td>
+            <td>Main breakthrough: tau-constrained time-domain DRT versus EIS.</td>
+          </tr>
+          <tr>
+            <td><code>Section_22_Tau_Constrained_Combined</code></td>
+            <td>Combined objective mirror test, currently weaker than separate constrained fitting.</td>
+          </tr>
+          <tr>
+            <td><code>Section_23_Protocol_Replication</code></td>
+            <td>Replication across HPPC_1C and HPPC_C3, the aggregate bridge baseline before the 10 C fix.</td>
+          </tr>
+          <tr>
+            <td><code>Section_24_Cold_Temperature_Diagnosis</code></td>
+            <td>10 C failure diagnosis across every long HPPC candidate, both pulse protocols.</td>
+          </tr>
+          <tr>
+            <td><code>Section_25_Cold_Regularization_Probe</code></td>
+            <td>Strict 10 C EIS and time-domain lambda sweeps showing tuning is not a clean fix.</td>
+          </tr>
+          <tr>
+            <td><code>Section_30_Final_10C_Pipeline</code></td>
+            <td>Final reproducible 10 C bridge rule, 82 of 82 rows pass.</td>
+          </tr>
+          <tr>
+            <td><code>Section_31_Final_Rule_MultiTemp</code></td>
+            <td>Primary final rule across 10, 25, and 40 C, 244 of 246 rows pass.</td>
+          </tr>
+          <tr>
+            <td><code>Section_32_Final_Rule_Outlier_Probe</code></td>
+            <td>Shows the two remaining failures are correlation-only EIS regularization edge cases.</td>
+          </tr>
+          <tr>
+            <td><code>Section_33_Final_Rule_Adaptive_MultiTemp</code></td>
+            <td>Current final CALB bridge result, 246 of 246 rows pass with 2 fallback rows.</td>
+          </tr>
+          <tr>
+            <td><code>Section_36_Drive_Cycle_ECM_Baseline</code></td>
+            <td>Stronger drive-cycle audit: fixed DRT loses to a calibrated ECM-style baseline.</td>
+          </tr>
+          <tr>
+            <td><code>Section_37_SOC_Alignment_Audit</code></td>
+            <td>Shows pulse bridge SOC alignment is tight, but drive-cycle SOC alignment is bad.</td>
+          </tr>
+          <tr>
+            <td><code>Section_40_Leakage_And_Claim_Audit</code></td>
+            <td>Draws the claim boundary: internal engineering result, not clean held-out validation.</td>
+          </tr>
+          <tr>
+            <td><code>Section_42_SOC_Stratified_Drive_Cycle_Audit</code></td>
+            <td>Only 16 of 198 drive-cycle rows are within 5 percent SOC delta, and DRT wins 0.0 against best ECM in that subset.</td>
+          </tr>
+          <tr>
+            <td><code>External Validation Dataset Qualification</code></td>
+            <td>NASA and CALCE manifest work. Recommendation: CALCE first, NASA second.</td>
+          </tr>
+          <tr>
+            <td><code>Section_35_Regression_Checks</code></td>
+            <td>Roadmap guardrail: regression currently passes 49 of 49 checks.</td>
+          </tr>
+          <tr>
+            <td><code>calb_l148n58a_protocol_replication.py</code></td>
+            <td>Script that generated the Section 23 result.</td>
+          </tr>
+          <tr>
+            <td><code>calb_l148n58a_cold_temp_diagnosis.py</code></td>
+            <td>Script that generated the Section 24 cold-temperature diagnosis.</td>
+          </tr>
+          <tr>
+            <td><code>calb_l148n58a_cold_regularization_probe.py</code></td>
+            <td>Script that generated the Section 25 regularization probe.</td>
+          </tr>
+          <tr>
+            <td><code>calb_l148n58a_final_rule_adaptive_multitemp.py</code></td>
+            <td>Script that generated the Section 33 final adaptive result.</td>
+          </tr>
+          <tr>
+            <td><code>calb_l148n58a_drive_cycle_ecm_baseline.py</code></td>
+            <td>Script that generated the Section 36 stronger drive-cycle baseline audit.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="slide">
+      <div class="kicker">Sources</div>
+      <h2>Evidence and references.</h2>
+      <ul>
+        <li>Local CALB archive: <code>[local path redacted]</code>.</li>
+        <li>Local manifest: <code>40 Outputs/Experiments/CALB L148N58A/01_Manifest/summary.json</code>.</li>
+        <li>Local first-slice audit: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_01_Data_Audit/section_1_summary.json</code> and <code>section_1_protocol_inventory.csv</code>.</li>
+        <li>Local Section 23 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_23_Protocol_Replication/section_23_summary.json</code>.</li>
+        <li>Local Section 24 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_24_Cold_Temperature_Diagnosis/section_24_summary.json</code>.</li>
+        <li>Local Section 25 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_25_Cold_Regularization_Probe/section_25_summary.json</code>.</li>
+        <li>Local Section 30 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_30_Final_10C_Pipeline/section_30_summary.json</code>.</li>
+        <li>Local Section 31 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_31_Final_Rule_MultiTemp/section_31_summary.json</code>.</li>
+        <li>Local Section 32 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_32_Final_Rule_Outlier_Probe/section_32_summary.json</code>.</li>
+        <li>Local Section 33 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_33_Final_Rule_Adaptive_MultiTemp/section_33_summary.json</code>.</li>
+        <li>Local Section 34 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_34_Drive_Cycle_Validation/section_34_summary.json</code>.</li>
+        <li>Local Section 35 regression summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_35_Regression_Checks/section_35_summary.json</code>.</li>
+        <li>Local Section 36 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_36_Drive_Cycle_ECM_Baseline/section_36_summary.json</code>.</li>
+        <li>Local Section 37 summary: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_37_SOC_Alignment_Audit/section_37_summary.json</code>.</li>
+        <li>Local Section 40 report: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_40_Leakage_And_Claim_Audit/section_40_leakage_and_claim_audit_report.md</code>.</li>
+        <li>Local Section 42 report: <code>40 Outputs/Experiments/CALB L148N58A/02_Section_Results/Section_42_SOC_Stratified_Drive_Cycle_Audit/section_42_soc_stratified_drive_cycle_audit_report.md</code>.</li>
+        <li>NASA external qualification summary: <code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/summary.json</code>.</li>
+        <li>CALCE external qualification summary: <code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/summary.json</code>.</li>
+        <li>External dataset comparison: <code>40 Outputs/Experiments/External Validation Dataset Qualification/README.md</code>.</li>
+        <li>Paper used for the combined EIS/TDM DRT concept: Wildfeuer, Gieler, and Karger, <a href="https://www.mdpi.com/2313-0105/7/3/52">Combining the Distribution of Relaxation Times from EIS and Time-Domain Data for Parameterizing Equivalent Circuit Models of Lithium-Ion Batteries</a>, Batteries 2021, 7(3), 52, DOI <a href="https://doi.org/10.3390/batteries7030052">10.3390/batteries7030052</a>.</li>
+      </ul>
+      <p class="muted">Presentation updated on 2026-06-24 from local pipeline outputs.</p>
+    </div>
+  </section>
+</body>
+</html>
