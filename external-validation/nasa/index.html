@@ -334,7 +334,7 @@ footer {
 
       </header>
       <main>
-<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab" href="../../external-validation/">Dataset comparison</a><a class="tab" href="../calce/">CALCE (Center for Advanced Life Cycle Engineering)</a><a class="tab active" href="./">NASA Battery</a><a class="tab" href="../../sources/external/">Sources</a></div><h2>NASA Battery External Validation Manifest</h2>
+<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab" href="../../external-validation/">Dataset comparison</a><a class="tab" href="../dataset-exploration/">New dataset exploration</a><a class="tab" href="../calce/">CALCE (Center for Advanced Life Cycle Engineering)</a><a class="tab active" href="./">NASA Battery</a><a class="tab" href="../../sources/external/">Sources</a></div><h2>NASA Battery External Validation Manifest</h2>
 <h2>Scope</h2>
 <p>This is dataset qualification only. It does not validate the frozen CALB rule.</p>
 <p>The script inspected the wrapper ZIP and inner BatteryAgingARC ZIPs in memory. It did not bulk-extract the archive.</p>
@@ -366,7 +366,7 @@ footer {
 <li>These are candidates only. NASA has repeated same-cell charge/discharge/impedance operations, but not drive-cycle operation coverage like the CALB drive-cycle question needs.</li>
 </ul>
 <h2>Blunt Read</h2>
-<p>NASA is useful for checking whether a time-domain bridge can survive on a classic same-cell impedance/cycling dataset. It is weak for the frozen CALB rule first pass because the time-domain side is mostly charge/discharge cycling, not drive-cycle or HPPC-like pulse validation.</p>
+<p>NASA is useful for checking whether a time-domain bridge can survive on a classic same-cell impedance/cycling dataset. It is third priority for the frozen CALB rule: CALCE goes first, RADAR4KIT goes second only when the corrected EIS addendum exists, and NASA stays a later robustness check. Its time-domain side is mostly charge/discharge cycling, not drive-cycle or HPPC-like pulse validation.</p>
 <h2>Outputs</h2>
 <ul>
 <li><code>zip_listing.csv</code></li>

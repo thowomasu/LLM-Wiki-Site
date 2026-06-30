@@ -387,6 +387,7 @@
     <a href="../manual/">CALB manual</a>
     <div class="side-section">CALB deck</div>
     <a href="#title">Title</a>
+    <a href="#evidence-map">Evidence map</a>
     <a href="#manual">Manual</a>
     <a href="#claim">Claim</a>
     <a href="#dataset">Dataset</a>
@@ -412,8 +413,8 @@
     <div class="slide">
       <div class="kicker">CALB L148N58A dataset pipeline</div>
       <h1>Internal pulse bridge is strong. External validation is not done.</h1>
-      <p class="large">Result: the final adaptive tau-constrained pulse bridge passes the declared internal EIS/TDM DRT gate across 10 C, 25 C, and 40 C. Drive-cycle and external validation remain the hard part.</p>
-      <p class="muted">Prepared from local CALB archive runs, Sections 1 to 42, plus NASA and CALCE dataset qualification. The corresponding public paper is the Data in Brief article by Fasolato et al. and the dataset repository is Mendeley Data version 2.</p>
+      <p class="large">What is achieved: the final adaptive tau-constrained pulse bridge passes the declared internal EIS/TDM DRT gate across 10 C, 25 C, and 40 C.</p>
+      <p class="muted">What is not achieved: this is not clean drive-cycle validation, external validation, aging prediction, or SOH prediction. Prepared from local CALB archive runs, Sections 1 to 42, plus CALCE, RADAR4KIT, and NASA dataset qualification.</p>
       <div class="button-row">
         <a class="button" href="#downloads">View and download data</a>
         <a class="button" href="../manual/">Open manual</a>
@@ -423,26 +424,48 @@
     </div>
   </section>
 
+  <section id="evidence-map">
+    <div class="slide">
+      <div class="kicker">Evidence map</div>
+      <h2>Use these files to check the story.</h2>
+      <p>The page has one main positive result and one main negative boundary. Start with the Section 33 CSV for the internal pulse bridge. Then read the Section 34 and Section 36 files before making any drive-cycle claim.</p>
+      <table>
+        <thead>
+          <tr><th>Question</th><th>Answer</th><th>Open the evidence</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Did the internal EIS-to-HPPC pulse bridge pass?</td><td>Yes, under the declared Section 33 rule: 246 of 246 rows pass.</td><td><a href="../data/section_33_adaptive_final_rule_rows.csv">Section 33 rows CSV</a> and <a href="../01_Graphs/Section_33_Final_Rule_Adaptive_MultiTemp/section_33_adaptive_final_rule_multitemp.png">Section 33 figure</a></td></tr>
+          <tr><td>Does that prove drive-cycle validation?</td><td>No. Section 34 is only an initial transfer test. Section 36 uses a stronger ECM-style baseline and the fixed DRT loses.</td><td><a href="../data/section_34_drive_cycle_rows.csv">Section 34 rows CSV</a>, <a href="../data/section_36_summary.json">Section 36 summary JSON</a>, and <a href="../01_Graphs/Section_36_Drive_Cycle_ECM_Baseline/section_36_drive_cycle_ecm_baseline.png">Section 36 figure</a></td></tr>
+          <tr><td>What raw data slice can be inspected quickly?</td><td>Cell 59294 at 25 C: EIS, C/20, and WLTP preview files.</td><td><a href="../data/EIS_test.csv">EIS_test.csv</a>, <a href="../data/C20_Discharge.csv">C20_Discharge.csv</a>, and <a href="../data/DV_WLTP.csv">DV_WLTP.csv</a></td></tr>
+          <tr><td>Where is the official dataset?</td><td>Mendeley Data version 2. The site only mirrors lightweight review outputs.</td><td><a href="https://data.mendeley.com/datasets/ycx459r5c3/2">Official CALB dataset repository</a></td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        If a reader only remembers one thing: pulse bridge passed internally, drive-cycle validation did not.
+      </div>
+    </div>
+  </section>
+
   <section id="manual">
     <div class="slide">
-      <div class="kicker">Manual</div>
-      <h2>How to use this CALB website.</h2>
+      <div class="kicker">Reader guide</div>
+      <h2>Read the site in this order.</h2>
       <div class="grid">
         <div class="card">
-          <h3>1. Start with the claim</h3>
-          <p class="small">Use the first two sections to see the claim boundary: the pulse bridge passes internally, but drive-cycle transfer and external validation are not solved.</p>
+          <h3>1. Claim boundary</h3>
+          <p class="small">The internal pulse bridge passes. Drive-cycle transfer, external validation, SOH, and aging prediction are not solved.</p>
         </div>
         <div class="card">
-          <h3>2. Open the data</h3>
-          <p class="small">Use the Data section buttons to view CSV and JSON files directly in the browser. Download the same files if you want to inspect them in Python, Excel, or MATLAB.</p>
+          <h3>2. Evidence files</h3>
+          <p class="small">Use the Evidence map and Data sections to open the exact CSV, JSON, and image files behind the claims.</p>
         </div>
         <div class="card">
-          <h3>3. Check the figures</h3>
-          <p class="small">Use the figures as entry points, not proof by themselves. Each figure has a CSV or JSON link beside it where practical.</p>
+          <h3>3. Figures last</h3>
+          <p class="small">Use figures as entry points only. A clean-looking voltage plot is not proof that the recovered DRT shape is physically right.</p>
         </div>
       </div>
       <div class="truth">
-        Example case: open <code>EIS_test.csv</code> for cell 59294 at 25 C, compare it with the Section 33 bridge rows, then open the drive-cycle rows to see why pulse success does not automatically prove drive-cycle success.
+        Fast audit: open <code>EIS_test.csv</code>, then <code>section_33_adaptive_final_rule_rows.csv</code>, then <code>section_34_drive_cycle_rows.csv</code> and <code>section_36_summary.json</code>. That sequence shows why pulse success does not automatically prove drive-cycle success.
       </div>
     </div>
   </section>
@@ -450,12 +473,12 @@
   <section id="claim">
     <div class="slide">
       <div class="kicker">Main claim</div>
-      <h2>The pulse bridge is solved internally, but the scientific claim must stay narrow.</h2>
+      <h2>What works: the internal pulse bridge. What does not: broad validation.</h2>
       <div class="truth">
-        Viable: EIS and HPPC pulse data can be bridged through DRT across the CALB fresh-cell temperature grid when the time-domain fit is restricted to EIS-observable relaxation times and the final adaptive rule is used.
+        Internal result: EIS and HPPC pulse data can be bridged through DRT across the CALB fresh-cell temperature grid when the time-domain fit is restricted to the EIS-observable relaxation-time window and the final adaptive rule is used.
       </div>
       <div class="note">
-        The internal pulse bridge is the strongest result. Section 33 passes 246 of 246 rows. But Section 36 shows fixed HPPC-derived DRT loses to a stronger ECM baseline on drive cycles, and Section 42 shows the SOC-aligned drive-cycle subset is tiny and unfavorable. Do not call this clean held-out validation.
+        Do not blur the boundary. Section 33 passes 246 of 246 rows for the internal pulse bridge. Section 36 shows fixed HPPC-derived DRT loses to a stronger ECM baseline on drive cycles. Section 42 shows the SOC-aligned drive-cycle subset is tiny and unfavorable. Calling this clean held-out validation would be wrong.
       </div>
       <div class="grid">
         <div class="card">
@@ -683,7 +706,7 @@
   <section id="pipeline">
     <div class="slide">
       <div class="kicker">What was built</div>
-      <h2>The work turned a raw archive into a repeatable DRT experiment package.</h2>
+      <h2>The work turned the raw archive into an auditable experiment package.</h2>
       <ul>
         <li>Built a CALB manifest without extracting the full 6.96 GB archive.</li>
         <li>Loaded HPPC and EIS MAT files directly from the ZIP by cell, protocol, and temperature.</li>
@@ -693,7 +716,7 @@
         <li>Added batch sections, failure audits, weighting probes, target-variant probes, tau coverage audits, tau-constrained fits, and protocol replication.</li>
       </ul>
       <div class="note">
-        The useful part is not the code existing. The useful part is that the pipeline produced negative results first, isolated the failure mode, then produced a replicated fix.
+        The useful part is not that code exists. The useful part is the sequence: the first bridge failed, the failure mode was isolated, the tau-constrained fix replicated, and the remaining drive-cycle claim boundary stayed visible.
       </div>
     </div>
   </section>
@@ -940,7 +963,7 @@
     <div class="slide">
       <div class="kicker">Drive-cycle validation</div>
       <h2>Drive-cycle transfer is where the story gets worse.</h2>
-      <p>Section 34 looked good against a baseline-only drift model. Then Section 36 used a stronger calibrated ECM-style baseline, and fixed HPPC-derived DRT lost. Section 37 found pulse SOC alignment is tight but drive-cycle SOC alignment is bad. Section 42 then showed only a tiny aligned drive-cycle subset survives.</p>
+      <p>Section 34 is a useful voltage simulation and transfer test, but it is not enough. It compared against a weak baseline-only drift model. Section 36 used a stronger calibrated ECM-style baseline, and fixed HPPC-derived DRT lost. Section 37 found pulse SOC alignment is tight but drive-cycle SOC alignment is bad. Section 42 showed only a tiny aligned drive-cycle subset survives.</p>
       <div class="grid">
         <div class="card">
           <h3>Section 34 rows</h3>
@@ -960,7 +983,7 @@
       </div>
       <div class="figure">
         <img src="../01_Graphs/Section_34_Drive_Cycle_Validation/section_34_drive_cycle_validation.png" alt="Section 34 drive-cycle validation">
-        <div class="caption">Section 34: example dynamic-cycle transfer using UDDS, US06, and WLTP drive profiles. It is useful for seeing what test was performed, but it used a weaker baseline than Section 36. View data: <a href="../data/section_34_drive_cycle_rows.csv">CSV</a>. Download figure: <a href="../01_Graphs/Section_34_Drive_Cycle_Validation/section_34_drive_cycle_validation.png">PNG</a>.</div>
+        <div class="caption">Section 34: dynamic-cycle voltage simulation using UDDS, US06, and WLTP drive profiles. The plot can look good, but it used a weaker baseline than Section 36. Read it as method exploration, not proof. View data: <a href="../data/section_34_drive_cycle_rows.csv">CSV</a>. Download figure: <a href="../01_Graphs/Section_34_Drive_Cycle_Validation/section_34_drive_cycle_validation.png">PNG</a>.</div>
       </div>
       <div class="note">
         Blunt version: the pulse bridge is real internally. The drive-cycle validation claim is not clean. If you present Section 34 alone, you are cherry-picking.
@@ -1060,7 +1083,7 @@
         <li>OCV and SOC alignment are still rule-based voltage matching, not a full state estimator. Section 37 says pulse alignment is tight, but drive-cycle SOC alignment is bad.</li>
         <li>Section 42 makes the drive-cycle problem sharper: only 16 of 198 rows are within 5 percent SOC delta, and DRT wins 0.0 against best ECM in that aligned subset.</li>
         <li>No aging or SOH claim has been proven. The current archive is characterization-rich, but this pipeline has not been converted into an aging predictor.</li>
-        <li>NASA and CALCE have now been qualified as external candidates. They have not validated the CALB rule.</li>
+        <li>CALCE, RADAR4KIT, and NASA have now been qualified or screened as external candidates. They have not validated the CALB rule.</li>
       </ul>
     </div>
   </section>
@@ -1185,7 +1208,7 @@
           </tr>
           <tr>
             <td><code>External Validation Dataset Qualification</code></td>
-            <td>NASA and CALCE manifest work. Recommendation: CALCE first, NASA second.</td>
+            <td>CALCE adapter and manifest work, RADAR4KIT manifest triage, and NASA manifest work. Recommendation: CALCE first, RADAR4KIT second only with corrected EIS, NASA third.</td>
           </tr>
           <tr>
             <td><code>Section_35_Regression_Checks</code></td>

@@ -1,0 +1,10 @@
+{
+  "dataset": "CALCE Storage 25 C",
+  "baseline_required": true,
+  "baseline_run_attempted": false,
+  "baseline_run_possible": false,
+  "frozen_rule_verdict": "blocked/inconclusive",
+  "primary_blocker": "no_hppc_compatible_pulse_windows_in_current_calce_inputs",
+  "verdict": "blocked/inconclusive",
+  "claim_boundary": "no_baseline_comparison_no_external_validation_claim"
+}

@@ -334,36 +334,44 @@ footer {
 
       </header>
       <main>
-<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab active" href="./">Dataset comparison</a><a class="tab" href="calce/">CALCE (Center for Advanced Life Cycle Engineering)</a><a class="tab" href="nasa/">NASA Battery</a><a class="tab" href="../sources/external/">Sources</a></div><h2>External Validation Dataset Qualification</h2>
+<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab active" href="./">Dataset comparison</a><a class="tab" href="dataset-exploration/">New dataset exploration</a><a class="tab" href="calce/">CALCE (Center for Advanced Life Cycle Engineering)</a><a class="tab" href="nasa/">NASA Battery</a><a class="tab" href="../sources/external/">Sources</a></div><h2>External Validation Dataset Qualification</h2>
 <h2>Scope</h2>
 <p>This is dataset qualification, not validation.</p>
-<p>The frozen CALB rule has not been externally validated here. These manifests only answer whether the local NASA and CALCE downloads have enough same-cell evidence to justify the next adapter.</p>
+<p>The frozen CALB rule has not been externally validated here. These manifests and adapter outputs only answer whether local external datasets have enough same-cell evidence to justify the next unchanged-rule run.</p>
 <h2>Inputs Reviewed</h2>
 <ul>
 <li>NASA wrapper ZIP: <code>[local path redacted]</code></li>
 <li>CALCE Storage folder: <code>[local path redacted]</code></li>
 <li>NASA manifest output: <code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/</code></li>
 <li>CALCE manifest output: <code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/</code></li>
+<li>CALCE frozen-join adapter output: <code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/03_Adapter/</code></li>
+<li>CALCE frozen input, rule-run readiness, baseline, and validation report outputs: <code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/04_Frozen_Inputs/</code> through <code>07_Validation_Report/</code></li>
+<li>Validation protocol: <code>40 Outputs/Experiments/External Validation Dataset Qualification/VALIDATION_PROTOCOL.md</code></li>
+<li>RADAR4KIT corrected-EIS status: <code>40 Outputs/Experiments/External Validation Dataset Qualification/03_RADAR4KIT_Corrected_EIS_Status/</code></li>
+<li>KIT/RADAR4KIT manifest output: <code>40 Outputs/Experiments/KIT RADAR4KIT/01_Manifest/</code></li>
 </ul>
 <h2>Comparison</h2>
 <table>
-<tr><th>Criterion</th><th>NASA Battery Data Set</th><th>CALCE Storage 25 C</th></tr>
-<tr><td>Files inspected</td><td>6 inner BatteryAgingARC ZIPs, 38 MAT files</td><td>5 requested Storage archives only</td></tr>
-<tr><td>Same-cell EIS</td><td>Yes, 34 unique cells with charge, discharge, and impedance</td><td>Yes, same PLN capacity and impedance candidates</td></tr>
-<tr><td>Time-domain evidence</td><td>Charge and discharge cycling</td><td>Capacity workbooks tied to PLN IDs</td></tr>
-<tr><td>Explicit SOC labels</td><td>Weak for bridge alignment</td><td>Strong: 0, 50, and 100 percent SOC metadata</td></tr>
-<tr><td>25 C subset</td><td>Present, but mixed with other ambient conditions</td><td>Direct target subset</td></tr>
-<tr><td>Candidate pairings</td><td>68 same-cell impedance plus charge/discharge rows</td><td>24 same-PLN capacity plus EIS rows at 25 C</td></tr>
-<tr><td>Fit to CALB failure mode</td><td>Weak, not drive-cycle or pulse-aligned</td><td>Better SOC and same-cell metadata, still not drive-cycle</td></tr>
+<tr><th>Criterion</th><th>CALCE Storage 25 C</th><th>KIT/RADAR4KIT</th><th>NASA Battery Data Set</th></tr>
+<tr><td>Priority</td><td>First</td><td>Second only after corrected EIS addendum</td><td>Third</td></tr>
+<tr><td>Current local status</td><td>Manifest, adapter, frozen inputs, and blocked validation report</td><td>Manifest only; corrected EIS unavailable locally and no public corrected-addendum source found</td><td>Manifest only</td></tr>
+<tr><td>Same-cell EIS</td><td>Yes, same PLN capacity and impedance candidates</td><td>Not acceptable from the incomplete local <code>cell_eisv2.zip</code></td><td>Yes, 34 unique cells with charge, discharge, and impedance</td></tr>
+<tr><td>Time-domain evidence</td><td>Capacity workbooks tied to PLN IDs</td><td>Profile ageing, pulse pattern, and drive/profile data once corrected EIS is present</td><td>Charge and discharge cycling</td></tr>
+<tr><td>Explicit SOC labels</td><td>Strong: 0, 50, and 100 percent SOC metadata</td><td>Promising, but blocked until corrected EIS is joined</td><td>Weak for bridge alignment</td></tr>
+<tr><td>25 C subset</td><td>Direct target subset</td><td>Needs corrected EIS confirmation</td><td>Present, but mixed with other ambient conditions</td></tr>
+<tr><td>Candidate pairings</td><td>24 same-PLN capacity plus EIS rows at 25 C, 0 Section 33 runnable rows in current inputs</td><td>Not valid yet</td><td>68 same-cell impedance plus charge/discharge rows</td></tr>
+<tr><td>Fit to CALB failure mode</td><td>Best first qualification path, still not drive-cycle validation</td><td>Best second drive/profile-ageing candidate when corrected EIS exists</td><td>Later robustness check, weak for the pulse/drive-profile failure mode</td></tr>
 </table>
 <h2>Recommendation</h2>
-<p>Use CALCE Storage 25 C first.</p>
-<p>Reason: CALCE has the cleaner external qualification path for the frozen CALB rule because it exposes PLN IDs, SOC labels, 25 C conditions, capacity workbooks, and same-cell impedance CSVs. The next adapter can make explicit same-PLN, same-SOC, same-temperature joins without playing games.</p>
-<p>NASA should be second. It is not useless, but it is the wrong first fight. It has same-cell impedance plus charge/discharge cycling, not the pulse or drive-cycle structure that already broke confidence in Sections 36, 37, 40, and 42. If you start with NASA because it has more rows, you are optimizing for comfort instead of the actual failure mode. That would be bad science.</p>
+<p>Use CALCE Storage 25 C first, but be precise about what happened.</p>
+<p>Reason: CALCE has the cleaner external qualification path for the frozen CALB rule because it exposes PLN IDs, SOC labels, 25 C conditions, capacity workbooks, and same-cell impedance CSVs. The frozen input build produced 24 same-join qualification rows, but 0 rows are scientifically runnable by Section 33 because the current inputs do not expose HPPC-compatible pulse windows.</p>
+<p>Use KIT/RADAR4KIT second only after the corrected EIS addendum is actually available. The incomplete local <code>cell_eisv2.zip</code> from DOI <code>10.35097/1947</code> is not validation evidence.</p>
+<p>Use NASA third as a robustness check. It is not useless, but it is the wrong first fight. It has same-cell impedance plus charge/discharge cycling, not the pulse or drive-profile structure that already broke confidence in Sections 36, 37, 40, and 42. If you start with NASA because it has more rows, you are optimizing for comfort instead of the actual failure mode. That would be bad science.</p>
 <h2>Claim Boundary</h2>
 <p>Allowed:</p>
 <ul>
 <li>CALCE Storage 25 C is the better first external dataset for same-cell capacity plus EIS qualification.</li>
+<li>KIT/RADAR4KIT is second only if the corrected EIS addendum is available.</li>
 <li>NASA is usable later as a same-cell impedance plus charge/discharge robustness check.</li>
 </ul>
 <p>Not allowed:</p>
@@ -371,20 +379,30 @@ footer {
 <li>The CALB rule is externally validated.</li>
 <li>NASA validates the drive-cycle bridge.</li>
 <li>CALCE validates drive-cycle behavior. It does not.</li>
+<li>The incomplete local RADAR4KIT <code>cell_eisv2.zip</code> validates the frozen CALB rule. It does not.</li>
 </ul>
 <h2>Next Step</h2>
-<p>Build the CALCE adapter first:</p>
-<p>1. Join <code>pln_metadata.csv</code>, <code>capacity_workbook_channels.csv</code>, and <code>impedance_csv_manifest.csv</code>.</p>
-<p>2. Freeze the join keys before modeling: <code>pln_id</code>, <code>temperature_c</code>, <code>storage_period</code>, and <code>soc_percent</code>.</p>
-<p>3. Start with the 24 candidate 25 C PLN IDs from <code>summary.json</code>.</p>
-<p>4. Run the frozen CALB rule unchanged, then compare against a boring ECM baseline.</p>
-<p>5. If DRT loses or the join is dirty, say that. Do not massage it into validation.</p>
+<p>Current CALCE status:</p>
+<p>1. Join keys are frozen: <code>pln_id</code>, <code>temperature_c</code>, <code>storage_period</code>, and <code>soc_percent</code>.</p>
+<p>2. <code>04_Frozen_Inputs/</code> records 24 same-join qualification rows.</p>
+<p>3. <code>05_Frozen_Rule_Run/</code> records <code>blocked/inconclusive</code>; the frozen rule was not run.</p>
+<p>4. <code>06_Baseline_Comparison/</code> records that no fair baseline comparison exists yet.</p>
+<p>5. <code>07_Validation_Report/</code> gives the only allowed verdict: <code>blocked/inconclusive</code>.</p>
+<p>Next requirement: find or build a same-PLN CALCE path with HPPC-compatible pulse windows tied to the same 25 C, storage-period, and SOC rows. If that evidence does not exist, do not pretend capacity summaries are pulse evidence.</p>
 <h2>Generated Artifacts</h2>
 <ul>
 <li><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/README.md</code></li>
 <li><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/summary.json</code></li>
 <li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/README.md</code></li>
 <li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/summary.json</code></li>
+<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/03_Adapter/README.md</code></li>
+<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/03_Adapter/adapter_summary.json</code></li>
+<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/03_Adapter/adapter_candidate_table.csv</code></li>
+<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/04_Frozen_Inputs/README.md</code></li>
+<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/05_Frozen_Rule_Run/README.md</code></li>
+<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/06_Baseline_Comparison/README.md</code></li>
+<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/07_Validation_Report/README.md</code></li>
+<li><code>40 Outputs/Experiments/External Validation Dataset Qualification/03_RADAR4KIT_Corrected_EIS_Status/README.md</code></li>
 </ul>
       </main>
       <footer>

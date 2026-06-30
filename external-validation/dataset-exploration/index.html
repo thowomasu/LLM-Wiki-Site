@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>External Dataset Exploration: Panasonic, Samsung, Graphite/LNMO | LLM Wiki Research Outputs</title>
+  <link rel="stylesheet" href="../../assets/site.css">
+  <style>
+    .figure {
+      margin: 24px 0 34px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+    }
+    .figure figcaption {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .verdict {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../../index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+      <div class="side-section">Project</div>
+      <a class="side-link" href="../../index.html">Overview</a>
+      <a class="side-link" href="../../presentations/">Presentations</a>
+      <a class="side-link" href="../../datasets/">Datasets</a>
+      <a class="side-link" href="../../sources/">Sources</a>
+      <a class="side-link" href="../../glossary/">Glossary</a>
+      <div class="side-section">External Validation</div>
+      <a class="side-link" href="../">Dataset comparison</a>
+      <a class="side-link" href="./">New dataset exploration</a>
+      <a class="side-link" href="../calce/">CALCE</a>
+      <a class="side-link" href="../nasa/">NASA Battery</a>
+      <a class="side-link" href="../../sources/external/">External sources</a>
+    </aside>
+    <div class="page-content">
+      <header>
+        <div class="kicker">External validation scouting</div>
+        <h1>Panasonic, Samsung, and Graphite/LNMO Dataset Exploration</h1>
+        <p class="lead">A presentation-style viability readout for three newly downloaded candidate datasets. This is data exploration only. It is not an external Section 33 validation run.</p>
+      </header>
+      <main>
+        <section class="note">
+          <strong>Claim boundary:</strong> the frozen CALB Section 33 rule is still internal evidence until an unchanged external run passes and beats the boring baseline. These plots only show whether the downloaded datasets look worth adapting into frozen inputs.
+        </section>
+
+        <div class="tabs" aria-label="Section tabs">
+          <a class="tab" href="../">Dataset comparison</a>
+          <a class="tab active" href="./">New dataset exploration</a>
+          <a class="tab" href="../calce/">CALCE</a>
+          <a class="tab" href="../nasa/">NASA Battery</a>
+          <a class="tab" href="../../sources/external/">Sources</a>
+        </div>
+
+        <section class="grid">
+          <article class="card">
+            <h3>Panasonic 18650PF</h3>
+            <span class="metric good">3</span>
+            <div class="label">Matched long-discharge IDs found: <code>3541</code>, <code>3623</code>, and <code>3740</code>.</div>
+            <span class="verdict good">Best next target</span>
+          </article>
+          <article class="card">
+            <h3>Samsung INR21700-50E</h3>
+            <span class="metric warn">14 GB</span>
+            <div class="label">Large HPPC archive set with sampled current, voltage, and temperature. No EIS observed locally.</div>
+            <span class="verdict warn">Pulse-side only</span>
+          </article>
+          <article class="card">
+            <h3>Graphite/LNMO</h3>
+            <span class="metric warn">22</span>
+            <div class="label">Full-cell EIS files by SOC. Only one long candidate from the rate file under the frozen window finder.</div>
+            <span class="verdict warn">Weak fit</span>
+          </article>
+        </section>
+
+        <h2>Bottom Line</h2>
+        <p>Panasonic is the only one that currently deserves a real adapter attempt for Section 33 frozen inputs. Samsung is useful for pulse exploration, but without same-cell EIS it cannot validate Section 33. Graphite/LNMO has clean EIS and useful electrochemical protocols, but its full-cell qOCV file gives zero frozen candidates and the rate file gives only one long candidate.</p>
+        <p>None of the three is aging validation. Do not say otherwise. Panasonic can test the pulse-to-EIS bridge on a different cell format and chemistry context. That is useful, but narrower than validating the whole CALB aging claim.</p>
+
+        <figure class="figure">
+          <img src="plots/combined_dataset_readiness_overview.png" alt="Combined readiness overview for Panasonic, Samsung, and Graphite/LNMO datasets">
+          <figcaption>Inventory and readiness matrix. Panasonic has the cleanest combination of same-cell EIS, raw time series, long pulse/rest evidence, and a plausible EIS-pulse join. The aging-validation column is red for every dataset.</figcaption>
+        </figure>
+
+        <h2>Panasonic 18650PF</h2>
+        <p>The Panasonic archive has both EIS CSVs and MATLAB pulse files across five temperatures. The true five-pulse HPPC files are too short for frozen Section 33 because they are about 10 seconds. The separate <code>dis5_10p</code> files are the important ones: several contain long discharge windows with enough post-rest to pass the frozen window gate.</p>
+        <table>
+          <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
+          <tr><td>EIS coverage</td><td>58 parsed EIS files across <code>25degC</code>, <code>10degC</code>, <code>0degC</code>, <code>-10degC</code>, and <code>-20degC</code>.</td><td>Strong for spectrum variability and SOC proxy review.</td></tr>
+          <tr><td>Pulse windows</td><td>14 pulse/time files screened; 8 files contain long candidates.</td><td>Strong enough for adapter work.</td></tr>
+          <tr><td>Clean matched IDs</td><td><code>3541</code> at 25 C, <code>3623</code> at 0 C, and <code>3740</code> at -10 C.</td><td>Best route for frozen-input construction.</td></tr>
+          <tr><td>Claim limit</td><td>Not an aging validation dataset in this pass.</td><td>External bridge support only if the unchanged rule later passes.</td></tr>
+        </table>
+        <figure class="figure">
+          <img src="plots/panasonic_eis_nyquist_by_temperature.png" alt="Panasonic EIS Nyquist traces grouped by temperature">
+          <figcaption>EIS variability by temperature. This shows spectrum shape and spread before any fitting claim is made.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="plots/panasonic_eis_voltage_coverage.png" alt="Panasonic EIS voltage coverage as SOC proxy">
+          <figcaption>EIS voltage coverage used as a rough SOC proxy. This helps identify whether candidate pulse windows can be paired to nearby EIS states without inventing labels.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="plots/panasonic_pulse_candidate_map.png" alt="Panasonic pulse candidate map showing long-window availability">
+          <figcaption>Pulse candidate map. The vertical line marks the frozen 250 second long-pulse gate. Matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code> are the serious candidates.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="plots/panasonic_matched_long_discharge_examples.png" alt="Panasonic matched long-discharge current and voltage examples">
+          <figcaption>Current and voltage traces for the matched long-discharge candidates. These are not yet fitted. They are the raw evidence that justifies a frozen-input adapter attempt.</figcaption>
+        </figure>
+
+        <h2>Samsung INR21700-50E HPPC</h2>
+        <p>The Samsung download is a large set of 7z archives with giant CSV reports. A streamed sample from Batch 1 shows usable current, voltage, cell temperature, and chamber temperature. That is good for pulse analysis. It is not enough for Section 33 because no same-cell EIS was observed in the local files.</p>
+        <table>
+          <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
+          <tr><td>Local archive size</td><td>19 archives, about 14.0 GB compressed.</td><td>Large HPPC corpus, expensive to process fully.</td></tr>
+          <tr><td>Sample read</td><td>120,000 streamed rows from <code>Batch1</code>, MCU1.</td><td>Confirms raw time-series fields are usable.</td></tr>
+          <tr><td>EIS</td><td>No EIS observed locally.</td><td>Blocks Section 33 validation by itself.</td></tr>
+        </table>
+        <figure class="figure">
+          <img src="plots/samsung_archive_inventory.png" alt="Samsung archive inventory by compressed size">
+          <figcaption>Archive inventory. This is too large for casual full extraction; process it only when the research question needs pulse-only robustness.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="plots/samsung_sample_timeseries.png" alt="Samsung sampled current voltage and temperature traces">
+          <figcaption>Sampled time-series from one streamed CSV. The sampled segment behaves like constant-current discharge, not an EIS-linked Section 33 validation row.</figcaption>
+        </figure>
+
+        <h2>Graphite/LNMO</h2>
+        <p>The graphite/LNMO archive is scientifically interesting, but weaker for this specific validation question. It has full-cell EIS by SOC, qOCV, rate, GITT-style files, and parameter JSONs. The frozen window finder sees zero candidates in qOCV because the current is below the hard rest threshold. It sees one long candidate in the rate file, but that is not a clean HPPC-style EIS-pulse check-up join.</p>
+        <table>
+          <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
+          <tr><td>EIS</td><td>22 full-cell EIS CSVs by SOC.</td><td>Good for spectrum-over-SOC presentation.</td></tr>
+          <tr><td>qOCV time series</td><td>386,001 rows, zero accepted frozen candidates.</td><td>Not runnable unchanged for Section 33.</td></tr>
+          <tr><td>Rate time series</td><td>170,726 rows, six accepted windows, one long candidate.</td><td>Possible side experiment, weak as validation.</td></tr>
+        </table>
+        <figure class="figure">
+          <img src="plots/graphite_lnmo_eis_nyquist_by_soc.png" alt="Graphite LNMO EIS Nyquist traces by SOC">
+          <figcaption>EIS variability by SOC. This is the cleanest visual in the graphite/LNMO set, but EIS alone does not validate a time-domain rule.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="plots/graphite_lnmo_full_cell_protocol_traces.png" alt="Graphite LNMO full-cell qOCV and rate traces">
+          <figcaption>Full-cell qOCV and rate traces. The qOCV current is too small for the frozen candidate finder; the rate protocol is not a clean HPPC check-up equivalent.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="plots/graphite_lnmo_window_candidate_counts.png" alt="Graphite LNMO frozen window candidate counts">
+          <figcaption>Frozen window-finder response. This is why graphite/LNMO should not outrank Panasonic for Section 33 readiness.</figcaption>
+        </figure>
+
+        <h2>Downloadable Exploration Outputs</h2>
+        <p>These are lightweight summaries and plot inputs produced from sampled or archive-inspected data. They are not raw dataset mirrors.</p>
+        <ul>
+          <li><a href="data/exploration_summary.json">Exploration summary JSON</a></li>
+          <li><a href="data/panasonic_eis_summary.csv">Panasonic EIS summary CSV</a></li>
+          <li><a href="data/panasonic_pulse_summary.csv">Panasonic pulse summary CSV</a></li>
+          <li><a href="data/samsung_archive_summary.csv">Samsung archive summary CSV</a></li>
+          <li><a href="data/graphite_lnmo_window_summary.csv">Graphite/LNMO window summary CSV</a></li>
+        </ul>
+
+        <h2>Next Move</h2>
+        <p>Build the Panasonic adapter first, using only the matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code>. Do not touch lambda, thresholds, windows, candidate logic, fallback logic, or pass criteria after seeing results. If the frozen run fails, call it failure or blocked evidence. Do not rescue it.</p>
+      </main>
+      <footer>
+        Public-facing static site generated from curated vault outputs. This is not the raw vault.
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

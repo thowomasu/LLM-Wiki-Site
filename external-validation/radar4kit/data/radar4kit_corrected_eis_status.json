@@ -1,0 +1,15 @@
+{
+  "dataset": "KIT/RADAR4KIT",
+  "checked_date": "2026-06-29",
+  "local_dataset_folder": "[local path redacted]",
+  "local_files_found": [
+    "10.35097-1947.tar",
+    "RADAR_DATASET_DESCRIPTIVE_METADATA"
+  ],
+  "corrected_eis_addendum_found_locally": false,
+  "web_search_performed": true,
+  "web_source_result": "no public corrected-addendum source found",
+  "corrected_eis_available": false,
+  "verdict": "blocked_corrected_eis_unavailable",
+  "claim_boundary": "do_not_use_incomplete_cell_eisv2_as_validation_evidence"
+}

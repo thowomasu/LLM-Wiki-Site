@@ -1,0 +1,20 @@
+{
+  "dataset": "CALCE Storage 25 C frozen inputs",
+  "frozen_rule_id": "calb_section_33_adaptive_final_rule_frozen_2026-06-29",
+  "source_table": "03_Adapter/adapter_candidate_table.csv",
+  "join_keys": [
+    "pln_id",
+    "temperature_c",
+    "storage_period",
+    "soc_percent"
+  ],
+  "row_count": 24,
+  "same_join_justified_rows": 24,
+  "dirty_join_warning_rows": 24,
+  "section33_runnable_rows": 0,
+  "blocked_rows": 24,
+  "section33_rule_run_possible": false,
+  "verdict": "blocked_no_hppc_compatible_pulse_windows",
+  "claim_boundary": "frozen_inputs_only_not_external_validation",
+  "required_next_evidence": "HPPC-compatible same-cell time-domain pulse windows tied to the same CALCE PLN, temperature, storage period, and SOC rows."
+}

@@ -334,7 +334,7 @@ footer {
 
       </header>
       <main>
-<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab" href="../../external-validation/">Dataset comparison</a><a class="tab active" href="./">CALCE (Center for Advanced Life Cycle Engineering)</a><a class="tab" href="../nasa/">NASA Battery</a><a class="tab" href="../../sources/external/">Sources</a></div><h2>CALCE Storage 25 C External Validation Manifest</h2>
+<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab" href="../../external-validation/">Dataset comparison</a><a class="tab" href="../dataset-exploration/">New dataset exploration</a><a class="tab active" href="./">CALCE (Center for Advanced Life Cycle Engineering)</a><a class="tab" href="../nasa/">NASA Battery</a><a class="tab" href="../../sources/external/">Sources</a></div><h2>CALCE Storage 25 C External Validation Manifest</h2>
 <h2>Scope</h2>
 <p>This is dataset qualification only. It does not validate the frozen CALB rule.</p>
 <p>The script inspected only the five requested Storage archives and did not bulk-extract them.</p>
@@ -359,7 +359,8 @@ footer {
 </ul>
 <h2>Blunt Read</h2>
 <p>CALCE Storage 25 C is the better first external target for the frozen CALB rule qualification. It has explicit PLN IDs, SOC labels, 25 C storage conditions, capacity workbooks, and same-cell impedance CSVs. The cost is that it is storage/calendar ageing, not drive-cycle validation.</p>
-<p>NASA is still useful, but it is the weaker first target because its same-cell time-domain side is ordinary charge/discharge cycling. That is too far from the CALB pulse/drive-cycle failure mode we already exposed.</p>
+<p>The CALCE adapter freezes 24 ready rows using <code>pln_id</code>, <code>temperature_c</code>, <code>storage_period</code>, and <code>soc_percent</code>. The frozen input build keeps all 24 as same-join qualification rows, but the current inputs expose 0 Section 33 runnable rows because HPPC-compatible pulse windows are missing. That is blocked validation readiness, not external validation.</p>
+<p>KIT/RADAR4KIT is second only after the corrected EIS addendum is available. NASA is still useful later, but it is the weaker target because its same-cell time-domain side is ordinary charge/discharge cycling. That is too far from the CALB pulse/drive-profile failure mode we already exposed.</p>
 <h2>Outputs</h2>
 <ul>
 <li><code>zip_listing.csv</code></li>
@@ -368,6 +369,14 @@ footer {
 <li><code>impedance_csv_manifest.csv</code></li>
 <li><code>candidate_pairings.csv</code></li>
 <li><code>summary.json</code></li>
+<li><code>03_Adapter/adapter_candidate_table.csv</code></li>
+<li><code>03_Adapter/adapter_summary.json</code></li>
+<li><code>03_Adapter/README.md</code></li>
+<li><code>04_Frozen_Inputs/calce_storage_25c_frozen_input_rows.csv</code></li>
+<li><code>04_Frozen_Inputs/calce_storage_25c_frozen_input_summary.json</code></li>
+<li><code>05_Frozen_Rule_Run/calce_storage_25c_frozen_rule_summary.json</code></li>
+<li><code>06_Baseline_Comparison/calce_storage_25c_baseline_summary.json</code></li>
+<li><code>07_Validation_Report/calce_storage_25c_validation_summary.json</code></li>
 </ul>
       </main>
       <footer>
