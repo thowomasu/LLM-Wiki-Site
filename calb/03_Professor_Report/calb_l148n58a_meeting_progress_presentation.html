@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CALB L148N58A Meeting Progress Brief</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17202a;
+      --muted: #5f6b76;
+      --line: #d9e0e6;
+      --paper: #f6f8fa;
+      --panel: #ffffff;
+      --panel-strong: #ffffff;
+      --note-bg: #fff8f0;
+      --code-bg: #eef2f5;
+      --table-head: #edf3f8;
+      --blue: #225f9f;
+      --green: #137458;
+      --orange: #b85f17;
+      --red: #a83d4a;
+    }
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #e6edf3;
+      --muted: #a7b3bf;
+      --line: #2d3844;
+      --paper: #0f141a;
+      --panel: #151c24;
+      --panel-strong: #10161d;
+      --note-bg: #241b12;
+      --code-bg: #1f2a35;
+      --table-head: #1c2a36;
+      --blue: #78b7ff;
+      --green: #58d39d;
+      --orange: #f0a35a;
+      --red: #f08490;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      padding-left: 260px;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+    .deck-nav {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: 260px;
+      overflow-y: auto;
+      padding: 18px 16px;
+      background: var(--panel-strong);
+      border-right: 1px solid var(--line);
+    }
+    .brand {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .brand strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.15;
+    }
+    .brand span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .side-section {
+      margin: 18px 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .deck-nav a {
+      display: block;
+      min-height: 34px;
+      padding: 8px 10px;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .deck-nav a:hover {
+      border-color: var(--line);
+      background: var(--paper);
+    }
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 36px;
+      margin: 14px 0 8px;
+      padding: 8px 9px;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .theme-toggle .toggle-state {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    header, main, footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding-right: min(5vw, 48px);
+      padding-left: min(5vw, 48px);
+    }
+    header {
+      padding-top: 46px;
+      padding-bottom: 28px;
+      background: var(--panel-strong);
+      border-bottom: 1px solid var(--line);
+    }
+    main {
+      padding-top: 28px;
+      padding-bottom: 58px;
+    }
+    footer {
+      padding-top: 20px;
+      padding-bottom: 26px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    h1 {
+      max-width: 980px;
+      font-size: clamp(38px, 6vw, 72px);
+    }
+    h2 {
+      margin-top: 34px;
+      margin-bottom: 14px;
+      font-size: clamp(26px, 3.4vw, 40px);
+    }
+    h3 {
+      margin-top: 18px;
+      margin-bottom: 8px;
+      font-size: 21px;
+    }
+    p, li {
+      max-width: 930px;
+      font-size: 18px;
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: var(--code-bg);
+      font-family: Consolas, Monaco, monospace;
+    }
+    .kicker {
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .lead {
+      max-width: 980px;
+      color: var(--muted);
+      font-size: 22px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 22px 0;
+    }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .metric {
+      display: block;
+      margin: 8px 0;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1;
+      font-weight: 800;
+    }
+    .good { color: var(--green); }
+    .warn { color: var(--orange); }
+    .bad { color: var(--red); }
+    .label {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .note {
+      margin: 22px 0;
+      padding: 15px 17px;
+      border-left: 5px solid var(--orange);
+      background: var(--note-bg);
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      margin: 4px 6px 4px 0;
+      padding: 8px 12px;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      font-size: 14px;
+    }
+    .button:hover {
+      border-color: var(--blue);
+    }
+    table {
+      width: 100%;
+      margin: 20px 0;
+      border-collapse: collapse;
+      background: var(--panel);
+    }
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 16px;
+    }
+    th { background: var(--table-head); }
+    figure {
+      margin: 26px 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+    }
+    figcaption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    @media (max-width: 850px) {
+      body { padding-left: 0; }
+      .deck-nav {
+        position: static;
+        width: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .grid, .grid.two { grid-template-columns: 1fr; }
+      p, li { font-size: 17px; }
+    }
+  </style>
+  <script>
+    (function () {
+      var key = "llm-wiki-theme";
+      function preferredTheme() {
+        try {
+          var saved = localStorage.getItem(key);
+          if (saved === "dark" || saved === "light") return saved;
+        } catch (error) {}
+        return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      function applyTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        var label = document.querySelector("[data-theme-label]");
+        if (label) label.textContent = theme === "dark" ? "On" : "Off";
+      }
+      var initialTheme = preferredTheme();
+      applyTheme(initialTheme);
+      window.addEventListener("DOMContentLoaded", function () {
+        applyTheme(document.documentElement.dataset.theme || initialTheme);
+        var toggle = document.querySelector("[data-theme-toggle]");
+        if (!toggle) return;
+        toggle.addEventListener("click", function () {
+          var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+          try { localStorage.setItem(key, next); } catch (error) {}
+          applyTheme(next);
+        });
+      });
+    })();
+  </script>
+</head>
+<body>
+  <nav class="deck-nav" aria-label="Meeting brief sections">
+    <a class="brand" href="../../index.html"><strong>LLM Toolkit Wiki</strong><span>CALB meeting progress brief</span></a>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+    <div class="side-section">This Page</div>
+    <a href="#message">Meeting Message</a>
+    <a href="#progress">Current Progress</a>
+    <a href="#evidence">Evidence To Show</a>
+    <a href="#limits">Limits</a>
+    <a href="#questions">Questions To Ask</a>
+    <div class="side-section">Public Site</div>
+    <a href="../../presentations/">Presentation Index</a>
+    <a href="../data/">CALB Data Explorer</a>
+    <a href="../manual/">CALB Manual</a>
+    <a href="../../external-validation/">External Dataset Checks</a>
+  </nav>
+
+  <header id="message">
+    <div class="kicker">Meeting brief</div>
+    <h1>CALB L148N58A Progress Update</h1>
+    <p class="lead">Say this plainly: the project has strong internal CALB pulse-to-EIS bridge evidence. It does not yet have external validation. That is the honest line.</p>
+  </header>
+
+  <main>
+    <section class="note">
+      <strong>Use this framing:</strong> we built a working time-domain DRT pipeline, found a strong internal bridge result, tested the risky drive-cycle and external claims, and found where the evidence breaks. That is progress. Do not dress it up as full validation.
+    </section>
+
+    <h2 id="progress">Current Progress</h2>
+    <section class="grid">
+      <article class="card">
+        <div class="kicker">Internal CALB bridge</div>
+        <span class="metric good">246 / 246</span>
+        <p>Section 33 quality-pass rows across 10, 25, and 40 C. Median bridge correlation is <code>0.928</code>.</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Drive-cycle transfer</div>
+        <span class="metric bad">12.1%</span>
+        <p>Fixed DRT wins against the stronger Section 36 ECM baseline on only <code>0.121</code> of drive-cycle rows.</p>
+      </article>
+      <article class="card">
+        <div class="kicker">External validation</div>
+        <span class="metric warn">Not solved</span>
+        <p>CALCE is blocked. RADAR4KIT and Panasonic adapter runs currently return <code>no support</code>.</p>
+      </article>
+    </section>
+
+    <h2 id="evidence">Evidence To Show</h2>
+    <figure>
+      <img src="../01_Graphs/Section_33_Final_Rule_Adaptive_MultiTemp/section_33_adaptive_final_rule_multitemp.png" alt="Section 33 adaptive final rule multi-temperature result">
+      <figcaption>Show this first. It is the strongest result: the frozen internal CALB pulse bridge passes all rows across the temperature grid.</figcaption>
+    </figure>
+    <figure>
+      <img src="../01_Graphs/Section_36_Drive_Cycle_ECM_Baseline/section_36_drive_cycle_ecm_baseline.png" alt="Section 36 drive-cycle ECM baseline audit">
+      <figcaption>Show this before someone asks. The drive-cycle claim weakens when compared against a stronger ECM baseline.</figcaption>
+    </figure>
+    <figure>
+      <img src="../01_Graphs/Section_37_SOC_Alignment_Audit/section_37_soc_alignment_audit.png" alt="Section 37 SOC alignment audit">
+      <figcaption>This explains why the drive-cycle transfer is weak: bridge rows are tightly state-aligned, while many drive-cycle rows are not.</figcaption>
+    </figure>
+
+    <h2 id="limits">Claim Boundary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Allowed claim</th>
+          <th>Do not claim</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CALB internal bridge</td>
+          <td>The Section 33 adaptive tau-constrained rule passes the internal CALB pulse-to-EIS bridge gate.</td>
+          <td>That this proves external validity, SOH prediction, or aging prediction.</td>
+        </tr>
+        <tr>
+          <td>Drive cycles</td>
+          <td>Drive-cycle transfer was tested and then downgraded after the stronger ECM baseline audit.</td>
+          <td>That Section 34 proves drive-cycle superiority. Section 36 says it does not.</td>
+        </tr>
+        <tr>
+          <td>CALCE</td>
+          <td>CALCE Storage 25 C has 24 same-join rows, but 0 Section 33-runnable rows in current inputs.</td>
+          <td>That CALCE validates the frozen rule.</td>
+        </tr>
+        <tr>
+          <td>RADAR4KIT</td>
+          <td>The corrected EIS addendum is locally usable, but the frozen adapter run gives <code>no support</code>.</td>
+          <td>That RADAR4KIT currently validates the frozen CALB rule.</td>
+        </tr>
+        <tr>
+          <td>Panasonic</td>
+          <td>Panasonic is a smoke-test adapter run, not support for the claim.</td>
+          <td>That it is aging validation or a successful external replication.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>External Dataset Status</h2>
+    <section class="grid">
+      <article class="card">
+        <h3>CALCE Storage 25 C</h3>
+        <p><strong>Verdict:</strong> <code>blocked/inconclusive</code></p>
+        <p>It has 24 same-join rows, but no HPPC-compatible pulse windows exposed in the current inputs.</p>
+      </article>
+      <article class="card">
+        <h3>KIT/RADAR4KIT</h3>
+        <p><strong>Verdict:</strong> <code>no support</code></p>
+        <p>456 frozen-rule rows, 411 quality-pass rows, but it does not beat the voltage-only baseline.</p>
+      </article>
+      <article class="card">
+        <h3>Panasonic 18650PF</h3>
+        <p><strong>Verdict:</strong> <code>no support</code></p>
+        <p>33 frozen-rule rows, 0 quality-pass rows. Useful as an adapter smoke test only.</p>
+      </article>
+    </section>
+
+    <h2 id="questions">Questions To Ask In The Meeting</h2>
+    <ol>
+      <li>Is internal same-cell CALB pulse-to-EIS bridge evidence enough for the current milestone, or do we need external validation before writing this up?</li>
+      <li>Which external dataset should count as acceptable validation: CALCE, RADAR4KIT, or another dataset with same-cell EIS plus pulse/rest windows?</li>
+      <li>What baseline must the method beat: voltage-only, ECM, or a published method?</li>
+      <li>If drive-cycle transfer is still required, what SOC alignment rule should be treated as acceptable?</li>
+    </ol>
+
+    <h2>Open The Supporting Pages</h2>
+    <p>
+      <a class="button" href="calb_l148n58a_viability_presentation.html">Viability presentation</a>
+      <a class="button" href="calb_l148n58a_professor_report.html">Dataset validation brief</a>
+      <a class="button" href="../../external-validation/">External dataset checks</a>
+      <a class="button" href="../data/">CALB data explorer</a>
+    </p>
+  </main>
+
+  <footer>
+    Source-grounded meeting page built from the CALB section summaries and external dataset qualification outputs.
+  </footer>
+</body>
+</html>
