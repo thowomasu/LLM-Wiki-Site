@@ -37,6 +37,35 @@
       text-transform: uppercase;
     }
   </style>
+  <script>
+(function () {
+  var key = "llm-wiki-theme";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  var initialTheme = preferredTheme();
+  applyTheme(initialTheme);
+  window.addEventListener("DOMContentLoaded", function () {
+    applyTheme(document.documentElement.dataset.theme || initialTheme);
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (!toggle) return;
+    toggle.addEventListener("click", function () {
+      var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      try { localStorage.setItem(key, next); } catch (error) {}
+      applyTheme(next);
+    });
+  });
+})();
+</script>
 </head>
 <body>
   <div class="site-shell">
@@ -60,11 +89,11 @@
       <header>
         <div class="kicker">External validation scouting</div>
         <h1>Panasonic, Samsung, and Graphite/LNMO Dataset Exploration</h1>
-        <p class="lead">A presentation-style viability readout for three newly downloaded candidate datasets. This is data exploration only. It is not an external Section 33 validation run.</p>
+        <p class="lead">A presentation-style viability readout for three newly downloaded battery datasets. It explains what each dataset contains, what was plotted, and whether the data can support an unchanged external test of the CALB Section 33 rule.</p>
       </header>
       <main>
         <section class="note">
-          <strong>Claim boundary:</strong> the frozen CALB Section 33 rule is still internal evidence until an unchanged external run passes and beats the boring baseline. These plots only show whether the downloaded datasets look worth adapting into frozen inputs.
+          <strong>Claim boundary:</strong> this page is not a validation result. It is a data-readiness screen. The frozen CALB Section 33 rule is still internal evidence until the same rule runs unchanged on an external dataset and beats a simple baseline model.
         </section>
 
         <div class="tabs" aria-label="Section tabs">
@@ -74,6 +103,11 @@
           <a class="tab" href="../nasa/">NASA Battery</a>
           <a class="tab" href="../../sources/external/">Sources</a>
         </div>
+
+        <h2>How To Read This Page</h2>
+        <p><strong>Section 33</strong> is the frozen CALB pulse-to-EIS rule. In simple terms, it asks whether a time-domain current/voltage pulse can recover useful impedance-like information that agrees with EIS, which means Electrochemical Impedance Spectroscopy.</p>
+        <p>A dataset is useful for that test only if it has both sides of the bridge: same-cell EIS spectra and matching time-domain pulse or rest windows with current, voltage, temperature, and state labels. More files do not automatically mean better validation. A huge pulse dataset without EIS still cannot validate Section 33.</p>
+        <p><strong>Frozen inputs</strong> means the rule is not allowed to change after seeing the external data. No tuning lambda, thresholds, windows, candidate rules, fallback logic, or pass criteria. That is the whole point. If we tune after looking, we are fooling ourselves.</p>
 
         <section class="grid">
           <article class="card">
@@ -97,16 +131,19 @@
         </section>
 
         <h2>Bottom Line</h2>
-        <p>Panasonic is the only one that currently deserves a real adapter attempt for Section 33 frozen inputs. Samsung is useful for pulse exploration, but without same-cell EIS it cannot validate Section 33. Graphite/LNMO has clean EIS and useful electrochemical protocols, but its full-cell qOCV file gives zero frozen candidates and the rate file gives only one long candidate.</p>
-        <p>None of the three is aging validation. Do not say otherwise. Panasonic can test the pulse-to-EIS bridge on a different cell format and chemistry context. That is useful, but narrower than validating the whole CALB aging claim.</p>
+        <p>Panasonic is the only dataset here that currently deserves a real adapter attempt for frozen Section 33 inputs. It has EIS files and long current/voltage discharge windows that can plausibly be joined by cell state.</p>
+        <p>Samsung is useful for pulse-only exploration because it has large HPPC-style time-series archives. But no same-cell EIS was observed locally, so Samsung cannot validate Section 33 by itself.</p>
+        <p>Graphite/LNMO has clean EIS and useful electrochemical protocols, but it does not line up cleanly with the frozen Section 33 gate. The qOCV file gives zero accepted candidates, and the rate file gives only one long candidate.</p>
+        <p>None of the three is aging validation. Panasonic can test the pulse-to-EIS bridge on a different cell format and chemistry context. That is useful, but it is narrower than proving the CALB aging claim.</p>
 
         <figure class="figure">
           <img src="plots/combined_dataset_readiness_overview.png" alt="Combined readiness overview for Panasonic, Samsung, and Graphite/LNMO datasets">
-          <figcaption>Inventory and readiness matrix. Panasonic has the cleanest combination of same-cell EIS, raw time series, long pulse/rest evidence, and a plausible EIS-pulse join. The aging-validation column is red for every dataset.</figcaption>
+          <figcaption>Inventory and readiness matrix. Green does not mean validated. It means the required raw ingredients appear to exist. Panasonic has the cleanest combination of EIS, raw current/voltage time series, long pulse/rest evidence, and a plausible join. The aging-validation column is red for every dataset.</figcaption>
         </figure>
 
         <h2>Panasonic 18650PF</h2>
-        <p>The Panasonic archive has both EIS CSVs and MATLAB pulse files across five temperatures. The true five-pulse HPPC files are too short for frozen Section 33 because they are about 10 seconds. The separate <code>dis5_10p</code> files are the important ones: several contain long discharge windows with enough post-rest to pass the frozen window gate.</p>
+        <p>The Panasonic archive has both EIS CSV files and MATLAB pulse files across five temperatures. That matters because Section 33 needs both an impedance spectrum and a time-domain current/voltage response.</p>
+        <p>The true five-pulse HPPC files are too short for the frozen Section 33 window rule because they are about 10 seconds long. The separate <code>dis5_10p</code> files are the important ones. Several of them contain long discharge windows with enough rest afterward to pass the frozen window gate.</p>
         <table>
           <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
           <tr><td>EIS coverage</td><td>58 parsed EIS files across <code>25degC</code>, <code>10degC</code>, <code>0degC</code>, <code>-10degC</code>, and <code>-20degC</code>.</td><td>Strong for spectrum variability and SOC proxy review.</td></tr>
@@ -116,23 +153,24 @@
         </table>
         <figure class="figure">
           <img src="plots/panasonic_eis_nyquist_by_temperature.png" alt="Panasonic EIS Nyquist traces grouped by temperature">
-          <figcaption>EIS variability by temperature. This shows spectrum shape and spread before any fitting claim is made.</figcaption>
+          <figcaption>EIS variability by temperature. This plot shows the impedance spectrum shape and spread before any model is fitted. It answers: does the dataset contain real, varied EIS curves worth pairing to pulses?</figcaption>
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_eis_voltage_coverage.png" alt="Panasonic EIS voltage coverage as SOC proxy">
-          <figcaption>EIS voltage coverage used as a rough SOC proxy. This helps identify whether candidate pulse windows can be paired to nearby EIS states without inventing labels.</figcaption>
+          <figcaption>EIS voltage coverage used as a rough SOC proxy. SOC means State of Charge. This helps check whether pulse windows can be paired to nearby EIS states without inventing labels.</figcaption>
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_pulse_candidate_map.png" alt="Panasonic pulse candidate map showing long-window availability">
-          <figcaption>Pulse candidate map. The vertical line marks the frozen 250 second long-pulse gate. Matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code> are the serious candidates.</figcaption>
+          <figcaption>Pulse candidate map. The vertical line marks the frozen 250 second long-pulse gate. Files to the right of that line have windows long enough to be considered. Matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code> are the serious candidates.</figcaption>
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_matched_long_discharge_examples.png" alt="Panasonic matched long-discharge current and voltage examples">
-          <figcaption>Current and voltage traces for the matched long-discharge candidates. These are not yet fitted. They are the raw evidence that justifies a frozen-input adapter attempt.</figcaption>
+          <figcaption>Current and voltage traces for the matched long-discharge candidates. These are not model results. They are the raw evidence that justifies building a frozen-input adapter next.</figcaption>
         </figure>
 
         <h2>Samsung INR21700-50E HPPC</h2>
-        <p>The Samsung download is a large set of 7z archives with giant CSV reports. A streamed sample from Batch 1 shows usable current, voltage, cell temperature, and chamber temperature. That is good for pulse analysis. It is not enough for Section 33 because no same-cell EIS was observed in the local files.</p>
+        <p>The Samsung download is a large set of 7z archives with giant CSV reports. A streamed sample from Batch 1 shows usable current, voltage, cell temperature, and chamber temperature. That is good for pulse analysis.</p>
+        <p>The blocker is simple: no same-cell EIS was observed in the local files. Without EIS, there is nothing for Section 33 to compare the time-domain pulse result against. So Samsung is not a validation dataset for this rule unless a matching EIS source is found.</p>
         <table>
           <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
           <tr><td>Local archive size</td><td>19 archives, about 14.0 GB compressed.</td><td>Large HPPC corpus, expensive to process fully.</td></tr>
@@ -141,15 +179,16 @@
         </table>
         <figure class="figure">
           <img src="plots/samsung_archive_inventory.png" alt="Samsung archive inventory by compressed size">
-          <figcaption>Archive inventory. This is too large for casual full extraction; process it only when the research question needs pulse-only robustness.</figcaption>
+          <figcaption>Archive inventory. This is too large for casual full extraction. Process it only when the research question needs pulse-only robustness or a matching EIS source is found.</figcaption>
         </figure>
         <figure class="figure">
           <img src="plots/samsung_sample_timeseries.png" alt="Samsung sampled current voltage and temperature traces">
-          <figcaption>Sampled time-series from one streamed CSV. The sampled segment behaves like constant-current discharge, not an EIS-linked Section 33 validation row.</figcaption>
+          <figcaption>Sampled time-series from one streamed CSV. The sampled segment confirms usable raw signals, but it is not linked to an EIS spectrum, so it is not a Section 33 validation row.</figcaption>
         </figure>
 
         <h2>Graphite/LNMO</h2>
-        <p>The graphite/LNMO archive is scientifically interesting, but weaker for this specific validation question. It has full-cell EIS by SOC, qOCV, rate, GITT-style files, and parameter JSONs. The frozen window finder sees zero candidates in qOCV because the current is below the hard rest threshold. It sees one long candidate in the rate file, but that is not a clean HPPC-style EIS-pulse check-up join.</p>
+        <p>The graphite/LNMO archive is scientifically interesting, but weaker for this specific validation question. It has full-cell EIS by SOC, qOCV, rate, GITT-style files, and parameter JSONs. That is a rich electrochemistry package, but richness is not the same as Section 33 readiness.</p>
+        <p>The frozen window finder sees zero candidates in qOCV because the current is below the hard rest threshold. It sees one long candidate in the rate file, but that is not a clean HPPC-style EIS-pulse check-up join. So this dataset is useful for presentation and side experiments, not the first honest external Section 33 run.</p>
         <table>
           <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
           <tr><td>EIS</td><td>22 full-cell EIS CSVs by SOC.</td><td>Good for spectrum-over-SOC presentation.</td></tr>
@@ -158,7 +197,7 @@
         </table>
         <figure class="figure">
           <img src="plots/graphite_lnmo_eis_nyquist_by_soc.png" alt="Graphite LNMO EIS Nyquist traces by SOC">
-          <figcaption>EIS variability by SOC. This is the cleanest visual in the graphite/LNMO set, but EIS alone does not validate a time-domain rule.</figcaption>
+          <figcaption>EIS variability by SOC. This is the cleanest visual in the graphite/LNMO set. But EIS alone does not validate a time-domain rule because the pulse side is missing or weakly aligned.</figcaption>
         </figure>
         <figure class="figure">
           <img src="plots/graphite_lnmo_full_cell_protocol_traces.png" alt="Graphite LNMO full-cell qOCV and rate traces">
@@ -166,11 +205,11 @@
         </figure>
         <figure class="figure">
           <img src="plots/graphite_lnmo_window_candidate_counts.png" alt="Graphite LNMO frozen window candidate counts">
-          <figcaption>Frozen window-finder response. This is why graphite/LNMO should not outrank Panasonic for Section 33 readiness.</figcaption>
+          <figcaption>Frozen window-finder response. This is the decision plot. It shows why graphite/LNMO should not outrank Panasonic for Section 33 readiness.</figcaption>
         </figure>
 
         <h2>Downloadable Exploration Outputs</h2>
-        <p>These are lightweight summaries and plot inputs produced from sampled or archive-inspected data. They are not raw dataset mirrors.</p>
+        <p>These are lightweight summaries and plot inputs produced from sampled or archive-inspected data. They are not raw dataset mirrors, and they should not be treated as a replacement for the original dataset downloads.</p>
         <ul>
           <li><a href="data/exploration_summary.json">Exploration summary JSON</a></li>
           <li><a href="data/panasonic_eis_summary.csv">Panasonic EIS summary CSV</a></li>
@@ -180,7 +219,8 @@
         </ul>
 
         <h2>Next Move</h2>
-        <p>Build the Panasonic adapter first, using only the matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code>. Do not touch lambda, thresholds, windows, candidate logic, fallback logic, or pass criteria after seeing results. If the frozen run fails, call it failure or blocked evidence. Do not rescue it.</p>
+        <p>Build the Panasonic adapter first, using only the matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code>. The adapter should create the exact inputs Section 33 expects: EIS spectrum, pulse/rest current and voltage window, temperature, state label, and candidate metadata.</p>
+        <p>After that, run the frozen rule unchanged and compare it against a simple baseline. Do not touch lambda, thresholds, windows, candidate logic, fallback logic, or pass criteria after seeing results. If the frozen run fails, call it failure or blocked evidence. Do not rescue it.</p>
       </main>
       <footer>
         Public-facing static site generated from curated vault outputs. This is not the raw vault.
