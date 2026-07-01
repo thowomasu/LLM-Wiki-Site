@@ -1,0 +1,10 @@
+{
+  "mode": "ssh",
+  "python": "[local path redacted]",
+  "remote_host": "replace-with-vm-hostname-or-ip",
+  "remote_user": "replace-with-vm-user",
+  "remote_repo": "/path/to/LLM-wiki/on/vm",
+  "remote_python": "/path/to/python/on/vm",
+  "remote_shell": "bash",
+  "identity_file": ""
+}

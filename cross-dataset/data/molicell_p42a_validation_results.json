@@ -1,0 +1,178 @@
+{
+  "experiment": "cross_dataset_pulse_to_eis_training_molicell_p42a_one_shot_validation",
+  "scored_utc": "2026-07-01T09:41:58.916328+00:00",
+  "claim_boundary": "One-shot Molicell P42A validation of the locked supervised time-domain-to-fixed-grid-EIS scaffold. This is not a frozen frozen pulse-to-EIS rule CALB rule validation.",
+  "post_outcome_tuning_performed": false,
+  "frozen_config_path": "[local path redacted]",
+  "frozen_config_sha256": "634300835ae1d7ab9b9455e1f1ff4918b23039fce0255ddc7ea01525445b3650",
+  "dev_matrix_sha256_at_scoring": "d685f64d5b5b7b4f05120a5c705a37c55a801d45d4eb34859d1b92ce45577311",
+  "holdout_matrix_csv": "[local path redacted]",
+  "holdout_matrix_sha256": "e89965f6772f9f4059a5e40d1698789da2886f965f86c5d00bd0cc543a516da6",
+  "train_rows": 489,
+  "train_datasets": [
+    "Panasonic 18650PF",
+    "RADAR4KIT corrected EIS plus PULSE"
+  ],
+  "molicell_rows_scored": 101,
+  "molicell_cell_count": 12,
+  "molicell_temperature_counts": {
+    "5": 33,
+    "25": 35,
+    "40": 33
+  },
+  "molicell_soc_counts": {
+    "20": 33,
+    "50": 34,
+    "80": 34
+  },
+  "target_columns": [
+    "target_zreal_0p05hz_ohm",
+    "target_znegimag_0p05hz_ohm",
+    "target_zreal_0p1hz_ohm",
+    "target_znegimag_0p1hz_ohm",
+    "target_zreal_0p2hz_ohm",
+    "target_znegimag_0p2hz_ohm",
+    "target_zreal_0p5hz_ohm",
+    "target_znegimag_0p5hz_ohm",
+    "target_zreal_1hz_ohm",
+    "target_znegimag_1hz_ohm",
+    "target_zreal_2hz_ohm",
+    "target_znegimag_2hz_ohm",
+    "target_zreal_5hz_ohm",
+    "target_znegimag_5hz_ohm",
+    "target_zreal_10hz_ohm",
+    "target_znegimag_10hz_ohm",
+    "target_zreal_20hz_ohm",
+    "target_znegimag_20hz_ohm",
+    "target_zreal_40hz_ohm",
+    "target_znegimag_40hz_ohm"
+  ],
+  "locked_baseline": {
+    "name": "global_train_target_mean",
+    "metrics": {
+      "rmse_all_ohm": 0.010619458027514959,
+      "mae_all_ohm": 0.007856004580838969,
+      "bias_all_ohm": 0.007110850237369551,
+      "rmse_zreal_ohm": 0.014705940907771272,
+      "rmse_znegimag_ohm": 0.0030464864374297237,
+      "r2_uniform_average": -5.4973137710542535,
+      "per_target_rmse_ohm": {
+        "target_zreal_0p05hz_ohm": 0.019079373217861673,
+        "target_znegimag_0p05hz_ohm": 0.005154190674106553,
+        "target_zreal_0p1hz_ohm": 0.018887249086118527,
+        "target_znegimag_0p1hz_ohm": 0.004217388629576064,
+        "target_zreal_0p2hz_ohm": 0.016367114977598407,
+        "target_znegimag_0p2hz_ohm": 0.003337567796950379,
+        "target_zreal_0p5hz_ohm": 0.015739285949195967,
+        "target_znegimag_0p5hz_ohm": 0.0025970850276358375,
+        "target_zreal_1hz_ohm": 0.0162652055184013,
+        "target_znegimag_1hz_ohm": 0.0025466563305159965,
+        "target_zreal_2hz_ohm": 0.014667328219168656,
+        "target_znegimag_2hz_ohm": 0.0025325178637024357,
+        "target_zreal_5hz_ohm": 0.011208484848304317,
+        "target_znegimag_5hz_ohm": 0.002091891218962006,
+        "target_zreal_10hz_ohm": 0.010625091516280662,
+        "target_znegimag_10hz_ohm": 0.0020829304283816745,
+        "target_zreal_20hz_ohm": 0.01032452319163544,
+        "target_znegimag_20hz_ohm": 0.0021567422566436375,
+        "target_zreal_40hz_ohm": 0.010073868939851315,
+        "target_znegimag_40hz_ohm": 0.0020758824479549798
+      }
+    }
+  },
+  "locked_model": {
+    "name": "knn_3_global_mean_shrinkage_post_cambridge_dev",
+    "selected_alpha": 0.35000000000000003,
+    "n_neighbors": 3,
+    "metrics": {
+      "rmse_all_ohm": 0.009036333894874982,
+      "mae_all_ohm": 0.0064959251050247906,
+      "bias_all_ohm": 0.005499686054320638,
+      "rmse_zreal_ohm": 0.012522862070344616,
+      "rmse_znegimag_ohm": 0.002547270320648569,
+      "r2_uniform_average": -3.546983809549713,
+      "per_target_rmse_ohm": {
+        "target_zreal_0p05hz_ohm": 0.015674281869931837,
+        "target_znegimag_0p05hz_ohm": 0.004720411821484867,
+        "target_zreal_0p1hz_ohm": 0.015290492584337668,
+        "target_znegimag_0p1hz_ohm": 0.003391868698216859,
+        "target_zreal_0p2hz_ohm": 0.013927387768303197,
+        "target_znegimag_0p2hz_ohm": 0.002600399895711287,
+        "target_zreal_0p5hz_ohm": 0.013092218718645158,
+        "target_znegimag_0p5hz_ohm": 0.001939698606384205,
+        "target_zreal_1hz_ohm": 0.014277999113556728,
+        "target_znegimag_1hz_ohm": 0.0019445059745516837,
+        "target_zreal_2hz_ohm": 0.01251951069734881,
+        "target_znegimag_2hz_ohm": 0.001909242317076943,
+        "target_zreal_5hz_ohm": 0.01009553025897715,
+        "target_znegimag_5hz_ohm": 0.001839645659995151,
+        "target_zreal_10hz_ohm": 0.00958085155084994,
+        "target_znegimag_10hz_ohm": 0.0018336290385171713,
+        "target_zreal_20hz_ohm": 0.009109185402659578,
+        "target_znegimag_20hz_ohm": 0.001792893661880303,
+        "target_zreal_40hz_ohm": 0.009277447631560305,
+        "target_znegimag_40hz_ohm": 0.001785222824904954
+      }
+    }
+  },
+  "relative_improvement_vs_baseline": {
+    "rmse_all_fraction": 0.14907767689632662,
+    "rmse_zreal_fraction": 0.14844876986232278,
+    "rmse_znegimag_fraction": 0.16386618717473636
+  },
+  "by_temperature_soc_rmse": {
+    "5degC_SOC20": {
+      "rows": 11,
+      "baseline_rmse_all_ohm": 0.007497729784731617,
+      "model_rmse_all_ohm": 0.007906212216680465
+    },
+    "5degC_SOC50": {
+      "rows": 11,
+      "baseline_rmse_all_ohm": 0.007252518152667167,
+      "model_rmse_all_ohm": 0.00685905226608363
+    },
+    "5degC_SOC80": {
+      "rows": 11,
+      "baseline_rmse_all_ohm": 0.004670594480143815,
+      "model_rmse_all_ohm": 0.0028629892141676053
+    },
+    "25degC_SOC20": {
+      "rows": 11,
+      "baseline_rmse_all_ohm": 0.010918186425316875,
+      "model_rmse_all_ohm": 0.008921383934659553
+    },
+    "25degC_SOC50": {
+      "rows": 12,
+      "baseline_rmse_all_ohm": 0.01148314069051667,
+      "model_rmse_all_ohm": 0.009484398148031063
+    },
+    "25degC_SOC80": {
+      "rows": 12,
+      "baseline_rmse_all_ohm": 0.011054489941417259,
+      "model_rmse_all_ohm": 0.009059562404292846
+    },
+    "40degC_SOC20": {
+      "rows": 11,
+      "baseline_rmse_all_ohm": 0.013012350077792818,
+      "model_rmse_all_ohm": 0.011018173919413229
+    },
+    "40degC_SOC50": {
+      "rows": 11,
+      "baseline_rmse_all_ohm": 0.013161933232416923,
+      "model_rmse_all_ohm": 0.011170548700062559
+    },
+    "40degC_SOC80": {
+      "rows": 11,
+      "baseline_rmse_all_ohm": 0.012880418514471161,
+      "model_rmse_all_ohm": 0.010888157343527204
+    }
+  },
+  "verdict": "external_support",
+  "verdict_reason": "Locked model beat the locked global-mean baseline by at least 5 percent overall and on both EIS components.",
+  "verdict_rules": {
+    "blocked_inconclusive": "No complete Molicell target rows, schema/join failure, or runner failure before scoring.",
+    "external_support": "Locked model RMSE is at least 5 percent lower than locked global-mean baseline RMSE on Molicell and both zreal and negative-imaginary RMSE are lower.",
+    "partial_support": "Locked model RMSE is lower than locked global-mean baseline RMSE on Molicell, but the 5 percent margin or both-component requirement is not met.",
+    "no_support": "Locked model RMSE is equal to or worse than locked global-mean baseline RMSE on Molicell."
+  }
+}

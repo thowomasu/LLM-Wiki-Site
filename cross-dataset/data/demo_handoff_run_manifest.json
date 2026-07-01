@@ -1,0 +1,133 @@
+{
+  "experiment": "cross_dataset_demo_handoff_bundle",
+  "created_utc": "2026-07-01T18:24:11.275254+00:00",
+  "status": "passed",
+  "python": "[local path redacted]",
+  "steps": [
+    {
+      "name": "demo_pipeline",
+      "command": [
+        "[local path redacted]",
+        "-B",
+        "scripts/experiments/cross_dataset_pulse_to_eis_training/demo_cross_dataset_pipeline.py"
+      ],
+      "cwd": "[local path redacted]",
+      "returncode": 0,
+      "status": "passed",
+      "stdout_tail": "Wrote [local path redacted]\nWrote [local path redacted]\nDemo verdict: working_demo_model_beats_baseline\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "local_vm_smoke",
+      "command": [
+        "[local path redacted]",
+        "-B",
+        "scripts/experiments/cross_dataset_pulse_to_eis_training/vm_demo_smoke.py",
+        "--mode",
+        "local",
+        "--python",
+        "[local path redacted]"
+      ],
+      "cwd": "[local path redacted]",
+      "returncode": 0,
+      "status": "passed",
+      "stdout_tail": "Wrote [local path redacted]\nSmoke status: passed\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "public_site_rebuild_before_initial_audit",
+      "command": [
+        "[local path redacted]",
+        "-B",
+        "scripts/site/build_github_pages_site.py"
+      ],
+      "cwd": "[local path redacted]",
+      "returncode": 0,
+      "status": "passed",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "initial_goal_completion_audit",
+      "command": [
+        "[local path redacted]",
+        "-B",
+        "scripts/experiments/cross_dataset_pulse_to_eis_training/audit_cross_dataset_goal_completion.py"
+      ],
+      "cwd": "[local path redacted]",
+      "returncode": 0,
+      "status": "passed",
+      "stdout_tail": "Wrote [local path redacted]\nOverall status: complete_vm_deferred_by_user\nNext: Deferred outside this goal: when the colleague-provided VM is ready, run vm_demo_smoke.py in SSH mode with explicit host, user, repo, and Python settings.\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "demo_pptx_deck",
+      "command": [
+        "[local path redacted]",
+        "scripts/experiments/cross_dataset_pulse_to_eis_training/build_demo_pptx_deck.mjs"
+      ],
+      "cwd": "[local path redacted]",
+      "returncode": 0,
+      "status": "passed",
+      "stdout_tail": "Inspect result written to file: [local path redacted]\nWrote [local path redacted]\nScratch workspace: [local path redacted]\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "public_site_rebuild_before_final_audit",
+      "command": [
+        "[local path redacted]",
+        "-B",
+        "scripts/site/build_github_pages_site.py"
+      ],
+      "cwd": "[local path redacted]",
+      "returncode": 0,
+      "status": "passed",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "final_goal_completion_audit",
+      "command": [
+        "[local path redacted]",
+        "-B",
+        "scripts/experiments/cross_dataset_pulse_to_eis_training/audit_cross_dataset_goal_completion.py"
+      ],
+      "cwd": "[local path redacted]",
+      "returncode": 0,
+      "status": "passed",
+      "stdout_tail": "Wrote [local path redacted]\nOverall status: complete_vm_deferred_by_user\nNext: Deferred outside this goal: when the colleague-provided VM is ready, run vm_demo_smoke.py in SSH mode with explicit host, user, repo, and Python settings.\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "public_site_rebuild_after_audit",
+      "command": [
+        "[local path redacted]",
+        "-B",
+        "scripts/site/build_github_pages_site.py"
+      ],
+      "cwd": "[local path redacted]",
+      "returncode": 0,
+      "status": "passed",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    }
+  ],
+  "artifacts": {
+    "demo_results_json": "[local path redacted]",
+    "demo_presentation_html": "[local path redacted]",
+    "demo_presentation_pptx": "[local path redacted]",
+    "demo_presentation_pptx_summary": "[local path redacted]",
+    "vm_smoke_results_json": "[local path redacted]",
+    "goal_audit_json": "[local path redacted]",
+    "public_page": "[local path redacted]",
+    "vm_config_template": "[local path redacted]"
+  },
+  "goal_audit": {
+    "overall_status": "complete_vm_deferred_by_user",
+    "remote_connection_verified": false,
+    "next_required_work": [
+      "Deferred outside this goal: when the colleague-provided VM is ready, run vm_demo_smoke.py in SSH mode with explicit host, user, repo, and Python settings."
+    ]
+  },
+  "claim_boundary": "This bundle regenerates and verifies the local demo handoff. VM connection is deferred by user and is not claimed."
+}

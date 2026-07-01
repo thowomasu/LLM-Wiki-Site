@@ -1,0 +1,130 @@
+{
+  "config_name": "frozen_molicell_p42a_one_shot_validation_config",
+  "created_utc": "2026-07-01T09:41:35.530377+00:00",
+  "claim_boundary": "This freezes the post-Cambridge supervised time-domain-to-fixed-grid-EIS model for one Molicell P42A score. It is not a frozen pulse-to-EIS rule CALB rule validation.",
+  "training_data": {
+    "matrix_csv": "[local path redacted]",
+    "matrix_sha256": "d685f64d5b5b7b4f05120a5c705a37c55a801d45d4eb34859d1b92ce45577311",
+    "train_role": "dev_train_seen_outcome",
+    "train_datasets": [
+      "Panasonic 18650PF",
+      "RADAR4KIT corrected EIS plus PULSE"
+    ],
+    "development_evaluation_dataset": "Stanford SECL INR21700-M50T",
+    "cambridge_status": "spent_holdout_not_used_for_this_freeze"
+  },
+  "holdout_data": {
+    "dataset": "Molicell P42A local high-power characterization",
+    "matrix_csv": "[local path redacted]",
+    "matrix_sha256": "e89965f6772f9f4059a5e40d1698789da2886f965f86c5d00bd0cc543a516da6",
+    "summary_json": "[local path redacted]",
+    "summary_sha256": "9bca72f49b6c50057e50a0725ca8ea470a9f5130ba3363ac9de37b1b7b2089bf",
+    "split_rule": "whole Molicell matrix holdout; no Molicell rows in training or dev tuning",
+    "expected_split_role": "molicell_p42a_whole_dataset_holdout_not_tuned",
+    "frequency_mapping_status": "explicit_frequency_column_in_eis_workbooks",
+    "time_domain_join_rule": "same cell and same temperature HCGT workbook joined to each SOC-specific EIS workbook"
+  },
+  "feature_columns": [
+    "soc_percent",
+    "temperature_c",
+    "td_rows",
+    "td_duration_s",
+    "td_voltage_start_v",
+    "td_voltage_end_v",
+    "td_voltage_min_v",
+    "td_voltage_max_v",
+    "td_voltage_mean_v",
+    "td_voltage_std_v",
+    "td_current_mean_a",
+    "td_current_abs_mean_a",
+    "td_current_abs_max_a",
+    "td_active_fraction",
+    "td_charge_throughput_ah",
+    "td_discharge_throughput_ah",
+    "td_temperature_median_c",
+    "td_rows_log1p",
+    "td_duration_log1p_s",
+    "td_voltage_delta_v",
+    "td_voltage_range_v",
+    "td_voltage_cv",
+    "td_current_activity_span_a",
+    "td_current_load_factor",
+    "td_total_throughput_ah",
+    "td_net_throughput_ah",
+    "td_discharge_to_charge_ratio",
+    "td_mean_abs_current_per_hour"
+  ],
+  "target": {
+    "representation": "fixed_grid_eis_real_and_negative_imaginary_ohm",
+    "frequency_grid_hz": [
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      20.0,
+      40.0
+    ],
+    "target_columns": [
+      "target_zreal_0p05hz_ohm",
+      "target_znegimag_0p05hz_ohm",
+      "target_zreal_0p1hz_ohm",
+      "target_znegimag_0p1hz_ohm",
+      "target_zreal_0p2hz_ohm",
+      "target_znegimag_0p2hz_ohm",
+      "target_zreal_0p5hz_ohm",
+      "target_znegimag_0p5hz_ohm",
+      "target_zreal_1hz_ohm",
+      "target_znegimag_1hz_ohm",
+      "target_zreal_2hz_ohm",
+      "target_znegimag_2hz_ohm",
+      "target_zreal_5hz_ohm",
+      "target_znegimag_5hz_ohm",
+      "target_zreal_10hz_ohm",
+      "target_znegimag_10hz_ohm",
+      "target_zreal_20hz_ohm",
+      "target_znegimag_20hz_ohm",
+      "target_zreal_40hz_ohm",
+      "target_znegimag_40hz_ohm"
+    ],
+    "interpolation": "linear interpolation over log10 frequency within measured frequency range only"
+  },
+  "locked_baseline": {
+    "name": "global_train_target_mean",
+    "selection_source": "[local path redacted]",
+    "selection_source_sha256": "f0805eb91da67082befed3c1877356db69ae1ac598e7a3f57b02924a60ffa427",
+    "dev_rmse_all_ohm": 0.0044402816104454155
+  },
+  "locked_model": {
+    "name": "knn_3_global_mean_shrinkage_post_cambridge_dev",
+    "estimator": "KNeighborsRegressor(n_neighbors=3) blended with global train target mean",
+    "n_neighbors": 3,
+    "selected_alpha": 0.35000000000000003,
+    "selection_source": "[local path redacted]",
+    "selection_source_sha256": "84951dff6ef31c4d2d7dcb06ade6c920cb98db5fe4771777e0764cb090d49cf1",
+    "dev_rmse_all_ohm": 0.003940562454940317,
+    "dev_tuned_on_stanford": true
+  },
+  "verdict_rules": {
+    "blocked_inconclusive": "No complete Molicell target rows, schema/join failure, or runner failure before scoring.",
+    "external_support": "Locked model RMSE is at least 5 percent lower than locked global-mean baseline RMSE on Molicell and both zreal and negative-imaginary RMSE are lower.",
+    "partial_support": "Locked model RMSE is lower than locked global-mean baseline RMSE on Molicell, but the 5 percent margin or both-component requirement is not met.",
+    "no_support": "Locked model RMSE is equal to or worse than locked global-mean baseline RMSE on Molicell."
+  },
+  "forbidden_after_scoring": [
+    "Do not change feature columns.",
+    "Do not change the frequency grid.",
+    "Do not change selected_alpha.",
+    "Do not choose a different model after seeing Molicell metrics and still call it clean validation.",
+    "Do not add Molicell rows to training before this one-shot result is reported."
+  ],
+  "script_hashes": {
+    "freeze_config_script_sha256": "f7daa0715221720e3b2055ee4e5a66ac60061d899a2810edbc3e1e0c6186bcb5",
+    "validation_runner_script_sha256": "cf5cd48dae5b44064073c912eb4fda44c086b446489aac8be6352defdd51aeec",
+    "holdout_builder_script_sha256": "b7b59930da27d364938a477986ffaa652fc55aa90164357ecd389fd89b1f5886",
+    "dev_trainer_script_sha256": "2b8ee9874668ba84af23049cc5a2e267eeb10d748ec5a6d23138c8f1be93bfa8"
+  }
+}

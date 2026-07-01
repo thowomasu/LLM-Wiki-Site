@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cross-Dataset Pulse-to-EIS Demo Pipeline</title>
+  <style>
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #16202a; background: #f5f7f9; line-height: 1.5; }
+    main { max-width: 1100px; margin: 0 auto; padding: 34px 24px 56px; }
+    section { margin: 22px 0; padding: 22px; background: #fff; border: 1px solid #d8e0e7; border-radius: 8px; }
+    h1 { font-size: 44px; line-height: 1.08; margin: 0 0 8px; }
+    h2 { font-size: 28px; margin: 0 0 12px; }
+    p, li { font-size: 18px; }
+    code { background: #eef2f5; padding: 2px 5px; border-radius: 4px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
+    td { border: 1px solid #d8e0e7; padding: 9px 11px; vertical-align: top; }
+    .lead { color: #586673; font-size: 21px; max-width: 900px; }
+    .metric { font-size: 38px; font-weight: 800; display: block; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .note { border-left: 5px solid #b85f17; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 34px; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Cross-Dataset Pulse-to-EIS Demo Pipeline</h1>
+  <p class="lead">A small working example of the supervised pipeline: objective, methodology, results, and conclusion. This is a demo, not a new validation claim.</p>
+
+  <section>
+    <h2>Objective</h2>
+    <p>Show that the code can take time-domain battery features, predict a fixed-grid EIS spectrum, compare against a boring baseline, and run a Kramer-Kronig quality screen on the EIS targets.</p>
+  </section>
+
+  <section>
+    <h2>Methodology</h2>
+    <ol>
+      <li>Read the existing development matrix and Molicell holdout matrix.</li>
+      <li>Train on development rows only. No random row split.</li>
+      <li>Predict fixed-grid real impedance and negative-imaginary impedance.</li>
+      <li>Compare the model against the global train-mean baseline.</li>
+      <li>Run the finite-range Kramer-Kronig RC-basis screen on the holdout EIS rows.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Results</h2>
+    <div class="grid">
+      <div><span class="metric">0.0092086</span><p>Baseline RMSE, ohm</p></div>
+      <div><span class="metric">0.00797675</span><p>Demo model RMSE, ohm</p></div>
+      <div><span class="metric">1.000</span><p>KK valid fraction</p></div>
+    </div>
+    <table>
+      <tbody>
+        <tr><td>Demo verdict</td><td>working_demo_model_beats_baseline</td></tr>
+        <tr><td>Relative RMSE improvement</td><td>0.133772</td></tr>
+        <tr><td>KK rows checked</td><td>30</td></tr>
+        <tr><td>KK valid rows</td><td>30</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="note">
+    <h2>Conclusion</h2>
+    <p>The demo pipeline runs end to end and produces a measurable baseline comparison plus EIS quality metadata. The serious boundary is simple: this demo is not a fresh external-validation result. It is the code path you can show, run, and connect to a VM when the VM is ready.</p>
+  </section>
+
+  <section>
+    <h2>Code For The Demo</h2>
+    <p>Run from the private repo root:</p>
+    <p><code>&amp; "[local path redacted]" -B scripts\experiments\cross_dataset_pulse_to_eis_training\demo_cross_dataset_pipeline.py</code></p>
+    <p>Outputs: <code>demo_pipeline_results.json</code> and <code>demo_pipeline_presentation.html</code>.</p>
+  </section>
+</main>
+</body>
+</html>

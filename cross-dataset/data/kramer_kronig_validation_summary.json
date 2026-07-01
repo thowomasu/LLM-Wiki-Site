@@ -1,0 +1,92 @@
+{
+  "experiment": "cross_dataset_pulse_to_eis_training_kramer_kronig_validation",
+  "claim_boundary": "Kramer-Kronig screen is advisory quality metadata for fixed-grid EIS targets. It was not used to tune models or revise already-scored validation verdicts.",
+  "residual_limit": 0.08,
+  "max_rows_per_matrix": 0,
+  "total_rows_checked": 21366,
+  "total_kk_valid_rows": 20961,
+  "overall_valid_fraction": 0.981044650379107,
+  "matrices": [
+    {
+      "matrix": "dev_feature_target_matrix",
+      "rows_checked": 671,
+      "kk_valid_rows": 279,
+      "kk_valid_fraction": 0.4157973174366617,
+      "kk_status_counts": {
+        "high_residual": 392,
+        "pass": 279
+      },
+      "kk_residual_norm_median": 0.11644385249718686,
+      "kk_residual_norm_p95": 0.5918133261155699,
+      "kk_residual_limit": 0.08,
+      "frequency_grid_hz": [
+        0.05,
+        0.1,
+        0.2,
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0,
+        20.0,
+        40.0
+      ],
+      "claim_boundary": "Finite-range RC-basis Kramer-Kronig consistency screen. Use as EIS quality metadata, not as proof that a prediction model is valid."
+    },
+    {
+      "matrix": "cambridge_feature_target_matrix",
+      "rows_checked": 20594,
+      "kk_valid_rows": 20581,
+      "kk_valid_fraction": 0.9993687481790813,
+      "kk_status_counts": {
+        "high_residual": 13,
+        "pass": 20581
+      },
+      "kk_residual_norm_median": 0.02513528612010912,
+      "kk_residual_norm_p95": 0.03521254699221527,
+      "kk_residual_limit": 0.08,
+      "frequency_grid_hz": [
+        0.05,
+        0.1,
+        0.2,
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0,
+        20.0,
+        40.0
+      ],
+      "claim_boundary": "Finite-range RC-basis Kramer-Kronig consistency screen. Use as EIS quality metadata, not as proof that a prediction model is valid."
+    },
+    {
+      "matrix": "molicell_p42a_holdout_matrix",
+      "rows_checked": 101,
+      "kk_valid_rows": 101,
+      "kk_valid_fraction": 1.0,
+      "kk_status_counts": {
+        "pass": 101
+      },
+      "kk_residual_norm_median": 0.014638165954413083,
+      "kk_residual_norm_p95": 0.018922110470483443,
+      "kk_residual_limit": 0.08,
+      "frequency_grid_hz": [
+        0.05,
+        0.1,
+        0.2,
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0,
+        20.0,
+        40.0
+      ],
+      "claim_boundary": "Finite-range RC-basis Kramer-Kronig consistency screen. Use as EIS quality metadata, not as proof that a prediction model is valid."
+    }
+  ],
+  "outputs": {
+    "rows_csv": "[local path redacted]",
+    "summary_json": "[local path redacted]"
+  }
+}

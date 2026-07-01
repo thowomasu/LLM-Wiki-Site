@@ -377,7 +377,7 @@ footer {
       <main>
 
     <section class="note">
-      <strong>Plain-language boundary:</strong> this page is about a supervised cross-dataset scaffold. It is not proof that the frozen CALB pulse-to-EIS rule generalizes. The Cambridge result is partial support because the locked model beat the locked mean baseline, but the improvement was only about 1.67 percent.
+      <strong>Plain-language boundary:</strong> this page is about a supervised cross-dataset scaffold. It is not proof that the frozen CALB pulse-to-EIS rule generalizes. Cambridge gave partial support, and Molicell P42A gave external support for the separate supervised scaffold. Do not mix those claims.
     </section>
     <section class="grid two">
       <article class="card">
@@ -401,13 +401,98 @@ footer {
 <tr><td>Post-outcome tuning</td><td>False</td></tr></tbody>
       </table>
     </div>
+    <h2>One-Shot Molicell P42A Result</h2>
+    <div class="table-wrap">
+      <table>
+        <tbody><tr><td>Verdict</td><td>external_support</td></tr>
+<tr><td>Rows scored</td><td>101</td></tr>
+<tr><td>Cells scored</td><td>12</td></tr>
+<tr><td>Baseline RMSE</td><td>0.010619458027514959 ohm</td></tr>
+<tr><td>Model RMSE</td><td>0.009036333894874982 ohm</td></tr>
+<tr><td>Relative RMSE improvement</td><td>0.14907767689632662</td></tr></tbody>
+      </table>
+    </div>
+    <h2>Kramer-Kronig EIS Quality Screen</h2>
+    <p>The pipeline now checks fixed-grid EIS targets with a finite-range RC-basis Kramer-Kronig screen. This is quality metadata, not a new validation verdict.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Matrix</th><th>KK valid rows</th><th>Median normalized residual</th></tr></thead>
+        <tbody><tr><td>dev_feature_target_matrix</td><td>279 / 671</td><td>0.11644385249718686</td></tr>
+<tr><td>cambridge_feature_target_matrix</td><td>20581 / 20594</td><td>0.02513528612010912</td></tr>
+<tr><td>molicell_p42a_holdout_matrix</td><td>101 / 101</td><td>0.014638165954413083</td></tr></tbody>
+      </table>
+    </div>
+    <section class="note">
+      <strong>Weak spot:</strong> The development matrix is the weak point, not Cambridge or Molicell. RADAR4KIT corrected EIS plus PULSE dominates the current KK failures. Any future frozen holdout should declare whether KK failures are advisory metadata or hard exclusions before scoring.
+      <p>Largest current problem group: <code>dev_feature_target_matrix</code> / <code>RADAR4KIT corrected EIS plus PULSE</code>, with <code>390</code> failures.</p>
+    </section>
+    <h2>RADAR4KIT EIS Variant Audit</h2>
+    <section class="grid two">
+      <article class="card">
+        <h3>Current variant</h3>
+        <p><code>column_as_negative_imag</code> / <code>fixed_grid_span_0p05_to_40hz</code></p>
+        <p>KK pass fraction: <code>0.08114035087719298</code></p>
+      </article>
+      <article class="card">
+        <h3>Best simple variant tested</h3>
+        <p><code>column_as_imaginary_flip_to_negative_imag</code> / <code>positive_negative_imag_only</code></p>
+        <p>KK pass fraction: <code>0.5614035087719298</code></p>
+      </article>
+    </section>
+    <section class="note">
+      <strong>Blunt read:</strong> a simple sign or window tweak does not fully rescue RADAR4KIT. Build a clearly labeled post-audit development matrix before letting RADAR4KIT drive a new frozen validation contract.
+    </section>
+    <h2>Goal Completion Audit</h2>
+    <p>Overall status: <code>complete_vm_deferred_by_user</code></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Requirement</th><th>Status</th></tr></thead>
+        <tbody><tr><td>Kramer-Kronig validation</td><td><code>passed</code></td></tr>
+<tr><td>Demo pipeline and presentation</td><td><code>passed</code></td></tr>
+<tr><td>Human-readable public site</td><td><code>passed</code></td></tr>
+<tr><td>VM handoff</td><td><code>deferred_by_user_local_ready</code></td></tr></tbody>
+      </table>
+    </div>
+    <section class="note">
+      <strong>VM boundary:</strong> VM connection is deferred because a colleague will set it up later. The local demo handoff is ready; a remote VM connection is only verified after the SSH smoke run passes with real VM settings.
+    </section>
+    <h2>Working Demo Pipeline</h2>
+    <section class="grid two">
+      <article class="card">
+        <h3>Demo result</h3>
+        <p>Verdict: <code>working_demo_model_beats_baseline</code></p>
+        <p>Baseline RMSE: <code>0.009208603939342681</code> ohm.</p>
+        <p>Demo model RMSE: <code>0.007976747730320428</code> ohm.</p>
+      </article>
+      <article class="card">
+        <h3>Code and VM handoff</h3>
+        <p>Run the smoke helper first when a VM is ready. Last smoke mode: <code>local</code>. Last smoke status: <code>passed</code>. VM connection deferred: <code>True</code>.</p>
+        <p><code>&amp; "[DRT python]" -B scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_smoke.py --mode local --python "[DRT python]"</code></p>
+        <p>When the VM is ready, fill a JSON config from <code>vm_demo_config.template.json</code> and run the smoke helper with <code>--config</code>.</p>
+        <p><a class="button" href="demo_pipeline_presentation.html">Open demo presentation</a></p>
+        <p><a class="button" href="data/cross_dataset_demo_pipeline_presentation.pptx">Download editable PPTX deck</a></p>
+      </article>
+    </section>
     <h2>Downloadable Public Summaries</h2>
     <ul><li><a class="button" href="data/validation_readiness.json">validation_readiness.json</a></li>
 <li><a class="button" href="data/cambridge_validation_results.json">cambridge_validation_results.json</a></li>
 <li><a class="button" href="data/frozen_cambridge_validation_config.json">frozen_cambridge_validation_config.json</a></li>
 <li><a class="button" href="data/dataset_qualification.json">dataset_qualification.json</a></li>
 <li><a class="button" href="data/fixed_grid_eis_baseline_results.json">fixed_grid_eis_baseline_results.json</a></li>
-<li><a class="button" href="data/fixed_grid_eis_model_results.json">fixed_grid_eis_model_results.json</a></li></ul>
+<li><a class="button" href="data/fixed_grid_eis_model_results.json">fixed_grid_eis_model_results.json</a></li>
+<li><a class="button" href="data/frozen_molicell_p42a_validation_config.json">frozen_molicell_p42a_validation_config.json</a></li>
+<li><a class="button" href="data/molicell_p42a_holdout_matrix_summary.json">molicell_p42a_holdout_matrix_summary.json</a></li>
+<li><a class="button" href="data/molicell_p42a_validation_results.json">molicell_p42a_validation_results.json</a></li>
+<li><a class="button" href="data/kramer_kronig_validation_summary.json">kramer_kronig_validation_summary.json</a></li>
+<li><a class="button" href="data/kramer_kronig_diagnostics.json">kramer_kronig_diagnostics.json</a></li>
+<li><a class="button" href="data/radar4kit_eis_kk_variant_audit.json">radar4kit_eis_kk_variant_audit.json</a></li>
+<li><a class="button" href="data/demo_pipeline_results.json">demo_pipeline_results.json</a></li>
+<li><a class="button" href="data/vm_demo_smoke_results.json">vm_demo_smoke_results.json</a></li>
+<li><a class="button" href="data/cross_dataset_goal_completion_audit.json">cross_dataset_goal_completion_audit.json</a></li>
+<li><a class="button" href="data/demo_handoff_run_manifest.json">demo_handoff_run_manifest.json</a></li>
+<li><a class="button" href="data/cross_dataset_demo_pipeline_presentation_summary.json">cross_dataset_demo_pipeline_presentation_summary.json</a></li>
+<li><a class="button" href="data/vm_demo_config.template.json">vm_demo_config.template.json</a></li>
+<li><a class="button" href="data/cross_dataset_demo_pipeline_presentation.pptx">cross_dataset_demo_pipeline_presentation.pptx</a></li></ul>
     <h2>Full Handoff</h2>
     <h2>Cross Dataset Pulse To EIS Training</h2>
 <p>This folder is the supervised cross-dataset validation scaffold.</p>
@@ -450,7 +535,7 @@ footer {
 </table>
 <h2>What Was Found In Cambridge</h2>
 <p>Local dataset folder checked:</p>
-<p>`[local path redacted]</p>
+<p><code>[local path redacted]</code></p>
 <p>Inspection mode:</p>
 <ul>
 <li>ZIP central directories.</li>
@@ -527,13 +612,11 @@ footer {
 </ul>
 <h2>Run Order</h2>
 <p>Use the DRT environment for these scripts:</p>
-<p>```powershell</p>
-<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\build_cross_dataset_training_scaffold.py</p>
-<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\build_dev_feature_target_matrix.py</p>
-<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\train_fixed_grid_eis_dev_models.py</p>
-<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\freeze_cambridge_validation_config.py</p>
-<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\run_cambridge_one_shot_validation.py</p>
-<p>```</p>
+<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\build_cross_dataset_training_scaffold.py
+&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\build_dev_feature_target_matrix.py
+&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\train_fixed_grid_eis_dev_models.py
+&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\freeze_cambridge_validation_config.py
+&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\run_cambridge_one_shot_validation.py</code></pre>
 <p>For a future dataset, do not reuse the Cambridge runner name as if the new dataset is Cambridge. Make a new frozen config and a new one-shot runner, then record the exact hashes and verdict rules before scoring.</p>
 <h2>Artifacts</h2>
 <ul>
@@ -563,6 +646,167 @@ footer {
 <li>Post-Cambridge model changes are still clean Cambridge validation.</li>
 </ul>
 <p>If you change features, target grid, model, split roles, alpha, or verdict rules after seeing Cambridge, label the next run as post-Cambridge development.</p>
+<h2>Fixed-Grid EIS Dev Training</h2>
+<p>The canonical dev training result now uses fixed-grid EIS targets, not the earlier scalar proxy.</p>
+<p>Cambridge is still excluded from training and remains spent as a clean one-shot holdout.</p>
+<ul>
+<li>Train rows: 489.</li>
+<li>Test rows: 182.</li>
+<li>Target columns: 20.</li>
+<li>Best baseline: <code>global_train_target_mean</code> with RMSE <code>0.00444028</code> ohm.</li>
+<li>Best model: <code>knn_3_global_mean_shrinkage_post_cambridge_dev</code> with RMSE <code>0.00394056</code> ohm.</li>
+<li>Best model was tuned on Stanford development/evaluation rows, so Stanford is not a clean validation estimate for that model.</li>
+<li>Readiness verdict: <code>post_cambridge_development_model_updated</code>.</li>
+</ul>
+<p>This is post-Cambridge development. Freeze a new contract before scoring another dataset, and do not call a Cambridge rerun clean validation.</p>
+<p>Training artifacts:</p>
+<ul>
+<li><code>baseline_results.json</code></li>
+<li><code>model_results.json</code></li>
+<li><code>fixed_grid_eis_baseline_results.json</code></li>
+<li><code>fixed_grid_eis_model_results.json</code></li>
+</ul>
+<h2>Molicell P42A Holdout Matrix</h2>
+<p>A cleaner next holdout candidate now exists from the local Molicell P42A archive.</p>
+<p>Why this is stronger than NASA for the fixed-grid model: the EIS workbooks expose explicit <code>Freq</code>, <code>Zmod</code>, and <code>Zphz</code> columns, so the target grid does not require guessing a hidden frequency vector.</p>
+<ul>
+<li>Rows: 101.</li>
+<li>Complete target rows: 101.</li>
+<li>Cells: 12.</li>
+<li>Temperatures C: <code>[5, 25, 40]</code>.</li>
+<li>SOC values: <code>[20, 50, 80]</code>.</li>
+<li>Frequency grid Hz: <code>[0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 40.0]</code>.</li>
+</ul>
+<p>Boundary: this is still only the holdout matrix. It is not validation until the model contract is frozen and scored once.</p>
+<p>Artifacts:</p>
+<ul>
+<li><code>molicell_p42a_holdout_matrix.csv</code></li>
+<li><code>molicell_p42a_holdout_matrix_summary.json</code></li>
+</ul>
+<h2>Molicell P42A One-Shot Validation</h2>
+<p>Molicell P42A has now been scored once with frozen settings.</p>
+<ul>
+<li>Verdict: <code>external_support</code>.</li>
+<li>Rows scored: 101.</li>
+<li>Cells scored: 12.</li>
+<li>Baseline: <code>global_train_target_mean</code> with RMSE <code>0.0106195</code> ohm.</li>
+<li>Locked model: <code>knn_3_global_mean_shrinkage_post_cambridge_dev</code> with RMSE <code>0.00903633</code> ohm.</li>
+<li>Relative RMSE improvement: <code>0.149078</code>.</li>
+<li>Post-outcome tuning performed: <code>False</code>.</li>
+</ul>
+<p>Boundary: this validates only the supervised cross-dataset scaffold on this local Molicell P42A matrix. It does not validate the frozen frozen pulse-to-EIS rule CALB rule.</p>
+<p>Validation artifacts:</p>
+<ul>
+<li><code>frozen_molicell_p42a_validation_config.json</code></li>
+<li><code>molicell_p42a_holdout_matrix.csv</code></li>
+<li><code>molicell_p42a_validation_results.json</code></li>
+</ul>
+<h2>Kramer-Kronig EIS Quality Screen</h2>
+<p>The pipeline now writes a finite-range Kramer-Kronig consistency screen for the fixed-grid EIS targets.</p>
+<p>This is EIS quality metadata. It does not rewrite earlier Cambridge or Molicell validation verdicts.</p>
+<ul>
+<li><code>dev_feature_target_matrix</code>: 279 of 671 rows passed, median normalized residual <code>0.11644385249718686</code>.</li>
+<li><code>cambridge_feature_target_matrix</code>: 20581 of 20594 rows passed, median normalized residual <code>0.02513528612010912</code>.</li>
+<li><code>molicell_p42a_holdout_matrix</code>: 101 of 101 rows passed, median normalized residual <code>0.014638165954413083</code>.</li>
+</ul>
+<p>Residual limit: <code>0.08</code> normalized RMSE.</p>
+<p>Blunt boundary: a pass means the target spectrum is broadly compatible with a small RC-basis impedance model over the measured frequency window. It does not prove the supervised predictor is good. A fail means the spectrum should be inspected before it is used as clean target evidence.</p>
+<p>Artifacts:</p>
+<ul>
+<li><code>kramer_kronig_validation_rows.csv</code></li>
+<li><code>kramer_kronig_validation_summary.json</code></li>
+</ul>
+<h2>Kramer-Kronig Failure Diagnostics</h2>
+<p>The KK pass rate looks strong overall, but that headline hides the real problem.</p>
+<ul>
+<li>Total failures: 405 of 21366.</li>
+<li>Largest problem group: <code>dev_feature_target_matrix</code> / <code>RADAR4KIT corrected EIS plus PULSE</code>.</li>
+<li>Largest problem failures: 390 of 456.</li>
+</ul>
+<p>Blunt read: the development matrix is the dirty part. RADAR4KIT corrected EIS plus PULSE dominates the current KK failures, while Cambridge and Molicell are mostly clean under this screen.</p>
+<p>Next action before a new frozen holdout: declare a KK policy before scoring. Either keep it advisory, or set a hard exclusion threshold. Do not decide after seeing the validation result.</p>
+<p>Artifacts:</p>
+<ul>
+<li><code>kramer_kronig_diagnostics.json</code></li>
+<li><code>kramer_kronig_top_failures.csv</code></li>
+</ul>
+<h2>RADAR4KIT EIS KK Variant Audit</h2>
+<p>The RADAR4KIT KK problem is not fixed by a simple imaginary-sign flip.</p>
+<ul>
+<li>Rows audited: 456.</li>
+<li>Current fixed-grid style variant: <code>column_as_negative_imag</code> / <code>fixed_grid_span_0p05_to_40hz</code>, pass fraction <code>0.08114035087719298</code>.</li>
+<li>Best tested variant: <code>column_as_imaginary_flip_to_negative_imag</code> / <code>positive_negative_imag_only</code>, pass fraction <code>0.5614035087719298</code>.</li>
+</ul>
+<p>Blunt read: RADAR4KIT should not be treated as clean target evidence until the raw EIS conversion and windowing are audited more deeply. Do not patch the matrix and pretend the old Molicell or Cambridge validation story stayed identical.</p>
+<p>Artifacts:</p>
+<ul>
+<li><code>radar4kit_eis_kk_variant_audit.json</code></li>
+<li><code>radar4kit_eis_kk_variant_rows.csv</code></li>
+</ul>
+<h2>Working Demo Pipeline</h2>
+<p>A small runnable demo now exists for presentation and VM handoff.</p>
+<ul>
+<li>Demo verdict: <code>working_demo_model_beats_baseline</code>.</li>
+<li>Baseline RMSE: <code>0.0092086</code> ohm.</li>
+<li>Demo model RMSE: <code>0.00797675</code> ohm.</li>
+<li>KK valid rows: 30 of 30.</li>
+</ul>
+<p>Run it with:</p>
+<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\demo_cross_dataset_pipeline.py</code></pre>
+<p>Artifacts:</p>
+<ul>
+<li><code>demo_pipeline_results.json</code></li>
+<li><code>demo_pipeline_presentation.html</code></li>
+</ul>
+<p>VM boundary: no VM connection config was found in this repo. When the VM is ready, wire this script as the first remote smoke test instead of pushing the full raw-archive pipeline immediately.</p>
+<h2>VM Demo Smoke Handoff</h2>
+<p>A VM-ready smoke runner now exists. It can run the demo locally today and over SSH when a VM is actually available.</p>
+<ul>
+<li>Last smoke mode: <code>local</code>.</li>
+<li>Last smoke status: <code>passed</code>.</li>
+<li>Return code: <code>0</code>.</li>
+<li>Config template: <code>[local path redacted]</code>.</li>
+</ul>
+<p>Local smoke command:</p>
+<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_smoke.py --mode local --python &quot;[local path redacted]&quot;</code></pre>
+<p>SSH smoke command template:</p>
+<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_smoke.py --mode ssh --remote-host &lt;host&gt; --remote-user &lt;user&gt; --remote-repo &lt;repo-path-on-vm&gt; --remote-python &lt;python-on-vm&gt;</code></pre>
+<p>SSH smoke command with config template:</p>
+<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_smoke.py --config scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_config.template.json</code></pre>
+<p>Blunt boundary: VM connection is deferred until the colleague-provided VM exists. Until real VM settings are provided and the SSH smoke passes, the project is local-code-ready, not VM-connected.</p>
+<p>Artifact:</p>
+<ul>
+<li><code>vm_demo_smoke_results.json</code></li>
+</ul>
+<h2>Goal Completion Audit</h2>
+<ul>
+<li>Overall status: <code>complete_vm_deferred_by_user</code>.</li>
+<li>Kramer-Kronig validation: <code>passed</code>.</li>
+<li>Demo pipeline and presentation: <code>passed</code>.</li>
+<li>Human-readable public site: <code>passed</code>.</li>
+<li>VM handoff: <code>deferred_by_user_local_ready</code>.</li>
+</ul>
+<p>Blunt boundary: the local code path is ready. VM connection is intentionally deferred because a colleague will set it up later. Do not claim VM connection until an SSH smoke run passes with real VM host, user, repo, and Python settings.</p>
+<p>Artifact:</p>
+<ul>
+<li><code>cross_dataset_goal_completion_audit.json</code></li>
+</ul>
+<h2>One-Command Demo Handoff</h2>
+<p>Use this command to regenerate the demo handoff bundle from the repo root:</p>
+<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\run_demo_handoff_bundle.py</code></pre>
+<ul>
+<li>Last bundle status: <code>passed</code>.</li>
+<li>Last bundle manifest: <code>demo_handoff_run_manifest.json</code>.</li>
+<li>Editable PPTX deck: <code>cross_dataset_demo_pipeline_presentation.pptx</code>.</li>
+<li>Final goal status: <code>complete_vm_deferred_by_user</code>.</li>
+</ul>
+<p>This command proves the local demo path. VM connection is deferred because a colleague will set it up later.</p>
+<p>Artifact:</p>
+<ul>
+<li><code>demo_handoff_run_manifest.json</code></li>
+<li><code>cross_dataset_demo_pipeline_presentation.pptx</code></li>
+<li><code>cross_dataset_demo_pipeline_presentation_summary.json</code></li>
+</ul>
 
       </main>
       <footer>

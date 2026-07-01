@@ -1,0 +1,154 @@
+{
+  "experiment": "radar4kit_eis_kk_variant_audit",
+  "claim_boundary": "Diagnostic audit only. It does not rebuild training data, retune models, or revise prior validation results.",
+  "rows_checked": 456,
+  "source_rows_csv": "[local path redacted]",
+  "audit_rows_csv": "[local path redacted]",
+  "grouped_results": [
+    {
+      "variant": "absolute_imaginary_magnitude",
+      "frequency_window": "fixed_grid_span_0p05_to_40hz",
+      "rows_checked": 456,
+      "kk_valid_rows": 37,
+      "kk_failure_rows": 419,
+      "kk_valid_fraction": 0.08114035087719298,
+      "median_residual_norm": 0.2654693810643362,
+      "p95_residual_norm": 0.6917085861360851
+    },
+    {
+      "variant": "absolute_imaginary_magnitude",
+      "frequency_window": "full_measured",
+      "rows_checked": 456,
+      "kk_valid_rows": 56,
+      "kk_failure_rows": 400,
+      "kk_valid_fraction": 0.12280701754385964,
+      "median_residual_norm": 0.19785995129034317,
+      "p95_residual_norm": 0.5970998738492252
+    },
+    {
+      "variant": "absolute_imaginary_magnitude",
+      "frequency_window": "positive_negative_imag_only",
+      "rows_checked": 456,
+      "kk_valid_rows": 56,
+      "kk_failure_rows": 400,
+      "kk_valid_fraction": 0.12280701754385964,
+      "median_residual_norm": 0.19785995129034317,
+      "p95_residual_norm": 0.5970998738492252
+    },
+    {
+      "variant": "absolute_imaginary_magnitude",
+      "frequency_window": "section33_span_0p03_to_50hz",
+      "rows_checked": 456,
+      "kk_valid_rows": 37,
+      "kk_failure_rows": 419,
+      "kk_valid_fraction": 0.08114035087719298,
+      "median_residual_norm": 0.26312512839239155,
+      "p95_residual_norm": 0.6825928279609643
+    },
+    {
+      "variant": "column_as_imaginary_flip_to_negative_imag",
+      "frequency_window": "fixed_grid_span_0p05_to_40hz",
+      "rows_checked": 456,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 455,
+      "kk_valid_fraction": 0.0021929824561403508,
+      "median_residual_norm": 0.30880711163847396,
+      "p95_residual_norm": 0.7300872266811478
+    },
+    {
+      "variant": "column_as_imaginary_flip_to_negative_imag",
+      "frequency_window": "full_measured",
+      "rows_checked": 456,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 456,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2736928509837393,
+      "p95_residual_norm": 0.6973918675498989
+    },
+    {
+      "variant": "column_as_imaginary_flip_to_negative_imag",
+      "frequency_window": "positive_negative_imag_only",
+      "rows_checked": 456,
+      "kk_valid_rows": 256,
+      "kk_failure_rows": 200,
+      "kk_valid_fraction": 0.5614035087719298,
+      "median_residual_norm": 0.07008412287964008,
+      "p95_residual_norm": 0.1735479395121475
+    },
+    {
+      "variant": "column_as_imaginary_flip_to_negative_imag",
+      "frequency_window": "section33_span_0p03_to_50hz",
+      "rows_checked": 456,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 456,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.31495841251507634,
+      "p95_residual_norm": 0.7305689461944611
+    },
+    {
+      "variant": "column_as_negative_imag",
+      "frequency_window": "fixed_grid_span_0p05_to_40hz",
+      "rows_checked": 456,
+      "kk_valid_rows": 37,
+      "kk_failure_rows": 419,
+      "kk_valid_fraction": 0.08114035087719298,
+      "median_residual_norm": 0.2654693810643362,
+      "p95_residual_norm": 0.6917085861360851
+    },
+    {
+      "variant": "column_as_negative_imag",
+      "frequency_window": "full_measured",
+      "rows_checked": 456,
+      "kk_valid_rows": 63,
+      "kk_failure_rows": 393,
+      "kk_valid_fraction": 0.13815789473684212,
+      "median_residual_norm": 0.1951218654626482,
+      "p95_residual_norm": 0.5956967047601225
+    },
+    {
+      "variant": "column_as_negative_imag",
+      "frequency_window": "positive_negative_imag_only",
+      "rows_checked": 456,
+      "kk_valid_rows": 37,
+      "kk_failure_rows": 419,
+      "kk_valid_fraction": 0.08114035087719298,
+      "median_residual_norm": 0.24864754329318278,
+      "p95_residual_norm": 0.6322250015352663
+    },
+    {
+      "variant": "column_as_negative_imag",
+      "frequency_window": "section33_span_0p03_to_50hz",
+      "rows_checked": 456,
+      "kk_valid_rows": 37,
+      "kk_failure_rows": 419,
+      "kk_valid_fraction": 0.08114035087719298,
+      "median_residual_norm": 0.26312512839239155,
+      "p95_residual_norm": 0.6825928279609643
+    }
+  ],
+  "current_pipeline_variant": {
+    "variant": "column_as_negative_imag",
+    "frequency_window": "fixed_grid_span_0p05_to_40hz",
+    "rows_checked": 456,
+    "kk_valid_rows": 37,
+    "kk_failure_rows": 419,
+    "kk_valid_fraction": 0.08114035087719298,
+    "median_residual_norm": 0.2654693810643362,
+    "p95_residual_norm": 0.6917085861360851
+  },
+  "best_variant_by_kk_pass_fraction": {
+    "variant": "column_as_imaginary_flip_to_negative_imag",
+    "frequency_window": "positive_negative_imag_only",
+    "rows_checked": 456,
+    "kk_valid_rows": 256,
+    "kk_failure_rows": 200,
+    "kk_valid_fraction": 0.5614035087719298,
+    "median_residual_norm": 0.07008412287964008,
+    "p95_residual_norm": 0.1735479395121475
+  },
+  "interpretation": [
+    "A simple imaginary-sign flip is not enough to rescue RADAR4KIT KK consistency.",
+    "The RADAR4KIT development target should be audited at the raw EIS conversion/windowing level before it is treated as clean training evidence.",
+    "Do not silently replace old matrices. Build a new post-audit dev matrix with a new frozen contract if this is corrected."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "dataset": "Molicell P42A local high-power characterization",
+  "archive_path": "[local path redacted]",
+  "rows": 101,
+  "complete_target_rows": 101,
+  "cell_count": 12,
+  "temperatures_c": [
+    5,
+    25,
+    40
+  ],
+  "soc_values": [
+    20,
+    50,
+    80
+  ],
+  "frequency_grid_hz": [
+    0.05,
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    2.0,
+    5.0,
+    10.0,
+    20.0,
+    40.0
+  ],
+  "target_columns": [
+    "target_zreal_0p05hz_ohm",
+    "target_znegimag_0p05hz_ohm",
+    "target_zreal_0p1hz_ohm",
+    "target_znegimag_0p1hz_ohm",
+    "target_zreal_0p2hz_ohm",
+    "target_znegimag_0p2hz_ohm",
+    "target_zreal_0p5hz_ohm",
+    "target_znegimag_0p5hz_ohm",
+    "target_zreal_1hz_ohm",
+    "target_znegimag_1hz_ohm",
+    "target_zreal_2hz_ohm",
+    "target_znegimag_2hz_ohm",
+    "target_zreal_5hz_ohm",
+    "target_znegimag_5hz_ohm",
+    "target_zreal_10hz_ohm",
+    "target_znegimag_10hz_ohm",
+    "target_zreal_20hz_ohm",
+    "target_znegimag_20hz_ohm",
+    "target_zreal_40hz_ohm",
+    "target_znegimag_40hz_ohm"
+  ],
+  "missing_hcgt_rows": 6,
+  "max_rows": 0,
+  "claim_boundary": "External holdout matrix only. Not scored and not tuned.",
+  "frequency_mapping_status": "explicit_frequency_column_in_eis_workbooks",
+  "time_domain_join_rule": "same cell and same temperature HCGT workbook joined to each SOC-specific EIS workbook"
+}

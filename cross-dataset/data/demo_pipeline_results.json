@@ -1,0 +1,52 @@
+{
+  "experiment": "cross_dataset_pulse_to_eis_training_demo",
+  "created_utc": "2026-07-01T18:23:43.535316+00:00",
+  "claim_boundary": "Demo only. Uses a bounded subset and does not create a new validation claim.",
+  "inputs": {
+    "dev_matrix_csv": "[local path redacted]",
+    "molicell_matrix_csv": "[local path redacted]",
+    "train_rows_used": 120,
+    "holdout_rows_used": 30,
+    "target_columns": [
+      "target_zreal_0p05hz_ohm",
+      "target_znegimag_0p05hz_ohm",
+      "target_zreal_0p1hz_ohm",
+      "target_znegimag_0p1hz_ohm",
+      "target_zreal_0p2hz_ohm",
+      "target_znegimag_0p2hz_ohm",
+      "target_zreal_0p5hz_ohm",
+      "target_znegimag_0p5hz_ohm",
+      "target_zreal_1hz_ohm",
+      "target_znegimag_1hz_ohm",
+      "target_zreal_2hz_ohm",
+      "target_znegimag_2hz_ohm",
+      "target_zreal_5hz_ohm",
+      "target_znegimag_5hz_ohm",
+      "target_zreal_10hz_ohm",
+      "target_znegimag_10hz_ohm",
+      "target_zreal_20hz_ohm",
+      "target_znegimag_20hz_ohm",
+      "target_zreal_40hz_ohm",
+      "target_znegimag_40hz_ohm"
+    ]
+  },
+  "method": {
+    "baseline": "global train target mean",
+    "model": "KNeighborsRegressor(n_neighbors=3) blended 20 percent with the KNN prediction and 80 percent with the train mean",
+    "split": "development rows train, Molicell subset holdout, no random row split",
+    "kk_screen": "finite-range RC-basis Kramer-Kronig residual check on holdout EIS targets"
+  },
+  "results": {
+    "baseline_rmse_all_ohm": 0.009208603939342681,
+    "model_rmse_all_ohm": 0.007976747730320428,
+    "relative_rmse_improvement_fraction": 0.13377230871655704,
+    "demo_verdict": "working_demo_model_beats_baseline",
+    "kk_valid_fraction": 1.0,
+    "kk_valid_rows": 30,
+    "kk_rows_checked": 30
+  },
+  "outputs": {
+    "results_json": "[local path redacted]",
+    "presentation_html": "[local path redacted]"
+  }
+}

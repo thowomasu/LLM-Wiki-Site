@@ -1,0 +1,3948 @@
+{
+  "experiment": "cross_dataset_pulse_to_eis_training_kramer_kronig_diagnostics",
+  "claim_boundary": "Diagnostics explain target-quality problems. They do not change already-scored validation verdicts and must not be used to retune a spent holdout.",
+  "input_rows_csv": "[local path redacted]",
+  "top_failures_csv": "[local path redacted]",
+  "overall": {
+    "rows_checked": 21366,
+    "kk_valid_rows": 20961,
+    "kk_failure_rows": 405,
+    "kk_valid_fraction": 0.981044650379107
+  },
+  "largest_problem_group": {
+    "matrix": "dev_feature_target_matrix",
+    "dataset": "RADAR4KIT corrected EIS plus PULSE",
+    "rows_checked": 456,
+    "kk_valid_rows": 66,
+    "kk_failure_rows": 390,
+    "kk_valid_fraction": 0.14473684210526316,
+    "median_residual_norm": 0.19288669889512366,
+    "p95_residual_norm": 0.710974632626768
+  },
+  "by_matrix_dataset": [
+    {
+      "matrix": "cambridge_feature_target_matrix",
+      "dataset": "Cambridge uneven-usage EIS dataset",
+      "rows_checked": 20594,
+      "kk_valid_rows": 20581,
+      "kk_failure_rows": 13,
+      "kk_valid_fraction": 0.9993687481790813,
+      "median_residual_norm": 0.025135286120109047,
+      "p95_residual_norm": 0.035212546992215245
+    },
+    {
+      "matrix": "dev_feature_target_matrix",
+      "dataset": "Panasonic 18650PF",
+      "rows_checked": 33,
+      "kk_valid_rows": 31,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.9393939393939394,
+      "median_residual_norm": 0.0143481143488851,
+      "p95_residual_norm": 0.06446114297390879
+    },
+    {
+      "matrix": "dev_feature_target_matrix",
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "rows_checked": 456,
+      "kk_valid_rows": 66,
+      "kk_failure_rows": 390,
+      "kk_valid_fraction": 0.14473684210526316,
+      "median_residual_norm": 0.19288669889512366,
+      "p95_residual_norm": 0.710974632626768
+    },
+    {
+      "matrix": "dev_feature_target_matrix",
+      "dataset": "Stanford SECL INR21700-M50T",
+      "rows_checked": 182,
+      "kk_valid_rows": 182,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0094691190154392,
+      "p95_residual_norm": 0.010913321736319929
+    },
+    {
+      "matrix": "molicell_p42a_holdout_matrix",
+      "dataset": "Molicell P42A local high-power characterization",
+      "rows_checked": 101,
+      "kk_valid_rows": 101,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.014638165954413,
+      "p95_residual_norm": 0.0189221104704834
+    }
+  ],
+  "by_matrix_split_role": [
+    {
+      "matrix": "cambridge_feature_target_matrix",
+      "split_role": "cambridge_whole_dataset_holdout_scored_once",
+      "rows_checked": 20594,
+      "kk_valid_rows": 20581,
+      "kk_failure_rows": 13,
+      "kk_valid_fraction": 0.9993687481790813,
+      "median_residual_norm": 0.025135286120109047,
+      "p95_residual_norm": 0.035212546992215245
+    },
+    {
+      "matrix": "dev_feature_target_matrix",
+      "split_role": "dev_train_seen_outcome",
+      "rows_checked": 489,
+      "kk_valid_rows": 97,
+      "kk_failure_rows": 392,
+      "kk_valid_fraction": 0.1983640081799591,
+      "median_residual_norm": 0.1800245916534647,
+      "p95_residual_norm": 0.6963061757105161
+    },
+    {
+      "matrix": "dev_feature_target_matrix",
+      "split_role": "dev_whole_dataset_holdout_seen_outcome",
+      "rows_checked": 182,
+      "kk_valid_rows": 182,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0094691190154392,
+      "p95_residual_norm": 0.010913321736319929
+    },
+    {
+      "matrix": "molicell_p42a_holdout_matrix",
+      "split_role": "molicell_p42a_whole_dataset_holdout_not_tuned",
+      "rows_checked": 101,
+      "kk_valid_rows": 101,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.014638165954413,
+      "p95_residual_norm": 0.0189221104704834
+    }
+  ],
+  "dev_by_dataset_temperature": [
+    {
+      "dataset": "Panasonic 18650PF",
+      "temperature_c": "-10.0",
+      "rows_checked": 8,
+      "kk_valid_rows": 7,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.875,
+      "median_residual_norm": 0.0139465015915893,
+      "p95_residual_norm": 0.11810728623640414
+    },
+    {
+      "dataset": "Panasonic 18650PF",
+      "temperature_c": "0.0",
+      "rows_checked": 11,
+      "kk_valid_rows": 10,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.9090909090909091,
+      "median_residual_norm": 0.0133178704426476,
+      "p95_residual_norm": 0.0733448035467449
+    },
+    {
+      "dataset": "Panasonic 18650PF",
+      "temperature_c": "25.0",
+      "rows_checked": 14,
+      "kk_valid_rows": 14,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.01512023539760675,
+      "p95_residual_norm": 0.023016149579184707
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.19",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3981709975095517,
+      "p95_residual_norm": 0.3981709975095517
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.37",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.8023954524048136,
+      "p95_residual_norm": 0.8023954524048136
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.48",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.9074503100557492,
+      "p95_residual_norm": 0.9074503100557492
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.55",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.73277973188979,
+      "p95_residual_norm": 0.73277973188979
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.59",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3382454528667252,
+      "p95_residual_norm": 0.3382454528667252
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.6",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5035246685289154,
+      "p95_residual_norm": 0.5035246685289154
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.67",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.8427662044813221,
+      "p95_residual_norm": 0.8427662044813221
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.87",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5039718892666994,
+      "p95_residual_norm": 0.5039718892666994
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.88",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.52008611908227,
+      "p95_residual_norm": 0.52008611908227
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.95",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3613485344336015,
+      "p95_residual_norm": 0.3613485344336015
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "1.98",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4250426270611332,
+      "p95_residual_norm": 0.4250426270611332
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.03",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5674197268723423,
+      "p95_residual_norm": 0.5674197268723423
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.06",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.338131795899569,
+      "p95_residual_norm": 0.338131795899569
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.25",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5188520819633178,
+      "p95_residual_norm": 0.5188520819633178
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.28",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.6591874870733169,
+      "p95_residual_norm": 0.705035199861408
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.3",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.9382433280353236,
+      "p95_residual_norm": 0.9382433280353236
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.41",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.7202011423603284,
+      "p95_residual_norm": 0.7202011423603284
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.58",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.6482299206900253,
+      "p95_residual_norm": 0.6482299206900253
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.59",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3087656484835198,
+      "p95_residual_norm": 0.3087656484835198
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.67",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3466888235149936,
+      "p95_residual_norm": 0.3466888235149936
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.68",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.309646945718934,
+      "p95_residual_norm": 0.309646945718934
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.74",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4685260242158512,
+      "p95_residual_norm": 0.4685260242158512
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.745",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.6772197715755673,
+      "p95_residual_norm": 0.6772197715755673
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "2.84",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.8148060113506875,
+      "p95_residual_norm": 0.8148060113506875
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "3.29",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4653717479301452,
+      "p95_residual_norm": 0.4653717479301452
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "3.48",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.8225194736152023,
+      "p95_residual_norm": 0.8225194736152023
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "3.58",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4092796886875933,
+      "p95_residual_norm": 0.4092796886875933
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "4.19",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4578859289677726,
+      "p95_residual_norm": 0.4578859289677726
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.47",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3316577838349496,
+      "p95_residual_norm": 0.3316577838349496
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.66",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3391218218189575,
+      "p95_residual_norm": 0.3391218218189575
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.67",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2534827431851559,
+      "p95_residual_norm": 0.2534827431851559
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.7",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3046302675250876,
+      "p95_residual_norm": 0.3046302675250876
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.72",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5273354370546379,
+      "p95_residual_norm": 0.5273354370546379
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.83",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3334986355997048,
+      "p95_residual_norm": 0.3334986355997048
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.85",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1939688214709787,
+      "p95_residual_norm": 0.1939688214709787
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.87",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3532416380455658,
+      "p95_residual_norm": 0.3532416380455658
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.93",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3464000307256897,
+      "p95_residual_norm": 0.3464000307256897
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.95",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3562046062351073,
+      "p95_residual_norm": 0.3562046062351073
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "10.96",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5898199847695857,
+      "p95_residual_norm": 0.5898199847695857
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "11.02",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3107890720127306,
+      "p95_residual_norm": 0.3107890720127306
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "11.09",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.6293696410928598,
+      "p95_residual_norm": 0.7010643647297213
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "11.11",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.175485054467247,
+      "p95_residual_norm": 0.175485054467247
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "11.27",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5229239716008949,
+      "p95_residual_norm": 0.5229239716008949
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "11.73",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3621548458802741,
+      "p95_residual_norm": 0.3621548458802741
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "11.89",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.7516575259278014,
+      "p95_residual_norm": 0.7516575259278014
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "11.9",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5506637115561479,
+      "p95_residual_norm": 0.5506637115561479
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "11.95",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2238165946078715,
+      "p95_residual_norm": 0.2238165946078715
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "12.5",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3842693097580083,
+      "p95_residual_norm": 0.3842693097580083
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "12.835",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.8025349549532783,
+      "p95_residual_norm": 0.8025349549532783
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.08",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.6933524676706957,
+      "p95_residual_norm": 0.7114945707612056
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.205",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1716263073018142,
+      "p95_residual_norm": 0.1716263073018142
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.225",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.6093513587076606,
+      "p95_residual_norm": 0.7827528384660976
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.245",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5189366315614374,
+      "p95_residual_norm": 0.5189366315614374
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.27",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4167032543742984,
+      "p95_residual_norm": 0.4167032543742984
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.275",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.334340463656744,
+      "p95_residual_norm": 0.334340463656744
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.29",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1674797774304342,
+      "p95_residual_norm": 0.1674797774304342
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.325",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1701168280812175,
+      "p95_residual_norm": 0.1701168280812175
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.335",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3890721486469547,
+      "p95_residual_norm": 0.3890721486469547
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.345",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.508327990136204,
+      "p95_residual_norm": 0.508327990136204
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.365",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.7354898532251257,
+      "p95_residual_norm": 0.7354898532251257
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.37",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.326925344021081,
+      "p95_residual_norm": 0.326925344021081
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.375",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 1.07412762618583,
+      "p95_residual_norm": 1.07412762618583
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.39",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5478969998912209,
+      "p95_residual_norm": 0.754706152611904
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.435",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0643311567485986,
+      "p95_residual_norm": 0.0643311567485986
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.445",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3144387638011259,
+      "p95_residual_norm": 0.3144387638011259
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.485",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.7341683886729367,
+      "p95_residual_norm": 0.7341683886729367
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.525",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1786182572610643,
+      "p95_residual_norm": 0.1786182572610643
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.57",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3360955415587089,
+      "p95_residual_norm": 0.3360955415587089
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.585",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4361995089570604,
+      "p95_residual_norm": 0.4361995089570604
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.635",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4079120094610344,
+      "p95_residual_norm": 0.4079120094610344
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.64",
+      "rows_checked": 5,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 5,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4490359928228467,
+      "p95_residual_norm": 0.47408672852879935
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.65",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3200570513432792,
+      "p95_residual_norm": 0.3200570513432792
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.66",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2676811983569417,
+      "p95_residual_norm": 0.2676811983569417
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.704999999999998",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2975754443662579,
+      "p95_residual_norm": 0.2975754443662579
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.71",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5032211350193453,
+      "p95_residual_norm": 0.5032211350193453
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.725",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4543019927195457,
+      "p95_residual_norm": 0.4543019927195457
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.74",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3480021300587367,
+      "p95_residual_norm": 0.3480021300587367
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.75",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4754697573974912,
+      "p95_residual_norm": 0.4754697573974912
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.76",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.36191572318661,
+      "p95_residual_norm": 0.36191572318661
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.885",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1260673762736702,
+      "p95_residual_norm": 0.1260673762736702
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.93",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.7270074424908887,
+      "p95_residual_norm": 0.7270074424908887
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.97",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4916688716177571,
+      "p95_residual_norm": 0.4916688716177571
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "13.995",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.8503510589619077,
+      "p95_residual_norm": 0.8503510589619077
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "14.015",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2147608998130232,
+      "p95_residual_norm": 0.2147608998130232
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "14.105",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4147463723277816,
+      "p95_residual_norm": 0.4147463723277816
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "14.125",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1962854311358662,
+      "p95_residual_norm": 0.1962854311358662
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "14.195",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1862541357813506,
+      "p95_residual_norm": 0.1862541357813506
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "14.43",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5830029614683634,
+      "p95_residual_norm": 0.5830029614683634
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.775",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3372860757008373,
+      "p95_residual_norm": 0.3372860757008373
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.785",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5199118756660105,
+      "p95_residual_norm": 0.5199118756660105
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.855",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2181117346571585,
+      "p95_residual_norm": 0.2181117346571585
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.865",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3900818152730295,
+      "p95_residual_norm": 0.3900818152730295
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.869999999999997",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2096034443540029,
+      "p95_residual_norm": 0.2096034443540029
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.92",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.6031981439289096,
+      "p95_residual_norm": 0.6031981439289096
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.924999999999997",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5864864904998124,
+      "p95_residual_norm": 0.5864864904998124
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.965",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0653455817944659,
+      "p95_residual_norm": 0.0653455817944659
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.97",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1626730327322758,
+      "p95_residual_norm": 0.18434345584690484
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "17.98",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.105834391776252,
+      "p95_residual_norm": 0.105834391776252
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.0",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0943494352844413,
+      "p95_residual_norm": 0.0943494352844413
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.025",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1952163651637818,
+      "p95_residual_norm": 0.1952163651637818
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.035",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.6105313961053749,
+      "p95_residual_norm": 0.6105313961053749
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.04",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1931447194033828,
+      "p95_residual_norm": 0.1931447194033828
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.06",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2295205240962917,
+      "p95_residual_norm": 0.2295205240962917
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.07",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2217369952805469,
+      "p95_residual_norm": 0.2217369952805469
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.075",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2842591864458656,
+      "p95_residual_norm": 0.3225732958649319
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.115",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3533649569581841,
+      "p95_residual_norm": 0.3533649569581841
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.125",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.27538215139302646,
+      "p95_residual_norm": 0.292053457723778
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.13",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1918281283498067,
+      "p95_residual_norm": 0.1918281283498067
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.135",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2232995613562193,
+      "p95_residual_norm": 0.2232995613562193
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.14",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1756918208380114,
+      "p95_residual_norm": 0.1756918208380114
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.145",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1919140848498215,
+      "p95_residual_norm": 0.1919140848498215
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.15",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.16463272344712349,
+      "p95_residual_norm": 0.1769126041522204
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.155",
+      "rows_checked": 3,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1863028500386259,
+      "p95_residual_norm": 0.3058780982199985
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.16",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3721333733277988,
+      "p95_residual_norm": 0.3721333733277988
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.165",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2636836635930523,
+      "p95_residual_norm": 0.2636836635930523
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.185",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.210491102107424,
+      "p95_residual_norm": 0.210491102107424
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.19",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1620701443636562,
+      "p95_residual_norm": 0.1620701443636562
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.195",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3320948418285104,
+      "p95_residual_norm": 0.4392645745765721
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.2",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3893645453638988,
+      "p95_residual_norm": 0.3893645453638988
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.215",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0946809919445424,
+      "p95_residual_norm": 0.0946809919445424
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.23",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2990349277132997,
+      "p95_residual_norm": 0.2990349277132997
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.235",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1491184104714759,
+      "p95_residual_norm": 0.1491184104714759
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.24",
+      "rows_checked": 3,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3176884628051425,
+      "p95_residual_norm": 0.48647594728551313
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.285",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4187852292666359,
+      "p95_residual_norm": 0.4187852292666359
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.295",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.16121718970493115,
+      "p95_residual_norm": 0.1731976024576787
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.31",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1556688637324194,
+      "p95_residual_norm": 0.1556688637324194
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.315",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.164357079372414,
+      "p95_residual_norm": 0.164357079372414
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.335",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4004418202091932,
+      "p95_residual_norm": 0.4004418202091932
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.34",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2199091327933832,
+      "p95_residual_norm": 0.2199091327933832
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.365",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4766450581012764,
+      "p95_residual_norm": 0.4766450581012764
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.37",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1129796684042528,
+      "p95_residual_norm": 0.1129796684042528
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.415",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1798797451544442,
+      "p95_residual_norm": 0.1798797451544442
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.42",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1911951952545559,
+      "p95_residual_norm": 0.1911951952545559
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.43",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2350863868506253,
+      "p95_residual_norm": 0.2350863868506253
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.515",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.373648526784519,
+      "p95_residual_norm": 0.373648526784519
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "18.595",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1759247022766485,
+      "p95_residual_norm": 0.1759247022766485
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "19.035",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1842793170798277,
+      "p95_residual_norm": 0.1842793170798277
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "19.045",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.162721081750846,
+      "p95_residual_norm": 0.162721081750846
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "19.09",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4849629623261367,
+      "p95_residual_norm": 0.4849629623261367
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "19.13",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2160053696832899,
+      "p95_residual_norm": 0.2160053696832899
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.525",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.209083973085141,
+      "p95_residual_norm": 0.209083973085141
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.58",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1602607809565728,
+      "p95_residual_norm": 0.1602607809565728
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.61",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.6687716527011562,
+      "p95_residual_norm": 0.6687716527011562
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.7",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.21332679081680106,
+      "p95_residual_norm": 0.37466557689250946
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.700000000000003",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1374688996793308,
+      "p95_residual_norm": 0.1374688996793308
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.71",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.26738190273937024,
+      "p95_residual_norm": 0.290053445077901
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.72",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0341715248942269,
+      "p95_residual_norm": 0.0341715248942269
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.74",
+      "rows_checked": 3,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.3333333333333333,
+      "median_residual_norm": 0.1439643120431882,
+      "p95_residual_norm": 0.7211298261568228
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.745",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.071020583335042,
+      "p95_residual_norm": 0.071020583335042
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.75",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.286246031003515,
+      "p95_residual_norm": 0.286246031003515
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.76",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2224496214508219,
+      "p95_residual_norm": 0.2224496214508219
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.77",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0396329581363288,
+      "p95_residual_norm": 0.0396329581363288
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.78",
+      "rows_checked": 3,
+      "kk_valid_rows": 2,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.6666666666666666,
+      "median_residual_norm": 0.0596465519941914,
+      "p95_residual_norm": 0.458159470980088
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.785",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0715722453907534,
+      "p95_residual_norm": 0.0715722453907534
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.795",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.10778103811364625,
+      "p95_residual_norm": 0.15497716580363777
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.8",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4982741519030852,
+      "p95_residual_norm": 0.4982741519030852
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.83",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0273609422257452,
+      "p95_residual_norm": 0.0273609422257452
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.835",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0820483918411013,
+      "p95_residual_norm": 0.0820483918411013
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.84",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.10369849299483815,
+      "p95_residual_norm": 0.15123839942471998
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.85",
+      "rows_checked": 4,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 4,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.27885519253824076,
+      "p95_residual_norm": 0.3603673960750451
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.86",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.26106382304873965,
+      "p95_residual_norm": 0.4083756535897422
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.87",
+      "rows_checked": 5,
+      "kk_valid_rows": 2,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.4,
+      "median_residual_norm": 0.1273058193945153,
+      "p95_residual_norm": 0.4598879843060535
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.875",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0710973197906804,
+      "p95_residual_norm": 0.0710973197906804
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.88",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0820496886632854,
+      "p95_residual_norm": 0.0820496886632854
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.89",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0377022380273188,
+      "p95_residual_norm": 0.0377022380273188
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.9",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3049433754130863,
+      "p95_residual_norm": 0.3049433754130863
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.91",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1691440221258761,
+      "p95_residual_norm": 0.1691440221258761
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.92",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3841728071386134,
+      "p95_residual_norm": 0.3841728071386134
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.94",
+      "rows_checked": 4,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 4,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.26031628165551013,
+      "p95_residual_norm": 0.46209372900591045
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.95",
+      "rows_checked": 3,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2110623860726283,
+      "p95_residual_norm": 0.5925909908371491
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.97",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2383685349957818,
+      "p95_residual_norm": 0.2383685349957818
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.975",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2327392809394518,
+      "p95_residual_norm": 0.2327392809394518
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "24.99",
+      "rows_checked": 5,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 5,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3805236568747246,
+      "p95_residual_norm": 0.5119891751477718
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.0",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.11093891175099585,
+      "p95_residual_norm": 0.12723922549150501
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.01",
+      "rows_checked": 3,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4673034910166663,
+      "p95_residual_norm": 0.8189660779225901
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.015",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.097913830252678,
+      "p95_residual_norm": 0.097913830252678
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.02",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1768586956154052,
+      "p95_residual_norm": 0.20212211470014627
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.03",
+      "rows_checked": 4,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.25,
+      "median_residual_norm": 0.3030151430852475,
+      "p95_residual_norm": 0.4937201420620543
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.04",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.26349589111294897,
+      "p95_residual_norm": 0.41860954031690295
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.05",
+      "rows_checked": 6,
+      "kk_valid_rows": 2,
+      "kk_failure_rows": 4,
+      "kk_valid_fraction": 0.3333333333333333,
+      "median_residual_norm": 0.22152002998793474,
+      "p95_residual_norm": 0.5389359627732703
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.06",
+      "rows_checked": 3,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.3333333333333333,
+      "median_residual_norm": 0.1292034766129802,
+      "p95_residual_norm": 0.30107699406091165
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.07",
+      "rows_checked": 4,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.75,
+      "median_residual_norm": 0.03966279920109315,
+      "p95_residual_norm": 0.7043185651783654
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.075",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.059839836994683,
+      "p95_residual_norm": 0.059839836994683
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.08",
+      "rows_checked": 4,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 4,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.45205413245821635,
+      "p95_residual_norm": 0.5107562632830353
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.09",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3667000907482627,
+      "p95_residual_norm": 0.3667000907482627
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.1",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2062335752979829,
+      "p95_residual_norm": 0.30303284864589625
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.105",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2342066385498376,
+      "p95_residual_norm": 0.2342066385498376
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.11",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.4198112775195489,
+      "p95_residual_norm": 0.4198112775195489
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.12",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.13218415363075908,
+      "p95_residual_norm": 0.13373260433129217
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.13",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.30754490980600874,
+      "p95_residual_norm": 0.36185532723004893
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.14",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0451206414820361,
+      "p95_residual_norm": 0.0451206414820361
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.15",
+      "rows_checked": 3,
+      "kk_valid_rows": 2,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.6666666666666666,
+      "median_residual_norm": 0.0788461632793937,
+      "p95_residual_norm": 0.2763316245331957
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.16",
+      "rows_checked": 7,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 6,
+      "kk_valid_fraction": 0.14285714285714285,
+      "median_residual_norm": 0.2246387084349201,
+      "p95_residual_norm": 0.4277059833307985
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.17",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.4678237300563654,
+      "p95_residual_norm": 0.8578656798731946
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.18",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.5189739506892896,
+      "p95_residual_norm": 0.5821227730429442
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.19",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.16704791858911805,
+      "p95_residual_norm": 0.1947141221980197
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.195",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0926221168707576,
+      "p95_residual_norm": 0.0926221168707576
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.2",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2488338918083725,
+      "p95_residual_norm": 0.2488338918083725
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.205",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1472816571040216,
+      "p95_residual_norm": 0.1472816571040216
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.215000000000003",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.7438971248370306,
+      "p95_residual_norm": 0.7438971248370306
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.22",
+      "rows_checked": 3,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.3333333333333333,
+      "median_residual_norm": 0.1030831748590763,
+      "p95_residual_norm": 0.25152308366353954
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.23",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.10276832514142176,
+      "p95_residual_norm": 0.11132955661669551
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.24",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1626375173376166,
+      "p95_residual_norm": 0.1626375173376166
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.25",
+      "rows_checked": 4,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.75,
+      "median_residual_norm": 0.07342270371652504,
+      "p95_residual_norm": 0.1378760119360554
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.26",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.255679935469272,
+      "p95_residual_norm": 0.255679935469272
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.27",
+      "rows_checked": 3,
+      "kk_valid_rows": 2,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.6666666666666666,
+      "median_residual_norm": 0.051556381722172,
+      "p95_residual_norm": 0.079682108055688
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.275",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.13628606898176202,
+      "p95_residual_norm": 0.23320408119291478
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.28",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.2824197395989835,
+      "p95_residual_norm": 0.4718463295142628
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.29",
+      "rows_checked": 3,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.100538913709097,
+      "p95_residual_norm": 0.3487184463371864
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.3",
+      "rows_checked": 4,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.25,
+      "median_residual_norm": 0.0885335508869861,
+      "p95_residual_norm": 0.11351441227279167
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.31",
+      "rows_checked": 4,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.25,
+      "median_residual_norm": 0.09845603799826294,
+      "p95_residual_norm": 0.1162096155175749
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.32",
+      "rows_checked": 4,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 4,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1110605344097509,
+      "p95_residual_norm": 0.17777560197324435
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.33",
+      "rows_checked": 4,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.25,
+      "median_residual_norm": 0.1285860862074739,
+      "p95_residual_norm": 0.16668869759408025
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.34",
+      "rows_checked": 3,
+      "kk_valid_rows": 2,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.6666666666666666,
+      "median_residual_norm": 0.0691231665861709,
+      "p95_residual_norm": 0.1417132723751385
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.35",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0278388129091603,
+      "p95_residual_norm": 0.0278388129091603
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.355",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0708534479056545,
+      "p95_residual_norm": 0.0708534479056545
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.36",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1700569776581486,
+      "p95_residual_norm": 0.1700569776581486
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.37",
+      "rows_checked": 3,
+      "kk_valid_rows": 2,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.6666666666666666,
+      "median_residual_norm": 0.0783104905113955,
+      "p95_residual_norm": 0.11602483510469865
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.375",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2819689430711974,
+      "p95_residual_norm": 0.2819689430711974
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.38",
+      "rows_checked": 5,
+      "kk_valid_rows": 2,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.4,
+      "median_residual_norm": 0.0817066510410022,
+      "p95_residual_norm": 0.12261830460714301
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.380000000000003",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3167314639495953,
+      "p95_residual_norm": 0.3167314639495953
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.385",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0854161664847625,
+      "p95_residual_norm": 0.0854161664847625
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.395",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1661026523021302,
+      "p95_residual_norm": 0.1661026523021302
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.4",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.051176879850495,
+      "p95_residual_norm": 0.051176879850495
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.41",
+      "rows_checked": 7,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 6,
+      "kk_valid_fraction": 0.14285714285714285,
+      "median_residual_norm": 0.1316235801790921,
+      "p95_residual_norm": 0.19982560663642623
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.415",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1999392233121376,
+      "p95_residual_norm": 0.1999392233121376
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.42",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.12851549055480846,
+      "p95_residual_norm": 0.15613231746048972
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.425",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1477526775533778,
+      "p95_residual_norm": 0.1477526775533778
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.43",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.2868446467081675,
+      "p95_residual_norm": 0.4745740666039303
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.435",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0764893921622861,
+      "p95_residual_norm": 0.0764893921622861
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.44",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1520338436540456,
+      "p95_residual_norm": 0.1520338436540456
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.445",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0859521348100679,
+      "p95_residual_norm": 0.0859521348100679
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.46",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0707517943473333,
+      "p95_residual_norm": 0.0707517943473333
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.465",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.13525125029698348,
+      "p95_residual_norm": 0.2211468967901801
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.49",
+      "rows_checked": 3,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.3333333333333333,
+      "median_residual_norm": 0.0829540077480924,
+      "p95_residual_norm": 0.29752117044890575
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.495",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0662931477444694,
+      "p95_residual_norm": 0.0662931477444694
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.5",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.08623730980043305,
+      "p95_residual_norm": 0.10248284236530143
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.51",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.14957122210817986,
+      "p95_residual_norm": 0.17354612918378362
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.53",
+      "rows_checked": 4,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.25,
+      "median_residual_norm": 0.0990664276569949,
+      "p95_residual_norm": 0.1758668616255321
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.56",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0988145795555441,
+      "p95_residual_norm": 0.10267196496981722
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.57",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.1140075081415503,
+      "p95_residual_norm": 0.1583268069903866
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.59",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1531180108927816,
+      "p95_residual_norm": 0.1531180108927816
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.6",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2853274071133613,
+      "p95_residual_norm": 0.2853274071133613
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.615",
+      "rows_checked": 3,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1833487299606713,
+      "p95_residual_norm": 0.26756735886224486
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.62",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0813764194927059,
+      "p95_residual_norm": 0.0813764194927059
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.635",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1890066331018228,
+      "p95_residual_norm": 0.1890066331018228
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.645",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1913869877617649,
+      "p95_residual_norm": 0.1913869877617649
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.68",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1580705963331557,
+      "p95_residual_norm": 0.1580705963331557
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.69",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2254080373479952,
+      "p95_residual_norm": 0.2254080373479952
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.71",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1003684776088646,
+      "p95_residual_norm": 0.1003684776088646
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.73",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1991047449248332,
+      "p95_residual_norm": 0.1991047449248332
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.78",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3129365526428765,
+      "p95_residual_norm": 0.3129365526428765
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.79",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1805676096739412,
+      "p95_residual_norm": 0.1805676096739412
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.825",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1520851194403907,
+      "p95_residual_norm": 0.1520851194403907
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "25.83",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1042731729219809,
+      "p95_residual_norm": 0.1042731729219809
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.03",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2191719537282727,
+      "p95_residual_norm": 0.2191719537282727
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.145",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0624763326019201,
+      "p95_residual_norm": 0.0624763326019201
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.225",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0867740064996586,
+      "p95_residual_norm": 0.0867740064996586
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.235",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.107604112142413,
+      "p95_residual_norm": 0.107604112142413
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.254999999999995",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1880067839064793,
+      "p95_residual_norm": 0.1880067839064793
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.285",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1718420840541025,
+      "p95_residual_norm": 0.1718420840541025
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.305",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0713755144752749,
+      "p95_residual_norm": 0.0713755144752749
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.33",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1265270072176155,
+      "p95_residual_norm": 0.1265270072176155
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.34",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1800245916534647,
+      "p95_residual_norm": 0.1800245916534647
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.36",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1477492798167516,
+      "p95_residual_norm": 0.1477492798167516
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.379999999999995",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1451770364979254,
+      "p95_residual_norm": 0.1451770364979254
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.405",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1361824239455814,
+      "p95_residual_norm": 0.1361824239455814
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.465",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2908095391323931,
+      "p95_residual_norm": 0.2908095391323931
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.495000000000005",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0951564009673888,
+      "p95_residual_norm": 0.0951564009673888
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.5",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1615832222188686,
+      "p95_residual_norm": 0.1615832222188686
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.51",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.357632420083159,
+      "p95_residual_norm": 0.357632420083159
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.52",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0617160270782721,
+      "p95_residual_norm": 0.0617160270782721
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.57",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0920047179433459,
+      "p95_residual_norm": 0.0920047179433459
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.575",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1269270386087922,
+      "p95_residual_norm": 0.1269270386087922
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.58",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0951499650840297,
+      "p95_residual_norm": 0.0951499650840297
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.59",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1279382124900842,
+      "p95_residual_norm": 0.1279382124900842
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.620000000000005",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3964402614016992,
+      "p95_residual_norm": 0.3964402614016992
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.625",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0634298892508561,
+      "p95_residual_norm": 0.0634298892508561
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.63",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2069240737360484,
+      "p95_residual_norm": 0.2069240737360484
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.65",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2645374586002834,
+      "p95_residual_norm": 0.2645374586002834
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.655",
+      "rows_checked": 3,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 3,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.179457094896851,
+      "p95_residual_norm": 0.36439104394561966
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.66",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2707402333137906,
+      "p95_residual_norm": 0.2707402333137906
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.675",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1158267746947925,
+      "p95_residual_norm": 0.1158267746947925
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.69",
+      "rows_checked": 1,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.072731352517511,
+      "p95_residual_norm": 0.072731352517511
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.705",
+      "rows_checked": 2,
+      "kk_valid_rows": 1,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.5,
+      "median_residual_norm": 0.1562285332939747,
+      "p95_residual_norm": 0.2262402434919047
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.715",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2154628197148122,
+      "p95_residual_norm": 0.2154628197148122
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.72",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2219527149004753,
+      "p95_residual_norm": 0.2219527149004753
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.73",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1471826537675715,
+      "p95_residual_norm": 0.1471826537675715
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.735",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1748408067971729,
+      "p95_residual_norm": 0.1748408067971729
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.745",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2899214961278047,
+      "p95_residual_norm": 0.32014887939862485
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.75",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1760121095074117,
+      "p95_residual_norm": 0.1760121095074117
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.77",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.24263875090454518,
+      "p95_residual_norm": 0.31813653063075076
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.775",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.193930886288352,
+      "p95_residual_norm": 0.193930886288352
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.78",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1099443900145914,
+      "p95_residual_norm": 0.1099443900145914
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.805",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1340777081100483,
+      "p95_residual_norm": 0.1340777081100483
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.815",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0947211015187404,
+      "p95_residual_norm": 0.0947211015187404
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.825",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1455425362266845,
+      "p95_residual_norm": 0.1455425362266845
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.85",
+      "rows_checked": 2,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 2,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.23665930201982538,
+      "p95_residual_norm": 0.3036985766453249
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.86",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1157698750441118,
+      "p95_residual_norm": 0.1157698750441118
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.91",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1384786235448777,
+      "p95_residual_norm": 0.1384786235448777
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.93",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1327991789328838,
+      "p95_residual_norm": 0.1327991789328838
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "32.94",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1471616888996156,
+      "p95_residual_norm": 0.1471616888996156
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "33.004999999999995",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1157078478228808,
+      "p95_residual_norm": 0.1157078478228808
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "38.97",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2225088986867896,
+      "p95_residual_norm": 0.2225088986867896
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "39.14",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1847556961782299,
+      "p95_residual_norm": 0.1847556961782299
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "39.22",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2512086317247588,
+      "p95_residual_norm": 0.2512086317247588
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "39.24",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3322615288820318,
+      "p95_residual_norm": 0.3322615288820318
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "39.52",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.3388001221771433,
+      "p95_residual_norm": 0.3388001221771433
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "39.78",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1031310644385765,
+      "p95_residual_norm": 0.1031310644385765
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "39.85",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2311909724037727,
+      "p95_residual_norm": 0.2311909724037727
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "39.92",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1643491368154929,
+      "p95_residual_norm": 0.1643491368154929
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "40.05",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2074029644061526,
+      "p95_residual_norm": 0.2074029644061526
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "40.13",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1926286783868645,
+      "p95_residual_norm": 0.1926286783868645
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "40.15",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0924299861537448,
+      "p95_residual_norm": 0.0924299861537448
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "40.17",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2815250332462521,
+      "p95_residual_norm": 0.2815250332462521
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "40.25",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1605249589585571,
+      "p95_residual_norm": 0.1605249589585571
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "40.35",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.1271495503410049,
+      "p95_residual_norm": 0.1271495503410049
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "40.39",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.2162510334995087,
+      "p95_residual_norm": 0.2162510334995087
+    },
+    {
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "temperature_c": "40.47",
+      "rows_checked": 1,
+      "kk_valid_rows": 0,
+      "kk_failure_rows": 1,
+      "kk_valid_fraction": 0.0,
+      "median_residual_norm": 0.0933213906081739,
+      "p95_residual_norm": 0.0933213906081739
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "0.0",
+      "rows_checked": 5,
+      "kk_valid_rows": 5,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0082774409553612,
+      "p95_residual_norm": 0.00950020992694404
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "20.34042739868164",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0098305446304251,
+      "p95_residual_norm": 0.01025669608618788
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "21.00302696228028",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0099445086844753,
+      "p95_residual_norm": 0.01006211493089644
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "21.135774500184866",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0097138955432463,
+      "p95_residual_norm": 0.00986624353671036
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.1932315826416",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0098608038687377,
+      "p95_residual_norm": 0.01026742545852335
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.33972549438477",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0094725562332491,
+      "p95_residual_norm": 0.01096803336171662
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.46529769897461",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.010047847898566,
+      "p95_residual_norm": 0.01032594743190907
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.49957275390625",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0095750990393236,
+      "p95_residual_norm": 0.01081492836999343
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.523712158203125",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0094419521048589,
+      "p95_residual_norm": 0.00998587563642879
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.66443634033203",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0101379236688244,
+      "p95_residual_norm": 0.01022581720196713
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.704774856567383",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0088243878327058,
+      "p95_residual_norm": 0.00964327250365228
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.70770310869217",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0096977862481833,
+      "p95_residual_norm": 0.010943061540348421
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.763497540034585",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0094656817976293,
+      "p95_residual_norm": 0.01076789935468945
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.780838012695312",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0097875568284882,
+      "p95_residual_norm": 0.010591095892839901
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.79990963230133",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0044601096309297,
+      "p95_residual_norm": 0.00464345464572906
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.80996894836425",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0100328201974986,
+      "p95_residual_norm": 0.01070615578387443
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.81760025024414",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0095414758484776,
+      "p95_residual_norm": 0.01048097528931904
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.82498359680176",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0079778160001478,
+      "p95_residual_norm": 0.00952341304558502
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.89654922485352",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0098939942153362,
+      "p95_residual_norm": 0.01046943654384367
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.90462875366211",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0086351020900773,
+      "p95_residual_norm": 0.00964742964405207
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.931007385253903",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0102822858616377,
+      "p95_residual_norm": 0.01118170858450152
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.939430236816406",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.00962763693299,
+      "p95_residual_norm": 0.009699405997658929
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.942358016967773",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0083344475756246,
+      "p95_residual_norm": 0.00961074791690774
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.94287109375",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0100638715883223,
+      "p95_residual_norm": 0.01049375385821568
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.946128845214844",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0097913294136732,
+      "p95_residual_norm": 0.00991346163308238
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.95492156626776",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.009423371897828,
+      "p95_residual_norm": 0.0103052208771098
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "22.97684955596924",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0096336608573922,
+      "p95_residual_norm": 0.01071155599460502
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.003639221191406",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0095434899509814,
+      "p95_residual_norm": 0.011173117995683879
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.00533482678013",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0096800914276607,
+      "p95_residual_norm": 0.01050408315903017
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.03702163696289",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0101315091841978,
+      "p95_residual_norm": 0.01083829722345742
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.03773498535156",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0093704148240204,
+      "p95_residual_norm": 0.0101052065466381
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.05885887145996",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0100408872706341,
+      "p95_residual_norm": 0.010934943516586951
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.073604583740234",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0095834366577051,
+      "p95_residual_norm": 0.010593328713874979
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.079769134521484",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0093466818294466,
+      "p95_residual_norm": 0.010019689333327121
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.080116271972656",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0087740939948315,
+      "p95_residual_norm": 0.00982502561090993
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.11127281188965",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0085990379086046,
+      "p95_residual_norm": 0.00943953015776546
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.11371421813965",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0094221288516818,
+      "p95_residual_norm": 0.01054144456553288
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.138307571411133",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0096364689373437,
+      "p95_residual_norm": 0.00974624437159728
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.14408964272667",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0099390227328391,
+      "p95_residual_norm": 0.0105470377943998
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.1486873626709",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.009600704387751,
+      "p95_residual_norm": 0.01039022826155409
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.16465377807617",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0100841094396906,
+      "p95_residual_norm": 0.011180382052670159
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.18080711364746",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0095388511934673,
+      "p95_residual_norm": 0.01069367538410127
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.180906295776367",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0100143252576392,
+      "p95_residual_norm": 0.010265664113840209
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.191471723036265",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0087307030757153,
+      "p95_residual_norm": 0.00943535114435189
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.21324348449707",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0102922148491074,
+      "p95_residual_norm": 0.010830484961899109
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.21598625183105",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0094144476386068,
+      "p95_residual_norm": 0.00968433988363297
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.21787643432617",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0098393706975975,
+      "p95_residual_norm": 0.010533497126481151
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.24600930079433",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0095390129756079,
+      "p95_residual_norm": 0.0097491753996435
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.26512622833252",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0083893062447177,
+      "p95_residual_norm": 0.00855663280187028
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.28370857238769",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0091658449664549,
+      "p95_residual_norm": 0.00972290259798074
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.29077911376953",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0092892584729073,
+      "p95_residual_norm": 0.009907208070384541
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.29633331298828",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0093903957738416,
+      "p95_residual_norm": 0.00948754870583987
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.342674255371094",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0093615507745523,
+      "p95_residual_norm": 0.01060380858662027
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.379928588867188",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0084264815707055,
+      "p95_residual_norm": 0.00873509209107776
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.38847138421075",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0092005218947062,
+      "p95_residual_norm": 0.00932200326312013
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.40268325805664",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0097329510105878,
+      "p95_residual_norm": 0.01027736756519825
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.40669250488281",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0089742437187233,
+      "p95_residual_norm": 0.00984292636482941
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.54464530944824",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0100342868209311,
+      "p95_residual_norm": 0.010825452896768489
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.55087852478028",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0104732253980481,
+      "p95_residual_norm": 0.011067722940062369
+    },
+    {
+      "dataset": "Stanford SECL INR21700-M50T",
+      "temperature_c": "23.796818399031224",
+      "rows_checked": 3,
+      "kk_valid_rows": 3,
+      "kk_failure_rows": 0,
+      "kk_valid_fraction": 1.0,
+      "median_residual_norm": 0.0089708624720721,
+      "p95_residual_norm": 0.00958488858269307
+    }
+  ],
+  "interpretation": [
+    "The development matrix is the weak point, not Cambridge or Molicell.",
+    "RADAR4KIT corrected EIS plus PULSE dominates the current KK failures.",
+    "Any future frozen holdout should declare whether KK failures are advisory metadata or hard exclusions before scoring."
+  ],
+  "recommended_next_actions": [
+    "Inspect RADAR4KIT EIS conversion and sign conventions before trusting it as development target evidence.",
+    "Add a pre-score KK gate to the next frozen validation contract, with threshold and exclusion policy declared before results.",
+    "Do not retroactively filter Cambridge or Molicell after seeing their validation metrics."
+  ]
+}

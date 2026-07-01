@@ -1,7 +1,7 @@
 {
   "cambridge_validation_ready": false,
-  "verdict": "cambridge_partial_support",
-  "reason": "Locked model beat the locked global-mean baseline overall, but did not meet the predeclared external-support margin/components rule.",
+  "verdict": "molicell_p42a_external_support",
+  "reason": "Locked model beat the locked global-mean baseline by at least 5 percent overall and on both EIS components.",
   "gates": {
     "cambridge_excluded_from_training_and_scoring": true,
     "no_random_row_split": true,
@@ -23,19 +23,49 @@
     "cambridge_rows_scored": 20594,
     "cambridge_post_outcome_tuning_performed": false,
     "frozen_config_used": true,
-    "cambridge_no_random_row_split": true
+    "cambridge_no_random_row_split": true,
+    "molicell_p42a_holdout_matrix_written": true,
+    "molicell_p42a_complete_target_rows": 101,
+    "molicell_p42a_explicit_frequency_columns": true,
+    "molicell_p42a_scored_once": true,
+    "molicell_p42a_rows_scored": 101,
+    "molicell_p42a_post_outcome_tuning_performed": false,
+    "molicell_p42a_frozen_config_used": true,
+    "molicell_p42a_no_random_row_split": true,
+    "kramer_kronig_validation_written": true,
+    "kramer_kronig_total_rows_checked": 21366,
+    "kramer_kronig_overall_valid_fraction": 0.981044650379107,
+    "kramer_kronig_used_to_change_prior_verdicts": false,
+    "kramer_kronig_diagnostics_written": true,
+    "kramer_kronig_failure_rows": 405,
+    "kramer_kronig_largest_problem_dataset": "RADAR4KIT corrected EIS plus PULSE",
+    "radar4kit_eis_kk_variant_audit_written": true,
+    "radar4kit_eis_kk_variant_audit_rows": 456,
+    "vm_demo_smoke_runner_written": true,
+    "vm_demo_last_smoke_mode": "local",
+    "vm_demo_last_smoke_status": "passed",
+    "vm_demo_remote_connection_verified": false,
+    "cross_dataset_goal_audit_written": true,
+    "cross_dataset_goal_local_pipeline_complete": true,
+    "cross_dataset_goal_remote_vm_verified": false,
+    "demo_handoff_bundle_written": true,
+    "demo_handoff_bundle_status": "passed"
   },
   "best_baseline": {
     "name": "global_train_target_mean",
     "rmse_all_ohm": 0.0044402816104454155
   },
   "best_model": {
-    "name": "knn_5_global_mean_shrinkage_dev_tuned",
-    "rmse_all_ohm": 0.0040249645317227255
+    "name": "knn_3_global_mean_shrinkage_post_cambridge_dev",
+    "rmse_all_ohm": 0.003940562454940317
   },
   "next_required_work": [
-    "Do not retune this validation run. Any further model changes must be labeled post-Cambridge development.",
-    "If publishing, state the Cambridge verdict exactly and keep Stanford labeled as development/evaluation data."
+    "If RADAR4KIT target extraction is corrected, rebuild a clearly labeled post-audit dev matrix and freeze a new validation contract.",
+    "Audit RADAR4KIT EIS target extraction because it dominates current KK failures in the development matrix.",
+    "For the next frozen holdout, declare whether KK quality gates are advisory metadata or hard exclusion gates before scoring.",
+    "Do not retune this Molicell result and still call it clean validation.",
+    "If the result is weak, diagnose it as post-validation analysis only.",
+    "Keep Cambridge labeled spent and NASA labeled blocked until its exact frequency vector is documented."
   ],
   "cambridge_validation_completed": true,
   "cambridge_validation_result": {
@@ -43,5 +73,129 @@
     "baseline_rmse_all_ohm": 1.1390269531133854,
     "model_rmse_all_ohm": 1.1200309137511784,
     "relative_rmse_improvement_fraction": 0.016677427439520904
+  },
+  "molicell_p42a_validation_completed": true,
+  "molicell_p42a_validation_result": {
+    "verdict": "external_support",
+    "baseline_rmse_all_ohm": 0.010619458027514959,
+    "model_rmse_all_ohm": 0.009036333894874982,
+    "relative_rmse_improvement_fraction": 0.14907767689632662
+  },
+  "kramer_kronig_validation": {
+    "summary_json": "[local path redacted]",
+    "rows_csv": "[local path redacted]",
+    "overall_valid_fraction": 0.981044650379107,
+    "residual_limit": 0.08,
+    "claim_boundary": "Kramer-Kronig screen is advisory quality metadata for fixed-grid EIS targets. It was not used to tune models or revise already-scored validation verdicts."
+  },
+  "kramer_kronig_diagnostics": {
+    "diagnostics_json": "[local path redacted]",
+    "top_failures_csv": "[local path redacted]",
+    "largest_problem_group": {
+      "matrix": "dev_feature_target_matrix",
+      "dataset": "RADAR4KIT corrected EIS plus PULSE",
+      "rows_checked": 456,
+      "kk_valid_rows": 66,
+      "kk_failure_rows": 390,
+      "kk_valid_fraction": 0.14473684210526316,
+      "median_residual_norm": 0.19288669889512366,
+      "p95_residual_norm": 0.710974632626768
+    },
+    "interpretation": [
+      "The development matrix is the weak point, not Cambridge or Molicell.",
+      "RADAR4KIT corrected EIS plus PULSE dominates the current KK failures.",
+      "Any future frozen holdout should declare whether KK failures are advisory metadata or hard exclusions before scoring."
+    ]
+  },
+  "radar4kit_eis_kk_variant_audit": {
+    "audit_json": "[local path redacted]",
+    "audit_rows_csv": "[local path redacted]",
+    "current_pipeline_variant": {
+      "variant": "column_as_negative_imag",
+      "frequency_window": "fixed_grid_span_0p05_to_40hz",
+      "rows_checked": 456,
+      "kk_valid_rows": 37,
+      "kk_failure_rows": 419,
+      "kk_valid_fraction": 0.08114035087719298,
+      "median_residual_norm": 0.2654693810643362,
+      "p95_residual_norm": 0.6917085861360851
+    },
+    "best_variant_by_kk_pass_fraction": {
+      "variant": "column_as_imaginary_flip_to_negative_imag",
+      "frequency_window": "positive_negative_imag_only",
+      "rows_checked": 456,
+      "kk_valid_rows": 256,
+      "kk_failure_rows": 200,
+      "kk_valid_fraction": 0.5614035087719298,
+      "median_residual_norm": 0.07008412287964008,
+      "p95_residual_norm": 0.1735479395121475
+    },
+    "interpretation": [
+      "A simple imaginary-sign flip is not enough to rescue RADAR4KIT KK consistency.",
+      "The RADAR4KIT development target should be audited at the raw EIS conversion/windowing level before it is treated as clean training evidence.",
+      "Do not silently replace old matrices. Build a new post-audit dev matrix with a new frozen contract if this is corrected."
+    ]
+  },
+  "vm_demo_smoke": {
+    "results_json": "[local path redacted]",
+    "config_template": "[local path redacted]",
+    "mode": "local",
+    "status": "passed",
+    "remote_connection_verified": false,
+    "claim_boundary": "Local smoke proves the demo code path on this machine. SSH smoke is required before claiming VM connection."
+  },
+  "cross_dataset_goal_completion_audit": {
+    "audit_json": "[local path redacted]",
+    "overall_status": "complete_vm_deferred_by_user",
+    "next_required_work": [
+      "Deferred outside this goal: when the colleague-provided VM is ready, run vm_demo_smoke.py in SSH mode with explicit host, user, repo, and Python settings."
+    ]
+  },
+  "demo_handoff_bundle": {
+    "manifest_json": "[local path redacted]",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "demo_pipeline",
+        "status": "passed",
+        "returncode": 0
+      },
+      {
+        "name": "local_vm_smoke",
+        "status": "passed",
+        "returncode": 0
+      },
+      {
+        "name": "public_site_rebuild_before_initial_audit",
+        "status": "passed",
+        "returncode": 0
+      },
+      {
+        "name": "initial_goal_completion_audit",
+        "status": "passed",
+        "returncode": 0
+      },
+      {
+        "name": "demo_pptx_deck",
+        "status": "passed",
+        "returncode": 0
+      },
+      {
+        "name": "public_site_rebuild_before_final_audit",
+        "status": "passed",
+        "returncode": 0
+      },
+      {
+        "name": "final_goal_completion_audit",
+        "status": "passed",
+        "returncode": 0
+      },
+      {
+        "name": "public_site_rebuild_after_audit",
+        "status": "passed",
+        "returncode": 0
+      }
+    ],
+    "claim_boundary": "This bundle regenerates and verifies the local demo handoff. VM connection is deferred by user and is not claimed."
   }
 }
