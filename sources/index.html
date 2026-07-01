@@ -6,6 +6,7 @@
   <title>Sources For Everything | LLM Wiki Research Outputs</title>
   <style>:root {
   color-scheme: light;
+  --sidebar-width: 260px;
   --ink: #17202a;
   --muted: #5f6b76;
   --line: #d9e0e6;
@@ -47,7 +48,8 @@ body {
 .site-shell {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  transition: grid-template-columns 180ms ease;
 }
 .sidebar {
   position: sticky;
@@ -57,6 +59,40 @@ body {
   padding: 18px 14px;
   background: var(--panel-strong);
   border-right: 1px solid var(--line);
+  transform: translateX(0);
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+[data-sidebar="collapsed"] .site-shell {
+  grid-template-columns: 0 minmax(0, 1fr);
+}
+[data-sidebar="collapsed"] .sidebar {
+  transform: translateX(calc(-1 * var(--sidebar-width)));
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar-floating-toggle {
+  position: fixed;
+  z-index: 40;
+  top: 12px;
+  left: calc(var(--sidebar-width) + 10px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+  cursor: pointer;
+  transition: left 180ms ease, background 180ms ease;
+}
+.sidebar-floating-toggle:hover {
+  background: var(--paper);
+}
+[data-sidebar="collapsed"] .sidebar-floating-toggle {
+  left: 12px;
 }
 .brand {
   display: block;
@@ -314,12 +350,19 @@ footer {
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
+  [data-sidebar="collapsed"] .sidebar {
+    display: none;
+  }
+  .sidebar-floating-toggle {
+    left: 12px;
+  }
   .grid, .grid.two { grid-template-columns: 1fr; }
   p { font-size: 17px; }
 }</style>
   <script>
 (function () {
   var key = "llm-wiki-theme";
+  var sidebarKey = "llm-wiki-sidebar";
   function preferredTheme() {
     try {
       var saved = localStorage.getItem(key);
@@ -332,23 +375,54 @@ footer {
     var label = document.querySelector("[data-theme-label]");
     if (label) label.textContent = theme === "dark" ? "On" : "Off";
   }
+  function preferredSidebar() {
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Hide sidebar");
+      button.setAttribute("title", collapsed ? "Show sidebar" : "Hide sidebar");
+    }
+    if (icon) icon.textContent = state === "collapsed" ? ">" : "<";
+  }
   var initialTheme = preferredTheme();
+  var initialSidebar = preferredSidebar();
   applyTheme(initialTheme);
+  applySidebar(initialSidebar);
   window.addEventListener("DOMContentLoaded", function () {
     applyTheme(document.documentElement.dataset.theme || initialTheme);
+    applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
     var toggle = document.querySelector("[data-theme-toggle]");
-    if (!toggle) return;
-    toggle.addEventListener("click", function () {
-      var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-      try { localStorage.setItem(key, next); } catch (error) {}
-      applyTheme(next);
-    });
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
   });
 })();
 </script>
   <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
   <div class="site-shell">
     <aside class="sidebar"><a class="brand" href="../index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
 <a class="side-link" href="../index.html">Overview</a>

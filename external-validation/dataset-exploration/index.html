@@ -40,6 +40,7 @@
   <script>
 (function () {
   var key = "llm-wiki-theme";
+  var sidebarKey = "llm-wiki-sidebar";
   function preferredTheme() {
     try {
       var saved = localStorage.getItem(key);
@@ -52,17 +53,47 @@
     var label = document.querySelector("[data-theme-label]");
     if (label) label.textContent = theme === "dark" ? "On" : "Off";
   }
+  function preferredSidebar() {
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Hide sidebar");
+      button.setAttribute("title", collapsed ? "Show sidebar" : "Hide sidebar");
+    }
+    if (icon) icon.textContent = state === "collapsed" ? ">" : "<";
+  }
   var initialTheme = preferredTheme();
+  var initialSidebar = preferredSidebar();
   applyTheme(initialTheme);
+  applySidebar(initialSidebar);
   window.addEventListener("DOMContentLoaded", function () {
     applyTheme(document.documentElement.dataset.theme || initialTheme);
+    applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
     var toggle = document.querySelector("[data-theme-toggle]");
-    if (!toggle) return;
-    toggle.addEventListener("click", function () {
-      var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-      try { localStorage.setItem(key, next); } catch (error) {}
-      applyTheme(next);
-    });
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
   });
 })();
 </script>
