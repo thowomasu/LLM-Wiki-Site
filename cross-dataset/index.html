@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cross-Dataset Validation Scaffold | LLM Wiki Research Outputs</title>
+  <title>bAIttery Project: Time-Series to DRT Pipeline | LLM Wiki Research Outputs</title>
   <style>:root {
   color-scheme: light;
   --ink: #17202a;
@@ -354,14 +354,14 @@ footer {
 <a class="side-link" href="../index.html">Overview</a>
 <a class="side-link" href="../presentations/">Presentations</a>
 <a class="side-link" href="../datasets/">Datasets</a>
-<a class="side-link" href="../cross-dataset/">Cross-dataset validation</a>
+<a class="side-link" href="../cross-dataset/">bAIttery DRT pipeline</a>
 <a class="side-link" href="../sources/">Sources</a>
 <a class="side-link" href="../glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
 <a class="side-link" href="../presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
 <a class="side-link" href="../presentations/#dib-data">DIB (Data in Brief) Data</a>
 <a class="side-link" href="../presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
-<a class="side-link" href="../cross-dataset/">Cross-dataset scaffold</a>
+<a class="side-link" href="../cross-dataset/">bAIttery DRT pipeline</a>
 <a class="side-link" href="../external-validation/dataset-exploration/">Dataset Viability Presentation</a>
 <a class="side-link" href="../external-validation/">External Dataset Checks</a>
 <div class="side-section">CALB Package</div>
@@ -371,8 +371,8 @@ footer {
     <div class="page-content">
       <header>
         <div class="kicker">LLM Wiki Research Outputs</div>
-        <h1>Cross-Dataset Validation Scaffold</h1>
-        <p class="lead">Readable handoff for the supervised time-series-to-EIS scaffold.</p>
+        <h1>bAIttery Project: Time-Series to DRT Pipeline</h1>
+        <p class="lead">Readable handoff for the bAIttery time-series to DRT pipeline work.</p>
       </header>
       <main>
 
@@ -469,7 +469,7 @@ footer {
         <p>Run the smoke helper first when a VM is ready. Last smoke mode: <code>local</code>. Last smoke status: <code>passed</code>. VM connection deferred: <code>True</code>.</p>
         <p><code>&amp; "[DRT python]" -B scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_smoke.py --mode local --python "[DRT python]"</code></p>
         <p>When the VM is ready, fill a JSON config from <code>vm_demo_config.template.json</code> and run the smoke helper with <code>--config</code>.</p>
-        <p><a class="button" href="demo_pipeline_presentation.html">Open demo presentation</a></p>
+        <p><a class="button" href="demo_pipeline_presentation.html">Open bAIttery project presentation</a></p>
       </article>
     </section>
     <h2>Downloadable Public Summaries</h2>
@@ -492,12 +492,12 @@ footer {
 <li><a class="button" href="data/demo_handoff_run_manifest.json">demo_handoff_run_manifest.json</a></li>
 <li><a class="button" href="data/vm_demo_config.template.json">vm_demo_config.template.json</a></li></ul>
     <h2>Full Handoff</h2>
-    <h2>Cross Dataset Pulse To EIS Training</h2>
-<p>This folder is the supervised cross-dataset validation scaffold.</p>
+    <h2>bAIttery Project: Time-Series to DRT Pipeline</h2>
+<p>This folder contains the supervised time-series-to-EIS demo path for the broader bAIttery time-series to DRT pipeline work.</p>
 <p>Plain English: it tries to predict an EIS spectrum from time-domain current and voltage behavior measured before that EIS spectrum. EIS means Electrochemical Impedance Spectroscopy. The target is a fixed frequency grid with real impedance and negative-imaginary impedance values.</p>
-<p>This is not the frozen CALB pulse-to-EIS rule. That older rule is the internal CALB rule that checks whether HPPC pulse windows recover EIS-like information. This folder is a separate supervised model scaffold for testing whether similar time-series-to-EIS structure survives across datasets.</p>
+<p>This is not the frozen CALB pulse-to-EIS rule. That older rule is the internal CALB rule that checks whether HPPC pulse windows recover EIS-like information. This folder is a separate supervised model path for testing whether similar time-series-to-EIS structure survives across datasets as part of the wider DRT pipeline work.</p>
 <h2>Current Verdict</h2>
-<p>The scaffold is now viable for the next similar internet dataset.</p>
+<p>The pipeline is now viable for the next similar internet dataset.</p>
 <p>Why that is true:</p>
 <p>1. It has a unified row schema for pairing one time-domain file with one later same-cell EIS spectrum.</p>
 <p>2. It blocks random row splits and uses whole-dataset holdouts.</p>
@@ -632,8 +632,8 @@ footer {
 <h2>Claim Boundary</h2>
 <p>Allowed:</p>
 <ul>
-<li>The supervised cross-dataset scaffold is viable for another similar dataset.</li>
-<li>Cambridge gives partial support to the scaffold because the locked model beat the locked mean baseline.</li>
+<li>The bAIttery time-series to DRT pipeline demo path is viable for another similar dataset.</li>
+<li>Cambridge gives partial support to the supervised demo path because the locked model beat the locked mean baseline.</li>
 <li>The Cambridge improvement is weak, about 1.67% RMSE improvement, so it is not strong external support.</li>
 </ul>
 <p>Not allowed:</p>
@@ -692,7 +692,7 @@ footer {
 <li>Relative RMSE improvement: <code>0.149078</code>.</li>
 <li>Post-outcome tuning performed: <code>False</code>.</li>
 </ul>
-<p>Boundary: this validates only the supervised cross-dataset scaffold on this local Molicell P42A matrix. It does not validate the frozen frozen pulse-to-EIS rule CALB rule.</p>
+<p>Boundary: this validates only the supervised bAIttery time-series to DRT pipeline demo path on this local Molicell P42A matrix. It does not validate the frozen frozen pulse-to-EIS rule CALB rule.</p>
 <p>Validation artifacts:</p>
 <ul>
 <li><code>frozen_molicell_p42a_validation_config.json</code></li>

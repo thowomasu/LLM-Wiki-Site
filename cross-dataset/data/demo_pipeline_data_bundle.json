@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-07-01T20:45:33.302359+00:00",
+  "created_utc": "2026-07-01T20:54:32.401775+00:00",
   "claim_boundary": "Demo only. Uses a bounded subset and does not create a new validation claim.",
   "inputs": {
     "dev_matrix_csv": "[local path redacted]",

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cross-Dataset Pulse-to-EIS Demo Pipeline, Technical Presentation</title>
+  <title>bAIttery Project: Time-Series to DRT Pipeline</title>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
 (function () {
@@ -156,15 +156,15 @@
     <a class="side-link" href="../index.html">Overview</a>
     <a class="side-link" href="../presentations/">Presentations</a>
     <a class="side-link" href="../datasets/">Datasets</a>
-    <a class="side-link" href="../cross-dataset/">Cross-Dataset</a>
+    <a class="side-link" href="../cross-dataset/">bAIttery DRT Pipeline</a>
     <div class="side-section">Demo Page</div>
     <a class="side-link" href="#summary">Summary</a><a class="side-link" href="#objective">Objective</a><a class="side-link" href="#methodology">Methodology</a><a class="side-link" href="#results">Results</a><a class="side-link" href="#conclusion">Conclusion</a><a class="side-link" href="#inputs">Inputs</a><a class="side-link" href="#math">Math</a><a class="side-link" href="#graphs">Graphs</a><a class="side-link" href="#code">Code</a><a class="side-link" href="#outputs">Outputs</a><a class="side-link" href="#glossary">Glossary</a><a class="side-link" href="#limits">Limits</a>
   </aside>
   <div class="page-content">
     <header>
       <div class="kicker">Cross-dataset pipeline, self-contained technical page</div>
-      <h1>Pulse-to-EIS Demo Pipeline</h1>
-      <p class="lead">This page contains the pipeline objective, inputs, transformations, equations, plots, numerical outputs, code snippets, and claim boundary. It is written so an external user can understand the demo without running the repository.</p>
+      <h1>bAIttery Project: Time-Series to DRT Pipeline</h1>
+      <p class="lead">This page contains the pipeline objective, inputs, transformations, equations, plots, numerical outputs, code snippets, and claim boundary. It is written so an external user can understand the bAIttery time-series to DRT pipeline work without running the repository. The demo target shown here is fixed-grid EIS, used as the measurable bridge into the broader DRT analysis path.</p>
       <div class="button-row">
         <a class="button" href="data/demo_pipeline_code_bundle.py" download>Download code bundle</a>
         <a class="button" href="data/demo_pipeline_data_bundle.json" download>Download data bundle</a>
@@ -174,7 +174,7 @@
 <main>
   <section id="summary" class="note">
     <h2>Executive Read</h2>
-    <p>The demo is a small but real supervised pipeline. It takes time-domain battery features, predicts a fixed-grid EIS vector, compares against a global-mean baseline, and runs a Kramer-Kronig quality screen on the EIS target rows.</p>
+    <p>The demo is a small but real supervised pipeline inside the bAIttery time-series to DRT project. It takes time-domain battery features, predicts a fixed-grid EIS vector, compares against a global-mean baseline, and runs a Kramer-Kronig quality screen on the EIS target rows.</p>
     <p><strong>Blunt boundary:</strong> this is a working demo and external-user explanation, not a new external-validation claim. VM connection is deferred until the colleague-provided VM exists.</p>
   </section>
 
@@ -582,7 +582,7 @@
     </div>
     <pre><code class="language-json">{
   &quot;experiment&quot;: &quot;cross_dataset_pulse_to_eis_training_demo&quot;,
-  &quot;created_utc&quot;: &quot;2026-07-01T20:45:33.302359+00:00&quot;,
+  &quot;created_utc&quot;: &quot;2026-07-01T20:54:32.401775+00:00&quot;,
   &quot;claim_boundary&quot;: &quot;Demo only. Uses a bounded subset and does not create a new validation claim.&quot;,
   &quot;inputs&quot;: {
     &quot;dev_matrix_csv&quot;: &quot;[local path redacted]
