@@ -1,6 +1,6 @@
 {
   "experiment": "cross_dataset_demo_handoff_bundle",
-  "created_utc": "2026-07-01T18:24:11.275254+00:00",
+  "created_utc": "2026-07-01T19:16:59.836060+00:00",
   "status": "passed",
   "python": "[local path redacted]",
   "steps": [
@@ -61,18 +61,6 @@
       "stderr_tail": ""
     },
     {
-      "name": "demo_pptx_deck",
-      "command": [
-        "[local path redacted]",
-        "scripts/experiments/cross_dataset_pulse_to_eis_training/build_demo_pptx_deck.mjs"
-      ],
-      "cwd": "[local path redacted]",
-      "returncode": 0,
-      "status": "passed",
-      "stdout_tail": "Inspect result written to file: [local path redacted]\nWrote [local path redacted]\nScratch workspace: [local path redacted]\n",
-      "stderr_tail": ""
-    },
-    {
       "name": "public_site_rebuild_before_final_audit",
       "command": [
         "[local path redacted]",
@@ -115,8 +103,6 @@
   "artifacts": {
     "demo_results_json": "[local path redacted]",
     "demo_presentation_html": "[local path redacted]",
-    "demo_presentation_pptx": "[local path redacted]",
-    "demo_presentation_pptx_summary": "[local path redacted]",
     "vm_smoke_results_json": "[local path redacted]",
     "goal_audit_json": "[local path redacted]",
     "public_page": "[local path redacted]",

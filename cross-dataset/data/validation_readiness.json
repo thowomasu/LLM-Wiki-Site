@@ -176,11 +176,6 @@
         "returncode": 0
       },
       {
-        "name": "demo_pptx_deck",
-        "status": "passed",
-        "returncode": 0
-      },
-      {
         "name": "public_site_rebuild_before_final_audit",
         "status": "passed",
         "returncode": 0

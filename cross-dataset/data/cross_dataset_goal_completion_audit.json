@@ -1,6 +1,6 @@
 {
   "experiment": "cross_dataset_goal_completion_audit",
-  "created_utc": "2026-07-01T18:24:06.003978+00:00",
+  "created_utc": "2026-07-01T19:16:55.400581+00:00",
   "overall_status": "complete_vm_deferred_by_user",
   "sections": {
     "kramer_kronig": {
@@ -50,14 +50,14 @@
       "status": "passed",
       "sections_present": {
         "objective": true,
+        "example": true,
+        "goal": true,
         "methodology": true,
-        "results": true,
-        "conclusion": true
-      },
-      "pptx_sections_present": {
-        "objective": true,
-        "methodology": true,
-        "results": true,
+        "feature-to-target math": true,
+        "scoring math": true,
+        "kramer-kronig quality screen": true,
+        "numerical results": true,
+        "code walkthrough": true,
         "conclusion": true
       },
       "verdict": "working_demo_model_beats_baseline",
@@ -74,27 +74,12 @@
         {
           "path": "[local path redacted]",
           "exists": true,
-          "description": "Editable PPTX deck builder"
-        },
-        {
-          "path": "[local path redacted]",
-          "exists": true,
           "description": "Demo pipeline results"
         },
         {
           "path": "[local path redacted]",
           "exists": true,
-          "description": "Human-readable demo presentation"
-        },
-        {
-          "path": "[local path redacted]",
-          "exists": true,
-          "description": "Editable demo presentation PPTX"
-        },
-        {
-          "path": "[local path redacted]",
-          "exists": true,
-          "description": "Editable PPTX deck summary"
+          "description": "Thorough site-native HTML demo presentation"
         }
       ]
     },
@@ -107,7 +92,6 @@
         "vm_deferred_boundary": true,
         "goal_audit_section": true,
         "html_presentation_link": true,
-        "pptx_presentation_link": true,
         "downloadable_summaries": true
       },
       "public_data_files": {
@@ -126,7 +110,6 @@
         "demo_pipeline_results.json": true,
         "vm_demo_smoke_results.json": true,
         "cross_dataset_goal_completion_audit.json": true,
-        "cross_dataset_demo_pipeline_presentation_summary.json": true,
         "vm_demo_config.template.json": true
       },
       "artifacts": [
@@ -138,17 +121,7 @@
         {
           "path": "[local path redacted]",
           "exists": true,
-          "description": "Public demo presentation copy"
-        },
-        {
-          "path": "[local path redacted]",
-          "exists": true,
-          "description": "Public editable PPTX deck copy"
-        },
-        {
-          "path": "[local path redacted]",
-          "exists": true,
-          "description": "Public editable PPTX deck summary"
+          "description": "Public thorough HTML demo presentation"
         }
       ]
     },

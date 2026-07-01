@@ -1,6 +1,6 @@
 {
   "experiment": "cross_dataset_pulse_to_eis_training_demo",
-  "created_utc": "2026-07-01T18:23:43.535316+00:00",
+  "created_utc": "2026-07-01T19:16:45.623658+00:00",
   "claim_boundary": "Demo only. Uses a bounded subset and does not create a new validation claim.",
   "inputs": {
     "dev_matrix_csv": "[local path redacted]",

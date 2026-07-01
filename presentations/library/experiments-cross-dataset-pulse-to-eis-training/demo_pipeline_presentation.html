@@ -3,72 +3,209 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cross-Dataset Pulse-to-EIS Demo Pipeline</title>
+  <title>Cross-Dataset Pulse-to-EIS Demo Pipeline, Technical Presentation</title>
   <style>
-    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #16202a; background: #f5f7f9; line-height: 1.5; }
-    main { max-width: 1100px; margin: 0 auto; padding: 34px 24px 56px; }
-    section { margin: 22px 0; padding: 22px; background: #fff; border: 1px solid #d8e0e7; border-radius: 8px; }
-    h1 { font-size: 44px; line-height: 1.08; margin: 0 0 8px; }
-    h2 { font-size: 28px; margin: 0 0 12px; }
+    :root {
+      --ink: #17212b;
+      --muted: #586673;
+      --paper: #f5f7f9;
+      --panel: #ffffff;
+      --line: #d8e0e7;
+      --teal: #147a73;
+      --green: #2f7d4a;
+      --amber: #b85f17;
+      --red: #a33a2d;
+      --code: #eef2f5;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.5; }
+    main { max-width: 1220px; margin: 0 auto; padding: 34px 24px 70px; }
+    section { margin: 26px 0; padding: 24px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+    h1 { font-size: clamp(38px, 6vw, 70px); line-height: 1.05; margin: 0 0 14px; max-width: 1080px; }
+    h2 { font-size: clamp(28px, 3vw, 42px); line-height: 1.12; margin: 0 0 14px; }
+    h3 { font-size: 23px; margin: 16px 0 8px; }
     p, li { font-size: 18px; }
-    code { background: #eef2f5; padding: 2px 5px; border-radius: 4px; }
+    code { background: var(--code); padding: 2px 5px; border-radius: 4px; }
+    pre { white-space: pre-wrap; overflow-x: auto; background: var(--code); padding: 14px 16px; border-radius: 6px; border: 1px solid var(--line); }
     table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
-    td { border: 1px solid #d8e0e7; padding: 9px 11px; vertical-align: top; }
-    .lead { color: #586673; font-size: 21px; max-width: 900px; }
-    .metric { font-size: 38px; font-weight: 800; display: block; }
-    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .note { border-left: 5px solid #b85f17; }
-    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 34px; } }
+    th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: #edf3f8; }
+    .lead { color: var(--muted); font-size: 22px; max-width: 980px; }
+    .kicker { color: var(--teal); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card { padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .metric { font-size: 38px; font-weight: 800; line-height: 1; display: block; margin-bottom: 8px; }
+    .good { color: var(--green); }
+    .warn { color: var(--amber); }
+    .bad { color: var(--red); }
+    .muted { color: var(--muted); }
+    .note { border-left: 5px solid var(--amber); background: #fff8f0; }
+    .equation { font-family: Consolas, Monaco, monospace; font-size: 18px; background: var(--code); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; margin: 12px 0; overflow-x: auto; }
+    .bar { display: grid; gap: 8px; margin-top: 10px; }
+    .bar-row { display: grid; grid-template-columns: 190px 1fr 92px; gap: 12px; align-items: center; }
+    .track { height: 22px; background: #edf3f8; border-radius: 999px; border: 1px solid var(--line); overflow: hidden; }
+    .fill { height: 100%; background: var(--teal); border-radius: 999px; }
+    .fill.good { background: var(--green); }
+    .fill.warn { background: var(--amber); }
+    .flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+    .step { padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: #fff; min-height: 150px; }
+    .step strong { display: block; font-size: 18px; margin-bottom: 6px; }
+    .small { font-size: 14px; color: var(--muted); }
+    .svg-wrap { width: 100%; overflow-x: auto; }
+    svg { max-width: 100%; height: auto; }
+    @media (max-width: 880px) {
+      .grid, .grid.two, .grid.four, .flow { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 <main>
+  <p class="kicker">Stakeholder technical demo</p>
   <h1>Cross-Dataset Pulse-to-EIS Demo Pipeline</h1>
-  <p class="lead">A small working example of the supervised pipeline: objective, methodology, results, and conclusion. This is a demo, not a new validation claim.</p>
+  <p class="lead">This presentation shows the actual demo pipeline, the math behind the target and scoring, the numbers produced by the current run, and the claim boundary. It assumes the reader already knows why EIS, impedance spectra, and relaxation behavior matter.</p>
 
-  <section>
-    <h2>Objective</h2>
-    <p>Show that the code can take time-domain battery features, predict a fixed-grid EIS spectrum, compare against a boring baseline, and run a Kramer-Kronig quality screen on the EIS targets.</p>
+  <section class="note">
+    <h2>Executive Read</h2>
+    <p>The demo is a small but real supervised pipeline. It takes time-domain battery features, predicts a fixed-grid EIS vector, compares against a global-mean baseline, and runs a Kramer-Kronig quality screen on the EIS target rows.</p>
+    <p><strong>Blunt boundary:</strong> this is a working demo and stakeholder explanation, not a new external-validation claim. VM connection is deferred until the colleague-provided VM exists.</p>
   </section>
 
   <section>
-    <h2>Methodology</h2>
-    <ol>
-      <li>Read the existing development matrix and Molicell holdout matrix.</li>
-      <li>Train on development rows only. No random row split.</li>
-      <li>Predict fixed-grid real impedance and negative-imaginary impedance.</li>
-      <li>Compare the model against the global train-mean baseline.</li>
-      <li>Run the finite-range Kramer-Kronig RC-basis screen on the holdout EIS rows.</li>
-    </ol>
+    <h2>Objective, Example, Goal, Conclusion</h2>
+    <div class="grid four">
+      <article class="card"><h3>Objective</h3><p>Prove the demo code path can convert earlier time-domain behavior into a fixed-grid EIS prediction and score it honestly.</p></article>
+      <article class="card"><h3>Example</h3><p>Train on <code>120</code> development rows, score <code>30</code> Molicell holdout rows, and inspect <code>20</code> target columns.</p></article>
+      <article class="card"><h3>Goal</h3><p>Give stakeholders enough technical detail to understand the data contract, leakage guard, model, baseline, math, and failure modes.</p></article>
+      <article class="card"><h3>Conclusion</h3><p>The local demo works and beats the baseline. The result is useful, but it should not be oversold as a new validation claim.</p></article>
+    </div>
   </section>
 
   <section>
-    <h2>Results</h2>
-    <div class="grid">
-      <div><span class="metric">0.0092086</span><p>Baseline RMSE, ohm</p></div>
-      <div><span class="metric">0.00797675</span><p>Demo model RMSE, ohm</p></div>
-      <div><span class="metric">1.000</span><p>KK valid fraction</p></div>
+    <h2>Methodology And Pipeline Architecture</h2>
+    <div class="flow">
+      <div class="step"><strong>1. Input matrix</strong><p>Read development features and Molicell holdout features. Each row is a same-cell time-domain segment paired with an EIS target.</p></div>
+      <div class="step"><strong>2. Feature layer</strong><p>Use current, voltage, time, temperature, SOC, and derived pulse statistics available before the EIS target.</p></div>
+      <div class="step"><strong>3. Target layer</strong><p>Predict real impedance and negative-imaginary impedance on a fixed frequency grid.</p></div>
+      <div class="step"><strong>4. Scoring layer</strong><p>Compare global-mean baseline against a KNN shrinkage model using RMSE across all target columns.</p></div>
+      <div class="step"><strong>5. Physics screen</strong><p>Run finite-range RC-basis Kramer-Kronig consistency on the holdout EIS targets.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Data Contract</h2>
+    <table>
+      <thead><tr><th>Layer</th><th>Current demo value</th><th>Why stakeholders should care</th></tr></thead>
+      <tbody>
+        <tr><td>Train rows</td><td>120</td><td>Training rows come from development data only.</td></tr>
+        <tr><td>Holdout rows</td><td>30</td><td>The demo scores a bounded Molicell subset. No random row split.</td></tr>
+        <tr><td>EIS target grid</td><td>0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</td><td>All spectra are forced into the same comparison space.</td></tr>
+        <tr><td>Target columns</td><td>20</td><td>10 real impedance values and 10 negative-imaginary impedance values.</td></tr>
+        <tr><td>Leakage rule</td><td>development rows train, Molicell subset holdout, no random row split</td><td>The demo blocks the easiest invalid win: random row leakage.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Feature-To-Target Math</h2>
+    <p>The supervised learning problem is vector-valued. For each sample <code>i</code>, we map time-domain features <code>x_i</code> to a fixed-grid EIS vector <code>y_i</code>.</p>
+    <div class="equation">x_i = features(current, voltage, time, temperature, SOC, capacity summaries)</div>
+    <div class="equation">y_i = [Zreal(f_1), -Zimag(f_1), ..., Zreal(f_10), -Zimag(f_10)]</div>
+    <div class="equation">f = [0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz]</div>
+    <p>The target is not one scalar health label. It is a 20-dimensional impedance vector. That matters because a model can improve the easy real component while failing the negative-imaginary component if the scoring is too loose.</p>
+  </section>
+
+  <section>
+    <h2>Baseline And Model</h2>
+    <div class="grid two">
+      <article class="card">
+        <h3>Boring baseline</h3>
+        <p><code>global train target mean</code></p>
+        <div class="equation">y_hat_baseline = mean(Y_train)</div>
+        <p>This is the right first opponent. If the model cannot beat this, the pipeline has no practical signal yet.</p>
+      </article>
+      <article class="card">
+        <h3>Demo model</h3>
+        <p><code>KNeighborsRegressor(n_neighbors=3) blended 20 percent with the KNN prediction and 80 percent with the train mean</code></p>
+        <div class="equation">y_hat_demo = 0.8 * y_hat_baseline + 0.2 * y_hat_KNN</div>
+        <p>The shrinkage keeps the demo conservative. It prevents a tiny nearest-neighbor fit from pretending it has broad generalization.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Scoring Math</h2>
+    <p>The demo reports RMSE across the full fixed-grid EIS vector. Lower is better.</p>
+    <div class="equation">RMSE = sqrt(mean((Y_true - Y_pred)^2))</div>
+    <div class="equation">relative improvement = (RMSE_baseline - RMSE_model) / RMSE_baseline</div>
+    <p>Current demo improvement:</p>
+    <div class="bar">
+      <div class="bar-row"><strong>Baseline RMSE</strong><div class="track"><div class="fill" style="width:100.0%"></div></div><code>0.0092086</code></div>
+      <div class="bar-row"><strong>Model RMSE</strong><div class="track"><div class="fill good" style="width:86.6%"></div></div><code>0.00797675</code></div>
+      <div class="bar-row"><strong>Relative improvement</strong><div class="track"><div class="fill good" style="width:4.0%"></div></div><code>13.38%</code></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Kramer-Kronig Quality Screen</h2>
+    <p>The demo also checks whether the EIS targets look broadly compatible with a finite RC-basis impedance model over the measured frequency window. This is target-quality metadata, not a model-performance claim.</p>
+    <div class="equation">Z_KK(f) approx R_inf + sum_k R_k / (1 + j * 2*pi*f*tau_k)</div>
+    <div class="equation">residual_norm = RMSE(Z_measured, Z_KK_fit) / scale(Z_measured)</div>
+    <div class="bar">
+      <div class="bar-row"><strong>KK valid rows</strong><div class="track"><div class="fill good" style="width:100.0%"></div></div><code>30 / 30</code></div>
+    </div>
+    <p class="small">The current demo subset has <code>30</code> valid rows out of <code>30</code>. That supports target sanity for the demo subset. It does not prove the predictor is good by itself.</p>
+  </section>
+
+  <section>
+    <h2>Numerical Results</h2>
+    <div class="grid four">
+      <article class="card"><span class="metric">0.0092086</span><p>Baseline RMSE, ohm</p></article>
+      <article class="card"><span class="metric good">0.00797675</span><p>Demo model RMSE, ohm</p></article>
+      <article class="card"><span class="metric good">13.38%</span><p>Relative RMSE improvement</p></article>
+      <article class="card"><span class="metric good">30 / 30</span><p>KK valid rows</p></article>
     </div>
     <table>
+      <thead><tr><th>Metric</th><th>Value</th><th>Interpretation</th></tr></thead>
       <tbody>
-        <tr><td>Demo verdict</td><td>working_demo_model_beats_baseline</td></tr>
-        <tr><td>Relative RMSE improvement</td><td>0.133772</td></tr>
-        <tr><td>KK rows checked</td><td>30</td></tr>
-        <tr><td>KK valid rows</td><td>30</td></tr>
+        <tr><td>Demo verdict</td><td>working_demo_model_beats_baseline</td><td>The model beats the baseline on this bounded demo.</td></tr>
+        <tr><td>Baseline RMSE</td><td>0.009208604 ohm</td><td>Global train-mean target vector.</td></tr>
+        <tr><td>Model RMSE</td><td>0.007976748 ohm</td><td>Shrinkage KNN demo model.</td></tr>
+        <tr><td>Relative improvement</td><td>13.38%</td><td>Positive, but this is still a demo-sized result.</td></tr>
+        <tr><td>KK valid fraction</td><td>1.000</td><td>Target-quality screen for the demo EIS rows.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>What This Proves, And What It Does Not</h2>
+    <div class="grid two">
+      <article class="card"><h3>Supported</h3><ul><li>The local code path runs end to end.</li><li>The demo model beats a global-mean baseline on the bounded subset.</li><li>The EIS targets in the demo subset pass the KK screen.</li><li>The public site can host the presentation and JSON outputs.</li></ul></article>
+      <article class="card"><h3>Not supported</h3><ul><li>This is not a new external validation claim.</li><li>This does not validate the frozen CALB pulse-to-EIS rule.</li><li>This does not solve the RADAR4KIT target-quality problem.</li><li>This does not claim VM connection. VM setup is deferred.</li></ul></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Code Walkthrough</h2>
+    <p>The demo code lives in the cross-dataset experiment folder and intentionally uses existing matrices so stakeholders can rerun it without touching raw archives.</p>
+    <pre>&amp; "[local path redacted]" -B scripts\experiments\cross_dataset_pulse_to_eis_training\demo_cross_dataset_pipeline.py</pre>
+    <table>
+      <thead><tr><th>File</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>demo_cross_dataset_pipeline.py</td><td>Runs the stakeholder demo, writes JSON results and this HTML presentation.</td></tr>
+        <tr><td>kramers_kronig_validation.py</td><td>Computes the finite-range RC-basis KK target-quality screen.</td></tr>
+        <tr><td>train_fixed_grid_eis_dev_models.py</td><td>Defines feature transforms, model helpers, and metric calculation.</td></tr>
+        <tr><td>demo_pipeline_results.json</td><td>Machine-readable demo result.</td></tr>
+        <tr><td>demo_pipeline_presentation.html</td><td>This site-native stakeholder presentation.</td></tr>
       </tbody>
     </table>
   </section>
 
   <section class="note">
     <h2>Conclusion</h2>
-    <p>The demo pipeline runs end to end and produces a measurable baseline comparison plus EIS quality metadata. The serious boundary is simple: this demo is not a fresh external-validation result. It is the code path you can show, run, and connect to a VM when the VM is ready.</p>
-  </section>
-
-  <section>
-    <h2>Code For The Demo</h2>
-    <p>Run from the private repo root:</p>
-    <p><code>&amp; "[local path redacted]" -B scripts\experiments\cross_dataset_pulse_to_eis_training\demo_cross_dataset_pipeline.py</code></p>
-    <p>Outputs: <code>demo_pipeline_results.json</code> and <code>demo_pipeline_presentation.html</code>.</p>
+    <p>The demo pipeline is now a usable technical handoff: it explains the objective, example, goal, math, data contract, model, baseline, KK screen, numerical result, code path, and claim boundary. The local demo is ready for stakeholder review. VM execution is intentionally deferred until the colleague-provided VM is available.</p>
   </section>
 </main>
 </body>
