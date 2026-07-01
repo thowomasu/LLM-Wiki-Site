@@ -1,6 +1,6 @@
 {
   "experiment": "cross_dataset_goal_completion_audit",
-  "created_utc": "2026-07-01T19:16:55.400581+00:00",
+  "created_utc": "2026-07-01T20:19:58.821432+00:00",
   "overall_status": "complete_vm_deferred_by_user",
   "sections": {
     "kramer_kronig": {

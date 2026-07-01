@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cross-Dataset Pulse-to-EIS Demo Pipeline, Technical Presentation</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     :root {
       --ink: #17212b;
@@ -18,24 +19,32 @@
       --code: #eef2f5;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.5; }
-    main { max-width: 1220px; margin: 0 auto; padding: 34px 24px 70px; }
-    section { margin: 26px 0; padding: 24px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.55; }
+    main { max-width: 1180px; margin: 0 auto; padding: 28px 24px 80px; }
+    section { margin: 22px 0; padding: 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; scroll-margin-top: 92px; }
     h1 { font-size: clamp(38px, 6vw, 70px); line-height: 1.05; margin: 0 0 14px; max-width: 1080px; }
     h2 { font-size: clamp(28px, 3vw, 42px); line-height: 1.12; margin: 0 0 14px; }
     h3 { font-size: 23px; margin: 16px 0 8px; }
     p, li { font-size: 18px; }
     code { background: var(--code); padding: 2px 5px; border-radius: 4px; }
-    pre { white-space: pre-wrap; overflow-x: auto; background: var(--code); padding: 14px 16px; border-radius: 6px; border: 1px solid var(--line); }
+    pre { white-space: pre-wrap; overflow-x: auto; background: var(--code); padding: 14px 16px; border-radius: 6px; border: 1px solid var(--line); max-height: 620px; }
     table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
     th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
     th { background: #edf3f8; }
     .lead { color: var(--muted); font-size: 22px; max-width: 980px; }
     .kicker { color: var(--teal); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .card { padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .site-header { background: #fff; border-bottom: 1px solid var(--line); }
+    .site-header-inner { max-width: 1180px; margin: 0 auto; padding: 26px 24px 22px; }
+    .nav-shell { position: sticky; top: 0; z-index: 20; background: rgba(245, 247, 249, .96); border-bottom: 1px solid var(--line); backdrop-filter: blur(8px); }
+    .tabs { max-width: 1180px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 8px; overflow-x: auto; }
+    .tab { flex: 0 0 auto; padding: 8px 11px; color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: 14px; font-weight: 700; }
+    .tab:hover { border-color: var(--teal); color: var(--teal); }
+    .vertical-flow { display: grid; gap: 18px; }
+    .flow-item { border-left: 5px solid var(--teal); padding: 4px 0 4px 18px; }
+    .flow-item h3 { margin-top: 0; }
+    .metric-table td:first-child { width: 280px; font-weight: 700; }
+    .split { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .metric { font-size: 38px; font-weight: 800; line-height: 1; display: block; margin-bottom: 8px; }
     .good { color: var(--green); }
     .warn { color: var(--amber); }
@@ -49,53 +58,1060 @@
     .fill { height: 100%; background: var(--teal); border-radius: 999px; }
     .fill.good { background: var(--green); }
     .fill.warn { background: var(--amber); }
-    .flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
-    .step { padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: #fff; min-height: 150px; }
-    .step strong { display: block; font-size: 18px; margin-bottom: 6px; }
+    .step-list { counter-reset: step; display: grid; gap: 14px; }
+    .step { counter-increment: step; padding: 16px 18px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .step strong::before { content: counter(step) ". "; color: var(--teal); }
+    .step strong { display: block; font-size: 19px; margin-bottom: 6px; }
     .small { font-size: 14px; color: var(--muted); }
-    .svg-wrap { width: 100%; overflow-x: auto; }
+    .chart { margin: 20px 0; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow-x: auto; }
+    .chart figcaption { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; }
+    .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; }
+    details { border: 1px solid var(--line); border-radius: 8px; background: #fff; margin: 14px 0; }
+    summary { cursor: pointer; padding: 12px 14px; font-weight: 800; }
+    details pre { margin: 0; border: 0; border-top: 1px solid var(--line); border-radius: 0 0 8px 8px; }
+    .math { overflow-x: auto; padding: 8px 0; }
     svg { max-width: 100%; height: auto; }
     @media (max-width: 880px) {
-      .grid, .grid.two, .grid.four, .flow { grid-template-columns: 1fr; }
       .bar-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <p class="kicker">Cross-dataset pipeline, self-contained technical page</p>
+    <h1>Pulse-to-EIS Demo Pipeline</h1>
+    <p class="lead">This page contains the pipeline objective, inputs, transformations, equations, plots, numerical outputs, code snippets, and claim boundary. It is written so a stakeholder can understand the demo without running the repository.</p>
+  </div>
+</header>
+<nav class="nav-shell" aria-label="Presentation sections">
+  <div class="tabs"><a class="tab" href="#summary">Summary</a><a class="tab" href="#objective">Objective</a><a class="tab" href="#example">Example</a><a class="tab" href="#goal">Goal</a><a class="tab" href="#inputs">Inputs</a><a class="tab" href="#method">Method</a><a class="tab" href="#math">Math</a><a class="tab" href="#graphs">Graphs</a><a class="tab" href="#results">Results</a><a class="tab" href="#code">Code</a><a class="tab" href="#outputs">Outputs</a><a class="tab" href="#limits">Limits</a><a class="tab" href="#conclusion">Conclusion</a></div>
+</nav>
 <main>
-  <p class="kicker">Stakeholder technical demo</p>
-  <h1>Cross-Dataset Pulse-to-EIS Demo Pipeline</h1>
-  <p class="lead">This presentation shows the actual demo pipeline, the math behind the target and scoring, the numbers produced by the current run, and the claim boundary. It assumes the reader already knows why EIS, impedance spectra, and relaxation behavior matter.</p>
-
-  <section class="note">
+  <section id="summary" class="note">
     <h2>Executive Read</h2>
     <p>The demo is a small but real supervised pipeline. It takes time-domain battery features, predicts a fixed-grid EIS vector, compares against a global-mean baseline, and runs a Kramer-Kronig quality screen on the EIS target rows.</p>
     <p><strong>Blunt boundary:</strong> this is a working demo and stakeholder explanation, not a new external-validation claim. VM connection is deferred until the colleague-provided VM exists.</p>
   </section>
 
-  <section>
-    <h2>Objective, Example, Goal, Conclusion</h2>
-    <div class="grid four">
-      <article class="card"><h3>Objective</h3><p>Prove the demo code path can convert earlier time-domain behavior into a fixed-grid EIS prediction and score it honestly.</p></article>
-      <article class="card"><h3>Example</h3><p>Train on <code>120</code> development rows, score <code>30</code> Molicell holdout rows, and inspect <code>20</code> target columns.</p></article>
-      <article class="card"><h3>Goal</h3><p>Give stakeholders enough technical detail to understand the data contract, leakage guard, model, baseline, math, and failure modes.</p></article>
-      <article class="card"><h3>Conclusion</h3><p>The local demo works and beats the baseline. The result is useful, but it should not be oversold as a new validation claim.</p></article>
+  <section id="objective">
+    <h2>Objective</h2>
+    <p>Prove that a time-domain feature matrix can be connected to a fixed-grid EIS target, scored against a boring baseline, screened with KK metadata, and packaged into a public demo page. This is not trying to hide behind a vague architecture slide. The page shows the inputs, outputs, math, plots, and code path.</p>
+  </section>
+
+  <section id="example">
+    <h2>Example</h2>
+    <p>The current run trains on <code>120</code> development rows, scores <code>30</code> Molicell holdout rows, and predicts <code>20</code> target columns on a <code>10</code>-frequency EIS grid.</p>
+    <table class="metric-table">
+      <tbody>
+        <tr><td>Representative sample</td><td>molicell_p42a::A11::5degC::SOC20::1</td></tr>
+        <tr><td>Cell</td><td>A11</td></tr>
+        <tr><td>SOC</td><td>20.0</td></tr>
+        <tr><td>Temperature</td><td>5.0</td></tr>
+        <tr><td>Frequency grid</td><td>0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="goal">
+    <h2>Goal</h2>
+    <div class="vertical-flow">
+      <div class="flow-item"><h3>Show the data contract</h3><p>Make clear what goes into the model, what is withheld as the demo holdout, and which target columns form the output vector.</p></div>
+      <div class="flow-item"><h3>Show the math</h3><p>Use LaTeX for the vector target, baseline, model blend, RMSE, relative improvement, and KK residual screen.</p></div>
+      <div class="flow-item"><h3>Show the evidence</h3><p>Give the numerical results and plots directly in the HTML so readers do not have to run the code during a presentation.</p></div>
+      <div class="flow-item"><h3>Show the boundary</h3><p>State plainly what the demo proves and what it does not prove.</p></div>
     </div>
   </section>
 
-  <section>
+  <section id="inputs">
+    <h2>Inputs</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Value</th><th>Reason it matters</th></tr></thead>
+      <tbody>
+        <tr><td>Development matrix</td><td>[local path redacted]</td><td>Training source for the demo model.</td></tr>
+        <tr><td>Molicell holdout matrix</td><td>[local path redacted]</td><td>Bounded holdout scored by the demo.</td></tr>
+        <tr><td>Feature count</td><td>28</td><td>Time-domain-only inputs after derived features are added.</td></tr>
+        <tr><td>Target count</td><td>20</td><td>Fixed-grid impedance vector, real and negative-imaginary components.</td></tr>
+        <tr><td>Leakage rule</td><td>development rows train, Molicell subset holdout, no random row split</td><td>No random row split. This avoids the easiest invalid win.</td></tr>
+      </tbody>
+    </table>
+    <h3>Feature Columns</h3>
+    <ul><li>soc_percent</li><li>temperature_c</li><li>td_rows</li><li>td_duration_s</li><li>td_voltage_start_v</li><li>td_voltage_end_v</li><li>td_voltage_min_v</li><li>td_voltage_max_v</li><li>td_voltage_mean_v</li><li>td_voltage_std_v</li><li>td_current_mean_a</li><li>td_current_abs_mean_a</li><li>td_current_abs_max_a</li><li>td_active_fraction</li><li>td_charge_throughput_ah</li><li>td_discharge_throughput_ah</li><li>td_temperature_median_c</li><li>td_rows_log1p</li><li>td_duration_log1p_s</li><li>td_voltage_delta_v</li><li>td_voltage_range_v</li><li>td_voltage_cv</li><li>td_current_activity_span_a</li><li>td_current_load_factor</li><li>td_total_throughput_ah</li><li>td_net_throughput_ah</li><li>td_discharge_to_charge_ratio</li><li>td_mean_abs_current_per_hour</li></ul>
+    <h3>Target Columns</h3>
+    <ul><li>target_zreal_0p05hz_ohm</li><li>target_znegimag_0p05hz_ohm</li><li>target_zreal_0p1hz_ohm</li><li>target_znegimag_0p1hz_ohm</li><li>target_zreal_0p2hz_ohm</li><li>target_znegimag_0p2hz_ohm</li><li>target_zreal_0p5hz_ohm</li><li>target_znegimag_0p5hz_ohm</li><li>target_zreal_1hz_ohm</li><li>target_znegimag_1hz_ohm</li><li>target_zreal_2hz_ohm</li><li>target_znegimag_2hz_ohm</li><li>target_zreal_5hz_ohm</li><li>target_znegimag_5hz_ohm</li><li>target_zreal_10hz_ohm</li><li>target_znegimag_10hz_ohm</li><li>target_zreal_20hz_ohm</li><li>target_znegimag_20hz_ohm</li><li>target_zreal_40hz_ohm</li><li>target_znegimag_40hz_ohm</li></ul>
+    <h3>Training Preview</h3>
+    <table><thead><tr><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>soc_percent</th><th>temperature_c</th><th>td_rows</th><th>td_duration_s</th><th>td_voltage_start_v</th><th>td_voltage_end_v</th></tr></thead><tbody><tr><td>dev_raw::panasonic::0</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>None</td><td>-10.0</td><td>426.0</td><td>228149.9310001731</td><td>3.8306</td><td>2.49948</td></tr><tr><td>dev_raw::panasonic::1</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>None</td><td>-10.0</td><td>426.0</td><td>228149.9310001731</td><td>3.8306</td><td>2.49948</td></tr><tr><td>dev_raw::panasonic::2</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>None</td><td>-10.0</td><td>426.0</td><td>228149.9310001731</td><td>3.8306</td><td>2.49948</td></tr></tbody></table>
+    <h3>Holdout Preview</h3>
+    <table><thead><tr><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>soc_percent</th><th>temperature_c</th><th>td_rows</th><th>td_duration_s</th><th>td_voltage_start_v</th><th>td_voltage_end_v</th></tr></thead><tbody><tr><td>molicell_p42a::A11::5degC::SOC20::1</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>20.0</td><td>5.0</td><td>168668.0</td><td>160573.400088</td><td>4.167196273803711</td><td>2.826201677322388</td></tr><tr><td>molicell_p42a::A11::5degC::SOC50::2</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>50.0</td><td>5.0</td><td>168668.0</td><td>160573.400088</td><td>4.167196273803711</td><td>2.826201677322388</td></tr><tr><td>molicell_p42a::A11::5degC::SOC80::3</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>80.0</td><td>5.0</td><td>168668.0</td><td>160573.400088</td><td>4.167196273803711</td><td>2.826201677322388</td></tr></tbody></table>
+  </section>
+
+  <section id="method">
     <h2>Methodology And Pipeline Architecture</h2>
-    <div class="flow">
-      <div class="step"><strong>1. Input matrix</strong><p>Read development features and Molicell holdout features. Each row is a same-cell time-domain segment paired with an EIS target.</p></div>
-      <div class="step"><strong>2. Feature layer</strong><p>Use current, voltage, time, temperature, SOC, and derived pulse statistics available before the EIS target.</p></div>
-      <div class="step"><strong>3. Target layer</strong><p>Predict real impedance and negative-imaginary impedance on a fixed frequency grid.</p></div>
-      <div class="step"><strong>4. Scoring layer</strong><p>Compare global-mean baseline against a KNN shrinkage model using RMSE across all target columns.</p></div>
-      <div class="step"><strong>5. Physics screen</strong><p>Run finite-range RC-basis Kramer-Kronig consistency on the holdout EIS targets.</p></div>
+    <div class="step-list">
+      <div class="step"><strong>Load matrices</strong><p>Read the already-built development feature-target matrix and the Molicell holdout matrix. The demo does not touch raw archives during presentation time.</p></div>
+      <div class="step"><strong>Build features</strong><p>Use base time-domain statistics and derived features. Derived features include log duration, voltage delta, voltage range, coefficient of variation, current load factor, and throughput ratios.</p></div>
+      <div class="step"><strong>Build target vector</strong><p>Use real impedance and negative-imaginary impedance at the fixed grid: <code>0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</code>.</p></div>
+      <div class="step"><strong>Fit baseline and model</strong><p>Compare a global train-mean vector against a conservative KNN shrinkage model. The KNN model receives only time-domain features.</p></div>
+      <div class="step"><strong>Score</strong><p>Compute full-vector RMSE, component RMSE, per-target RMSE, relative improvement, and per-frequency error.</p></div>
+      <div class="step"><strong>Screen EIS target quality</strong><p>Run finite-range RC-basis Kramer-Kronig validation on the holdout target spectra. This is quality metadata, not a prediction score.</p></div>
     </div>
+  </section>
+
+  <section id="math">
+    <h2>Feature-To-Target Math, Scoring Math, And Kramer-Kronig Quality Screen</h2>
+    <p>The supervised problem maps time-domain features into a fixed-grid impedance vector.</p>
+    <div class="math">\[x_i = [\mathrm{SOC}, T, V_\mathrm{start}, V_\mathrm{end}, \Delta V, I_\mathrm{mean}, Q_\mathrm{charge}, Q_\mathrm{discharge}, \ldots]\]</div>
+    <div class="math">\[y_i = [Z'(f_1), -Z''(f_1), \ldots, Z'(f_{10}), -Z''(f_{10})]\]</div>
+    <p>The baseline is deliberately boring.</p>
+    <div class="math">\[\hat{y}_{\mathrm{mean}} = \frac{1}{N_{\mathrm{train}}}\sum_{i=1}^{N_{\mathrm{train}}} y_i\]</div>
+    <p>The demo model is conservative. It keeps most of the train-mean prediction and only blends in a small KNN contribution.</p>
+    <div class="math">\[\hat{y}_{\mathrm{demo}} = 0.8\hat{y}_{\mathrm{mean}} + 0.2\hat{y}_{\mathrm{KNN}}\]</div>
+    <p>The scoring uses full-vector RMSE and relative improvement.</p>
+    <div class="math">\[\mathrm{RMSE} = \sqrt{\frac{1}{NM}\sum_{i=1}^{N}\sum_{j=1}^{M}(y_{ij} - \hat{y}_{ij})^2}\]</div>
+    <div class="math">\[\mathrm{Improvement} = \frac{\mathrm{RMSE}_{\mathrm{baseline}} - \mathrm{RMSE}_{\mathrm{model}}}{\mathrm{RMSE}_{\mathrm{baseline}}}\]</div>
+    <p>The EIS target screen fits a finite RC basis over the available frequency range.</p>
+    <div class="math">\[Z_{\mathrm{KK}}(f) \approx R_{\infty} + \sum_k \frac{R_k}{1 + j2\pi f\tau_k}\]</div>
+    <div class="math">\[\mathrm{residual}_{\mathrm{norm}} = \frac{\mathrm{RMSE}(Z_{\mathrm{measured}}, Z_{\mathrm{KK-fit}})}{\mathrm{scale}(Z_{\mathrm{measured}})}\]</div>
+  </section>
+
+  <section id="graphs">
+    <h2>Graphs</h2>
+    <p>These plots are generated directly from the current demo run. They are embedded in the HTML, so the presentation does not need a live Python session.</p>
+
+<figure class="chart">
+  <figcaption>Representative spectrum, real impedance</figcaption>
+  <div class="legend"><span class="legend-item"><span class="swatch" style="background:#147a73"></span>true Zreal</span><span class="legend-item"><span class="swatch" style="background:#b85f17"></span>baseline Zreal</span><span class="legend-item"><span class="swatch" style="background:#2f7d4a"></span>model Zreal</span></div>
+  <svg viewbox="0 0 980 360" role="img" aria-label="Representative spectrum, real impedance">
+    <rect x="0" y="0" width="980" height="360" fill="#fff">
+    <line x1="72" x2="952" y1="296.0" y2="296.0" stroke="#edf3f8"><text x="62" y="300.0" text-anchor="end">-0.0039</text><line x1="72" x2="952" y1="234.0" y2="234.0" stroke="#edf3f8"><text x="62" y="238.0" text-anchor="end">0.0103</text><line x1="72" x2="952" y1="172.0" y2="172.0" stroke="#edf3f8"><text x="62" y="176.0" text-anchor="end">0.0245</text><line x1="72" x2="952" y1="110.0" y2="110.0" stroke="#edf3f8"><text x="62" y="114.0" text-anchor="end">0.0388</text><line x1="72" x2="952" y1="48.0" y2="48.0" stroke="#edf3f8"><text x="62" y="52.0" text-anchor="end">0.0530</text>
+    <line x1="72" x2="952" y1="296" y2="296" stroke="#8a98a6">
+    <line x1="72" x2="72" y1="48" y2="296" stroke="#8a98a6">
+    <polyline points="72.0,127.1 163.2,132.8 254.5,137.5 375.1,143.3 466.4,149.7 557.6,159.1 678.3,174.4 769.5,184.1 860.8,193.2 952.0,202.3" fill="none" stroke="#147a73" stroke-width="3"><circle cx="72.0" cy="127.1" r="4" fill="#147a73"><circle cx="163.2" cy="132.8" r="4" fill="#147a73"><circle cx="254.5" cy="137.5" r="4" fill="#147a73"><circle cx="375.1" cy="143.3" r="4" fill="#147a73"><circle cx="466.4" cy="149.7" r="4" fill="#147a73"><circle cx="557.6" cy="159.1" r="4" fill="#147a73"><circle cx="678.3" cy="174.4" r="4" fill="#147a73"><circle cx="769.5" cy="184.1" r="4" fill="#147a73"><circle cx="860.8" cy="193.2" r="4" fill="#147a73"><circle cx="952.0" cy="202.3" r="4" fill="#147a73"><polyline points="72.0,65.1 163.2,84.5 254.5,103.6 375.1,122.2 466.4,134.7 557.6,143.9 678.3,159.2 769.5,164.1 860.8,169.6 952.0,178.3" fill="none" stroke="#b85f17" stroke-width="3"><circle cx="72.0" cy="65.1" r="4" fill="#b85f17"><circle cx="163.2" cy="84.5" r="4" fill="#b85f17"><circle cx="254.5" cy="103.6" r="4" fill="#b85f17"><circle cx="375.1" cy="122.2" r="4" fill="#b85f17"><circle cx="466.4" cy="134.7" r="4" fill="#b85f17"><circle cx="557.6" cy="143.9" r="4" fill="#b85f17"><circle cx="678.3" cy="159.2" r="4" fill="#b85f17"><circle cx="769.5" cy="164.1" r="4" fill="#b85f17"><circle cx="860.8" cy="169.6" r="4" fill="#b85f17"><circle cx="952.0" cy="178.3" r="4" fill="#b85f17"><polyline points="72.0,87.8 163.2,99.8 254.5,116.0 375.1,135.2 466.4,142.6 557.6,150.6 678.3,166.6 769.5,168.6 860.8,172.9 952.0,181.5" fill="none" stroke="#2f7d4a" stroke-width="3"><circle cx="72.0" cy="87.8" r="4" fill="#2f7d4a"><circle cx="163.2" cy="99.8" r="4" fill="#2f7d4a"><circle cx="254.5" cy="116.0" r="4" fill="#2f7d4a"><circle cx="375.1" cy="135.2" r="4" fill="#2f7d4a"><circle cx="466.4" cy="142.6" r="4" fill="#2f7d4a"><circle cx="557.6" cy="150.6" r="4" fill="#2f7d4a"><circle cx="678.3" cy="166.6" r="4" fill="#2f7d4a"><circle cx="769.5" cy="168.6" r="4" fill="#2f7d4a"><circle cx="860.8" cy="172.9" r="4" fill="#2f7d4a"><circle cx="952.0" cy="181.5" r="4" fill="#2f7d4a">
+    <text x="72.0" y="332" text-anchor="middle">0.05</text><text x="163.2" y="332" text-anchor="middle">0.1</text><text x="254.5" y="332" text-anchor="middle">0.2</text><text x="375.1" y="332" text-anchor="middle">0.5</text><text x="466.4" y="332" text-anchor="middle">1.0</text><text x="557.6" y="332" text-anchor="middle">2.0</text><text x="678.3" y="332" text-anchor="middle">5.0</text><text x="769.5" y="332" text-anchor="middle">10.0</text><text x="860.8" y="332" text-anchor="middle">20.0</text><text x="952.0" y="332" text-anchor="middle">40.0</text>
+    <text x="490.0" y="354" text-anchor="middle">frequency, Hz, log-scaled axis</text>
+  </svg>
+</figure>
+
+
+<figure class="chart">
+  <figcaption>Representative spectrum, negative imaginary impedance</figcaption>
+  <div class="legend"><span class="legend-item"><span class="swatch" style="background:#147a73"></span>true -Zimag</span><span class="legend-item"><span class="swatch" style="background:#b85f17"></span>baseline -Zimag</span><span class="legend-item"><span class="swatch" style="background:#2f7d4a"></span>model -Zimag</span></div>
+  <svg viewbox="0 0 980 360" role="img" aria-label="Representative spectrum, negative imaginary impedance">
+    <rect x="0" y="0" width="980" height="360" fill="#fff">
+    <line x1="72" x2="952" y1="296.0" y2="296.0" stroke="#edf3f8"><text x="62" y="300.0" text-anchor="end">-0.0009</text><line x1="72" x2="952" y1="234.0" y2="234.0" stroke="#edf3f8"><text x="62" y="238.0" text-anchor="end">0.0025</text><line x1="72" x2="952" y1="172.0" y2="172.0" stroke="#edf3f8"><text x="62" y="176.0" text-anchor="end">0.0058</text><line x1="72" x2="952" y1="110.0" y2="110.0" stroke="#edf3f8"><text x="62" y="114.0" text-anchor="end">0.0092</text><line x1="72" x2="952" y1="48.0" y2="48.0" stroke="#edf3f8"><text x="62" y="52.0" text-anchor="end">0.0126</text>
+    <line x1="72" x2="952" y1="296" y2="296" stroke="#8a98a6">
+    <line x1="72" x2="72" y1="48" y2="296" stroke="#8a98a6">
+    <polyline points="72.0,198.1 163.2,215.0 254.5,221.9 375.1,218.9 466.4,203.0 557.6,186.7 678.3,186.2 769.5,191.4 860.8,194.8 952.0,200.1" fill="none" stroke="#147a73" stroke-width="3"><circle cx="72.0" cy="198.1" r="4" fill="#147a73"><circle cx="163.2" cy="215.0" r="4" fill="#147a73"><circle cx="254.5" cy="221.9" r="4" fill="#147a73"><circle cx="375.1" cy="218.9" r="4" fill="#147a73"><circle cx="466.4" cy="203.0" r="4" fill="#147a73"><circle cx="557.6" cy="186.7" r="4" fill="#147a73"><circle cx="678.3" cy="186.2" r="4" fill="#147a73"><circle cx="769.5" cy="191.4" r="4" fill="#147a73"><circle cx="860.8" cy="194.8" r="4" fill="#147a73"><circle cx="952.0" cy="200.1" r="4" fill="#147a73"><polyline points="72.0,65.1 163.2,79.7 254.5,101.0 375.1,135.7 466.4,160.8 557.6,180.9 678.3,203.5 769.5,208.8 860.8,211.8 952.0,221.1" fill="none" stroke="#b85f17" stroke-width="3"><circle cx="72.0" cy="65.1" r="4" fill="#b85f17"><circle cx="163.2" cy="79.7" r="4" fill="#b85f17"><circle cx="254.5" cy="101.0" r="4" fill="#b85f17"><circle cx="375.1" cy="135.7" r="4" fill="#b85f17"><circle cx="466.4" cy="160.8" r="4" fill="#b85f17"><circle cx="557.6" cy="180.9" r="4" fill="#b85f17"><circle cx="678.3" cy="203.5" r="4" fill="#b85f17"><circle cx="769.5" cy="208.8" r="4" fill="#b85f17"><circle cx="860.8" cy="211.8" r="4" fill="#b85f17"><circle cx="952.0" cy="221.1" r="4" fill="#b85f17"><polyline points="72.0,89.3 163.2,104.9 254.5,125.6 375.1,158.6 466.4,177.7 557.6,193.9 678.3,214.2 769.5,217.9 860.8,218.4 952.0,227.2" fill="none" stroke="#2f7d4a" stroke-width="3"><circle cx="72.0" cy="89.3" r="4" fill="#2f7d4a"><circle cx="163.2" cy="104.9" r="4" fill="#2f7d4a"><circle cx="254.5" cy="125.6" r="4" fill="#2f7d4a"><circle cx="375.1" cy="158.6" r="4" fill="#2f7d4a"><circle cx="466.4" cy="177.7" r="4" fill="#2f7d4a"><circle cx="557.6" cy="193.9" r="4" fill="#2f7d4a"><circle cx="678.3" cy="214.2" r="4" fill="#2f7d4a"><circle cx="769.5" cy="217.9" r="4" fill="#2f7d4a"><circle cx="860.8" cy="218.4" r="4" fill="#2f7d4a"><circle cx="952.0" cy="227.2" r="4" fill="#2f7d4a">
+    <text x="72.0" y="332" text-anchor="middle">0.05</text><text x="163.2" y="332" text-anchor="middle">0.1</text><text x="254.5" y="332" text-anchor="middle">0.2</text><text x="375.1" y="332" text-anchor="middle">0.5</text><text x="466.4" y="332" text-anchor="middle">1.0</text><text x="557.6" y="332" text-anchor="middle">2.0</text><text x="678.3" y="332" text-anchor="middle">5.0</text><text x="769.5" y="332" text-anchor="middle">10.0</text><text x="860.8" y="332" text-anchor="middle">20.0</text><text x="952.0" y="332" text-anchor="middle">40.0</text>
+    <text x="490.0" y="354" text-anchor="middle">frequency, Hz, log-scaled axis</text>
+  </svg>
+</figure>
+
+
+<figure class="chart">
+  <figcaption>Per-frequency RMSE, baseline versus demo model</figcaption>
+  <div class="legend">
+    <span class="legend-item"><span class="swatch" style="background:#b85f17"></span>baseline</span>
+    <span class="legend-item"><span class="swatch" style="background:#2f7d4a"></span>demo model</span>
+  </div>
+  <svg viewbox="0 0 980 434" role="img" aria-label="Per-frequency RMSE bars">
+    <rect x="0" y="0" width="980" height="434" fill="#fff">
+    <text x="118" y="71" text-anchor="end">0.05 Hz</text><rect x="130" y="55" width="802.0" height="11" fill="#b85f17"><rect x="130" y="70" width="632.8" height="11" fill="#2f7d4a"><text x="118" y="105" text-anchor="end">0.1 Hz</text><rect x="130" y="89" width="709.5" height="11" fill="#b85f17"><rect x="130" y="104" width="588.8" height="11" fill="#2f7d4a"><text x="118" y="139" text-anchor="end">0.2 Hz</text><rect x="130" y="123" width="606.5" height="11" fill="#b85f17"><rect x="130" y="138" width="516.2" height="11" fill="#2f7d4a"><text x="118" y="173" text-anchor="end">0.5 Hz</text><rect x="130" y="157" width="498.4" height="11" fill="#b85f17"><rect x="130" y="172" width="429.3" height="11" fill="#2f7d4a"><text x="118" y="207" text-anchor="end">1 Hz</text><rect x="130" y="191" width="429.5" height="11" fill="#b85f17"><rect x="130" y="206" width="392.4" height="11" fill="#2f7d4a"><text x="118" y="241" text-anchor="end">2 Hz</text><rect x="130" y="225" width="384.0" height="11" fill="#b85f17"><rect x="130" y="240" width="360.7" height="11" fill="#2f7d4a"><text x="118" y="275" text-anchor="end">5 Hz</text><rect x="130" y="259" width="339.2" height="11" fill="#b85f17"><rect x="130" y="274" width="328.8" height="11" fill="#2f7d4a"><text x="118" y="309" text-anchor="end">10 Hz</text><rect x="130" y="293" width="339.9" height="11" fill="#b85f17"><rect x="130" y="308" width="328.5" height="11" fill="#2f7d4a"><text x="118" y="343" text-anchor="end">20 Hz</text><rect x="130" y="327" width="344.5" height="11" fill="#b85f17"><rect x="130" y="342" width="335.0" height="11" fill="#2f7d4a"><text x="118" y="377" text-anchor="end">40 Hz</text><rect x="130" y="361" width="340.6" height="11" fill="#b85f17"><rect x="130" y="376" width="332.7" height="11" fill="#2f7d4a">
+    <text x="130" y="422">longer bar means larger RMSE in ohm</text>
+  </svg>
+</figure>
+
+    <h3>Representative Spectrum Data</h3>
+    <table><thead><tr><th>frequency_hz</th><th>true_zreal_ohm</th><th>true_znegimag_ohm</th><th>baseline_zreal_ohm</th><th>baseline_znegimag_ohm</th><th>model_zreal_ohm</th><th>model_znegimag_ohm</th></tr></thead><tbody><tr><td>0.05</td><td>0.0348594872030526</td><td>0.0044220725438761</td><td>0.04908180304790199</td><td>0.011699323828008116</td><td>0.04387964243832159</td><td>0.010376192395739827</td></tr><tr><td>0.1</td><td>0.0335408927945971</td><td>0.0034966845445866</td><td>0.044632228626750266</td><td>0.010900076904499836</td><td>0.04111144956806688</td><td>0.00952272819026653</td></tr><tr><td>0.2</td><td>0.0324637194049128</td><td>0.0031164200151977</td><td>0.04024156464556086</td><td>0.009736227595408192</td><td>0.03739721740203748</td><td>0.00838868831151836</td></tr><tr><td>0.5</td><td>0.0311286825020031</td><td>0.003282219701099</td><td>0.03596237699188536</td><td>0.00783548062056227</td><td>0.032998501593508284</td><td>0.0065815178297831504</td></tr><tr><td>1.0</td><td>0.0296642381327686</td><td>0.0041536712710108</td><td>0.03309743676404969</td><td>0.0064634236968912516</td><td>0.03128448274457307</td><td>0.005536672290846335</td></tr><tr><td>2.0</td><td>0.0275019881974106</td><td>0.0050472618247648</td><td>0.03098933957888932</td><td>0.005362491947570908</td><td>0.029448285727184963</td><td>0.0046519604010774466</td></tr><tr><td>5.0</td><td>0.0240001749075568</td><td>0.005071122699789</td><td>0.027484252225287165</td><td>0.004126989461966167</td><td>0.025778335113563065</td><td>0.0035399915695729337</td></tr><tr><td>10.0</td><td>0.0217541159831534</td><td>0.0047855026061837</td><td>0.02636318023455104</td><td>0.0038380214438058827</td><td>0.02532214418764083</td><td>0.003337350488378033</td></tr><tr><td>20.0</td><td>0.0196679896398897</td><td>0.0046021421453341</td><td>0.0251004988742542</td><td>0.0036728882536165206</td><td>0.02433464917803798</td><td>0.0033116229568727435</td></tr><tr><td>40.0</td><td>0.0175736422015022</td><td>0.0043120243929142</td><td>0.023090262592865764</td><td>0.0031607805680249285</td><td>0.022348617245310974</td><td>0.002830353445363616</td></tr></tbody></table>
+  </section>
+
+  <section id="results">
+    <h2>Numerical Results</h2>
+    <table class="metric-table">
+      <tbody>
+        <tr><td>Demo verdict</td><td>working_demo_model_beats_baseline</td><td>The model beats the baseline on this bounded demo.</td></tr>
+        <tr><td>Baseline RMSE</td><td>0.009208604 ohm</td><td>Global train-mean target vector.</td></tr>
+        <tr><td>Model RMSE</td><td>0.007976748 ohm</td><td>Shrinkage KNN demo model.</td></tr>
+        <tr><td>Relative improvement</td><td>13.38%</td><td>Positive, but this is still demo-sized evidence.</td></tr>
+        <tr><td>KK valid fraction</td><td>1.000</td><td>Target-quality screen for the demo EIS rows.</td></tr>
+        <tr><td>KK valid rows</td><td>30 / 30</td><td>Rows passing the finite-range RC-basis screen.</td></tr>
+      </tbody>
+    </table>
+    <div class="bar">
+      <div class="bar-row"><strong>Baseline RMSE</strong><div class="track"><div class="fill" style="width:100.0%"></div></div><code>0.0092086</code></div>
+      <div class="bar-row"><strong>Model RMSE</strong><div class="track"><div class="fill good" style="width:86.6%"></div></div><code>0.00797675</code></div>
+      <div class="bar-row"><strong>Relative improvement</strong><div class="track"><div class="fill good" style="width:4.0%"></div></div><code>13.38%</code></div>
+      <div class="bar-row"><strong>KK valid rows</strong><div class="track"><div class="fill good" style="width:100.0%"></div></div><code>30 / 30</code></div>
+    </div>
+    <h3>Per-Frequency Error Table</h3>
+    <table><thead><tr><th>frequency_hz</th><th>baseline_rmse_ohm</th><th>model_rmse_ohm</th></tr></thead><tbody><tr><td>0.05</td><td>0.014596326400418708</td><td>0.011517619628889602</td></tr><tr><td>0.1</td><td>0.01291196792981657</td><td>0.010715556397654062</td></tr><tr><td>0.2</td><td>0.011038994948622254</td><td>0.009394784860346124</td></tr><tr><td>0.5</td><td>0.00907005510155144</td><td>0.007813766526857375</td></tr><tr><td>1.0</td><td>0.0078174249312099</td><td>0.0071422917296229856</td></tr><tr><td>2.0</td><td>0.006988204787978238</td><td>0.006563945043052873</td></tr><tr><td>5.0</td><td>0.006173199039226986</td><td>0.005983541685500603</td></tr><tr><td>10.0</td><td>0.0061865663505014466</td><td>0.005979290190773845</td></tr><tr><td>20.0</td><td>0.006270694573164825</td><td>0.006097352686553043</td></tr><tr><td>40.0</td><td>0.006199690085553011</td><td>0.006054692811788644</td></tr></tbody></table>
+    <h3>KK Preview Rows</h3>
+    <table><thead><tr><th>matrix</th><th>row_index</th><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>temperature_c</th><th>soc_percent</th><th>kk_valid</th></tr></thead><tbody><tr><td>demo_molicell_subset</td><td>0</td><td>molicell_p42a::A11::5degC::SOC20::1</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5.0</td><td>20.0</td><td>True</td></tr><tr><td>demo_molicell_subset</td><td>1</td><td>molicell_p42a::A11::5degC::SOC50::2</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5.0</td><td>50.0</td><td>True</td></tr><tr><td>demo_molicell_subset</td><td>2</td><td>molicell_p42a::A11::5degC::SOC80::3</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5.0</td><td>80.0</td><td>True</td></tr><tr><td>demo_molicell_subset</td><td>3</td><td>molicell_p42a::A12::5degC::SOC20::4</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A12</td><td>5.0</td><td>20.0</td><td>True</td></tr><tr><td>demo_molicell_subset</td><td>4</td><td>molicell_p42a::A12::5degC::SOC50::5</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A12</td><td>5.0</td><td>50.0</td><td>True</td></tr></tbody></table>
+  </section>
+
+  <section id="code">
+    <h2>Code Walkthrough: Included In The Page</h2>
+    <p>This is the core code path. It is embedded here so readers can inspect the pipeline without switching to the repository during the presentation.</p>
+    <details open><summary>Demo scoring function</summary><pre><code class="language-python">def demo_score(max_train_rows: int, max_holdout_rows: int) -&gt; dict[str, Any]:
+    dev = pd.read_csv(DEV_MATRIX_CSV)
+    holdout = pd.read_csv(MOLICELL_MATRIX_CSV)
+    targets = target_columns(dev)
+    train = dev[dev[&quot;split_role&quot;] == &quot;dev_train_seen_outcome&quot;].head(max_train_rows).copy()
+    test = holdout[holdout[&quot;split_role&quot;] == &quot;molicell_p42a_whole_dataset_holdout_not_tuned&quot;].head(max_holdout_rows).copy()
+    if train.empty or test.empty:
+        raise RuntimeError(&quot;Demo needs non-empty dev train rows and Molicell holdout rows.&quot;)
+    train = add_derived_features(train)
+    test = add_derived_features(test)
+    for col in FEATURE_COLUMNS + targets:
+        train[col] = pd.to_numeric(train[col], errors=&quot;coerce&quot;)
+        test[col] = pd.to_numeric(test[col], errors=&quot;coerce&quot;)
+    train = train.dropna(subset=targets).copy()
+    test = test.dropna(subset=targets).copy()
+
+    train_y = train[targets].to_numpy()
+    test_y = test[targets].to_numpy()
+    baseline_pred = np.tile(np.nanmean(train_y, axis=0), (len(test), 1))
+    model = build_model(KNeighborsRegressor(n_neighbors=3), FEATURE_COLUMNS)
+    model.fit(train[FEATURE_COLUMNS], train[targets])
+    knn_pred = model.predict(test[FEATURE_COLUMNS])
+    model_pred = 0.8 * baseline_pred + 0.2 * knn_pred
+
+    baseline_metrics = metric_payload(test_y, baseline_pred, targets)
+    model_metrics = metric_payload(test_y, model_pred, targets)
+    improvement = float(
+        (baseline_metrics[&quot;rmse_all_ohm&quot;] - model_metrics[&quot;rmse_all_ohm&quot;])
+        / baseline_metrics[&quot;rmse_all_ohm&quot;]
+    )
+    kk_rows, kk_summary = validate_matrix(test, &quot;demo_molicell_subset&quot;)
+    pairs = target_frequency_pairs(targets)
+    input_columns = [
+        &quot;sample_id&quot;,
+        &quot;dataset&quot;,
+        &quot;split_role&quot;,
+        &quot;cell_id&quot;,
+        &quot;soc_percent&quot;,
+        &quot;temperature_c&quot;,
+        &quot;td_rows&quot;,
+        &quot;td_duration_s&quot;,
+        &quot;td_voltage_start_v&quot;,
+        &quot;td_voltage_end_v&quot;,
+        &quot;td_voltage_min_v&quot;,
+        &quot;td_voltage_max_v&quot;,
+        &quot;td_voltage_mean_v&quot;,
+        &quot;td_voltage_std_v&quot;,
+        &quot;td_current_mean_a&quot;,
+        &quot;td_current_abs_mean_a&quot;,
+        &quot;td_current_abs_max_a&quot;,
+        &quot;td_active_fraction&quot;,
+        &quot;td_charge_throughput_ah&quot;,
+        &quot;td_discharge_throughput_ah&quot;,
+    ]
+    results = {
+        &quot;experiment&quot;: &quot;cross_dataset_pulse_to_eis_training_demo&quot;,
+        &quot;created_utc&quot;: datetime.now(timezone.utc).isoformat(),
+        &quot;claim_boundary&quot;: &quot;Demo only. Uses a bounded subset and does not create a new validation claim.&quot;,
+        &quot;inputs&quot;: {
+            &quot;dev_matrix_csv&quot;: str(DEV_MATRIX_CSV),
+            &quot;molicell_matrix_csv&quot;: str(MOLICELL_MATRIX_CSV),
+            &quot;train_rows_used&quot;: int(len(train)),
+            &quot;holdout_rows_used&quot;: int(len(test)),
+            &quot;feature_columns&quot;: FEATURE_COLUMNS,
+            &quot;target_columns&quot;: targets,
+            &quot;frequency_grid_hz&quot;: [row[&quot;frequency_hz&quot;] for row in pairs],
+            &quot;train_preview_rows&quot;: records_preview(train, input_columns, rows=3),
+            &quot;holdout_preview_rows&quot;: records_preview(test, input_columns + targets[:6], rows=3),
+        },
+        &quot;method&quot;: {
+            &quot;baseline&quot;: &quot;global train target mean&quot;,
+            &quot;model&quot;: &quot;KNeighborsRegressor(n_neighbors=3) blended 20 percent with the KNN prediction and 80 percent with the train mean&quot;,
+            &quot;split&quot;: &quot;development rows train, Molicell subset holdout, no random row split&quot;,
+            &quot;kk_screen&quot;: &quot;finite-range RC-basis Kramer-Kronig residual check on holdout EIS targets&quot;,
+            &quot;preprocessing&quot;: &quot;median imputation and standard scaling inside a scikit-learn ColumnTransformer&quot;,
+            &quot;derived_features&quot;: &quot;log duration, voltage delta/range/CV, current load factor, total/net throughput, discharge-to-charge ratio&quot;,
+        },
+        &quot;results&quot;: {
+            &quot;baseline_rmse_all_ohm&quot;: baseline_metrics[&quot;rmse_all_ohm&quot;],
+            &quot;model_rmse_all_ohm&quot;: model_metrics[&quot;rmse_all_ohm&quot;],
+            &quot;baseline_metrics&quot;: baseline_metrics,
+            &quot;model_metrics&quot;: model_metrics,
+            &quot;per_frequency_rmse_ohm&quot;: per_frequency_error_payload(pairs, targets, test_y, baseline_pred, model_pred),
+            &quot;representative_spectrum&quot;: representative_spectrum(test, pairs, targets, baseline_pred, model_pred),
+            &quot;relative_rmse_improvement_fraction&quot;: improvement,
+            &quot;demo_verdict&quot;: &quot;working_demo_model_beats_baseline&quot; if improvement &gt; 0 else &quot;working_demo_no_support&quot;,
+            &quot;kk_valid_fraction&quot;: kk_summary[&quot;kk_valid_fraction&quot;],
+            &quot;kk_valid_rows&quot;: kk_summary[&quot;kk_valid_rows&quot;],
+            &quot;kk_rows_checked&quot;: kk_summary[&quot;rows_checked&quot;],
+            &quot;kk_summary&quot;: kk_summary,
+            &quot;kk_preview_rows&quot;: records_preview(kk_rows, list(kk_rows.columns), rows=5),
+        },
+        &quot;outputs&quot;: {
+            &quot;results_json&quot;: str(DEMO_RESULTS_JSON),
+            &quot;presentation_html&quot;: str(DEMO_PRESENTATION_HTML),
+        },
+    }
+    return results</code></pre></details>
+    <details><summary>Derived feature builder</summary><pre><code class="language-python">def add_derived_features(frame: pd.DataFrame) -&gt; pd.DataFrame:
+    &quot;&quot;&quot;Add time-domain-only features without touching target-side EIS values.&quot;&quot;&quot;
+
+    frame = frame.copy()
+    for col in BASE_FEATURE_COLUMNS:
+        if col not in frame.columns:
+            frame[col] = np.nan
+        frame[col] = pd.to_numeric(frame[col], errors=&quot;coerce&quot;)
+
+    voltage_mean_abs = frame[&quot;td_voltage_mean_v&quot;].abs().replace(0, np.nan)
+    duration_hours = (frame[&quot;td_duration_s&quot;] / 3600.0).replace(0, np.nan)
+    charge = frame[&quot;td_charge_throughput_ah&quot;].clip(lower=0)
+    discharge = frame[&quot;td_discharge_throughput_ah&quot;].clip(lower=0)
+    total_throughput = charge + discharge
+
+    frame[&quot;td_rows_log1p&quot;] = np.log1p(frame[&quot;td_rows&quot;].clip(lower=0))
+    frame[&quot;td_duration_log1p_s&quot;] = np.log1p(frame[&quot;td_duration_s&quot;].clip(lower=0))
+    frame[&quot;td_voltage_delta_v&quot;] = frame[&quot;td_voltage_end_v&quot;] - frame[&quot;td_voltage_start_v&quot;]
+    frame[&quot;td_voltage_range_v&quot;] = frame[&quot;td_voltage_max_v&quot;] - frame[&quot;td_voltage_min_v&quot;]
+    frame[&quot;td_voltage_cv&quot;] = safe_divide(frame[&quot;td_voltage_std_v&quot;], voltage_mean_abs)
+    frame[&quot;td_current_activity_span_a&quot;] = frame[&quot;td_current_abs_max_a&quot;] - frame[&quot;td_current_abs_mean_a&quot;]
+    frame[&quot;td_current_load_factor&quot;] = safe_divide(frame[&quot;td_current_abs_mean_a&quot;], frame[&quot;td_current_abs_max_a&quot;].replace(0, np.nan))
+    frame[&quot;td_total_throughput_ah&quot;] = total_throughput
+    frame[&quot;td_net_throughput_ah&quot;] = charge - discharge
+    frame[&quot;td_discharge_to_charge_ratio&quot;] = safe_divide(discharge, charge.replace(0, np.nan))
+    frame[&quot;td_mean_abs_current_per_hour&quot;] = safe_divide(frame[&quot;td_current_abs_mean_a&quot;], duration_hours)
+    return frame</code></pre></details>
+    <details><summary>Model construction</summary><pre><code class="language-python">def build_model(estimator: Any, feature_columns: list[str] | None = None) -&gt; Pipeline:
+    columns = feature_columns or FEATURE_COLUMNS
+    preprocessor = ColumnTransformer(
+        [
+            (
+                &quot;numeric&quot;,
+                Pipeline(
+                    [
+                        (&quot;impute&quot;, SimpleImputer(strategy=&quot;median&quot;)),
+                        (&quot;scale&quot;, StandardScaler()),
+                    ]
+                ),
+                columns,
+            )
+        ]
+    )
+    return Pipeline([(&quot;preprocess&quot;, preprocessor), (&quot;model&quot;, estimator)])</code></pre></details>
+    <details><summary>Metric payload</summary><pre><code class="language-python">def metric_payload(y_true: np.ndarray, y_pred: np.ndarray, target_cols: list[str]) -&gt; dict[str, Any]:
+    zreal_idx = [idx for idx, col in enumerate(target_cols) if &quot;zreal&quot; in col]
+    znegimag_idx = [idx for idx, col in enumerate(target_cols) if &quot;znegimag&quot; in col]
+    per_target = {
+        col: float(mean_squared_error(y_true[:, idx], y_pred[:, idx]) ** 0.5)
+        for idx, col in enumerate(target_cols)
+    }
+    payload = {
+        &quot;rmse_all_ohm&quot;: float(mean_squared_error(y_true.ravel(), y_pred.ravel()) ** 0.5),
+        &quot;mae_all_ohm&quot;: float(mean_absolute_error(y_true.ravel(), y_pred.ravel())),
+        &quot;bias_all_ohm&quot;: float(np.mean(y_pred - y_true)),
+        &quot;rmse_zreal_ohm&quot;: float(mean_squared_error(y_true[:, zreal_idx].ravel(), y_pred[:, zreal_idx].ravel()) ** 0.5),
+        &quot;rmse_znegimag_ohm&quot;: float(
+            mean_squared_error(y_true[:, znegimag_idx].ravel(), y_pred[:, znegimag_idx].ravel()) ** 0.5
+        ),
+        &quot;r2_uniform_average&quot;: float(r2_score(y_true, y_pred, multioutput=&quot;uniform_average&quot;)),
+        &quot;per_target_rmse_ohm&quot;: per_target,
+    }
+    return payload</code></pre></details>
+    <details><summary>Kramer-Kronig matrix validation</summary><pre><code class="language-python">def validate_matrix(
+    frame: pd.DataFrame,
+    matrix_name: str,
+    residual_limit: float = DEFAULT_RESIDUAL_LIMIT,
+    max_rows: int = 0,
+) -&gt; tuple[pd.DataFrame, dict[str, Any]]:
+    frequencies, zreal_cols, znegimag_cols = fixed_grid_columns(list(frame.columns))
+    if not frequencies:
+        raise RuntimeError(f&quot;No fixed-grid EIS target columns found for {matrix_name}.&quot;)
+
+    work = frame.copy()
+    if max_rows &gt; 0:
+        work = work.head(max_rows).copy()
+
+    rows: list[dict[str, Any]] = []
+    for idx, row in work.iterrows():
+        metrics = validate_spectrum(
+            frequencies,
+            [row[col] for col in zreal_cols],
+            [row[col] for col in znegimag_cols],
+            residual_limit=residual_limit,
+        )
+        rows.append(
+            {
+                &quot;matrix&quot;: matrix_name,
+                &quot;row_index&quot;: int(idx) if isinstance(idx, (int, np.integer)) else str(idx),
+                &quot;sample_id&quot;: str(row.get(&quot;sample_id&quot;, &quot;&quot;)),
+                &quot;dataset&quot;: str(row.get(&quot;dataset&quot;, &quot;&quot;)),
+                &quot;split_role&quot;: str(row.get(&quot;split_role&quot;, &quot;&quot;)),
+                &quot;cell_id&quot;: str(row.get(&quot;cell_id&quot;, &quot;&quot;)),
+                &quot;temperature_c&quot;: row.get(&quot;temperature_c&quot;, np.nan),
+                &quot;soc_percent&quot;: row.get(&quot;soc_percent&quot;, np.nan),
+                **metrics,
+            }
+        )
+
+    result = pd.DataFrame(rows)
+    status_counts = Counter(result[&quot;kk_status&quot;].astype(str)) if not result.empty else Counter()
+    valid_count = int(result[&quot;kk_valid&quot;].sum()) if &quot;kk_valid&quot; in result else 0
+    residual_values = pd.to_numeric(result.get(&quot;kk_residual_norm&quot;, pd.Series(dtype=float)), errors=&quot;coerce&quot;)
+    summary = {
+        &quot;matrix&quot;: matrix_name,
+        &quot;rows_checked&quot;: int(len(result)),
+        &quot;kk_valid_rows&quot;: valid_count,
+        &quot;kk_valid_fraction&quot;: float(valid_count / len(result)) if len(result) else 0.0,
+        &quot;kk_status_counts&quot;: dict(sorted(status_counts.items())),
+        &quot;kk_residual_norm_median&quot;: float(residual_values.median()) if residual_values.notna().any() else None,
+        &quot;kk_residual_norm_p95&quot;: float(residual_values.quantile(0.95)) if residual_values.notna().any() else None,
+        &quot;kk_residual_limit&quot;: float(residual_limit),
+        &quot;frequency_grid_hz&quot;: frequencies,
+        &quot;claim_boundary&quot;: (
+            &quot;Finite-range RC-basis Kramer-Kronig consistency screen. Use as EIS quality metadata, &quot;
+            &quot;not as proof that a prediction model is valid.&quot;
+        ),
+    }
+    return result, summary</code></pre></details>
+  </section>
+
+  <section id="outputs">
+    <h2>Outputs</h2>
+    <p>The machine-readable output is included below. This is the same payload written to <code>demo_pipeline_results.json</code>.</p>
+    <pre><code class="language-json">{
+  &quot;experiment&quot;: &quot;cross_dataset_pulse_to_eis_training_demo&quot;,
+  &quot;created_utc&quot;: &quot;2026-07-01T20:19:48.874238+00:00&quot;,
+  &quot;claim_boundary&quot;: &quot;Demo only. Uses a bounded subset and does not create a new validation claim.&quot;,
+  &quot;inputs&quot;: {
+    &quot;dev_matrix_csv&quot;: &quot;[local path redacted]
+    &quot;molicell_matrix_csv&quot;: &quot;[local path redacted]
+    &quot;train_rows_used&quot;: 120,
+    &quot;holdout_rows_used&quot;: 30,
+    &quot;feature_columns&quot;: [
+      &quot;soc_percent&quot;,
+      &quot;temperature_c&quot;,
+      &quot;td_rows&quot;,
+      &quot;td_duration_s&quot;,
+      &quot;td_voltage_start_v&quot;,
+      &quot;td_voltage_end_v&quot;,
+      &quot;td_voltage_min_v&quot;,
+      &quot;td_voltage_max_v&quot;,
+      &quot;td_voltage_mean_v&quot;,
+      &quot;td_voltage_std_v&quot;,
+      &quot;td_current_mean_a&quot;,
+      &quot;td_current_abs_mean_a&quot;,
+      &quot;td_current_abs_max_a&quot;,
+      &quot;td_active_fraction&quot;,
+      &quot;td_charge_throughput_ah&quot;,
+      &quot;td_discharge_throughput_ah&quot;,
+      &quot;td_temperature_median_c&quot;,
+      &quot;td_rows_log1p&quot;,
+      &quot;td_duration_log1p_s&quot;,
+      &quot;td_voltage_delta_v&quot;,
+      &quot;td_voltage_range_v&quot;,
+      &quot;td_voltage_cv&quot;,
+      &quot;td_current_activity_span_a&quot;,
+      &quot;td_current_load_factor&quot;,
+      &quot;td_total_throughput_ah&quot;,
+      &quot;td_net_throughput_ah&quot;,
+      &quot;td_discharge_to_charge_ratio&quot;,
+      &quot;td_mean_abs_current_per_hour&quot;
+    ],
+    &quot;target_columns&quot;: [
+      &quot;target_zreal_0p05hz_ohm&quot;,
+      &quot;target_znegimag_0p05hz_ohm&quot;,
+      &quot;target_zreal_0p1hz_ohm&quot;,
+      &quot;target_znegimag_0p1hz_ohm&quot;,
+      &quot;target_zreal_0p2hz_ohm&quot;,
+      &quot;target_znegimag_0p2hz_ohm&quot;,
+      &quot;target_zreal_0p5hz_ohm&quot;,
+      &quot;target_znegimag_0p5hz_ohm&quot;,
+      &quot;target_zreal_1hz_ohm&quot;,
+      &quot;target_znegimag_1hz_ohm&quot;,
+      &quot;target_zreal_2hz_ohm&quot;,
+      &quot;target_znegimag_2hz_ohm&quot;,
+      &quot;target_zreal_5hz_ohm&quot;,
+      &quot;target_znegimag_5hz_ohm&quot;,
+      &quot;target_zreal_10hz_ohm&quot;,
+      &quot;target_znegimag_10hz_ohm&quot;,
+      &quot;target_zreal_20hz_ohm&quot;,
+      &quot;target_znegimag_20hz_ohm&quot;,
+      &quot;target_zreal_40hz_ohm&quot;,
+      &quot;target_znegimag_40hz_ohm&quot;
+    ],
+    &quot;frequency_grid_hz&quot;: [
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      20.0,
+      40.0
+    ],
+    &quot;train_preview_rows&quot;: [
+      {
+        &quot;sample_id&quot;: &quot;dev_raw::panasonic::0&quot;,
+        &quot;dataset&quot;: &quot;Panasonic 18650PF&quot;,
+        &quot;split_role&quot;: &quot;dev_train_seen_outcome&quot;,
+        &quot;cell_id&quot;: &quot;3740&quot;,
+        &quot;soc_percent&quot;: null,
+        &quot;temperature_c&quot;: -10.0,
+        &quot;td_rows&quot;: 426.0,
+        &quot;td_duration_s&quot;: 228149.9310001731,
+        &quot;td_voltage_start_v&quot;: 3.8306,
+        &quot;td_voltage_end_v&quot;: 2.49948,
+        &quot;td_voltage_min_v&quot;: 2.49948,
+        &quot;td_voltage_max_v&quot;: 4.07268,
+        &quot;td_voltage_mean_v&quot;: 3.5550384037558684,
+        &quot;td_voltage_std_v&quot;: 0.2741665916299734,
+        &quot;td_current_mean_a&quot;: -0.6040233333333334,
+        &quot;td_current_abs_mean_a&quot;: 0.6040233333333334,
+        &quot;td_current_abs_max_a&quot;: 0.8697,
+        &quot;td_active_fraction&quot;: 0.6948356807511737,
+        &quot;td_charge_throughput_ah&quot;: 0.0,
+        &quot;td_discharge_throughput_ah&quot;: 41.06532749075169
+      },
+      {
+        &quot;sample_id&quot;: &quot;dev_raw::panasonic::1&quot;,
+        &quot;dataset&quot;: &quot;Panasonic 18650PF&quot;,
+        &quot;split_role&quot;: &quot;dev_train_seen_outcome&quot;,
+        &quot;cell_id&quot;: &quot;3740&quot;,
+        &quot;soc_percent&quot;: null,
+        &quot;temperature_c&quot;: -10.0,
+        &quot;td_rows&quot;: 426.0,
+        &quot;td_duration_s&quot;: 228149.9310001731,
+        &quot;td_voltage_start_v&quot;: 3.8306,
+        &quot;td_voltage_end_v&quot;: 2.49948,
+        &quot;td_voltage_min_v&quot;: 2.49948,
+        &quot;td_voltage_max_v&quot;: 4.07268,
+        &quot;td_voltage_mean_v&quot;: 3.5550384037558684,
+        &quot;td_voltage_std_v&quot;: 0.2741665916299734,
+        &quot;td_current_mean_a&quot;: -0.6040233333333334,
+        &quot;td_current_abs_mean_a&quot;: 0.6040233333333334,
+        &quot;td_current_abs_max_a&quot;: 0.8697,
+        &quot;td_active_fraction&quot;: 0.6948356807511737,
+        &quot;td_charge_throughput_ah&quot;: 0.0,
+        &quot;td_discharge_throughput_ah&quot;: 41.06532749075169
+      },
+      {
+        &quot;sample_id&quot;: &quot;dev_raw::panasonic::2&quot;,
+        &quot;dataset&quot;: &quot;Panasonic 18650PF&quot;,
+        &quot;split_role&quot;: &quot;dev_train_seen_outcome&quot;,
+        &quot;cell_id&quot;: &quot;3740&quot;,
+        &quot;soc_percent&quot;: null,
+        &quot;temperature_c&quot;: -10.0,
+        &quot;td_rows&quot;: 426.0,
+        &quot;td_duration_s&quot;: 228149.9310001731,
+        &quot;td_voltage_start_v&quot;: 3.8306,
+        &quot;td_voltage_end_v&quot;: 2.49948,
+        &quot;td_voltage_min_v&quot;: 2.49948,
+        &quot;td_voltage_max_v&quot;: 4.07268,
+        &quot;td_voltage_mean_v&quot;: 3.5550384037558684,
+        &quot;td_voltage_std_v&quot;: 0.2741665916299734,
+        &quot;td_current_mean_a&quot;: -0.6040233333333334,
+        &quot;td_current_abs_mean_a&quot;: 0.6040233333333334,
+        &quot;td_current_abs_max_a&quot;: 0.8697,
+        &quot;td_active_fraction&quot;: 0.6948356807511737,
+        &quot;td_charge_throughput_ah&quot;: 0.0,
+        &quot;td_discharge_throughput_ah&quot;: 41.06532749075169
+      }
+    ],
+    &quot;holdout_preview_rows&quot;: [
+      {
+        &quot;sample_id&quot;: &quot;molicell_p42a::A11::5degC::SOC20::1&quot;,
+        &quot;dataset&quot;: &quot;Molicell P42A local high-power characterization&quot;,
+        &quot;split_role&quot;: &quot;molicell_p42a_whole_dataset_holdout_not_tuned&quot;,
+        &quot;cell_id&quot;: &quot;A11&quot;,
+        &quot;soc_percent&quot;: 20.0,
+        &quot;temperature_c&quot;: 5.0,
+        &quot;td_rows&quot;: 168668.0,
+        &quot;td_duration_s&quot;: 160573.400088,
+        &quot;td_voltage_start_v&quot;: 4.167196273803711,
+        &quot;td_voltage_end_v&quot;: 2.826201677322388,
+        &quot;td_voltage_min_v&quot;: 2.499967336654663,
+        &quot;td_voltage_max_v&quot;: 4.242364406585693,
+        &quot;td_voltage_mean_v&quot;: 3.679135297423965,
+        &quot;td_voltage_std_v&quot;: 0.3344375544872495,
+        &quot;td_current_mean_a&quot;: -0.130155400660056,
+        &quot;td_current_abs_mean_a&quot;: 0.836335796956355,
+        &quot;td_current_abs_max_a&quot;: 32.00702667236328,
+        &quot;td_active_fraction&quot;: 0.2038323807716935,
+        &quot;td_charge_throughput_ah&quot;: 5.043743318209656,
+        &quot;td_discharge_throughput_ah&quot;: 8.835726686025142,
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.0348594872030526,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.0044220725438761,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.0335408927945971,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.0034966845445866,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.0324637194049128,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.0031164200151977
+      },
+      {
+        &quot;sample_id&quot;: &quot;molicell_p42a::A11::5degC::SOC50::2&quot;,
+        &quot;dataset&quot;: &quot;Molicell P42A local high-power characterization&quot;,
+        &quot;split_role&quot;: &quot;molicell_p42a_whole_dataset_holdout_not_tuned&quot;,
+        &quot;cell_id&quot;: &quot;A11&quot;,
+        &quot;soc_percent&quot;: 50.0,
+        &quot;temperature_c&quot;: 5.0,
+        &quot;td_rows&quot;: 168668.0,
+        &quot;td_duration_s&quot;: 160573.400088,
+        &quot;td_voltage_start_v&quot;: 4.167196273803711,
+        &quot;td_voltage_end_v&quot;: 2.826201677322388,
+        &quot;td_voltage_min_v&quot;: 2.499967336654663,
+        &quot;td_voltage_max_v&quot;: 4.242364406585693,
+        &quot;td_voltage_mean_v&quot;: 3.679135297423965,
+        &quot;td_voltage_std_v&quot;: 0.3344375544872495,
+        &quot;td_current_mean_a&quot;: -0.130155400660056,
+        &quot;td_current_abs_mean_a&quot;: 0.836335796956355,
+        &quot;td_current_abs_max_a&quot;: 32.00702667236328,
+        &quot;td_active_fraction&quot;: 0.2038323807716935,
+        &quot;td_charge_throughput_ah&quot;: 5.043743318209656,
+        &quot;td_discharge_throughput_ah&quot;: 8.835726686025142,
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.0304134547853784,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.0042385666338052,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.0291386515312195,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.0031889156623996,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.0282077899969896,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.0026091736553727
+      },
+      {
+        &quot;sample_id&quot;: &quot;molicell_p42a::A11::5degC::SOC80::3&quot;,
+        &quot;dataset&quot;: &quot;Molicell P42A local high-power characterization&quot;,
+        &quot;split_role&quot;: &quot;molicell_p42a_whole_dataset_holdout_not_tuned&quot;,
+        &quot;cell_id&quot;: &quot;A11&quot;,
+        &quot;soc_percent&quot;: 80.0,
+        &quot;temperature_c&quot;: 5.0,
+        &quot;td_rows&quot;: 168668.0,
+        &quot;td_duration_s&quot;: 160573.400088,
+        &quot;td_voltage_start_v&quot;: 4.167196273803711,
+        &quot;td_voltage_end_v&quot;: 2.826201677322388,
+        &quot;td_voltage_min_v&quot;: 2.499967336654663,
+        &quot;td_voltage_max_v&quot;: 4.242364406585693,
+        &quot;td_voltage_mean_v&quot;: 3.679135297423965,
+        &quot;td_voltage_std_v&quot;: 0.3344375544872495,
+        &quot;td_current_mean_a&quot;: -0.130155400660056,
+        &quot;td_current_abs_mean_a&quot;: 0.836335796956355,
+        &quot;td_current_abs_max_a&quot;: 32.00702667236328,
+        &quot;td_active_fraction&quot;: 0.2038323807716935,
+        &quot;td_charge_throughput_ah&quot;: 5.043743318209656,
+        &quot;td_discharge_throughput_ah&quot;: 8.835726686025142,
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.0265812259339048,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.0043570639097772,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.0253532407362925,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.0031556899411221,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.0244214717365874,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.0023863986491859
+      }
+    ]
+  },
+  &quot;method&quot;: {
+    &quot;baseline&quot;: &quot;global train target mean&quot;,
+    &quot;model&quot;: &quot;KNeighborsRegressor(n_neighbors=3) blended 20 percent with the KNN prediction and 80 percent with the train mean&quot;,
+    &quot;split&quot;: &quot;development rows train, Molicell subset holdout, no random row split&quot;,
+    &quot;kk_screen&quot;: &quot;finite-range RC-basis Kramer-Kronig residual check on holdout EIS targets&quot;,
+    &quot;preprocessing&quot;: &quot;median imputation and standard scaling inside a scikit-learn ColumnTransformer&quot;,
+    &quot;derived_features&quot;: &quot;log duration, voltage delta/range/CV, current load factor, total/net throughput, discharge-to-charge ratio&quot;
+  },
+  &quot;results&quot;: {
+    &quot;baseline_rmse_all_ohm&quot;: 0.009208603939342681,
+    &quot;model_rmse_all_ohm&quot;: 0.007976747730320428,
+    &quot;baseline_metrics&quot;: {
+      &quot;rmse_all_ohm&quot;: 0.009208603939342681,
+      &quot;mae_all_ohm&quot;: 0.006881669900694002,
+      &quot;bias_all_ohm&quot;: 0.00501335170239768,
+      &quot;rmse_zreal_ohm&quot;: 0.012125260271127996,
+      &quot;rmse_znegimag_ohm&quot;: 0.004751298388941718,
+      &quot;r2_uniform_average&quot;: -49.20190196068792,
+      &quot;per_target_rmse_ohm&quot;: {
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.01924383576557271,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.007468619270172028,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.016513042260883237,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.007794694793993373,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.013826501505054148,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.007248908544198264,
+        &quot;target_zreal_0p5hz_ohm&quot;: 0.011568956845416038,
+        &quot;target_znegimag_0p5hz_ohm&quot;: 0.005539949151324408,
+        &quot;target_zreal_1hz_ohm&quot;: 0.010308256928484841,
+        &quot;target_znegimag_1hz_ohm&quot;: 0.003995510506374432,
+        &quot;target_zreal_2hz_ohm&quot;: 0.009529935953265166,
+        &quot;target_znegimag_2hz_ohm&quot;: 0.002617314089693452,
+        &quot;target_zreal_5hz_ohm&quot;: 0.00864582926200139,
+        &quot;target_znegimag_5hz_ohm&quot;: 0.0012109538092538797,
+        &quot;target_zreal_10hz_ohm&quot;: 0.008712567657505374,
+        &quot;target_znegimag_10hz_ohm&quot;: 0.00079898137131279,
+        &quot;target_zreal_20hz_ohm&quot;: 0.008844693465369613,
+        &quot;target_znegimag_20hz_ohm&quot;: 0.0006439086608251457,
+        &quot;target_zreal_40hz_ohm&quot;: 0.008731153354277037,
+        &quot;target_znegimag_40hz_ohm&quot;: 0.0007995470079397788
+      }
+    },
+    &quot;model_metrics&quot;: {
+      &quot;rmse_all_ohm&quot;: 0.007976747730320428,
+      &quot;mae_all_ohm&quot;: 0.00561117558827229,
+      &quot;bias_all_ohm&quot;: 0.003467087773493067,
+      &quot;rmse_zreal_ohm&quot;: 0.010595231041889742,
+      &quot;rmse_znegimag_ohm&quot;: 0.003872736484105294,
+      &quot;r2_uniform_average&quot;: -32.94564822455692,
+      &quot;per_target_rmse_ohm&quot;: {
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.015081825203354526,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.006152208738902337,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.013734902943511663,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.006403025765598983,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.011908453608097173,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.0058917482811280154,
+        &quot;target_zreal_0p5hz_ohm&quot;: 0.01017779993923242,
+        &quot;target_znegimag_0p5hz_ohm&quot;: 0.004303752208182305,
+        &quot;target_zreal_1hz_ohm&quot;: 0.009607234834382661,
+        &quot;target_znegimag_1hz_ohm&quot;: 0.003118605640203032,
+        &quot;target_zreal_2hz_ohm&quot;: 0.009052581292930377,
+        &quot;target_znegimag_2hz_ohm&quot;: 0.002054634028561728,
+        &quot;target_zreal_5hz_ohm&quot;: 0.008388615972323744,
+        &quot;target_znegimag_5hz_ohm&quot;: 0.0011120540783261298,
+        &quot;target_zreal_10hz_ohm&quot;: 0.008404041076057994,
+        &quot;target_znegimag_10hz_ohm&quot;: 0.000935903821393325,
+        &quot;target_zreal_20hz_ohm&quot;: 0.008583290907813556,
+        &quot;target_znegimag_20hz_ohm&quot;: 0.0008261578301247014,
+        &quot;target_zreal_40hz_ohm&quot;: 0.008494908043253572,
+        &quot;target_znegimag_40hz_ohm&quot;: 0.0010747778500303715
+      }
+    },
+    &quot;per_frequency_rmse_ohm&quot;: [
+      {
+        &quot;frequency_hz&quot;: 0.05,
+        &quot;baseline_rmse_ohm&quot;: 0.014596326400418708,
+        &quot;model_rmse_ohm&quot;: 0.011517619628889602
+      },
+      {
+        &quot;frequency_hz&quot;: 0.1,
+        &quot;baseline_rmse_ohm&quot;: 0.01291196792981657,
+        &quot;model_rmse_ohm&quot;: 0.010715556397654062
+      },
+      {
+        &quot;frequency_hz&quot;: 0.2,
+        &quot;baseline_rmse_ohm&quot;: 0.011038994948622254,
+        &quot;model_rmse_ohm&quot;: 0.009394784860346124
+      },
+      {
+        &quot;frequency_hz&quot;: 0.5,
+        &quot;baseline_rmse_ohm&quot;: 0.00907005510155144,
+        &quot;model_rmse_ohm&quot;: 0.007813766526857375
+      },
+      {
+        &quot;frequency_hz&quot;: 1.0,
+        &quot;baseline_rmse_ohm&quot;: 0.0078174249312099,
+        &quot;model_rmse_ohm&quot;: 0.0071422917296229856
+      },
+      {
+        &quot;frequency_hz&quot;: 2.0,
+        &quot;baseline_rmse_ohm&quot;: 0.006988204787978238,
+        &quot;model_rmse_ohm&quot;: 0.006563945043052873
+      },
+      {
+        &quot;frequency_hz&quot;: 5.0,
+        &quot;baseline_rmse_ohm&quot;: 0.006173199039226986,
+        &quot;model_rmse_ohm&quot;: 0.005983541685500603
+      },
+      {
+        &quot;frequency_hz&quot;: 10.0,
+        &quot;baseline_rmse_ohm&quot;: 0.0061865663505014466,
+        &quot;model_rmse_ohm&quot;: 0.005979290190773845
+      },
+      {
+        &quot;frequency_hz&quot;: 20.0,
+        &quot;baseline_rmse_ohm&quot;: 0.006270694573164825,
+        &quot;model_rmse_ohm&quot;: 0.006097352686553043
+      },
+      {
+        &quot;frequency_hz&quot;: 40.0,
+        &quot;baseline_rmse_ohm&quot;: 0.006199690085553011,
+        &quot;model_rmse_ohm&quot;: 0.006054692811788644
+      }
+    ],
+    &quot;representative_spectrum&quot;: {
+      &quot;sample_id&quot;: &quot;molicell_p42a::A11::5degC::SOC20::1&quot;,
+      &quot;dataset&quot;: &quot;Molicell P42A local high-power characterization&quot;,
+      &quot;cell_id&quot;: &quot;A11&quot;,
+      &quot;soc_percent&quot;: 20.0,
+      &quot;temperature_c&quot;: 5.0,
+      &quot;points&quot;: [
+        {
+          &quot;frequency_hz&quot;: 0.05,
+          &quot;true_zreal_ohm&quot;: 0.0348594872030526,
+          &quot;true_znegimag_ohm&quot;: 0.0044220725438761,
+          &quot;baseline_zreal_ohm&quot;: 0.04908180304790199,
+          &quot;baseline_znegimag_ohm&quot;: 0.011699323828008116,
+          &quot;model_zreal_ohm&quot;: 0.04387964243832159,
+          &quot;model_znegimag_ohm&quot;: 0.010376192395739827
+        },
+        {
+          &quot;frequency_hz&quot;: 0.1,
+          &quot;true_zreal_ohm&quot;: 0.0335408927945971,
+          &quot;true_znegimag_ohm&quot;: 0.0034966845445866,
+          &quot;baseline_zreal_ohm&quot;: 0.044632228626750266,
+          &quot;baseline_znegimag_ohm&quot;: 0.010900076904499836,
+          &quot;model_zreal_ohm&quot;: 0.04111144956806688,
+          &quot;model_znegimag_ohm&quot;: 0.00952272819026653
+        },
+        {
+          &quot;frequency_hz&quot;: 0.2,
+          &quot;true_zreal_ohm&quot;: 0.0324637194049128,
+          &quot;true_znegimag_ohm&quot;: 0.0031164200151977,
+          &quot;baseline_zreal_ohm&quot;: 0.04024156464556086,
+          &quot;baseline_znegimag_ohm&quot;: 0.009736227595408192,
+          &quot;model_zreal_ohm&quot;: 0.03739721740203748,
+          &quot;model_znegimag_ohm&quot;: 0.00838868831151836
+        },
+        {
+          &quot;frequency_hz&quot;: 0.5,
+          &quot;true_zreal_ohm&quot;: 0.0311286825020031,
+          &quot;true_znegimag_ohm&quot;: 0.003282219701099,
+          &quot;baseline_zreal_ohm&quot;: 0.03596237699188536,
+          &quot;baseline_znegimag_ohm&quot;: 0.00783548062056227,
+          &quot;model_zreal_ohm&quot;: 0.032998501593508284,
+          &quot;model_znegimag_ohm&quot;: 0.0065815178297831504
+        },
+        {
+          &quot;frequency_hz&quot;: 1.0,
+          &quot;true_zreal_ohm&quot;: 0.0296642381327686,
+          &quot;true_znegimag_ohm&quot;: 0.0041536712710108,
+          &quot;baseline_zreal_ohm&quot;: 0.03309743676404969,
+          &quot;baseline_znegimag_ohm&quot;: 0.0064634236968912516,
+          &quot;model_zreal_ohm&quot;: 0.03128448274457307,
+          &quot;model_znegimag_ohm&quot;: 0.005536672290846335
+        },
+        {
+          &quot;frequency_hz&quot;: 2.0,
+          &quot;true_zreal_ohm&quot;: 0.0275019881974106,
+          &quot;true_znegimag_ohm&quot;: 0.0050472618247648,
+          &quot;baseline_zreal_ohm&quot;: 0.03098933957888932,
+          &quot;baseline_znegimag_ohm&quot;: 0.005362491947570908,
+          &quot;model_zreal_ohm&quot;: 0.029448285727184963,
+          &quot;model_znegimag_ohm&quot;: 0.0046519604010774466
+        },
+        {
+          &quot;frequency_hz&quot;: 5.0,
+          &quot;true_zreal_ohm&quot;: 0.0240001749075568,
+          &quot;true_znegimag_ohm&quot;: 0.005071122699789,
+          &quot;baseline_zreal_ohm&quot;: 0.027484252225287165,
+          &quot;baseline_znegimag_ohm&quot;: 0.004126989461966167,
+          &quot;model_zreal_ohm&quot;: 0.025778335113563065,
+          &quot;model_znegimag_ohm&quot;: 0.0035399915695729337
+        },
+        {
+          &quot;frequency_hz&quot;: 10.0,
+          &quot;true_zreal_ohm&quot;: 0.0217541159831534,
+          &quot;true_znegimag_ohm&quot;: 0.0047855026061837,
+          &quot;baseline_zreal_ohm&quot;: 0.02636318023455104,
+          &quot;baseline_znegimag_ohm&quot;: 0.0038380214438058827,
+          &quot;model_zreal_ohm&quot;: 0.02532214418764083,
+          &quot;model_znegimag_ohm&quot;: 0.003337350488378033
+        },
+        {
+          &quot;frequency_hz&quot;: 20.0,
+          &quot;true_zreal_ohm&quot;: 0.0196679896398897,
+          &quot;true_znegimag_ohm&quot;: 0.0046021421453341,
+          &quot;baseline_zreal_ohm&quot;: 0.0251004988742542,
+          &quot;baseline_znegimag_ohm&quot;: 0.0036728882536165206,
+          &quot;model_zreal_ohm&quot;: 0.02433464917803798,
+          &quot;model_znegimag_ohm&quot;: 0.0033116229568727435
+        },
+        {
+          &quot;frequency_hz&quot;: 40.0,
+          &quot;true_zreal_ohm&quot;: 0.0175736422015022,
+          &quot;true_znegimag_ohm&quot;: 0.0043120243929142,
+          &quot;baseline_zreal_ohm&quot;: 0.023090262592865764,
+          &quot;baseline_znegimag_ohm&quot;: 0.0031607805680249285,
+          &quot;model_zreal_ohm&quot;: 0.022348617245310974,
+          &quot;model_znegimag_ohm&quot;: 0.002830353445363616
+        }
+      ]
+    },
+    &quot;relative_rmse_improvement_fraction&quot;: 0.13377230871655704,
+    &quot;demo_verdict&quot;: &quot;working_demo_model_beats_baseline&quot;,
+    &quot;kk_valid_fraction&quot;: 1.0,
+    &quot;kk_valid_rows&quot;: 30,
+    &quot;kk_rows_checked&quot;: 30,
+    &quot;kk_summary&quot;: {
+      &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
+      &quot;rows_checked&quot;: 30,
+      &quot;kk_valid_rows&quot;: 30,
+      &quot;kk_valid_fraction&quot;: 1.0,
+      &quot;kk_status_counts&quot;: {
+        &quot;pass&quot;: 30
+      },
+      &quot;kk_residual_norm_median&quot;: 0.015137999165960751,
+      &quot;kk_residual_norm_p95&quot;: 0.02031451261112053,
+      &quot;kk_residual_limit&quot;: 0.08,
+      &quot;frequency_grid_hz&quot;: [
+        0.05,
+        0.1,
+        0.2,
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0,
+        20.0,
+        40.0
+      ],
+      &quot;claim_boundary&quot;: &quot;Finite-range RC-basis Kramer-Kronig consistency screen. Use as EIS quality metadata, not as proof that a prediction model is valid.&quot;
+    },
+    &quot;kk_preview_rows&quot;: [
+      {
+        &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
+        &quot;row_index&quot;: 0,
+        &quot;sample_id&quot;: &quot;molicell_p42a::A11::5degC::SOC20::1&quot;,
+        &quot;dataset&quot;: &quot;Molicell P42A local high-power characterization&quot;,
+        &quot;split_role&quot;: &quot;molicell_p42a_whole_dataset_holdout_not_tuned&quot;,
+        &quot;cell_id&quot;: &quot;A11&quot;,
+        &quot;temperature_c&quot;: 5.0,
+        &quot;soc_percent&quot;: 20.0,
+        &quot;kk_valid&quot;: true,
+        &quot;kk_status&quot;: &quot;pass&quot;,
+        &quot;kk_points&quot;: 10,
+        &quot;kk_frequency_min_hz&quot;: 0.05,
+        &quot;kk_frequency_max_hz&quot;: 40.0,
+        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_tau_count&quot;: 8,
+        &quot;kk_residual_rmse_ohm&quot;: 0.0001714034089656992,
+        &quot;kk_residual_norm&quot;: 0.01513845780363353,
+        &quot;kk_residual_limit&quot;: 0.08,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.0005392705736851078,
+        &quot;kk_rinf_ohm&quot;: 0.01521873490392538,
+        &quot;kk_inductance_h&quot;: -2.7943702350440677e-06,
+        &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.027215493096684723,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.004158513523409116
+      },
+      {
+        &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
+        &quot;row_index&quot;: 1,
+        &quot;sample_id&quot;: &quot;molicell_p42a::A11::5degC::SOC50::2&quot;,
+        &quot;dataset&quot;: &quot;Molicell P42A local high-power characterization&quot;,
+        &quot;split_role&quot;: &quot;molicell_p42a_whole_dataset_holdout_not_tuned&quot;,
+        &quot;cell_id&quot;: &quot;A11&quot;,
+        &quot;temperature_c&quot;: 5.0,
+        &quot;soc_percent&quot;: 50.0,
+        &quot;kk_valid&quot;: true,
+        &quot;kk_status&quot;: &quot;pass&quot;,
+        &quot;kk_points&quot;: 10,
+        &quot;kk_frequency_min_hz&quot;: 0.05,
+        &quot;kk_frequency_max_hz&quot;: 40.0,
+        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_tau_count&quot;: 8,
+        &quot;kk_residual_rmse_ohm&quot;: 0.00017462139194888992,
+        &quot;kk_residual_norm&quot;: 0.015847794305232067,
+        &quot;kk_residual_limit&quot;: 0.08,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.0005447975461422422,
+        &quot;kk_rinf_ohm&quot;: 0.01561793950339021,
+        &quot;kk_inductance_h&quot;: -3.890377245742439e-06,
+        &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.02495843001822193,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.0032947297754958036
+      },
+      {
+        &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
+        &quot;row_index&quot;: 2,
+        &quot;sample_id&quot;: &quot;molicell_p42a::A11::5degC::SOC80::3&quot;,
+        &quot;dataset&quot;: &quot;Molicell P42A local high-power characterization&quot;,
+        &quot;split_role&quot;: &quot;molicell_p42a_whole_dataset_holdout_not_tuned&quot;,
+        &quot;cell_id&quot;: &quot;A11&quot;,
+        &quot;temperature_c&quot;: 5.0,
+        &quot;soc_percent&quot;: 80.0,
+        &quot;kk_valid&quot;: true,
+        &quot;kk_status&quot;: &quot;pass&quot;,
+        &quot;kk_points&quot;: 10,
+        &quot;kk_frequency_min_hz&quot;: 0.05,
+        &quot;kk_frequency_max_hz&quot;: 40.0,
+        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_tau_count&quot;: 8,
+        &quot;kk_residual_rmse_ohm&quot;: 0.0001811146547904749,
+        &quot;kk_residual_norm&quot;: 0.01730757337361001,
+        &quot;kk_residual_limit&quot;: 0.08,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.0005769542082287409,
+        &quot;kk_rinf_ohm&quot;: 0.01492221746144279,
+        &quot;kk_inductance_h&quot;: -2.4262207881666175e-06,
+        &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.021894469815308057,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.0026659404900953934
+      },
+      {
+        &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
+        &quot;row_index&quot;: 3,
+        &quot;sample_id&quot;: &quot;molicell_p42a::A12::5degC::SOC20::4&quot;,
+        &quot;dataset&quot;: &quot;Molicell P42A local high-power characterization&quot;,
+        &quot;split_role&quot;: &quot;molicell_p42a_whole_dataset_holdout_not_tuned&quot;,
+        &quot;cell_id&quot;: &quot;A12&quot;,
+        &quot;temperature_c&quot;: 5.0,
+        &quot;soc_percent&quot;: 20.0,
+        &quot;kk_valid&quot;: true,
+        &quot;kk_status&quot;: &quot;pass&quot;,
+        &quot;kk_points&quot;: 10,
+        &quot;kk_frequency_min_hz&quot;: 0.05,
+        &quot;kk_frequency_max_hz&quot;: 40.0,
+        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_tau_count&quot;: 8,
+        &quot;kk_residual_rmse_ohm&quot;: 0.00017826717775558618,
+        &quot;kk_residual_norm&quot;: 0.014761428718598505,
+        &quot;kk_residual_limit&quot;: 0.08,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.000561178885984899,
+        &quot;kk_rinf_ohm&quot;: 0.016211181755421626,
+        &quot;kk_inductance_h&quot;: -2.929242226327641e-06,
+        &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.028792129765711983,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.0042710629087143095
+      },
+      {
+        &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
+        &quot;row_index&quot;: 4,
+        &quot;sample_id&quot;: &quot;molicell_p42a::A12::5degC::SOC50::5&quot;,
+        &quot;dataset&quot;: &quot;Molicell P42A local high-power characterization&quot;,
+        &quot;split_role&quot;: &quot;molicell_p42a_whole_dataset_holdout_not_tuned&quot;,
+        &quot;cell_id&quot;: &quot;A12&quot;,
+        &quot;temperature_c&quot;: 5.0,
+        &quot;soc_percent&quot;: 50.0,
+        &quot;kk_valid&quot;: true,
+        &quot;kk_status&quot;: &quot;pass&quot;,
+        &quot;kk_points&quot;: 10,
+        &quot;kk_frequency_min_hz&quot;: 0.05,
+        &quot;kk_frequency_max_hz&quot;: 40.0,
+        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_tau_count&quot;: 8,
+        &quot;kk_residual_rmse_ohm&quot;: 0.0001839777522567359,
+        &quot;kk_residual_norm&quot;: 0.01672793542833163,
+        &quot;kk_residual_limit&quot;: 0.08,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.0005801137739446759,
+        &quot;kk_rinf_ohm&quot;: 0.01602317717231254,
+        &quot;kk_inductance_h&quot;: -3.2447752125310678e-06,
+        &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.02373715897404921,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.0025483852159546216
+      }
+    ]
+  },
+  &quot;outputs&quot;: {
+    &quot;results_json&quot;: &quot;[local path redacted]
+    &quot;presentation_html&quot;: &quot;[local path redacted]
+  }
+}</code></pre>
+  </section>
+
+  <section id="limits">
+    <h2>What This Proves, And What It Does Not</h2>
+    <div class="vertical-flow">
+      <div class="flow-item"><h3>Supported</h3><ul><li>The local code path runs end to end.</li><li>The demo model beats a global-mean baseline on the bounded subset.</li><li>The EIS targets in the demo subset pass the KK screen.</li><li>The public site can host the presentation and JSON outputs.</li></ul></div>
+      <div class="flow-item"><h3>Not supported</h3><ul><li>This is not a new external validation claim.</li><li>This does not validate the frozen CALB pulse-to-EIS rule.</li><li>This does not solve the RADAR4KIT target-quality problem.</li><li>This does not claim VM connection. VM setup is deferred.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="conclusion" class="note">
+    <h2>Conclusion</h2>
+    <p>The demo pipeline is now packaged as a self-contained technical page. It includes the objective, example, goal, input rows, output payload, vector target definition, LaTeX equations, scoring math, KK quality screen, SVG graphs, source code snippets, numerical results, and claim boundary. The local demo is ready for stakeholder review. VM execution stays deferred until the colleague-provided VM is available.</p>
   </section>
 
   <section>
     <h2>Data Contract</h2>
+    <p>This final table repeats the compact contract for readers who want the short version after the full walkthrough.</p>
     <table>
       <thead><tr><th>Layer</th><th>Current demo value</th><th>Why stakeholders should care</th></tr></thead>
       <tbody>
@@ -106,106 +1122,6 @@
         <tr><td>Leakage rule</td><td>development rows train, Molicell subset holdout, no random row split</td><td>The demo blocks the easiest invalid win: random row leakage.</td></tr>
       </tbody>
     </table>
-  </section>
-
-  <section>
-    <h2>Feature-To-Target Math</h2>
-    <p>The supervised learning problem is vector-valued. For each sample <code>i</code>, we map time-domain features <code>x_i</code> to a fixed-grid EIS vector <code>y_i</code>.</p>
-    <div class="equation">x_i = features(current, voltage, time, temperature, SOC, capacity summaries)</div>
-    <div class="equation">y_i = [Zreal(f_1), -Zimag(f_1), ..., Zreal(f_10), -Zimag(f_10)]</div>
-    <div class="equation">f = [0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz]</div>
-    <p>The target is not one scalar health label. It is a 20-dimensional impedance vector. That matters because a model can improve the easy real component while failing the negative-imaginary component if the scoring is too loose.</p>
-  </section>
-
-  <section>
-    <h2>Baseline And Model</h2>
-    <div class="grid two">
-      <article class="card">
-        <h3>Boring baseline</h3>
-        <p><code>global train target mean</code></p>
-        <div class="equation">y_hat_baseline = mean(Y_train)</div>
-        <p>This is the right first opponent. If the model cannot beat this, the pipeline has no practical signal yet.</p>
-      </article>
-      <article class="card">
-        <h3>Demo model</h3>
-        <p><code>KNeighborsRegressor(n_neighbors=3) blended 20 percent with the KNN prediction and 80 percent with the train mean</code></p>
-        <div class="equation">y_hat_demo = 0.8 * y_hat_baseline + 0.2 * y_hat_KNN</div>
-        <p>The shrinkage keeps the demo conservative. It prevents a tiny nearest-neighbor fit from pretending it has broad generalization.</p>
-      </article>
-    </div>
-  </section>
-
-  <section>
-    <h2>Scoring Math</h2>
-    <p>The demo reports RMSE across the full fixed-grid EIS vector. Lower is better.</p>
-    <div class="equation">RMSE = sqrt(mean((Y_true - Y_pred)^2))</div>
-    <div class="equation">relative improvement = (RMSE_baseline - RMSE_model) / RMSE_baseline</div>
-    <p>Current demo improvement:</p>
-    <div class="bar">
-      <div class="bar-row"><strong>Baseline RMSE</strong><div class="track"><div class="fill" style="width:100.0%"></div></div><code>0.0092086</code></div>
-      <div class="bar-row"><strong>Model RMSE</strong><div class="track"><div class="fill good" style="width:86.6%"></div></div><code>0.00797675</code></div>
-      <div class="bar-row"><strong>Relative improvement</strong><div class="track"><div class="fill good" style="width:4.0%"></div></div><code>13.38%</code></div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Kramer-Kronig Quality Screen</h2>
-    <p>The demo also checks whether the EIS targets look broadly compatible with a finite RC-basis impedance model over the measured frequency window. This is target-quality metadata, not a model-performance claim.</p>
-    <div class="equation">Z_KK(f) approx R_inf + sum_k R_k / (1 + j * 2*pi*f*tau_k)</div>
-    <div class="equation">residual_norm = RMSE(Z_measured, Z_KK_fit) / scale(Z_measured)</div>
-    <div class="bar">
-      <div class="bar-row"><strong>KK valid rows</strong><div class="track"><div class="fill good" style="width:100.0%"></div></div><code>30 / 30</code></div>
-    </div>
-    <p class="small">The current demo subset has <code>30</code> valid rows out of <code>30</code>. That supports target sanity for the demo subset. It does not prove the predictor is good by itself.</p>
-  </section>
-
-  <section>
-    <h2>Numerical Results</h2>
-    <div class="grid four">
-      <article class="card"><span class="metric">0.0092086</span><p>Baseline RMSE, ohm</p></article>
-      <article class="card"><span class="metric good">0.00797675</span><p>Demo model RMSE, ohm</p></article>
-      <article class="card"><span class="metric good">13.38%</span><p>Relative RMSE improvement</p></article>
-      <article class="card"><span class="metric good">30 / 30</span><p>KK valid rows</p></article>
-    </div>
-    <table>
-      <thead><tr><th>Metric</th><th>Value</th><th>Interpretation</th></tr></thead>
-      <tbody>
-        <tr><td>Demo verdict</td><td>working_demo_model_beats_baseline</td><td>The model beats the baseline on this bounded demo.</td></tr>
-        <tr><td>Baseline RMSE</td><td>0.009208604 ohm</td><td>Global train-mean target vector.</td></tr>
-        <tr><td>Model RMSE</td><td>0.007976748 ohm</td><td>Shrinkage KNN demo model.</td></tr>
-        <tr><td>Relative improvement</td><td>13.38%</td><td>Positive, but this is still a demo-sized result.</td></tr>
-        <tr><td>KK valid fraction</td><td>1.000</td><td>Target-quality screen for the demo EIS rows.</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section>
-    <h2>What This Proves, And What It Does Not</h2>
-    <div class="grid two">
-      <article class="card"><h3>Supported</h3><ul><li>The local code path runs end to end.</li><li>The demo model beats a global-mean baseline on the bounded subset.</li><li>The EIS targets in the demo subset pass the KK screen.</li><li>The public site can host the presentation and JSON outputs.</li></ul></article>
-      <article class="card"><h3>Not supported</h3><ul><li>This is not a new external validation claim.</li><li>This does not validate the frozen CALB pulse-to-EIS rule.</li><li>This does not solve the RADAR4KIT target-quality problem.</li><li>This does not claim VM connection. VM setup is deferred.</li></ul></article>
-    </div>
-  </section>
-
-  <section>
-    <h2>Code Walkthrough</h2>
-    <p>The demo code lives in the cross-dataset experiment folder and intentionally uses existing matrices so stakeholders can rerun it without touching raw archives.</p>
-    <pre>&amp; "[local path redacted]" -B scripts\experiments\cross_dataset_pulse_to_eis_training\demo_cross_dataset_pipeline.py</pre>
-    <table>
-      <thead><tr><th>File</th><th>Role</th></tr></thead>
-      <tbody>
-        <tr><td>demo_cross_dataset_pipeline.py</td><td>Runs the stakeholder demo, writes JSON results and this HTML presentation.</td></tr>
-        <tr><td>kramers_kronig_validation.py</td><td>Computes the finite-range RC-basis KK target-quality screen.</td></tr>
-        <tr><td>train_fixed_grid_eis_dev_models.py</td><td>Defines feature transforms, model helpers, and metric calculation.</td></tr>
-        <tr><td>demo_pipeline_results.json</td><td>Machine-readable demo result.</td></tr>
-        <tr><td>demo_pipeline_presentation.html</td><td>This site-native stakeholder presentation.</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section class="note">
-    <h2>Conclusion</h2>
-    <p>The demo pipeline is now a usable technical handoff: it explains the objective, example, goal, math, data contract, model, baseline, KK screen, numerical result, code path, and claim boundary. The local demo is ready for stakeholder review. VM execution is intentionally deferred until the colleague-provided VM is available.</p>
   </section>
 </main>
 </body>
