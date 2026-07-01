@@ -1,6 +1,6 @@
 {
   "experiment": "cross_dataset_goal_completion_audit",
-  "created_utc": "2026-07-01T20:19:58.821432+00:00",
+  "created_utc": "2026-07-01T20:45:41.303326+00:00",
   "overall_status": "complete_vm_deferred_by_user",
   "sections": {
     "kramer_kronig": {
@@ -50,15 +50,16 @@
       "status": "passed",
       "sections_present": {
         "objective": true,
-        "example": true,
-        "goal": true,
         "methodology": true,
+        "numerical results": true,
+        "conclusion": true,
         "feature-to-target math": true,
         "scoring math": true,
         "kramer-kronig quality screen": true,
-        "numerical results": true,
         "code walkthrough": true,
-        "conclusion": true
+        "glossary": true,
+        "download code bundle": true,
+        "download data bundle": true
       },
       "verdict": "working_demo_model_beats_baseline",
       "baseline_rmse_all_ohm": 0.009208603939342681,
@@ -108,6 +109,8 @@
         "kramer_kronig_diagnostics.json": true,
         "radar4kit_eis_kk_variant_audit.json": true,
         "demo_pipeline_results.json": true,
+        "demo_pipeline_data_bundle.json": true,
+        "demo_pipeline_code_bundle.py": true,
         "vm_demo_smoke_results.json": true,
         "cross_dataset_goal_completion_audit.json": true,
         "vm_demo_config.template.json": true

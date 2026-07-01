@@ -1,6 +1,6 @@
 {
   "experiment": "cross_dataset_pipeline_vm_demo_smoke",
-  "created_utc": "2026-07-01T20:19:49.102312+00:00",
+  "created_utc": "2026-07-01T20:45:33.523400+00:00",
   "mode": "local",
   "status": "passed",
   "claim_boundary": "Local mode verifies demo code execution on this workstation. SSH mode is the only evidence of a VM connection.",

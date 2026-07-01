@@ -1,5 +1,4 @@
 {
-  "experiment": "cross_dataset_pulse_to_eis_training_demo",
   "created_utc": "2026-07-01T20:45:33.302359+00:00",
   "claim_boundary": "Demo only. Uses a bounded subset and does not create a new validation claim.",
   "inputs": {
@@ -610,11 +609,5 @@
         "kk_model_znegimag_mean_ohm": 0.0025483852159546216
       }
     ]
-  },
-  "outputs": {
-    "results_json": "[local path redacted]",
-    "presentation_html": "[local path redacted]",
-    "code_bundle": "[local path redacted]",
-    "data_bundle": "[local path redacted]"
   }
 }

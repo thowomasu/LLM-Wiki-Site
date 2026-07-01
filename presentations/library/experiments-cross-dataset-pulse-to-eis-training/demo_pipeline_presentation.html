@@ -5,45 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cross-Dataset Pulse-to-EIS Demo Pipeline, Technical Presentation</title>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+(function () {
+  var key = "llm-wiki-theme";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  var initialTheme = preferredTheme();
+  applyTheme(initialTheme);
+  window.addEventListener("DOMContentLoaded", function () {
+    applyTheme(document.documentElement.dataset.theme || initialTheme);
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (!toggle) return;
+    toggle.addEventListener("click", function () {
+      var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      try { localStorage.setItem(key, next); } catch (error) {}
+      applyTheme(next);
+    });
+  });
+})();
+  </script>
   <style>
     :root {
+      color-scheme: light;
       --ink: #17212b;
       --muted: #586673;
       --paper: #f5f7f9;
       --panel: #ffffff;
+      --panel-strong: #ffffff;
       --line: #d8e0e7;
+      --table-head: #edf3f8;
       --teal: #147a73;
+      --blue: #225f9f;
       --green: #2f7d4a;
       --amber: #b85f17;
       --red: #a33a2d;
       --code: #eef2f5;
     }
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #e6edf3;
+      --muted: #a7b3bf;
+      --paper: #0f141a;
+      --panel: #151c24;
+      --panel-strong: #10161d;
+      --line: #2d3844;
+      --table-head: #1c2a36;
+      --teal: #58d0c7;
+      --blue: #78b7ff;
+      --green: #58d39d;
+      --amber: #f0a35a;
+      --red: #f08490;
+      --code: #1f2a35;
+    }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.55; }
-    main { max-width: 1180px; margin: 0 auto; padding: 28px 24px 80px; }
-    section { margin: 22px 0; padding: 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; scroll-margin-top: 92px; }
+    .site-shell { min-height: 100vh; display: grid; grid-template-columns: 280px minmax(0, 1fr); }
+    .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 18px 14px; background: var(--panel-strong); border-right: 1px solid var(--line); }
+    .brand { display: block; margin-bottom: 18px; color: var(--ink); text-decoration: none; }
+    .brand strong { display: block; font-size: 18px; line-height: 1.15; }
+    .brand span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; }
+    .side-section { margin: 18px 0 8px; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .side-link { display: flex; align-items: center; min-height: 34px; margin: 6px 0; padding: 7px 9px; color: var(--ink); text-decoration: none; border: 1px solid transparent; border-radius: 6px; font-size: 14px; }
+    .side-link:hover { border-color: var(--line); background: var(--paper); }
+    .theme-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 38px; margin: 14px 0 8px; padding: 8px 10px; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; background: var(--panel); font: inherit; font-size: 14px; cursor: pointer; }
+    .theme-toggle .toggle-state { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .page-content { min-width: 0; }
+    header { padding: 38px min(6vw, 64px) 24px; background: var(--panel-strong); border-bottom: 1px solid var(--line); }
+    main { max-width: 1320px; margin: 0 auto; padding: 28px min(4vw, 42px) 80px; }
+    section { margin: 22px 0; padding: 24px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; scroll-margin-top: 24px; }
     h1 { font-size: clamp(38px, 6vw, 70px); line-height: 1.05; margin: 0 0 14px; max-width: 1080px; }
     h2 { font-size: clamp(28px, 3vw, 42px); line-height: 1.12; margin: 0 0 14px; }
     h3 { font-size: 23px; margin: 16px 0 8px; }
     p, li { font-size: 18px; }
-    code { background: var(--code); padding: 2px 5px; border-radius: 4px; }
+    a { color: var(--blue); }
+    code { background: var(--code); padding: 2px 5px; border-radius: 4px; overflow-wrap: anywhere; }
     pre { white-space: pre-wrap; overflow-x: auto; background: var(--code); padding: 14px 16px; border-radius: 6px; border: 1px solid var(--line); max-height: 620px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
-    th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
-    th { background: #edf3f8; }
+    .table-scroll { max-width: 100%; overflow-x: auto; margin: 14px 0 22px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    table { width: 100%; table-layout: fixed; border-collapse: collapse; background: var(--panel); }
+    th, td { border: 1px solid var(--line); padding: 9px 10px; text-align: left; vertical-align: top; overflow-wrap: anywhere; word-break: break-word; font-size: 14px; }
+    th { background: var(--table-head); }
+    .table-scroll table { margin: 0; min-width: 760px; }
+    .metric-table td:first-child { width: 220px; font-weight: 700; }
+    .button-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
+    .button { display: inline-flex; align-items: center; min-height: 36px; padding: 8px 12px; color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); font-size: 14px; }
+    .button:hover { background: var(--paper); }
     .lead { color: var(--muted); font-size: 22px; max-width: 980px; }
     .kicker { color: var(--teal); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-    .site-header { background: #fff; border-bottom: 1px solid var(--line); }
-    .site-header-inner { max-width: 1180px; margin: 0 auto; padding: 26px 24px 22px; }
-    .nav-shell { position: sticky; top: 0; z-index: 20; background: rgba(245, 247, 249, .96); border-bottom: 1px solid var(--line); backdrop-filter: blur(8px); }
-    .tabs { max-width: 1180px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 8px; overflow-x: auto; }
-    .tab { flex: 0 0 auto; padding: 8px 11px; color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: 14px; font-weight: 700; }
-    .tab:hover { border-color: var(--teal); color: var(--teal); }
     .vertical-flow { display: grid; gap: 18px; }
     .flow-item { border-left: 5px solid var(--teal); padding: 4px 0 4px 18px; }
     .flow-item h3 { margin-top: 0; }
-    .metric-table td:first-child { width: 280px; font-weight: 700; }
     .split { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .metric { font-size: 38px; font-weight: 800; line-height: 1; display: block; margin-bottom: 8px; }
     .good { color: var(--green); }
@@ -63,37 +124,58 @@
     .step strong::before { content: counter(step) ". "; color: var(--teal); }
     .step strong { display: block; font-size: 19px; margin-bottom: 6px; }
     .small { font-size: 14px; color: var(--muted); }
-    .chart { margin: 20px 0; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow-x: auto; }
+    .chart { margin: 20px 0; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); overflow-x: auto; }
     .chart figcaption { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+    .chart-analysis { color: var(--muted); font-size: 16px; max-width: 980px; }
     .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
     .legend-item { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; }
     .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; }
-    details { border: 1px solid var(--line); border-radius: 8px; background: #fff; margin: 14px 0; }
+    .mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin: 14px 0 24px; }
+    .mini-card { padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    .mini-card p { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
+    details { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); margin: 14px 0; }
     summary { cursor: pointer; padding: 12px 14px; font-weight: 800; }
     details pre { margin: 0; border: 0; border-top: 1px solid var(--line); border-radius: 0 0 8px 8px; }
     .math { overflow-x: auto; padding: 8px 0; }
-    svg { max-width: 100%; height: auto; }
+    svg { display: block; max-width: 100%; height: auto; color: var(--ink); }
+    svg text { fill: var(--muted); font-size: 13px; }
     @media (max-width: 880px) {
+      .site-shell { display: block; }
+      .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
       .bar-row { grid-template-columns: 1fr; }
+      section { padding: 18px; }
     }
   </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="site-header-inner">
-    <p class="kicker">Cross-dataset pipeline, self-contained technical page</p>
-    <h1>Pulse-to-EIS Demo Pipeline</h1>
-    <p class="lead">This page contains the pipeline objective, inputs, transformations, equations, plots, numerical outputs, code snippets, and claim boundary. It is written so a stakeholder can understand the demo without running the repository.</p>
-  </div>
-</header>
-<nav class="nav-shell" aria-label="Presentation sections">
-  <div class="tabs"><a class="tab" href="#summary">Summary</a><a class="tab" href="#objective">Objective</a><a class="tab" href="#example">Example</a><a class="tab" href="#goal">Goal</a><a class="tab" href="#inputs">Inputs</a><a class="tab" href="#method">Method</a><a class="tab" href="#math">Math</a><a class="tab" href="#graphs">Graphs</a><a class="tab" href="#results">Results</a><a class="tab" href="#code">Code</a><a class="tab" href="#outputs">Outputs</a><a class="tab" href="#limits">Limits</a><a class="tab" href="#conclusion">Conclusion</a></div>
-</nav>
+<div class="site-shell">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+    <div class="side-section">Project</div>
+    <a class="side-link" href="../index.html">Overview</a>
+    <a class="side-link" href="../presentations/">Presentations</a>
+    <a class="side-link" href="../datasets/">Datasets</a>
+    <a class="side-link" href="../cross-dataset/">Cross-Dataset</a>
+    <div class="side-section">Demo Page</div>
+    <a class="side-link" href="#summary">Summary</a><a class="side-link" href="#objective">Objective</a><a class="side-link" href="#methodology">Methodology</a><a class="side-link" href="#results">Results</a><a class="side-link" href="#conclusion">Conclusion</a><a class="side-link" href="#inputs">Inputs</a><a class="side-link" href="#math">Math</a><a class="side-link" href="#graphs">Graphs</a><a class="side-link" href="#code">Code</a><a class="side-link" href="#outputs">Outputs</a><a class="side-link" href="#glossary">Glossary</a><a class="side-link" href="#limits">Limits</a>
+  </aside>
+  <div class="page-content">
+    <header>
+      <div class="kicker">Cross-dataset pipeline, self-contained technical page</div>
+      <h1>Pulse-to-EIS Demo Pipeline</h1>
+      <p class="lead">This page contains the pipeline objective, inputs, transformations, equations, plots, numerical outputs, code snippets, and claim boundary. It is written so an external user can understand the demo without running the repository.</p>
+      <div class="button-row">
+        <a class="button" href="data/demo_pipeline_code_bundle.py" download>Download code bundle</a>
+        <a class="button" href="data/demo_pipeline_data_bundle.json" download>Download data bundle</a>
+        <a class="button" href="data/demo_pipeline_results.json" download>Download results JSON</a>
+      </div>
+    </header>
 <main>
   <section id="summary" class="note">
     <h2>Executive Read</h2>
     <p>The demo is a small but real supervised pipeline. It takes time-domain battery features, predicts a fixed-grid EIS vector, compares against a global-mean baseline, and runs a Kramer-Kronig quality screen on the EIS target rows.</p>
-    <p><strong>Blunt boundary:</strong> this is a working demo and stakeholder explanation, not a new external-validation claim. VM connection is deferred until the colleague-provided VM exists.</p>
+    <p><strong>Blunt boundary:</strong> this is a working demo and external-user explanation, not a new external-validation claim. VM connection is deferred until the colleague-provided VM exists.</p>
   </section>
 
   <section id="objective">
@@ -101,32 +183,31 @@
     <p>Prove that a time-domain feature matrix can be connected to a fixed-grid EIS target, scored against a boring baseline, screened with KK metadata, and packaged into a public demo page. This is not trying to hide behind a vague architecture slide. The page shows the inputs, outputs, math, plots, and code path.</p>
   </section>
 
-  <section id="example">
-    <h2>Example</h2>
+  <section id="methodology">
+    <h2>Methodology</h2>
     <p>The current run trains on <code>120</code> development rows, scores <code>30</code> Molicell holdout rows, and predicts <code>20</code> target columns on a <code>10</code>-frequency EIS grid.</p>
     <table class="metric-table">
       <tbody>
         <tr><td>Representative sample</td><td>molicell_p42a::A11::5degC::SOC20::1</td></tr>
         <tr><td>Cell</td><td>A11</td></tr>
-        <tr><td>SOC</td><td>20.0</td></tr>
-        <tr><td>Temperature</td><td>5.0</td></tr>
+        <tr><td>SOC</td><td>20</td></tr>
+        <tr><td>Temperature</td><td>5</td></tr>
         <tr><td>Frequency grid</td><td>0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</td></tr>
       </tbody>
     </table>
-  </section>
-
-  <section id="goal">
-    <h2>Goal</h2>
-    <div class="vertical-flow">
-      <div class="flow-item"><h3>Show the data contract</h3><p>Make clear what goes into the model, what is withheld as the demo holdout, and which target columns form the output vector.</p></div>
-      <div class="flow-item"><h3>Show the math</h3><p>Use LaTeX for the vector target, baseline, model blend, RMSE, relative improvement, and KK residual screen.</p></div>
-      <div class="flow-item"><h3>Show the evidence</h3><p>Give the numerical results and plots directly in the HTML so readers do not have to run the code during a presentation.</p></div>
-      <div class="flow-item"><h3>Show the boundary</h3><p>State plainly what the demo proves and what it does not prove.</p></div>
+    <div class="step-list">
+      <div class="step"><strong>Load matrices</strong><p>Read the already-built development feature-target matrix and the Molicell holdout matrix. The demo does not touch raw archives during presentation time.</p></div>
+      <div class="step"><strong>Build features</strong><p>Use base time-domain statistics and derived features. Derived features include log duration, voltage delta, voltage range, coefficient of variation, current load factor, and throughput ratios.</p></div>
+      <div class="step"><strong>Build target vector</strong><p>Use real impedance and negative-imaginary impedance at the fixed grid: <code>0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</code>.</p></div>
+      <div class="step"><strong>Fit baseline and model</strong><p>Compare a global train-mean vector against a conservative KNN shrinkage model. The KNN model receives only time-domain features.</p></div>
+      <div class="step"><strong>Score</strong><p>Compute full-vector RMSE, component RMSE, per-target RMSE, relative improvement, and per-frequency error.</p></div>
+      <div class="step"><strong>Screen EIS target quality</strong><p>Run finite-range RC-basis Kramer-Kronig validation on the holdout target spectra. This is quality metadata, not a prediction score.</p></div>
     </div>
   </section>
 
   <section id="inputs">
     <h2>Inputs</h2>
+    <p>This section shows what the model is allowed to see. The important boundary is simple: input columns come from time-domain behavior and metadata, while target columns come from the paired EIS spectrum. If target-side values leak into the feature set, the demo becomes invalid.</p>
     <table>
       <thead><tr><th>Item</th><th>Value</th><th>Reason it matters</th></tr></thead>
       <tbody>
@@ -138,25 +219,26 @@
       </tbody>
     </table>
     <h3>Feature Columns</h3>
-    <ul><li>soc_percent</li><li>temperature_c</li><li>td_rows</li><li>td_duration_s</li><li>td_voltage_start_v</li><li>td_voltage_end_v</li><li>td_voltage_min_v</li><li>td_voltage_max_v</li><li>td_voltage_mean_v</li><li>td_voltage_std_v</li><li>td_current_mean_a</li><li>td_current_abs_mean_a</li><li>td_current_abs_max_a</li><li>td_active_fraction</li><li>td_charge_throughput_ah</li><li>td_discharge_throughput_ah</li><li>td_temperature_median_c</li><li>td_rows_log1p</li><li>td_duration_log1p_s</li><li>td_voltage_delta_v</li><li>td_voltage_range_v</li><li>td_voltage_cv</li><li>td_current_activity_span_a</li><li>td_current_load_factor</li><li>td_total_throughput_ah</li><li>td_net_throughput_ah</li><li>td_discharge_to_charge_ratio</li><li>td_mean_abs_current_per_hour</li></ul>
+    <p>The feature list is grouped as compact cards because a raw bullet list is useless for review. Base features describe SOC, temperature, voltage, current, duration, and throughput. Derived features compress shape and load information without touching the EIS target.</p>
+    <div class="mini-grid"><article class="mini-card"><code>soc_percent</code><p>State of charge at the diagnostic point.</p></article><article class="mini-card"><code>temperature_c</code><p>Cell or chamber temperature in degrees Celsius.</p></article><article class="mini-card"><code>td_rows</code><p>Number of time-domain samples in the paired segment.</p></article><article class="mini-card"><code>td_duration_s</code><p>Duration of the paired time-domain segment.</p></article><article class="mini-card"><code>td_voltage_start_v</code><p>Voltage at the start of the segment.</p></article><article class="mini-card"><code>td_voltage_end_v</code><p>Voltage at the end of the segment.</p></article><article class="mini-card"><code>td_voltage_min_v</code><p>Minimum voltage observed in the segment.</p></article><article class="mini-card"><code>td_voltage_max_v</code><p>Maximum voltage observed in the segment.</p></article><article class="mini-card"><code>td_voltage_mean_v</code><p>Mean segment voltage.</p></article><article class="mini-card"><code>td_voltage_std_v</code><p>Voltage variation inside the segment.</p></article><article class="mini-card"><code>td_current_mean_a</code><p>Signed mean current.</p></article><article class="mini-card"><code>td_current_abs_mean_a</code><p>Mean absolute current, used as a load-intensity proxy.</p></article><article class="mini-card"><code>td_current_abs_max_a</code><p>Peak absolute current in the segment.</p></article><article class="mini-card"><code>td_active_fraction</code><p>Share of samples with non-trivial current.</p></article><article class="mini-card"><code>td_charge_throughput_ah</code><p>Charge throughput accumulated in the segment.</p></article><article class="mini-card"><code>td_discharge_throughput_ah</code><p>Discharge throughput accumulated in the segment.</p></article><article class="mini-card"><code>td_temperature_median_c</code><p>Median time-domain temperature.</p></article><article class="mini-card"><code>td_rows_log1p</code><p>Log-scaled row count, reducing the dominance of long traces.</p></article><article class="mini-card"><code>td_duration_log1p_s</code><p>Log-scaled duration.</p></article><article class="mini-card"><code>td_voltage_delta_v</code><p>End voltage minus start voltage.</p></article><article class="mini-card"><code>td_voltage_range_v</code><p>Maximum voltage minus minimum voltage.</p></article><article class="mini-card"><code>td_voltage_cv</code><p>Voltage coefficient of variation.</p></article><article class="mini-card"><code>td_current_activity_span_a</code><p>Peak current minus mean absolute current.</p></article><article class="mini-card"><code>td_current_load_factor</code><p>Mean absolute current divided by peak absolute current.</p></article><article class="mini-card"><code>td_total_throughput_ah</code><p>Charge plus discharge throughput.</p></article><article class="mini-card"><code>td_net_throughput_ah</code><p>Charge throughput minus discharge throughput.</p></article><article class="mini-card"><code>td_discharge_to_charge_ratio</code><p>Discharge throughput divided by charge throughput.</p></article><article class="mini-card"><code>td_mean_abs_current_per_hour</code><p>Mean absolute current normalized by duration.</p></article></div>
     <h3>Target Columns</h3>
-    <ul><li>target_zreal_0p05hz_ohm</li><li>target_znegimag_0p05hz_ohm</li><li>target_zreal_0p1hz_ohm</li><li>target_znegimag_0p1hz_ohm</li><li>target_zreal_0p2hz_ohm</li><li>target_znegimag_0p2hz_ohm</li><li>target_zreal_0p5hz_ohm</li><li>target_znegimag_0p5hz_ohm</li><li>target_zreal_1hz_ohm</li><li>target_znegimag_1hz_ohm</li><li>target_zreal_2hz_ohm</li><li>target_znegimag_2hz_ohm</li><li>target_zreal_5hz_ohm</li><li>target_znegimag_5hz_ohm</li><li>target_zreal_10hz_ohm</li><li>target_znegimag_10hz_ohm</li><li>target_zreal_20hz_ohm</li><li>target_znegimag_20hz_ohm</li><li>target_zreal_40hz_ohm</li><li>target_znegimag_40hz_ohm</li></ul>
+    <p>The target is a vector, not a scalar label. Each frequency contributes two numbers: real impedance and negative-imaginary impedance. The model must predict the whole vector.</p>
+    <div class="table-scroll"><table><thead><tr><th>Frequency</th><th>Real target</th><th>Negative-imaginary target</th><th>Meaning</th></tr></thead><tbody><tr><td>0.05 Hz</td><td><code>target_zreal_0p05hz_ohm</code></td><td><code>target_znegimag_0p05hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
+<tr><td>0.1 Hz</td><td><code>target_zreal_0p1hz_ohm</code></td><td><code>target_znegimag_0p1hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
+<tr><td>0.2 Hz</td><td><code>target_zreal_0p2hz_ohm</code></td><td><code>target_znegimag_0p2hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
+<tr><td>0.5 Hz</td><td><code>target_zreal_0p5hz_ohm</code></td><td><code>target_znegimag_0p5hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
+<tr><td>1 Hz</td><td><code>target_zreal_1hz_ohm</code></td><td><code>target_znegimag_1hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
+<tr><td>2 Hz</td><td><code>target_zreal_2hz_ohm</code></td><td><code>target_znegimag_2hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
+<tr><td>5 Hz</td><td><code>target_zreal_5hz_ohm</code></td><td><code>target_znegimag_5hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
+<tr><td>10 Hz</td><td><code>target_zreal_10hz_ohm</code></td><td><code>target_znegimag_10hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
+<tr><td>20 Hz</td><td><code>target_zreal_20hz_ohm</code></td><td><code>target_znegimag_20hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
+<tr><td>40 Hz</td><td><code>target_zreal_40hz_ohm</code></td><td><code>target_znegimag_40hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr></tbody></table></div>
     <h3>Training Preview</h3>
-    <table><thead><tr><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>soc_percent</th><th>temperature_c</th><th>td_rows</th><th>td_duration_s</th><th>td_voltage_start_v</th><th>td_voltage_end_v</th></tr></thead><tbody><tr><td>dev_raw::panasonic::0</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>None</td><td>-10.0</td><td>426.0</td><td>228149.9310001731</td><td>3.8306</td><td>2.49948</td></tr><tr><td>dev_raw::panasonic::1</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>None</td><td>-10.0</td><td>426.0</td><td>228149.9310001731</td><td>3.8306</td><td>2.49948</td></tr><tr><td>dev_raw::panasonic::2</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>None</td><td>-10.0</td><td>426.0</td><td>228149.9310001731</td><td>3.8306</td><td>2.49948</td></tr></tbody></table>
+    <p>The training preview confirms the development rows used by the demo. Long identifiers wrap inside the table instead of forcing the page wider than the viewport.</p>
+    <div class="table-scroll"><table><thead><tr><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>soc_percent</th><th>temperature_c</th><th>td_rows</th><th>td_duration_s</th></tr></thead><tbody><tr><td>dev_raw::panasonic::0</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>not available</td><td>-10</td><td>426</td><td>228,149.93</td></tr><tr><td>dev_raw::panasonic::1</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>not available</td><td>-10</td><td>426</td><td>228,149.93</td></tr><tr><td>dev_raw::panasonic::2</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>not available</td><td>-10</td><td>426</td><td>228,149.93</td></tr></tbody></table></div>
     <h3>Holdout Preview</h3>
-    <table><thead><tr><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>soc_percent</th><th>temperature_c</th><th>td_rows</th><th>td_duration_s</th><th>td_voltage_start_v</th><th>td_voltage_end_v</th></tr></thead><tbody><tr><td>molicell_p42a::A11::5degC::SOC20::1</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>20.0</td><td>5.0</td><td>168668.0</td><td>160573.400088</td><td>4.167196273803711</td><td>2.826201677322388</td></tr><tr><td>molicell_p42a::A11::5degC::SOC50::2</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>50.0</td><td>5.0</td><td>168668.0</td><td>160573.400088</td><td>4.167196273803711</td><td>2.826201677322388</td></tr><tr><td>molicell_p42a::A11::5degC::SOC80::3</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>80.0</td><td>5.0</td><td>168668.0</td><td>160573.400088</td><td>4.167196273803711</td><td>2.826201677322388</td></tr></tbody></table>
-  </section>
-
-  <section id="method">
-    <h2>Methodology And Pipeline Architecture</h2>
-    <div class="step-list">
-      <div class="step"><strong>Load matrices</strong><p>Read the already-built development feature-target matrix and the Molicell holdout matrix. The demo does not touch raw archives during presentation time.</p></div>
-      <div class="step"><strong>Build features</strong><p>Use base time-domain statistics and derived features. Derived features include log duration, voltage delta, voltage range, coefficient of variation, current load factor, and throughput ratios.</p></div>
-      <div class="step"><strong>Build target vector</strong><p>Use real impedance and negative-imaginary impedance at the fixed grid: <code>0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</code>.</p></div>
-      <div class="step"><strong>Fit baseline and model</strong><p>Compare a global train-mean vector against a conservative KNN shrinkage model. The KNN model receives only time-domain features.</p></div>
-      <div class="step"><strong>Score</strong><p>Compute full-vector RMSE, component RMSE, per-target RMSE, relative improvement, and per-frequency error.</p></div>
-      <div class="step"><strong>Screen EIS target quality</strong><p>Run finite-range RC-basis Kramer-Kronig validation on the holdout target spectra. This is quality metadata, not a prediction score.</p></div>
-    </div>
+    <p>The holdout preview confirms the Molicell rows scored by the demo. These rows are not random splits of the same table, which matters because random row splits can overstate generalization.</p>
+    <div class="table-scroll"><table><thead><tr><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>soc_percent</th><th>temperature_c</th><th>td_rows</th><th>td_duration_s</th></tr></thead><tbody><tr><td>molicell_p42a::A11::5degC::SOC20::1</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>20</td><td>5</td><td>168,668.00</td><td>160,573.40</td></tr><tr><td>molicell_p42a::A11::5degC::SOC50::2</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>50</td><td>5</td><td>168,668.00</td><td>160,573.40</td></tr><tr><td>molicell_p42a::A11::5degC::SOC80::3</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>80</td><td>5</td><td>168,668.00</td><td>160,573.40</td></tr></tbody></table></div>
   </section>
 
   <section id="math">
@@ -183,32 +265,36 @@
 <figure class="chart">
   <figcaption>Representative spectrum, real impedance</figcaption>
   <div class="legend"><span class="legend-item"><span class="swatch" style="background:#147a73"></span>true Zreal</span><span class="legend-item"><span class="swatch" style="background:#b85f17"></span>baseline Zreal</span><span class="legend-item"><span class="swatch" style="background:#2f7d4a"></span>model Zreal</span></div>
-  <svg viewbox="0 0 980 360" role="img" aria-label="Representative spectrum, real impedance">
-    <rect x="0" y="0" width="980" height="360" fill="#fff">
-    <line x1="72" x2="952" y1="296.0" y2="296.0" stroke="#edf3f8"><text x="62" y="300.0" text-anchor="end">-0.0039</text><line x1="72" x2="952" y1="234.0" y2="234.0" stroke="#edf3f8"><text x="62" y="238.0" text-anchor="end">0.0103</text><line x1="72" x2="952" y1="172.0" y2="172.0" stroke="#edf3f8"><text x="62" y="176.0" text-anchor="end">0.0245</text><line x1="72" x2="952" y1="110.0" y2="110.0" stroke="#edf3f8"><text x="62" y="114.0" text-anchor="end">0.0388</text><line x1="72" x2="952" y1="48.0" y2="48.0" stroke="#edf3f8"><text x="62" y="52.0" text-anchor="end">0.0530</text>
-    <line x1="72" x2="952" y1="296" y2="296" stroke="#8a98a6">
-    <line x1="72" x2="72" y1="48" y2="296" stroke="#8a98a6">
-    <polyline points="72.0,127.1 163.2,132.8 254.5,137.5 375.1,143.3 466.4,149.7 557.6,159.1 678.3,174.4 769.5,184.1 860.8,193.2 952.0,202.3" fill="none" stroke="#147a73" stroke-width="3"><circle cx="72.0" cy="127.1" r="4" fill="#147a73"><circle cx="163.2" cy="132.8" r="4" fill="#147a73"><circle cx="254.5" cy="137.5" r="4" fill="#147a73"><circle cx="375.1" cy="143.3" r="4" fill="#147a73"><circle cx="466.4" cy="149.7" r="4" fill="#147a73"><circle cx="557.6" cy="159.1" r="4" fill="#147a73"><circle cx="678.3" cy="174.4" r="4" fill="#147a73"><circle cx="769.5" cy="184.1" r="4" fill="#147a73"><circle cx="860.8" cy="193.2" r="4" fill="#147a73"><circle cx="952.0" cy="202.3" r="4" fill="#147a73"><polyline points="72.0,65.1 163.2,84.5 254.5,103.6 375.1,122.2 466.4,134.7 557.6,143.9 678.3,159.2 769.5,164.1 860.8,169.6 952.0,178.3" fill="none" stroke="#b85f17" stroke-width="3"><circle cx="72.0" cy="65.1" r="4" fill="#b85f17"><circle cx="163.2" cy="84.5" r="4" fill="#b85f17"><circle cx="254.5" cy="103.6" r="4" fill="#b85f17"><circle cx="375.1" cy="122.2" r="4" fill="#b85f17"><circle cx="466.4" cy="134.7" r="4" fill="#b85f17"><circle cx="557.6" cy="143.9" r="4" fill="#b85f17"><circle cx="678.3" cy="159.2" r="4" fill="#b85f17"><circle cx="769.5" cy="164.1" r="4" fill="#b85f17"><circle cx="860.8" cy="169.6" r="4" fill="#b85f17"><circle cx="952.0" cy="178.3" r="4" fill="#b85f17"><polyline points="72.0,87.8 163.2,99.8 254.5,116.0 375.1,135.2 466.4,142.6 557.6,150.6 678.3,166.6 769.5,168.6 860.8,172.9 952.0,181.5" fill="none" stroke="#2f7d4a" stroke-width="3"><circle cx="72.0" cy="87.8" r="4" fill="#2f7d4a"><circle cx="163.2" cy="99.8" r="4" fill="#2f7d4a"><circle cx="254.5" cy="116.0" r="4" fill="#2f7d4a"><circle cx="375.1" cy="135.2" r="4" fill="#2f7d4a"><circle cx="466.4" cy="142.6" r="4" fill="#2f7d4a"><circle cx="557.6" cy="150.6" r="4" fill="#2f7d4a"><circle cx="678.3" cy="166.6" r="4" fill="#2f7d4a"><circle cx="769.5" cy="168.6" r="4" fill="#2f7d4a"><circle cx="860.8" cy="172.9" r="4" fill="#2f7d4a"><circle cx="952.0" cy="181.5" r="4" fill="#2f7d4a">
+  <svg width="980" height="360" viewbox="0 0 980 360" role="img" aria-label="Representative spectrum, real impedance">
+    <rect x="0" y="0" width="980" height="360" fill="var(--panel)"></rect>
+    <line x1="72" x2="952" y1="296.0" y2="296.0" stroke="var(--line)"></line><text x="62" y="300.0" text-anchor="end">-0.00393</text><line x1="72" x2="952" y1="234.0" y2="234.0" stroke="var(--line)"></line><text x="62" y="238.0" text-anchor="end">0.01031</text><line x1="72" x2="952" y1="172.0" y2="172.0" stroke="var(--line)"></line><text x="62" y="176.0" text-anchor="end">0.02454</text><line x1="72" x2="952" y1="110.0" y2="110.0" stroke="var(--line)"></line><text x="62" y="114.0" text-anchor="end">0.03877</text><line x1="72" x2="952" y1="48.0" y2="48.0" stroke="var(--line)"></line><text x="62" y="52.0" text-anchor="end">0.05301</text>
+    <line x1="72" x2="952" y1="296" y2="296" stroke="var(--muted)"></line>
+    <line x1="72" x2="72" y1="48" y2="296" stroke="var(--muted)"></line>
+    <polyline points="72.0,127.1 163.2,132.8 254.5,137.5 375.1,143.3 466.4,149.7 557.6,159.1 678.3,174.4 769.5,184.1 860.8,193.2 952.0,202.3" fill="none" stroke="#147a73" stroke-width="3"></polyline><circle cx="72.0" cy="127.1" r="4" fill="#147a73"></circle><circle cx="163.2" cy="132.8" r="4" fill="#147a73"></circle><circle cx="254.5" cy="137.5" r="4" fill="#147a73"></circle><circle cx="375.1" cy="143.3" r="4" fill="#147a73"></circle><circle cx="466.4" cy="149.7" r="4" fill="#147a73"></circle><circle cx="557.6" cy="159.1" r="4" fill="#147a73"></circle><circle cx="678.3" cy="174.4" r="4" fill="#147a73"></circle><circle cx="769.5" cy="184.1" r="4" fill="#147a73"></circle><circle cx="860.8" cy="193.2" r="4" fill="#147a73"></circle><circle cx="952.0" cy="202.3" r="4" fill="#147a73"></circle><polyline points="72.0,65.1 163.2,84.5 254.5,103.6 375.1,122.2 466.4,134.7 557.6,143.9 678.3,159.2 769.5,164.1 860.8,169.6 952.0,178.3" fill="none" stroke="#b85f17" stroke-width="3"></polyline><circle cx="72.0" cy="65.1" r="4" fill="#b85f17"></circle><circle cx="163.2" cy="84.5" r="4" fill="#b85f17"></circle><circle cx="254.5" cy="103.6" r="4" fill="#b85f17"></circle><circle cx="375.1" cy="122.2" r="4" fill="#b85f17"></circle><circle cx="466.4" cy="134.7" r="4" fill="#b85f17"></circle><circle cx="557.6" cy="143.9" r="4" fill="#b85f17"></circle><circle cx="678.3" cy="159.2" r="4" fill="#b85f17"></circle><circle cx="769.5" cy="164.1" r="4" fill="#b85f17"></circle><circle cx="860.8" cy="169.6" r="4" fill="#b85f17"></circle><circle cx="952.0" cy="178.3" r="4" fill="#b85f17"></circle><polyline points="72.0,87.8 163.2,99.8 254.5,116.0 375.1,135.2 466.4,142.6 557.6,150.6 678.3,166.6 769.5,168.6 860.8,172.9 952.0,181.5" fill="none" stroke="#2f7d4a" stroke-width="3"></polyline><circle cx="72.0" cy="87.8" r="4" fill="#2f7d4a"></circle><circle cx="163.2" cy="99.8" r="4" fill="#2f7d4a"></circle><circle cx="254.5" cy="116.0" r="4" fill="#2f7d4a"></circle><circle cx="375.1" cy="135.2" r="4" fill="#2f7d4a"></circle><circle cx="466.4" cy="142.6" r="4" fill="#2f7d4a"></circle><circle cx="557.6" cy="150.6" r="4" fill="#2f7d4a"></circle><circle cx="678.3" cy="166.6" r="4" fill="#2f7d4a"></circle><circle cx="769.5" cy="168.6" r="4" fill="#2f7d4a"></circle><circle cx="860.8" cy="172.9" r="4" fill="#2f7d4a"></circle><circle cx="952.0" cy="181.5" r="4" fill="#2f7d4a"></circle>
     <text x="72.0" y="332" text-anchor="middle">0.05</text><text x="163.2" y="332" text-anchor="middle">0.1</text><text x="254.5" y="332" text-anchor="middle">0.2</text><text x="375.1" y="332" text-anchor="middle">0.5</text><text x="466.4" y="332" text-anchor="middle">1.0</text><text x="557.6" y="332" text-anchor="middle">2.0</text><text x="678.3" y="332" text-anchor="middle">5.0</text><text x="769.5" y="332" text-anchor="middle">10.0</text><text x="860.8" y="332" text-anchor="middle">20.0</text><text x="952.0" y="332" text-anchor="middle">40.0</text>
     <text x="490.0" y="354" text-anchor="middle">frequency, Hz, log-scaled axis</text>
+    <text x="18" y="172.0" transform="rotate(-90 18 172.0)" text-anchor="middle">impedance, ohm</text>
   </svg>
 </figure>
 
+    <p class="chart-analysis">Analysis: the real-impedance plot compares the measured spectrum with the global-mean baseline and the demo model for one representative holdout row. The useful question is not whether every point is perfect. It is whether the model moves the prediction closer to the measured curve without inventing a new physical claim.</p>
 
 <figure class="chart">
   <figcaption>Representative spectrum, negative imaginary impedance</figcaption>
   <div class="legend"><span class="legend-item"><span class="swatch" style="background:#147a73"></span>true -Zimag</span><span class="legend-item"><span class="swatch" style="background:#b85f17"></span>baseline -Zimag</span><span class="legend-item"><span class="swatch" style="background:#2f7d4a"></span>model -Zimag</span></div>
-  <svg viewbox="0 0 980 360" role="img" aria-label="Representative spectrum, negative imaginary impedance">
-    <rect x="0" y="0" width="980" height="360" fill="#fff">
-    <line x1="72" x2="952" y1="296.0" y2="296.0" stroke="#edf3f8"><text x="62" y="300.0" text-anchor="end">-0.0009</text><line x1="72" x2="952" y1="234.0" y2="234.0" stroke="#edf3f8"><text x="62" y="238.0" text-anchor="end">0.0025</text><line x1="72" x2="952" y1="172.0" y2="172.0" stroke="#edf3f8"><text x="62" y="176.0" text-anchor="end">0.0058</text><line x1="72" x2="952" y1="110.0" y2="110.0" stroke="#edf3f8"><text x="62" y="114.0" text-anchor="end">0.0092</text><line x1="72" x2="952" y1="48.0" y2="48.0" stroke="#edf3f8"><text x="62" y="52.0" text-anchor="end">0.0126</text>
-    <line x1="72" x2="952" y1="296" y2="296" stroke="#8a98a6">
-    <line x1="72" x2="72" y1="48" y2="296" stroke="#8a98a6">
-    <polyline points="72.0,198.1 163.2,215.0 254.5,221.9 375.1,218.9 466.4,203.0 557.6,186.7 678.3,186.2 769.5,191.4 860.8,194.8 952.0,200.1" fill="none" stroke="#147a73" stroke-width="3"><circle cx="72.0" cy="198.1" r="4" fill="#147a73"><circle cx="163.2" cy="215.0" r="4" fill="#147a73"><circle cx="254.5" cy="221.9" r="4" fill="#147a73"><circle cx="375.1" cy="218.9" r="4" fill="#147a73"><circle cx="466.4" cy="203.0" r="4" fill="#147a73"><circle cx="557.6" cy="186.7" r="4" fill="#147a73"><circle cx="678.3" cy="186.2" r="4" fill="#147a73"><circle cx="769.5" cy="191.4" r="4" fill="#147a73"><circle cx="860.8" cy="194.8" r="4" fill="#147a73"><circle cx="952.0" cy="200.1" r="4" fill="#147a73"><polyline points="72.0,65.1 163.2,79.7 254.5,101.0 375.1,135.7 466.4,160.8 557.6,180.9 678.3,203.5 769.5,208.8 860.8,211.8 952.0,221.1" fill="none" stroke="#b85f17" stroke-width="3"><circle cx="72.0" cy="65.1" r="4" fill="#b85f17"><circle cx="163.2" cy="79.7" r="4" fill="#b85f17"><circle cx="254.5" cy="101.0" r="4" fill="#b85f17"><circle cx="375.1" cy="135.7" r="4" fill="#b85f17"><circle cx="466.4" cy="160.8" r="4" fill="#b85f17"><circle cx="557.6" cy="180.9" r="4" fill="#b85f17"><circle cx="678.3" cy="203.5" r="4" fill="#b85f17"><circle cx="769.5" cy="208.8" r="4" fill="#b85f17"><circle cx="860.8" cy="211.8" r="4" fill="#b85f17"><circle cx="952.0" cy="221.1" r="4" fill="#b85f17"><polyline points="72.0,89.3 163.2,104.9 254.5,125.6 375.1,158.6 466.4,177.7 557.6,193.9 678.3,214.2 769.5,217.9 860.8,218.4 952.0,227.2" fill="none" stroke="#2f7d4a" stroke-width="3"><circle cx="72.0" cy="89.3" r="4" fill="#2f7d4a"><circle cx="163.2" cy="104.9" r="4" fill="#2f7d4a"><circle cx="254.5" cy="125.6" r="4" fill="#2f7d4a"><circle cx="375.1" cy="158.6" r="4" fill="#2f7d4a"><circle cx="466.4" cy="177.7" r="4" fill="#2f7d4a"><circle cx="557.6" cy="193.9" r="4" fill="#2f7d4a"><circle cx="678.3" cy="214.2" r="4" fill="#2f7d4a"><circle cx="769.5" cy="217.9" r="4" fill="#2f7d4a"><circle cx="860.8" cy="218.4" r="4" fill="#2f7d4a"><circle cx="952.0" cy="227.2" r="4" fill="#2f7d4a">
+  <svg width="980" height="360" viewbox="0 0 980 360" role="img" aria-label="Representative spectrum, negative imaginary impedance">
+    <rect x="0" y="0" width="980" height="360" fill="var(--panel)"></rect>
+    <line x1="72" x2="952" y1="296.0" y2="296.0" stroke="var(--line)"></line><text x="62" y="300.0" text-anchor="end">-9.3595e-04</text><line x1="72" x2="952" y1="234.0" y2="234.0" stroke="var(--line)"></line><text x="62" y="238.0" text-anchor="end">0.00246</text><line x1="72" x2="952" y1="172.0" y2="172.0" stroke="var(--line)"></line><text x="62" y="176.0" text-anchor="end">0.00585</text><line x1="72" x2="952" y1="110.0" y2="110.0" stroke="var(--line)"></line><text x="62" y="114.0" text-anchor="end">0.00924</text><line x1="72" x2="952" y1="48.0" y2="48.0" stroke="var(--line)"></line><text x="62" y="52.0" text-anchor="end">0.01264</text>
+    <line x1="72" x2="952" y1="296" y2="296" stroke="var(--muted)"></line>
+    <line x1="72" x2="72" y1="48" y2="296" stroke="var(--muted)"></line>
+    <polyline points="72.0,198.1 163.2,215.0 254.5,221.9 375.1,218.9 466.4,203.0 557.6,186.7 678.3,186.2 769.5,191.4 860.8,194.8 952.0,200.1" fill="none" stroke="#147a73" stroke-width="3"></polyline><circle cx="72.0" cy="198.1" r="4" fill="#147a73"></circle><circle cx="163.2" cy="215.0" r="4" fill="#147a73"></circle><circle cx="254.5" cy="221.9" r="4" fill="#147a73"></circle><circle cx="375.1" cy="218.9" r="4" fill="#147a73"></circle><circle cx="466.4" cy="203.0" r="4" fill="#147a73"></circle><circle cx="557.6" cy="186.7" r="4" fill="#147a73"></circle><circle cx="678.3" cy="186.2" r="4" fill="#147a73"></circle><circle cx="769.5" cy="191.4" r="4" fill="#147a73"></circle><circle cx="860.8" cy="194.8" r="4" fill="#147a73"></circle><circle cx="952.0" cy="200.1" r="4" fill="#147a73"></circle><polyline points="72.0,65.1 163.2,79.7 254.5,101.0 375.1,135.7 466.4,160.8 557.6,180.9 678.3,203.5 769.5,208.8 860.8,211.8 952.0,221.1" fill="none" stroke="#b85f17" stroke-width="3"></polyline><circle cx="72.0" cy="65.1" r="4" fill="#b85f17"></circle><circle cx="163.2" cy="79.7" r="4" fill="#b85f17"></circle><circle cx="254.5" cy="101.0" r="4" fill="#b85f17"></circle><circle cx="375.1" cy="135.7" r="4" fill="#b85f17"></circle><circle cx="466.4" cy="160.8" r="4" fill="#b85f17"></circle><circle cx="557.6" cy="180.9" r="4" fill="#b85f17"></circle><circle cx="678.3" cy="203.5" r="4" fill="#b85f17"></circle><circle cx="769.5" cy="208.8" r="4" fill="#b85f17"></circle><circle cx="860.8" cy="211.8" r="4" fill="#b85f17"></circle><circle cx="952.0" cy="221.1" r="4" fill="#b85f17"></circle><polyline points="72.0,89.3 163.2,104.9 254.5,125.6 375.1,158.6 466.4,177.7 557.6,193.9 678.3,214.2 769.5,217.9 860.8,218.4 952.0,227.2" fill="none" stroke="#2f7d4a" stroke-width="3"></polyline><circle cx="72.0" cy="89.3" r="4" fill="#2f7d4a"></circle><circle cx="163.2" cy="104.9" r="4" fill="#2f7d4a"></circle><circle cx="254.5" cy="125.6" r="4" fill="#2f7d4a"></circle><circle cx="375.1" cy="158.6" r="4" fill="#2f7d4a"></circle><circle cx="466.4" cy="177.7" r="4" fill="#2f7d4a"></circle><circle cx="557.6" cy="193.9" r="4" fill="#2f7d4a"></circle><circle cx="678.3" cy="214.2" r="4" fill="#2f7d4a"></circle><circle cx="769.5" cy="217.9" r="4" fill="#2f7d4a"></circle><circle cx="860.8" cy="218.4" r="4" fill="#2f7d4a"></circle><circle cx="952.0" cy="227.2" r="4" fill="#2f7d4a"></circle>
     <text x="72.0" y="332" text-anchor="middle">0.05</text><text x="163.2" y="332" text-anchor="middle">0.1</text><text x="254.5" y="332" text-anchor="middle">0.2</text><text x="375.1" y="332" text-anchor="middle">0.5</text><text x="466.4" y="332" text-anchor="middle">1.0</text><text x="557.6" y="332" text-anchor="middle">2.0</text><text x="678.3" y="332" text-anchor="middle">5.0</text><text x="769.5" y="332" text-anchor="middle">10.0</text><text x="860.8" y="332" text-anchor="middle">20.0</text><text x="952.0" y="332" text-anchor="middle">40.0</text>
     <text x="490.0" y="354" text-anchor="middle">frequency, Hz, log-scaled axis</text>
+    <text x="18" y="172.0" transform="rotate(-90 18 172.0)" text-anchor="middle">impedance, ohm</text>
   </svg>
 </figure>
 
+    <p class="chart-analysis">Analysis: the negative-imaginary component is harder to read because its scale is smaller and its shape changes across frequency. Showing it separately prevents the real component from hiding errors in the reactive part of the spectrum.</p>
 
 <figure class="chart">
   <figcaption>Per-frequency RMSE, baseline versus demo model</figcaption>
@@ -216,44 +302,50 @@
     <span class="legend-item"><span class="swatch" style="background:#b85f17"></span>baseline</span>
     <span class="legend-item"><span class="swatch" style="background:#2f7d4a"></span>demo model</span>
   </div>
-  <svg viewbox="0 0 980 434" role="img" aria-label="Per-frequency RMSE bars">
-    <rect x="0" y="0" width="980" height="434" fill="#fff">
-    <text x="118" y="71" text-anchor="end">0.05 Hz</text><rect x="130" y="55" width="802.0" height="11" fill="#b85f17"><rect x="130" y="70" width="632.8" height="11" fill="#2f7d4a"><text x="118" y="105" text-anchor="end">0.1 Hz</text><rect x="130" y="89" width="709.5" height="11" fill="#b85f17"><rect x="130" y="104" width="588.8" height="11" fill="#2f7d4a"><text x="118" y="139" text-anchor="end">0.2 Hz</text><rect x="130" y="123" width="606.5" height="11" fill="#b85f17"><rect x="130" y="138" width="516.2" height="11" fill="#2f7d4a"><text x="118" y="173" text-anchor="end">0.5 Hz</text><rect x="130" y="157" width="498.4" height="11" fill="#b85f17"><rect x="130" y="172" width="429.3" height="11" fill="#2f7d4a"><text x="118" y="207" text-anchor="end">1 Hz</text><rect x="130" y="191" width="429.5" height="11" fill="#b85f17"><rect x="130" y="206" width="392.4" height="11" fill="#2f7d4a"><text x="118" y="241" text-anchor="end">2 Hz</text><rect x="130" y="225" width="384.0" height="11" fill="#b85f17"><rect x="130" y="240" width="360.7" height="11" fill="#2f7d4a"><text x="118" y="275" text-anchor="end">5 Hz</text><rect x="130" y="259" width="339.2" height="11" fill="#b85f17"><rect x="130" y="274" width="328.8" height="11" fill="#2f7d4a"><text x="118" y="309" text-anchor="end">10 Hz</text><rect x="130" y="293" width="339.9" height="11" fill="#b85f17"><rect x="130" y="308" width="328.5" height="11" fill="#2f7d4a"><text x="118" y="343" text-anchor="end">20 Hz</text><rect x="130" y="327" width="344.5" height="11" fill="#b85f17"><rect x="130" y="342" width="335.0" height="11" fill="#2f7d4a"><text x="118" y="377" text-anchor="end">40 Hz</text><rect x="130" y="361" width="340.6" height="11" fill="#b85f17"><rect x="130" y="376" width="332.7" height="11" fill="#2f7d4a">
-    <text x="130" y="422">longer bar means larger RMSE in ohm</text>
+  <svg width="980" height="434" viewbox="0 0 980 434" role="img" aria-label="Per-frequency RMSE bars">
+    <rect x="0" y="0" width="980" height="434" fill="var(--panel)"></rect>
+    <text x="118" y="71" text-anchor="end">0.05 Hz</text><rect x="130" y="55" width="802.0" height="11" fill="#b85f17"></rect><rect x="130" y="70" width="632.8" height="11" fill="#2f7d4a"></rect><text x="118" y="105" text-anchor="end">0.1 Hz</text><rect x="130" y="89" width="709.5" height="11" fill="#b85f17"></rect><rect x="130" y="104" width="588.8" height="11" fill="#2f7d4a"></rect><text x="118" y="139" text-anchor="end">0.2 Hz</text><rect x="130" y="123" width="606.5" height="11" fill="#b85f17"></rect><rect x="130" y="138" width="516.2" height="11" fill="#2f7d4a"></rect><text x="118" y="173" text-anchor="end">0.5 Hz</text><rect x="130" y="157" width="498.4" height="11" fill="#b85f17"></rect><rect x="130" y="172" width="429.3" height="11" fill="#2f7d4a"></rect><text x="118" y="207" text-anchor="end">1 Hz</text><rect x="130" y="191" width="429.5" height="11" fill="#b85f17"></rect><rect x="130" y="206" width="392.4" height="11" fill="#2f7d4a"></rect><text x="118" y="241" text-anchor="end">2 Hz</text><rect x="130" y="225" width="384.0" height="11" fill="#b85f17"></rect><rect x="130" y="240" width="360.7" height="11" fill="#2f7d4a"></rect><text x="118" y="275" text-anchor="end">5 Hz</text><rect x="130" y="259" width="339.2" height="11" fill="#b85f17"></rect><rect x="130" y="274" width="328.8" height="11" fill="#2f7d4a"></rect><text x="118" y="309" text-anchor="end">10 Hz</text><rect x="130" y="293" width="339.9" height="11" fill="#b85f17"></rect><rect x="130" y="308" width="328.5" height="11" fill="#2f7d4a"></rect><text x="118" y="343" text-anchor="end">20 Hz</text><rect x="130" y="327" width="344.5" height="11" fill="#b85f17"></rect><rect x="130" y="342" width="335.0" height="11" fill="#2f7d4a"></rect><text x="118" y="377" text-anchor="end">40 Hz</text><rect x="130" y="361" width="340.6" height="11" fill="#b85f17"></rect><rect x="130" y="376" width="332.7" height="11" fill="#2f7d4a"></rect>
+    <text x="130" y="422">RMSE in ohm, shorter is better</text>
   </svg>
 </figure>
 
+    <p class="chart-analysis">Analysis: the per-frequency RMSE bars show where the model improves over the baseline and where it still struggles. Shorter green bars than orange bars mean the demo model reduced error at that frequency pair.</p>
     <h3>Representative Spectrum Data</h3>
-    <table><thead><tr><th>frequency_hz</th><th>true_zreal_ohm</th><th>true_znegimag_ohm</th><th>baseline_zreal_ohm</th><th>baseline_znegimag_ohm</th><th>model_zreal_ohm</th><th>model_znegimag_ohm</th></tr></thead><tbody><tr><td>0.05</td><td>0.0348594872030526</td><td>0.0044220725438761</td><td>0.04908180304790199</td><td>0.011699323828008116</td><td>0.04387964243832159</td><td>0.010376192395739827</td></tr><tr><td>0.1</td><td>0.0335408927945971</td><td>0.0034966845445866</td><td>0.044632228626750266</td><td>0.010900076904499836</td><td>0.04111144956806688</td><td>0.00952272819026653</td></tr><tr><td>0.2</td><td>0.0324637194049128</td><td>0.0031164200151977</td><td>0.04024156464556086</td><td>0.009736227595408192</td><td>0.03739721740203748</td><td>0.00838868831151836</td></tr><tr><td>0.5</td><td>0.0311286825020031</td><td>0.003282219701099</td><td>0.03596237699188536</td><td>0.00783548062056227</td><td>0.032998501593508284</td><td>0.0065815178297831504</td></tr><tr><td>1.0</td><td>0.0296642381327686</td><td>0.0041536712710108</td><td>0.03309743676404969</td><td>0.0064634236968912516</td><td>0.03128448274457307</td><td>0.005536672290846335</td></tr><tr><td>2.0</td><td>0.0275019881974106</td><td>0.0050472618247648</td><td>0.03098933957888932</td><td>0.005362491947570908</td><td>0.029448285727184963</td><td>0.0046519604010774466</td></tr><tr><td>5.0</td><td>0.0240001749075568</td><td>0.005071122699789</td><td>0.027484252225287165</td><td>0.004126989461966167</td><td>0.025778335113563065</td><td>0.0035399915695729337</td></tr><tr><td>10.0</td><td>0.0217541159831534</td><td>0.0047855026061837</td><td>0.02636318023455104</td><td>0.0038380214438058827</td><td>0.02532214418764083</td><td>0.003337350488378033</td></tr><tr><td>20.0</td><td>0.0196679896398897</td><td>0.0046021421453341</td><td>0.0251004988742542</td><td>0.0036728882536165206</td><td>0.02433464917803798</td><td>0.0033116229568727435</td></tr><tr><td>40.0</td><td>0.0175736422015022</td><td>0.0043120243929142</td><td>0.023090262592865764</td><td>0.0031607805680249285</td><td>0.022348617245310974</td><td>0.002830353445363616</td></tr></tbody></table>
+    <p>The table below is the data behind the first two graphs. It is included so an external user can inspect the numeric values without rerunning the script.</p>
+    <div class="table-scroll"><table><thead><tr><th>frequency_hz</th><th>true_zreal_ohm</th><th>true_znegimag_ohm</th><th>baseline_zreal_ohm</th><th>baseline_znegimag_ohm</th><th>model_zreal_ohm</th><th>model_znegimag_ohm</th></tr></thead><tbody><tr><td>0.05</td><td>0.03486</td><td>0.00442</td><td>0.04908</td><td>0.0117</td><td>0.04388</td><td>0.01038</td></tr><tr><td>0.1</td><td>0.03354</td><td>0.0035</td><td>0.04463</td><td>0.0109</td><td>0.04111</td><td>0.00952</td></tr><tr><td>0.2</td><td>0.03246</td><td>0.00312</td><td>0.04024</td><td>0.00974</td><td>0.0374</td><td>0.00839</td></tr><tr><td>0.5</td><td>0.03113</td><td>0.00328</td><td>0.03596</td><td>0.00784</td><td>0.033</td><td>0.00658</td></tr><tr><td>1</td><td>0.02966</td><td>0.00415</td><td>0.0331</td><td>0.00646</td><td>0.03128</td><td>0.00554</td></tr><tr><td>2</td><td>0.0275</td><td>0.00505</td><td>0.03099</td><td>0.00536</td><td>0.02945</td><td>0.00465</td></tr><tr><td>5</td><td>0.024</td><td>0.00507</td><td>0.02748</td><td>0.00413</td><td>0.02578</td><td>0.00354</td></tr><tr><td>10</td><td>0.02175</td><td>0.00479</td><td>0.02636</td><td>0.00384</td><td>0.02532</td><td>0.00334</td></tr><tr><td>20</td><td>0.01967</td><td>0.0046</td><td>0.0251</td><td>0.00367</td><td>0.02433</td><td>0.00331</td></tr><tr><td>40</td><td>0.01757</td><td>0.00431</td><td>0.02309</td><td>0.00316</td><td>0.02235</td><td>0.00283</td></tr></tbody></table></div>
   </section>
 
   <section id="results">
     <h2>Numerical Results</h2>
+    <p>The result is positive but modest. The model beats the train-mean baseline on this bounded demo. That is useful for showing the pipeline works, but it is not enough to claim broad external validation.</p>
     <table class="metric-table">
       <tbody>
         <tr><td>Demo verdict</td><td>working_demo_model_beats_baseline</td><td>The model beats the baseline on this bounded demo.</td></tr>
-        <tr><td>Baseline RMSE</td><td>0.009208604 ohm</td><td>Global train-mean target vector.</td></tr>
-        <tr><td>Model RMSE</td><td>0.007976748 ohm</td><td>Shrinkage KNN demo model.</td></tr>
+        <tr><td>Baseline RMSE</td><td>0.00921 ohm</td><td>Global train-mean target vector.</td></tr>
+        <tr><td>Model RMSE</td><td>0.00798 ohm</td><td>Shrinkage KNN demo model.</td></tr>
         <tr><td>Relative improvement</td><td>13.38%</td><td>Positive, but this is still demo-sized evidence.</td></tr>
-        <tr><td>KK valid fraction</td><td>1.000</td><td>Target-quality screen for the demo EIS rows.</td></tr>
+        <tr><td>KK valid fraction</td><td>1</td><td>Target-quality screen for the demo EIS rows.</td></tr>
         <tr><td>KK valid rows</td><td>30 / 30</td><td>Rows passing the finite-range RC-basis screen.</td></tr>
       </tbody>
     </table>
     <div class="bar">
-      <div class="bar-row"><strong>Baseline RMSE</strong><div class="track"><div class="fill" style="width:100.0%"></div></div><code>0.0092086</code></div>
-      <div class="bar-row"><strong>Model RMSE</strong><div class="track"><div class="fill good" style="width:86.6%"></div></div><code>0.00797675</code></div>
+      <div class="bar-row"><strong>Baseline RMSE</strong><div class="track"><div class="fill" style="width:100.0%"></div></div><code>0.00921</code></div>
+      <div class="bar-row"><strong>Model RMSE</strong><div class="track"><div class="fill good" style="width:86.6%"></div></div><code>0.00798</code></div>
       <div class="bar-row"><strong>Relative improvement</strong><div class="track"><div class="fill good" style="width:4.0%"></div></div><code>13.38%</code></div>
       <div class="bar-row"><strong>KK valid rows</strong><div class="track"><div class="fill good" style="width:100.0%"></div></div><code>30 / 30</code></div>
     </div>
     <h3>Per-Frequency Error Table</h3>
-    <table><thead><tr><th>frequency_hz</th><th>baseline_rmse_ohm</th><th>model_rmse_ohm</th></tr></thead><tbody><tr><td>0.05</td><td>0.014596326400418708</td><td>0.011517619628889602</td></tr><tr><td>0.1</td><td>0.01291196792981657</td><td>0.010715556397654062</td></tr><tr><td>0.2</td><td>0.011038994948622254</td><td>0.009394784860346124</td></tr><tr><td>0.5</td><td>0.00907005510155144</td><td>0.007813766526857375</td></tr><tr><td>1.0</td><td>0.0078174249312099</td><td>0.0071422917296229856</td></tr><tr><td>2.0</td><td>0.006988204787978238</td><td>0.006563945043052873</td></tr><tr><td>5.0</td><td>0.006173199039226986</td><td>0.005983541685500603</td></tr><tr><td>10.0</td><td>0.0061865663505014466</td><td>0.005979290190773845</td></tr><tr><td>20.0</td><td>0.006270694573164825</td><td>0.006097352686553043</td></tr><tr><td>40.0</td><td>0.006199690085553011</td><td>0.006054692811788644</td></tr></tbody></table>
+    <p>This table gives the same comparison as the bar chart. It is useful when the exact frequency-level values matter more than the visual trend.</p>
+    <div class="table-scroll"><table><thead><tr><th>frequency_hz</th><th>baseline_rmse_ohm</th><th>model_rmse_ohm</th></tr></thead><tbody><tr><td>0.05</td><td>0.0146</td><td>0.01152</td></tr><tr><td>0.1</td><td>0.01291</td><td>0.01072</td></tr><tr><td>0.2</td><td>0.01104</td><td>0.00939</td></tr><tr><td>0.5</td><td>0.00907</td><td>0.00781</td></tr><tr><td>1</td><td>0.00782</td><td>0.00714</td></tr><tr><td>2</td><td>0.00699</td><td>0.00656</td></tr><tr><td>5</td><td>0.00617</td><td>0.00598</td></tr><tr><td>10</td><td>0.00619</td><td>0.00598</td></tr><tr><td>20</td><td>0.00627</td><td>0.0061</td></tr><tr><td>40</td><td>0.0062</td><td>0.00605</td></tr></tbody></table></div>
     <h3>KK Preview Rows</h3>
-    <table><thead><tr><th>matrix</th><th>row_index</th><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>temperature_c</th><th>soc_percent</th><th>kk_valid</th></tr></thead><tbody><tr><td>demo_molicell_subset</td><td>0</td><td>molicell_p42a::A11::5degC::SOC20::1</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5.0</td><td>20.0</td><td>True</td></tr><tr><td>demo_molicell_subset</td><td>1</td><td>molicell_p42a::A11::5degC::SOC50::2</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5.0</td><td>50.0</td><td>True</td></tr><tr><td>demo_molicell_subset</td><td>2</td><td>molicell_p42a::A11::5degC::SOC80::3</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5.0</td><td>80.0</td><td>True</td></tr><tr><td>demo_molicell_subset</td><td>3</td><td>molicell_p42a::A12::5degC::SOC20::4</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A12</td><td>5.0</td><td>20.0</td><td>True</td></tr><tr><td>demo_molicell_subset</td><td>4</td><td>molicell_p42a::A12::5degC::SOC50::5</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A12</td><td>5.0</td><td>50.0</td><td>True</td></tr></tbody></table>
+    <p>The KK preview rows show target-quality metadata for the holdout spectra. A pass means the measured target spectrum is broadly consistent with the finite-range RC-basis screen. It does not mean the prediction model is automatically valid.</p>
+    <div class="table-scroll"><table><thead><tr><th>matrix</th><th>row_index</th><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>temperature_c</th><th>soc_percent</th><th>kk_valid</th></tr></thead><tbody><tr><td>demo_molicell_subset</td><td>0</td><td>molicell_p42a::A11::5degC::SOC20::1</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5</td><td>20</td><td>true</td></tr><tr><td>demo_molicell_subset</td><td>1</td><td>molicell_p42a::A11::5degC::SOC50::2</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5</td><td>50</td><td>true</td></tr><tr><td>demo_molicell_subset</td><td>2</td><td>molicell_p42a::A11::5degC::SOC80::3</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5</td><td>80</td><td>true</td></tr><tr><td>demo_molicell_subset</td><td>3</td><td>molicell_p42a::A12::5degC::SOC20::4</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A12</td><td>5</td><td>20</td><td>true</td></tr><tr><td>demo_molicell_subset</td><td>4</td><td>molicell_p42a::A12::5degC::SOC50::5</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A12</td><td>5</td><td>50</td><td>true</td></tr></tbody></table></div>
   </section>
 
   <section id="code">
     <h2>Code Walkthrough: Included In The Page</h2>
-    <p>This is the core code path. It is embedded here so readers can inspect the pipeline without switching to the repository during the presentation.</p>
+    <p>This is the core code path. It is embedded here so readers can inspect the pipeline without switching to the repository during the presentation. Each block is intentionally paired with a plain explanation, because raw code alone is not a presentation.</p>
+    <p><strong>How to read it:</strong> the demo first loads fixed matrices, builds time-domain-only derived features, fits a baseline and a conservative KNN blend, computes vector RMSE, then runs the KK screen on the EIS target rows.</p>
     <details open><summary>Demo scoring function</summary><pre><code class="language-python">def demo_score(max_train_rows: int, max_holdout_rows: int) -&gt; dict[str, Any]:
     dev = pd.read_csv(DEV_MATRIX_CSV)
     holdout = pd.read_csv(MOLICELL_MATRIX_CSV)
@@ -349,9 +441,12 @@
         &quot;outputs&quot;: {
             &quot;results_json&quot;: str(DEMO_RESULTS_JSON),
             &quot;presentation_html&quot;: str(DEMO_PRESENTATION_HTML),
+            &quot;code_bundle&quot;: str(DEMO_CODE_BUNDLE),
+            &quot;data_bundle&quot;: str(DEMO_DATA_BUNDLE),
         },
     }
     return results</code></pre></details>
+    <p class="chart-analysis">This function is the pipeline spine. It defines the split, creates predictions, computes improvement, attaches KK metadata, and writes the output payload consumed by this page.</p>
     <details><summary>Derived feature builder</summary><pre><code class="language-python">def add_derived_features(frame: pd.DataFrame) -&gt; pd.DataFrame:
     &quot;&quot;&quot;Add time-domain-only features without touching target-side EIS values.&quot;&quot;&quot;
 
@@ -379,6 +474,7 @@
     frame[&quot;td_discharge_to_charge_ratio&quot;] = safe_divide(discharge, charge.replace(0, np.nan))
     frame[&quot;td_mean_abs_current_per_hour&quot;] = safe_divide(frame[&quot;td_current_abs_mean_a&quot;], duration_hours)
     return frame</code></pre></details>
+    <p class="chart-analysis">This block is the feature layer. The important guardrail is that derived features are computed only from time-domain columns, not target-side EIS values.</p>
     <details><summary>Model construction</summary><pre><code class="language-python">def build_model(estimator: Any, feature_columns: list[str] | None = None) -&gt; Pipeline:
     columns = feature_columns or FEATURE_COLUMNS
     preprocessor = ColumnTransformer(
@@ -396,6 +492,7 @@
         ]
     )
     return Pipeline([(&quot;preprocess&quot;, preprocessor), (&quot;model&quot;, estimator)])</code></pre></details>
+    <p class="chart-analysis">This block uses median imputation and standard scaling before the estimator. That keeps the feature space stable when columns have different units.</p>
     <details><summary>Metric payload</summary><pre><code class="language-python">def metric_payload(y_true: np.ndarray, y_pred: np.ndarray, target_cols: list[str]) -&gt; dict[str, Any]:
     zreal_idx = [idx for idx, col in enumerate(target_cols) if &quot;zreal&quot; in col]
     znegimag_idx = [idx for idx, col in enumerate(target_cols) if &quot;znegimag&quot; in col]
@@ -415,6 +512,7 @@
         &quot;per_target_rmse_ohm&quot;: per_target,
     }
     return payload</code></pre></details>
+    <p class="chart-analysis">This block computes the headline RMSE and the component-level RMSE. The split between real and negative-imaginary error matters because one component can improve while the other stays weak.</p>
     <details><summary>Kramer-Kronig matrix validation</summary><pre><code class="language-python">def validate_matrix(
     frame: pd.DataFrame,
     matrix_name: str,
@@ -471,14 +569,20 @@
         ),
     }
     return result, summary</code></pre></details>
+    <p class="chart-analysis">This block loops over fixed-grid spectra and attaches KK status to each row. Treat this as target-quality metadata, not a model-performance score.</p>
   </section>
 
   <section id="outputs">
     <h2>Outputs</h2>
-    <p>The machine-readable output is included below. This is the same payload written to <code>demo_pipeline_results.json</code>.</p>
+    <p>The machine-readable output is included below in rounded display form. The downloadable JSON keeps the same structure for external inspection.</p>
+    <div class="button-row">
+      <a class="button" href="data/demo_pipeline_code_bundle.py" download>Download code bundle</a>
+      <a class="button" href="data/demo_pipeline_data_bundle.json" download>Download data bundle</a>
+      <a class="button" href="data/demo_pipeline_results.json" download>Download results JSON</a>
+    </div>
     <pre><code class="language-json">{
   &quot;experiment&quot;: &quot;cross_dataset_pulse_to_eis_training_demo&quot;,
-  &quot;created_utc&quot;: &quot;2026-07-01T20:19:48.874238+00:00&quot;,
+  &quot;created_utc&quot;: &quot;2026-07-01T20:45:33.302359+00:00&quot;,
   &quot;claim_boundary&quot;: &quot;Demo only. Uses a bounded subset and does not create a new validation claim.&quot;,
   &quot;inputs&quot;: {
     &quot;dev_matrix_csv&quot;: &quot;[local path redacted]
@@ -558,19 +662,19 @@
         &quot;soc_percent&quot;: null,
         &quot;temperature_c&quot;: -10.0,
         &quot;td_rows&quot;: 426.0,
-        &quot;td_duration_s&quot;: 228149.9310001731,
+        &quot;td_duration_s&quot;: 228149.931,
         &quot;td_voltage_start_v&quot;: 3.8306,
-        &quot;td_voltage_end_v&quot;: 2.49948,
-        &quot;td_voltage_min_v&quot;: 2.49948,
-        &quot;td_voltage_max_v&quot;: 4.07268,
-        &quot;td_voltage_mean_v&quot;: 3.5550384037558684,
-        &quot;td_voltage_std_v&quot;: 0.2741665916299734,
-        &quot;td_current_mean_a&quot;: -0.6040233333333334,
-        &quot;td_current_abs_mean_a&quot;: 0.6040233333333334,
+        &quot;td_voltage_end_v&quot;: 2.4995,
+        &quot;td_voltage_min_v&quot;: 2.4995,
+        &quot;td_voltage_max_v&quot;: 4.0727,
+        &quot;td_voltage_mean_v&quot;: 3.555,
+        &quot;td_voltage_std_v&quot;: 0.27417,
+        &quot;td_current_mean_a&quot;: -0.60402,
+        &quot;td_current_abs_mean_a&quot;: 0.60402,
         &quot;td_current_abs_max_a&quot;: 0.8697,
-        &quot;td_active_fraction&quot;: 0.6948356807511737,
-        &quot;td_charge_throughput_ah&quot;: 0.0,
-        &quot;td_discharge_throughput_ah&quot;: 41.06532749075169
+        &quot;td_active_fraction&quot;: 0.69484,
+        &quot;td_charge_throughput_ah&quot;: 0,
+        &quot;td_discharge_throughput_ah&quot;: 41.0653
       },
       {
         &quot;sample_id&quot;: &quot;dev_raw::panasonic::1&quot;,
@@ -580,19 +684,19 @@
         &quot;soc_percent&quot;: null,
         &quot;temperature_c&quot;: -10.0,
         &quot;td_rows&quot;: 426.0,
-        &quot;td_duration_s&quot;: 228149.9310001731,
+        &quot;td_duration_s&quot;: 228149.931,
         &quot;td_voltage_start_v&quot;: 3.8306,
-        &quot;td_voltage_end_v&quot;: 2.49948,
-        &quot;td_voltage_min_v&quot;: 2.49948,
-        &quot;td_voltage_max_v&quot;: 4.07268,
-        &quot;td_voltage_mean_v&quot;: 3.5550384037558684,
-        &quot;td_voltage_std_v&quot;: 0.2741665916299734,
-        &quot;td_current_mean_a&quot;: -0.6040233333333334,
-        &quot;td_current_abs_mean_a&quot;: 0.6040233333333334,
+        &quot;td_voltage_end_v&quot;: 2.4995,
+        &quot;td_voltage_min_v&quot;: 2.4995,
+        &quot;td_voltage_max_v&quot;: 4.0727,
+        &quot;td_voltage_mean_v&quot;: 3.555,
+        &quot;td_voltage_std_v&quot;: 0.27417,
+        &quot;td_current_mean_a&quot;: -0.60402,
+        &quot;td_current_abs_mean_a&quot;: 0.60402,
         &quot;td_current_abs_max_a&quot;: 0.8697,
-        &quot;td_active_fraction&quot;: 0.6948356807511737,
-        &quot;td_charge_throughput_ah&quot;: 0.0,
-        &quot;td_discharge_throughput_ah&quot;: 41.06532749075169
+        &quot;td_active_fraction&quot;: 0.69484,
+        &quot;td_charge_throughput_ah&quot;: 0,
+        &quot;td_discharge_throughput_ah&quot;: 41.0653
       },
       {
         &quot;sample_id&quot;: &quot;dev_raw::panasonic::2&quot;,
@@ -602,19 +706,19 @@
         &quot;soc_percent&quot;: null,
         &quot;temperature_c&quot;: -10.0,
         &quot;td_rows&quot;: 426.0,
-        &quot;td_duration_s&quot;: 228149.9310001731,
+        &quot;td_duration_s&quot;: 228149.931,
         &quot;td_voltage_start_v&quot;: 3.8306,
-        &quot;td_voltage_end_v&quot;: 2.49948,
-        &quot;td_voltage_min_v&quot;: 2.49948,
-        &quot;td_voltage_max_v&quot;: 4.07268,
-        &quot;td_voltage_mean_v&quot;: 3.5550384037558684,
-        &quot;td_voltage_std_v&quot;: 0.2741665916299734,
-        &quot;td_current_mean_a&quot;: -0.6040233333333334,
-        &quot;td_current_abs_mean_a&quot;: 0.6040233333333334,
+        &quot;td_voltage_end_v&quot;: 2.4995,
+        &quot;td_voltage_min_v&quot;: 2.4995,
+        &quot;td_voltage_max_v&quot;: 4.0727,
+        &quot;td_voltage_mean_v&quot;: 3.555,
+        &quot;td_voltage_std_v&quot;: 0.27417,
+        &quot;td_current_mean_a&quot;: -0.60402,
+        &quot;td_current_abs_mean_a&quot;: 0.60402,
         &quot;td_current_abs_max_a&quot;: 0.8697,
-        &quot;td_active_fraction&quot;: 0.6948356807511737,
-        &quot;td_charge_throughput_ah&quot;: 0.0,
-        &quot;td_discharge_throughput_ah&quot;: 41.06532749075169
+        &quot;td_active_fraction&quot;: 0.69484,
+        &quot;td_charge_throughput_ah&quot;: 0,
+        &quot;td_discharge_throughput_ah&quot;: 41.0653
       }
     ],
     &quot;holdout_preview_rows&quot;: [
@@ -626,25 +730,25 @@
         &quot;soc_percent&quot;: 20.0,
         &quot;temperature_c&quot;: 5.0,
         &quot;td_rows&quot;: 168668.0,
-        &quot;td_duration_s&quot;: 160573.400088,
-        &quot;td_voltage_start_v&quot;: 4.167196273803711,
-        &quot;td_voltage_end_v&quot;: 2.826201677322388,
-        &quot;td_voltage_min_v&quot;: 2.499967336654663,
-        &quot;td_voltage_max_v&quot;: 4.242364406585693,
-        &quot;td_voltage_mean_v&quot;: 3.679135297423965,
-        &quot;td_voltage_std_v&quot;: 0.3344375544872495,
-        &quot;td_current_mean_a&quot;: -0.130155400660056,
-        &quot;td_current_abs_mean_a&quot;: 0.836335796956355,
-        &quot;td_current_abs_max_a&quot;: 32.00702667236328,
-        &quot;td_active_fraction&quot;: 0.2038323807716935,
-        &quot;td_charge_throughput_ah&quot;: 5.043743318209656,
-        &quot;td_discharge_throughput_ah&quot;: 8.835726686025142,
-        &quot;target_zreal_0p05hz_ohm&quot;: 0.0348594872030526,
-        &quot;target_znegimag_0p05hz_ohm&quot;: 0.0044220725438761,
-        &quot;target_zreal_0p1hz_ohm&quot;: 0.0335408927945971,
-        &quot;target_znegimag_0p1hz_ohm&quot;: 0.0034966845445866,
-        &quot;target_zreal_0p2hz_ohm&quot;: 0.0324637194049128,
-        &quot;target_znegimag_0p2hz_ohm&quot;: 0.0031164200151977
+        &quot;td_duration_s&quot;: 160573.4001,
+        &quot;td_voltage_start_v&quot;: 4.1672,
+        &quot;td_voltage_end_v&quot;: 2.8262,
+        &quot;td_voltage_min_v&quot;: 2.5,
+        &quot;td_voltage_max_v&quot;: 4.2424,
+        &quot;td_voltage_mean_v&quot;: 3.6791,
+        &quot;td_voltage_std_v&quot;: 0.33444,
+        &quot;td_current_mean_a&quot;: -0.13016,
+        &quot;td_current_abs_mean_a&quot;: 0.83634,
+        &quot;td_current_abs_max_a&quot;: 32.007,
+        &quot;td_active_fraction&quot;: 0.20383,
+        &quot;td_charge_throughput_ah&quot;: 5.0437,
+        &quot;td_discharge_throughput_ah&quot;: 8.8357,
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.03486,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.00442,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.03354,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.0035,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.03246,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.00312
       },
       {
         &quot;sample_id&quot;: &quot;molicell_p42a::A11::5degC::SOC50::2&quot;,
@@ -654,25 +758,25 @@
         &quot;soc_percent&quot;: 50.0,
         &quot;temperature_c&quot;: 5.0,
         &quot;td_rows&quot;: 168668.0,
-        &quot;td_duration_s&quot;: 160573.400088,
-        &quot;td_voltage_start_v&quot;: 4.167196273803711,
-        &quot;td_voltage_end_v&quot;: 2.826201677322388,
-        &quot;td_voltage_min_v&quot;: 2.499967336654663,
-        &quot;td_voltage_max_v&quot;: 4.242364406585693,
-        &quot;td_voltage_mean_v&quot;: 3.679135297423965,
-        &quot;td_voltage_std_v&quot;: 0.3344375544872495,
-        &quot;td_current_mean_a&quot;: -0.130155400660056,
-        &quot;td_current_abs_mean_a&quot;: 0.836335796956355,
-        &quot;td_current_abs_max_a&quot;: 32.00702667236328,
-        &quot;td_active_fraction&quot;: 0.2038323807716935,
-        &quot;td_charge_throughput_ah&quot;: 5.043743318209656,
-        &quot;td_discharge_throughput_ah&quot;: 8.835726686025142,
-        &quot;target_zreal_0p05hz_ohm&quot;: 0.0304134547853784,
-        &quot;target_znegimag_0p05hz_ohm&quot;: 0.0042385666338052,
-        &quot;target_zreal_0p1hz_ohm&quot;: 0.0291386515312195,
-        &quot;target_znegimag_0p1hz_ohm&quot;: 0.0031889156623996,
-        &quot;target_zreal_0p2hz_ohm&quot;: 0.0282077899969896,
-        &quot;target_znegimag_0p2hz_ohm&quot;: 0.0026091736553727
+        &quot;td_duration_s&quot;: 160573.4001,
+        &quot;td_voltage_start_v&quot;: 4.1672,
+        &quot;td_voltage_end_v&quot;: 2.8262,
+        &quot;td_voltage_min_v&quot;: 2.5,
+        &quot;td_voltage_max_v&quot;: 4.2424,
+        &quot;td_voltage_mean_v&quot;: 3.6791,
+        &quot;td_voltage_std_v&quot;: 0.33444,
+        &quot;td_current_mean_a&quot;: -0.13016,
+        &quot;td_current_abs_mean_a&quot;: 0.83634,
+        &quot;td_current_abs_max_a&quot;: 32.007,
+        &quot;td_active_fraction&quot;: 0.20383,
+        &quot;td_charge_throughput_ah&quot;: 5.0437,
+        &quot;td_discharge_throughput_ah&quot;: 8.8357,
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.03041,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.00424,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.02914,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.00319,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.02821,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.00261
       },
       {
         &quot;sample_id&quot;: &quot;molicell_p42a::A11::5degC::SOC80::3&quot;,
@@ -682,25 +786,25 @@
         &quot;soc_percent&quot;: 80.0,
         &quot;temperature_c&quot;: 5.0,
         &quot;td_rows&quot;: 168668.0,
-        &quot;td_duration_s&quot;: 160573.400088,
-        &quot;td_voltage_start_v&quot;: 4.167196273803711,
-        &quot;td_voltage_end_v&quot;: 2.826201677322388,
-        &quot;td_voltage_min_v&quot;: 2.499967336654663,
-        &quot;td_voltage_max_v&quot;: 4.242364406585693,
-        &quot;td_voltage_mean_v&quot;: 3.679135297423965,
-        &quot;td_voltage_std_v&quot;: 0.3344375544872495,
-        &quot;td_current_mean_a&quot;: -0.130155400660056,
-        &quot;td_current_abs_mean_a&quot;: 0.836335796956355,
-        &quot;td_current_abs_max_a&quot;: 32.00702667236328,
-        &quot;td_active_fraction&quot;: 0.2038323807716935,
-        &quot;td_charge_throughput_ah&quot;: 5.043743318209656,
-        &quot;td_discharge_throughput_ah&quot;: 8.835726686025142,
-        &quot;target_zreal_0p05hz_ohm&quot;: 0.0265812259339048,
-        &quot;target_znegimag_0p05hz_ohm&quot;: 0.0043570639097772,
-        &quot;target_zreal_0p1hz_ohm&quot;: 0.0253532407362925,
-        &quot;target_znegimag_0p1hz_ohm&quot;: 0.0031556899411221,
-        &quot;target_zreal_0p2hz_ohm&quot;: 0.0244214717365874,
-        &quot;target_znegimag_0p2hz_ohm&quot;: 0.0023863986491859
+        &quot;td_duration_s&quot;: 160573.4001,
+        &quot;td_voltage_start_v&quot;: 4.1672,
+        &quot;td_voltage_end_v&quot;: 2.8262,
+        &quot;td_voltage_min_v&quot;: 2.5,
+        &quot;td_voltage_max_v&quot;: 4.2424,
+        &quot;td_voltage_mean_v&quot;: 3.6791,
+        &quot;td_voltage_std_v&quot;: 0.33444,
+        &quot;td_current_mean_a&quot;: -0.13016,
+        &quot;td_current_abs_mean_a&quot;: 0.83634,
+        &quot;td_current_abs_max_a&quot;: 32.007,
+        &quot;td_active_fraction&quot;: 0.20383,
+        &quot;td_charge_throughput_ah&quot;: 5.0437,
+        &quot;td_discharge_throughput_ah&quot;: 8.8357,
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.02658,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.00436,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.02535,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.00316,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.02442,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.00239
       }
     ]
   },
@@ -713,118 +817,118 @@
     &quot;derived_features&quot;: &quot;log duration, voltage delta/range/CV, current load factor, total/net throughput, discharge-to-charge ratio&quot;
   },
   &quot;results&quot;: {
-    &quot;baseline_rmse_all_ohm&quot;: 0.009208603939342681,
-    &quot;model_rmse_all_ohm&quot;: 0.007976747730320428,
+    &quot;baseline_rmse_all_ohm&quot;: 0.00921,
+    &quot;model_rmse_all_ohm&quot;: 0.00798,
     &quot;baseline_metrics&quot;: {
-      &quot;rmse_all_ohm&quot;: 0.009208603939342681,
-      &quot;mae_all_ohm&quot;: 0.006881669900694002,
-      &quot;bias_all_ohm&quot;: 0.00501335170239768,
-      &quot;rmse_zreal_ohm&quot;: 0.012125260271127996,
-      &quot;rmse_znegimag_ohm&quot;: 0.004751298388941718,
-      &quot;r2_uniform_average&quot;: -49.20190196068792,
+      &quot;rmse_all_ohm&quot;: 0.00921,
+      &quot;mae_all_ohm&quot;: 0.00688,
+      &quot;bias_all_ohm&quot;: 0.00501,
+      &quot;rmse_zreal_ohm&quot;: 0.01213,
+      &quot;rmse_znegimag_ohm&quot;: 0.00475,
+      &quot;r2_uniform_average&quot;: -49.2019,
       &quot;per_target_rmse_ohm&quot;: {
-        &quot;target_zreal_0p05hz_ohm&quot;: 0.01924383576557271,
-        &quot;target_znegimag_0p05hz_ohm&quot;: 0.007468619270172028,
-        &quot;target_zreal_0p1hz_ohm&quot;: 0.016513042260883237,
-        &quot;target_znegimag_0p1hz_ohm&quot;: 0.007794694793993373,
-        &quot;target_zreal_0p2hz_ohm&quot;: 0.013826501505054148,
-        &quot;target_znegimag_0p2hz_ohm&quot;: 0.007248908544198264,
-        &quot;target_zreal_0p5hz_ohm&quot;: 0.011568956845416038,
-        &quot;target_znegimag_0p5hz_ohm&quot;: 0.005539949151324408,
-        &quot;target_zreal_1hz_ohm&quot;: 0.010308256928484841,
-        &quot;target_znegimag_1hz_ohm&quot;: 0.003995510506374432,
-        &quot;target_zreal_2hz_ohm&quot;: 0.009529935953265166,
-        &quot;target_znegimag_2hz_ohm&quot;: 0.002617314089693452,
-        &quot;target_zreal_5hz_ohm&quot;: 0.00864582926200139,
-        &quot;target_znegimag_5hz_ohm&quot;: 0.0012109538092538797,
-        &quot;target_zreal_10hz_ohm&quot;: 0.008712567657505374,
-        &quot;target_znegimag_10hz_ohm&quot;: 0.00079898137131279,
-        &quot;target_zreal_20hz_ohm&quot;: 0.008844693465369613,
-        &quot;target_znegimag_20hz_ohm&quot;: 0.0006439086608251457,
-        &quot;target_zreal_40hz_ohm&quot;: 0.008731153354277037,
-        &quot;target_znegimag_40hz_ohm&quot;: 0.0007995470079397788
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.01924,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.00747,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.01651,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.00779,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.01383,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.00725,
+        &quot;target_zreal_0p5hz_ohm&quot;: 0.01157,
+        &quot;target_znegimag_0p5hz_ohm&quot;: 0.00554,
+        &quot;target_zreal_1hz_ohm&quot;: 0.01031,
+        &quot;target_znegimag_1hz_ohm&quot;: 0.004,
+        &quot;target_zreal_2hz_ohm&quot;: 0.00953,
+        &quot;target_znegimag_2hz_ohm&quot;: 0.00262,
+        &quot;target_zreal_5hz_ohm&quot;: 0.00865,
+        &quot;target_znegimag_5hz_ohm&quot;: 0.00121,
+        &quot;target_zreal_10hz_ohm&quot;: 0.00871,
+        &quot;target_znegimag_10hz_ohm&quot;: 0.00079898,
+        &quot;target_zreal_20hz_ohm&quot;: 0.00884,
+        &quot;target_znegimag_20hz_ohm&quot;: 0.00064391,
+        &quot;target_zreal_40hz_ohm&quot;: 0.00873,
+        &quot;target_znegimag_40hz_ohm&quot;: 0.00079955
       }
     },
     &quot;model_metrics&quot;: {
-      &quot;rmse_all_ohm&quot;: 0.007976747730320428,
-      &quot;mae_all_ohm&quot;: 0.00561117558827229,
-      &quot;bias_all_ohm&quot;: 0.003467087773493067,
-      &quot;rmse_zreal_ohm&quot;: 0.010595231041889742,
-      &quot;rmse_znegimag_ohm&quot;: 0.003872736484105294,
-      &quot;r2_uniform_average&quot;: -32.94564822455692,
+      &quot;rmse_all_ohm&quot;: 0.00798,
+      &quot;mae_all_ohm&quot;: 0.00561,
+      &quot;bias_all_ohm&quot;: 0.00347,
+      &quot;rmse_zreal_ohm&quot;: 0.0106,
+      &quot;rmse_znegimag_ohm&quot;: 0.00387,
+      &quot;r2_uniform_average&quot;: -32.9456,
       &quot;per_target_rmse_ohm&quot;: {
-        &quot;target_zreal_0p05hz_ohm&quot;: 0.015081825203354526,
-        &quot;target_znegimag_0p05hz_ohm&quot;: 0.006152208738902337,
-        &quot;target_zreal_0p1hz_ohm&quot;: 0.013734902943511663,
-        &quot;target_znegimag_0p1hz_ohm&quot;: 0.006403025765598983,
-        &quot;target_zreal_0p2hz_ohm&quot;: 0.011908453608097173,
-        &quot;target_znegimag_0p2hz_ohm&quot;: 0.0058917482811280154,
-        &quot;target_zreal_0p5hz_ohm&quot;: 0.01017779993923242,
-        &quot;target_znegimag_0p5hz_ohm&quot;: 0.004303752208182305,
-        &quot;target_zreal_1hz_ohm&quot;: 0.009607234834382661,
-        &quot;target_znegimag_1hz_ohm&quot;: 0.003118605640203032,
-        &quot;target_zreal_2hz_ohm&quot;: 0.009052581292930377,
-        &quot;target_znegimag_2hz_ohm&quot;: 0.002054634028561728,
-        &quot;target_zreal_5hz_ohm&quot;: 0.008388615972323744,
-        &quot;target_znegimag_5hz_ohm&quot;: 0.0011120540783261298,
-        &quot;target_zreal_10hz_ohm&quot;: 0.008404041076057994,
-        &quot;target_znegimag_10hz_ohm&quot;: 0.000935903821393325,
-        &quot;target_zreal_20hz_ohm&quot;: 0.008583290907813556,
-        &quot;target_znegimag_20hz_ohm&quot;: 0.0008261578301247014,
-        &quot;target_zreal_40hz_ohm&quot;: 0.008494908043253572,
-        &quot;target_znegimag_40hz_ohm&quot;: 0.0010747778500303715
+        &quot;target_zreal_0p05hz_ohm&quot;: 0.01508,
+        &quot;target_znegimag_0p05hz_ohm&quot;: 0.00615,
+        &quot;target_zreal_0p1hz_ohm&quot;: 0.01373,
+        &quot;target_znegimag_0p1hz_ohm&quot;: 0.0064,
+        &quot;target_zreal_0p2hz_ohm&quot;: 0.01191,
+        &quot;target_znegimag_0p2hz_ohm&quot;: 0.00589,
+        &quot;target_zreal_0p5hz_ohm&quot;: 0.01018,
+        &quot;target_znegimag_0p5hz_ohm&quot;: 0.0043,
+        &quot;target_zreal_1hz_ohm&quot;: 0.00961,
+        &quot;target_znegimag_1hz_ohm&quot;: 0.00312,
+        &quot;target_zreal_2hz_ohm&quot;: 0.00905,
+        &quot;target_znegimag_2hz_ohm&quot;: 0.00205,
+        &quot;target_zreal_5hz_ohm&quot;: 0.00839,
+        &quot;target_znegimag_5hz_ohm&quot;: 0.00111,
+        &quot;target_zreal_10hz_ohm&quot;: 0.0084,
+        &quot;target_znegimag_10hz_ohm&quot;: 0.0009359,
+        &quot;target_zreal_20hz_ohm&quot;: 0.00858,
+        &quot;target_znegimag_20hz_ohm&quot;: 0.00082616,
+        &quot;target_zreal_40hz_ohm&quot;: 0.00849,
+        &quot;target_znegimag_40hz_ohm&quot;: 0.00107
       }
     },
     &quot;per_frequency_rmse_ohm&quot;: [
       {
         &quot;frequency_hz&quot;: 0.05,
-        &quot;baseline_rmse_ohm&quot;: 0.014596326400418708,
-        &quot;model_rmse_ohm&quot;: 0.011517619628889602
+        &quot;baseline_rmse_ohm&quot;: 0.0146,
+        &quot;model_rmse_ohm&quot;: 0.01152
       },
       {
         &quot;frequency_hz&quot;: 0.1,
-        &quot;baseline_rmse_ohm&quot;: 0.01291196792981657,
-        &quot;model_rmse_ohm&quot;: 0.010715556397654062
+        &quot;baseline_rmse_ohm&quot;: 0.01291,
+        &quot;model_rmse_ohm&quot;: 0.01072
       },
       {
         &quot;frequency_hz&quot;: 0.2,
-        &quot;baseline_rmse_ohm&quot;: 0.011038994948622254,
-        &quot;model_rmse_ohm&quot;: 0.009394784860346124
+        &quot;baseline_rmse_ohm&quot;: 0.01104,
+        &quot;model_rmse_ohm&quot;: 0.00939
       },
       {
         &quot;frequency_hz&quot;: 0.5,
-        &quot;baseline_rmse_ohm&quot;: 0.00907005510155144,
-        &quot;model_rmse_ohm&quot;: 0.007813766526857375
+        &quot;baseline_rmse_ohm&quot;: 0.00907,
+        &quot;model_rmse_ohm&quot;: 0.00781
       },
       {
         &quot;frequency_hz&quot;: 1.0,
-        &quot;baseline_rmse_ohm&quot;: 0.0078174249312099,
-        &quot;model_rmse_ohm&quot;: 0.0071422917296229856
+        &quot;baseline_rmse_ohm&quot;: 0.00782,
+        &quot;model_rmse_ohm&quot;: 0.00714
       },
       {
         &quot;frequency_hz&quot;: 2.0,
-        &quot;baseline_rmse_ohm&quot;: 0.006988204787978238,
-        &quot;model_rmse_ohm&quot;: 0.006563945043052873
+        &quot;baseline_rmse_ohm&quot;: 0.00699,
+        &quot;model_rmse_ohm&quot;: 0.00656
       },
       {
         &quot;frequency_hz&quot;: 5.0,
-        &quot;baseline_rmse_ohm&quot;: 0.006173199039226986,
-        &quot;model_rmse_ohm&quot;: 0.005983541685500603
+        &quot;baseline_rmse_ohm&quot;: 0.00617,
+        &quot;model_rmse_ohm&quot;: 0.00598
       },
       {
         &quot;frequency_hz&quot;: 10.0,
-        &quot;baseline_rmse_ohm&quot;: 0.0061865663505014466,
-        &quot;model_rmse_ohm&quot;: 0.005979290190773845
+        &quot;baseline_rmse_ohm&quot;: 0.00619,
+        &quot;model_rmse_ohm&quot;: 0.00598
       },
       {
         &quot;frequency_hz&quot;: 20.0,
-        &quot;baseline_rmse_ohm&quot;: 0.006270694573164825,
-        &quot;model_rmse_ohm&quot;: 0.006097352686553043
+        &quot;baseline_rmse_ohm&quot;: 0.00627,
+        &quot;model_rmse_ohm&quot;: 0.0061
       },
       {
         &quot;frequency_hz&quot;: 40.0,
-        &quot;baseline_rmse_ohm&quot;: 0.006199690085553011,
-        &quot;model_rmse_ohm&quot;: 0.006054692811788644
+        &quot;baseline_rmse_ohm&quot;: 0.0062,
+        &quot;model_rmse_ohm&quot;: 0.00605
       }
     ],
     &quot;representative_spectrum&quot;: {
@@ -836,97 +940,97 @@
       &quot;points&quot;: [
         {
           &quot;frequency_hz&quot;: 0.05,
-          &quot;true_zreal_ohm&quot;: 0.0348594872030526,
-          &quot;true_znegimag_ohm&quot;: 0.0044220725438761,
-          &quot;baseline_zreal_ohm&quot;: 0.04908180304790199,
-          &quot;baseline_znegimag_ohm&quot;: 0.011699323828008116,
-          &quot;model_zreal_ohm&quot;: 0.04387964243832159,
-          &quot;model_znegimag_ohm&quot;: 0.010376192395739827
+          &quot;true_zreal_ohm&quot;: 0.03486,
+          &quot;true_znegimag_ohm&quot;: 0.00442,
+          &quot;baseline_zreal_ohm&quot;: 0.04908,
+          &quot;baseline_znegimag_ohm&quot;: 0.0117,
+          &quot;model_zreal_ohm&quot;: 0.04388,
+          &quot;model_znegimag_ohm&quot;: 0.01038
         },
         {
           &quot;frequency_hz&quot;: 0.1,
-          &quot;true_zreal_ohm&quot;: 0.0335408927945971,
-          &quot;true_znegimag_ohm&quot;: 0.0034966845445866,
-          &quot;baseline_zreal_ohm&quot;: 0.044632228626750266,
-          &quot;baseline_znegimag_ohm&quot;: 0.010900076904499836,
-          &quot;model_zreal_ohm&quot;: 0.04111144956806688,
-          &quot;model_znegimag_ohm&quot;: 0.00952272819026653
+          &quot;true_zreal_ohm&quot;: 0.03354,
+          &quot;true_znegimag_ohm&quot;: 0.0035,
+          &quot;baseline_zreal_ohm&quot;: 0.04463,
+          &quot;baseline_znegimag_ohm&quot;: 0.0109,
+          &quot;model_zreal_ohm&quot;: 0.04111,
+          &quot;model_znegimag_ohm&quot;: 0.00952
         },
         {
           &quot;frequency_hz&quot;: 0.2,
-          &quot;true_zreal_ohm&quot;: 0.0324637194049128,
-          &quot;true_znegimag_ohm&quot;: 0.0031164200151977,
-          &quot;baseline_zreal_ohm&quot;: 0.04024156464556086,
-          &quot;baseline_znegimag_ohm&quot;: 0.009736227595408192,
-          &quot;model_zreal_ohm&quot;: 0.03739721740203748,
-          &quot;model_znegimag_ohm&quot;: 0.00838868831151836
+          &quot;true_zreal_ohm&quot;: 0.03246,
+          &quot;true_znegimag_ohm&quot;: 0.00312,
+          &quot;baseline_zreal_ohm&quot;: 0.04024,
+          &quot;baseline_znegimag_ohm&quot;: 0.00974,
+          &quot;model_zreal_ohm&quot;: 0.0374,
+          &quot;model_znegimag_ohm&quot;: 0.00839
         },
         {
           &quot;frequency_hz&quot;: 0.5,
-          &quot;true_zreal_ohm&quot;: 0.0311286825020031,
-          &quot;true_znegimag_ohm&quot;: 0.003282219701099,
-          &quot;baseline_zreal_ohm&quot;: 0.03596237699188536,
-          &quot;baseline_znegimag_ohm&quot;: 0.00783548062056227,
-          &quot;model_zreal_ohm&quot;: 0.032998501593508284,
-          &quot;model_znegimag_ohm&quot;: 0.0065815178297831504
+          &quot;true_zreal_ohm&quot;: 0.03113,
+          &quot;true_znegimag_ohm&quot;: 0.00328,
+          &quot;baseline_zreal_ohm&quot;: 0.03596,
+          &quot;baseline_znegimag_ohm&quot;: 0.00784,
+          &quot;model_zreal_ohm&quot;: 0.033,
+          &quot;model_znegimag_ohm&quot;: 0.00658
         },
         {
           &quot;frequency_hz&quot;: 1.0,
-          &quot;true_zreal_ohm&quot;: 0.0296642381327686,
-          &quot;true_znegimag_ohm&quot;: 0.0041536712710108,
-          &quot;baseline_zreal_ohm&quot;: 0.03309743676404969,
-          &quot;baseline_znegimag_ohm&quot;: 0.0064634236968912516,
-          &quot;model_zreal_ohm&quot;: 0.03128448274457307,
-          &quot;model_znegimag_ohm&quot;: 0.005536672290846335
+          &quot;true_zreal_ohm&quot;: 0.02966,
+          &quot;true_znegimag_ohm&quot;: 0.00415,
+          &quot;baseline_zreal_ohm&quot;: 0.0331,
+          &quot;baseline_znegimag_ohm&quot;: 0.00646,
+          &quot;model_zreal_ohm&quot;: 0.03128,
+          &quot;model_znegimag_ohm&quot;: 0.00554
         },
         {
           &quot;frequency_hz&quot;: 2.0,
-          &quot;true_zreal_ohm&quot;: 0.0275019881974106,
-          &quot;true_znegimag_ohm&quot;: 0.0050472618247648,
-          &quot;baseline_zreal_ohm&quot;: 0.03098933957888932,
-          &quot;baseline_znegimag_ohm&quot;: 0.005362491947570908,
-          &quot;model_zreal_ohm&quot;: 0.029448285727184963,
-          &quot;model_znegimag_ohm&quot;: 0.0046519604010774466
+          &quot;true_zreal_ohm&quot;: 0.0275,
+          &quot;true_znegimag_ohm&quot;: 0.00505,
+          &quot;baseline_zreal_ohm&quot;: 0.03099,
+          &quot;baseline_znegimag_ohm&quot;: 0.00536,
+          &quot;model_zreal_ohm&quot;: 0.02945,
+          &quot;model_znegimag_ohm&quot;: 0.00465
         },
         {
           &quot;frequency_hz&quot;: 5.0,
-          &quot;true_zreal_ohm&quot;: 0.0240001749075568,
-          &quot;true_znegimag_ohm&quot;: 0.005071122699789,
-          &quot;baseline_zreal_ohm&quot;: 0.027484252225287165,
-          &quot;baseline_znegimag_ohm&quot;: 0.004126989461966167,
-          &quot;model_zreal_ohm&quot;: 0.025778335113563065,
-          &quot;model_znegimag_ohm&quot;: 0.0035399915695729337
+          &quot;true_zreal_ohm&quot;: 0.024,
+          &quot;true_znegimag_ohm&quot;: 0.00507,
+          &quot;baseline_zreal_ohm&quot;: 0.02748,
+          &quot;baseline_znegimag_ohm&quot;: 0.00413,
+          &quot;model_zreal_ohm&quot;: 0.02578,
+          &quot;model_znegimag_ohm&quot;: 0.00354
         },
         {
           &quot;frequency_hz&quot;: 10.0,
-          &quot;true_zreal_ohm&quot;: 0.0217541159831534,
-          &quot;true_znegimag_ohm&quot;: 0.0047855026061837,
-          &quot;baseline_zreal_ohm&quot;: 0.02636318023455104,
-          &quot;baseline_znegimag_ohm&quot;: 0.0038380214438058827,
-          &quot;model_zreal_ohm&quot;: 0.02532214418764083,
-          &quot;model_znegimag_ohm&quot;: 0.003337350488378033
+          &quot;true_zreal_ohm&quot;: 0.02175,
+          &quot;true_znegimag_ohm&quot;: 0.00479,
+          &quot;baseline_zreal_ohm&quot;: 0.02636,
+          &quot;baseline_znegimag_ohm&quot;: 0.00384,
+          &quot;model_zreal_ohm&quot;: 0.02532,
+          &quot;model_znegimag_ohm&quot;: 0.00334
         },
         {
           &quot;frequency_hz&quot;: 20.0,
-          &quot;true_zreal_ohm&quot;: 0.0196679896398897,
-          &quot;true_znegimag_ohm&quot;: 0.0046021421453341,
-          &quot;baseline_zreal_ohm&quot;: 0.0251004988742542,
-          &quot;baseline_znegimag_ohm&quot;: 0.0036728882536165206,
-          &quot;model_zreal_ohm&quot;: 0.02433464917803798,
-          &quot;model_znegimag_ohm&quot;: 0.0033116229568727435
+          &quot;true_zreal_ohm&quot;: 0.01967,
+          &quot;true_znegimag_ohm&quot;: 0.0046,
+          &quot;baseline_zreal_ohm&quot;: 0.0251,
+          &quot;baseline_znegimag_ohm&quot;: 0.00367,
+          &quot;model_zreal_ohm&quot;: 0.02433,
+          &quot;model_znegimag_ohm&quot;: 0.00331
         },
         {
           &quot;frequency_hz&quot;: 40.0,
-          &quot;true_zreal_ohm&quot;: 0.0175736422015022,
-          &quot;true_znegimag_ohm&quot;: 0.0043120243929142,
-          &quot;baseline_zreal_ohm&quot;: 0.023090262592865764,
-          &quot;baseline_znegimag_ohm&quot;: 0.0031607805680249285,
-          &quot;model_zreal_ohm&quot;: 0.022348617245310974,
-          &quot;model_znegimag_ohm&quot;: 0.002830353445363616
+          &quot;true_zreal_ohm&quot;: 0.01757,
+          &quot;true_znegimag_ohm&quot;: 0.00431,
+          &quot;baseline_zreal_ohm&quot;: 0.02309,
+          &quot;baseline_znegimag_ohm&quot;: 0.00316,
+          &quot;model_zreal_ohm&quot;: 0.02235,
+          &quot;model_znegimag_ohm&quot;: 0.00283
         }
       ]
     },
-    &quot;relative_rmse_improvement_fraction&quot;: 0.13377230871655704,
+    &quot;relative_rmse_improvement_fraction&quot;: 0.13377,
     &quot;demo_verdict&quot;: &quot;working_demo_model_beats_baseline&quot;,
     &quot;kk_valid_fraction&quot;: 1.0,
     &quot;kk_valid_rows&quot;: 30,
@@ -939,8 +1043,8 @@
       &quot;kk_status_counts&quot;: {
         &quot;pass&quot;: 30
       },
-      &quot;kk_residual_norm_median&quot;: 0.015137999165960751,
-      &quot;kk_residual_norm_p95&quot;: 0.02031451261112053,
+      &quot;kk_residual_norm_median&quot;: 0.01514,
+      &quot;kk_residual_norm_p95&quot;: 0.02031,
       &quot;kk_residual_limit&quot;: 0.08,
       &quot;frequency_grid_hz&quot;: [
         0.05,
@@ -971,17 +1075,17 @@
         &quot;kk_points&quot;: 10,
         &quot;kk_frequency_min_hz&quot;: 0.05,
         &quot;kk_frequency_max_hz&quot;: 40.0,
-        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_frequency_decades&quot;: 2.9031,
         &quot;kk_tau_count&quot;: 8,
-        &quot;kk_residual_rmse_ohm&quot;: 0.0001714034089656992,
-        &quot;kk_residual_norm&quot;: 0.01513845780363353,
+        &quot;kk_residual_rmse_ohm&quot;: 0.0001714,
+        &quot;kk_residual_norm&quot;: 0.01514,
         &quot;kk_residual_limit&quot;: 0.08,
-        &quot;kk_max_abs_residual_ohm&quot;: 0.0005392705736851078,
-        &quot;kk_rinf_ohm&quot;: 0.01521873490392538,
-        &quot;kk_inductance_h&quot;: -2.7943702350440677e-06,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.00053927,
+        &quot;kk_rinf_ohm&quot;: 0.01522,
+        &quot;kk_inductance_h&quot;: -2.7944e-06,
         &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
-        &quot;kk_model_zreal_mean_ohm&quot;: 0.027215493096684723,
-        &quot;kk_model_znegimag_mean_ohm&quot;: 0.004158513523409116
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.02722,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.00416
       },
       {
         &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
@@ -997,17 +1101,17 @@
         &quot;kk_points&quot;: 10,
         &quot;kk_frequency_min_hz&quot;: 0.05,
         &quot;kk_frequency_max_hz&quot;: 40.0,
-        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_frequency_decades&quot;: 2.9031,
         &quot;kk_tau_count&quot;: 8,
-        &quot;kk_residual_rmse_ohm&quot;: 0.00017462139194888992,
-        &quot;kk_residual_norm&quot;: 0.015847794305232067,
+        &quot;kk_residual_rmse_ohm&quot;: 0.00017462,
+        &quot;kk_residual_norm&quot;: 0.01585,
         &quot;kk_residual_limit&quot;: 0.08,
-        &quot;kk_max_abs_residual_ohm&quot;: 0.0005447975461422422,
-        &quot;kk_rinf_ohm&quot;: 0.01561793950339021,
-        &quot;kk_inductance_h&quot;: -3.890377245742439e-06,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.0005448,
+        &quot;kk_rinf_ohm&quot;: 0.01562,
+        &quot;kk_inductance_h&quot;: -3.8904e-06,
         &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
-        &quot;kk_model_zreal_mean_ohm&quot;: 0.02495843001822193,
-        &quot;kk_model_znegimag_mean_ohm&quot;: 0.0032947297754958036
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.02496,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.00329
       },
       {
         &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
@@ -1023,17 +1127,17 @@
         &quot;kk_points&quot;: 10,
         &quot;kk_frequency_min_hz&quot;: 0.05,
         &quot;kk_frequency_max_hz&quot;: 40.0,
-        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_frequency_decades&quot;: 2.9031,
         &quot;kk_tau_count&quot;: 8,
-        &quot;kk_residual_rmse_ohm&quot;: 0.0001811146547904749,
-        &quot;kk_residual_norm&quot;: 0.01730757337361001,
+        &quot;kk_residual_rmse_ohm&quot;: 0.00018111,
+        &quot;kk_residual_norm&quot;: 0.01731,
         &quot;kk_residual_limit&quot;: 0.08,
-        &quot;kk_max_abs_residual_ohm&quot;: 0.0005769542082287409,
-        &quot;kk_rinf_ohm&quot;: 0.01492221746144279,
-        &quot;kk_inductance_h&quot;: -2.4262207881666175e-06,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.00057695,
+        &quot;kk_rinf_ohm&quot;: 0.01492,
+        &quot;kk_inductance_h&quot;: -2.4262e-06,
         &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
-        &quot;kk_model_zreal_mean_ohm&quot;: 0.021894469815308057,
-        &quot;kk_model_znegimag_mean_ohm&quot;: 0.0026659404900953934
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.02189,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.00267
       },
       {
         &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
@@ -1049,17 +1153,17 @@
         &quot;kk_points&quot;: 10,
         &quot;kk_frequency_min_hz&quot;: 0.05,
         &quot;kk_frequency_max_hz&quot;: 40.0,
-        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_frequency_decades&quot;: 2.9031,
         &quot;kk_tau_count&quot;: 8,
-        &quot;kk_residual_rmse_ohm&quot;: 0.00017826717775558618,
-        &quot;kk_residual_norm&quot;: 0.014761428718598505,
+        &quot;kk_residual_rmse_ohm&quot;: 0.00017827,
+        &quot;kk_residual_norm&quot;: 0.01476,
         &quot;kk_residual_limit&quot;: 0.08,
-        &quot;kk_max_abs_residual_ohm&quot;: 0.000561178885984899,
-        &quot;kk_rinf_ohm&quot;: 0.016211181755421626,
-        &quot;kk_inductance_h&quot;: -2.929242226327641e-06,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.00056118,
+        &quot;kk_rinf_ohm&quot;: 0.01621,
+        &quot;kk_inductance_h&quot;: -2.9292e-06,
         &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
-        &quot;kk_model_zreal_mean_ohm&quot;: 0.028792129765711983,
-        &quot;kk_model_znegimag_mean_ohm&quot;: 0.0042710629087143095
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.02879,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.00427
       },
       {
         &quot;matrix&quot;: &quot;demo_molicell_subset&quot;,
@@ -1075,25 +1179,33 @@
         &quot;kk_points&quot;: 10,
         &quot;kk_frequency_min_hz&quot;: 0.05,
         &quot;kk_frequency_max_hz&quot;: 40.0,
-        &quot;kk_frequency_decades&quot;: 2.9030899869919438,
+        &quot;kk_frequency_decades&quot;: 2.9031,
         &quot;kk_tau_count&quot;: 8,
-        &quot;kk_residual_rmse_ohm&quot;: 0.0001839777522567359,
-        &quot;kk_residual_norm&quot;: 0.01672793542833163,
+        &quot;kk_residual_rmse_ohm&quot;: 0.00018398,
+        &quot;kk_residual_norm&quot;: 0.01673,
         &quot;kk_residual_limit&quot;: 0.08,
-        &quot;kk_max_abs_residual_ohm&quot;: 0.0005801137739446759,
-        &quot;kk_rinf_ohm&quot;: 0.01602317717231254,
-        &quot;kk_inductance_h&quot;: -3.2447752125310678e-06,
+        &quot;kk_max_abs_residual_ohm&quot;: 0.00058011,
+        &quot;kk_rinf_ohm&quot;: 0.01602,
+        &quot;kk_inductance_h&quot;: -3.2448e-06,
         &quot;kk_negative_rc_weight_fraction&quot;: 0.25,
-        &quot;kk_model_zreal_mean_ohm&quot;: 0.02373715897404921,
-        &quot;kk_model_znegimag_mean_ohm&quot;: 0.0025483852159546216
+        &quot;kk_model_zreal_mean_ohm&quot;: 0.02374,
+        &quot;kk_model_znegimag_mean_ohm&quot;: 0.00255
       }
     ]
   },
   &quot;outputs&quot;: {
     &quot;results_json&quot;: &quot;[local path redacted]
     &quot;presentation_html&quot;: &quot;[local path redacted]
+    &quot;code_bundle&quot;: &quot;[local path redacted]
+    &quot;data_bundle&quot;: &quot;[local path redacted]
   }
 }</code></pre>
+  </section>
+
+  <section id="glossary">
+    <h2>Glossary</h2>
+    <p>This glossary defines the terms used in the page so an external user can read the pipeline without guessing what each abbreviation or metric means.</p>
+    <div class="table-scroll"><table><tbody><tr><td><strong>EIS</strong></td><td>Electrochemical impedance spectroscopy, a frequency-domain measurement of battery impedance.</td></tr><tr><td><strong>DRT</strong></td><td>Distribution of relaxation times. Used in the broader project to interpret impedance-like behavior.</td></tr><tr><td><strong>Fixed-grid EIS</strong></td><td>A spectrum represented on the same frequency grid for every row, so supervised models can compare like with like.</td></tr><tr><td><strong>Zreal</strong></td><td>The real component of impedance, stored as ohm values.</td></tr><tr><td><strong>-Zimag</strong></td><td>The negative imaginary impedance component. Battery EIS plots commonly use the negative sign for readability.</td></tr><tr><td><strong>Kramer-Kronig</strong></td><td>A consistency check for causal, linear, stable impedance behavior. Here it is a quality screen, not proof of model validity.</td></tr><tr><td><strong>RMSE</strong></td><td>Root mean squared error. Lower means the predicted impedance vector is closer to the target vector.</td></tr><tr><td><strong>Baseline</strong></td><td>The boring comparison model. Here it predicts the train-set mean target vector.</td></tr><tr><td><strong>KNN</strong></td><td>K-nearest neighbors. Here it predicts from nearby time-domain feature rows after scaling and imputation.</td></tr><tr><td><strong>Shrinkage blend</strong></td><td>The demo prediction uses 80 percent mean baseline and 20 percent KNN prediction to avoid overclaiming from a small demo.</td></tr><tr><td><strong>Holdout</strong></td><td>Rows held out from tuning and used only for scoring in this demo path.</td></tr><tr><td><strong>Leakage</strong></td><td>Invalid information flow from evaluation data into training or model selection.</td></tr><tr><td><strong>External user</strong></td><td>A reader outside the implementation loop who needs enough context to judge the demo without running it.</td></tr></tbody></table></div>
   </section>
 
   <section id="limits">
@@ -1106,14 +1218,14 @@
 
   <section id="conclusion" class="note">
     <h2>Conclusion</h2>
-    <p>The demo pipeline is now packaged as a self-contained technical page. It includes the objective, example, goal, input rows, output payload, vector target definition, LaTeX equations, scoring math, KK quality screen, SVG graphs, source code snippets, numerical results, and claim boundary. The local demo is ready for stakeholder review. VM execution stays deferred until the colleague-provided VM is available.</p>
+    <p>The demo pipeline is now packaged as a self-contained technical page. It follows the objective, methodology, results, conclusion structure and includes input rows, output payload, vector target definition, LaTeX equations, scoring math, KK quality screen, SVG graphs, source code snippets, numerical results, glossary, and claim boundary. The local demo is ready for external-user review. VM execution stays deferred until the colleague-provided VM is available.</p>
   </section>
 
   <section>
     <h2>Data Contract</h2>
     <p>This final table repeats the compact contract for readers who want the short version after the full walkthrough.</p>
     <table>
-      <thead><tr><th>Layer</th><th>Current demo value</th><th>Why stakeholders should care</th></tr></thead>
+      <thead><tr><th>Layer</th><th>Current demo value</th><th>Why external users should care</th></tr></thead>
       <tbody>
         <tr><td>Train rows</td><td>120</td><td>Training rows come from development data only.</td></tr>
         <tr><td>Holdout rows</td><td>30</td><td>The demo scores a bounded Molicell subset. No random row split.</td></tr>
@@ -1124,5 +1236,7 @@
     </table>
   </section>
 </main>
+  </div>
+</div>
 </body>
 </html>
