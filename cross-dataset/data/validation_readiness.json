@@ -1,0 +1,47 @@
+{
+  "cambridge_validation_ready": false,
+  "verdict": "cambridge_partial_support",
+  "reason": "Locked model beat the locked global-mean baseline overall, but did not meet the predeclared external-support margin/components rule.",
+  "gates": {
+    "cambridge_excluded_from_training_and_scoring": true,
+    "no_random_row_split": true,
+    "whole_dataset_holdout_used": true,
+    "baseline_results_written": true,
+    "model_results_written": true,
+    "simple_model_beats_best_baseline": true,
+    "full_eis_target_training_implemented": true,
+    "raw_time_domain_feature_extraction_across_dev_datasets_implemented": true,
+    "raw_feature_target_smoke_matrix_written": true,
+    "raw_feature_target_smoke_complete_target_rows": 30,
+    "raw_feature_target_smoke_cambridge_used": false,
+    "raw_feature_target_full_matrix_written": true,
+    "raw_feature_target_full_complete_target_rows": 671,
+    "raw_feature_target_full_cambridge_used": false,
+    "stanford_used_as_development_evaluation_data": true,
+    "best_model_dev_tuned_on_stanford": true,
+    "cambridge_scored_once": true,
+    "cambridge_rows_scored": 20594,
+    "cambridge_post_outcome_tuning_performed": false,
+    "frozen_config_used": true,
+    "cambridge_no_random_row_split": true
+  },
+  "best_baseline": {
+    "name": "global_train_target_mean",
+    "rmse_all_ohm": 0.0044402816104454155
+  },
+  "best_model": {
+    "name": "knn_5_global_mean_shrinkage_dev_tuned",
+    "rmse_all_ohm": 0.0040249645317227255
+  },
+  "next_required_work": [
+    "Do not retune this validation run. Any further model changes must be labeled post-Cambridge development.",
+    "If publishing, state the Cambridge verdict exactly and keep Stanford labeled as development/evaluation data."
+  ],
+  "cambridge_validation_completed": true,
+  "cambridge_validation_result": {
+    "verdict": "partial_support",
+    "baseline_rmse_all_ohm": 1.1390269531133854,
+    "model_rmse_all_ohm": 1.1200309137511784,
+    "relative_rmse_improvement_fraction": 0.016677427439520904
+  }
+}

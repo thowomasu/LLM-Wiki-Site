@@ -338,7 +338,7 @@
 
     <h2 id="one-minute">One-Minute Version</h2>
     <p>We started with a rough idea: estimate DRT-like relaxation behavior from time-domain current and voltage data, then compare it with EIS-derived DRT. The early broad 2D comparisons were weak. Voltage fits could look decent while the gamma-shape agreement stayed poor. That was a warning sign.</p>
-    <p>The useful turn came when the work narrowed from broad "time-series DRT works" claims to a stricter pulse-to-EIS bridge on matched CALB HPPC and EIS records. The final Section 33 adaptive tau-constrained rule passes all internal CALB rows across 10, 25, and 40 C. That is the strongest result.</p>
+    <p>The useful turn came when the work narrowed from broad "time-series DRT works" claims to a stricter pulse-to-EIS bridge on matched CALB HPPC and EIS records. The final frozen pulse-to-EIS rule adaptive tau-constrained rule passes all internal CALB rows across 10, 25, and 40 C. That is the strongest result.</p>
     <p>The weak spot is transfer. Drive-cycle transfer does not beat a stronger ECM baseline, and the external dataset checks do not yet validate the frozen CALB rule. So the meeting line is simple: internal bridge evidence is strong, external validation is not solved, and the next decision is what evidence standard the professor wants before this becomes write-up material.</p>
 
     <h2 id="progress">Current Progress Snapshot</h2>
@@ -346,12 +346,12 @@
       <article class="card">
         <div class="kicker">Internal CALB bridge</div>
         <span class="metric good">246 / 246</span>
-        <p>Section 33 quality-pass rows across 10, 25, and 40 C. Median bridge correlation is <code>0.928</code>, median OCV delta is about <code>3.3 mV</code>, and median time fit RMSE is about <code>3.1 mV</code>.</p>
+        <p>frozen pulse-to-EIS rule quality-pass rows across 10, 25, and 40 C. Median bridge correlation is <code>0.928</code>, median OCV delta is about <code>3.3 mV</code>, and median time fit RMSE is about <code>3.1 mV</code>.</p>
       </article>
       <article class="card">
         <div class="kicker">Drive-cycle transfer</div>
         <span class="metric bad">12.1%</span>
-        <p>Fixed DRT wins against the stronger Section 36 ECM baseline on only <code>0.121</code> of drive-cycle rows. Section 34 looked better, but Section 36 is the harder and fairer test.</p>
+        <p>Fixed DRT wins against the stronger drive-cycle ECM baseline check ECM baseline on only <code>0.121</code> of drive-cycle rows. drive-cycle transfer test looked better, but drive-cycle ECM baseline check is the harder and fairer test.</p>
       </article>
       <article class="card">
         <div class="kicker">External validation</div>
@@ -369,7 +369,7 @@
       </article>
       <article class="card">
         <h3>Scientific Claim</h3>
-        <p>The narrow claim is that matched CALB pulse windows can reproduce an EIS-aligned relaxation signature under the final Section 33 rule. The broad claim, that this transfers cleanly to drive cycles or external datasets, is not supported yet.</p>
+        <p>The narrow claim is that matched CALB pulse windows can reproduce an EIS-aligned relaxation signature under the final frozen pulse-to-EIS rule. The broad claim, that this transfers cleanly to drive cycles or external datasets, is not supported yet.</p>
         <p>This distinction is the whole project right now. If you blur it, the work sounds better for ten seconds and then collapses under questions.</p>
       </article>
     </section>
@@ -400,7 +400,7 @@
           <td>The useful problem is narrower than the original ambition. Narrow is fine if it is true.</td>
         </tr>
         <tr>
-          <td>Final adaptive Section 33 rule</td>
+          <td>Final adaptive frozen pulse-to-EIS rule</td>
           <td>The final rule passes all 246 internal CALB rows, with only 2 fallback rows.</td>
           <td>This is the current best internal result and the one worth showing first.</td>
         </tr>
@@ -414,25 +414,25 @@
 
     <h2 id="evidence">Evidence To Show</h2>
     <figure>
-      <img src="../01_Graphs/Section_33_Final_Rule_Adaptive_MultiTemp/section_33_adaptive_final_rule_multitemp.png" alt="Section 33 adaptive final rule multi-temperature result">
+      <img src="../01_Graphs/Section_33_Final_Rule_Adaptive_MultiTemp/section_33_adaptive_final_rule_multitemp.png" alt="frozen pulse-to-EIS rule adaptive final rule multi-temperature result">
       <figcaption>Show this first. This is the strongest result: the adaptive final internal CALB pulse bridge passes all 246 rows across the temperature grid. Explain that this is internal CALB evidence, not external validation.</figcaption>
     </figure>
     <figure>
-      <img src="../01_Graphs/Section_36_Drive_Cycle_ECM_Baseline/section_36_drive_cycle_ecm_baseline.png" alt="Section 36 drive-cycle ECM baseline audit">
-      <figcaption>Show this before someone asks. Section 34 looked supportive, but Section 36 compares against a stronger drive-cycle-fitted ECM baseline. The fixed DRT method loses that harder comparison.</figcaption>
+      <img src="../01_Graphs/Section_36_Drive_Cycle_ECM_Baseline/section_36_drive_cycle_ecm_baseline.png" alt="drive-cycle ECM baseline check drive-cycle ECM baseline audit">
+      <figcaption>Show this before someone asks. drive-cycle transfer test looked supportive, but drive-cycle ECM baseline check compares against a stronger drive-cycle-fitted ECM baseline. The fixed DRT method loses that harder comparison.</figcaption>
     </figure>
     <figure>
-      <img src="../01_Graphs/Section_37_SOC_Alignment_Audit/section_37_soc_alignment_audit.png" alt="Section 37 SOC alignment audit">
+      <img src="../01_Graphs/Section_37_SOC_Alignment_Audit/section_37_soc_alignment_audit.png" alt="SOC alignment audit SOC alignment audit">
       <figcaption>This explains the failure mode. The pulse bridge rows are tightly state-aligned, while the drive-cycle rows have much worse SOC alignment. That makes broad transfer claims risky.</figcaption>
     </figure>
 
     <h2 id="external">External Dataset Checks</h2>
-    <p>The external work is dataset qualification plus frozen-rule adapter testing. The important guardrail is that the Section 33 rule should not be tuned after looking at external data. If we tune on the validation dataset, the result becomes self-deception with nicer plots.</p>
+    <p>The external work is dataset qualification plus frozen-rule adapter testing. The important guardrail is that the frozen pulse-to-EIS rule should not be tuned after looking at external data. If we tune on the validation dataset, the result becomes self-deception with nicer plots.</p>
     <section class="grid">
       <article class="card">
         <h3>CALCE Storage 25 C</h3>
         <p><strong>Verdict:</strong> <code>blocked/inconclusive</code></p>
-        <p>CALCE has 24 same-join rows using frozen join keys, but 0 rows are runnable by Section 33 in the current inputs. The missing piece is HPPC-compatible pulse windows tied to the same cell, temperature, storage period, and SOC evidence.</p>
+        <p>CALCE has 24 same-join rows using frozen join keys, but 0 rows are runnable by frozen pulse-to-EIS rule in the current inputs. The missing piece is HPPC-compatible pulse windows tied to the same cell, temperature, storage period, and SOC evidence.</p>
       </article>
       <article class="card">
         <h3>KIT/RADAR4KIT</h3>
@@ -458,17 +458,17 @@
       <tbody>
         <tr>
           <td>CALB internal bridge</td>
-          <td>The Section 33 adaptive tau-constrained rule passes the internal CALB pulse-to-EIS bridge gate across the processed 10, 25, and 40 C grid.</td>
+          <td>The frozen pulse-to-EIS rule adaptive tau-constrained rule passes the internal CALB pulse-to-EIS bridge gate across the processed 10, 25, and 40 C grid.</td>
           <td>That this proves external validity, SOH prediction, or aging prediction.</td>
         </tr>
         <tr>
           <td>Drive cycles</td>
           <td>Drive-cycle transfer was tested and then downgraded after the stronger ECM baseline audit.</td>
-          <td>That Section 34 proves drive-cycle superiority. Section 36 says it does not.</td>
+          <td>That drive-cycle transfer test proves drive-cycle superiority. drive-cycle ECM baseline check says it does not.</td>
         </tr>
         <tr>
           <td>CALCE</td>
-          <td>CALCE Storage 25 C has 24 same-join rows, but 0 Section 33-runnable rows in current inputs.</td>
+          <td>CALCE Storage 25 C has 24 same-join rows, but 0 frozen pulse-to-EIS rule-runnable rows in current inputs.</td>
           <td>That CALCE validates the frozen rule.</td>
         </tr>
         <tr>
@@ -488,14 +488,14 @@
     <section class="grid two">
       <article class="card">
         <h3>Say This</h3>
-        <p>"The strongest result is the internal CALB pulse-to-EIS bridge. The final Section 33 rule passes 246 of 246 rows across all three temperatures. But I am not claiming external validation yet. The drive-cycle and external checks are exactly where the claim gets weaker."</p>
+        <p>"The strongest result is the internal CALB pulse-to-EIS bridge. The final frozen pulse-to-EIS rule passes 246 of 246 rows across all three temperatures. But I am not claiming external validation yet. The drive-cycle and external checks are exactly where the claim gets weaker."</p>
         <p>"The next decision is not whether we can make another plot. It is what validation standard we want: which dataset, which baseline, and which claim boundary."</p>
       </article>
       <article class="card">
         <h3>Do Not Say This</h3>
         <p>"The method is validated." It is not.</p>
         <p>"This predicts SOH." It does not, at least not from the current CALB evidence.</p>
-        <p>"Drive-cycle transfer works." Section 36 says the stronger ECM baseline beats fixed DRT on most rows.</p>
+        <p>"Drive-cycle transfer works." drive-cycle ECM baseline check says the stronger ECM baseline beats fixed DRT on most rows.</p>
       </article>
     </section>
 
@@ -522,7 +522,7 @@
         </tr>
         <tr>
           <td>What do you need next?</td>
-          <td>A defensible external dataset with same-cell EIS plus pulse/rest evidence, a declared baseline, and permission to keep the Section 33 rule frozen.</td>
+          <td>A defensible external dataset with same-cell EIS plus pulse/rest evidence, a declared baseline, and permission to keep the frozen pulse-to-EIS rule frozen.</td>
         </tr>
       </tbody>
     </table>

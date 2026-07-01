@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zenodo Expt4 Time-Series DRT Pipeline, Section 9</title>
+  <title>Zenodo Expt4 Time-Series DRT Pipeline, time-series 2D DRT surface</title>
   <style>
 :root {
   color-scheme: light;
@@ -148,7 +148,7 @@ img {
   <main>
     <article>
       <div class="meta">Generated HTML mirror from 02_Section_Results/Section_09_Held_Out_Cell_Validation/section_9_held_out_cell_validation_report.md. Edit the Markdown source, then rerun the Zenodo pipeline.</div>
-<h1>Zenodo Expt4 Time-Series DRT Pipeline, Section 9</h1>
+<h1>Zenodo Expt4 Time-Series DRT Pipeline, time-series 2D DRT surface</h1>
 <h2>Purpose</h2>
 <p>This section tests whether the fitted GITT features survive a simple held-out-cell check. The model is deliberately small ridge regression. A fancier model on 40 rows would be noise cosplay.</p>
 <h2>Outputs</h2>
@@ -182,7 +182,7 @@ img {
 <h2>Interpretation</h2>
 <p>Positive skill means the feature set beat a train-mean baseline. Negative skill means it made things worse. This is the closest honest replacement for DIB EIS validation in Expt4. It validates health-feature usefulness, not DRT physics. If global validation works but within-temperature validation collapses, the model is mostly learning temperature grouping. Do not hide that. If DRT bands do not improve over R0 plus simple voltage features, they are not ready to justify a larger model.</p>
 <h2>Linked Graph</h2>
-<img src="../../01_Graphs/section_9_held_out_cell_validation.png" alt="section 9 held out cell validation">
+<img src="../../01_Graphs/section_9_held_out_cell_validation.png" alt="time-series 2D DRT surface held out cell validation">
     </article>
   </main>
 </body>

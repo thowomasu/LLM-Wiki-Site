@@ -1,8 +1,8 @@
 protocol,role,rows,duration_h,median_dt_s,current_min_a,current_max_a,current_span_a,eis_records,frequency_min_hz,frequency_max_hz,csv
-C20_Discharge,low-rate capacity and OCV context,1104,18.373809861111113,60.0,-2.900212,-2.90005,0.00016199999999999548,,,,E:\LLM-wiki\40 Outputs\Experiments\CALB L148N58A\02_First_Slice\C20_Discharge.csv
-DV_WLTP,drive-cycle validation later,221437,7.500418555555556,0.10000000000218279,-60.08051,19.42142,79.50193,,,,E:\LLM-wiki\40 Outputs\Experiments\CALB L148N58A\02_First_Slice\DV_WLTP.csv
-DV_UDDS,drive-cycle validation later,239440,8.000456333333332,0.10000000000582077,-59.37879,36.16817,95.54696000000001,,,,E:\LLM-wiki\40 Outputs\Experiments\CALB L148N58A\02_First_Slice\DV_UDDS.csv
-DV_US06,drive-cycle validation later,119243,4.661400361111115,0.10000000000582077,-59.9935,26.98949,86.98299,,,,E:\LLM-wiki\40 Outputs\Experiments\CALB L148N58A\02_First_Slice\DV_US06.csv
-HPPC_1C,pulse/relaxation fitting target,172269,12.434086305555555,0.10009999999965657,-58.00464,37.70427,95.70891,,,,E:\LLM-wiki\40 Outputs\Experiments\CALB L148N58A\02_First_Slice\HPPC_1C.csv
-HPPC_C3,pulse/relaxation fitting target,172850,12.450246472222222,0.10009999999965657,-58.00565,37.70327,95.70892,,,,E:\LLM-wiki\40 Outputs\Experiments\CALB L148N58A\02_First_Slice\HPPC_C3.csv
-EIS_test,same-cell impedance target,120,,,,,,3,0.010001099668443203,3722.427001953125,E:\LLM-wiki\40 Outputs\Experiments\CALB L148N58A\02_First_Slice\EIS_test.csv
+C20_Discharge,low-rate capacity and OCV context,1104,18.373809861111113,60.0,-2.900212,-2.90005,0.00016199999999999548,,,,[local path redacted]
+DV_WLTP,drive-cycle validation later,221437,7.500418555555556,0.10000000000218279,-60.08051,19.42142,79.50193,,,,[local path redacted]
+DV_UDDS,drive-cycle validation later,239440,8.000456333333332,0.10000000000582077,-59.37879,36.16817,95.54696000000001,,,,[local path redacted]
+DV_US06,drive-cycle validation later,119243,4.661400361111115,0.10000000000582077,-59.9935,26.98949,86.98299,,,,[local path redacted]
+HPPC_1C,pulse/relaxation fitting target,172269,12.434086305555555,0.10009999999965657,-58.00464,37.70427,95.70891,,,,[local path redacted]
+HPPC_C3,pulse/relaxation fitting target,172850,12.450246472222222,0.10009999999965657,-58.00565,37.70327,95.70892,,,,[local path redacted]
+EIS_test,same-cell impedance target,120,,,,,,3,0.010001099668443203,3722.427001953125,[local path redacted]

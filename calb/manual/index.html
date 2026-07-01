@@ -262,6 +262,44 @@ th { background: var(--table-head); }
   border-radius: 8px;
   background: var(--panel);
 }
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.table-wrap table {
+  min-width: 980px;
+  margin: 0;
+  border: 0;
+}
+.table-wrap th,
+.table-wrap td {
+  border-top: 0;
+  border-left: 0;
+}
+.table-wrap th:last-child,
+.table-wrap td:last-child { border-right: 0; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status-pill.good { color: var(--green); }
+.status-pill.warn { color: var(--orange); }
+.status-pill.bad { color: var(--red); }
+.small-note {
+  color: var(--muted);
+  font-size: 14px;
+}
 footer {
   padding: 22px min(7vw, 72px);
   color: var(--muted);
@@ -316,12 +354,14 @@ footer {
 <a class="side-link" href="../../index.html">Overview</a>
 <a class="side-link" href="../../presentations/">Presentations</a>
 <a class="side-link" href="../../datasets/">Datasets</a>
+<a class="side-link" href="../../cross-dataset/">Cross-dataset validation</a>
 <a class="side-link" href="../../sources/">Sources</a>
 <a class="side-link" href="../../glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
 <a class="side-link" href="../../presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
 <a class="side-link" href="../../presentations/#dib-data">DIB (Data in Brief) Data</a>
 <a class="side-link" href="../../presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
+<a class="side-link" href="../../cross-dataset/">Cross-dataset scaffold</a>
 <a class="side-link" href="../../external-validation/dataset-exploration/">Dataset Viability Presentation</a>
 <a class="side-link" href="../../external-validation/">External Dataset Checks</a>
 <div class="side-section">CALB Package</div>
@@ -349,8 +389,8 @@ footer {
       </article>
       <article class="card">
         <h3>Use the pipeline</h3>
-        <p>Run scripts from the repository root with the DRT conda interpreter. The main guardrail is the regression check. Do not change claims until it still passes.</p>
-        <p><code>&amp; "E:\anaconda\envs\DRT\python.exe" -B scripts\experiments\calb_l148n58a\calb_l148n58a_regression_checks.py</code></p>
+        <p>Run scripts from the private repository root with the project DRT conda interpreter. The main guardrail is the regression check. Do not change claims until it still passes.</p>
+        <p><code>&amp; "[DRT python]" -B scripts\experiments\calb_l148n58a\calb_l148n58a_regression_checks.py</code></p>
       </article>
     </section>
     <h2>Example Case</h2>
@@ -359,15 +399,15 @@ footer {
       <tbody>
         <tr><td>1</td><td><a class="button" href="../data/EIS_test.csv">EIS_test.csv</a></td><td>Three EIS records for cell 59294 at 25 C, each with frequency, real impedance, and imaginary impedance.</td></tr>
         <tr><td>2</td><td><a class="button" href="../data/DV_WLTP.csv">DV_WLTP.csv</a></td><td>Example dynamic WLTP voltage and current trace. This shows what a drive-cycle test looks like.</td></tr>
-        <tr><td>3</td><td><a class="button" href="../data/section_33_adaptive_final_rule_rows.csv">Section 33 rows</a></td><td>Main internal pulse-bridge result. Check cell, temperature, HPPC protocol, EIS record, correlation, RMSE, and pass flag.</td></tr>
-        <tr><td>4</td><td><a class="button" href="../data/section_34_drive_cycle_rows.csv">Section 34 rows</a></td><td>Drive-cycle transfer rows. Compare with the claim boundary, because this part is weaker.</td></tr>
+        <tr><td>3</td><td><a class="button" href="../data/section_33_adaptive_final_rule_rows.csv">Frozen pulse-to-EIS rows</a></td><td>Main internal CALB pulse-to-EIS result. Check cell, temperature, HPPC protocol, EIS record, correlation, RMSE, and pass flag.</td></tr>
+        <tr><td>4</td><td><a class="button" href="../data/section_34_drive_cycle_rows.csv">Drive-cycle transfer rows</a></td><td>Drive-cycle transfer rows. Compare with the claim boundary, because this part is weaker.</td></tr>
       </tbody>
     </table>
     <h2>What Has Been Done So Far</h2>
     <ul>
       <li>Parsed the CALB archive into a manifest covering 11 cells, three temperatures, and eight protocol folders.</li>
       <li>Built a same-cell EIS and HPPC pulse bridge pipeline.</li>
-      <li>Produced final Section 33 internal bridge rows with 246 of 246 quality-pass rows.</li>
+      <li>Produced final internal pulse-to-EIS rows with 246 of 246 quality-pass rows.</li>
       <li>Audited dynamic-cycle transfer and found the fixed DRT claim loses to a stronger ECM baseline.</li>
       <li>Published curated CSV, JSON, plot, source, manual, and presentation pages for review.</li>
     </ul>

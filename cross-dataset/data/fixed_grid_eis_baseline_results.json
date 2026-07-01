@@ -1,0 +1,115 @@
+{
+  "experiment": "cross_dataset_pulse_to_eis_training_fixed_grid_eis_dev",
+  "target": "fixed_grid_eis_real_and_negative_imaginary_ohm",
+  "target_columns": [
+    "target_zreal_0p05hz_ohm",
+    "target_znegimag_0p05hz_ohm",
+    "target_zreal_0p1hz_ohm",
+    "target_znegimag_0p1hz_ohm",
+    "target_zreal_0p2hz_ohm",
+    "target_znegimag_0p2hz_ohm",
+    "target_zreal_0p5hz_ohm",
+    "target_znegimag_0p5hz_ohm",
+    "target_zreal_1hz_ohm",
+    "target_znegimag_1hz_ohm",
+    "target_zreal_2hz_ohm",
+    "target_znegimag_2hz_ohm",
+    "target_zreal_5hz_ohm",
+    "target_znegimag_5hz_ohm",
+    "target_zreal_10hz_ohm",
+    "target_znegimag_10hz_ohm",
+    "target_zreal_20hz_ohm",
+    "target_znegimag_20hz_ohm",
+    "target_zreal_40hz_ohm",
+    "target_znegimag_40hz_ohm"
+  ],
+  "claim_boundary": "Development-only fixed-grid EIS baselines. Cambridge is excluded.",
+  "split": {
+    "rule": "train on Panasonic plus RADAR4KIT development rows; test on Stanford SECL whole-dataset holdout",
+    "train_rows": 489,
+    "test_rows": 182,
+    "train_datasets": [
+      "Panasonic 18650PF",
+      "RADAR4KIT corrected EIS plus PULSE"
+    ],
+    "test_datasets": [
+      "Stanford SECL INR21700-M50T"
+    ],
+    "no_random_row_split": true,
+    "cambridge_used": false
+  },
+  "baselines": [
+    {
+      "baseline": "global_train_target_mean",
+      "test_metrics": {
+        "rmse_all_ohm": 0.0044402816104454155,
+        "mae_all_ohm": 0.003557439860458976,
+        "bias_all_ohm": 0.001903765919277533,
+        "rmse_zreal_ohm": 0.0054551944683413605,
+        "rmse_znegimag_ohm": 0.003110153512722046,
+        "r2_uniform_average": -85.41060624003057,
+        "per_target_rmse_ohm": {
+          "target_zreal_0p05hz_ohm": 0.0073439563166582365,
+          "target_znegimag_0p05hz_ohm": 0.005057398104262436,
+          "target_zreal_0p1hz_ohm": 0.007251809884353002,
+          "target_znegimag_0p1hz_ohm": 0.004263084951529366,
+          "target_zreal_0p2hz_ohm": 0.00495891763787723,
+          "target_znegimag_0p2hz_ohm": 0.00346078729724437,
+          "target_zreal_0p5hz_ohm": 0.004537732305831938,
+          "target_znegimag_0p5hz_ohm": 0.002815089296156669,
+          "target_zreal_1hz_ohm": 0.004948122869319865,
+          "target_znegimag_1hz_ohm": 0.0028099348601022507,
+          "target_zreal_2hz_ohm": 0.003975795258703376,
+          "target_znegimag_2hz_ohm": 0.002766165788550134,
+          "target_zreal_5hz_ohm": 0.004714348343033261,
+          "target_znegimag_5hz_ohm": 0.0021267532671191422,
+          "target_zreal_10hz_ohm": 0.005126410639662126,
+          "target_znegimag_10hz_ohm": 0.0020743961357015473,
+          "target_zreal_20hz_ohm": 0.00527559103589737,
+          "target_znegimag_20hz_ohm": 0.0021313793210744683,
+          "target_zreal_40hz_ohm": 0.005409182219415436,
+          "target_znegimag_40hz_ohm": 0.002039906784839252
+        }
+      }
+    },
+    {
+      "baseline": "voltage_soc_temperature_1nn",
+      "features": [
+        "td_voltage_start_v",
+        "td_voltage_end_v",
+        "soc_percent",
+        "temperature_c"
+      ],
+      "test_metrics": {
+        "rmse_all_ohm": 0.013397691089212238,
+        "mae_all_ohm": 0.007810425871799759,
+        "bias_all_ohm": 0.005082483798404359,
+        "rmse_zreal_ohm": 0.016944212611193468,
+        "rmse_znegimag_ohm": 0.008478791896879306,
+        "r2_uniform_average": -941.0346706259352,
+        "per_target_rmse_ohm": {
+          "target_zreal_0p05hz_ohm": 0.02937050972192833,
+          "target_znegimag_0p05hz_ohm": 0.007900803452876191,
+          "target_zreal_0p1hz_ohm": 0.026438844638069853,
+          "target_znegimag_0p1hz_ohm": 0.011053778470576038,
+          "target_zreal_0p2hz_ohm": 0.023002806211409543,
+          "target_znegimag_0p2hz_ohm": 0.012257412903712447,
+          "target_zreal_0p5hz_ohm": 0.018569354961400712,
+          "target_znegimag_0p5hz_ohm": 0.010427712610134246,
+          "target_zreal_1hz_ohm": 0.014307388649244305,
+          "target_znegimag_1hz_ohm": 0.010556181674929036,
+          "target_zreal_2hz_ohm": 0.009176425244458749,
+          "target_znegimag_2hz_ohm": 0.010167238160680964,
+          "target_zreal_5hz_ohm": 0.006480997595210735,
+          "target_znegimag_5hz_ohm": 0.006250730610006741,
+          "target_zreal_10hz_ohm": 0.00562370288216204,
+          "target_znegimag_10hz_ohm": 0.0035933062004594066,
+          "target_zreal_20hz_ohm": 0.006101685164472802,
+          "target_znegimag_20hz_ohm": 0.00231019826432844,
+          "target_zreal_40hz_ohm": 0.005975445566588388,
+          "target_znegimag_40hz_ohm": 0.001784052481544695
+        }
+      }
+    }
+  ]
+}

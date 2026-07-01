@@ -262,6 +262,44 @@ th { background: var(--table-head); }
   border-radius: 8px;
   background: var(--panel);
 }
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.table-wrap table {
+  min-width: 980px;
+  margin: 0;
+  border: 0;
+}
+.table-wrap th,
+.table-wrap td {
+  border-top: 0;
+  border-left: 0;
+}
+.table-wrap th:last-child,
+.table-wrap td:last-child { border-right: 0; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status-pill.good { color: var(--green); }
+.status-pill.warn { color: var(--orange); }
+.status-pill.bad { color: var(--red); }
+.small-note {
+  color: var(--muted);
+  font-size: 14px;
+}
 footer {
   padding: 22px min(7vw, 72px);
   color: var(--muted);
@@ -316,12 +354,14 @@ footer {
 <a class="side-link" href="index.html">Overview</a>
 <a class="side-link" href="presentations/">Presentations</a>
 <a class="side-link" href="datasets/">Datasets</a>
+<a class="side-link" href="cross-dataset/">Cross-dataset validation</a>
 <a class="side-link" href="sources/">Sources</a>
 <a class="side-link" href="glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
 <a class="side-link" href="presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
 <a class="side-link" href="presentations/#dib-data">DIB (Data in Brief) Data</a>
 <a class="side-link" href="presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
+<a class="side-link" href="cross-dataset/">Cross-dataset scaffold</a>
 <a class="side-link" href="external-validation/dataset-exploration/">Dataset Viability Presentation</a>
 <a class="side-link" href="external-validation/">External Dataset Checks</a>
 <div class="side-section">CALB Package</div>
@@ -342,12 +382,12 @@ footer {
       <p>The goal is simple: a new reader should be able to open this site, understand what was built, inspect the actual data and plots, and see the limits without digging through the private vault.</p>
     </section>
     <section class="note">
-      <strong>Claim boundary:</strong> this site is for clear review, not hype. It does not turn internal results into external validation. The strongest CALB (China Aviation Lithium Battery) result is internal pulse-bridge evidence. CALCE (Center for Advanced Life Cycle Engineering) now has frozen qualification rows, but the Section 33 run is blocked until HPPC-compatible pulse evidence exists.
+      <strong>Claim boundary:</strong> this site is for clear review, not hype. It does not turn internal results into external validation. The strongest CALB (China Aviation Lithium Battery) result is internal pulse-to-EIS evidence. Several external adapter runs have now failed or stayed blocked. The separate supervised cross-dataset scaffold has partial support on Cambridge, but that does not validate the frozen CALB rule.
     </section>
     <section class="grid">
       <article class="card">
         <h3>Presentations</h3>
-        <span class="metric good">17</span>
+        <span class="metric good">18</span>
         <div class="label">Presentation-like HTML files found under <code>40 Outputs</code>. Future presentation files are picked up by the site build.</div>
         <p><a class="button" href="presentations/">Open presentations</a></p>
       </article>
@@ -362,6 +402,12 @@ footer {
         <span class="metric warn">trace</span>
         <div class="label">Public provenance pages for reports, summaries, manifests, plots, data artifacts, and literature links.</div>
         <p><a class="button" href="sources/">Open sources</a></p>
+      </article>
+      <article class="card">
+        <h3>Cross-dataset scaffold</h3>
+        <span class="metric warn">partial</span>
+        <div class="label">Locked supervised time-series-to-EIS model scored once on Cambridge. It beat the mean baseline weakly, not strongly.</div>
+        <p><a class="button" href="cross-dataset/">Open scaffold</a></p>
       </article>
     </section>
     <section>
@@ -379,7 +425,7 @@ footer {
       </article>
       <article class="card">
         <h3>CALB dataset work</h3>
-        <p>Parsed the CALB L148N58A archive, published viewable data files, built the pulse-bridge evidence package, and kept the drive-cycle limitation visible.</p>
+        <p>Parsed the CALB L148N58A archive, published viewable data files, built the internal pulse-to-EIS evidence package, and kept the drive-cycle limitation visible.</p>
         <p><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB work</a></p>
       </article>
       </div>
@@ -395,7 +441,7 @@ footer {
       </article>
       <article class="card">
         <h3>Validation candidates</h3>
-        <p>CALCE, KIT RADAR4KIT, and NASA are screened as external or next-step candidates. CALCE is first with 24 same-join qualification rows and 0 Section 33 runnable rows in the current inputs. KIT RADAR4KIT is second only when the corrected EIS addendum exists. NASA has 34 unique cells with charge, discharge, and impedance, but it is later robustness evidence. The newest exploration screens Panasonic 18650PF, Samsung INR21700-50E, and Graphite/LNMO downloads for Section 33 viability.</p>
+        <p>CALCE, KIT RADAR4KIT, Stanford SECL, Panasonic 18650PF, Samsung INR21700-50E, Graphite/LNMO, NASA, and Cambridge are screened or used for external checks. CALCE has 24 same-join qualification rows and 0 frozen-rule runnable rows in the current inputs. RADAR4KIT, Stanford, and Panasonic ran but did not support the frozen rule. Cambridge gave partial support to the separate supervised scaffold.</p>
         <p><a class="button" href="external-validation/">Open validation checks</a> <a class="button" href="external-validation/dataset-exploration/">Open new dataset exploration</a></p>
       </article>
       </div>

@@ -209,8 +209,8 @@ th {
 <tr><td>365-414</td><td>Fits the time-domain DRT.</td><td>Main inverse step: current and voltage in, tau/gamma curve out.</td></tr>
 <tr><td>416-447</td><td>Summarizes peaks and broad tau bands.</td><td>Makes the DRT result readable without inspecting every tau point.</td></tr>
 <tr><td>449-594</td><td>Writes CSVs and Matplotlib plots.</td><td>Saves evidence, not just terminal output.</td></tr>
-<tr><td>597-656</td><td>Writes the Section 1 report.</td><td>Explains whether the synthetic sanity check passed.</td></tr>
-<tr><td>659-726</td><td>Main workflow for Section 1.</td><td>Runs simulation, fit, plots, and report.</td></tr>
+<tr><td>597-656</td><td>Writes the first-slice protocol inventory report.</td><td>Explains whether the synthetic sanity check passed.</td></tr>
+<tr><td>659-726</td><td>Main workflow for first-slice protocol inventory.</td><td>Runs simulation, fit, plots, and report.</td></tr>
 </table>
 <h2>Window Finder</h2>
 <p>File: <code>scripts/experiments/time_domain_window_finder.py</code></p>
@@ -234,7 +234,7 @@ th {
 <p>File: <code>scripts/experiments/time_domain_candidate_fit.py</code></p>
 <table>
 <tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
-<tr><td>54-62</td><td>Sets paths for default input and candidate files.</td><td>Default mode uses the synthetic outputs from Sections 1 and 2.</td></tr>
+<tr><td>54-62</td><td>Sets paths for default input and candidate files.</td><td>Default mode uses the synthetic outputs from first-slice protocol inventory and file and protocol screen.</td></tr>
 <tr><td>65-90</td><td>Loads accepted candidates and chooses one candidate by ID or score.</td><td>Prevents fitting rejected windows.</td></tr>
 <tr><td>92-108</td><td>Slices the time-series data around the chosen pulse.</td><td>Adds pre-rest and post-rest context around the pulse.</td></tr>
 <tr><td>110-128</td><td>Estimates a simple voltage trend.</td><td>Helps separate baseline drift from relaxation.</td></tr>

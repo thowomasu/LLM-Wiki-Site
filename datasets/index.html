@@ -262,6 +262,44 @@ th { background: var(--table-head); }
   border-radius: 8px;
   background: var(--panel);
 }
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.table-wrap table {
+  min-width: 980px;
+  margin: 0;
+  border: 0;
+}
+.table-wrap th,
+.table-wrap td {
+  border-top: 0;
+  border-left: 0;
+}
+.table-wrap th:last-child,
+.table-wrap td:last-child { border-right: 0; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status-pill.good { color: var(--green); }
+.status-pill.warn { color: var(--orange); }
+.status-pill.bad { color: var(--red); }
+.small-note {
+  color: var(--muted);
+  font-size: 14px;
+}
 footer {
   padding: 22px min(7vw, 72px);
   color: var(--muted);
@@ -316,12 +354,14 @@ footer {
 <a class="side-link" href="../index.html">Overview</a>
 <a class="side-link" href="../presentations/">Presentations</a>
 <a class="side-link" href="../datasets/">Datasets</a>
+<a class="side-link" href="../cross-dataset/">Cross-dataset validation</a>
 <a class="side-link" href="../sources/">Sources</a>
 <a class="side-link" href="../glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
 <a class="side-link" href="../presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
 <a class="side-link" href="../presentations/#dib-data">DIB (Data in Brief) Data</a>
 <a class="side-link" href="../presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
+<a class="side-link" href="../cross-dataset/">Cross-dataset scaffold</a>
 <a class="side-link" href="../external-validation/dataset-exploration/">Dataset Viability Presentation</a>
 <a class="side-link" href="../external-validation/">External Dataset Checks</a>
 <div class="side-section">CALB Package</div>
@@ -337,10 +377,29 @@ footer {
       <main>
 
     <section class="note">
-      <strong>Purpose:</strong> this page lists every dataset currently used or explicitly screened by the public project outputs. It separates current evidence from future validation targets.
+      <strong>Purpose:</strong> this page compares every dataset currently used or screened by the public project outputs. Read across the row: the useful question is not "is there a lot of data?" The useful question is whether the same cell has time-series data, EIS spectra, temperature/state labels, and a fair validation status.
     </section>
-    <section class="grid two">
-      <article class="card"><h3>CALB L148N58A Dataset</h3><p>China Aviation Lithium Battery L148N58A large-prismatic-cell dataset used for the current EIS (Electrochemical Impedance Spectroscopy), HPPC (Hybrid Pulse Power Characterization), and drive-cycle evidence package.</p><span class="metric good">246 / 246</span><div class="label">Internal pulse-bridge quality-pass rows. This is the strongest current local result.</div><p><a class="button" href="../calb/data/">View CALB data</a> <a class="button" href="../calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB presentation</a></p></article><article class="card"><h3>Zenodo Experiment 4 DIB Dataset</h3><p>Data in Brief style ageing dataset used for the time-series DRT pipeline, feature extraction, held-out-cell checks, and negative-control audits.</p><span class="metric good">1,106</span><div class="label">Local files inspected for same-cell EIS evidence. The result was zero EIS-like hits, so this stays a health-feature dataset, not EIS validation.</div><p><a class="button" href="../presentations/#dib-data">Open DIB presentations</a></p></article><article class="card"><h3>CALCE Storage 25 C Dataset</h3><p>Center for Advanced Life Cycle Engineering storage dataset screened as the first external EIS validation candidate.</p><span class="metric good">24 / 0</span><div class="label">Same-join qualification rows versus Section 33 runnable rows. Current verdict is blocked/inconclusive.</div><p><a class="button" href="../external-validation/calce/">Open CALCE report</a> <a class="button" href="../external-validation/calce/data/candidate_pairings.csv">View CALCE pairings</a></p></article><article class="card"><h3>KIT RADAR4KIT Dataset</h3><p>Comprehensive battery ageing dataset with capacity and impedance fade measurements. Second external target only after the corrected EIS addendum is available.</p><span class="metric good">21</span><div class="label">Local DOI 10.35097/1947 cell_eisv2.zip is incomplete; use corrected EIS addendum before validation.</div><p><a class="button" href="../sources/external/">Open external sources</a></p></article><article class="card"><h3>Panasonic, Samsung, and Graphite/LNMO Exploration</h3><p>New dataset exploration package for the downloaded Panasonic 18650PF, Samsung INR21700-50E HPPC, and Graphite/LNMO archives.</p><span class="metric good">3</span><div class="label">Panasonic is the best next Section 33 adapter target. Samsung is HPPC-only locally. Graphite/LNMO is scientifically useful but weak for the frozen Section 33 gate.</div><p><a class="button" href="../external-validation/dataset-exploration/">Open exploration presentation</a></p></article><article class="card"><h3>NASA Battery Dataset</h3><p>National Aeronautics and Space Administration battery dataset screened as a later robustness candidate.</p><span class="metric good">34</span><div class="label">Unique cells with charge, discharge, and impedance evidence. Useful later, but weaker for the pulse/drive-profile failure mode.</div><p><a class="button" href="../external-validation/nasa/">Open NASA report</a> <a class="button" href="../external-validation/nasa/data/candidate_pairings.csv">View NASA pairings</a></p></article>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name and role</th>
+            <th>DRT / model use</th>
+            <th>Time series</th>
+            <th>EIS</th>
+            <th>Temperature</th>
+            <th>Status</th>
+            <th>Open</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>CALB L148N58A</strong><div class="small-note">Internal development dataset. It built the pulse-to-EIS rule and the public evidence package.</div></td><td>Yes, internal time-domain and EIS comparison work.</td><td>HPPC, drive cycles, C/20 charge/discharge.</td><td>Yes.</td><td>10 C, 25 C, 40 C.</td><td><span class="status-pill good">246 / 246 internal rows</span></td><td><p><a class="button" href="../calb/data/">View data</a> <a class="button" href="../calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open report</a></p></td></tr><tr><td><strong>Cross-dataset supervised scaffold</strong><div class="small-note">Train on known external rows, freeze a model, then score a new whole dataset once.</div></td><td>No frozen-rule DRT claim. It predicts fixed-grid EIS targets from time-series features.</td><td>Uses pulse or GCPL current/voltage features before each EIS target.</td><td>Yes, fixed frequency grid real and negative-imaginary targets.</td><td>Mixed. Uses labels when available.</td><td><span class="status-pill warn">Cambridge partial support</span></td><td><p><a class="button" href="../cross-dataset/">Open scaffold</a></p></td></tr><tr><td><strong>CALCE Storage 25 C</strong><div class="small-note">First external qualification target for same-cell capacity plus EIS evidence.</div></td><td>Not runnable by the frozen rule yet.</td><td>Capacity workbooks, but no HPPC-compatible pulse windows in current inputs.</td><td>Yes, same-PLN impedance candidates.</td><td>25 C target subset.</td><td><span class="status-pill bad">24 joins, 0 runnable</span></td><td><p><a class="button" href="../external-validation/calce/">Open CALCE</a> <a class="button" href="../external-validation/calce/data/candidate_pairings.csv">Pairings</a></p></td></tr><tr><td><strong>KIT RADAR4KIT</strong><div class="small-note">Second external target after corrected EIS addendum became available.</div></td><td>Frozen CALB pulse-to-EIS adapter ran, but did not beat the voltage-only baseline.</td><td>Pulse/profile ageing data.</td><td>Yes, corrected EIS addendum required.</td><td>Dataset-dependent.</td><td><span class="status-pill bad">No support</span></td><td><p><a class="button" href="../sources/external/">Sources</a></p></td></tr><tr><td><strong>Stanford SECL INR21700-M50T</strong><div class="small-note">Clean same-cell HPPC plus EIS external check.</div></td><td>Frozen CALB pulse-to-EIS adapter ran, 0 quality-pass rows.</td><td>HPPC diagnostic files.</td><td>Yes, SOC20, SOC50, SOC80.</td><td>23 C nominal.</td><td><span class="status-pill bad">No support</span></td><td><p><a class="button" href="../sources/external/">Sources</a></p></td></tr><tr><td><strong>Panasonic 18650PF</strong><div class="small-note">Runnable external adapter smoke test from the new dataset exploration.</div></td><td>Frozen CALB pulse-to-EIS adapter ran, but did not beat baseline.</td><td>Long discharge windows in selected dis5_10p files.</td><td>Yes.</td><td>25 C, 10 C, 0 C, -10 C, -20 C.</td><td><span class="status-pill bad">No support</span></td><td><p><a class="button" href="../external-validation/dataset-exploration/">Exploration</a></p></td></tr><tr><td><strong>Samsung INR21700-50E</strong><div class="small-note">Pulse-side exploration only unless matching EIS is found.</div></td><td>No, not for the frozen bridge rule by itself.</td><td>Large HPPC-style current, voltage, and temperature archives.</td><td>No local EIS observed.</td><td>Cell and chamber temperature columns in sample.</td><td><span class="status-pill bad">Blocked</span></td><td><p><a class="button" href="../external-validation/dataset-exploration/">Exploration</a></p></td></tr><tr><td><strong>Graphite/LNMO</strong><div class="small-note">Useful electrochemistry side dataset, weak for the frozen pulse-to-EIS gate.</div></td><td>No clean unchanged-rule fit.</td><td>qOCV and rate files. Frozen window finder sees weak candidates.</td><td>Yes, full-cell EIS by SOC.</td><td>Not the main selection axis here.</td><td><span class="status-pill warn">Weak fit</span></td><td><p><a class="button" href="../external-validation/dataset-exploration/">Exploration</a></p></td></tr><tr><td><strong>NASA Battery</strong><div class="small-note">Later robustness check, not the first fight for the pulse failure mode.</div></td><td>Possible later, but not the clean frozen-rule target.</td><td>Charge and discharge cycling.</td><td>Yes, same-cell impedance evidence.</td><td>Mixed ambient conditions.</td><td><span class="status-pill warn">34 cells</span></td><td><p><a class="button" href="../external-validation/nasa/">Open NASA</a> <a class="button" href="../external-validation/nasa/data/candidate_pairings.csv">Pairings</a></p></td></tr><tr><td><strong>Zenodo Experiment 4 DIB</strong><div class="small-note">Ageing and health-feature pipeline work. Not an EIS validation source.</div></td><td>Time-series prototype and feature work only.</td><td>GITT and ageing time-series files.</td><td>No same-cell EIS found in local inspection.</td><td>Protocol-dependent.</td><td><span class="status-pill warn">Not EIS validation</span></td><td><p><a class="button" href="../presentations/#dib-data">Presentations</a></p></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <section>
+      <h2>How To Read The Status Column</h2>
+      <p><strong>Internal rows</strong> means the result came from CALB itself. It is useful, but it is not external validation. <strong>No support</strong> means the frozen external adapter ran and failed the rule or failed to beat the baseline. <strong>Blocked</strong> means the required paired evidence is missing. <strong>Partial support</strong> means the locked supervised model beat a boring baseline, but not by enough to call it strong external support.</p>
     </section>
 
       </main>

@@ -262,6 +262,44 @@ th { background: var(--table-head); }
   border-radius: 8px;
   background: var(--panel);
 }
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.table-wrap table {
+  min-width: 980px;
+  margin: 0;
+  border: 0;
+}
+.table-wrap th,
+.table-wrap td {
+  border-top: 0;
+  border-left: 0;
+}
+.table-wrap th:last-child,
+.table-wrap td:last-child { border-right: 0; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status-pill.good { color: var(--green); }
+.status-pill.warn { color: var(--orange); }
+.status-pill.bad { color: var(--red); }
+.small-note {
+  color: var(--muted);
+  font-size: 14px;
+}
 footer {
   padding: 22px min(7vw, 72px);
   color: var(--muted);
@@ -316,12 +354,14 @@ footer {
 <a class="side-link" href="../../index.html">Overview</a>
 <a class="side-link" href="../../presentations/">Presentations</a>
 <a class="side-link" href="../../datasets/">Datasets</a>
+<a class="side-link" href="../../cross-dataset/">Cross-dataset validation</a>
 <a class="side-link" href="../../sources/">Sources</a>
 <a class="side-link" href="../../glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
 <a class="side-link" href="../../presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
 <a class="side-link" href="../../presentations/#dib-data">DIB (Data in Brief) Data</a>
 <a class="side-link" href="../../presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
+<a class="side-link" href="../../cross-dataset/">Cross-dataset scaffold</a>
 <a class="side-link" href="../../external-validation/dataset-exploration/">Dataset Viability Presentation</a>
 <a class="side-link" href="../../external-validation/">External Dataset Checks</a>
 <div class="side-section">CALB Package</div>
@@ -341,67 +381,95 @@ footer {
       <strong>Dataset qualification only:</strong> these sources describe whether CALCE, RADAR4KIT, and NASA are usable next targets. They do not validate the frozen CALB rule.
     </section>
     <h2>CALCE, RADAR4KIT, And NASA Qualification Artifacts</h2>
-    <div class="source-list"><div class="source-item"><span class="source-kind">artifact</span><strong>candidate pairings</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/candidate_pairings.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>capacity summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/capacity_summary.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>cell manifest</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/cell_manifest.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>impedance schema</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/impedance_schema.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>operation counts</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/operation_counts.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/README.md</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/summary.json</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>zip listing</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/01_NASA_Battery/zip_listing.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>adapter candidate table</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/03_Adapter/adapter_candidate_table.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>adapter summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/03_Adapter/adapter_summary.json</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/03_Adapter/README.md</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c frozen input rows</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/04_Frozen_Inputs/calce_storage_25c_frozen_input_rows.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c frozen input summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/04_Frozen_Inputs/calce_storage_25c_frozen_input_summary.json</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/04_Frozen_Inputs/README.md</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c frozen rule blockers</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/05_Frozen_Rule_Run/calce_storage_25c_frozen_rule_blockers.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c frozen rule summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/05_Frozen_Rule_Run/calce_storage_25c_frozen_rule_summary.json</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/05_Frozen_Rule_Run/README.md</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c baseline summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/06_Baseline_Comparison/calce_storage_25c_baseline_summary.json</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/06_Baseline_Comparison/README.md</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c validation summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/07_Validation_Report/calce_storage_25c_validation_summary.json</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/07_Validation_Report/README.md</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>candidate pairings</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/candidate_pairings.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>capacity workbook channels</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/capacity_workbook_channels.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>impedance csv manifest</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/impedance_csv_manifest.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>pln metadata</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/pln_metadata.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/README.md</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/summary.json</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>zip listing</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/02_CALCE_Storage_25C/zip_listing.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>radar4kit corrected eis status</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/03_RADAR4KIT_Corrected_EIS_Status/radar4kit_corrected_eis_status.json</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/03_RADAR4KIT_Corrected_EIS_Status/README.md</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>exploration summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/data/exploration_summary.json</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>graphite lnmo window summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/data/graphite_lnmo_window_summary.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic eis summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/data/panasonic_eis_summary.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic pulse summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/data/panasonic_pulse_summary.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>samsung archive summary</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/data/samsung_archive_summary.csv</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>index</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/index.html</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>combined dataset readiness overview</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/combined_dataset_readiness_overview.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>graphite lnmo eis nyquist by soc</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/graphite_lnmo_eis_nyquist_by_soc.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>graphite lnmo full cell protocol traces</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/graphite_lnmo_full_cell_protocol_traces.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>graphite lnmo window candidate counts</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/graphite_lnmo_window_candidate_counts.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic eis nyquist by temperature</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/panasonic_eis_nyquist_by_temperature.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic eis voltage coverage</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/panasonic_eis_voltage_coverage.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic matched long discharge examples</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/panasonic_matched_long_discharge_examples.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic pulse candidate map</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/panasonic_pulse_candidate_map.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>samsung archive inventory</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/samsung_archive_inventory.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>samsung sample timeseries</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/04_New_Dataset_Exploration/plots/samsung_sample_timeseries.png</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/README.md</code></div></div>
-<div class="source-item"><span class="source-kind">artifact</span><strong>VALIDATION PROTOCOL</strong><div><code>40 Outputs/Experiments/External Validation Dataset Qualification/VALIDATION_PROTOCOL.md</code></div></div></div>
+    <div class="source-list"><div class="source-item"><span class="source-kind">artifact</span><strong>candidate pairings</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 01 NASA Battery / candidate pairings.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>capacity summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 01 NASA Battery / capacity summary.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>cell manifest</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 01 NASA Battery / cell manifest.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>impedance schema</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 01 NASA Battery / impedance schema.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>operation counts</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 01 NASA Battery / operation counts.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 01 NASA Battery / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 01 NASA Battery / summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>zip listing</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 01 NASA Battery / zip listing.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>adapter candidate table</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 03 Adapter / adapter candidate table.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>adapter summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 03 Adapter / adapter summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 03 Adapter / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c frozen input rows</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 04 Frozen Inputs / calce storage 25c frozen input rows.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c frozen input summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 04 Frozen Inputs / calce storage 25c frozen input summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 04 Frozen Inputs / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c frozen rule blockers</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 05 Frozen Rule Run / calce storage 25c frozen rule blockers.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c frozen rule summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 05 Frozen Rule Run / calce storage 25c frozen rule summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 05 Frozen Rule Run / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c baseline summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 06 Baseline Comparison / calce storage 25c baseline summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 06 Baseline Comparison / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>calce storage 25c validation summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 07 Validation Report / calce storage 25c validation summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / 07 Validation Report / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>candidate pairings</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / candidate pairings.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>capacity workbook channels</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / capacity workbook channels.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>impedance csv manifest</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / impedance csv manifest.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>pln metadata</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / pln metadata.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>zip listing</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 02 CALCE Storage 25C / zip listing.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>radar4kit corrected eis status</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 03 RADAR4KIT Corrected EIS Status / radar4kit corrected eis status.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 03 RADAR4KIT Corrected EIS Status / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>exploration summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / data / exploration summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>graphite lnmo window summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / data / graphite lnmo window summary.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic eis summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / data / panasonic eis summary.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic pulse summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / data / panasonic pulse summary.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>samsung archive summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / data / samsung archive summary.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>index</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / index.html</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>combined dataset readiness overview</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / combined dataset readiness overview.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>graphite lnmo eis nyquist by soc</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / graphite lnmo eis nyquist by soc.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>graphite lnmo full cell protocol traces</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / graphite lnmo full cell protocol traces.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>graphite lnmo window candidate counts</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / graphite lnmo window candidate counts.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic eis nyquist by temperature</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / panasonic eis nyquist by temperature.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic eis voltage coverage</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / panasonic eis voltage coverage.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic matched long discharge examples</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / panasonic matched long discharge examples.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic pulse candidate map</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / panasonic pulse candidate map.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>samsung archive inventory</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / samsung archive inventory.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>samsung sample timeseries</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 04 New Dataset Exploration / plots / samsung sample timeseries.png</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic adapter candidate table</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 05 Panasonic 18650PF Frozen Adapter / panasonic adapter candidate table.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic by temperature</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 05 Panasonic 18650PF Frozen Adapter / panasonic by temperature.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic by temperature protocol</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 05 Panasonic 18650PF Frozen Adapter / panasonic by temperature protocol.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic by temperature record</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 05 Panasonic 18650PF Frozen Adapter / panasonic by temperature record.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic frozen rule errors</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 05 Panasonic 18650PF Frozen Adapter / panasonic frozen rule errors.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic frozen rule rows</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 05 Panasonic 18650PF Frozen Adapter / panasonic frozen rule rows.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>panasonic frozen rule summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 05 Panasonic 18650PF Frozen Adapter / panasonic frozen rule summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 05 Panasonic 18650PF Frozen Adapter / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>radar4kit adapter candidate table</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 06 RADAR4KIT Frozen Adapter / radar4kit adapter candidate table.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>radar4kit by temperature</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 06 RADAR4KIT Frozen Adapter / radar4kit by temperature.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>radar4kit by temperature protocol</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 06 RADAR4KIT Frozen Adapter / radar4kit by temperature protocol.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>radar4kit by temperature record</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 06 RADAR4KIT Frozen Adapter / radar4kit by temperature record.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>radar4kit frozen rule errors</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 06 RADAR4KIT Frozen Adapter / radar4kit frozen rule errors.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>radar4kit frozen rule rows</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 06 RADAR4KIT Frozen Adapter / radar4kit frozen rule rows.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>radar4kit frozen rule summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 06 RADAR4KIT Frozen Adapter / radar4kit frozen rule summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 06 RADAR4KIT Frozen Adapter / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>SANITY AUDIT</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / SANITY AUDIT.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl adapter candidate table</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl adapter candidate table.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl by temperature</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl by temperature.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl by temperature protocol</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl by temperature protocol.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl by temperature record</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl by temperature record.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl frozen rule errors</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl frozen rule errors.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl frozen rule rows</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl frozen rule rows.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl frozen rule summary</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl frozen rule summary.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl sanity audit</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl sanity audit.json</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl sanity eis audit</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl sanity eis audit.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>stanford secl sanity join audit</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / 07 Stanford SECL INR21700 M50T Frozen Adapter / stanford secl sanity join audit.csv</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>README</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / README.md</code></div></div>
+<div class="source-item"><span class="source-kind">artifact</span><strong>VALIDATION PROTOCOL</strong><div><code>40 Outputs / Experiments / External Validation Dataset Qualification / VALIDATION PROTOCOL.md</code></div></div></div>
     <h2>Public Data Files On This Site</h2>
     <div class="source-list">
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/nasa/data/summary.json">NASA summary JSON</a></strong><div><code>../../external-validation/nasa/data/summary.json</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/nasa/data/candidate_pairings.csv">NASA candidate pairings CSV</a></strong><div><code>../../external-validation/nasa/data/candidate_pairings.csv</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/summary.json">CALCE summary JSON</a></strong><div><code>../../external-validation/calce/data/summary.json</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/candidate_pairings.csv">CALCE candidate pairings CSV</a></strong><div><code>../../external-validation/calce/data/candidate_pairings.csv</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/03_Adapter/adapter_summary.json">CALCE adapter summary JSON</a></strong><div><code>../../external-validation/calce/data/03_Adapter/adapter_summary.json</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/03_Adapter/adapter_candidate_table.csv">CALCE adapter candidate table CSV</a></strong><div><code>../../external-validation/calce/data/03_Adapter/adapter_candidate_table.csv</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/04_Frozen_Inputs/calce_storage_25c_frozen_input_summary.json">CALCE frozen input summary JSON</a></strong><div><code>../../external-validation/calce/data/04_Frozen_Inputs/calce_storage_25c_frozen_input_summary.json</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/04_Frozen_Inputs/calce_storage_25c_frozen_input_rows.csv">CALCE frozen input rows CSV</a></strong><div><code>../../external-validation/calce/data/04_Frozen_Inputs/calce_storage_25c_frozen_input_rows.csv</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/05_Frozen_Rule_Run/calce_storage_25c_frozen_rule_summary.json">CALCE frozen rule summary JSON</a></strong><div><code>../../external-validation/calce/data/05_Frozen_Rule_Run/calce_storage_25c_frozen_rule_summary.json</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/07_Validation_Report/calce_storage_25c_validation_summary.json">CALCE validation summary JSON</a></strong><div><code>../../external-validation/calce/data/07_Validation_Report/calce_storage_25c_validation_summary.json</code></div><div>Sanitized public copy.</div></div>
-      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/radar4kit/data/radar4kit_corrected_eis_status.json">RADAR4KIT corrected EIS status JSON</a></strong><div><code>../../external-validation/radar4kit/data/radar4kit_corrected_eis_status.json</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/nasa/data/summary.json">NASA summary JSON</a></strong><div><code>.. / .. / external validation / nasa / data / summary.json</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/nasa/data/candidate_pairings.csv">NASA candidate pairings CSV</a></strong><div><code>.. / .. / external validation / nasa / data / candidate pairings.csv</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/summary.json">CALCE summary JSON</a></strong><div><code>.. / .. / external validation / calce / data / summary.json</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/candidate_pairings.csv">CALCE candidate pairings CSV</a></strong><div><code>.. / .. / external validation / calce / data / candidate pairings.csv</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/03_Adapter/adapter_summary.json">CALCE adapter summary JSON</a></strong><div><code>.. / .. / external validation / calce / data / 03 Adapter / adapter summary.json</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/03_Adapter/adapter_candidate_table.csv">CALCE adapter candidate table CSV</a></strong><div><code>.. / .. / external validation / calce / data / 03 Adapter / adapter candidate table.csv</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/04_Frozen_Inputs/calce_storage_25c_frozen_input_summary.json">CALCE frozen input summary JSON</a></strong><div><code>.. / .. / external validation / calce / data / 04 Frozen Inputs / calce storage 25c frozen input summary.json</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/04_Frozen_Inputs/calce_storage_25c_frozen_input_rows.csv">CALCE frozen input rows CSV</a></strong><div><code>.. / .. / external validation / calce / data / 04 Frozen Inputs / calce storage 25c frozen input rows.csv</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/05_Frozen_Rule_Run/calce_storage_25c_frozen_rule_summary.json">CALCE frozen rule summary JSON</a></strong><div><code>.. / .. / external validation / calce / data / 05 Frozen Rule Run / calce storage 25c frozen rule summary.json</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/calce/data/07_Validation_Report/calce_storage_25c_validation_summary.json">CALCE validation summary JSON</a></strong><div><code>.. / .. / external validation / calce / data / 07 Validation Report / calce storage 25c validation summary.json</code></div><div>Sanitized public copy.</div></div>
+      <div class="source-item"><span class="source-kind">data</span><strong><a href="../../external-validation/radar4kit/data/radar4kit_corrected_eis_status.json">RADAR4KIT corrected EIS status JSON</a></strong><div><code>.. / .. / external validation / radar4kit / data / radar4kit corrected eis status.json</code></div><div>Sanitized public copy.</div></div>
     </div>
 
       </main>

@@ -191,7 +191,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li><code>VIABILITY_REPORT.md</code></li></ul>
 <ul><li><code>Model Rule/model_rule_report.md</code></li></ul>
 <h2>Section Status</h2>
-<h3>Section 1: Synthetic inverse sanity check</h3>
+<h3>first-slice protocol inventory: Synthetic inverse sanity check</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_drt_pilot.py</code></p>
@@ -210,9 +210,9 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li>Fast and mid relaxation bands are recovered reasonably.</li></ul>
 <ul><li>The slow branch is smeared and shifted, which is a warning that exact DRT peak location is fragile in pulse-based time-domain fitting.</li></ul>
 <p>Interpretation:</p>
-<p>Section 1 passes the basic math sanity check. It does not prove the method works on real data.</p>
-<h3>Section 2: Real-data input contract and window finder</h3>
-<p>Status: complete for first pass using the synthetic Section 1 CSV.</p>
+<p>first-slice protocol inventory passes the basic math sanity check. It does not prove the method works on real data.</p>
+<h3>file and protocol screen: Real-data input contract and window finder</h3>
+<p>Status: complete for first pass using the synthetic first-slice protocol inventory CSV.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_window_finder.py</code></p>
 <p>Command:</p>
@@ -228,14 +228,14 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li>Accepted all 5 synthetic pulse windows.</li></ul>
 <ul><li>Estimated usable tau ranges per window based on sampling interval and pulse/rest duration.</li></ul>
 <p>Interpretation:</p>
-<p>Section 2 passes the mechanics check. It correctly finds pulse/rest regions on clean synthetic data and exports candidate windows for downstream DRT fitting.</p>
+<p>file and protocol screen passes the mechanics check. It correctly finds pulse/rest regions on clean synthetic data and exports candidate windows for downstream DRT fitting.</p>
 <p>Limits:</p>
 <ul><li>The detector currently assumes step-like current pulses and rests.</li></ul>
 <ul><li>It reports temperature drift but does not reject windows based on it yet.</li></ul>
 <ul><li>Real battery data may need protocol-specific rules and current sign checks.</li></ul>
 <h2>Next Section</h2>
-<h3>Section 3: Candidate-window DRT fit</h3>
-<p>Status: complete for first pass using the best synthetic Section 2 candidate.</p>
+<h3>HPPC window finder: Candidate-window DRT fit</h3>
+<p>Status: complete for first pass using the best synthetic file and protocol screen candidate.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_candidate_fit.py</code></p>
 <p>Command:</p>
@@ -255,9 +255,9 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li>Recovered fast-band resistance around 10 s and mid-band resistance around 60 s.</li></ul>
 <ul><li>Did not recover the true 180 s branch because this selected window cannot support tau above about 81 s. That is the correct limitation, not a bug.</li></ul>
 <p>Interpretation:</p>
-<p>Section 3 passes the synthetic integration test. The window finder and DRT solver work together on one accepted window.</p>
+<p>HPPC window finder passes the synthetic integration test. The window finder and DRT solver work together on one accepted window.</p>
 <p>The important lesson is tau visibility. A single pulse/rest window only supports a bounded tau range. If the window is too short, slow processes are invisible no matter how good the solver is.</p>
-<h3>Section 4: Real CSV pilot</h3>
+<h3>HPPC candidate fit: Real CSV pilot</h3>
 <p>Status: blocked on real professor/dataset CSV, but complete for DIB-style format smoke test.</p>
 <p>Smoke-test script:</p>
 <p><code>scripts/experiments/time_domain_real_csv_smoke_test.py</code></p>
@@ -274,14 +274,14 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li><code>section_4_fit_summary.json</code></li></ul>
 <ul><li><code>section_4_candidate_fit_plot.png</code></li></ul>
 <p>Smoke-test result:</p>
-<ul><li>Rewrote the synthetic Section 1 signal with DIB-style columns: <code>Step Time</code>, <code>Current</code>, <code>Voltage</code>, <code>LogTemp001</code>.</li></ul>
+<ul><li>Rewrote the synthetic first-slice protocol inventory signal with DIB-style columns: <code>Step Time</code>, <code>Current</code>, <code>Voltage</code>, <code>LogTemp001</code>.</li></ul>
 <ul><li>Loader correctly mapped those columns to <code>time_s</code>, <code>current_a</code>, <code>voltage_v</code>, and <code>temperature_c</code>.</li></ul>
 <ul><li>Window finder detected 5 candidates and accepted all 5.</li></ul>
-<ul><li>Candidate-window fit produced the same result family as Section 3: R0 about 0.00175 ohm and voltage RMSE about 0.803 mV.</li></ul>
+<ul><li>Candidate-window fit produced the same result family as HPPC window finder: R0 about 0.00175 ohm and voltage RMSE about 0.803 mV.</li></ul>
 <p>Interpretation:</p>
-<p>Section 4 proves column compatibility and end-to-end mechanics for a realistic CSV layout. It does not prove real-data performance.</p>
+<p>HPPC candidate fit proves column compatibility and end-to-end mechanics for a realistic CSV layout. It does not prove real-data performance.</p>
 <p>Real CSV pilot:</p>
-<p>Use the same Section 2 and Section 3 scripts on one real battery time-series CSV.</p>
+<p>Use the same file and protocol screen and HPPC window finder scripts on one real battery time-series CSV.</p>
 <p>Expected command pattern:</p>
 <pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_window_finder.py&quot; --input &quot;path\to\real_timeseries.csv&quot;
 &amp; &quot;python&quot; &quot;scripts\experiments\time_domain_candidate_fit.py&quot; --input &quot;path\to\real_timeseries.csv&quot;</code></pre>
@@ -299,7 +299,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li>cell id and cycle/test id</li></ul>
 <ul><li>SOC, SOH, and temperature metadata if available</li></ul>
 <ul><li>matching EIS file or table for the same cell/SOC/temp/SOH condition</li></ul>
-<h3>Section 5: Real DIB capacity-file pilot</h3>
+<h3>EIS DRT baseline: Real DIB capacity-file pilot</h3>
 <p>Status: complete for first pass on local DIB time-series data.</p>
 <p>Input:</p>
 <p><code>$DIB_CAPACITY_ROOT\100per_Cells_Capacity_Check_09112021_000cycle\Cell27_100SOH_Capacity_Check_25degC_000cycle.csv</code></p>
@@ -328,7 +328,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <p>But this is not yet matched-pair validation. The selected pulse has noticeable temperature drift, and we have not compared the time-domain DRT against the matching EIS-derived DRT. This is a real-data smoke test, not proof.</p>
 <p>Follow-up:</p>
 <p>Cell27 is useful as a real-data smoke test, but it is a bad matched-validation target in the local DIB folder because the matching Cell27 EIS files are not present. Do not spend time forcing Cell27 into the validation story.</p>
-<h3>Section 6: Cell28 matched-data target</h3>
+<h3>time-domain versus EIS bridge comparison: Cell28 matched-data target</h3>
 <p>Status: complete for first pass.</p>
 <p>Reason for switching from Cell27 to Cell28:</p>
 <p>Cell28 has both capacity-check time-series data and matching EIS conditions in the local DIB folder. That makes it a real matched-pair candidate instead of just a pulse-fitting example.</p>
@@ -356,7 +356,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li>Main recovered structures: about 45 s, 90 s, and a boundary peak near 449 s.</li></ul>
 <p>Interpretation:</p>
 <p>This is the strongest real-data time-domain DRT result so far. It reconstructs voltage well and uses a lower-drift pulse near a known EIS SOC point. But the slow boundary peak is not automatically trustworthy. Boundary peaks often mean the selected window is not long enough to resolve the slow process cleanly.</p>
-<h3>Section 7: Matched Cell28 time-domain DRT versus EIS-derived DRT</h3>
+<h3>lambda sensitivity check: Matched Cell28 time-domain DRT versus EIS-derived DRT</h3>
 <p>Status: complete for first pass, not validated yet.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_eis_compare.py</code></p>
@@ -391,14 +391,14 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li>check whether repeated pulses at the same approximate SOC give similar band areas</li></ul>
 <p>Blunt takeaway:</p>
 <p>One matched-pair plot is not evidence. A small table across SOC points is evidence. If the trend is not repeatable, the pipeline is still a curve generator, not a measurement pipeline.</p>
-<h3>Section 8: Cell28 SOC sweep</h3>
+<h3>combined EIS and time-domain DRT prototype: Cell28 SOC sweep</h3>
 <p>Status: complete for first pass, not validated yet.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_cell28_soc_sweep.py</code></p>
 <p>Command:</p>
 <pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_cell28_soc_sweep.py&quot;</code></pre>
 <p>Purpose:</p>
-<p>Section 8 repeats the Cell28 matched comparison across SOC points using the lower-current pulse windows. This is the first useful validation table.</p>
+<p>combined EIS and time-domain DRT prototype repeats the Cell28 matched comparison across SOC points using the lower-current pulse windows. This is the first useful validation table.</p>
 <p>Cases:</p>
 <table>
 <tr><th>SOC percent</th><th>Candidate</th><th>Pre-rest V</th><th>Temp drift C</th><th>Time RMSE mV</th><th>Corr</th><th>Time overlap area</th><th>EIS overlap area</th></tr>
@@ -426,14 +426,14 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li>Should SOC be assigned by integrated capacity rather than pre-rest voltage?</li></ul>
 <p>Blunt takeaway:</p>
 <p>The pipeline is mechanically real now. Scientifically, it is not proven. The next job is to find out whether the mismatch is a bug, a modeling assumption, or a real limitation of pulse-only time-domain data.</p>
-<h3>Section 9: Validation diagnostics</h3>
+<h3>time-series 2D DRT surface: Validation diagnostics</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_validation_diagnostics.py</code></p>
 <p>Command:</p>
 <pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_validation_diagnostics.py&quot;</code></pre>
 <p>Purpose:</p>
-<p>Section 9 checks whether the Section 8 mismatch is mostly a scale problem or a shape problem. This matters because a constant scale problem could be fixed by units or normalization. A shape problem means the time-domain inverse is not measuring the same thing as EIS under the current assumptions.</p>
+<p>time-series 2D DRT surface checks whether the combined EIS and time-domain DRT prototype mismatch is mostly a scale problem or a shape problem. This matters because a constant scale problem could be fixed by units or normalization. A shape problem means the time-domain inverse is not measuring the same thing as EIS under the current assumptions.</p>
 <p>Outputs:</p>
 <ul><li><code>section_9_validation_diagnostics_report.md</code></li></ul>
 <ul><li><code>section_9_scale_diagnostics.csv</code></li></ul>
@@ -465,17 +465,17 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li>verify that candidate windows actually correspond to the EIS SOC labels</li></ul>
 <ul><li>estimate and subtract OCV/baseline from rest periods more carefully</li></ul>
 <ul><li>compare discharge and charge pulses separately</li></ul>
-<ul><li>rerun Section 8 with a pre-declared lambda rule</li></ul>
+<ul><li>rerun combined EIS and time-domain DRT prototype with a pre-declared lambda rule</li></ul>
 <p>Blunt takeaway:</p>
 <p>The mismatch survived scale diagnostics. Regularization helps one case, but it is not a clean fix. The weak point is now experimental alignment and baseline modeling, not whether Python can draw a DRT curve.</p>
-<h3>Section 10: SOC alignment diagnostic</h3>
+<h3>EIS 2D DRT surface: SOC alignment diagnostic</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_soc_alignment.py</code></p>
 <p>Command:</p>
 <pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_soc_alignment.py&quot;</code></pre>
 <p>Purpose:</p>
-<p>Section 10 checks whether the pulse windows used for matched EIS validation line up with the intended EIS SOC labels. Earlier matching mostly used pre-rest voltage. This section adds coulomb counting from the measured current.</p>
+<p>EIS 2D DRT surface checks whether the pulse windows used for matched EIS validation line up with the intended EIS SOC labels. Earlier matching mostly used pre-rest voltage. This section adds coulomb counting from the measured current.</p>
 <p>Capacity clues from the raw Cell28 CSV:</p>
 <ul><li><code>AhAccu</code> max absolute value: about 4.956 Ah</li></ul>
 <ul><li><code>AhPrev</code> max absolute value: about 4.962 Ah</li></ul>
@@ -501,18 +501,18 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <p>Next serious target:</p>
 <ul><li>ask for exact protocol annotations that say which pulse windows correspond to which SOC targets</li></ul>
 <ul><li>compute SOC by protocol-aware capacity integration, not just a single anchor</li></ul>
-<ul><li>rerun Section 8 using windows whose integrated SOC is closest to the EIS SOC label</li></ul>
+<ul><li>rerun combined EIS and time-domain DRT prototype using windows whose integrated SOC is closest to the EIS SOC label</li></ul>
 <ul><li>compare candidate 10 against interpolated EIS DRT between 70 and 95 SOC if exact SOC is unavailable</li></ul>
 <p>Blunt takeaway:</p>
 <p>The current validation is contaminated by SOC uncertainty. Do not present the 70 percent comparison as exact. Present it as an approximate matched case and say the next task is protocol-aware SOC reconstruction.</p>
-<h3>Section 11: Generalized DIB batch runner</h3>
+<h3>time-series versus EIS 2D comparison: Generalized DIB batch runner</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_dib_batch.py</code></p>
 <p>Command:</p>
 <pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_dib_batch.py&quot; --max-cases 3 --soc-selection coulomb</code></pre>
 <p>Purpose:</p>
-<p>Section 11 tests whether the prototype can run on multiple DIB cells instead of only the hand-picked Cell28 case.</p>
+<p>time-series versus EIS 2D comparison tests whether the prototype can run on multiple DIB cells instead of only the hand-picked Cell28 case.</p>
 <p>What it does:</p>
 <ul><li>discovers DIB capacity-check CSV files</li></ul>
 <ul><li>discovers matching EIS rows from <code>WholeDataRealSOH.xlsx</code></li></ul>
@@ -563,14 +563,14 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <p>Do not use the latest aged-cycle capacity files by default for this prototype. Many latest-cycle files contain only two long charge/discharge segments, which are poor DRT excitation windows. The earliest-cycle files contain the pulse-rich protocol needed by the current solver.</p>
 <p>Blunt takeaway:</p>
 <p>The prototype is now generalized enough to test DIB cells. It is not yet smart enough to choose scientifically perfect windows. The next fix is professor/protocol-confirmed SOC reconstruction and stronger quality gates tied to the experiment protocol, not more plotting.</p>
-<h3>Section 12: SOC mapping sensitivity</h3>
+<h3>multi-cell 2D batch check: SOC mapping sensitivity</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_soc_mapping_sensitivity.py</code></p>
 <p>Command:</p>
 <pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_soc_mapping_sensitivity.py&quot; --max-cases 3</code></pre>
 <p>Purpose:</p>
-<p>Section 12 treats SOC matching as an assumption layer instead of pretending it is known ground truth. It reruns the same three DIB cases under four SOC mapping modes:</p>
+<p>multi-cell 2D batch check treats SOC matching as an assumption layer instead of pretending it is known ground truth. It reruns the same three DIB cases under four SOC mapping modes:</p>
 <ul><li><code>voltage</code>: assign SOC by pre-rest voltage order.</li></ul>
 <ul><li><code>coulomb</code>: anchor the highest-voltage pulse at 95 percent SOC, then use integrated current and raw capacity.</li></ul>
 <ul><li><code>endpoint</code>: force the highest-voltage pulse to 95 percent and the lowest-voltage pulse to 5 percent.</li></ul>
@@ -595,14 +595,14 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <p>That is not proof that the method fails. It means the current mismatch is probably not just an artifact of voltage sorting versus coulomb counting. The next weak points are time-domain model assumptions, EIS/time-domain comparability, baseline handling, and regularization.</p>
 <p>Blunt takeaway:</p>
 <p>Good news: the prototype is less fragile to SOC mapping than expected on this small run. Bad news: the EIS mismatch is still there, so SOC mapping was not the easy excuse.</p>
-<h3>Section 13: Model sensitivity</h3>
+<h3>multi-temperature 2D batch check: Model sensitivity</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_model_sensitivity.py</code></p>
 <p>Command:</p>
 <pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_model_sensitivity.py&quot; --max-cases 2</code></pre>
 <p>Purpose:</p>
-<p>Section 13 tests whether EIS agreement changes when the time-domain model assumptions change. It varies:</p>
+<p>multi-temperature 2D batch check tests whether EIS agreement changes when the time-domain model assumptions change. It varies:</p>
 <ul><li>baseline mode: <code>offset</code>, <code>charge</code>, and <code>time_charge</code></li></ul>
 <ul><li>DRT smoothness strength: lambda values <code>0.001</code>, <code>0.1</code>, <code>1.0</code>, and <code>3.0</code></li></ul>
 <ul><li>SOC selection fixed at <code>coulomb</code></li></ul>
@@ -627,7 +627,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <p>Stronger smoothing often improves normalized shape metrics while barely changing voltage RMSE. That does not automatically mean the smoother DRT is more correct. It may just mean the curve became easier to match after removing structure.</p>
 <p>Blunt takeaway:</p>
 <p>SOC mapping was not the easy excuse. Model assumptions are now the main suspect. Do not pick the prettiest baseline/lambda after seeing EIS. Define the rule first, then test it.</p>
-<h3>Section 14: Viability report</h3>
+<h3>combined DRT mirror check: Viability report</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_viability_report.py</code></p>
@@ -652,7 +652,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <p>The next required move is to run the pre-declared model rule on more cells after protocol metadata is confirmed. If rule-selected outputs still disagree with EIS, the method is not validated.</p>
 <p>Blunt takeaway:</p>
 <p>The prototype is now useful. It is still not scientifically proven. Training a model now would train on unresolved preprocessing assumptions.</p>
-<h3>Section 15: Pre-declared model rule</h3>
+<h3>failure-mode audit: Pre-declared model rule</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_model_rule.py</code></p>
@@ -679,7 +679,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <p>This makes the pipeline more honest because lambda is selected without using EIS agreement. It also makes the bad news harder to dodge: the rule-selected EIS comparison is still weak.</p>
 <p>Blunt takeaway:</p>
 <p>The pipeline is now viable as a research scaffold. It is still not validated as a measurement method.</p>
-<h3>Section 16: HTML documentation export</h3>
+<h3>weighting probe: HTML documentation export</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_export_html.py</code></p>
@@ -696,8 +696,8 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li><code>TIME_DOMAIN_DRT_MATH.html</code></li></ul>
 <ul><li><code>VIABILITY_REPORT.html</code></li></ul>
 <ul><li><code>Model Rule/model_rule_report.html</code></li></ul>
-<h2>Earlier Section 3 Implementation Target</h2>
-<p>Use the accepted candidate windows from Section 2 and fit time-domain DRT on one selected pulse/rest window.</p>
+<h2>Earlier HPPC window finder Implementation Target</h2>
+<p>Use the accepted candidate windows from file and protocol screen and fit time-domain DRT on one selected pulse/rest window.</p>
 <p>Expected inputs:</p>
 <ul><li><code>section_2_window_candidates.csv</code></li></ul>
 <ul><li>real or synthetic time-series CSV</li></ul>
@@ -708,7 +708,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code
 <ul><li>residual plot</li></ul>
 <ul><li>fit quality summary</li></ul>
 <p>The first version should run on the synthetic data. After the professor gives the real dataset, the same script should run on a real pulse/rest window.</p>
-<h2>Section 2 Implementation Target</h2>
+<h2>file and protocol screen Implementation Target</h2>
 <p>Build a loader that accepts real battery time-series files with:</p>
 <ul><li>time</li></ul>
 <ul><li>current</li></ul>

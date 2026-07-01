@@ -1,0 +1,142 @@
+{
+  "experiment": "cross_dataset_pulse_to_eis_training_cambridge_one_shot_validation",
+  "scored_utc": "2026-06-30T20:28:29.779773+00:00",
+  "claim_boundary": "One-shot Cambridge validation of the locked supervised pulse/time-domain-to-fixed-grid-EIS scaffold. This is not a frozen frozen pulse-to-EIS rule CALB rule validation.",
+  "post_outcome_tuning_performed": false,
+  "frozen_config_path": "[local path redacted]",
+  "frozen_config_sha256": "f32a5c1ec3a1627e0faf7687417a626ec0993435a6e332240a24f3ad449f7936",
+  "dev_matrix_sha256_at_scoring": "d685f64d5b5b7b4f05120a5c705a37c55a801d45d4eb34859d1b92ce45577311",
+  "cambridge_matrix_csv": "[local path redacted]",
+  "cambridge_matrix_sha256": "aaebc2acf33b788e0074166fdd2b37407f06df275259b59c0fe76536cd93d019",
+  "train_rows": 489,
+  "train_datasets": [
+    "Panasonic 18650PF",
+    "RADAR4KIT corrected EIS plus PULSE"
+  ],
+  "cambridge_rows_scored": 20594,
+  "cambridge_cell_count": 88,
+  "cambridge_zip_counts": {
+    "raw-data.zip": 10229,
+    "chemistry2-25C.zip": 7107,
+    "chemistry2-35C.zip": 3258
+  },
+  "target_columns": [
+    "target_zreal_0p05hz_ohm",
+    "target_znegimag_0p05hz_ohm",
+    "target_zreal_0p1hz_ohm",
+    "target_znegimag_0p1hz_ohm",
+    "target_zreal_0p2hz_ohm",
+    "target_znegimag_0p2hz_ohm",
+    "target_zreal_0p5hz_ohm",
+    "target_znegimag_0p5hz_ohm",
+    "target_zreal_1hz_ohm",
+    "target_znegimag_1hz_ohm",
+    "target_zreal_2hz_ohm",
+    "target_znegimag_2hz_ohm",
+    "target_zreal_5hz_ohm",
+    "target_znegimag_5hz_ohm",
+    "target_zreal_10hz_ohm",
+    "target_znegimag_10hz_ohm",
+    "target_zreal_20hz_ohm",
+    "target_znegimag_20hz_ohm",
+    "target_zreal_40hz_ohm",
+    "target_znegimag_40hz_ohm"
+  ],
+  "locked_baseline": {
+    "name": "global_train_target_mean",
+    "metrics": {
+      "rmse_all_ohm": 1.1390269531133854,
+      "mae_all_ohm": 0.8040797914290136,
+      "bias_all_ohm": -0.8034123433294527,
+      "rmse_zreal_ohm": 1.4676966003256924,
+      "rmse_znegimag_ohm": 0.6638007903203563,
+      "r2_uniform_average": -14.580057554354998,
+      "per_target_rmse_ohm": {
+        "target_zreal_0p05hz_ohm": 2.095027258867954,
+        "target_znegimag_0p05hz_ohm": 1.2866179685894314,
+        "target_zreal_0p1hz_ohm": 1.9135640477672302,
+        "target_znegimag_0p1hz_ohm": 1.0105466888940828,
+        "target_zreal_0p2hz_ohm": 1.8150115659135155,
+        "target_znegimag_0p2hz_ohm": 0.7743675800428803,
+        "target_zreal_0p5hz_ohm": 1.6820599436697694,
+        "target_znegimag_0p5hz_ohm": 0.5187072382487128,
+        "target_zreal_1hz_ohm": 1.5329864591955256,
+        "target_znegimag_1hz_ohm": 0.4739737095953034,
+        "target_zreal_2hz_ohm": 1.343419228134786,
+        "target_znegimag_2hz_ohm": 0.4548584121992549,
+        "target_zreal_5hz_ohm": 1.1028719559900684,
+        "target_znegimag_5hz_ohm": 0.38182479700086536,
+        "target_zreal_10hz_ohm": 0.9458767712079257,
+        "target_znegimag_10hz_ohm": 0.335261408187449,
+        "target_zreal_20hz_ohm": 0.8049337878534384,
+        "target_znegimag_20hz_ohm": 0.3053492295213003,
+        "target_zreal_40hz_ohm": 0.6731443828952449,
+        "target_znegimag_40hz_ohm": 0.27936775906399725
+      }
+    }
+  },
+  "locked_model": {
+    "name": "knn_5_global_mean_shrinkage_dev_tuned",
+    "selected_alpha": 0.4,
+    "metrics": {
+      "rmse_all_ohm": 1.1200309137511784,
+      "mae_all_ohm": 0.784712424499357,
+      "bias_all_ohm": -0.7840374436591974,
+      "rmse_zreal_ohm": 1.440535777852906,
+      "rmse_znegimag_ohm": 0.6586312839839318,
+      "r2_uniform_average": -14.151286774686028,
+      "per_target_rmse_ohm": {
+        "target_zreal_0p05hz_ohm": 2.0428581834849697,
+        "target_znegimag_0p05hz_ohm": 1.2812394557286946,
+        "target_zreal_0p1hz_ohm": 1.8702692449951717,
+        "target_znegimag_0p1hz_ohm": 1.0052434284877092,
+        "target_zreal_0p2hz_ohm": 1.779631330892477,
+        "target_znegimag_0p2hz_ohm": 0.7690278076694905,
+        "target_zreal_0p5hz_ohm": 1.6552497312243406,
+        "target_znegimag_0p5hz_ohm": 0.5109631464132156,
+        "target_zreal_1hz_ohm": 1.5120028850335636,
+        "target_znegimag_1hz_ohm": 0.46555106782271544,
+        "target_zreal_2hz_ohm": 1.3260198167282267,
+        "target_znegimag_2hz_ohm": 0.4473966760579225,
+        "target_zreal_5hz_ohm": 1.0880183524732807,
+        "target_znegimag_5hz_ohm": 0.3754370719604818,
+        "target_zreal_10hz_ohm": 0.9334759858515377,
+        "target_znegimag_10hz_ohm": 0.32985675169722284,
+        "target_zreal_20hz_ohm": 0.7947634533910554,
+        "target_znegimag_20hz_ohm": 0.30100091261292766,
+        "target_zreal_40hz_ohm": 0.6648501654448469,
+        "target_znegimag_40hz_ohm": 0.2758878023639996
+      }
+    }
+  },
+  "relative_improvement_vs_baseline": {
+    "rmse_all_fraction": 0.016677427439520904,
+    "rmse_zreal_fraction": 0.018505747350480484,
+    "rmse_znegimag_fraction": 0.0077877375438641675
+  },
+  "by_zip_rmse": {
+    "chemistry2-25C.zip": {
+      "rows": 7107,
+      "baseline_rmse_all_ohm": 0.9743758705820827,
+      "model_rmse_all_ohm": 0.9536710697948467
+    },
+    "chemistry2-35C.zip": {
+      "rows": 3258,
+      "baseline_rmse_all_ohm": 0.7147775706669541,
+      "model_rmse_all_ohm": 0.6955186184277692
+    },
+    "raw-data.zip": {
+      "rows": 10229,
+      "baseline_rmse_all_ohm": 1.3377773988557924,
+      "model_rmse_all_ohm": 1.3189534766461575
+    }
+  },
+  "verdict": "partial_support",
+  "verdict_reason": "Locked model beat the locked global-mean baseline overall, but did not meet the predeclared external-support margin/components rule.",
+  "verdict_rules": {
+    "blocked_inconclusive": "No complete Cambridge target rows, schema/join failure, or runner failure before scoring.",
+    "external_support": "Locked model RMSE is at least 5 percent lower than locked global-mean baseline RMSE on Cambridge and both zreal and negative-imaginary RMSE are lower.",
+    "partial_support": "Locked model RMSE is lower than locked global-mean baseline RMSE on Cambridge, but the 5 percent margin or both-component requirement is not met.",
+    "no_support": "Locked model RMSE is equal to or worse than locked global-mean baseline RMSE on Cambridge."
+  }
+}

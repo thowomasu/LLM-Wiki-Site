@@ -1,0 +1,114 @@
+{
+  "config_name": "frozen_cambridge_one_shot_validation_config",
+  "created_utc": "2026-06-30T20:24:18.990269+00:00",
+  "claim_boundary": "This config freezes a supervised pulse/time-domain-to-fixed-grid-EIS scaffold. It is not a frozen pulse-to-EIS rule CALB rule validation and must not be tuned after Cambridge outcomes are inspected.",
+  "cambridge_status_at_freeze": "clean_holdout_not_yet_scored_by_this_pipeline",
+  "training_data": {
+    "matrix_csv": "[local path redacted]",
+    "matrix_sha256": "d685f64d5b5b7b4f05120a5c705a37c55a801d45d4eb34859d1b92ce45577311",
+    "train_role": "dev_train_seen_outcome",
+    "train_datasets": [
+      "Panasonic 18650PF",
+      "RADAR4KIT corrected EIS plus PULSE"
+    ],
+    "development_evaluation_dataset": "Stanford SECL INR21700-M50T",
+    "stanford_role": "development_evaluation_seen_outcome_not_clean_validation"
+  },
+  "holdout_data": {
+    "dataset": "Cambridge uneven-usage EIS dataset",
+    "dataset_path": "[local path redacted]",
+    "split_rule": "whole Cambridge dataset holdout; no Cambridge rows in training or dev tuning",
+    "expected_split_role": "final_holdout_candidate_do_not_tune"
+  },
+  "feature_columns": [
+    "soc_percent",
+    "temperature_c",
+    "td_rows",
+    "td_duration_s",
+    "td_voltage_start_v",
+    "td_voltage_end_v",
+    "td_voltage_min_v",
+    "td_voltage_max_v",
+    "td_voltage_mean_v",
+    "td_voltage_std_v",
+    "td_current_mean_a",
+    "td_current_abs_mean_a",
+    "td_current_abs_max_a",
+    "td_active_fraction",
+    "td_charge_throughput_ah",
+    "td_discharge_throughput_ah",
+    "td_temperature_median_c"
+  ],
+  "target": {
+    "representation": "fixed_grid_eis_real_and_negative_imaginary_ohm",
+    "frequency_grid_hz": [
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      20.0,
+      40.0
+    ],
+    "target_columns": [
+      "target_zreal_0p05hz_ohm",
+      "target_znegimag_0p05hz_ohm",
+      "target_zreal_0p1hz_ohm",
+      "target_znegimag_0p1hz_ohm",
+      "target_zreal_0p2hz_ohm",
+      "target_znegimag_0p2hz_ohm",
+      "target_zreal_0p5hz_ohm",
+      "target_znegimag_0p5hz_ohm",
+      "target_zreal_1hz_ohm",
+      "target_znegimag_1hz_ohm",
+      "target_zreal_2hz_ohm",
+      "target_znegimag_2hz_ohm",
+      "target_zreal_5hz_ohm",
+      "target_znegimag_5hz_ohm",
+      "target_zreal_10hz_ohm",
+      "target_znegimag_10hz_ohm",
+      "target_zreal_20hz_ohm",
+      "target_znegimag_20hz_ohm",
+      "target_zreal_40hz_ohm",
+      "target_znegimag_40hz_ohm"
+    ],
+    "interpolation": "linear interpolation over log10 frequency within measured frequency range only"
+  },
+  "locked_baseline": {
+    "name": "global_train_target_mean",
+    "selection_source": "[local path redacted]",
+    "selection_source_sha256": "f0805eb91da67082befed3c1877356db69ae1ac598e7a3f57b02924a60ffa427",
+    "dev_rmse_all_ohm": 0.0044402816104454155
+  },
+  "locked_model": {
+    "name": "knn_5_global_mean_shrinkage_dev_tuned",
+    "estimator": "KNeighborsRegressor(n_neighbors=5) blended with global train target mean",
+    "selected_alpha": 0.4,
+    "selection_source": "[local path redacted]",
+    "selection_source_sha256": "375da218b390422c96adccf4957f1d9d0f127919898c0115ba500bf48932b7ed",
+    "dev_rmse_all_ohm": 0.0040249645317227255,
+    "dev_tuned_on_stanford": true
+  },
+  "verdict_rules": {
+    "blocked_inconclusive": "No complete Cambridge target rows, schema/join failure, or runner failure before scoring.",
+    "external_support": "Locked model RMSE is at least 5 percent lower than locked global-mean baseline RMSE on Cambridge and both zreal and negative-imaginary RMSE are lower.",
+    "partial_support": "Locked model RMSE is lower than locked global-mean baseline RMSE on Cambridge, but the 5 percent margin or both-component requirement is not met.",
+    "no_support": "Locked model RMSE is equal to or worse than locked global-mean baseline RMSE on Cambridge."
+  },
+  "forbidden_after_scoring": [
+    "Do not change feature columns.",
+    "Do not change the frequency grid.",
+    "Do not change selected_alpha.",
+    "Do not change train/dev split roles.",
+    "Do not choose a different model after seeing Cambridge metrics and still call it clean validation."
+  ],
+  "script_hashes": {
+    "freeze_config_script_sha256": "c4c965784b1ce28989a92225bc4c7a65b26f396db9c737cb022d147debd236c7",
+    "validation_runner_script_sha256": "027c62a8aba13645d940d868fcb11a7cf44d9439724f67916dfef9fd29f7966c",
+    "dev_matrix_builder_script_sha256": "56bda0dc9bf777d1e21173abeccd419da8f8f21ede4311e9f6b0831956194f37",
+    "dev_trainer_script_sha256": "e2bf9da779a0f22a6e84efe4fc2dfb63cdc5b615bec2bc1c338870e9942236fa"
+  }
+}

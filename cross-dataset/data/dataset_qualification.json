@@ -1,0 +1,122 @@
+{
+  "dataset": "Cambridge uneven-usage EIS dataset",
+  "dataset_path": "[local path redacted]",
+  "inspection_mode": "zip central directory plus small in-memory member previews; no bulk extraction",
+  "zip_files": [
+    {
+      "zip_name": "chemistry2-25C.zip",
+      "zip_path": "[local path redacted]",
+      "entry_count": 28893,
+      "txt_entry_count": 28824,
+      "parsed_biologic_txt_count": 14412,
+      "methods": {
+        "GCPL": 7221,
+        "GEIS": 7191
+      },
+      "cell_count": 32,
+      "channel_count": 16,
+      "uncompressed_bytes": 811116216
+    },
+    {
+      "zip_name": "chemistry2-35C.zip",
+      "zip_path": "[local path redacted]",
+      "entry_count": 13588,
+      "txt_entry_count": 13568,
+      "parsed_biologic_txt_count": 6784,
+      "methods": {
+        "GCPL": 3394,
+        "GEIS": 3390
+      },
+      "cell_count": 16,
+      "channel_count": 16,
+      "uncompressed_bytes": 438643948
+    },
+    {
+      "zip_name": "raw-data.zip",
+      "zip_path": "[local path redacted]",
+      "entry_count": 41586,
+      "txt_entry_count": 41436,
+      "parsed_biologic_txt_count": 20718,
+      "methods": {
+        "GCPL": 10398,
+        "GEIS": 10320
+      },
+      "cell_count": 40,
+      "channel_count": 8,
+      "uncompressed_bytes": 1840634879
+    }
+  ],
+  "parsed_entries": 41914,
+  "method_counts": {
+    "GCPL": 21013,
+    "GEIS": 20901
+  },
+  "cell_count": 88,
+  "channel_count": 16,
+  "same_cell_channel_geis_with_preceding_gcpl": 20896,
+  "has_eis": true,
+  "has_hppc_or_pulse_rest_data": true,
+  "has_dynamic_current_voltage_profiles": true,
+  "has_aging_cycles_or_diagnostic_rounds": "partial_sequence_indices_only",
+  "has_same_cell_join_keys": true,
+  "has_soc_labels": false,
+  "has_temperature_labels": "partial_from_folder_names_25C_35C_and_raw_groups",
+  "has_cycle_count_labels": "partial_from_filename_major_indices",
+  "has_soh_or_capacity_labels": "capacity_column_available_in_GCPL_but_no_explicit_SOH_label",
+  "sample_headers": {
+    "gcpl_member": "chemistry2-25C/PJ252/PJ252_025_14_GCPL_CA5.txt",
+    "gcpl_columns": [
+      "time/s",
+      "Ecell/V",
+      "<I>/mA",
+      "Capacity/mA.h",
+      "P/W",
+      "ox/red"
+    ],
+    "geis_member": "chemistry2-25C/PJ252/PJ252_033_07_GEIS_CA5.txt",
+    "geis_columns": [
+      "freq/Hz",
+      "Re(Z)/Ohm",
+      "-Im(Z)/Ohm",
+      "time/s"
+    ]
+  },
+  "gcpl_probe": {
+    "member": "chemistry2-25C/PJ257/PJ257_000_01_GCPL_CB2.txt",
+    "rows_inspected": 8000,
+    "has_time": true,
+    "has_voltage": true,
+    "has_current": true,
+    "has_capacity": true,
+    "has_temperature": false,
+    "has_rest_rows": true,
+    "has_nonzero_current_rows": true,
+    "current_signs": [
+      -1,
+      1
+    ],
+    "current_min_ma": -40.01114464498276,
+    "current_max_ma": 40.01176644060752,
+    "current_transitions_observed": 3
+  },
+  "geis_probe": {
+    "member": "chemistry2-25C/PJ252/PJ252_033_07_GEIS_CA5.txt",
+    "rows_inspected": 57,
+    "columns": [
+      "freq/Hz",
+      "Re(Z)/Ohm",
+      "-Im(Z)/Ohm",
+      "time/s",
+      "Unnamed: 4"
+    ],
+    "has_frequency": true,
+    "has_real_impedance": true,
+    "has_negative_imag_impedance": true,
+    "has_time": true,
+    "frequency_min_hz": 0.020954758,
+    "frequency_max_hz": 9904.999,
+    "frequency_points": 57
+  },
+  "qualification_verdict": "qualified_for_scaffold_as_candidate_holdout_not_yet_final_validation",
+  "claim_boundary": "This qualifies schema and joinability only. It does not validate a model or the frozen frozen pulse-to-EIS rule."
+}

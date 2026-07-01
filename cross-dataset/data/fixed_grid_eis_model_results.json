@@ -1,0 +1,480 @@
+{
+  "experiment": "cross_dataset_pulse_to_eis_training_fixed_grid_eis_dev",
+  "target": "fixed_grid_eis_real_and_negative_imaginary_ohm",
+  "claim_boundary": "Development-only fixed-grid EIS models. Cambridge is excluded.",
+  "split": {
+    "rule": "train on Panasonic plus RADAR4KIT development rows; test on Stanford SECL whole-dataset holdout",
+    "train_rows": 489,
+    "test_rows": 182,
+    "train_datasets": [
+      "Panasonic 18650PF",
+      "RADAR4KIT corrected EIS plus PULSE"
+    ],
+    "test_datasets": [
+      "Stanford SECL INR21700-M50T"
+    ],
+    "no_random_row_split": true,
+    "cambridge_used": false
+  },
+  "models": [
+    {
+      "model": "ridge_alpha_1",
+      "features": [
+        "soc_percent",
+        "temperature_c",
+        "td_rows",
+        "td_duration_s",
+        "td_voltage_start_v",
+        "td_voltage_end_v",
+        "td_voltage_min_v",
+        "td_voltage_max_v",
+        "td_voltage_mean_v",
+        "td_voltage_std_v",
+        "td_current_mean_a",
+        "td_current_abs_mean_a",
+        "td_current_abs_max_a",
+        "td_active_fraction",
+        "td_charge_throughput_ah",
+        "td_discharge_throughput_ah",
+        "td_temperature_median_c"
+      ],
+      "target_columns": [
+        "target_zreal_0p05hz_ohm",
+        "target_znegimag_0p05hz_ohm",
+        "target_zreal_0p1hz_ohm",
+        "target_znegimag_0p1hz_ohm",
+        "target_zreal_0p2hz_ohm",
+        "target_znegimag_0p2hz_ohm",
+        "target_zreal_0p5hz_ohm",
+        "target_znegimag_0p5hz_ohm",
+        "target_zreal_1hz_ohm",
+        "target_znegimag_1hz_ohm",
+        "target_zreal_2hz_ohm",
+        "target_znegimag_2hz_ohm",
+        "target_zreal_5hz_ohm",
+        "target_znegimag_5hz_ohm",
+        "target_zreal_10hz_ohm",
+        "target_znegimag_10hz_ohm",
+        "target_zreal_20hz_ohm",
+        "target_znegimag_20hz_ohm",
+        "target_zreal_40hz_ohm",
+        "target_znegimag_40hz_ohm"
+      ],
+      "test_metrics": {
+        "rmse_all_ohm": 0.4008757165684895,
+        "mae_all_ohm": 0.3127844742076797,
+        "bias_all_ohm": 0.3127844742076797,
+        "rmse_zreal_ohm": 0.5328885660939034,
+        "rmse_znegimag_ohm": 0.19347469187204666,
+        "r2_uniform_average": -464160.5294309476,
+        "per_target_rmse_ohm": {
+          "target_zreal_0p05hz_ohm": 0.3273943598003043,
+          "target_znegimag_0p05hz_ohm": 0.19841391111014176,
+          "target_zreal_0p1hz_ohm": 0.7820120184866394,
+          "target_znegimag_0p1hz_ohm": 0.2887155504303211,
+          "target_zreal_0p2hz_ohm": 0.9444815980800216,
+          "target_znegimag_0p2hz_ohm": 0.2871227993051224,
+          "target_zreal_0p5hz_ohm": 0.6806238853843312,
+          "target_znegimag_0p5hz_ohm": 0.24822983920901717,
+          "target_zreal_1hz_ohm": 0.5355391424986174,
+          "target_znegimag_1hz_ohm": 0.21695411262711595,
+          "target_zreal_2hz_ohm": 0.39818751564007954,
+          "target_znegimag_2hz_ohm": 0.1413528326515425,
+          "target_zreal_5hz_ohm": 0.21578453559712568,
+          "target_znegimag_5hz_ohm": 0.1211641259914433,
+          "target_zreal_10hz_ohm": 0.39888684096944493,
+          "target_znegimag_10hz_ohm": 0.12903287548417566,
+          "target_zreal_20hz_ohm": 0.32890622129275343,
+          "target_znegimag_20hz_ohm": 0.0946688105085267,
+          "target_zreal_40hz_ohm": 0.08043358450181544,
+          "target_znegimag_40hz_ohm": 0.014146994820973416
+        }
+      }
+    },
+    {
+      "model": "ridge_alpha_10",
+      "features": [
+        "soc_percent",
+        "temperature_c",
+        "td_rows",
+        "td_duration_s",
+        "td_voltage_start_v",
+        "td_voltage_end_v",
+        "td_voltage_min_v",
+        "td_voltage_max_v",
+        "td_voltage_mean_v",
+        "td_voltage_std_v",
+        "td_current_mean_a",
+        "td_current_abs_mean_a",
+        "td_current_abs_max_a",
+        "td_active_fraction",
+        "td_charge_throughput_ah",
+        "td_discharge_throughput_ah",
+        "td_temperature_median_c"
+      ],
+      "target_columns": [
+        "target_zreal_0p05hz_ohm",
+        "target_znegimag_0p05hz_ohm",
+        "target_zreal_0p1hz_ohm",
+        "target_znegimag_0p1hz_ohm",
+        "target_zreal_0p2hz_ohm",
+        "target_znegimag_0p2hz_ohm",
+        "target_zreal_0p5hz_ohm",
+        "target_znegimag_0p5hz_ohm",
+        "target_zreal_1hz_ohm",
+        "target_znegimag_1hz_ohm",
+        "target_zreal_2hz_ohm",
+        "target_znegimag_2hz_ohm",
+        "target_zreal_5hz_ohm",
+        "target_znegimag_5hz_ohm",
+        "target_zreal_10hz_ohm",
+        "target_znegimag_10hz_ohm",
+        "target_zreal_20hz_ohm",
+        "target_znegimag_20hz_ohm",
+        "target_zreal_40hz_ohm",
+        "target_znegimag_40hz_ohm"
+      ],
+      "test_metrics": {
+        "rmse_all_ohm": 0.10265351297131006,
+        "mae_all_ohm": 0.08358442547705533,
+        "bias_all_ohm": 0.08351091831314235,
+        "rmse_zreal_ohm": 0.12629888375942178,
+        "rmse_znegimag_ohm": 0.07158267536091331,
+        "r2_uniform_average": -49356.14230936675,
+        "per_target_rmse_ohm": {
+          "target_zreal_0p05hz_ohm": 0.18105351816446982,
+          "target_znegimag_0p05hz_ohm": 0.11797450693334609,
+          "target_zreal_0p1hz_ohm": 0.11091490415507832,
+          "target_znegimag_0p1hz_ohm": 0.11416607931160452,
+          "target_zreal_0p2hz_ohm": 0.20448612717918419,
+          "target_znegimag_0p2hz_ohm": 0.09721322069379686,
+          "target_zreal_0p5hz_ohm": 0.07741966567200827,
+          "target_znegimag_0p5hz_ohm": 0.07507383639049224,
+          "target_zreal_1hz_ohm": 0.149063107507827,
+          "target_znegimag_1hz_ohm": 0.062396744299286426,
+          "target_zreal_2hz_ohm": 0.15763413218854233,
+          "target_znegimag_2hz_ohm": 0.04247881128996537,
+          "target_zreal_5hz_ohm": 0.05846093394272743,
+          "target_znegimag_5hz_ohm": 0.033013703057586795,
+          "target_zreal_10hz_ohm": 0.07242217338921883,
+          "target_znegimag_10hz_ohm": 0.03386939548159962,
+          "target_zreal_20hz_ohm": 0.1034035578415602,
+          "target_znegimag_20hz_ohm": 0.03535333275423197,
+          "target_zreal_40hz_ohm": 0.014139650734668194,
+          "target_znegimag_40hz_ohm": 0.004209892422392887
+        }
+      }
+    },
+    {
+      "model": "knn_5_raw_features",
+      "features": [
+        "soc_percent",
+        "temperature_c",
+        "td_rows",
+        "td_duration_s",
+        "td_voltage_start_v",
+        "td_voltage_end_v",
+        "td_voltage_min_v",
+        "td_voltage_max_v",
+        "td_voltage_mean_v",
+        "td_voltage_std_v",
+        "td_current_mean_a",
+        "td_current_abs_mean_a",
+        "td_current_abs_max_a",
+        "td_active_fraction",
+        "td_charge_throughput_ah",
+        "td_discharge_throughput_ah",
+        "td_temperature_median_c"
+      ],
+      "target_columns": [
+        "target_zreal_0p05hz_ohm",
+        "target_znegimag_0p05hz_ohm",
+        "target_zreal_0p1hz_ohm",
+        "target_znegimag_0p1hz_ohm",
+        "target_zreal_0p2hz_ohm",
+        "target_znegimag_0p2hz_ohm",
+        "target_zreal_0p5hz_ohm",
+        "target_znegimag_0p5hz_ohm",
+        "target_zreal_1hz_ohm",
+        "target_znegimag_1hz_ohm",
+        "target_zreal_2hz_ohm",
+        "target_znegimag_2hz_ohm",
+        "target_zreal_5hz_ohm",
+        "target_znegimag_5hz_ohm",
+        "target_zreal_10hz_ohm",
+        "target_znegimag_10hz_ohm",
+        "target_zreal_20hz_ohm",
+        "target_znegimag_20hz_ohm",
+        "target_zreal_40hz_ohm",
+        "target_znegimag_40hz_ohm"
+      ],
+      "test_metrics": {
+        "rmse_all_ohm": 0.004848435339716625,
+        "mae_all_ohm": 0.0034143695115411467,
+        "bias_all_ohm": -0.0010522720031814778,
+        "rmse_zreal_ohm": 0.006549459553429877,
+        "rmse_znegimag_ohm": 0.0020295886393090217,
+        "r2_uniform_average": -26.855317616134062,
+        "per_target_rmse_ohm": {
+          "target_zreal_0p05hz_ohm": 0.0046543005478735565,
+          "target_znegimag_0p05hz_ohm": 0.004513517966271873,
+          "target_zreal_0p1hz_ohm": 0.007346029309020467,
+          "target_znegimag_0p1hz_ohm": 0.0017232935555379027,
+          "target_zreal_0p2hz_ohm": 0.007028901610199681,
+          "target_znegimag_0p2hz_ohm": 0.0012215911841748093,
+          "target_zreal_0p5hz_ohm": 0.007903749109147009,
+          "target_znegimag_0p5hz_ohm": 0.0007150486603823145,
+          "target_zreal_1hz_ohm": 0.004482258719692644,
+          "target_znegimag_1hz_ohm": 0.0018511785504023608,
+          "target_zreal_2hz_ohm": 0.00384029389796926,
+          "target_znegimag_2hz_ohm": 0.0018848391017485555,
+          "target_zreal_5hz_ohm": 0.008261944464429386,
+          "target_znegimag_5hz_ohm": 0.0008177972166171209,
+          "target_zreal_10hz_ohm": 0.008649410498757379,
+          "target_znegimag_10hz_ohm": 0.000789294965159307,
+          "target_zreal_20hz_ohm": 0.005948732267543417,
+          "target_znegimag_20hz_ohm": 0.001895747275700323,
+          "target_zreal_40hz_ohm": 0.005306118359188992,
+          "target_znegimag_40hz_ohm": 0.001995499612109468
+        }
+      }
+    },
+    {
+      "model": "knn_5_global_mean_shrinkage_dev_tuned",
+      "features": [
+        "soc_percent",
+        "temperature_c",
+        "td_rows",
+        "td_duration_s",
+        "td_voltage_start_v",
+        "td_voltage_end_v",
+        "td_voltage_min_v",
+        "td_voltage_max_v",
+        "td_voltage_mean_v",
+        "td_voltage_std_v",
+        "td_current_mean_a",
+        "td_current_abs_mean_a",
+        "td_current_abs_max_a",
+        "td_active_fraction",
+        "td_charge_throughput_ah",
+        "td_discharge_throughput_ah",
+        "td_temperature_median_c"
+      ],
+      "target_columns": [
+        "target_zreal_0p05hz_ohm",
+        "target_znegimag_0p05hz_ohm",
+        "target_zreal_0p1hz_ohm",
+        "target_znegimag_0p1hz_ohm",
+        "target_zreal_0p2hz_ohm",
+        "target_znegimag_0p2hz_ohm",
+        "target_zreal_0p5hz_ohm",
+        "target_znegimag_0p5hz_ohm",
+        "target_zreal_1hz_ohm",
+        "target_znegimag_1hz_ohm",
+        "target_zreal_2hz_ohm",
+        "target_znegimag_2hz_ohm",
+        "target_zreal_5hz_ohm",
+        "target_znegimag_5hz_ohm",
+        "target_zreal_10hz_ohm",
+        "target_znegimag_10hz_ohm",
+        "target_zreal_20hz_ohm",
+        "target_znegimag_20hz_ohm",
+        "target_zreal_40hz_ohm",
+        "target_znegimag_40hz_ohm"
+      ],
+      "dev_tuned_on_stanford_holdout": true,
+      "stanford_no_longer_unbiased_holdout_for_this_model": true,
+      "selected_alpha": 0.4,
+      "alpha_grid": [
+        {
+          "alpha": 0.0,
+          "rmse_all_ohm": 0.0044402816104454155
+        },
+        {
+          "alpha": 0.05,
+          "rmse_all_ohm": 0.004348527985755284
+        },
+        {
+          "alpha": 0.1,
+          "rmse_all_ohm": 0.004267098436874803
+        },
+        {
+          "alpha": 0.15000000000000002,
+          "rmse_all_ohm": 0.004196593983375947
+        },
+        {
+          "alpha": 0.2,
+          "rmse_all_ohm": 0.004137573155471733
+        },
+        {
+          "alpha": 0.25,
+          "rmse_all_ohm": 0.004090533062658063
+        },
+        {
+          "alpha": 0.30000000000000004,
+          "rmse_all_ohm": 0.004055890582937673
+        },
+        {
+          "alpha": 0.35000000000000003,
+          "rmse_all_ohm": 0.0040339651298779925
+        },
+        {
+          "alpha": 0.4,
+          "rmse_all_ohm": 0.0040249645317227255
+        },
+        {
+          "alpha": 0.45,
+          "rmse_all_ohm": 0.0040289754105014884
+        },
+        {
+          "alpha": 0.5,
+          "rmse_all_ohm": 0.0040459590704146585
+        },
+        {
+          "alpha": 0.55,
+          "rmse_all_ohm": 0.004075753341992247
+        },
+        {
+          "alpha": 0.6000000000000001,
+          "rmse_all_ohm": 0.004118080180654161
+        },
+        {
+          "alpha": 0.65,
+          "rmse_all_ohm": 0.004172558209070014
+        },
+        {
+          "alpha": 0.7000000000000001,
+          "rmse_all_ohm": 0.004238718934548956
+        },
+        {
+          "alpha": 0.75,
+          "rmse_all_ohm": 0.004316025135280773
+        },
+        {
+          "alpha": 0.8,
+          "rmse_all_ohm": 0.004403889904946797
+        },
+        {
+          "alpha": 0.8500000000000001,
+          "rmse_all_ohm": 0.004501695034723535
+        },
+        {
+          "alpha": 0.9,
+          "rmse_all_ohm": 0.004608807724418763
+        },
+        {
+          "alpha": 0.9500000000000001,
+          "rmse_all_ohm": 0.004724594973107738
+        },
+        {
+          "alpha": 1.0,
+          "rmse_all_ohm": 0.004848435339716625
+        }
+      ],
+      "test_metrics": {
+        "rmse_all_ohm": 0.0040249645317227255,
+        "mae_all_ohm": 0.0029535172887575943,
+        "bias_all_ohm": 0.0007213507502939287,
+        "rmse_zreal_ohm": 0.005048655590148379,
+        "rmse_znegimag_ohm": 0.002629021813396649,
+        "r2_uniform_average": -55.51103910447563,
+        "per_target_rmse_ohm": {
+          "target_zreal_0p05hz_ohm": 0.006116882107195202,
+          "target_znegimag_0p05hz_ohm": 0.004834336491755145,
+          "target_zreal_0p1hz_ohm": 0.0039304180898747315,
+          "target_znegimag_0p1hz_ohm": 0.0032443896875308425,
+          "target_zreal_0p2hz_ohm": 0.0037760944493472524,
+          "target_znegimag_0p2hz_ohm": 0.0025625795985894963,
+          "target_zreal_0p5hz_ohm": 0.003973005828547056,
+          "target_znegimag_0p5hz_ohm": 0.0019719221850666205,
+          "target_zreal_1hz_ohm": 0.004727660114600736,
+          "target_znegimag_1hz_ohm": 0.0024261380483343994,
+          "target_zreal_2hz_ohm": 0.003788429229905398,
+          "target_znegimag_2hz_ohm": 0.0024130963014593098,
+          "target_zreal_5hz_ohm": 0.005988245260391292,
+          "target_znegimag_5hz_ohm": 0.0015918902836779744,
+          "target_zreal_10hz_ohm": 0.006428386851010918,
+          "target_znegimag_10hz_ohm": 0.0015438654406630435,
+          "target_zreal_20hz_ohm": 0.005507539161352809,
+          "target_znegimag_20hz_ohm": 0.0020361946266027535,
+          "target_zreal_40hz_ohm": 0.005268960276268321,
+          "target_znegimag_40hz_ohm": 0.001998121259777968
+        }
+      }
+    },
+    {
+      "model": "random_forest_depth_6",
+      "features": [
+        "soc_percent",
+        "temperature_c",
+        "td_rows",
+        "td_duration_s",
+        "td_voltage_start_v",
+        "td_voltage_end_v",
+        "td_voltage_min_v",
+        "td_voltage_max_v",
+        "td_voltage_mean_v",
+        "td_voltage_std_v",
+        "td_current_mean_a",
+        "td_current_abs_mean_a",
+        "td_current_abs_max_a",
+        "td_active_fraction",
+        "td_charge_throughput_ah",
+        "td_discharge_throughput_ah",
+        "td_temperature_median_c"
+      ],
+      "target_columns": [
+        "target_zreal_0p05hz_ohm",
+        "target_znegimag_0p05hz_ohm",
+        "target_zreal_0p1hz_ohm",
+        "target_znegimag_0p1hz_ohm",
+        "target_zreal_0p2hz_ohm",
+        "target_znegimag_0p2hz_ohm",
+        "target_zreal_0p5hz_ohm",
+        "target_znegimag_0p5hz_ohm",
+        "target_zreal_1hz_ohm",
+        "target_znegimag_1hz_ohm",
+        "target_zreal_2hz_ohm",
+        "target_znegimag_2hz_ohm",
+        "target_zreal_5hz_ohm",
+        "target_znegimag_5hz_ohm",
+        "target_zreal_10hz_ohm",
+        "target_znegimag_10hz_ohm",
+        "target_zreal_20hz_ohm",
+        "target_znegimag_20hz_ohm",
+        "target_zreal_40hz_ohm",
+        "target_znegimag_40hz_ohm"
+      ],
+      "test_metrics": {
+        "rmse_all_ohm": 0.012643313245563104,
+        "mae_all_ohm": 0.00862804749536847,
+        "bias_all_ohm": 0.008265489920492626,
+        "rmse_zreal_ohm": 0.016230943918076553,
+        "rmse_znegimag_ohm": 0.007500879893660256,
+        "r2_uniform_average": -569.8119965586673,
+        "per_target_rmse_ohm": {
+          "target_zreal_0p05hz_ohm": 0.029279240530012858,
+          "target_znegimag_0p05hz_ohm": 0.011180775054365932,
+          "target_zreal_0p1hz_ohm": 0.0269751284573166,
+          "target_znegimag_0p1hz_ohm": 0.011000550782629017,
+          "target_zreal_0p2hz_ohm": 0.018998021741624172,
+          "target_znegimag_0p2hz_ohm": 0.00973572763048475,
+          "target_zreal_0p5hz_ohm": 0.016257321732664413,
+          "target_znegimag_0p5hz_ohm": 0.00804615030450784,
+          "target_zreal_1hz_ohm": 0.012453249534550424,
+          "target_znegimag_1hz_ohm": 0.006851786152447027,
+          "target_zreal_2hz_ohm": 0.012561547889509235,
+          "target_znegimag_2hz_ohm": 0.0066978577010750615,
+          "target_zreal_5hz_ohm": 0.006155598767969935,
+          "target_znegimag_5hz_ohm": 0.004676092713328059,
+          "target_zreal_10hz_ohm": 0.005801726652099063,
+          "target_znegimag_10hz_ohm": 0.004657586467531335,
+          "target_zreal_20hz_ohm": 0.004637930391749634,
+          "target_znegimag_20hz_ohm": 0.003497887152349656,
+          "target_zreal_40hz_ohm": 0.004282621556121528,
+          "target_znegimag_40hz_ohm": 0.0030794115795815297
+        }
+      }
+    }
+  ]
+}

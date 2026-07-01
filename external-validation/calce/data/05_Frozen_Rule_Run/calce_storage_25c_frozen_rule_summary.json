@@ -1,7 +1,7 @@
 {
   "dataset": "CALCE Storage 25 C",
   "input_table": "04_Frozen_Inputs/calce_storage_25c_frozen_input_rows.csv",
-  "frozen_rule": "CALB Section 33 adaptive final rule",
+  "frozen_rule": "CALB frozen pulse-to-EIS rule adaptive final rule",
   "frozen_rule_changed": false,
   "frozen_input_rows": 24,
   "runnable_rows": 0,

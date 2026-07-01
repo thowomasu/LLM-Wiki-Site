@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cross-Dataset Validation Scaffold | LLM Wiki Research Outputs</title>
+  <style>:root {
+  color-scheme: light;
+  --ink: #17202a;
+  --muted: #5f6b76;
+  --line: #d9e0e6;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --panel-strong: #ffffff;
+  --note-bg: #fff8f0;
+  --code-bg: #eef2f5;
+  --table-head: #edf3f8;
+  --blue: #225f9f;
+  --green: #137458;
+  --orange: #b85f17;
+  --red: #a83d4a;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e6edf3;
+  --muted: #a7b3bf;
+  --line: #2d3844;
+  --paper: #0f141a;
+  --panel: #151c24;
+  --panel-strong: #10161d;
+  --note-bg: #241b12;
+  --code-bg: #1f2a35;
+  --table-head: #1c2a36;
+  --blue: #78b7ff;
+  --green: #58d39d;
+  --orange: #f0a35a;
+  --red: #f08490;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+.site-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+}
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 18px 14px;
+  background: var(--panel-strong);
+  border-right: 1px solid var(--line);
+}
+.brand {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.15;
+}
+.brand span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.side-section {
+  margin: 18px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.side-link {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  margin: 6px 0;
+  padding: 7px 9px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.side-link:hover {
+  border-color: var(--line);
+  background: var(--paper);
+}
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 38px;
+  margin: 14px 0 8px;
+  padding: 8px 10px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.theme-toggle:hover {
+  background: var(--paper);
+}
+.theme-toggle .toggle-state {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.page-content {
+  min-width: 0;
+}
+header {
+  padding: 38px min(6vw, 64px) 24px;
+  background: var(--panel-strong);
+  border-bottom: 1px solid var(--line);
+}
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px min(5vw, 48px) 56px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 8px 12px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font-size: 14px;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 20px;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 8px 14px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  font-size: 14px;
+  font-weight: 700;
+}
+.tab.active {
+  color: #fff;
+  border-color: var(--blue);
+  background: var(--blue);
+}
+a { color: var(--blue); }
+h1, h2, h3 { margin: 0; line-height: 1.12; letter-spacing: 0; }
+h1 { max-width: 980px; font-size: clamp(38px, 6vw, 76px); }
+h2 { margin-top: 30px; margin-bottom: 14px; font-size: clamp(26px, 3.5vw, 42px); }
+h3 { margin-top: 18px; margin-bottom: 8px; font-size: 21px; }
+p { max-width: 900px; font-size: 18px; }
+code {
+  font-family: Consolas, Monaco, monospace;
+  background: var(--code-bg);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.kicker {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.lead { max-width: 980px; color: var(--muted); font-size: 22px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.metric {
+  display: block;
+  margin: 8px 0;
+  font-size: clamp(30px, 5vw, 54px);
+  line-height: 1;
+  font-weight: 800;
+}
+.good { color: var(--green); }
+.warn { color: var(--orange); }
+.bad { color: var(--red); }
+.label { color: var(--muted); font-size: 15px; }
+.note {
+  margin: 22px 0;
+  padding: 15px 17px;
+  border-left: 5px solid var(--orange);
+  background: var(--note-bg);
+}
+.source-list {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 28px;
+}
+.source-item {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.source-item code { word-break: break-word; }
+.source-kind {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: var(--panel);
+}
+th, td {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+th { background: var(--table-head); }
+.presentation-frame {
+  width: 100%;
+  height: 78vh;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.table-wrap table {
+  min-width: 980px;
+  margin: 0;
+  border: 0;
+}
+.table-wrap th,
+.table-wrap td {
+  border-top: 0;
+  border-left: 0;
+}
+.table-wrap th:last-child,
+.table-wrap td:last-child { border-right: 0; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status-pill.good { color: var(--green); }
+.status-pill.warn { color: var(--orange); }
+.status-pill.bad { color: var(--red); }
+.small-note {
+  color: var(--muted);
+  font-size: 14px;
+}
+footer {
+  padding: 22px min(7vw, 72px);
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  background: var(--panel-strong);
+}
+@media (max-width: 850px) {
+  .site-shell { display: block; }
+  .sidebar {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .grid, .grid.two { grid-template-columns: 1fr; }
+  p { font-size: 17px; }
+}</style>
+  <script>
+(function () {
+  var key = "llm-wiki-theme";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  var initialTheme = preferredTheme();
+  applyTheme(initialTheme);
+  window.addEventListener("DOMContentLoaded", function () {
+    applyTheme(document.documentElement.dataset.theme || initialTheme);
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (!toggle) return;
+    toggle.addEventListener("click", function () {
+      var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      try { localStorage.setItem(key, next); } catch (error) {}
+      applyTheme(next);
+    });
+  });
+})();
+</script>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="sidebar"><a class="brand" href="../index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
+<a class="side-link" href="../index.html">Overview</a>
+<a class="side-link" href="../presentations/">Presentations</a>
+<a class="side-link" href="../datasets/">Datasets</a>
+<a class="side-link" href="../cross-dataset/">Cross-dataset validation</a>
+<a class="side-link" href="../sources/">Sources</a>
+<a class="side-link" href="../glossary/">Glossary</a>
+<div class="side-section">Workstreams</div>
+<a class="side-link" href="../presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
+<a class="side-link" href="../presentations/#dib-data">DIB (Data in Brief) Data</a>
+<a class="side-link" href="../presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
+<a class="side-link" href="../cross-dataset/">Cross-dataset scaffold</a>
+<a class="side-link" href="../external-validation/dataset-exploration/">Dataset Viability Presentation</a>
+<a class="side-link" href="../external-validation/">External Dataset Checks</a>
+<div class="side-section">CALB Package</div>
+<a class="side-link" href="../calb/data/">View CALB Data</a>
+<a class="side-link" href="../calb/manual/">CALB Manual</a>
+<a class="side-link" href="../sources/calb/">CALB Sources</a></aside>
+    <div class="page-content">
+      <header>
+        <div class="kicker">LLM Wiki Research Outputs</div>
+        <h1>Cross-Dataset Validation Scaffold</h1>
+        <p class="lead">Readable handoff for the supervised time-series-to-EIS scaffold.</p>
+      </header>
+      <main>
+
+    <section class="note">
+      <strong>Plain-language boundary:</strong> this page is about a supervised cross-dataset scaffold. It is not proof that the frozen CALB pulse-to-EIS rule generalizes. The Cambridge result is partial support because the locked model beat the locked mean baseline, but the improvement was only about 1.67 percent.
+    </section>
+    <section class="grid two">
+      <article class="card">
+        <h3>What this does</h3>
+        <p>It predicts a fixed-grid EIS spectrum from earlier time-series current and voltage features, then tests that prediction on a whole dataset that was held out before scoring.</p>
+      </article>
+      <article class="card">
+        <h3>What this does not do</h3>
+        <p>It does not validate the frozen CALB pulse-to-EIS rule. It also does not erase the no-support results from Panasonic, RADAR4KIT, or Stanford frozen-rule adapter runs.</p>
+      </article>
+    </section>
+    <h2>One-Shot Cambridge Result</h2>
+    <div class="table-wrap">
+      <table>
+        <tbody><tr><td>Verdict</td><td>partial_support</td></tr>
+<tr><td>Rows scored</td><td>20594</td></tr>
+<tr><td>Cells scored</td><td>88</td></tr>
+<tr><td>Baseline RMSE</td><td>1.1390269531133854 ohm</td></tr>
+<tr><td>Model RMSE</td><td>1.1200309137511784 ohm</td></tr>
+<tr><td>Relative RMSE improvement</td><td>0.016677427439520904</td></tr>
+<tr><td>Post-outcome tuning</td><td>False</td></tr></tbody>
+      </table>
+    </div>
+    <h2>Downloadable Public Summaries</h2>
+    <ul><li><a class="button" href="data/validation_readiness.json">validation_readiness.json</a></li>
+<li><a class="button" href="data/cambridge_validation_results.json">cambridge_validation_results.json</a></li>
+<li><a class="button" href="data/frozen_cambridge_validation_config.json">frozen_cambridge_validation_config.json</a></li>
+<li><a class="button" href="data/dataset_qualification.json">dataset_qualification.json</a></li>
+<li><a class="button" href="data/fixed_grid_eis_baseline_results.json">fixed_grid_eis_baseline_results.json</a></li>
+<li><a class="button" href="data/fixed_grid_eis_model_results.json">fixed_grid_eis_model_results.json</a></li></ul>
+    <h2>Full Handoff</h2>
+    <h2>Cross Dataset Pulse To EIS Training</h2>
+<p>This folder is the supervised cross-dataset validation scaffold.</p>
+<p>Plain English: it tries to predict an EIS spectrum from time-domain current and voltage behavior measured before that EIS spectrum. EIS means Electrochemical Impedance Spectroscopy. The target is a fixed frequency grid with real impedance and negative-imaginary impedance values.</p>
+<p>This is not the frozen CALB pulse-to-EIS rule. That older rule is the internal CALB rule that checks whether HPPC pulse windows recover EIS-like information. This folder is a separate supervised model scaffold for testing whether similar time-series-to-EIS structure survives across datasets.</p>
+<h2>Current Verdict</h2>
+<p>The scaffold is now viable for the next similar internet dataset.</p>
+<p>Why that is true:</p>
+<p>1. It has a unified row schema for pairing one time-domain file with one later same-cell EIS spectrum.</p>
+<p>2. It blocks random row splits and uses whole-dataset holdouts.</p>
+<p>3. It builds a fixed-grid EIS feature/target matrix.</p>
+<p>4. It trains only on development datasets with already-seen outcomes.</p>
+<p>5. It freezes a model and baseline before scoring a new dataset.</p>
+<p>6. It scored Cambridge once without post-outcome tuning.</p>
+<p>Current Cambridge result: <code>partial_support</code>.</p>
+<p>That means the locked model beat the locked global-mean EIS baseline, but the improvement was too small for a strong external-support verdict.</p>
+<p>Do not oversell this. It is real progress. It is not a win lap.</p>
+<h2>What The Pipeline Uses</h2>
+<p>One supervised sample means:</p>
+<ul>
+<li>Input: current, voltage, time, temperature, SOC, and capacity-style summaries that are available before the EIS target.</li>
+<li>Target: the same cell/channel EIS spectrum measured after or near that time-domain segment.</li>
+<li>Leak guard: train/test splits must hold out whole cells, diagnostic rounds, or whole datasets. No random row split.</li>
+</ul>
+<p>The fixed EIS target grid is:</p>
+<p><code>[0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 40.0]</code> Hz</p>
+<p>For each frequency, the target includes:</p>
+<ul>
+<li><code>Zreal</code> in ohms.</li>
+<li><code>-Zimag</code> in ohms.</li>
+</ul>
+<p>That gives 20 target columns.</p>
+<h2>Dataset Roles</h2>
+<table>
+<tr><th>Dataset</th><th>Role</th><th>Current status</th></tr>
+<tr><td>Panasonic 18650PF</td><td>Development training data</td><td>External frozen pulse-to-EIS adapter already failed, but the rows are useful for supervised development.</td></tr>
+<tr><td>RADAR4KIT corrected EIS plus PULSE</td><td>Development training data</td><td>External frozen pulse-to-EIS adapter already failed to beat voltage-only baseline, but it contributes paired rows.</td></tr>
+<tr><td>Stanford SECL INR21700-M50T</td><td>Seen-outcome whole-dataset development holdout</td><td>Useful for model selection, not clean validation anymore.</td></tr>
+<tr><td>Cambridge uneven-usage EIS dataset</td><td>First clean whole-dataset holdout</td><td>Scored once with frozen settings. Verdict: <code>partial_support</code>.</td></tr>
+</table>
+<h2>What Was Found In Cambridge</h2>
+<p>Local dataset folder checked:</p>
+<p>`[local path redacted]</p>
+<p>Inspection mode:</p>
+<ul>
+<li>ZIP central directories.</li>
+<li>Small in-memory previews.</li>
+<li>No bulk extraction.</li>
+</ul>
+<p>Parsed evidence:</p>
+<ul>
+<li>Parsed BioLogic text entries: 41,914.</li>
+<li>GCPL entries: 21,013.</li>
+<li>GEIS entries: 20,901.</li>
+<li>Same-cell/channel EIS spectra with a preceding GCPL file: 20,896.</li>
+<li>Cells scored in validation: 88.</li>
+</ul>
+<p>GCPL is the time-domain side: current, voltage, time, and capacity-like fields.</p>
+<p>GEIS is the EIS side: frequency, real impedance, negative-imaginary impedance, and time.</p>
+<h2>Model And Baseline</h2>
+<p>Locked baseline:</p>
+<ul>
+<li>Name: <code>global_train_target_mean</code>.</li>
+<li>Meaning: predict the average training EIS vector for every Cambridge row.</li>
+<li>Cambridge RMSE: <code>1.13903</code> ohm.</li>
+</ul>
+<p>Locked model:</p>
+<ul>
+<li>Name: <code>knn_5_global_mean_shrinkage_dev_tuned</code>.</li>
+<li>Meaning: K-nearest-neighbor prediction blended with the global training mean.</li>
+<li>Cambridge RMSE: <code>1.12003</code> ohm.</li>
+</ul>
+<p>Relative RMSE improvement:</p>
+<ul>
+<li>Overall: <code>1.6677%</code>.</li>
+<li>Real impedance: <code>1.8506%</code>.</li>
+<li>Negative-imaginary impedance: <code>0.7788%</code>.</li>
+</ul>
+<p>Predeclared verdict rules:</p>
+<ul>
+<li><code>external_support</code>: model RMSE at least 5% lower than baseline and both real and negative-imaginary components improve.</li>
+<li><code>partial_support</code>: model RMSE lower than baseline, but the 5% margin or component rule is not met.</li>
+<li><code>no_support</code>: model equal to or worse than baseline.</li>
+<li><code>blocked_inconclusive</code>: no complete target rows, schema failure, join failure, or runner failure.</li>
+</ul>
+<p>Actual verdict: <code>partial_support</code>.</p>
+<h2>How To Use This For The Next Internet Dataset</h2>
+<p>Use this checklist before downloading a huge archive:</p>
+<p>1. Same-cell key exists.</p>
+<p>The files must expose a cell ID, channel ID, sample ID, or another key that joins time-series data to EIS.</p>
+<p>2. Time-series side exists.</p>
+<p>The dataset needs current, voltage, and time. Temperature, SOC, and capacity are useful but not always required.</p>
+<p>3. EIS side exists.</p>
+<p>The dataset needs frequency, real impedance, and imaginary or negative-imaginary impedance.</p>
+<p>4. The time-series data comes before or near the EIS target.</p>
+<p>Future data must not be used to predict a past EIS spectrum.</p>
+<p>5. The dataset can be held out as a whole dataset.</p>
+<p>If you tune after looking at its validation metrics, it is no longer clean validation.</p>
+<p>6. The target frequency range overlaps the fixed grid.</p>
+<p>At minimum, enough measured EIS frequencies must cover the grid from 0.05 Hz to 40 Hz after interpolation.</p>
+<p>7. The result can be compared against a boring baseline.</p>
+<p>If the model cannot beat the global training mean or a simple voltage/SOC/temperature baseline, call it weak or no support.</p>
+<p>Minimum useful download target:</p>
+<ul>
+<li>Raw or processed battery files.</li>
+<li>Same-cell EIS and time-series measurements.</li>
+<li>Clear cell/channel/sample labels.</li>
+<li>Temperature or protocol labels.</li>
+<li>Enough rows to hold out the full dataset.</li>
+</ul>
+<p>Bad target:</p>
+<ul>
+<li>HPPC or cycling only, no EIS.</li>
+<li>EIS only, no time-series current/voltage data.</li>
+<li>Files with no join key.</li>
+<li>A dataset that requires hand-tuning after seeing the validation result.</li>
+</ul>
+<h2>Run Order</h2>
+<p>Use the DRT environment for these scripts:</p>
+<p>```powershell</p>
+<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\build_cross_dataset_training_scaffold.py</p>
+<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\build_dev_feature_target_matrix.py</p>
+<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\train_fixed_grid_eis_dev_models.py</p>
+<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\freeze_cambridge_validation_config.py</p>
+<p>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\run_cambridge_one_shot_validation.py</p>
+<p>```</p>
+<p>For a future dataset, do not reuse the Cambridge runner name as if the new dataset is Cambridge. Make a new frozen config and a new one-shot runner, then record the exact hashes and verdict rules before scoring.</p>
+<h2>Artifacts</h2>
+<ul>
+<li><code>dataset_qualification.json</code>: Cambridge schema and joinability screen.</li>
+<li><code>unified_sample_manifest.csv</code>: all candidate rows across development and holdout datasets.</li>
+<li><code>split_manifest.csv</code>: split roles and leakage groups.</li>
+<li><code>dev_feature_target_matrix.csv</code>: fixed-grid EIS training matrix for development rows.</li>
+<li><code>fixed_grid_eis_baseline_results.json</code>: development baselines.</li>
+<li><code>fixed_grid_eis_model_results.json</code>: development model results.</li>
+<li><code>frozen_cambridge_validation_config.json</code>: locked Cambridge validation config.</li>
+<li><code>cambridge_feature_target_matrix.csv</code>: Cambridge fixed-grid EIS matrix.</li>
+<li><code>cambridge_validation_results.json</code>: one-shot Cambridge result.</li>
+<li><code>validation_readiness.json</code>: machine-readable readiness and verdict summary.</li>
+</ul>
+<h2>Claim Boundary</h2>
+<p>Allowed:</p>
+<ul>
+<li>The supervised cross-dataset scaffold is viable for another similar dataset.</li>
+<li>Cambridge gives partial support to the scaffold because the locked model beat the locked mean baseline.</li>
+<li>The Cambridge improvement is weak, about 1.67% RMSE improvement, so it is not strong external support.</li>
+</ul>
+<p>Not allowed:</p>
+<ul>
+<li>The frozen CALB pulse-to-EIS rule is externally validated.</li>
+<li>The Cambridge result rescues Panasonic, RADAR4KIT, or Stanford frozen-rule failures.</li>
+<li>Stanford is clean validation for the selected model.</li>
+<li>Post-Cambridge model changes are still clean Cambridge validation.</li>
+</ul>
+<p>If you change features, target grid, model, split roles, alpha, or verdict rules after seeing Cambridge, label the next run as post-Cambridge development.</p>
+
+      </main>
+      <footer>
+        Public-facing static site generated from curated vault outputs. This is not the raw vault.
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

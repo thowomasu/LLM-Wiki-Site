@@ -89,11 +89,11 @@
       <header>
         <div class="kicker">External validation scouting</div>
         <h1>Panasonic, Samsung, and Graphite/LNMO Dataset Exploration</h1>
-        <p class="lead">A presentation-style viability readout for three newly downloaded battery datasets. It explains what each dataset contains, what was plotted, and whether the data can support an unchanged external test of the CALB Section 33 rule.</p>
+        <p class="lead">A presentation-style readout for three newly downloaded battery datasets. It explains what each dataset contains, what was plotted, what can be tested, and what cannot honestly be claimed.</p>
       </header>
       <main>
         <section class="note">
-          <strong>Claim boundary:</strong> this page is not a validation result. It is a data-readiness screen. The frozen CALB Section 33 rule is still internal evidence until the same rule runs unchanged on an external dataset and beats a simple baseline model.
+          <strong>Claim boundary:</strong> this page started as a data-readiness screen. Since then, the Panasonic frozen-rule adapter has run and produced <strong>no support</strong>. That means the unchanged CALB pulse-to-EIS rule did not beat the simple voltage-only baseline on the mapped Panasonic rows.
         </section>
 
         <div class="tabs" aria-label="Section tabs">
@@ -105,8 +105,8 @@
         </div>
 
         <h2>How To Read This Page</h2>
-        <p><strong>Section 33</strong> is the frozen CALB pulse-to-EIS rule. In simple terms, it asks whether a time-domain current/voltage pulse can recover useful impedance-like information that agrees with EIS, which means Electrochemical Impedance Spectroscopy.</p>
-        <p>A dataset is useful for that test only if it has both sides of the bridge: same-cell EIS spectra and matching time-domain pulse or rest windows with current, voltage, temperature, and state labels. More files do not automatically mean better validation. A huge pulse dataset without EIS still cannot validate Section 33.</p>
+        <p><strong>The frozen CALB pulse-to-EIS rule</strong> is the internal rule previously labeled frozen pulse-to-EIS rule. In simple terms, it asks whether a current/voltage pulse can recover impedance-like information that agrees with EIS, which means Electrochemical Impedance Spectroscopy.</p>
+        <p>A dataset is useful for that test only if it has both sides of the bridge: same-cell EIS spectra and matching time-domain pulse or rest windows with current, voltage, temperature, and state labels. More files do not automatically mean better validation. A huge pulse dataset without EIS still cannot validate this rule.</p>
         <p><strong>Frozen inputs</strong> means the rule is not allowed to change after seeing the external data. No tuning lambda, thresholds, windows, candidate rules, fallback logic, or pass criteria. That is the whole point. If we tune after looking, we are fooling ourselves.</p>
 
         <section class="grid">
@@ -114,7 +114,7 @@
             <h3>Panasonic 18650PF</h3>
             <span class="metric good">3</span>
             <div class="label">Matched long-discharge IDs found: <code>3541</code>, <code>3623</code>, and <code>3740</code>.</div>
-            <span class="verdict good">Best next target</span>
+            <span class="verdict bad">Ran, no support</span>
           </article>
           <article class="card">
             <h3>Samsung INR21700-50E</h3>
@@ -131,10 +131,10 @@
         </section>
 
         <h2>Bottom Line</h2>
-        <p>Panasonic is the only dataset here that currently deserves a real adapter attempt for frozen Section 33 inputs. It has EIS files and long current/voltage discharge windows that can plausibly be joined by cell state.</p>
-        <p>Samsung is useful for pulse-only exploration because it has large HPPC-style time-series archives. But no same-cell EIS was observed locally, so Samsung cannot validate Section 33 by itself.</p>
-        <p>Graphite/LNMO has clean EIS and useful electrochemical protocols, but it does not line up cleanly with the frozen Section 33 gate. The qOCV file gives zero accepted candidates, and the rate file gives only one long candidate.</p>
-        <p>None of the three is aging validation. Panasonic can test the pulse-to-EIS bridge on a different cell format and chemistry context. That is useful, but it is narrower than proving the CALB aging claim.</p>
+        <p>Panasonic was the only dataset here that deserved a real frozen-rule adapter attempt. That attempt has now run. The result is not supportive: 3 adapter joins, 33 rule rows, 0 quality-pass rows, and the frozen rule did not beat the voltage-only baseline.</p>
+        <p>Samsung is useful for pulse-only exploration because it has large HPPC-style time-series archives. But no same-cell EIS was observed locally, so Samsung cannot validate the frozen pulse-to-EIS rule by itself.</p>
+        <p>Graphite/LNMO has clean EIS and useful electrochemical protocols, but it does not line up cleanly with the frozen pulse-to-EIS gate. The qOCV file gives zero accepted candidates, and the rate file gives only one long candidate.</p>
+        <p>None of the three is aging validation. Panasonic tested the pulse-to-EIS bridge on a different cell format and chemistry context, and the result was no support. That is not a disaster. It is information. But pretending it is validation would be bad science.</p>
 
         <figure class="figure">
           <img src="plots/combined_dataset_readiness_overview.png" alt="Combined readiness overview for Panasonic, Samsung, and Graphite/LNMO datasets">
@@ -142,14 +142,14 @@
         </figure>
 
         <h2>Panasonic 18650PF</h2>
-        <p>The Panasonic archive has both EIS CSV files and MATLAB pulse files across five temperatures. That matters because Section 33 needs both an impedance spectrum and a time-domain current/voltage response.</p>
-        <p>The true five-pulse HPPC files are too short for the frozen Section 33 window rule because they are about 10 seconds long. The separate <code>dis5_10p</code> files are the important ones. Several of them contain long discharge windows with enough rest afterward to pass the frozen window gate.</p>
+        <p>The Panasonic archive has both EIS CSV files and MATLAB pulse files across five temperatures. That matters because the frozen pulse-to-EIS rule needs both an impedance spectrum and a time-domain current/voltage response.</p>
+        <p>The true five-pulse HPPC files are too short for the frozen window rule because they are about 10 seconds long. The separate <code>dis5_10p</code> files are the important ones. Several of them contain long discharge windows with enough rest afterward to pass the frozen window gate.</p>
         <table>
           <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
           <tr><td>EIS coverage</td><td>58 parsed EIS files across <code>25degC</code>, <code>10degC</code>, <code>0degC</code>, <code>-10degC</code>, and <code>-20degC</code>.</td><td>Strong for spectrum variability and SOC proxy review.</td></tr>
           <tr><td>Pulse windows</td><td>14 pulse/time files screened; 8 files contain long candidates.</td><td>Strong enough for adapter work.</td></tr>
           <tr><td>Clean matched IDs</td><td><code>3541</code> at 25 C, <code>3623</code> at 0 C, and <code>3740</code> at -10 C.</td><td>Best route for frozen-input construction.</td></tr>
-          <tr><td>Claim limit</td><td>Not an aging validation dataset in this pass.</td><td>External bridge support only if the unchanged rule later passes.</td></tr>
+          <tr><td>Claim limit</td><td>Not an aging validation dataset in this pass.</td><td>The unchanged rule has now run and does not support the claim.</td></tr>
         </table>
         <figure class="figure">
           <img src="plots/panasonic_eis_nyquist_by_temperature.png" alt="Panasonic EIS Nyquist traces grouped by temperature">
@@ -161,7 +161,7 @@
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_pulse_candidate_map.png" alt="Panasonic pulse candidate map showing long-window availability">
-          <figcaption>Pulse candidate map. The vertical line marks the frozen 250 second long-pulse gate. Files to the right of that line have windows long enough to be considered. Matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code> are the serious candidates.</figcaption>
+          <figcaption>Pulse candidate map. The vertical line marks the frozen 250 second long-pulse gate. Files to the right of that line have windows long enough to be considered. Matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code> were the serious candidates used for the adapter smoke test.</figcaption>
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_matched_long_discharge_examples.png" alt="Panasonic matched long-discharge current and voltage examples">
@@ -170,12 +170,12 @@
 
         <h2>Samsung INR21700-50E HPPC</h2>
         <p>The Samsung download is a large set of 7z archives with giant CSV reports. A streamed sample from Batch 1 shows usable current, voltage, cell temperature, and chamber temperature. That is good for pulse analysis.</p>
-        <p>The blocker is simple: no same-cell EIS was observed in the local files. Without EIS, there is nothing for Section 33 to compare the time-domain pulse result against. So Samsung is not a validation dataset for this rule unless a matching EIS source is found.</p>
+        <p>The blocker is simple: no same-cell EIS was observed in the local files. Without EIS, there is nothing for the frozen pulse-to-EIS rule to compare the time-domain pulse result against. So Samsung is not a validation dataset for this rule unless a matching EIS source is found.</p>
         <table>
           <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
           <tr><td>Local archive size</td><td>19 archives, about 14.0 GB compressed.</td><td>Large HPPC corpus, expensive to process fully.</td></tr>
           <tr><td>Sample read</td><td>120,000 streamed rows from <code>Batch1</code>, MCU1.</td><td>Confirms raw time-series fields are usable.</td></tr>
-          <tr><td>EIS</td><td>No EIS observed locally.</td><td>Blocks Section 33 validation by itself.</td></tr>
+          <tr><td>EIS</td><td>No EIS observed locally.</td><td>Blocks frozen pulse-to-EIS validation by itself.</td></tr>
         </table>
         <figure class="figure">
           <img src="plots/samsung_archive_inventory.png" alt="Samsung archive inventory by compressed size">
@@ -183,16 +183,16 @@
         </figure>
         <figure class="figure">
           <img src="plots/samsung_sample_timeseries.png" alt="Samsung sampled current voltage and temperature traces">
-          <figcaption>Sampled time-series from one streamed CSV. The sampled segment confirms usable raw signals, but it is not linked to an EIS spectrum, so it is not a Section 33 validation row.</figcaption>
+          <figcaption>Sampled time-series from one streamed CSV. The sampled segment confirms usable raw signals, but it is not linked to an EIS spectrum, so it is not a frozen-rule validation row.</figcaption>
         </figure>
 
         <h2>Graphite/LNMO</h2>
-        <p>The graphite/LNMO archive is scientifically interesting, but weaker for this specific validation question. It has full-cell EIS by SOC, qOCV, rate, GITT-style files, and parameter JSONs. That is a rich electrochemistry package, but richness is not the same as Section 33 readiness.</p>
-        <p>The frozen window finder sees zero candidates in qOCV because the current is below the hard rest threshold. It sees one long candidate in the rate file, but that is not a clean HPPC-style EIS-pulse check-up join. So this dataset is useful for presentation and side experiments, not the first honest external Section 33 run.</p>
+        <p>The graphite/LNMO archive is scientifically interesting, but weaker for this specific validation question. It has full-cell EIS by SOC, qOCV, rate, GITT-style files, and parameter JSONs. That is a rich electrochemistry package, but richness is not the same as frozen-rule readiness.</p>
+        <p>The frozen window finder sees zero candidates in qOCV because the current is below the hard rest threshold. It sees one long candidate in the rate file, but that is not a clean HPPC-style EIS-pulse check-up join. So this dataset is useful for presentation and side experiments, not an honest external run for the frozen CALB rule.</p>
         <table>
           <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
           <tr><td>EIS</td><td>22 full-cell EIS CSVs by SOC.</td><td>Good for spectrum-over-SOC presentation.</td></tr>
-          <tr><td>qOCV time series</td><td>386,001 rows, zero accepted frozen candidates.</td><td>Not runnable unchanged for Section 33.</td></tr>
+          <tr><td>qOCV time series</td><td>386,001 rows, zero accepted frozen candidates.</td><td>Not runnable unchanged for the frozen pulse-to-EIS rule.</td></tr>
           <tr><td>Rate time series</td><td>170,726 rows, six accepted windows, one long candidate.</td><td>Possible side experiment, weak as validation.</td></tr>
         </table>
         <figure class="figure">
@@ -205,7 +205,7 @@
         </figure>
         <figure class="figure">
           <img src="plots/graphite_lnmo_window_candidate_counts.png" alt="Graphite LNMO frozen window candidate counts">
-          <figcaption>Frozen window-finder response. This is the decision plot. It shows why graphite/LNMO should not outrank Panasonic for Section 33 readiness.</figcaption>
+          <figcaption>Frozen window-finder response. This is the decision plot. It shows why graphite/LNMO should not outrank Panasonic for frozen-rule readiness.</figcaption>
         </figure>
 
         <h2>Downloadable Exploration Outputs</h2>
@@ -219,8 +219,8 @@
         </ul>
 
         <h2>Next Move</h2>
-        <p>Build the Panasonic adapter first, using only the matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code>. The adapter should create the exact inputs Section 33 expects: EIS spectrum, pulse/rest current and voltage window, temperature, state label, and candidate metadata.</p>
-        <p>After that, run the frozen rule unchanged and compare it against a simple baseline. Do not touch lambda, thresholds, windows, candidate logic, fallback logic, or pass criteria after seeing results. If the frozen run fails, call it failure or blocked evidence. Do not rescue it.</p>
+        <p>The Panasonic adapter already ran, so do not describe Panasonic as the next target anymore. The current frozen-rule verdict is <strong>no support</strong>.</p>
+        <p>The next useful move is not to tune the failed rule. The next useful move is to use the cross-dataset supervised scaffold on another dataset that has same-cell EIS plus earlier current/voltage time series, then freeze the model and baseline before scoring it once.</p>
       </main>
       <footer>
         Public-facing static site generated from curated vault outputs. This is not the raw vault.

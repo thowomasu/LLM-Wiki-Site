@@ -262,6 +262,44 @@ th { background: var(--table-head); }
   border-radius: 8px;
   background: var(--panel);
 }
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.table-wrap table {
+  min-width: 980px;
+  margin: 0;
+  border: 0;
+}
+.table-wrap th,
+.table-wrap td {
+  border-top: 0;
+  border-left: 0;
+}
+.table-wrap th:last-child,
+.table-wrap td:last-child { border-right: 0; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status-pill.good { color: var(--green); }
+.status-pill.warn { color: var(--orange); }
+.status-pill.bad { color: var(--red); }
+.small-note {
+  color: var(--muted);
+  font-size: 14px;
+}
 footer {
   padding: 22px min(7vw, 72px);
   color: var(--muted);
@@ -316,12 +354,14 @@ footer {
 <a class="side-link" href="../index.html">Overview</a>
 <a class="side-link" href="../presentations/">Presentations</a>
 <a class="side-link" href="../datasets/">Datasets</a>
+<a class="side-link" href="../cross-dataset/">Cross-dataset validation</a>
 <a class="side-link" href="../sources/">Sources</a>
 <a class="side-link" href="../glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
 <a class="side-link" href="../presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
 <a class="side-link" href="../presentations/#dib-data">DIB (Data in Brief) Data</a>
 <a class="side-link" href="../presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
+<a class="side-link" href="../cross-dataset/">Cross-dataset scaffold</a>
 <a class="side-link" href="../external-validation/dataset-exploration/">Dataset Viability Presentation</a>
 <a class="side-link" href="../external-validation/">External Dataset Checks</a>
 <div class="side-section">CALB Package</div>
@@ -343,7 +383,7 @@ footer {
     <section class="grid">
       <article class="card"><h3>CALB reports</h3><span class="metric good">42</span><div class="label">Section reports used by the presentation.</div></article>
       <article class="card"><h3>CALB summaries</h3><span class="metric good">42</span><div class="label">Machine-readable section summaries.</div></article>
-      <article class="card"><h3>External files</h3><span class="metric warn">48</span><div class="label">CALCE, RADAR4KIT, and NASA qualification artifacts.</div></article>
+      <article class="card"><h3>External files</h3><span class="metric warn">76</span><div class="label">CALCE, RADAR4KIT, and NASA qualification artifacts.</div></article>
     </section>
     <h2>Source Groups</h2>
     <div class="grid two">
@@ -351,10 +391,10 @@ footer {
       <article class="card"><h3>External datasets</h3><p>CALCE and NASA manifest outputs, plus RADAR4KIT qualification context, used for dataset triage.</p><p><a class="button" href="external/">Open external sources</a></p></article>
     </div>
     <h2>Literature And Public References</h2>
-    <div class="source-list"><div class="source-item"><span class="source-kind">paper</span><strong><a href="https://www.sciencedirect.com/science/article/pii/S2352340925000332">Fasolato et al., Data in Brief 58, 111301, 2025</a></strong><div><code>https://www.sciencedirect.com/science/article/pii/S2352340925000332</code></div><div>Corresponding CALB L148N58A data article.</div></div>
-<div class="source-item"><span class="source-kind">dataset</span><strong><a href="https://data.mendeley.com/datasets/ycx459r5c3/2">Mendeley Data CALB L148N58A repository, version 2</a></strong><div><code>https://data.mendeley.com/datasets/ycx459r5c3/2</code></div><div>Official downloadable source dataset, DOI 10.17632/ycx459r5c3.2.</div></div>
-<div class="source-item"><span class="source-kind">paper</span><strong><a href="https://www.mdpi.com/2313-0105/7/3/52">Combining the Distribution of Relaxation Times from EIS and Time-Domain Data</a></strong><div><code>https://www.mdpi.com/2313-0105/7/3/52</code></div><div>Conceptual reference for combining EIS and time-domain DRT evidence.</div></div>
-<div class="source-item"><span class="source-kind">doi</span><strong><a href="https://doi.org/10.3390/batteries7030052">Wildfeuer, Gieler, and Karger, Batteries 2021, 7(3), 52</a></strong><div><code>https://doi.org/10.3390/batteries7030052</code></div><div>DOI for the combined EIS/TDM DRT paper.</div></div></div>
+    <div class="source-list"><div class="source-item"><span class="source-kind">paper</span><strong><a href="https://www.sciencedirect.com/science/article/pii/S2352340925000332">Fasolato et al., Data in Brief 58, 111301, 2025</a></strong><div><code>https: / / www.sciencedirect.com / science / article / pii / S2352340925000332</code></div><div>Corresponding CALB L148N58A data article.</div></div>
+<div class="source-item"><span class="source-kind">dataset</span><strong><a href="https://data.mendeley.com/datasets/ycx459r5c3/2">Mendeley Data CALB L148N58A repository, version 2</a></strong><div><code>https: / / data.mendeley.com / datasets / ycx459r5c3 / 2</code></div><div>Official downloadable source dataset, DOI 10.17632/ycx459r5c3.2.</div></div>
+<div class="source-item"><span class="source-kind">paper</span><strong><a href="https://www.mdpi.com/2313-0105/7/3/52">Combining the Distribution of Relaxation Times from EIS and Time Domain Data</a></strong><div><code>https: / / www.mdpi.com / 2313 0105 / 7 / 3 / 52</code></div><div>Conceptual reference for combining EIS and time-domain DRT evidence.</div></div>
+<div class="source-item"><span class="source-kind">doi</span><strong><a href="https://doi.org/10.3390/batteries7030052">Wildfeuer, Gieler, and Karger, Batteries 2021, 7(3), 52</a></strong><div><code>https: / / doi.org / 10.3390 / batteries7030052</code></div><div>DOI for the combined EIS/TDM DRT paper.</div></div></div>
 
       </main>
       <footer>

@@ -1,15 +1,17 @@
 {
   "dataset": "KIT/RADAR4KIT",
-  "checked_date": "2026-06-29",
+  "checked_date": "2026-06-30",
   "local_dataset_folder": "[local path redacted]",
   "local_files_found": [
     "10.35097-1947.tar",
-    "RADAR_DATASET_DESCRIPTIVE_METADATA"
+    "RADAR_DATASET_DESCRIPTIVE_METADATA",
+    "RADAR4KIT_Corrected_EIS_Addendum_10.35097_krk531nmj4bsshha/extracted/10.35097-krk531nmj4bsshha/data/dataset/cell_eisv2_fixed.zip"
   ],
-  "corrected_eis_addendum_found_locally": false,
-  "web_search_performed": true,
-  "web_source_result": "no public corrected-addendum source found",
-  "corrected_eis_available": false,
-  "verdict": "blocked_corrected_eis_unavailable",
-  "claim_boundary": "do_not_use_incomplete_cell_eisv2_as_validation_evidence"
+  "corrected_eis_addendum_found_locally": true,
+  "web_search_performed": false,
+  "web_source_result": "not needed for this refresh; corrected addendum was found locally",
+  "corrected_eis_available": true,
+  "verdict": "corrected_eis_available_adapter_run_completed_no_support",
+  "adapter_summary": "../06_RADAR4KIT_Frozen_Adapter/radar4kit_frozen_rule_summary.json",
+  "claim_boundary": "corrected_eis_availability_enables_adapter_run_but_does_not_validate_the_frozen_calb_rule"
 }
