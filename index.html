@@ -185,20 +185,22 @@ main {
   font-size: 14px;
 }
 .tabs {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 10px;
-  margin: 14px 0 20px;
+  max-width: 520px;
+  margin: 14px 0 24px;
 }
 .tab {
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
   min-height: 38px;
   padding: 8px 14px;
   color: var(--ink);
   text-decoration: none;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   font-size: 14px;
   font-weight: 700;
@@ -319,6 +321,35 @@ th { background: var(--table-head); }
 .table-wrap th:last-child,
 .table-wrap td:last-child { border-right: 0; }
 .table-wrap tr:last-child td { border-bottom: 0; }
+.catalog-table {
+  table-layout: fixed;
+}
+.catalog-table th,
+.catalog-table td {
+  line-height: 1.45;
+}
+.catalog-table th:nth-child(1) { width: 21%; }
+.catalog-table th:nth-child(2) { width: 18%; }
+.catalog-table th:nth-child(3) { width: 27%; }
+.catalog-table th:nth-child(4) { width: 18%; }
+.catalog-table th:nth-child(5) { width: 16%; }
+.catalog-title {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+.catalog-detail {
+  color: var(--muted);
+  font-size: 14px;
+}
+.open-cell .button {
+  width: 100%;
+  justify-content: center;
+}
+.open-cell {
+  display: grid;
+  gap: 8px;
+}
 .status-pill {
   display: inline-block;
   padding: 4px 8px;
@@ -452,35 +483,36 @@ footer {
 
     <section>
       <h2>What This Project Is</h2>
-      <p>This is the front-facing part of the LLM (Large Language Model) toolkit wiki. It collects the work done so far on battery-data pipelines, DRT (Distribution of Relaxation Times) modeling, dataset qualification, professor-facing reports, source traces, and downloadable evidence.</p>
-      <p>The goal is simple: a new reader should be able to open this site, understand what was built, inspect the actual data and plots, and see the limits without digging through the private vault.</p>
+      <p>This is the public face of the bAIttery / LLM (Large Language Model) toolkit work. It collects the battery-analysis outputs that can be shown outside the private repository: presentations, curated data tables, plots, dataset qualification notes, source traces, and machine-readable summaries.</p>
+      <p>The project has two related but separate tracks. The first track is the CALB L148N58A internal pulse-to-EIS evidence package, where HPPC time-series windows are compared with EIS-derived impedance behavior. The second track is the newer supervised cross-dataset scaffold, where time-series features are used to predict a fixed-grid EIS target on held-out datasets. Mixing those tracks would make the claims look stronger than they are, so the site keeps them separated.</p>
+      <p>An external technical reader should be able to read this site without opening the private repo. That means the public pages explain the objective, data source, methodology, metrics, status, and limitation for each output. Internal paths are shown only as sanitized public labels when they help trace an artifact.</p>
     </section>
     <section class="note">
-      <strong>Claim boundary:</strong> this site is for clear review, not hype. It does not turn internal results into external validation. The strongest CALB (China Aviation Lithium Battery) result is internal pulse-to-EIS evidence. Several external adapter runs have now failed or stayed blocked. The bAIttery time-series to DRT pipeline demo path has partial support on Cambridge, but that does not validate the frozen CALB rule.
+      <strong>Claim boundary:</strong> this site is for technical review, not hype. It does not turn internal CALB results into external validation. The strongest CALB (China Aviation Lithium Battery) result is internal pulse-to-EIS evidence. Panasonic, RADAR4KIT, and Stanford external adapter runs do not support the frozen CALB rule. Cambridge and Molicell belong to the separate supervised scaffold and do not rescue the CALB claim.
     </section>
     <section class="grid">
       <article class="card">
         <h3>Presentations</h3>
         <span class="metric good">19</span>
-        <div class="label">Presentation-like HTML files found under <code>40 Outputs</code>. Future presentation files are picked up by the site build.</div>
+        <div class="label">A vertical public index of HTML deliverables. Each row shows the pipeline, dataset, explanation, public source label, and Open button.</div>
         <p><a class="button" href="presentations/">Open presentations</a></p>
       </article>
       <article class="card">
         <h3>CALB (China Aviation Lithium Battery)</h3>
         <span class="metric good">246 / 246</span>
-        <div class="label">Internal EIS (Electrochemical Impedance Spectroscopy) and HPPC (Hybrid Pulse Power Characterization) pulse-bridge pass rows.</div>
+        <div class="label">Internal EIS (Electrochemical Impedance Spectroscopy) and HPPC (Hybrid Pulse Power Characterization) pulse-bridge rows. This is evidence inside one dataset, not external validation.</div>
         <p><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open presentation</a> <a class="button" href="calb/data/">View CALB data</a> <a class="button" href="calb/manual/">Open manual</a></p>
       </article>
       <article class="card">
         <h3>Sources</h3>
         <span class="metric warn">trace</span>
-        <div class="label">Public provenance pages for reports, summaries, manifests, plots, data artifacts, and literature links.</div>
+        <div class="label">Public provenance pages for reports, summaries, manifests, plots, data artifacts, and literature links. This is the public evidence trail, not the raw private vault.</div>
         <p><a class="button" href="sources/">Open sources</a></p>
       </article>
       <article class="card">
         <h3>bAIttery Project: Time-Series to DRT Pipeline</h3>
         <span class="metric warn">partial</span>
-        <div class="label">Public handoff for the bAIttery time-series to DRT pipeline work, including the supervised time-series-to-EIS demo path and its claim boundary.</div>
+        <div class="label">Public handoff for the supervised time-series-to-EIS scaffold: feature matrix, fixed-grid targets, Kramer-Kronig screen, baseline, model, output files, and claim boundary.</div>
         <p><a class="button" href="cross-dataset/">Open bAIttery project</a></p>
       </article>
     </section>
@@ -489,17 +521,17 @@ footer {
       <div class="grid">
       <article class="card">
         <h3>DRT (Distribution of Relaxation Times) pipeline</h3>
-        <p>Built a time-domain battery pipeline that finds pulse/rest windows, fits DRT-like relaxation curves, compares against EIS (Electrochemical Impedance Spectroscopy), and reports where voltage fitting can mislead.</p>
+        <p>Built a time-domain battery pipeline that finds pulse/rest windows, fits relaxation behavior, compares against EIS (Electrochemical Impedance Spectroscopy), and reports where voltage-only fitting can look good while still failing impedance behavior.</p>
         <p><a class="button" href="presentations/#drt-pipeline">Open DRT presentations</a></p>
       </article>
       <article class="card">
         <h3>DIB (Data in Brief) dataset work</h3>
-        <p>Mapped and tested the Zenodo Experiment 4 / DIB-style dataset package, including data audit, feature extraction, held-out-cell checks, and reproducibility material.</p>
+        <p>Mapped and tested the Zenodo Experiment 4 / DIB-style dataset package, including data audit, feature extraction, held-out-cell checks, validation diagnostics, and reproduction material.</p>
         <p><a class="button" href="presentations/#dib-data">Open DIB presentations</a></p>
       </article>
       <article class="card">
         <h3>CALB dataset work</h3>
-        <p>Parsed the CALB L148N58A archive, published viewable data files, built the internal pulse-to-EIS evidence package, and kept the drive-cycle limitation visible.</p>
+        <p>Parsed the CALB L148N58A archive, published viewable data files, built the internal pulse-to-EIS evidence package, and kept the drive-cycle limitation visible because the drive-cycle result is weaker than the HPPC/EIS bridge.</p>
         <p><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB work</a></p>
       </article>
       </div>
@@ -510,12 +542,12 @@ footer {
       <div class="grid two">
       <article class="card">
         <h3>Current evidence datasets</h3>
-        <p>CALB L148N58A provides the current internal EIS and HPPC pulse-bridge package. Zenodo Experiment 4 provides the DIB-style ageing and health-feature pipeline work.</p>
+        <p>CALB L148N58A provides the current internal EIS and HPPC pulse-bridge package. Zenodo Experiment 4 provides the DIB-style ageing and health-feature pipeline work. These are useful development datasets, but they answer different questions.</p>
         <p><a class="button" href="datasets/">Open all datasets</a></p>
       </article>
       <article class="card">
         <h3>Validation candidates</h3>
-        <p>CALCE, KIT RADAR4KIT, Stanford SECL, Panasonic 18650PF, Samsung INR21700-50E, Graphite/LNMO, NASA, and Cambridge are screened or used for external checks. CALCE has 24 same-join qualification rows and 0 frozen-rule runnable rows in the current inputs. RADAR4KIT, Stanford, and Panasonic ran but did not support the frozen rule. Cambridge gave partial support to the separate supervised scaffold.</p>
+        <p>CALCE, KIT RADAR4KIT, Stanford SECL, Panasonic 18650PF, Samsung INR21700-50E, Graphite/LNMO, NASA, Cambridge, and Molicell are screened or used for external checks. CALCE has 24 same-join qualification rows and 0 frozen-rule runnable rows in the current inputs. RADAR4KIT, Stanford, and Panasonic ran but did not support the frozen CALB rule. Cambridge and Molicell belong to the separate supervised scaffold.</p>
         <p><a class="button" href="external-validation/">Open validation checks</a> <a class="button" href="external-validation/dataset-exploration/">Open new dataset exploration</a></p>
       </article>
       </div>
