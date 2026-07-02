@@ -22,7 +22,7 @@
 - Stronger drive-cycle ECM-style baseline audit against the fixed frozen pulse-to-EIS rule/34 DRT transfer result.
 - C/20-derived SOC/protocol alignment audit for the frozen pulse-to-EIS rule bridge rows and drive-cycle transfer test/36 drive-cycle calibration rows.
 - Bootstrap uncertainty audit across the final bridge, drive-cycle baseline, and SOC-alignment metrics.
-- External replication readiness audit across the local KIT/RADAR4KIT, Zenodo Expt4, and DIB comparison evidence.
+- External replication readiness audit across the local KIT/RADAR4KIT, LG M50T 21700 Expt 4 drive-cycle aging, and DIB comparison evidence.
 
 ## What Is Not Proven
 
@@ -49,7 +49,7 @@ SOC alignment audit SOC-alignment note: bridge median absolute SOC delta 0.00455
 
 analysis step 38 uncertainty note: 12 metrics bootstrapped with 5000 samples; the drive-cycle ECM baseline check DRT loss to best ECM and the SOC alignment audit drive-cycle SOC mismatch remain stable under row resampling; verdict `uncertainty_audit_complete`.
 
-external-validation claim boundary external-readiness note: three hard blockers remain, including incomplete local KIT EIS archive, no same-cell EIS in local Zenodo Expt4 evidence, and too-small DIB overlap; verdict `external_replication_blocked_missing_corrected_eis`.
+external-validation claim boundary external-readiness note: three hard blockers remain, including incomplete local KIT EIS archive, no same-cell EIS in local LG M50T 21700 Expt 4 drive-cycle aging evidence, and too-small DIB overlap; verdict `external_replication_blocked_missing_corrected_eis`.
 
 
 

@@ -1,7 +1,7 @@
 {
   "experiment": "cross_dataset_pulse_to_eis_training_cambridge_one_shot_validation",
   "scored_utc": "2026-06-30T20:28:29.779773+00:00",
-  "claim_boundary": "One-shot Cambridge validation of the locked supervised pulse/time-domain-to-fixed-grid-EIS scaffold. This is not a frozen frozen pulse-to-EIS rule CALB rule validation.",
+  "claim_boundary": "One-shot Cambridge validation of the locked supervised pulse/time-domain-to-fixed-grid-EIS scaffold. This is not a frozen CALB pulse-to-EIS rule validation.",
   "post_outcome_tuning_performed": false,
   "frozen_config_path": "[local path redacted]",
   "frozen_config_sha256": "f32a5c1ec3a1627e0faf7687417a626ec0993435a6e332240a24f3ad449f7936",

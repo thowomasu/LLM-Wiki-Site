@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>bAIttery Project: Time-Series to DRT Pipeline | LLM Wiki Research Outputs</title>
+  <title>Cambridge and Molicell EIS prediction study | Battery DRT Research Outputs</title>
   <style>:root {
   color-scheme: light;
   --sidebar-width: 260px;
@@ -237,6 +237,98 @@ code {
   margin: 24px 0;
 }
 .grid.two { grid-template-columns: 1fr; }
+.start-grid,
+.summary-grid,
+.terms-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 14px;
+  margin: 20px 0 28px;
+}
+.start-card,
+.summary-card,
+.term-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 15px 16px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.start-card h3,
+.summary-card h3,
+.term-card h3 {
+  margin: 0;
+  font-size: 19px;
+}
+.start-card p,
+.summary-card p,
+.term-card p {
+  margin: 0;
+  font-size: 15px;
+}
+.reader-path {
+  display: grid;
+  gap: 12px;
+  margin: 14px 0;
+}
+.reader-card {
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teal);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 14px 16px;
+}
+.reader-card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+.reader-card p {
+  margin: 0;
+  color: var(--muted);
+}
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+.card-actions .button {
+  width: auto;
+}
+.terms-strip {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+}
+.term-card {
+  border-left-color: var(--green);
+}
+.term-card strong {
+  font-size: 14px;
+}
+.term-card span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.provenance-detail {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  word-break: break-word;
+}
+.provenance-note {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+}
+.provenance-note strong {
+  color: var(--text);
+}
 .card {
   display: grid;
   grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
@@ -419,6 +511,21 @@ footer {
     left: 12px;
   }
   .grid, .grid.two { grid-template-columns: 1fr; }
+  .card {
+    display: block;
+  }
+  .card p,
+  .card ul,
+  .card ol,
+  .card .label,
+  .card .metric,
+  .card h3:first-child {
+    grid-column: auto;
+  }
+  h1 { font-size: clamp(32px, 10vw, 48px); }
+  h2 { font-size: clamp(23px, 7vw, 32px); }
+  main { padding: 24px min(4vw, 20px) 44px; }
+  header { padding: 34px min(5vw, 24px) 22px; }
   p { font-size: 17px; }
 }</style>
   <script>
@@ -486,44 +593,57 @@ footer {
 <body>
   <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
   <div class="site-shell">
-    <aside class="sidebar"><a class="brand" href="../index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
+    <aside class="sidebar"><a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Public battery analysis outputs and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
 <a class="side-link" href="../index.html">Overview</a>
 <a class="side-link" href="../presentations/">Presentations</a>
 <a class="side-link" href="../datasets/">Datasets</a>
-<a class="side-link" href="../cross-dataset/">bAIttery DRT pipeline</a>
+<a class="side-link" href="../cross-dataset/">Cambridge and Molicell EIS prediction study</a>
 <a class="side-link" href="../sources/">Sources</a>
 <a class="side-link" href="../glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
-<a class="side-link" href="../presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
-<a class="side-link" href="../presentations/#dib-data">DIB (Data in Brief) Data</a>
-<a class="side-link" href="../presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
-<a class="side-link" href="../cross-dataset/">bAIttery DRT pipeline</a>
-<a class="side-link" href="../external-validation/dataset-exploration/">Dataset Viability Presentation</a>
+<a class="side-link" href="../presentations/#drt-pipeline">Rashid and Faraji-Niri DIB battery SOH estimation dataset</a>
+<a class="side-link" href="../presentations/#lg-m50t-expt4">LG M50T 21700 degradation study, Expt 4 drive-cycle aging</a>
+<a class="side-link" href="../presentations/#calb-study">CALB L148N58A comprehensive characterization study</a>
+<a class="side-link" href="../cross-dataset/">Cambridge and Molicell EIS prediction study</a>
+<a class="side-link" href="../external-validation/dataset-exploration/">Dataset exploration screen</a>
 <a class="side-link" href="../external-validation/">External Dataset Checks</a>
-<div class="side-section">CALB Package</div>
-<a class="side-link" href="../calb/data/">View CALB Data</a>
-<a class="side-link" href="../calb/manual/">CALB Manual</a>
-<a class="side-link" href="../sources/calb/">CALB Sources</a></aside>
+<div class="side-section">CALB study</div>
+<a class="side-link" href="../calb/data/">View CALB L148N58A study data</a>
+<a class="side-link" href="../calb/manual/">CALB L148N58A study guide</a>
+<a class="side-link" href="../sources/calb/">CALB L148N58A sources</a></aside>
     <div class="page-content">
       <header>
-        <div class="kicker">LLM Wiki Research Outputs</div>
-        <h1>bAIttery Project: Time-Series to DRT Pipeline</h1>
-        <p class="lead">Readable handoff for the bAIttery time-series to DRT pipeline work.</p>
+        <div class="kicker">Battery DRT Research Outputs</div>
+        <h1>Cambridge and Molicell EIS prediction study</h1>
+        <p class="lead">Predict measured EIS spectra from earlier current and voltage features, then score the model on separate datasets.</p>
       </header>
       <main>
 
     <section class="note">
-      <strong>Plain-language boundary:</strong> this page is about a supervised cross-dataset scaffold. It is not proof that the frozen CALB pulse-to-EIS rule generalizes. Cambridge gave partial support, and Molicell P42A gave external support for the separate supervised scaffold. Do not mix those claims.
+      <strong>Plain-language boundary:</strong> this page is about a separate supervised EIS prediction track. It is not proof that the frozen CALB pulse-to-EIS rule generalizes. Cambridge gave partial support, and Molicell P42A gave external support for this separate track. Do not mix those claims.
     </section>
-    <section class="grid two">
-      <article class="card">
-        <h3>What this does</h3>
-        <p>It predicts a fixed-grid EIS spectrum from earlier time-series current and voltage features, then tests that prediction on a whole dataset that was held out before scoring.</p>
-      </article>
-      <article class="card">
-        <h3>What this does not do</h3>
-        <p>It does not validate the frozen CALB pulse-to-EIS rule. It also does not erase the no-support results from Panasonic, RADAR4KIT, or Stanford frozen-rule adapter runs.</p>
-      </article>
+    <section>
+      <h2>Reader Path</h2>
+      <div class="reader-path">
+        <div class="reader-card"><strong>Question</strong><p>Can earlier current and voltage behavior predict a measured EIS spectrum for a different dataset?</p></div>
+        <div class="reader-card"><strong>Training boundary</strong><p>The model learns from development rows. Rows kept back for scoring are not random neighbors from the same table.</p></div>
+        <div class="reader-card"><strong>What to believe</strong><p>Cambridge is weak partial support. Molicell is stronger support for this supervised EIS prediction track.</p></div>
+        <div class="reader-card"><strong>What not to believe</strong><p>This does not validate CALB. It does not erase the no-support Panasonic, RADAR4KIT, or Stanford frozen-rule checks.</p></div>
+      </div>
+    </section>
+    <section class="summary-grid">
+      <article class="summary-card"><h3>Cambridge and Molicell EIS prediction study</h3><p>Predict measured EIS spectra from earlier current and voltage features, then score the model on separate datasets.</p></article>
+      <article class="summary-card"><h3>Separate from CALB</h3><p>Cambridge and Molicell do not rescue the frozen CALB rule. They answer a different supervised prediction question.</p></article>
+      <article class="summary-card"><h3>EIS quality screen</h3><p>KK means Kramers-Kronig. Here it checks measured EIS target quality. It is not a model feature.</p></article>
+    </section>
+    <section>
+      <h2>What This Page Does</h2>
+      <div class="reader-path">
+        <div class="reader-card"><strong>It predicts a spectrum</strong><p>The model predicts real impedance and negative-imaginary impedance on the same frequency grid for every row.</p></div>
+        <div class="reader-card"><strong>It compares with a boring baseline</strong><p>The baseline predicts the development-set mean EIS vector. The model has to beat that to be worth attention.</p></div>
+        <div class="reader-card"><strong>It scores separate datasets</strong><p>Cambridge and Molicell are treated as whole-dataset checks, not random row splits.</p></div>
+        <div class="reader-card"><strong>It keeps the claim small</strong><p>This page supports only the supervised EIS prediction track. It is not a DRT physics proof.</p></div>
+      </div>
     </section>
     <h2>One-Shot Cambridge Result</h2>
     <div class="table-wrap">
@@ -605,7 +725,7 @@ footer {
         <p>Run the smoke helper first when a VM is ready. Last smoke mode: <code>local</code>. Last smoke status: <code>passed</code>. VM connection deferred: <code>True</code>.</p>
         <p><code>&amp; "[DRT python]" -B scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_smoke.py --mode local --python "[DRT python]"</code></p>
         <p>When the VM is ready, fill a JSON config from <code>vm_demo_config.template.json</code> and run the smoke helper with <code>--config</code>.</p>
-        <p><a class="button" href="demo_pipeline_presentation.html">Open bAIttery project presentation</a></p>
+        <p><a class="button" href="demo_pipeline_presentation.html">Open Cambridge and Molicell EIS prediction brief</a></p>
       </article>
     </section>
     <h2>Downloadable Public Summaries</h2>
@@ -628,8 +748,8 @@ footer {
 <li><a class="button" href="data/demo_handoff_run_manifest.json">demo_handoff_run_manifest.json</a></li>
 <li><a class="button" href="data/vm_demo_config.template.json">vm_demo_config.template.json</a></li></ul>
     <h2>Full Handoff</h2>
-    <h2>bAIttery Project: Time-Series to DRT Pipeline</h2>
-<p>This folder contains the supervised time-series-to-EIS demo path for the broader bAIttery time-series to DRT pipeline work.</p>
+    <h2>Cambridge and Molicell EIS prediction study</h2>
+<p>This folder contains the supervised time-series-to-EIS demo path for the broader Cambridge and Molicell EIS prediction study work.</p>
 <p>Plain English: it tries to predict an EIS spectrum from time-domain current and voltage behavior measured before that EIS spectrum. EIS means Electrochemical Impedance Spectroscopy. The target is a fixed frequency grid with real impedance and negative-imaginary impedance values.</p>
 <p>This is not the frozen CALB pulse-to-EIS rule. That older rule is the internal CALB rule that checks whether HPPC pulse windows recover EIS-like information. This folder is a separate supervised model path for testing whether similar time-series-to-EIS structure survives across datasets as part of the wider DRT pipeline work.</p>
 <h2>Current Verdict</h2>
@@ -768,7 +888,7 @@ footer {
 <h2>Claim Boundary</h2>
 <p>Allowed:</p>
 <ul>
-<li>The bAIttery time-series to DRT pipeline demo path is viable for another similar dataset.</li>
+<li>The Cambridge and Molicell EIS prediction study demo path is viable for another similar dataset.</li>
 <li>Cambridge gives partial support to the supervised demo path because the locked model beat the locked mean baseline.</li>
 <li>The Cambridge improvement is weak, about 1.67% RMSE improvement, so it is not strong external support.</li>
 </ul>
@@ -828,7 +948,7 @@ footer {
 <li>Relative RMSE improvement: <code>0.149078</code>.</li>
 <li>Post-outcome tuning performed: <code>False</code>.</li>
 </ul>
-<p>Boundary: this validates only the supervised bAIttery time-series to DRT pipeline demo path on this local Molicell P42A matrix. It does not validate the frozen frozen pulse-to-EIS rule CALB rule.</p>
+<p>Boundary: this validates only the Cambridge and Molicell EIS prediction study demo path on this local Molicell P42A matrix. It does not validate the frozen CALB pulse-to-EIS rule.</p>
 <p>Validation artifacts:</p>
 <ul>
 <li><code>frozen_molicell_p42a_validation_config.json</code></li>
@@ -893,25 +1013,6 @@ footer {
 <li><code>demo_pipeline_presentation.html</code></li>
 </ul>
 <p>VM boundary: no VM connection config was found in this repo. When the VM is ready, wire this script as the first remote smoke test instead of pushing the full raw-archive pipeline immediately.</p>
-<h2>VM Demo Smoke Handoff</h2>
-<p>A VM-ready smoke runner now exists. It can run the demo locally today and over SSH when a VM is actually available.</p>
-<ul>
-<li>Last smoke mode: <code>local</code>.</li>
-<li>Last smoke status: <code>passed</code>.</li>
-<li>Return code: <code>0</code>.</li>
-<li>Config template: <code>[local path redacted]</code>.</li>
-</ul>
-<p>Local smoke command:</p>
-<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_smoke.py --mode local --python &quot;[local path redacted]&quot;</code></pre>
-<p>SSH smoke command template:</p>
-<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_smoke.py --mode ssh --remote-host &lt;host&gt; --remote-user &lt;user&gt; --remote-repo &lt;repo-path-on-vm&gt; --remote-python &lt;python-on-vm&gt;</code></pre>
-<p>SSH smoke command with config template:</p>
-<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_smoke.py --config scripts\experiments\cross_dataset_pulse_to_eis_training\vm_demo_config.template.json</code></pre>
-<p>Blunt boundary: VM connection is deferred until the colleague-provided VM exists. Until real VM settings are provided and the SSH smoke passes, the project is local-code-ready, not VM-connected.</p>
-<p>Artifact:</p>
-<ul>
-<li><code>vm_demo_smoke_results.json</code></li>
-</ul>
 <h2>Goal Completion Audit</h2>
 <ul>
 <li>Overall status: <code>complete_vm_deferred_by_user</code>.</li>
@@ -924,22 +1025,6 @@ footer {
 <p>Artifact:</p>
 <ul>
 <li><code>cross_dataset_goal_completion_audit.json</code></li>
-</ul>
-<h2>One-Command Demo Handoff</h2>
-<p>Use this command to regenerate the demo handoff bundle from the repo root:</p>
-<pre><code>&amp; &quot;[local path redacted]&quot; -B scripts\experiments\cross_dataset_pulse_to_eis_training\run_demo_handoff_bundle.py</code></pre>
-<ul>
-<li>Last bundle status: <code>passed</code>.</li>
-<li>Last bundle manifest: <code>demo_handoff_run_manifest.json</code>.</li>
-<li>Thorough HTML presentation: <code>demo_pipeline_presentation.html</code>.</li>
-<li>Final goal status: <code>complete_vm_deferred_by_user</code>.</li>
-</ul>
-<p>This command proves the local demo path. VM connection is deferred because a colleague will set it up later.</p>
-<p>Artifact:</p>
-<ul>
-<li><code>demo_handoff_run_manifest.json</code></li>
-<li><code>demo_pipeline_presentation.html</code></li>
-<li><code>demo_pipeline_results.json</code></li>
 </ul>
 
       </main>

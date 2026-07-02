@@ -169,9 +169,9 @@ th {
 <p>Status: complete for first pass.</p>
 <h2>Local Data Configuration</h2>
 <p>The DIB dataset is not stored in this repo. Set these environment variables before running the DIB-dependent sections:</p>
-<pre><code>$env:DIB_DATA_ROOT = &quot;path\to\DIB_Data&quot;
-$env:DIB_CAPACITY_ROOT = &quot;path\to\DIB_Data\.csvfiles\Capacity_Check&quot;
-$env:DIB_EIS_WORKBOOK = &quot;path\to\DIB_Data\WholeDataRealSOH.xlsx&quot;</code></pre>
+<pre><code>$env:DIB_DATA_ROOT = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH estimation dataset&quot;
+$env:DIB_CAPACITY_ROOT = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH estimation dataset\.csvfiles\Capacity_Check&quot;
+$env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH estimation dataset\WholeDataRealSOH.xlsx&quot;</code></pre>
 <p><code>DIB_DATA_ROOT</code> is enough when the extracted dataset keeps the original DIB folder structure. Use the narrower variables only when your files live somewhere else.</p>
 <p>Runner:</p>
 <p><code>scripts/experiments/run_time_domain_rough_prototype.py</code></p>

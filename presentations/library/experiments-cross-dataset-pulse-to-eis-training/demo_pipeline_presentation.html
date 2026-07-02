@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>bAIttery Project: Time-Series to DRT Pipeline</title>
+  <title>Cambridge and Molicell EIS Prediction Demo</title>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
 (function () {
@@ -169,7 +169,13 @@
     .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
     .legend-item { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; }
     .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; }
-    .mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin: 14px 0 24px; }
+    .reader-path { display: grid; gap: 12px; margin: 16px 0 6px; }
+    .reader-card { padding: 14px 16px; border: 1px solid var(--line); border-left: 5px solid var(--teal); border-radius: 8px; background: var(--panel); }
+    .reader-card strong { display: block; margin-bottom: 4px; font-size: 18px; }
+    .reader-card p { margin: 0; color: var(--muted); }
+    .plain-callout { border: 1px solid var(--line); border-left: 5px solid var(--amber); border-radius: 8px; padding: 14px 16px; background: var(--note-bg); margin: 14px 0; }
+    .plain-callout p { margin: 6px 0 0; }
+    .mini-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 14px 0 24px; }
     .mini-card { padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
     .mini-card p { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
     details { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); margin: 14px 0; }
@@ -192,21 +198,21 @@
 <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
 <div class="site-shell">
   <aside class="sidebar">
-    <a class="brand" href="../../../index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a>
+    <a class="brand" href="../../../index.html"><strong>Battery DRT Research Outputs</strong><span>Public battery analysis outputs and source trail</span></a>
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
     <div class="side-section">Project</div>
     <a class="side-link" href="../../../index.html">Overview</a>
     <a class="side-link" href="../../../presentations/">Presentations</a>
     <a class="side-link" href="../../../datasets/">Datasets</a>
-    <a class="side-link" href="../../../cross-dataset/">bAIttery DRT Pipeline</a>
+    <a class="side-link" href="../../../cross-dataset/">Cambridge and Molicell EIS prediction study</a>
     <div class="side-section">Demo Page</div>
     <a class="side-link" href="#summary">Summary</a><a class="side-link" href="#objective">Objective</a><a class="side-link" href="#methodology">Methodology</a><a class="side-link" href="#results">Results</a><a class="side-link" href="#conclusion">Conclusion</a><a class="side-link" href="#inputs">Inputs</a><a class="side-link" href="#math">Math</a><a class="side-link" href="#graphs">Graphs</a><a class="side-link" href="#code">Code</a><a class="side-link" href="#outputs">Outputs</a><a class="side-link" href="#glossary">Glossary</a><a class="side-link" href="#limits">Limits</a>
   </aside>
   <div class="page-content">
     <header>
-      <div class="kicker">Cross-dataset pipeline, self-contained technical page</div>
-      <h1>bAIttery Project: Time-Series to DRT Pipeline</h1>
-      <p class="lead">This page contains the pipeline objective, inputs, transformations, equations, plots, numerical outputs, code snippets, and claim boundary. It is written so an external user can understand the bAIttery time-series to DRT pipeline work without running the repository. The demo target shown here is fixed-grid EIS, used as the measurable bridge into the broader DRT analysis path.</p>
+      <div class="kicker">Cross-dataset demo, self-contained technical page</div>
+      <h1>Cambridge and Molicell EIS Prediction Demo</h1>
+      <p class="lead">This page explains a small supervised demo: can current and voltage features predict a measured EIS spectrum for rows kept out of training? It is written for a technical reader who wants the story before the raw matrices.</p>
       <div class="button-row">
         <a class="button" href="../../../cross-dataset/data/demo_pipeline_code_bundle.py" download>Download code bundle</a>
         <a class="button" href="../../../cross-dataset/data/demo_pipeline_data_bundle.json" download>Download data bundle</a>
@@ -216,18 +222,25 @@
 <main>
   <section id="summary" class="note">
     <h2>Executive Read</h2>
-    <p>The demo is a small but real supervised pipeline inside the bAIttery time-series to DRT project. It takes time-domain battery features, predicts a fixed-grid EIS vector, compares against a global-mean baseline, and runs a Kramer-Kronig quality screen on the EIS target rows.</p>
-    <p><strong>Blunt boundary:</strong> this is a working demo and external-user explanation, not a new external-validation claim. VM connection is deferred until the colleague-provided VM exists.</p>
+    <p>The demo learns from development rows, predicts measured EIS spectra for Molicell rows kept back from training, and compares that prediction with a simple mean baseline.</p>
+    <p><strong>Blunt boundary:</strong> this is a working demo and external-reader explanation. It is not a new CALB validation claim. VM connection is deferred until the colleague-provided VM exists.</p>
+    <div class="reader-path">
+      <div class="reader-card"><strong>What the model sees</strong><p>Only time-domain features such as voltage, current, duration, SOC, temperature, and derived shape features.</p></div>
+      <div class="reader-card"><strong>What the model predicts</strong><p>A fixed-grid EIS vector: real impedance and negative-imaginary impedance at the same 10 frequencies.</p></div>
+      <div class="reader-card"><strong>What “rows kept back” means</strong><p>The Molicell rows shown below were not used for training. They are the demo score rows, not a random split from the same table.</p></div>
+      <div class="reader-card"><strong>What this does not prove</strong><p>It does not validate the frozen CALB pulse-to-EIS rule and it does not turn DRT-inspired features into physical DRT evidence.</p></div>
+    </div>
   </section>
 
   <section id="objective">
-    <h2>Objective</h2>
-    <p>Prove that a time-domain feature matrix can be connected to a fixed-grid EIS target, scored against a boring baseline, screened with KK metadata, and packaged into a public demo page. This is not trying to hide behind a vague architecture slide. The page shows the inputs, outputs, math, plots, and code path.</p>
+    <h2>Question</h2>
+    <p>Can a small, honest supervised pipeline connect time-domain battery behavior to measured EIS spectra without leaking the answer into training?</p>
+    <p>The answer here is limited but useful: yes for this bounded demo, with a conservative model and a clear claim boundary.</p>
   </section>
 
   <section id="methodology">
     <h2>Methodology</h2>
-    <p>The current run trains on <code>120</code> development rows, scores <code>30</code> Molicell holdout rows, and predicts <code>20</code> target columns on a <code>10</code>-frequency EIS grid.</p>
+    <p>The current run trains on <code>120</code> development rows, scores <code>30</code> Molicell rows that were kept back, and predicts <code>20</code> target columns on a <code>10</code>-frequency EIS grid.</p>
     <table class="metric-table">
       <tbody>
         <tr><td>Representative sample</td><td>molicell_p42a::A11::5degC::SOC20::1</td></tr>
@@ -238,12 +251,12 @@
       </tbody>
     </table>
     <div class="step-list">
-      <div class="step"><strong>Load matrices</strong><p>Read the already-built development feature-target matrix and the Molicell holdout matrix. The demo does not touch raw archives during presentation time.</p></div>
+      <div class="step"><strong>Load matrices</strong><p>Read the already-built development matrix and the Molicell score matrix. The demo does not touch raw archives during presentation time.</p></div>
       <div class="step"><strong>Build features</strong><p>Use base time-domain statistics and derived features. Derived features include log duration, voltage delta, voltage range, coefficient of variation, current load factor, and throughput ratios.</p></div>
       <div class="step"><strong>Build target vector</strong><p>Use real impedance and negative-imaginary impedance at the fixed grid: <code>0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</code>.</p></div>
       <div class="step"><strong>Fit baseline and model</strong><p>Compare a global train-mean vector against a conservative KNN shrinkage model. The KNN model receives only time-domain features.</p></div>
       <div class="step"><strong>Score</strong><p>Compute full-vector RMSE, component RMSE, per-target RMSE, relative improvement, and per-frequency error.</p></div>
-      <div class="step"><strong>Screen EIS target quality</strong><p>Run finite-range RC-basis Kramer-Kronig validation on the holdout target spectra. This is quality metadata, not a prediction score.</p></div>
+      <div class="step"><strong>Screen EIS target quality</strong><p>Run finite-range RC-basis Kramer-Kronig validation on the measured EIS spectra for the rows kept back. This is quality metadata, not a prediction score.</p></div>
     </div>
   </section>
 
@@ -254,10 +267,10 @@
       <thead><tr><th>Item</th><th>Value</th><th>Reason it matters</th></tr></thead>
       <tbody>
         <tr><td>Development matrix</td><td>[local path redacted]</td><td>Training source for the demo model.</td></tr>
-        <tr><td>Molicell holdout matrix</td><td>[local path redacted]</td><td>Bounded holdout scored by the demo.</td></tr>
+        <tr><td>Molicell score matrix</td><td>[local path redacted]</td><td>Rows kept back from training and scored by the demo.</td></tr>
         <tr><td>Feature count</td><td>28</td><td>Time-domain-only inputs after derived features are added.</td></tr>
         <tr><td>Target count</td><td>20</td><td>Fixed-grid impedance vector, real and negative-imaginary components.</td></tr>
-        <tr><td>Leakage rule</td><td>development rows train, Molicell subset holdout, no random row split</td><td>No random row split. This avoids the easiest invalid win.</td></tr>
+        <tr><td>Leakage rule</td><td>development rows train, Molicell rows kept back for scoring, no random row split</td><td>No random row split. This avoids the easiest invalid win.</td></tr>
       </tbody>
     </table>
     <h3>Feature Columns</h3>
@@ -275,11 +288,11 @@
 <tr><td>10 Hz</td><td><code>target_zreal_10hz_ohm</code></td><td><code>target_znegimag_10hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
 <tr><td>20 Hz</td><td><code>target_zreal_20hz_ohm</code></td><td><code>target_znegimag_20hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr>
 <tr><td>40 Hz</td><td><code>target_zreal_40hz_ohm</code></td><td><code>target_znegimag_40hz_ohm</code></td><td>One real impedance value and one negative-imaginary impedance value at the same frequency.</td></tr></tbody></table></div>
-    <h3>Training Preview</h3>
-    <p>The training preview confirms the development rows used by the demo. Long identifiers wrap inside the table instead of forcing the page wider than the viewport.</p>
+    <h3>Rows the model learned from</h3>
+    <p>These rows are examples from the development set. The model can learn from them.</p>
     <div class="table-scroll"><table><thead><tr><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>soc_percent</th><th>temperature_c</th><th>td_rows</th><th>td_duration_s</th></tr></thead><tbody><tr><td>dev_raw::panasonic::0</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>not available</td><td>-10</td><td>426</td><td>228,149.93</td></tr><tr><td>dev_raw::panasonic::1</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>not available</td><td>-10</td><td>426</td><td>228,149.93</td></tr><tr><td>dev_raw::panasonic::2</td><td>Panasonic 18650PF</td><td>dev_train_seen_outcome</td><td>3740</td><td>not available</td><td>-10</td><td>426</td><td>228,149.93</td></tr></tbody></table></div>
-    <h3>Holdout Preview</h3>
-    <p>The holdout preview confirms the Molicell rows scored by the demo. These rows are not random splits of the same table, which matters because random row splits can overstate generalization.</p>
+    <h3>Rows kept back for the demo score</h3>
+    <div class="plain-callout"><strong>Plain meaning:</strong><p>These Molicell rows were not used to choose or fit the model. They are the rows used to ask, “does the trained model still work on this separate dataset?”</p></div>
     <div class="table-scroll"><table><thead><tr><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>soc_percent</th><th>temperature_c</th><th>td_rows</th><th>td_duration_s</th></tr></thead><tbody><tr><td>molicell_p42a::A11::5degC::SOC20::1</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>20</td><td>5</td><td>168,668.00</td><td>160,573.40</td></tr><tr><td>molicell_p42a::A11::5degC::SOC50::2</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>50</td><td>5</td><td>168,668.00</td><td>160,573.40</td></tr><tr><td>molicell_p42a::A11::5degC::SOC80::3</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>80</td><td>5</td><td>168,668.00</td><td>160,573.40</td></tr></tbody></table></div>
   </section>
 
@@ -379,8 +392,8 @@
     <h3>Per-Frequency Error Table</h3>
     <p>This table gives the same comparison as the bar chart. It is useful when the exact frequency-level values matter more than the visual trend.</p>
     <div class="table-scroll"><table><thead><tr><th>frequency_hz</th><th>baseline_rmse_ohm</th><th>model_rmse_ohm</th></tr></thead><tbody><tr><td>0.05</td><td>0.0146</td><td>0.01152</td></tr><tr><td>0.1</td><td>0.01291</td><td>0.01072</td></tr><tr><td>0.2</td><td>0.01104</td><td>0.00939</td></tr><tr><td>0.5</td><td>0.00907</td><td>0.00781</td></tr><tr><td>1</td><td>0.00782</td><td>0.00714</td></tr><tr><td>2</td><td>0.00699</td><td>0.00656</td></tr><tr><td>5</td><td>0.00617</td><td>0.00598</td></tr><tr><td>10</td><td>0.00619</td><td>0.00598</td></tr><tr><td>20</td><td>0.00627</td><td>0.0061</td></tr><tr><td>40</td><td>0.0062</td><td>0.00605</td></tr></tbody></table></div>
-    <h3>KK Preview Rows</h3>
-    <p>The KK preview rows show target-quality metadata for the holdout spectra. A pass means the measured target spectrum is broadly consistent with the finite-range RC-basis screen. It does not mean the prediction model is automatically valid.</p>
+    <h3>EIS quality-check rows</h3>
+    <p>These rows show target-quality metadata for the measured EIS spectra. A pass means the measured spectrum is broadly consistent with the finite-range RC-basis screen. It does not mean the prediction model is automatically valid.</p>
     <div class="table-scroll"><table><thead><tr><th>matrix</th><th>row_index</th><th>sample_id</th><th>dataset</th><th>split_role</th><th>cell_id</th><th>temperature_c</th><th>soc_percent</th><th>kk_valid</th></tr></thead><tbody><tr><td>demo_molicell_subset</td><td>0</td><td>molicell_p42a::A11::5degC::SOC20::1</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5</td><td>20</td><td>true</td></tr><tr><td>demo_molicell_subset</td><td>1</td><td>molicell_p42a::A11::5degC::SOC50::2</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5</td><td>50</td><td>true</td></tr><tr><td>demo_molicell_subset</td><td>2</td><td>molicell_p42a::A11::5degC::SOC80::3</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A11</td><td>5</td><td>80</td><td>true</td></tr><tr><td>demo_molicell_subset</td><td>3</td><td>molicell_p42a::A12::5degC::SOC20::4</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A12</td><td>5</td><td>20</td><td>true</td></tr><tr><td>demo_molicell_subset</td><td>4</td><td>molicell_p42a::A12::5degC::SOC50::5</td><td>Molicell P42A local high-power characterization</td><td>molicell_p42a_whole_dataset_holdout_not_tuned</td><td>A12</td><td>5</td><td>50</td><td>true</td></tr></tbody></table></div>
   </section>
 
@@ -460,7 +473,7 @@
         &quot;method&quot;: {
             &quot;baseline&quot;: &quot;global train target mean&quot;,
             &quot;model&quot;: &quot;KNeighborsRegressor(n_neighbors=3) blended 20 percent with the KNN prediction and 80 percent with the train mean&quot;,
-            &quot;split&quot;: &quot;development rows train, Molicell subset holdout, no random row split&quot;,
+        &quot;split&quot;: &quot;development rows train, Molicell rows kept back for scoring, no random row split&quot;,
             &quot;kk_screen&quot;: &quot;finite-range RC-basis Kramer-Kronig residual check on holdout EIS targets&quot;,
             &quot;preprocessing&quot;: &quot;median imputation and standard scaling inside a scikit-learn ColumnTransformer&quot;,
             &quot;derived_features&quot;: &quot;log duration, voltage delta/range/CV, current load factor, total/net throughput, discharge-to-charge ratio&quot;,
@@ -624,7 +637,7 @@
     </div>
     <pre><code class="language-json">{
   &quot;experiment&quot;: &quot;cross_dataset_pulse_to_eis_training_demo&quot;,
-  &quot;created_utc&quot;: &quot;2026-07-01T21:01:53.350046+00:00&quot;,
+  &quot;created_utc&quot;: &quot;2026-07-02T17:55:38.285382+00:00&quot;,
   &quot;claim_boundary&quot;: &quot;Demo only. Uses a bounded subset and does not create a new validation claim.&quot;,
   &quot;inputs&quot;: {
     &quot;dev_matrix_csv&quot;: &quot;[local path redacted]
@@ -853,7 +866,7 @@
   &quot;method&quot;: {
     &quot;baseline&quot;: &quot;global train target mean&quot;,
     &quot;model&quot;: &quot;KNeighborsRegressor(n_neighbors=3) blended 20 percent with the KNN prediction and 80 percent with the train mean&quot;,
-    &quot;split&quot;: &quot;development rows train, Molicell subset holdout, no random row split&quot;,
+    &quot;split&quot;: &quot;development rows train, Molicell rows kept back for scoring, no random row split&quot;,
     &quot;kk_screen&quot;: &quot;finite-range RC-basis Kramer-Kronig residual check on holdout EIS targets&quot;,
     &quot;preprocessing&quot;: &quot;median imputation and standard scaling inside a scikit-learn ColumnTransformer&quot;,
     &quot;derived_features&quot;: &quot;log duration, voltage delta/range/CV, current load factor, total/net throughput, discharge-to-charge ratio&quot;
@@ -1247,7 +1260,7 @@
   <section id="glossary">
     <h2>Glossary</h2>
     <p>This glossary defines the terms used in the page so an external user can read the pipeline without guessing what each abbreviation or metric means.</p>
-    <div class="table-scroll"><table><tbody><tr><td><strong>EIS</strong></td><td>Electrochemical impedance spectroscopy, a frequency-domain measurement of battery impedance.</td></tr><tr><td><strong>DRT</strong></td><td>Distribution of relaxation times. Used in the broader project to interpret impedance-like behavior.</td></tr><tr><td><strong>Fixed-grid EIS</strong></td><td>A spectrum represented on the same frequency grid for every row, so supervised models can compare like with like.</td></tr><tr><td><strong>Zreal</strong></td><td>The real component of impedance, stored as ohm values.</td></tr><tr><td><strong>-Zimag</strong></td><td>The negative imaginary impedance component. Battery EIS plots commonly use the negative sign for readability.</td></tr><tr><td><strong>Kramer-Kronig</strong></td><td>A consistency check for causal, linear, stable impedance behavior. Here it is a quality screen, not proof of model validity.</td></tr><tr><td><strong>RMSE</strong></td><td>Root mean squared error. Lower means the predicted impedance vector is closer to the target vector.</td></tr><tr><td><strong>Baseline</strong></td><td>The boring comparison model. Here it predicts the train-set mean target vector.</td></tr><tr><td><strong>KNN</strong></td><td>K-nearest neighbors. Here it predicts from nearby time-domain feature rows after scaling and imputation.</td></tr><tr><td><strong>Shrinkage blend</strong></td><td>The demo prediction uses 80 percent mean baseline and 20 percent KNN prediction to avoid overclaiming from a small demo.</td></tr><tr><td><strong>Holdout</strong></td><td>Rows held out from tuning and used only for scoring in this demo path.</td></tr><tr><td><strong>Leakage</strong></td><td>Invalid information flow from evaluation data into training or model selection.</td></tr><tr><td><strong>External user</strong></td><td>A reader outside the implementation loop who needs enough context to judge the demo without running it.</td></tr></tbody></table></div>
+    <div class="table-scroll"><table><tbody><tr><td><strong>EIS</strong></td><td>Electrochemical impedance spectroscopy, a frequency-domain measurement of battery impedance.</td></tr><tr><td><strong>DRT</strong></td><td>Distribution of relaxation times. Used in the broader project to interpret impedance-like behavior.</td></tr><tr><td><strong>Fixed-grid EIS</strong></td><td>A spectrum represented on the same frequency grid for every row, so supervised models can compare like with like.</td></tr><tr><td><strong>Zreal</strong></td><td>The real component of impedance, stored as ohm values.</td></tr><tr><td><strong>-Zimag</strong></td><td>The negative imaginary impedance component. Battery EIS plots commonly use the negative sign for readability.</td></tr><tr><td><strong>Kramer-Kronig</strong></td><td>A consistency check for causal, linear, stable impedance behavior. Here it is a quality screen, not proof of model validity.</td></tr><tr><td><strong>RMSE</strong></td><td>Root mean squared error. Lower means the predicted impedance vector is closer to the target vector.</td></tr><tr><td><strong>Baseline</strong></td><td>The boring comparison model. Here it predicts the train-set mean target vector.</td></tr><tr><td><strong>KNN</strong></td><td>K-nearest neighbors. Here it predicts from nearby time-domain feature rows after scaling and imputation.</td></tr><tr><td><strong>Shrinkage blend</strong></td><td>The demo prediction uses 80 percent mean baseline and 20 percent KNN prediction to avoid overclaiming from a small demo.</td></tr><tr><td><strong>Rows kept back for scoring</strong></td><td>Rows not used to fit or choose the model. They are used only to check whether the trained model still works on a separate dataset.</td></tr><tr><td><strong>Leakage</strong></td><td>Invalid information flow from evaluation data into training or model selection.</td></tr><tr><td><strong>External user</strong></td><td>A reader outside the implementation loop who needs enough context to judge the demo without running it.</td></tr></tbody></table></div>
   </section>
 
   <section id="limits">
@@ -1270,10 +1283,10 @@
       <thead><tr><th>Layer</th><th>Current demo value</th><th>Why external users should care</th></tr></thead>
       <tbody>
         <tr><td>Train rows</td><td>120</td><td>Training rows come from development data only.</td></tr>
-        <tr><td>Holdout rows</td><td>30</td><td>The demo scores a bounded Molicell subset. No random row split.</td></tr>
+        <tr><td>Rows kept back for scoring</td><td>30</td><td>The demo scores a bounded Molicell subset. No random row split.</td></tr>
         <tr><td>EIS target grid</td><td>0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</td><td>All spectra are forced into the same comparison space.</td></tr>
         <tr><td>Target columns</td><td>20</td><td>10 real impedance values and 10 negative-imaginary impedance values.</td></tr>
-        <tr><td>Leakage rule</td><td>development rows train, Molicell subset holdout, no random row split</td><td>The demo blocks the easiest invalid win: random row leakage.</td></tr>
+        <tr><td>Leakage rule</td><td>development rows train, Molicell rows kept back for scoring, no random row split</td><td>The demo blocks the easiest invalid win: random row leakage.</td></tr>
       </tbody>
     </table>
   </section>

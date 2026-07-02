@@ -1,7 +1,7 @@
 {
   "experiment": "cross_dataset_pulse_to_eis_training_molicell_p42a_one_shot_validation",
   "scored_utc": "2026-07-01T09:41:58.916328+00:00",
-  "claim_boundary": "One-shot Molicell P42A validation of the locked supervised time-domain-to-fixed-grid-EIS scaffold. This is not a frozen frozen pulse-to-EIS rule CALB rule validation.",
+  "claim_boundary": "One-shot Molicell P42A validation of the locked supervised time-domain-to-fixed-grid-EIS scaffold. This is not a frozen CALB pulse-to-EIS rule validation.",
   "post_outcome_tuning_performed": false,
   "frozen_config_path": "[local path redacted]",
   "frozen_config_sha256": "634300835ae1d7ab9b9455e1f1ff4918b23039fce0255ddc7ea01525445b3650",

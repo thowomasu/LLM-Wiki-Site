@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LLM Toolkit Wiki | LLM Wiki Research Outputs</title>
+  <title>Battery DRT Research Outputs</title>
   <style>:root {
   color-scheme: light;
   --sidebar-width: 260px;
@@ -237,6 +237,98 @@ code {
   margin: 24px 0;
 }
 .grid.two { grid-template-columns: 1fr; }
+.start-grid,
+.summary-grid,
+.terms-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 14px;
+  margin: 20px 0 28px;
+}
+.start-card,
+.summary-card,
+.term-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 15px 16px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.start-card h3,
+.summary-card h3,
+.term-card h3 {
+  margin: 0;
+  font-size: 19px;
+}
+.start-card p,
+.summary-card p,
+.term-card p {
+  margin: 0;
+  font-size: 15px;
+}
+.reader-path {
+  display: grid;
+  gap: 12px;
+  margin: 14px 0;
+}
+.reader-card {
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teal);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 14px 16px;
+}
+.reader-card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+.reader-card p {
+  margin: 0;
+  color: var(--muted);
+}
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+.card-actions .button {
+  width: auto;
+}
+.terms-strip {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+}
+.term-card {
+  border-left-color: var(--green);
+}
+.term-card strong {
+  font-size: 14px;
+}
+.term-card span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.provenance-detail {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  word-break: break-word;
+}
+.provenance-note {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+}
+.provenance-note strong {
+  color: var(--text);
+}
 .card {
   display: grid;
   grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
@@ -419,6 +511,21 @@ footer {
     left: 12px;
   }
   .grid, .grid.two { grid-template-columns: 1fr; }
+  .card {
+    display: block;
+  }
+  .card p,
+  .card ul,
+  .card ol,
+  .card .label,
+  .card .metric,
+  .card h3:first-child {
+    grid-column: auto;
+  }
+  h1 { font-size: clamp(32px, 10vw, 48px); }
+  h2 { font-size: clamp(23px, 7vw, 32px); }
+  main { padding: 24px min(4vw, 20px) 44px; }
+  header { padding: 34px min(5vw, 24px) 22px; }
   p { font-size: 17px; }
 }</style>
   <script>
@@ -486,73 +593,81 @@ footer {
 <body>
   <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
   <div class="site-shell">
-    <aside class="sidebar"><a class="brand" href="index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
+    <aside class="sidebar"><a class="brand" href="index.html"><strong>Battery DRT Research Outputs</strong><span>Public battery analysis outputs and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
 <a class="side-link" href="index.html">Overview</a>
 <a class="side-link" href="presentations/">Presentations</a>
 <a class="side-link" href="datasets/">Datasets</a>
-<a class="side-link" href="cross-dataset/">bAIttery DRT pipeline</a>
+<a class="side-link" href="cross-dataset/">Cambridge and Molicell EIS prediction study</a>
 <a class="side-link" href="sources/">Sources</a>
 <a class="side-link" href="glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
-<a class="side-link" href="presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
-<a class="side-link" href="presentations/#dib-data">DIB (Data in Brief) Data</a>
-<a class="side-link" href="presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
-<a class="side-link" href="cross-dataset/">bAIttery DRT pipeline</a>
-<a class="side-link" href="external-validation/dataset-exploration/">Dataset Viability Presentation</a>
+<a class="side-link" href="presentations/#drt-pipeline">Rashid and Faraji-Niri DIB battery SOH estimation dataset</a>
+<a class="side-link" href="presentations/#lg-m50t-expt4">LG M50T 21700 degradation study, Expt 4 drive-cycle aging</a>
+<a class="side-link" href="presentations/#calb-study">CALB L148N58A comprehensive characterization study</a>
+<a class="side-link" href="cross-dataset/">Cambridge and Molicell EIS prediction study</a>
+<a class="side-link" href="external-validation/dataset-exploration/">Dataset exploration screen</a>
 <a class="side-link" href="external-validation/">External Dataset Checks</a>
-<div class="side-section">CALB Package</div>
-<a class="side-link" href="calb/data/">View CALB Data</a>
-<a class="side-link" href="calb/manual/">CALB Manual</a>
-<a class="side-link" href="sources/calb/">CALB Sources</a></aside>
+<div class="side-section">CALB study</div>
+<a class="side-link" href="calb/data/">View CALB L148N58A study data</a>
+<a class="side-link" href="calb/manual/">CALB L148N58A study guide</a>
+<a class="side-link" href="sources/calb/">CALB L148N58A sources</a></aside>
     <div class="page-content">
       <header>
-        <div class="kicker">LLM Wiki Research Outputs</div>
-        <h1>LLM Toolkit Wiki</h1>
-        <p class="lead">A public front door for the project: presentations, data, sources, and blunt claim boundaries.</p>
+        <div class="kicker">Battery DRT Research Outputs</div>
+        <h1>Battery DRT Research Outputs</h1>
+        <p class="lead">Public battery research outputs with plain claim boundaries, source links, data tables, and reproduction trail.</p>
       </header>
       <main>
 
     <section>
+      <h2>Start Here</h2>
+      <div class="start-grid">
+        <article class="start-card">
+          <h3>I want the main result</h3>
+          <p>Read the CALB L148N58A pulse-to-EIS analysis first. It is the strongest internal result, not external validation.</p>
+          <div class="card-actions"><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB viability report</a></div>
+        </article>
+        <article class="start-card">
+          <h3>I want the data</h3>
+          <p>Use the dataset map, then open the curated CALB tables or external dataset checks.</p>
+          <div class="card-actions"><a class="button" href="datasets/">Open dataset map</a><a class="button" href="calb/data/">View CALB L148N58A study data</a></div>
+        </article>
+        <article class="start-card">
+          <h3>I want the limitations</h3>
+          <p>Start with external validation. This is where the blocked and no-support results are kept visible.</p>
+          <div class="card-actions"><a class="button" href="external-validation/">Open external validation checks</a></div>
+        </article>
+        <article class="start-card">
+          <h3>I want sources and reproduction</h3>
+          <p>Open the source trail for paper titles, dataset records, DOI links, and public artifact provenance.</p>
+          <div class="card-actions"><a class="button" href="sources/">Open sources and reproduction trail</a></div>
+        </article>
+      </div>
+    </section>
+    <section>
       <h2>What This Project Is</h2>
-      <p>This is the public face of the bAIttery / LLM (Large Language Model) toolkit work. It collects the battery-analysis outputs that can be shown outside the private repository: presentations, curated data tables, plots, dataset qualification notes, source traces, and machine-readable summaries.</p>
-      <p>The project has two related but separate tracks. The first track is the CALB L148N58A internal pulse-to-EIS evidence package, where HPPC time-series windows are compared with EIS-derived impedance behavior. The second track is the newer supervised cross-dataset scaffold, where time-series features are used to predict a fixed-grid EIS target on held-out datasets. Mixing those tracks would make the claims look stronger than they are, so the site keeps them separated.</p>
+      <p>This site publishes the battery-analysis outputs that can be shown outside the private repository: presentations, curated data tables, plots, dataset qualification notes, source traces, and machine-readable summaries.</p>
+      <p>The project has two related but separate tracks. The first track is the CALB L148N58A comprehensive characterization study: pulse-to-EIS analysis, where HPPC time-series windows are compared with EIS-derived impedance behavior. The second track is the Cambridge and Molicell EIS prediction study, where time-series features predict measured EIS spectra for separate datasets. Mixing those tracks would make the claims look stronger than they are, so the site keeps them separated.</p>
       <p>An external technical reader should be able to read this site without opening the private repo. That means the public pages explain the objective, data source, methodology, metrics, status, and limitation for each output. Internal paths are shown only as sanitized public labels when they help trace an artifact.</p>
     </section>
     <section class="note">
-      <strong>Claim boundary:</strong> this site is for technical review, not hype. It does not turn internal CALB results into external validation. The strongest CALB (China Aviation Lithium Battery) result is internal pulse-to-EIS evidence. Panasonic, RADAR4KIT, and Stanford external adapter runs do not support the frozen CALB rule. Cambridge and Molicell belong to the separate supervised scaffold and do not rescue the CALB claim.
+      <strong>Claim boundary:</strong> this site is for technical review, not hype. It does not turn internal CALB results into external validation. The strongest CALB result is internal pulse-to-EIS evidence. Panasonic, RADAR4KIT, and Stanford external adapter runs do not support the frozen CALB rule. Cambridge and Molicell belong to the separate EIS prediction track and do not rescue the CALB claim. The LG M50T Expt 4 work is health-feature and drive-cycle ageing work, not EIS-validated DRT evidence.
     </section>
-    <h2>Start Here</h2>
-    <div class="table-wrap">
-      <table class="briefing-table">
-        <thead><tr><th>Area</th><th>What an external reader gets</th><th>Status</th><th>Open</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><strong class="catalog-title">Presentations</strong><div class="catalog-detail">Public HTML deliverables</div></td>
-            <td>A vertical index of presentation pages. Each row shows the pipeline, dataset, explanation, public source label, and Open button.</td>
-            <td><span class="metric-inline">19</span> public pages currently indexed.</td>
-            <td class="open-cell"><a class="button" href="presentations/">Open presentations</a></td>
-          </tr>
-          <tr>
-            <td><strong class="catalog-title">CALB pulse-to-EIS package</strong><div class="catalog-detail">Internal evidence track</div></td>
-            <td>Same-dataset CALB L148N58A evidence connecting HPPC time-series windows with EIS behavior. Useful result, but not external validation.</td>
-            <td><span class="metric-inline">246 / 246</span> internal quality-pass rows.</td>
-            <td class="open-cell"><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open presentation</a><a class="button" href="calb/data/">View data</a><a class="button" href="calb/manual/">Open manual</a></td>
-          </tr>
-          <tr>
-            <td><strong class="catalog-title">Source trail</strong><div class="catalog-detail">Public provenance</div></td>
-            <td>Readable provenance for reports, summaries, manifests, plots, public data artifacts, and literature references. It explains what each source group supports.</td>
-            <td><span class="metric-inline warn">trace</span> public evidence trail, not the raw vault.</td>
-            <td class="open-cell"><a class="button" href="sources/">Open sources</a></td>
-          </tr>
-          <tr>
-            <td><strong class="catalog-title">bAIttery time-series to DRT scaffold</strong><div class="catalog-detail">Supervised cross-dataset track</div></td>
-            <td>Feature matrix, fixed-grid EIS targets, Kramer-Kronig screen, baseline, model, output files, and claim boundary for the supervised scaffold.</td>
-            <td><span class="metric-inline warn">partial</span> Cambridge partial support; Molicell is separate support for this scaffold, not CALB.</td>
-            <td class="open-cell"><a class="button" href="cross-dataset/">Open bAIttery project</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <h2>Public Shelf</h2>
+    <section class="summary-grid">
+      <article class="summary-card"><h3>Public research briefs</h3><p><span class="metric-inline">19</span> HTML pages, grouped by source study and claim boundary.</p><div class="card-actions"><a class="button" href="presentations/">Open public research briefs</a></div></article>
+      <article class="summary-card"><h3>CALB L148N58A comprehensive characterization study</h3><p><span class="metric-inline">246 / 246</span> internal quality-pass rows for the CALB pulse-to-EIS analysis.</p><div class="card-actions"><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB viability report</a><a class="button" href="calb/data/">View CALB L148N58A study data</a></div></article>
+      <article class="summary-card"><h3>External validation checks</h3><p>CALCE is blocked for runnable rows. RADAR4KIT, Stanford, and Panasonic are no-support for the frozen CALB rule.</p><div class="card-actions"><a class="button" href="external-validation/">Open external validation checks</a></div></article>
+      <article class="summary-card"><h3>Cambridge and Molicell EIS prediction study</h3><p>Separate EIS prediction track. Cambridge is partial support. Molicell belongs here, not under CALB validation.</p><div class="card-actions"><a class="button" href="cross-dataset/">Open EIS prediction study</a></div></article>
+    </section>
+    <h2>Common Terms</h2>
+    <section class="terms-strip">
+      <article class="term-card"><strong>EIS</strong><span>Electrochemical Impedance Spectroscopy, the frequency-domain target.</span></article>
+      <article class="term-card"><strong>DRT</strong><span>Distribution of Relaxation Times, the relaxation representation used in analysis.</span></article>
+      <article class="term-card"><strong>HPPC</strong><span>Hybrid Pulse Power Characterization, the CALB pulse source.</span></article>
+      <article class="term-card"><strong>KK</strong><span>Kramers-Kronig, used here as an EIS quality screen.</span></article>
+      <article class="term-card"><strong>SOC</strong><span>State of Charge, a key alignment variable.</span></article>
+    </section>
     <section>
       <h2>What Has Been Done So Far</h2>
       <div class="table-wrap">
@@ -560,45 +675,45 @@ footer {
           <thead><tr><th>Workstream</th><th>What was built</th><th>What to remember</th><th>Open</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong class="catalog-title">DRT pipeline</strong><div class="catalog-detail">Distribution of Relaxation Times</div></td>
+              <td><strong class="catalog-title">Distribution of Relaxation Times pipeline</strong><div class="catalog-detail">Method-development outputs</div></td>
               <td>Time-domain battery pipeline that finds pulse/rest windows, fits relaxation behavior, compares against EIS, and reports where voltage-only fitting can look good while still failing impedance behavior.</td>
               <td>This is method development. Strong voltage fit is not automatically strong impedance evidence.</td>
-              <td class="open-cell"><a class="button" href="presentations/#drt-pipeline">Open DRT presentations</a></td>
+              <td class="open-cell"><a class="button" href="presentations/#drt-pipeline">Open DRT method outputs</a></td>
             </tr>
             <tr>
-              <td><strong class="catalog-title">DIB dataset work</strong><div class="catalog-detail">Zenodo Experiment 4</div></td>
-              <td>Mapped and tested the DIB-style dataset package, including data audit, feature extraction, held-out-cell checks, validation diagnostics, and reproduction material.</td>
+              <td><strong class="catalog-title">LG M50T 21700 degradation study, Expt 4 drive-cycle aging</strong><div class="catalog-detail">Expt 4 - Drive Cycle Aging (Control)</div></td>
+              <td>Mapped and tested the Expt 4 drive-cycle ageing subset, including data audit, feature extraction, held-out-cell checks, validation diagnostics, and reproduction material.</td>
               <td>Good for pipeline mechanics and health-feature development. It is not the same thing as EIS external validation.</td>
-              <td class="open-cell"><a class="button" href="presentations/#dib-data">Open DIB presentations</a></td>
+              <td class="open-cell"><a class="button" href="presentations/#lg-m50t-expt4">Open LG M50T Expt 4 outputs</a></td>
             </tr>
             <tr>
-              <td><strong class="catalog-title">CALB dataset work</strong><div class="catalog-detail">L148N58A internal evidence</div></td>
+              <td><strong class="catalog-title">CALB L148N58A comprehensive characterization study: pulse-to-EIS analysis</strong><div class="catalog-detail">Internal evidence</div></td>
               <td>Parsed the archive, published viewable data files, built the internal pulse-to-EIS evidence package, and kept the drive-cycle limitation visible.</td>
               <td>The drive-cycle result is weaker than the HPPC/EIS bridge. Do not flatten those into one claim.</td>
-              <td class="open-cell"><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB work</a></td>
+              <td class="open-cell"><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB viability report</a></td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
     <section>
-      <h2>Dataset Exploration</h2>
-      <p>The site now tracks the datasets actually used or screened by the work: CALB L148N58A, Zenodo Experiment 4 DIB, CALCE Storage 25 C, KIT RADAR4KIT, NASA Battery, and the newer Panasonic/Samsung/Graphite-LNMO exploration set.</p>
+      <h2>Dataset Map</h2>
+      <p>The site tracks the datasets actually used or screened by the work: CALB L148N58A comprehensive characterization study, LG M50T 21700 degradation study, Expt 4 drive-cycle aging, CALCE Storage 25 C, KIT RADAR4KIT, NASA Battery, and the newer Panasonic/Samsung/Graphite-LNMO exploration set.</p>
       <div class="table-wrap">
         <table class="briefing-table">
           <thead><tr><th>Dataset group</th><th>What it contributes</th><th>Status</th><th>Open</th></tr></thead>
           <tbody>
             <tr>
               <td><strong class="catalog-title">Current evidence datasets</strong></td>
-              <td>CALB L148N58A provides the current internal EIS and HPPC pulse-bridge package. Zenodo Experiment 4 provides the DIB-style ageing and health-feature pipeline work.</td>
+              <td>CALB L148N58A testing campaign provides the current internal EIS and HPPC pulse-bridge package. LG M50T 21700 degradation study, Expt 4 drive-cycle aging provides the drive-cycle ageing health-feature pipeline work.</td>
               <td>Useful development datasets, but they answer different questions.</td>
-              <td class="open-cell"><a class="button" href="datasets/">Open all datasets</a></td>
+              <td class="open-cell"><a class="button" href="datasets/">Open dataset map</a></td>
             </tr>
             <tr>
               <td><strong class="catalog-title">Validation candidates</strong></td>
               <td>CALCE, KIT RADAR4KIT, Stanford SECL, Panasonic 18650PF, Samsung INR21700-50E, Graphite/LNMO, NASA, Cambridge, and Molicell are screened or used for external checks.</td>
-              <td>CALCE has 24 same-join qualification rows and 0 frozen-rule runnable rows. RADAR4KIT, Stanford, and Panasonic do not support the frozen CALB rule. Cambridge and Molicell belong to the separate supervised scaffold.</td>
-              <td class="open-cell"><a class="button" href="external-validation/">Open validation checks</a><a class="button" href="external-validation/dataset-exploration/">Open exploration</a></td>
+              <td>CALCE has 24 same-join qualification rows and 0 frozen-rule runnable rows. RADAR4KIT, Stanford, and Panasonic do not support the frozen CALB rule. Cambridge and Molicell belong to the separate EIS prediction track.</td>
+              <td class="open-cell"><a class="button" href="external-validation/">Open external validation checks</a><a class="button" href="external-validation/dataset-exploration/">Open dataset exploration</a></td>
             </tr>
           </tbody>
         </table>

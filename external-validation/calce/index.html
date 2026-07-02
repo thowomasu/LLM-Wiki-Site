@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CALCE Storage 25 C Manifest | LLM Wiki Research Outputs</title>
+  <title>CALCE Storage 25 C validation check | Battery DRT Research Outputs</title>
   <style>:root {
   color-scheme: light;
   --sidebar-width: 260px;
@@ -237,6 +237,98 @@ code {
   margin: 24px 0;
 }
 .grid.two { grid-template-columns: 1fr; }
+.start-grid,
+.summary-grid,
+.terms-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 14px;
+  margin: 20px 0 28px;
+}
+.start-card,
+.summary-card,
+.term-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 15px 16px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.start-card h3,
+.summary-card h3,
+.term-card h3 {
+  margin: 0;
+  font-size: 19px;
+}
+.start-card p,
+.summary-card p,
+.term-card p {
+  margin: 0;
+  font-size: 15px;
+}
+.reader-path {
+  display: grid;
+  gap: 12px;
+  margin: 14px 0;
+}
+.reader-card {
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teal);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 14px 16px;
+}
+.reader-card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+.reader-card p {
+  margin: 0;
+  color: var(--muted);
+}
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+.card-actions .button {
+  width: auto;
+}
+.terms-strip {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+}
+.term-card {
+  border-left-color: var(--green);
+}
+.term-card strong {
+  font-size: 14px;
+}
+.term-card span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.provenance-detail {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  word-break: break-word;
+}
+.provenance-note {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+}
+.provenance-note strong {
+  color: var(--text);
+}
 .card {
   display: grid;
   grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
@@ -419,6 +511,21 @@ footer {
     left: 12px;
   }
   .grid, .grid.two { grid-template-columns: 1fr; }
+  .card {
+    display: block;
+  }
+  .card p,
+  .card ul,
+  .card ol,
+  .card .label,
+  .card .metric,
+  .card h3:first-child {
+    grid-column: auto;
+  }
+  h1 { font-size: clamp(32px, 10vw, 48px); }
+  h2 { font-size: clamp(23px, 7vw, 32px); }
+  main { padding: 24px min(4vw, 20px) 44px; }
+  header { padding: 34px min(5vw, 24px) 22px; }
   p { font-size: 17px; }
 }</style>
   <script>
@@ -486,32 +593,32 @@ footer {
 <body>
   <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
   <div class="site-shell">
-    <aside class="sidebar"><a class="brand" href="../../index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
+    <aside class="sidebar"><a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Public battery analysis outputs and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
 <a class="side-link" href="../../index.html">Overview</a>
 <a class="side-link" href="../../presentations/">Presentations</a>
 <a class="side-link" href="../../datasets/">Datasets</a>
-<a class="side-link" href="../../cross-dataset/">bAIttery DRT pipeline</a>
+<a class="side-link" href="../../cross-dataset/">Cambridge and Molicell EIS prediction study</a>
 <a class="side-link" href="../../sources/">Sources</a>
 <a class="side-link" href="../../glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
-<a class="side-link" href="../../presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
-<a class="side-link" href="../../presentations/#dib-data">DIB (Data in Brief) Data</a>
-<a class="side-link" href="../../presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
-<a class="side-link" href="../../cross-dataset/">bAIttery DRT pipeline</a>
-<a class="side-link" href="../../external-validation/dataset-exploration/">Dataset Viability Presentation</a>
+<a class="side-link" href="../../presentations/#drt-pipeline">Rashid and Faraji-Niri DIB battery SOH estimation dataset</a>
+<a class="side-link" href="../../presentations/#lg-m50t-expt4">LG M50T 21700 degradation study, Expt 4 drive-cycle aging</a>
+<a class="side-link" href="../../presentations/#calb-study">CALB L148N58A comprehensive characterization study</a>
+<a class="side-link" href="../../cross-dataset/">Cambridge and Molicell EIS prediction study</a>
+<a class="side-link" href="../../external-validation/dataset-exploration/">Dataset exploration screen</a>
 <a class="side-link" href="../../external-validation/">External Dataset Checks</a>
-<div class="side-section">CALB Package</div>
-<a class="side-link" href="../../calb/data/">View CALB Data</a>
-<a class="side-link" href="../../calb/manual/">CALB Manual</a>
-<a class="side-link" href="../../sources/calb/">CALB Sources</a></aside>
+<div class="side-section">CALB study</div>
+<a class="side-link" href="../../calb/data/">View CALB L148N58A study data</a>
+<a class="side-link" href="../../calb/manual/">CALB L148N58A study guide</a>
+<a class="side-link" href="../../sources/calb/">CALB L148N58A sources</a></aside>
     <div class="page-content">
       <header>
-        <div class="kicker">LLM Wiki Research Outputs</div>
-        <h1>CALCE Storage 25 C Manifest</h1>
+        <div class="kicker">Battery DRT Research Outputs</div>
+        <h1>CALCE Storage 25 C validation check</h1>
 
       </header>
       <main>
-<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab" href="../../external-validation/">Dataset comparison</a><a class="tab" href="../dataset-exploration/">New dataset exploration</a><a class="tab active" href="./">CALCE (Center for Advanced Life Cycle Engineering)</a><a class="tab" href="../nasa/">NASA Battery</a><a class="tab" href="../../sources/external/">Sources</a></div><h2>CALCE Storage 25 C External Validation Manifest</h2>
+<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab" href="../../external-validation/">Dataset comparison</a><a class="tab" href="../dataset-exploration/">Dataset exploration screen</a><a class="tab active" href="./">CALCE Storage 25 C validation check</a><a class="tab" href="../nasa/">NASA battery dataset screen</a><a class="tab" href="../../sources/external/">External validation sources</a></div><h2>CALCE Storage 25 C External Validation Manifest</h2>
 <h2>Scope</h2>
 <p>This is dataset qualification only. It does not validate the frozen CALB rule.</p>
 <p>The script inspected only the five requested Storage archives and did not bulk-extract them.</p>

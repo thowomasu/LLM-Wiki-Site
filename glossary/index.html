@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Glossary | LLM Wiki Research Outputs</title>
+  <title>Glossary | Battery DRT Research Outputs</title>
   <style>:root {
   color-scheme: light;
   --sidebar-width: 260px;
@@ -237,6 +237,98 @@ code {
   margin: 24px 0;
 }
 .grid.two { grid-template-columns: 1fr; }
+.start-grid,
+.summary-grid,
+.terms-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 14px;
+  margin: 20px 0 28px;
+}
+.start-card,
+.summary-card,
+.term-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 15px 16px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.start-card h3,
+.summary-card h3,
+.term-card h3 {
+  margin: 0;
+  font-size: 19px;
+}
+.start-card p,
+.summary-card p,
+.term-card p {
+  margin: 0;
+  font-size: 15px;
+}
+.reader-path {
+  display: grid;
+  gap: 12px;
+  margin: 14px 0;
+}
+.reader-card {
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teal);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 14px 16px;
+}
+.reader-card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+.reader-card p {
+  margin: 0;
+  color: var(--muted);
+}
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+.card-actions .button {
+  width: auto;
+}
+.terms-strip {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+}
+.term-card {
+  border-left-color: var(--green);
+}
+.term-card strong {
+  font-size: 14px;
+}
+.term-card span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.provenance-detail {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  word-break: break-word;
+}
+.provenance-note {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+}
+.provenance-note strong {
+  color: var(--text);
+}
 .card {
   display: grid;
   grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
@@ -419,6 +511,21 @@ footer {
     left: 12px;
   }
   .grid, .grid.two { grid-template-columns: 1fr; }
+  .card {
+    display: block;
+  }
+  .card p,
+  .card ul,
+  .card ol,
+  .card .label,
+  .card .metric,
+  .card h3:first-child {
+    grid-column: auto;
+  }
+  h1 { font-size: clamp(32px, 10vw, 48px); }
+  h2 { font-size: clamp(23px, 7vw, 32px); }
+  main { padding: 24px min(4vw, 20px) 44px; }
+  header { padding: 34px min(5vw, 24px) 22px; }
   p { font-size: 17px; }
 }</style>
   <script>
@@ -486,27 +593,27 @@ footer {
 <body>
   <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
   <div class="site-shell">
-    <aside class="sidebar"><a class="brand" href="../index.html"><strong>LLM Toolkit Wiki</strong><span>Research outputs, presentations, data, and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
+    <aside class="sidebar"><a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Public battery analysis outputs and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
 <a class="side-link" href="../index.html">Overview</a>
 <a class="side-link" href="../presentations/">Presentations</a>
 <a class="side-link" href="../datasets/">Datasets</a>
-<a class="side-link" href="../cross-dataset/">bAIttery DRT pipeline</a>
+<a class="side-link" href="../cross-dataset/">Cambridge and Molicell EIS prediction study</a>
 <a class="side-link" href="../sources/">Sources</a>
 <a class="side-link" href="../glossary/">Glossary</a>
 <div class="side-section">Workstreams</div>
-<a class="side-link" href="../presentations/#drt-pipeline">DRT (Distribution of Relaxation Times)</a>
-<a class="side-link" href="../presentations/#dib-data">DIB (Data in Brief) Data</a>
-<a class="side-link" href="../presentations/#calb-dataset">CALB (China Aviation Lithium Battery)</a>
-<a class="side-link" href="../cross-dataset/">bAIttery DRT pipeline</a>
-<a class="side-link" href="../external-validation/dataset-exploration/">Dataset Viability Presentation</a>
+<a class="side-link" href="../presentations/#drt-pipeline">Rashid and Faraji-Niri DIB battery SOH estimation dataset</a>
+<a class="side-link" href="../presentations/#lg-m50t-expt4">LG M50T 21700 degradation study, Expt 4 drive-cycle aging</a>
+<a class="side-link" href="../presentations/#calb-study">CALB L148N58A comprehensive characterization study</a>
+<a class="side-link" href="../cross-dataset/">Cambridge and Molicell EIS prediction study</a>
+<a class="side-link" href="../external-validation/dataset-exploration/">Dataset exploration screen</a>
 <a class="side-link" href="../external-validation/">External Dataset Checks</a>
-<div class="side-section">CALB Package</div>
-<a class="side-link" href="../calb/data/">View CALB Data</a>
-<a class="side-link" href="../calb/manual/">CALB Manual</a>
-<a class="side-link" href="../sources/calb/">CALB Sources</a></aside>
+<div class="side-section">CALB study</div>
+<a class="side-link" href="../calb/data/">View CALB L148N58A study data</a>
+<a class="side-link" href="../calb/manual/">CALB L148N58A study guide</a>
+<a class="side-link" href="../sources/calb/">CALB L148N58A sources</a></aside>
     <div class="page-content">
       <header>
-        <div class="kicker">LLM Wiki Research Outputs</div>
+        <div class="kicker">Battery DRT Research Outputs</div>
         <h1>Glossary</h1>
         <p class="lead">Plain definitions for acronyms and dataset codes used across the toolkit.</p>
       </header>
@@ -519,19 +626,22 @@ footer {
       <thead><tr><th>Acronym or code</th><th>Expansion</th><th>Meaning in this project</th></tr></thead>
       <tbody><tr><td><strong>LLM</strong></td><td>Large Language Model</td><td>The AI tooling layer used to maintain this research wiki and generate public-facing outputs.</td></tr>
 <tr><td><strong>DRT</strong></td><td>Distribution of Relaxation Times</td><td>Battery-analysis method that represents relaxation behavior across time constants.</td></tr>
-<tr><td><strong>DIB</strong></td><td>Data in Brief</td><td>Journal and dataset style used by the Zenodo Experiment 4 workstream.</td></tr>
+<tr><td><strong>DIB</strong></td><td>Data in Brief</td><td>Journal style. Do not use it as the public name for the LG M50T Expt 4 dataset.</td></tr>
 <tr><td><strong>CALB</strong></td><td>China Aviation Lithium Battery</td><td>Manufacturer name used for the CALB L148N58A prismatic cell dataset.</td></tr>
 <tr><td><strong>L148N58A</strong></td><td>58 Ah large prismatic lithium-ion cell model</td><td>The specific cell model in the CALB paper and Mendeley repository.</td></tr>
+<tr><td><strong>LG M50T</strong></td><td>Commercial 21700 cylindrical lithium-ion cell</td><td>Cell family in the degradation study where this project used Expt 4 drive-cycle ageing data.</td></tr>
 <tr><td><strong>EIS</strong></td><td>Electrochemical Impedance Spectroscopy</td><td>Frequency-domain impedance test used as the comparison target for DRT outputs.</td></tr>
 <tr><td><strong>TDM</strong></td><td>Time-Domain Measurement</td><td>Time-series voltage/current data used to fit relaxation behavior from pulses or dynamic tests.</td></tr>
 <tr><td><strong>HPPC</strong></td><td>Hybrid Pulse Power Characterization</td><td>Pulse protocol used to extract time-domain relaxation windows.</td></tr>
 <tr><td><strong>SOC</strong></td><td>State of Charge</td><td>Battery charge level. Bad SOC alignment can make comparisons unfair.</td></tr>
 <tr><td><strong>SOH</strong></td><td>State of Health</td><td>Battery ageing or degradation state. The current CALB work does not validate SOH prediction.</td></tr>
+<tr><td><strong>KK</strong></td><td>Kramers-Kronig</td><td>EIS consistency screen. In this project it is a quality gate, not a model feature.</td></tr>
 <tr><td><strong>OCV</strong></td><td>Open Circuit Voltage</td><td>Rested voltage used to match pulse candidates with EIS records.</td></tr>
 <tr><td><strong>ECM</strong></td><td>Equivalent Circuit Model</td><td>Compact battery model used as a baseline in drive-cycle audits.</td></tr>
 <tr><td><strong>CALCE</strong></td><td>Center for Advanced Life Cycle Engineering</td><td>External battery-data source used for candidate validation planning.</td></tr>
 <tr><td><strong>NASA</strong></td><td>National Aeronautics and Space Administration</td><td>External battery dataset source considered after CALCE and corrected-EIS RADAR4KIT.</td></tr>
 <tr><td><strong>PLN</strong></td><td>CALCE cell identifier</td><td>Identifier used in CALCE storage files to join capacity, SOC, temperature, storage period, and impedance records.</td></tr>
+<tr><td><strong>RADAR4KIT</strong></td><td>KIT battery research dataset</td><td>External validation check. Current frozen adapter result does not support the CALB rule.</td></tr>
 <tr><td><strong>UDDS</strong></td><td>Urban Dynamometer Driving Schedule</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
 <tr><td><strong>US06</strong></td><td>High-aggression supplemental driving schedule</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
 <tr><td><strong>WLTP</strong></td><td>Worldwide Harmonised Light Vehicles Test Procedure</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>

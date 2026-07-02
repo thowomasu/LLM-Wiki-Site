@@ -260,7 +260,7 @@ external-validation claim boundary checks the local evidence for an external val
 Blockers:
 
 - KIT/RADAR4KIT local EIS archive is incomplete and needs the corrected EIS addendum.
-- Local Zenodo Expt4 evidence has no same-cell EIS for this DRT bridge.
+- Local LG M50T 21700 Expt 4 drive-cycle aging evidence has no same-cell EIS for this DRT bridge.
 - Local DIB comparison has only five exact paired rows from one cell/SOH/temp condition, with weak shape agreement outside one SOC.
 
 Blunt read: external validation is not done. The next useful move is to get corrected KIT EIS or another same-cell EIS-paired dataset, not to polish CALB again.

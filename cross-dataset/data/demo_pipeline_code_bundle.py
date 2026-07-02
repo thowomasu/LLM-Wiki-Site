@@ -82,7 +82,7 @@ def demo_score(max_train_rows: int, max_holdout_rows: int) -> dict[str, Any]:
         "method": {
             "baseline": "global train target mean",
             "model": "KNeighborsRegressor(n_neighbors=3) blended 20 percent with the KNN prediction and 80 percent with the train mean",
-            "split": "development rows train, Molicell subset holdout, no random row split",
+        "split": "development rows train, Molicell rows kept back for scoring, no random row split",
             "kk_screen": "finite-range RC-basis Kramer-Kronig residual check on holdout EIS targets",
             "preprocessing": "median imputation and standard scaling inside a scikit-learn ColumnTransformer",
             "derived_features": "log duration, voltage delta/range/CV, current load factor, total/net throughput, discharge-to-charge ratio",
