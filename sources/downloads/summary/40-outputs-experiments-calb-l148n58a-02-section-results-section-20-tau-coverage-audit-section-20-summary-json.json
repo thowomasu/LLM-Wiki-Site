@@ -1,0 +1,17 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "cells_attempted_per_temperature": 11,
+  "rows": 123,
+  "quality_pass_rows": 99,
+  "error_count": 0,
+  "lambda_value": 0.001,
+  "median_time_fraction_above_eis_window_quality": 0.27327271120524804,
+  "median_time_fraction_overlap_eis_window_quality": 0.710135303228249,
+  "median_corr_quality": -0.0485998081564577,
+  "verdict": "tau_coverage_audit_complete"
+}

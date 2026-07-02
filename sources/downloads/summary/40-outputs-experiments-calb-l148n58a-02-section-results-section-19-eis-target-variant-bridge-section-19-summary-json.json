@@ -1,0 +1,23 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "cells_attempted_per_temperature": 11,
+  "variants": [
+    "full",
+    "drop_high_gt_100hz",
+    "drop_low_lt_0p03hz",
+    "mid_0p03_to_100hz"
+  ],
+  "comparison_rows": 492,
+  "error_count": 0,
+  "lambda_value": 0.001,
+  "best_variant_by_median_corr": "mid_0p03_to_100hz",
+  "best_variant_median_corr": -0.03691909818439151,
+  "most_frequent_best_variant_by_case": "mid_0p03_to_100hz",
+  "most_frequent_best_variant_case_count": 55,
+  "verdict": "eis_target_variant_bridge_complete"
+}

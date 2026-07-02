@@ -1,0 +1,10 @@
+{
+  "section": 40,
+  "audit_item_count": 5,
+  "high_risk_items": 5,
+  "fallback_rows": 2,
+  "external_ready": false,
+  "drive_rows_soc_delta_gt_5pct": 182,
+  "claim_boundary": "internal_engineering_result_not_clean_holdout_or_external_validation",
+  "verdict": "local_leakage_and_claim_limits_documented"
+}

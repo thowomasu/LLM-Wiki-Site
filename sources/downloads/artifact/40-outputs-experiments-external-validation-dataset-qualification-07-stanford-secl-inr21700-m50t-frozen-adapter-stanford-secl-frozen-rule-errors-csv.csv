@@ -1,0 +1,2 @@
+join_key,diag_index,cell_id,channel,soc_percent,eis_record_index,stage,error
+Diag_3_V4_Ch1,3,V4,1,20,2,fit_frozen_rule,too_few_eis_points

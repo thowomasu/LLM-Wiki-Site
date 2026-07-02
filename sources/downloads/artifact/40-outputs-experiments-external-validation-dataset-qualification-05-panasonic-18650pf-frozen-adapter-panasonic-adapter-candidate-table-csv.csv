@@ -1,0 +1,4 @@
+cell_id,temperature_label,temperature_c,pulse_member,eis_file_count,finder_candidate_count,finder_accepted_count,duration_s,voltage_min_v,voltage_max_v,adapter_status
+3740,-10degC,-10,Panasonic 18650PF Data/-10degC/5 pulse test/06-07-17_14.11 3740_dis5_10p.mat,9,20,19,228149.9310001731,2.49948,4.07268,runnable_frozen_rule_input
+3623,0degC,0,Panasonic 18650PF Data/0degC/Charges and Pauses/05-22-17_13.48 3623_dis5_10p.mat,12,11,10,128907.02599771321,2.49948,4.03922,runnable_frozen_rule_input
+3541,25degC,25,Panasonic 18650PF Data/Panasonic 18650PF Data/25degC/Charges and Pauses/04-27-17_11.53 3541_dis5_10p.mat,14,14,13,177172.6060051471,2.49948,4.09905,runnable_frozen_rule_input

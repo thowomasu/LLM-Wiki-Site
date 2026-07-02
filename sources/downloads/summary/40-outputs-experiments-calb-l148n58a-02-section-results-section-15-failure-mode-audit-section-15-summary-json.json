@@ -1,0 +1,19 @@
+{
+  "input": "[local path redacted]",
+  "rows": 123,
+  "quality_pass_rows": 71,
+  "combined_better_rows_quality": 53,
+  "large_gain_rows_quality": 11,
+  "large_loss_rows_quality": 16,
+  "median_delta_quality": 0.0294825567811062,
+  "median_combined_corr_quality": -0.0158780552988706,
+  "median_separate_corr_quality": -0.0477440602688705,
+  "high_ocv_median_delta_quality": 0.030321548537452,
+  "low_ocv_median_delta_quality": 0.0093846055296428,
+  "top_failure_flag": {
+    "quality_flag": "combined_eis_real_rmse_gt_0p2mohm",
+    "count": 34
+  },
+  "verdict": "structured_failure_combined_objective_not_ready",
+  "recommended_next_step": "Run a small low-OCV weighting/alignment experiment before any broader batch."
+}

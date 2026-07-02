@@ -1,0 +1,34 @@
+{
+  "zip_path": "[local path redacted]",
+  "zip_size_bytes": 6959521363,
+  "zip_entries": 466,
+  "manifest_rows": 264,
+  "protocols": [
+    "C20_Charge",
+    "C20_Discharge",
+    "DV_UDDS",
+    "DV_US06",
+    "DV_WLTP",
+    "EIS_test",
+    "HPPC_1C",
+    "HPPC_C3"
+  ],
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "processed_cells": [
+    "59294",
+    "59485",
+    "59627",
+    "59690",
+    "59861",
+    "60031",
+    "60129",
+    "60195",
+    "60403",
+    "60644",
+    "60710"
+  ]
+}

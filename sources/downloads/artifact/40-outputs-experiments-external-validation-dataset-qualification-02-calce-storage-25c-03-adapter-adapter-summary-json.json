@@ -1,0 +1,41 @@
+{
+  "dataset": "CALCE Storage 25 C frozen-join adapter",
+  "input_dir": "[local path redacted]",
+  "join_keys": [
+    "pln_id",
+    "temperature_c",
+    "storage_period",
+    "soc_percent"
+  ],
+  "candidate_rows": 24,
+  "ready_rows": 24,
+  "blocked_rows": 0,
+  "candidate_pln_ids": [
+    "PLN45",
+    "PLN46",
+    "PLN47",
+    "PLN48",
+    "PLN51",
+    "PLN52",
+    "PLN53",
+    "PLN54",
+    "PLN59",
+    "PLN63",
+    "PLN64",
+    "PLN65",
+    "PLN67",
+    "PLN68",
+    "PLN69",
+    "PLN70",
+    "PLN71",
+    "PLN72",
+    "PLN73",
+    "PLN74",
+    "PLN75",
+    "PLN76",
+    "PLN77",
+    "PLN78"
+  ],
+  "claim_boundary": "adapter_qualification_only_not_external_validation",
+  "dataset_priority": "CALCE first; RADAR4KIT second only with corrected EIS addendum; NASA later robustness check"
+}

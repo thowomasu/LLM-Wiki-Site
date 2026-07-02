@@ -1,0 +1,23 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperature_c": 10,
+  "protocols": [
+    "HPPC_1C",
+    "HPPC_C3"
+  ],
+  "cells_attempted": 11,
+  "time_lambda": 0.001,
+  "baseline_mode": "time_charge",
+  "include_pre_s": 120.0,
+  "include_post_s": 1200.0,
+  "eis_fmin_hz": 0.03,
+  "eis_fmax_hz": 50.0,
+  "eis_lambda": 3.0,
+  "row_count": 82,
+  "quality_pass_rows": 82,
+  "error_count": 0,
+  "median_corr_quality": 0.9281845691435505,
+  "median_abs_ocv_delta_v_quality": 0.003476104583740147,
+  "median_time_rmse_mv_quality": 5.388854059089618,
+  "verdict": "final_10c_all_rows_pass"
+}

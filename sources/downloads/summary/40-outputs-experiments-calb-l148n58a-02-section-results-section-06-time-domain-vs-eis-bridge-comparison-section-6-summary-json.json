@@ -1,0 +1,18 @@
+{
+  "pre_rest_voltage_v": 4.075706,
+  "nearest_eis_record_index": 0,
+  "nearest_eis_ocv_value": 3.959110736846924,
+  "ocv_delta_v": 0.11659526315307644,
+  "comparison": {
+    "overlap_tau_min_s": 0.20019999999931318,
+    "overlap_tau_max_s": 47.741232974834425,
+    "overlap_points": 49,
+    "overlap_corr_gamma": -0.06347473208491614,
+    "overlap_rmse_gamma": 0.00035849076158705394,
+    "overlap_time_gamma_area": 0.00011527224899930599,
+    "overlap_eis_gamma_area": 0.00041158716038815625,
+    "best_scale_time_to_eis": 0.020217989693639363,
+    "scaled_rmse": 0.0003468228449093935,
+    "normalized_scaled_rmse": 0.9999854340866104
+  }
+}

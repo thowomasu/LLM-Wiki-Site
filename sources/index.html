@@ -238,15 +238,33 @@ code {
 }
 .grid.two { grid-template-columns: 1fr; }
 .card {
-  padding: 18px;
+  display: grid;
+  grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
+  gap: 12px 24px;
+  align-items: start;
+  padding: 16px 18px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-left: 5px solid var(--blue);
+  border-radius: 6px;
   background: var(--panel);
+}
+.card h3 {
+  margin-top: 0;
+}
+.card p,
+.card ul,
+.card ol,
+.card .label,
+.card .metric {
+  grid-column: 2;
+}
+.card h3:first-child {
+  grid-column: 1;
 }
 .metric {
   display: block;
   margin: 8px 0;
-  font-size: clamp(30px, 5vw, 54px);
+  font-size: clamp(24px, 3vw, 38px);
   line-height: 1;
   font-weight: 800;
 }
@@ -544,10 +562,7 @@ footer {
       </table>
     </div>
     <h2>Literature And Public References</h2>
-    <div class="source-list"><div class="source-item"><span class="source-kind">paper</span><strong><a href="https://www.sciencedirect.com/science/article/pii/S2352340925000332">Fasolato et al., Data in Brief 58, 111301, 2025</a></strong><div><code>https: / / www.sciencedirect.com / science / article / pii / S2352340925000332</code></div><div>Corresponding CALB L148N58A data article.</div></div>
-<div class="source-item"><span class="source-kind">dataset</span><strong><a href="https://data.mendeley.com/datasets/ycx459r5c3/2">Mendeley Data CALB L148N58A repository, version 2</a></strong><div><code>https: / / data.mendeley.com / datasets / ycx459r5c3 / 2</code></div><div>Official downloadable source dataset, DOI 10.17632/ycx459r5c3.2.</div></div>
-<div class="source-item"><span class="source-kind">paper</span><strong><a href="https://www.mdpi.com/2313-0105/7/3/52">Combining the Distribution of Relaxation Times from EIS and Time Domain Data</a></strong><div><code>https: / / www.mdpi.com / 2313 0105 / 7 / 3 / 52</code></div><div>Conceptual reference for combining EIS and time-domain DRT evidence.</div></div>
-<div class="source-item"><span class="source-kind">doi</span><strong><a href="https://doi.org/10.3390/batteries7030052">Wildfeuer, Gieler, and Karger, Batteries 2021, 7(3), 52</a></strong><div><code>https: / / doi.org / 10.3390 / batteries7030052</code></div><div>DOI for the combined EIS/TDM DRT paper.</div></div></div>
+    <div class="table-wrap"><table class="briefing-table"><thead><tr><th>Type</th><th>Source</th><th>Public label or URL</th><th>Open / download</th></tr></thead><tbody><tr><td><span class="source-kind">paper</span></td><td><strong class="catalog-title">Fasolato et al., Data in Brief 58, 111301, 2025</strong><div class="catalog-detail">Corresponding CALB L148N58A data article.</div></td><td><span class="catalog-detail">https: / / www.sciencedirect.com / science / article / pii / S2352340925000332</span></td><td class="open-cell"><a class="button" href="https://www.sciencedirect.com/science/article/pii/S2352340925000332">Open</a></td></tr><tr><td><span class="source-kind">dataset</span></td><td><strong class="catalog-title">Mendeley Data CALB L148N58A repository, version 2</strong><div class="catalog-detail">Official downloadable source dataset, DOI 10.17632/ycx459r5c3.2.</div></td><td><span class="catalog-detail">https: / / data.mendeley.com / datasets / ycx459r5c3 / 2</span></td><td class="open-cell"><a class="button" href="https://data.mendeley.com/datasets/ycx459r5c3/2">Open</a></td></tr><tr><td><span class="source-kind">paper</span></td><td><strong class="catalog-title">Combining the Distribution of Relaxation Times from EIS and Time Domain Data</strong><div class="catalog-detail">Conceptual reference for combining EIS and time-domain DRT evidence.</div></td><td><span class="catalog-detail">https: / / www.mdpi.com / 2313 0105 / 7 / 3 / 52</span></td><td class="open-cell"><a class="button" href="https://www.mdpi.com/2313-0105/7/3/52">Open</a></td></tr><tr><td><span class="source-kind">doi</span></td><td><strong class="catalog-title">Wildfeuer, Gieler, and Karger, Batteries 2021, 7(3), 52</strong><div class="catalog-detail">DOI for the combined EIS/TDM DRT paper.</div></td><td><span class="catalog-detail">https: / / doi.org / 10.3390 / batteries7030052</span></td><td class="open-cell"><a class="button" href="https://doi.org/10.3390/batteries7030052">Open</a></td></tr></tbody></table></div>
 
       </main>
       <footer>

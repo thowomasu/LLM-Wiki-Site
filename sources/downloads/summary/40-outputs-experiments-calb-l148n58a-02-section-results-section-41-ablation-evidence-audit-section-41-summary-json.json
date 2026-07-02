@@ -1,0 +1,7 @@
+{
+  "section": 41,
+  "ablation_count": 12,
+  "positive_internal_components": 5,
+  "negative_or_limit_components": 4,
+  "verdict": "local_ablation_evidence_consolidated_not_external_validation"
+}

@@ -1,0 +1,27 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "hppc_protocols": [
+    "HPPC_1C",
+    "HPPC_C3"
+  ],
+  "cells_attempted_per_temperature_protocol": 11,
+  "rows": 246,
+  "quality_pass_rows": 203,
+  "error_count": 0,
+  "lambda_value": 0.001,
+  "median_default_corr_quality": -0.048314053447822185,
+  "median_constrained_corr_quality": 0.8924652435154302,
+  "median_constrained_minus_default_corr_quality": 0.6965678707428696,
+  "constrained_better_rows_quality": 200,
+  "protocol_median_constrained_corr_quality": {
+    "HPPC_1C": 0.8956430786264292,
+    "HPPC_C3": 0.8889282185609136
+  },
+  "viability_rule": "all requested HPPC protocol median constrained correlations >= 0.75 on quality-pass rows",
+  "viability_label": "pulse_bridge_viable"
+}

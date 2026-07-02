@@ -1,0 +1,18 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "cells_attempted_per_temperature": 11,
+  "rows": 123,
+  "quality_pass_rows": 99,
+  "error_count": 0,
+  "lambda_value": 0.001,
+  "median_default_corr_quality": -0.0485998081564577,
+  "median_constrained_corr_quality": 0.8956430786264292,
+  "median_constrained_minus_default_corr_quality": 0.6464111745046026,
+  "constrained_better_rows_quality": 97,
+  "verdict": "tau_constrained_fit_complete"
+}

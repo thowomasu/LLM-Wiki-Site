@@ -1,0 +1,46 @@
+{
+  "matched_pairs": [
+    {
+      "eis_record_index": 0,
+      "eis_ocv_value": 3.959110736846924,
+      "time_candidate_id": 9,
+      "time_pre_rest_voltage_v": 3.954346,
+      "ocv_delta_v": -0.0047647368469236895,
+      "overlap_points": 49,
+      "overlap_corr_gamma": -0.04623883315115348,
+      "overlap_rmse_gamma": 0.0003748597914666574,
+      "overlap_time_gamma_area": 0.0001214074730233435,
+      "overlap_eis_gamma_area": 0.00041158463661438783,
+      "normalized_scaled_rmse": 1.0
+    },
+    {
+      "eis_record_index": 1,
+      "eis_ocv_value": 3.722273349761963,
+      "time_candidate_id": 15,
+      "time_pre_rest_voltage_v": 3.714797,
+      "ocv_delta_v": -0.007476349761962986,
+      "overlap_points": 49,
+      "overlap_corr_gamma": -0.033011703737114914,
+      "overlap_rmse_gamma": 0.00031426277422894386,
+      "overlap_time_gamma_area": 0.00011071563187346462,
+      "overlap_eis_gamma_area": 0.00028558899564340293,
+      "normalized_scaled_rmse": 0.9999274783157496
+    },
+    {
+      "eis_record_index": 2,
+      "eis_ocv_value": 3.630812168121338,
+      "time_candidate_id": 21,
+      "time_pre_rest_voltage_v": 3.6274045,
+      "ocv_delta_v": -0.00340766812133797,
+      "overlap_points": 49,
+      "overlap_corr_gamma": 0.917565072889239,
+      "overlap_rmse_gamma": 0.00017806670641017482,
+      "overlap_time_gamma_area": 5.842347062215256e-05,
+      "overlap_eis_gamma_area": 0.00024406187804573134,
+      "normalized_scaled_rmse": 0.3920286931701804
+    }
+  ],
+  "median_overlap_corr_gamma": -0.033011703737114914,
+  "max_abs_ocv_delta_v": 0.007476349761962986,
+  "verdict": "same_dataset_2d_comparison_runs_not_validated"
+}

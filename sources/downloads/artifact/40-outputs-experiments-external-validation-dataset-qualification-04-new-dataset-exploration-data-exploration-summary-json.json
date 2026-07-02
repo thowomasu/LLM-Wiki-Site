@@ -1,0 +1,62 @@
+{
+  "output_dir": "[local path redacted]",
+  "datasets": {
+    "panasonic": {
+      "archive": "[local path redacted]",
+      "files_total": 259,
+      "eis_files_parsed": 58,
+      "pulse_mat_files": 14,
+      "long_candidate_files": 8,
+      "matched_long_ids": [
+        "3541",
+        "3623",
+        "3740"
+      ]
+    },
+    "samsung": {
+      "folder": "[local path redacted]",
+      "archive_count": 19,
+      "compressed_total_gb": 14.003701996058226,
+      "sample_archive": "Batch1.7z",
+      "sample_inner_file": "Batch1\\Report_Samsung_INR21700-50E_Zelltester_MCU1_2024-01-09_14.04.12.csv",
+      "sample_rows_read": 120000,
+      "has_eis_locally_observed": false
+    },
+    "graphite_lnmo": {
+      "archive": "[local path redacted]",
+      "files_total": 65,
+      "full_cell_eis_files": 22,
+      "bdf_csv_files": 8,
+      "candidate_summaries": [
+        {
+          "file": "hydra0__graphite_lnmo_1ah__qocv.bdf.csv",
+          "rows": 386001,
+          "duration_s": 393049.1141168,
+          "accepted": 0,
+          "long_candidates": 0,
+          "max_pulse_s": 0.0
+        },
+        {
+          "file": "hydra0__graphite_lnmo_1ah__rate.bdf.csv",
+          "rows": 170726,
+          "duration_s": 180813.5736848,
+          "accepted": 6,
+          "long_candidates": 1,
+          "max_pulse_s": 18433.8928
+        }
+      ]
+    }
+  },
+  "plots": [
+    "panasonic_eis_nyquist_by_temperature.png",
+    "panasonic_eis_voltage_coverage.png",
+    "panasonic_pulse_candidate_map.png",
+    "panasonic_matched_long_discharge_examples.png",
+    "samsung_archive_inventory.png",
+    "samsung_sample_timeseries.png",
+    "graphite_lnmo_eis_nyquist_by_soc.png",
+    "graphite_lnmo_full_cell_protocol_traces.png",
+    "graphite_lnmo_window_candidate_counts.png",
+    "combined_dataset_readiness_overview.png"
+  ]
+}

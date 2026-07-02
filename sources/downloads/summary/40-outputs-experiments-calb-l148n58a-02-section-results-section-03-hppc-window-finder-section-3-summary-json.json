@@ -1,0 +1,41 @@
+{
+  "rows_loaded_after_cleaning": 172269,
+  "time_start_s": 0.0,
+  "time_stop_s": 44762.7107,
+  "duration_s": 44762.7107,
+  "median_dt_s": 0.10009999999965657,
+  "rest_current_threshold_a": 0.8700518999999999,
+  "step_current_threshold_a": 2.900173,
+  "current_min_a": -58.00464,
+  "current_max_a": 37.70427,
+  "voltage_min_v": 2.499992,
+  "voltage_max_v": 4.25577,
+  "candidate_count": 27,
+  "accepted_count": 27,
+  "selected_candidate": {
+    "candidate_id": 6,
+    "accepted": true,
+    "start_idx": 31612,
+    "end_idx": 35212,
+    "start_time_s": 6400.512999999999,
+    "end_time_s": 6760.413799999998,
+    "pulse_duration_s": 359.90079999999944,
+    "pre_rest_s": 600.0479000000014,
+    "post_rest_s": 3599.0044000000016,
+    "median_current_a": -57.99932,
+    "current_step_a": -57.99957,
+    "max_abs_step_a": 57.99996,
+    "voltage_span_v": 0.1894269999999998,
+    "temperature_drift_c": null,
+    "median_dt_s": 0.10009999999965657,
+    "tau_min_s": 0.20019999999931315,
+    "tau_max_s": 1319.635066666667,
+    "excitation_score": 1804.3672208320384
+  },
+  "columns": {
+    "time_s": "time_s",
+    "current_a": "current_a",
+    "voltage_v": "voltage_v",
+    "temperature_c": null
+  }
+}

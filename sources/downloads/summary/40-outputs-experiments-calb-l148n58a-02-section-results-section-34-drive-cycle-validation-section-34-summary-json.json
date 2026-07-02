@@ -1,0 +1,33 @@
+{
+  "section": 34,
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "cells_attempted": 11,
+  "drive_protocols": [
+    "DV_UDDS",
+    "DV_US06",
+    "DV_WLTP"
+  ],
+  "hppc_protocols": [
+    "HPPC_1C",
+    "HPPC_C3"
+  ],
+  "calibration_fraction": 0.2,
+  "min_calibration_s": 300.0,
+  "max_calibration_fraction": 0.5,
+  "max_points": 0,
+  "row_count": 198,
+  "error_count": 0,
+  "drt_win_fraction_vs_baseline": 1.0,
+  "drt_win_rows_vs_baseline": 198,
+  "median_drt_holdout_rmse_mv": 150.9172295922953,
+  "median_baseline_holdout_rmse_mv": 164.95303653565315,
+  "median_flat_holdout_rmse_mv": 311.3895187643536,
+  "median_drt_improvement_vs_baseline_mv": 16.830790799673707,
+  "mean_drt_improvement_vs_baseline_fraction": 0.11265158260834794,
+  "median_abs_drive_to_eis_delta_v": 0.05646359671020518,
+  "verdict": "drive_cycle_transfer_supports_hppc_drt"
+}

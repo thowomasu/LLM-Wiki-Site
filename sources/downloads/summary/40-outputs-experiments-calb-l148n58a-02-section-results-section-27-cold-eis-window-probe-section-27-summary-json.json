@@ -1,0 +1,42 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperature_c": 10,
+  "hppc_protocols": [
+    "HPPC_1C",
+    "HPPC_C3"
+  ],
+  "cells_attempted_per_protocol": 11,
+  "fmins_hz": [
+    null,
+    0.03,
+    0.1
+  ],
+  "fmaxes_hz": [
+    50.0,
+    100.0,
+    null
+  ],
+  "eis_lambdas": [
+    0.1,
+    3.0,
+    30.0
+  ],
+  "time_lambda": 0.001,
+  "row_count": 2214,
+  "error_count": 0,
+  "best_variant_summary": {
+    "variant": "ge_0p03hz_le_50hz_lam_3",
+    "fmin_hz": 0.03,
+    "fmax_hz": 50.0,
+    "eis_lambda": 3.0,
+    "rows": 82,
+    "quality_pass_rows": 56,
+    "quality_pass_fraction": 0.6829268292682927,
+    "median_corr_quality": 0.928248017443013,
+    "corr_ge_0p75_rows_quality": 56,
+    "corr_ge_0p75_fraction_quality": 1.0,
+    "median_scaled_rmse_quality": 0.3725551306121031,
+    "median_time_rmse_mv_quality": 6.077196430384479
+  },
+  "verdict": "cold_eis_window_high_corr_but_insufficient_coverage"
+}

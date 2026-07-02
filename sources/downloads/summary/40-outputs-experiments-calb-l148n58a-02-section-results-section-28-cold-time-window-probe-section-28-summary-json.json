@@ -1,0 +1,41 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperature_c": 10,
+  "hppc_protocols": [
+    "HPPC_1C",
+    "HPPC_C3"
+  ],
+  "cells_attempted_per_protocol": 11,
+  "baseline_modes": [
+    "charge",
+    "time_charge"
+  ],
+  "include_posts_s": [
+    1200.0,
+    2400.0
+  ],
+  "include_pres_s": [
+    120.0
+  ],
+  "time_lambda": 0.001,
+  "eis_fmin_hz": 0.03,
+  "eis_fmax_hz": 50.0,
+  "eis_lambda": 3.0,
+  "row_count": 328,
+  "error_count": 0,
+  "best_variant_summary": {
+    "variant": "time_charge_pre_120_post_1200",
+    "baseline_mode": "time_charge",
+    "include_pre_s": 120.0,
+    "include_post_s": 1200.0,
+    "rows": 82,
+    "quality_pass_rows": 66,
+    "quality_pass_fraction": 0.8048780487804879,
+    "median_corr_quality": 0.9282648777010276,
+    "corr_ge_0p75_rows_quality": 66,
+    "corr_ge_0p75_fraction_quality": 1.0,
+    "median_scaled_rmse_quality": 0.372018885032928,
+    "median_time_rmse_mv_quality": 5.68612625058436
+  },
+  "verdict": "cold_time_window_candidate_fix"
+}

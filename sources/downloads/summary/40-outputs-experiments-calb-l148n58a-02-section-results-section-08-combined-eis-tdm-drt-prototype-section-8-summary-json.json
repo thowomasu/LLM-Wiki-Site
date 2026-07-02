@@ -1,0 +1,15 @@
+{
+  "status": "prototype_runs_not_validated",
+  "lambda_value": 0.1,
+  "r0_ohm": 0.0,
+  "r_inf_ohm": 0.0009872013205477282,
+  "time_rmse_v": 0.004085094188617694,
+  "time_rmse_mv": 4.085094188617695,
+  "eis_real_rmse_ohm": 8.767202701509276e-05,
+  "eis_img_rmse_ohm": 0.00011980834674375109,
+  "baseline_coefficients": {
+    "offset_v": 4.077839064537797,
+    "drift_v_per_as": 5.771845516254282e-06
+  },
+  "claim_boundary": "Combined objective is implemented as a rough prototype. It has not been validated."
+}

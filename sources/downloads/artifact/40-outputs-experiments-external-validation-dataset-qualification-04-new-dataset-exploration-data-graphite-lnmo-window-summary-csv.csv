@@ -1,0 +1,3 @@
+file,rows,duration_s,accepted,long_candidates,max_pulse_s
+hydra0__graphite_lnmo_1ah__qocv.bdf.csv,386001,393049.1141168,0,0,0.0
+hydra0__graphite_lnmo_1ah__rate.bdf.csv,170726,180813.5736848,6,1,18433.8928

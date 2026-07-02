@@ -1,0 +1,38 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperature_c": 10,
+  "hppc_protocols": [
+    "HPPC_1C",
+    "HPPC_C3"
+  ],
+  "cells_attempted_per_protocol": 11,
+  "baseline_modes": [
+    "offset",
+    "time",
+    "charge",
+    "time_charge"
+  ],
+  "current_signs": [
+    1,
+    -1
+  ],
+  "time_lambda": 0.001,
+  "eis_lambda": 0.1,
+  "row_count": 656,
+  "error_count": 0,
+  "best_variant_summary": {
+    "variant": "time|sign_+1",
+    "baseline_mode": "time",
+    "current_sign": 1,
+    "rows": 82,
+    "quality_pass_rows": 4,
+    "median_corr_quality": 0.9177546505204854,
+    "corr_ge_0p75_rows_quality": 4,
+    "positive_rows_quality": 4,
+    "median_scaled_rmse_quality": 0.3975818864770942,
+    "median_time_rmse_mv_quality": 9.765979694561757,
+    "median_r0_ohm_quality": 0.0017839619738805586
+  },
+  "best_variant_quality_pass_fraction": 0.04878048780487805,
+  "verdict": "baseline_or_sign_changes_tiny_subset_not_validation"
+}

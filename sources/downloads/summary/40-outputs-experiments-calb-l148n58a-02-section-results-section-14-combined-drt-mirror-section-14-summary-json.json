@@ -1,0 +1,20 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "cells_attempted_per_temperature": 11,
+  "comparison_rows": 123,
+  "quality_pass_rows": 71,
+  "error_count": 0,
+  "separate_lambda": 0.001,
+  "combined_lambda": 0.1,
+  "median_quality_pass_separate_corr": -0.04774406026887051,
+  "median_quality_pass_combined_corr": -0.01587805529887068,
+  "median_quality_pass_combined_minus_separate_corr": 0.02948255678110624,
+  "median_quality_pass_combined_time_rmse_mv": 2.9136056197942644,
+  "quality_rule": "separate_time_rmse_mv <= 10, combined_time_rmse_mv <= 10, abs(ocv_delta_v) <= 0.02, combined EIS RMSE components <= 0.0002 ohm",
+  "method_boundary": "Paper-aligned combined inverse problem, still not a validated ECM parameterization."
+}

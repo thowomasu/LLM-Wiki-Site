@@ -1,0 +1,43 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperature_c": 10,
+  "hppc_protocols": [
+    "HPPC_1C",
+    "HPPC_C3"
+  ],
+  "cells_attempted_per_protocol": 11,
+  "eis_lambdas": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    3.0,
+    10.0,
+    30.0
+  ],
+  "time_lambdas": [
+    1e-05,
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "eis_lambda_rows": 656,
+  "time_lambda_rows": 492,
+  "error_count": 0,
+  "best_eis_lambda_summary": {
+    "eis_lambda": 30.0,
+    "median_corr_quality": 0.39841347979707287,
+    "corr_ge_0p75_rows_quality": 0,
+    "median_scaled_rmse_quality": 0.9052378439001971
+  },
+  "best_time_lambda_summary": {
+    "time_lambda": 1e-05,
+    "median_corr_quality": -0.024996621276100403,
+    "corr_ge_0p75_rows_quality": 26,
+    "median_scaled_rmse_quality": 0.9999992553806383
+  },
+  "verdict": "regularization_not_clean_fix"
+}

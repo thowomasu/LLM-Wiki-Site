@@ -1,0 +1,46 @@
+# CALB L148N58A Section Report Index
+
+Read these after the root README.
+
+- first-slice protocol inventory: `02_Section_Results/Section_01_Data_Audit/section_1_data_audit_report.md`
+- file and protocol screen: `02_Section_Results/Section_02_File_Protocol_Screen/section_2_file_protocol_screen_report.md`
+- HPPC window finder: `02_Section_Results/Section_03_HPPC_Window_Finder/section_3_hppc_window_finder_report.md`
+- HPPC candidate fit: `02_Section_Results/Section_04_HPPC_Candidate_Fit/section_4_hppc_candidate_fit_report.md`
+- EIS DRT baseline: `02_Section_Results/Section_05_EIS_DRT_Baseline/section_5_eis_drt_baseline_report.md`
+- time-domain versus EIS bridge comparison: `02_Section_Results/Section_06_Time_Domain_vs_EIS_Bridge_Comparison/section_6_bridge_comparison_report.md`
+- lambda sensitivity check: `02_Section_Results/Section_07_Model_Lambda_Sensitivity/section_7_lambda_sensitivity_report.md`
+- combined EIS and time-domain DRT prototype: `02_Section_Results/Section_08_Combined_EIS_TDM_DRT_Prototype/section_8_combined_eis_tdm_prototype_report.md`
+- time-series 2D DRT surface: `02_Section_Results/Section_09_Time_Series_2D_DRT_Surface/section_9_time_series_2d_drt_surface_report.md`
+- EIS 2D DRT surface: `02_Section_Results/Section_10_EIS_2D_DRT_Surface/section_10_eis_2d_drt_surface_report.md`
+- time-series versus EIS 2D comparison: `02_Section_Results/Section_11_Time_Series_vs_EIS_2D_Comparison/section_11_time_series_vs_eis_2d_comparison_report.md`
+- multi-cell 2D batch check: `02_Section_Results/Section_12_Multi_Cell_2D_Batch/section_12_multicell_2d_batch_report.md`
+- multi-temperature 2D batch check: `02_Section_Results/Section_13_Multi_Temperature_2D_Batch/section_13_multitemp_2d_batch_report.md`
+- combined DRT mirror check: `02_Section_Results/Section_14_Combined_DRT_Mirror/section_14_combined_drt_mirror_report.md`
+- failure-mode audit: `02_Section_Results/Section_15_Failure_Mode_Audit/section_15_failure_mode_audit_report.md`
+- weighting probe: `02_Section_Results/Section_16_Weighting_Probe/section_16_weighting_probe_report.md`
+- candidate-alignment probe: `02_Section_Results/Section_17_Candidate_Alignment_Probe/section_17_candidate_alignment_probe_report.md`
+- EIS robustness audit: `02_Section_Results/Section_18_EIS_Robustness_Audit/section_18_eis_robustness_audit_report.md`
+- EIS target variant bridge: `02_Section_Results/Section_19_EIS_Target_Variant_Bridge/section_19_eis_target_variant_bridge_report.md`
+- tau-coverage audit: `02_Section_Results/Section_20_Tau_Coverage_Audit/section_20_tau_coverage_audit_report.md`
+- tau-constrained pulse-to-EIS fit: `02_Section_Results/Section_21_Tau_Constrained_Fit/section_21_tau_constrained_fit_report.md`
+- tau-constrained combined fit: `02_Section_Results/Section_22_Tau_Constrained_Combined/section_22_tau_constrained_combined_report.md`
+- protocol replication check: `02_Section_Results/Section_23_Protocol_Replication/section_23_protocol_replication_report.md`
+- cold-temperature diagnosis: `02_Section_Results/Section_24_Cold_Temperature_Diagnosis/section_24_cold_temperature_diagnosis_report.md`
+- cold regularization probe: `02_Section_Results/Section_25_Cold_Regularization_Probe/section_25_cold_regularization_probe_report.md`
+- cold baseline-sign probe: `02_Section_Results/Section_26_Cold_Baseline_Sign_Probe/section_26_cold_baseline_sign_probe_report.md`
+- cold EIS-window probe: `02_Section_Results/Section_27_Cold_EIS_Window_Probe/section_27_cold_eis_window_probe_report.md`
+- cold time-window probe: `02_Section_Results/Section_28_Cold_Time_Window_Probe/section_28_cold_time_window_probe_report.md`
+- record-3 protocol search: `02_Section_Results/Section_29_Record3_Protocol_Search/section_29_record3_protocol_search_report.md`
+- final 10 C rule: `02_Section_Results/Section_30_Final_10C_Pipeline/section_30_final_10c_pipeline_report.md`
+- multi-temperature rule: `02_Section_Results/Section_31_Final_Rule_MultiTemp/section_31_final_rule_multitemp_report.md`
+- outlier probe: `02_Section_Results/Section_32_Final_Rule_Outlier_Probe/section_32_final_rule_outlier_probe_report.md`
+- frozen pulse-to-EIS rule: `02_Section_Results/Section_33_Final_Rule_Adaptive_MultiTemp/section_33_adaptive_final_rule_multitemp_report.md`
+- drive-cycle transfer test: `02_Section_Results/Section_34_Drive_Cycle_Validation/section_34_drive_cycle_validation_report.md`
+- regression checks: `02_Section_Results/Section_35_Regression_Checks/section_35_regression_checks_report.md`
+- drive-cycle ECM baseline check: `02_Section_Results/Section_36_Drive_Cycle_ECM_Baseline/section_36_drive_cycle_ecm_baseline_report.md`
+- SOC alignment audit: `02_Section_Results/Section_37_SOC_Alignment_Audit/section_37_soc_alignment_audit_report.md`
+- analysis step 38: `02_Section_Results/Section_38_Uncertainty_Audit/section_38_uncertainty_audit_report.md`
+- external-validation claim boundary: `02_Section_Results/Section_39_External_Replication_Readiness/section_39_external_replication_readiness_report.md`
+- leakage and claim audit: `02_Section_Results/Section_40_Leakage_And_Claim_Audit/section_40_leakage_and_claim_audit_report.md`
+- analysis step 41: `02_Section_Results/Section_41_Ablation_Evidence_Audit/section_41_ablation_evidence_audit_report.md`
+- SOC-stratified drive-cycle audit: `02_Section_Results/Section_42_SOC_Stratified_Drive_Cycle_Audit/section_42_soc_stratified_drive_cycle_audit_report.md`

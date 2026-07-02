@@ -1,0 +1,566 @@
+{
+  "fits": [
+    {
+      "candidate_id": 3,
+      "pre_rest_voltage_v": 4.197943,
+      "fit_rows": 6000,
+      "lambda_value": 0.001,
+      "baseline_mode": "charge",
+      "rmse_v": 0.0003362277459995312,
+      "rmse_mv": 0.3362277459995312,
+      "r0_ohm": 0.0011398492485278817,
+      "tau_min_s": 0.20019999999931318,
+      "tau_max_s": 559.6257333333332,
+      "top_recovered_peaks": [
+        {
+          "tau_s": 27.370459019085988,
+          "gamma_ohm": 0.0003325207944074184
+        },
+        {
+          "tau_s": 30.607185750519793,
+          "gamma_ohm": 0.0002864001867968775
+        },
+        {
+          "tau_s": 204.65662659948657,
+          "gamma_ohm": 0.0001959725883682137
+        },
+        {
+          "tau_s": 4.577422364144307,
+          "gamma_ohm": 0.00013425222855995171
+        },
+        {
+          "tau_s": 0.765525908248657,
+          "gamma_ohm": 4.627776592683364e-05
+        },
+        {
+          "tau_s": 0.20019999999931318,
+          "gamma_ohm": 1.2779986484086783e-05
+        }
+      ],
+      "broad_band_summary": [
+        {
+          "band": "fast_band_4_to_16_s",
+          "tau_start_s": 4.0,
+          "tau_stop_s": 16.0,
+          "gamma_sum_ohm": 0.00013425222855995171
+        },
+        {
+          "band": "mid_band_25_to_90_s",
+          "tau_start_s": 25.0,
+          "tau_stop_s": 90.0,
+          "gamma_sum_ohm": 0.000618920981204296
+        },
+        {
+          "band": "slow_band_90_to_450_s",
+          "tau_start_s": 90.0,
+          "tau_stop_s": 450.0,
+          "gamma_sum_ohm": 0.00019734767147111526
+        }
+      ],
+      "matched_to_eis_surface": false,
+      "quality_pass": true,
+      "quality_flags": ""
+    },
+    {
+      "candidate_id": 6,
+      "pre_rest_voltage_v": 4.075706,
+      "fit_rows": 6000,
+      "lambda_value": 0.001,
+      "baseline_mode": "charge",
+      "rmse_v": 0.0016060101557984316,
+      "rmse_mv": 1.6060101557984316,
+      "r0_ohm": 0.0011236705609684763,
+      "tau_min_s": 0.20019999999931318,
+      "tau_max_s": 559.6260999999998,
+      "top_recovered_peaks": [
+        {
+          "tau_s": 559.6260999999998,
+          "gamma_ohm": 0.0005148132340912911
+        },
+        {
+          "tau_s": 30.607198460687094,
+          "gamma_ohm": 0.0005026310213440038
+        },
+        {
+          "tau_s": 27.370470132566965,
+          "gamma_ohm": 0.00038749461032804716
+        },
+        {
+          "tau_s": 2.09330178030111,
+          "gamma_ohm": 0.00012921433624243732
+        },
+        {
+          "tau_s": 0.20019999999931318,
+          "gamma_ohm": 2.3979226225744946e-05
+        },
+        {
+          "tau_s": 500.445327432659,
+          "gamma_ohm": 0.0
+        }
+      ],
+      "broad_band_summary": [
+        {
+          "band": "fast_band_4_to_16_s",
+          "tau_start_s": 4.0,
+          "tau_stop_s": 16.0,
+          "gamma_sum_ohm": 0.0
+        },
+        {
+          "band": "mid_band_25_to_90_s",
+          "tau_start_s": 25.0,
+          "tau_stop_s": 90.0,
+          "gamma_sum_ohm": 0.000890125631672051
+        },
+        {
+          "band": "slow_band_90_to_450_s",
+          "tau_start_s": 90.0,
+          "tau_stop_s": 450.0,
+          "gamma_sum_ohm": 0.0
+        }
+      ],
+      "matched_to_eis_surface": false,
+      "quality_pass": true,
+      "quality_flags": ""
+    },
+    {
+      "candidate_id": 9,
+      "pre_rest_voltage_v": 3.954346,
+      "fit_rows": 6000,
+      "lambda_value": 0.001,
+      "baseline_mode": "charge",
+      "rmse_v": 0.0026933440195305094,
+      "rmse_mv": 2.6933440195305094,
+      "r0_ohm": 0.0011163076074474738,
+      "tau_min_s": 0.2002000000029511,
+      "tau_max_s": 559.6256666666666,
+      "top_recovered_peaks": [
+        {
+          "tau_s": 24.476016154454882,
+          "gamma_ohm": 0.0009934391675825221
+        },
+        {
+          "tau_s": 559.6256666666666,
+          "gamma_ohm": 0.00041234184726987876
+        },
+        {
+          "tau_s": 0.6121773392458424,
+          "gamma_ohm": 5.735878744720757e-05
+        },
+        {
+          "tau_s": 0.6845711096787984,
+          "gamma_ohm": 3.542298358729349e-05
+        },
+        {
+          "tau_s": 357.87581844522236,
+          "gamma_ohm": 0.0
+        },
+        {
+          "tau_s": 500.4449453825539,
+          "gamma_ohm": 0.0
+        }
+      ],
+      "broad_band_summary": [
+        {
+          "band": "fast_band_4_to_16_s",
+          "tau_start_s": 4.0,
+          "tau_stop_s": 16.0,
+          "gamma_sum_ohm": 0.0
+        },
+        {
+          "band": "mid_band_25_to_90_s",
+          "tau_start_s": 25.0,
+          "tau_stop_s": 90.0,
+          "gamma_sum_ohm": 0.0
+        },
+        {
+          "band": "slow_band_90_to_450_s",
+          "tau_start_s": 90.0,
+          "tau_stop_s": 450.0,
+          "gamma_sum_ohm": 0.0
+        }
+      ],
+      "matched_to_eis_surface": true,
+      "quality_pass": true,
+      "quality_flags": ""
+    },
+    {
+      "candidate_id": 12,
+      "pre_rest_voltage_v": 3.8362315000000002,
+      "fit_rows": 6000,
+      "lambda_value": 0.001,
+      "baseline_mode": "charge",
+      "rmse_v": 0.003389552286627327,
+      "rmse_mv": 3.389552286627327,
+      "r0_ohm": 0.001122813005878391,
+      "tau_min_s": 0.2002000000065891,
+      "tau_max_s": 559.6259000000017,
+      "top_recovered_peaks": [
+        {
+          "tau_s": 24.476022335220733,
+          "gamma_ohm": 0.0005753315425590074
+        },
+        {
+          "tau_s": 21.887669416169647,
+          "gamma_ohm": 0.00048111803083557053
+        },
+        {
+          "tau_s": 0.48954727175146817,
+          "gamma_ohm": 7.816209017077155e-05
+        },
+        {
+          "tau_s": 559.6259000000017,
+          "gamma_ohm": 0.0
+        },
+        {
+          "tau_s": 357.8759592537954,
+          "gamma_ohm": 0.0
+        },
+        {
+          "tau_s": 500.44515110204014,
+          "gamma_ohm": 0.0
+        }
+      ],
+      "broad_band_summary": [
+        {
+          "band": "fast_band_4_to_16_s",
+          "tau_start_s": 4.0,
+          "tau_stop_s": 16.0,
+          "gamma_sum_ohm": 0.0
+        },
+        {
+          "band": "mid_band_25_to_90_s",
+          "tau_start_s": 25.0,
+          "tau_stop_s": 90.0,
+          "gamma_sum_ohm": 0.0
+        },
+        {
+          "band": "slow_band_90_to_450_s",
+          "tau_start_s": 90.0,
+          "tau_stop_s": 450.0,
+          "gamma_sum_ohm": 0.0
+        }
+      ],
+      "matched_to_eis_surface": false,
+      "quality_pass": true,
+      "quality_flags": ""
+    },
+    {
+      "candidate_id": 15,
+      "pre_rest_voltage_v": 3.714797,
+      "fit_rows": 6000,
+      "lambda_value": 0.001,
+      "baseline_mode": "charge",
+      "rmse_v": 0.0009004671681419924,
+      "rmse_mv": 0.9004671681419923,
+      "r0_ohm": 0.0011520908969815625,
+      "tau_min_s": 0.20019999999931318,
+      "tau_max_s": 559.6261666666677,
+      "top_recovered_peaks": [
+        {
+          "tau_s": 38.274212039304786,
+          "gamma_ohm": 0.0007891112128960827
+        },
+        {
+          "tau_s": 559.6261666666677,
+          "gamma_ohm": 0.00039350289446709826
+        },
+        {
+          "tau_s": 5.724054576752269,
+          "gamma_ohm": 9.444765978643882e-05
+        },
+        {
+          "tau_s": 6.400959642850836,
+          "gamma_ohm": 6.16047927276551e-05
+        },
+        {
+          "tau_s": 0.6121774162718221,
+          "gamma_ohm": 4.304530458996916e-05
+        },
+        {
+          "tau_s": 0.20019999999931318,
+          "gamma_ohm": 2.7120343496100632e-06
+        }
+      ],
+      "broad_band_summary": [
+        {
+          "band": "fast_band_4_to_16_s",
+          "tau_start_s": 4.0,
+          "tau_stop_s": 16.0,
+          "gamma_sum_ohm": 0.0001560524525140939
+        },
+        {
+          "band": "mid_band_25_to_90_s",
+          "tau_start_s": 25.0,
+          "tau_stop_s": 90.0,
+          "gamma_sum_ohm": 0.0007891112128960827
+        },
+        {
+          "band": "slow_band_90_to_450_s",
+          "tau_start_s": 90.0,
+          "tau_stop_s": 450.0,
+          "gamma_sum_ohm": 0.0
+        }
+      ],
+      "matched_to_eis_surface": true,
+      "quality_pass": true,
+      "quality_flags": ""
+    },
+    {
+      "candidate_id": 18,
+      "pre_rest_voltage_v": 3.6602265000000003,
+      "fit_rows": 6000,
+      "lambda_value": 0.001,
+      "baseline_mode": "charge",
+      "rmse_v": 0.0004441704453423639,
+      "rmse_mv": 0.44417044534236394,
+      "r0_ohm": 0.0011658248286496484,
+      "tau_min_s": 0.20019999999931318,
+      "tau_max_s": 559.6257333333332,
+      "top_recovered_peaks": [
+        {
+          "tau_s": 38.27419242061903,
+          "gamma_ohm": 0.0007069712880013803
+        },
+        {
+          "tau_s": 357.87585867577184,
+          "gamma_ohm": 0.0006335492369838068
+        },
+        {
+          "tau_s": 6.400957478774302,
+          "gamma_ohm": 0.00013082999564159375
+        },
+        {
+          "tau_s": 400.1969011362928,
+          "gamma_ohm": 9.38272185057226e-05
+        },
+        {
+          "tau_s": 34.226675515875385,
+          "gamma_ohm": 3.399135636736471e-05
+        },
+        {
+          "tau_s": 0.765525908248657,
+          "gamma_ohm": 2.5473977966202823e-05
+        }
+      ],
+      "broad_band_summary": [
+        {
+          "band": "fast_band_4_to_16_s",
+          "tau_start_s": 4.0,
+          "tau_stop_s": 16.0,
+          "gamma_sum_ohm": 0.0001317887569327376
+        },
+        {
+          "band": "mid_band_25_to_90_s",
+          "tau_start_s": 25.0,
+          "tau_stop_s": 90.0,
+          "gamma_sum_ohm": 0.000740962644368745
+        },
+        {
+          "band": "slow_band_90_to_450_s",
+          "tau_start_s": 90.0,
+          "tau_stop_s": 450.0,
+          "gamma_sum_ohm": 0.0007273764554895294
+        }
+      ],
+      "matched_to_eis_surface": false,
+      "quality_pass": true,
+      "quality_flags": ""
+    },
+    {
+      "candidate_id": 21,
+      "pre_rest_voltage_v": 3.6274045,
+      "fit_rows": 6000,
+      "lambda_value": 0.001,
+      "baseline_mode": "charge",
+      "rmse_v": 0.0004974157735020337,
+      "rmse_mv": 0.49741577350203364,
+      "r0_ohm": 0.0011766037474553335,
+      "tau_min_s": 0.20019999999931318,
+      "tau_max_s": 559.6255666666644,
+      "top_recovered_peaks": [
+        {
+          "tau_s": 42.80034471424748,
+          "gamma_ohm": 0.0006346745197318964
+        },
+        {
+          "tau_s": 357.8757580984796,
+          "gamma_ohm": 0.0005829190335770903
+        },
+        {
+          "tau_s": 47.861751037745314,
+          "gamma_ohm": 0.00014616288964474747
+        },
+        {
+          "tau_s": 8.004376694525515,
+          "gamma_ohm": 0.00010594683317841824
+        },
+        {
+          "tau_s": 7.157909485555672,
+          "gamma_ohm": 4.9065644775793594e-05
+        },
+        {
+          "tau_s": 0.9572877569821528,
+          "gamma_ohm": 4.4510883375586106e-05
+        }
+      ],
+      "broad_band_summary": [
+        {
+          "band": "fast_band_4_to_16_s",
+          "tau_start_s": 4.0,
+          "tau_stop_s": 16.0,
+          "gamma_sum_ohm": 0.00015501247795421185
+        },
+        {
+          "band": "mid_band_25_to_90_s",
+          "tau_start_s": 25.0,
+          "tau_stop_s": 90.0,
+          "gamma_sum_ohm": 0.0007808374093766438
+        },
+        {
+          "band": "slow_band_90_to_450_s",
+          "tau_start_s": 90.0,
+          "tau_stop_s": 450.0,
+          "gamma_sum_ohm": 0.0005829190335770903
+        }
+      ],
+      "matched_to_eis_surface": true,
+      "quality_pass": true,
+      "quality_flags": ""
+    },
+    {
+      "candidate_id": 24,
+      "pre_rest_voltage_v": 3.575111,
+      "fit_rows": 6000,
+      "lambda_value": 0.001,
+      "baseline_mode": "charge",
+      "rmse_v": 0.00117800105372521,
+      "rmse_mv": 1.17800105372521,
+      "r0_ohm": 0.0012036415005993416,
+      "tau_min_s": 0.2002000000065891,
+      "tau_max_s": 559.6260333333337,
+      "top_recovered_peaks": [
+        {
+          "tau_s": 27.37046811231254,
+          "gamma_ohm": 0.00046029994559699204
+        },
+        {
+          "tau_s": 183.0141600378792,
+          "gamma_ohm": 0.00045534679548218585
+        },
+        {
+          "tau_s": 30.60719615015514,
+          "gamma_ohm": 0.0003361230844764011
+        },
+        {
+          "tau_s": 2.093301706597628,
+          "gamma_ohm": 9.37722323092399e-05
+        },
+        {
+          "tau_s": 0.2002000000065891,
+          "gamma_ohm": 1.6007596033363708e-05
+        },
+        {
+          "tau_s": 204.6567224042255,
+          "gamma_ohm": 1.1564490693449753e-05
+        }
+      ],
+      "broad_band_summary": [
+        {
+          "band": "fast_band_4_to_16_s",
+          "tau_start_s": 4.0,
+          "tau_stop_s": 16.0,
+          "gamma_sum_ohm": 0.0
+        },
+        {
+          "band": "mid_band_25_to_90_s",
+          "tau_start_s": 25.0,
+          "tau_stop_s": 90.0,
+          "gamma_sum_ohm": 0.0007964230300733931
+        },
+        {
+          "band": "slow_band_90_to_450_s",
+          "tau_start_s": 90.0,
+          "tau_stop_s": 450.0,
+          "gamma_sum_ohm": 0.0004669112861756356
+        }
+      ],
+      "matched_to_eis_surface": false,
+      "quality_pass": true,
+      "quality_flags": ""
+    },
+    {
+      "candidate_id": 27,
+      "pre_rest_voltage_v": 3.494422,
+      "fit_rows": 5406,
+      "lambda_value": 0.001,
+      "baseline_mode": "charge",
+      "rmse_v": 0.08635688282585763,
+      "rmse_mv": 86.35688282585762,
+      "r0_ohm": 0.0011117185845470467,
+      "tau_min_s": 0.2002000000065891,
+      "tau_max_s": 539.8274333333369,
+      "top_recovered_peaks": [
+        {
+          "tau_s": 276.9038291362364,
+          "gamma_ohm": 0.007195829340729047
+        },
+        {
+          "tau_s": 247.7467483375085,
+          "gamma_ohm": 0.0011590232797000976
+        },
+        {
+          "tau_s": 539.8274333333369,
+          "gamma_ohm": 0.0
+        },
+        {
+          "tau_s": 482.98534436631854,
+          "gamma_ohm": 0.0
+        },
+        {
+          "tau_s": 386.62680114392924,
+          "gamma_ohm": 0.0
+        },
+        {
+          "tau_s": 432.12854417609213,
+          "gamma_ohm": 0.0
+        }
+      ],
+      "broad_band_summary": [
+        {
+          "band": "fast_band_4_to_16_s",
+          "tau_start_s": 4.0,
+          "tau_stop_s": 16.0,
+          "gamma_sum_ohm": 0.0
+        },
+        {
+          "band": "mid_band_25_to_90_s",
+          "tau_start_s": 25.0,
+          "tau_stop_s": 90.0,
+          "gamma_sum_ohm": 0.0
+        },
+        {
+          "band": "slow_band_90_to_450_s",
+          "tau_start_s": 90.0,
+          "tau_stop_s": 450.0,
+          "gamma_sum_ohm": 0.008354852620429145
+        }
+      ],
+      "matched_to_eis_surface": false,
+      "quality_pass": false,
+      "quality_flags": "high_voltage_rmse"
+    }
+  ],
+  "surface_fit_count": 8,
+  "excluded_fit_count": 1,
+  "eis_ocv_targets": [
+    3.959110736846924,
+    3.722273349761963,
+    3.630812168121338
+  ],
+  "target_candidate_ids": [
+    9,
+    15,
+    21
+  ],
+  "quality_rule": "surface includes only fits with voltage RMSE <= 10 mV"
+}

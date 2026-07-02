@@ -1,0 +1,28 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperatures_c": [
+    25,
+    40
+  ],
+  "cells_attempted_per_temperature": 11,
+  "eis_record_indices": [
+    2
+  ],
+  "weights": [
+    0.03,
+    0.1,
+    0.3,
+    1.0,
+    3.0
+  ],
+  "case_count": 22,
+  "probe_rows": 110,
+  "error_count": 0,
+  "separate_lambda": 0.001,
+  "combined_lambda": 0.1,
+  "best_weight_by_median_delta": 0.03,
+  "best_median_delta_quality": 0.01931990221947468,
+  "best_median_combined_corr_quality": -0.030908314442907946,
+  "best_quality_pass_rows": 22,
+  "verdict": "weighting_probe_complete_not_full_validation"
+}

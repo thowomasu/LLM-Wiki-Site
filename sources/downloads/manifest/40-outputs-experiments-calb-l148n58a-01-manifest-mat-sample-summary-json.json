@@ -1,0 +1,450 @@
+[
+  {
+    "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/C20_discharge/59294.mat",
+    "protocol": "C20_Discharge",
+    "cell_id": "59294",
+    "temperature_c": 25,
+    "mat_shape": "struct",
+    "fields": [
+      "Times",
+      "VoltageV",
+      "CurrentA",
+      "TempC",
+      "Temp_Amb",
+      "Step_Index"
+    ],
+    "field_stats": {
+      "Times": {
+        "length": 1104,
+        "finite": 1104,
+        "min": 0.0,
+        "max": 66145.7155,
+        "mean": 33089.96918777175
+      },
+      "VoltageV": {
+        "length": 1104,
+        "finite": 1104,
+        "min": 2.499986,
+        "max": 4.191873,
+        "mean": 3.714037717391304
+      },
+      "CurrentA": {
+        "length": 1104,
+        "finite": 1104,
+        "min": -2.900212,
+        "max": -2.90005,
+        "mean": -2.9001264682971013
+      },
+      "TempC": {
+        "length": 1104,
+        "finite": 1104,
+        "min": 25.124170303344727,
+        "max": 26.006418228149414,
+        "mean": 25.466987514841385
+      },
+      "Temp_Amb": {
+        "length": 1104,
+        "finite": 1104,
+        "min": 25.38509178161621,
+        "max": 25.97788429260254,
+        "mean": 25.75922253511954
+      },
+      "Step_Index": {
+        "length": 1104,
+        "finite": 1104,
+        "min": 10.0,
+        "max": 10.0,
+        "mean": 10.0
+      }
+    }
+  },
+  {
+    "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/DV_WLTP/59294.mat",
+    "protocol": "DV_WLTP",
+    "cell_id": "59294",
+    "temperature_c": 25,
+    "mat_shape": "struct",
+    "fields": [
+      "Times",
+      "VoltageV",
+      "CurrentA",
+      "TempC",
+      "Temp_Amb",
+      "Step_Index"
+    ],
+    "field_stats": {
+      "Times": {
+        "length": 221437,
+        "finite": 221437,
+        "min": 0.0,
+        "max": 27001.506800000003,
+        "mean": 11130.15068472297
+      },
+      "VoltageV": {
+        "length": 221437,
+        "finite": 221437,
+        "min": 3.37707,
+        "max": 4.199734,
+        "mean": 3.7554322725515608
+      },
+      "CurrentA": {
+        "length": 221437,
+        "finite": 221437,
+        "min": -60.08051,
+        "max": 19.42142,
+        "mean": -7.786019024394492
+      },
+      "TempC": {
+        "length": 221437,
+        "finite": 221437,
+        "min": 24.769521713256836,
+        "max": 26.14884376525879,
+        "mean": 25.325895021610737
+      },
+      "Temp_Amb": {
+        "length": 221437,
+        "finite": 221437,
+        "min": 25.01824378967285,
+        "max": 25.52511215209961,
+        "mean": 25.29825225003142
+      },
+      "Step_Index": {
+        "length": 221437,
+        "finite": 221437,
+        "min": 5.0,
+        "max": 7.0,
+        "mean": 5.0488355604528605
+      }
+    }
+  },
+  {
+    "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/DV_UDDS/59294.mat",
+    "protocol": "DV_UDDS",
+    "cell_id": "59294",
+    "temperature_c": 25,
+    "mat_shape": "struct",
+    "fields": [
+      "Times",
+      "VoltageV",
+      "CurrentA",
+      "TempC",
+      "Temp_Amb",
+      "Step_Index"
+    ],
+    "field_stats": {
+      "Times": {
+        "length": 239440,
+        "finite": 239440,
+        "min": 0.0,
+        "max": 28801.642799999994,
+        "mean": 12025.760830888321
+      },
+      "VoltageV": {
+        "length": 239440,
+        "finite": 239440,
+        "min": 3.478829,
+        "max": 4.018364,
+        "mean": 3.711572623751253
+      },
+      "CurrentA": {
+        "length": 239440,
+        "finite": 239440,
+        "min": -59.37879,
+        "max": 36.16817,
+        "mean": -4.782898405506771
+      },
+      "TempC": {
+        "length": 239440,
+        "finite": 239440,
+        "min": 24.742534637451172,
+        "max": 26.10240936279297,
+        "mean": 25.220307951800706
+      },
+      "Temp_Amb": {
+        "length": 239440,
+        "finite": 239440,
+        "min": 24.935346603393555,
+        "max": 26.165172576904297,
+        "mean": 25.309907989027188
+      },
+      "Step_Index": {
+        "length": 239440,
+        "finite": 239440,
+        "min": 11.0,
+        "max": 13.0,
+        "mean": 11.045167891747411
+      }
+    }
+  },
+  {
+    "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/DV_US06/59294.mat",
+    "protocol": "DV_US06",
+    "cell_id": "59294",
+    "temperature_c": 25,
+    "mat_shape": "struct",
+    "fields": [
+      "Times",
+      "VoltageV",
+      "CurrentA",
+      "TempC",
+      "Temp_Amb",
+      "Step_Index"
+    ],
+    "field_stats": {
+      "Times": {
+        "length": 119243,
+        "finite": 119243,
+        "min": 0.0,
+        "max": 16781.04130000001,
+        "mean": 6070.640168776368
+      },
+      "VoltageV": {
+        "length": 119243,
+        "finite": 119243,
+        "min": 2.499848,
+        "max": 3.806077,
+        "mean": 3.516792891607893
+      },
+      "CurrentA": {
+        "length": 119243,
+        "finite": 119243,
+        "min": -59.9935,
+        "max": 26.98949,
+        "mean": -10.342882520700787
+      },
+      "TempC": {
+        "length": 119243,
+        "finite": 119243,
+        "min": 24.78648567199707,
+        "max": 27.044567108154297,
+        "mean": 25.51814007608236
+      },
+      "Temp_Amb": {
+        "length": 119243,
+        "finite": 119243,
+        "min": 25.068702697753906,
+        "max": 25.616025924682617,
+        "mean": 25.362225641229
+      },
+      "Step_Index": {
+        "length": 119243,
+        "finite": 119243,
+        "min": 17.0,
+        "max": 19.0,
+        "mean": 17.090739079023507
+      }
+    }
+  },
+  {
+    "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/HPPC_1C/59294.mat",
+    "protocol": "HPPC_1C",
+    "cell_id": "59294",
+    "temperature_c": 25,
+    "mat_shape": "struct",
+    "fields": [
+      "Times",
+      "VoltageV",
+      "CurrentA",
+      "TempC"
+    ],
+    "field_stats": {
+      "Times": {
+        "length": 172269,
+        "finite": 172269,
+        "min": 0.0,
+        "max": 44762.710699999996,
+        "mean": 21670.843854762606
+      },
+      "VoltageV": {
+        "length": 172269,
+        "finite": 172269,
+        "min": 2.499992,
+        "max": 4.25577,
+        "mean": 3.7446930345390057
+      },
+      "CurrentA": {
+        "length": 172269,
+        "finite": 172269,
+        "min": -58.00464,
+        "max": 37.70427,
+        "mean": -10.818665499185345
+      },
+      "TempC": {
+        "length": 172269,
+        "finite": 172269,
+        "min": 25.09844207763672,
+        "max": 29.261287689208984,
+        "mean": 25.601985385955714
+      }
+    }
+  },
+  {
+    "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/HPPC_C3/59294.mat",
+    "protocol": "HPPC_C3",
+    "cell_id": "59294",
+    "temperature_c": 25,
+    "mat_shape": "struct",
+    "fields": [
+      "Times",
+      "VoltageV",
+      "CurrentA",
+      "TempC"
+    ],
+    "field_stats": {
+      "Times": {
+        "length": 172850,
+        "finite": 172850,
+        "min": 0.0,
+        "max": 44820.8873,
+        "mean": 21743.110258316457
+      },
+      "VoltageV": {
+        "length": 172850,
+        "finite": 172850,
+        "min": 2.49996,
+        "max": 4.258051,
+        "mean": 3.750254653433613
+      },
+      "CurrentA": {
+        "length": 172850,
+        "finite": 172850,
+        "min": -58.00565,
+        "max": 37.70327,
+        "mean": -10.773836731816084
+      },
+      "TempC": {
+        "length": 172850,
+        "finite": 172850,
+        "min": 25.090362548828125,
+        "max": 29.76045799255371,
+        "mean": 25.616105759319403
+      }
+    }
+  },
+  {
+    "member": "A Dataset for Large Prismatic Lithium-Ion Battery Cells (CALB L148N58A) Comprehensive Characterization and Real-World Driving Cycles/CALB L148N58A testing campaign/Processed Data/Temperature_25C/EIS_test/59294.mat",
+    "protocol": "EIS_test",
+    "cell_id": "59294",
+    "temperature_c": 25,
+    "mat_shape": "object_array_(3,)",
+    "eis_records": [
+      {
+        "index": 0,
+        "cell_id": "59294",
+        "temperature_c": 25,
+        "ocv_value": 3.959110736846924,
+        "fields": [
+          "Times",
+          "Cycle_ID",
+          "EIS_Data_Point",
+          "Frequency",
+          "Zmod",
+          "Zphd",
+          "Zreal",
+          "Zimg",
+          "OCV",
+          "AC_Amp_RMS"
+        ],
+        "frequency": {
+          "length": 40,
+          "finite": 40,
+          "min": 0.010001099668443203,
+          "max": 3722.427001953125,
+          "mean": 332.06332794681657
+        },
+        "zreal": {
+          "length": 40,
+          "finite": 40,
+          "min": 0.0006894500111229718,
+          "max": 0.0014955205842852592,
+          "mean": 0.0010401458508567884
+        },
+        "zimg": {
+          "length": 40,
+          "finite": 40,
+          "min": -0.000501292000990361,
+          "max": 0.0006126140360720456,
+          "mean": -6.0427116841310637e-05
+        }
+      },
+      {
+        "index": 1,
+        "cell_id": "59294",
+        "temperature_c": 25,
+        "ocv_value": 3.722273349761963,
+        "fields": [
+          "Times",
+          "Cycle_ID",
+          "EIS_Data_Point",
+          "Frequency",
+          "Zmod",
+          "Zphd",
+          "Zreal",
+          "Zimg",
+          "OCV",
+          "AC_Amp_RMS"
+        ],
+        "frequency": {
+          "length": 40,
+          "finite": 40,
+          "min": 0.010001099668443203,
+          "max": 3722.427001953125,
+          "mean": 332.06332794681657
+        },
+        "zreal": {
+          "length": 40,
+          "finite": 40,
+          "min": 0.0007003617938607931,
+          "max": 0.0014249628875404596,
+          "mean": 0.001047846935398411
+        },
+        "zimg": {
+          "length": 40,
+          "finite": 40,
+          "min": -0.00042537893750704825,
+          "max": 0.0006142558995634317,
+          "mean": -4.806617212125275e-05
+        }
+      },
+      {
+        "index": 2,
+        "cell_id": "59294",
+        "temperature_c": 25,
+        "ocv_value": 3.630812168121338,
+        "fields": [
+          "Times",
+          "Cycle_ID",
+          "EIS_Data_Point",
+          "Frequency",
+          "Zmod",
+          "Zphd",
+          "Zreal",
+          "Zimg",
+          "OCV",
+          "AC_Amp_RMS"
+        ],
+        "frequency": {
+          "length": 40,
+          "finite": 40,
+          "min": 0.010001099668443203,
+          "max": 3722.427001953125,
+          "mean": 332.06332794681657
+        },
+        "zreal": {
+          "length": 40,
+          "finite": 40,
+          "min": 0.0007008920656517148,
+          "max": 0.001421652385033667,
+          "mean": 0.0010613553313305601
+        },
+        "zimg": {
+          "length": 40,
+          "finite": 40,
+          "min": -0.0003789832699112594,
+          "max": 0.0006008439813740551,
+          "mean": -4.4642860439125796e-05
+        }
+      }
+    ]
+  }
+]

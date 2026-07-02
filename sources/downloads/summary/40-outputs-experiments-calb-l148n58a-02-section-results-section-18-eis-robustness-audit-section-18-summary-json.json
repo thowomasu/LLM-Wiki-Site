@@ -1,0 +1,15 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "cells_attempted_per_temperature": 11,
+  "variant_fit_rows": 492,
+  "comparison_rows": 369,
+  "error_count": 0,
+  "weakest_variant": "mid_0p03_to_100hz",
+  "weakest_variant_median_corr_vs_full": -0.014424236857425133,
+  "verdict": "eis_robustness_audit_complete"
+}

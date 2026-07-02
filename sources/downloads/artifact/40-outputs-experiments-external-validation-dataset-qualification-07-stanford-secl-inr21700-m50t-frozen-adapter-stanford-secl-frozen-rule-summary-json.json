@@ -1,0 +1,35 @@
+{
+  "dataset": "Stanford SECL INR21700-M50T",
+  "archive_path": "[local path redacted]",
+  "frozen_rule": "CALB frozen pulse-to-EIS rule adaptive final rule",
+  "frozen_rule_changed": false,
+  "adapter_join_rows": 61,
+  "rule_rows": 182,
+  "quality_pass_rows": 0,
+  "error_rows": 1,
+  "voltage_only_baseline_pass_rows": 76,
+  "frozen_rule_beats_voltage_only_baseline": false,
+  "median_corr_quality": null,
+  "median_abs_ocv_delta_v_quality": null,
+  "median_time_rmse_mv_quality": null,
+  "settings": {
+    "time_lambda": 0.001,
+    "baseline_mode": "time_charge",
+    "include_pre_s": 120.0,
+    "include_post_s": 1200.0,
+    "eis_fmin_hz": 0.03,
+    "eis_fmax_hz": 50.0,
+    "eis_lambda_sequence": [
+      3.0,
+      0.1
+    ]
+  },
+  "max_joins": 0,
+  "soc_record_mapping": {
+    "80": 0,
+    "50": 1,
+    "20": 2
+  },
+  "verdict": "no support",
+  "claim_boundary": "external_adapter_run_not_drive_cycle_or_soh_validation"
+}

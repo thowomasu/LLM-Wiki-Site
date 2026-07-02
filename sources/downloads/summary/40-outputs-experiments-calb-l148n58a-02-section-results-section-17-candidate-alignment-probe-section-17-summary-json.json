@@ -1,0 +1,21 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperatures_c": [
+    25,
+    40
+  ],
+  "cells_attempted_per_temperature": 11,
+  "eis_record_index": 2,
+  "max_candidates_per_case": 5,
+  "separate_lambda": 0.001,
+  "combined_lambda": 0.1,
+  "eis_weight_multiplier": 0.03,
+  "case_count": 22,
+  "candidate_fit_rows": 110,
+  "error_count": 0,
+  "best_is_nearest_cases": 22,
+  "median_nearest_combined_corr": -0.030908314442907946,
+  "median_best_combined_corr": -0.030908314442907946,
+  "median_best_minus_nearest_combined_corr": 0.0,
+  "verdict": "alignment_probe_complete_not_full_validation"
+}

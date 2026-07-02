@@ -1,0 +1,3 @@
+cell_id,temperature_label,temperature_c,eis_record_index,error
+3740,-10degC,-10,3,Selected candidate window has too few rows after slicing
+3623,0degC,0,11,too_few_eis_points

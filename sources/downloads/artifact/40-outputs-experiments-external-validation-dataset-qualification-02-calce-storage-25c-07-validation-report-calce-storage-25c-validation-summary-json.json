@@ -1,0 +1,12 @@
+{
+  "dataset": "CALCE Storage 25 C",
+  "verdict": "blocked/inconclusive",
+  "frozen_input_rows": 24,
+  "same_join_justified_rows": 24,
+  "dirty_join_warning_rows": 24,
+  "section33_runnable_rows": 0,
+  "rule_run_attempted": false,
+  "baseline_run_attempted": false,
+  "primary_blocker": "no_hppc_compatible_pulse_windows_in_current_calce_inputs",
+  "claim_boundary": "readiness_only_not_external_validation"
+}

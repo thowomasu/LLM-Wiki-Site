@@ -1,0 +1,7 @@
+{
+  "section": 38,
+  "bootstrap_samples": 5000,
+  "seed": 20260624,
+  "metric_count": 12,
+  "verdict": "uncertainty_audit_complete"
+}

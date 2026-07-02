@@ -1,0 +1,13 @@
+{
+  "processed_cells": 11,
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "first_slice_cell": "59294",
+  "first_slice_temperature_c": 25,
+  "protocol_count": 7,
+  "time_series_protocol_count": 6,
+  "eis_records": 3
+}

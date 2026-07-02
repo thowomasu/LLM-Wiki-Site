@@ -1,0 +1,44 @@
+{
+  "records": [
+    {
+      "eis_record_index": 0,
+      "ocv_value": 3.959110736846924,
+      "cleaned_points": 34,
+      "frequency_min_hz": 0.0100010996684432,
+      "frequency_max_hz": 516.4194946289062,
+      "tau_min_s": 0.00010272975410314595,
+      "tau_max_s": 47.741232974834425,
+      "r_inf_ohm": 0.0007902907086738024,
+      "real_rmse_ohm": 1.221310964960631e-05,
+      "imag_rmse_ohm": 7.066916655359628e-06,
+      "gamma_area": 0.0013273163072143848
+    },
+    {
+      "eis_record_index": 1,
+      "ocv_value": 3.722273349761963,
+      "cleaned_points": 34,
+      "frequency_min_hz": 0.0100010996684432,
+      "frequency_max_hz": 516.4194946289062,
+      "tau_min_s": 0.00010272975410314595,
+      "tau_max_s": 47.741232974834425,
+      "r_inf_ohm": 0.0008047724034517807,
+      "real_rmse_ohm": 1.294541133538452e-05,
+      "imag_rmse_ohm": 5.7450219979198466e-06,
+      "gamma_area": 0.001156826544309245
+    },
+    {
+      "eis_record_index": 2,
+      "ocv_value": 3.630812168121338,
+      "cleaned_points": 34,
+      "frequency_min_hz": 0.0100010996684432,
+      "frequency_max_hz": 516.4194946289062,
+      "tau_min_s": 0.00010272975410314595,
+      "tau_max_s": 47.741232974834425,
+      "r_inf_ohm": 0.0008145308210172761,
+      "real_rmse_ohm": 1.1740624956020148e-05,
+      "imag_rmse_ohm": 4.7210830807830845e-06,
+      "gamma_area": 0.0010801334504528088
+    }
+  ],
+  "method": "complex_EIS_NNLS_real_plus_imag_regularized"
+}

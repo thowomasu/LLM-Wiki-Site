@@ -238,15 +238,33 @@ code {
 }
 .grid.two { grid-template-columns: 1fr; }
 .card {
-  padding: 18px;
+  display: grid;
+  grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
+  gap: 12px 24px;
+  align-items: start;
+  padding: 16px 18px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-left: 5px solid var(--blue);
+  border-radius: 6px;
   background: var(--panel);
+}
+.card h3 {
+  margin-top: 0;
+}
+.card p,
+.card ul,
+.card ol,
+.card .label,
+.card .metric {
+  grid-column: 2;
+}
+.card h3:first-child {
+  grid-column: 1;
 }
 .metric {
   display: block;
   margin: 8px 0;
-  font-size: clamp(30px, 5vw, 54px);
+  font-size: clamp(24px, 3vw, 38px);
   line-height: 1;
   font-weight: 800;
 }

@@ -1,0 +1,12 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperature_c": 25,
+  "cells_attempted": 11,
+  "cells_completed": 11,
+  "comparison_rows": 38,
+  "quality_pass_rows": 33,
+  "error_count": 0,
+  "median_quality_pass_corr": -0.014459186812620282,
+  "median_quality_pass_abs_ocv_delta_v": 0.004637073089599486,
+  "quality_rule": "time_rmse_mv <= 10 and abs(ocv_delta_v) <= 0.02"
+}

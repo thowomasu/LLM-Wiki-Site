@@ -1,0 +1,9 @@
+{
+  "section": 35,
+  "total_checks": 49,
+  "passed_checks": 49,
+  "failed_checks": 0,
+  "nonzero_error_count_files": 0,
+  "nonempty_error_csvs": 0,
+  "verdict": "calb_core_regression_checks_pass"
+}

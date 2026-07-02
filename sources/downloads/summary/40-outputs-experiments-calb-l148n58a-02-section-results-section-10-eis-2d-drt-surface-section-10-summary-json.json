@@ -1,0 +1,12 @@
+{
+  "eis_records": 3,
+  "ocv_values": [
+    3.630812168121338,
+    3.722273349761963,
+    3.959110736846924
+  ],
+  "tau_min_s": 0.00010272975410314595,
+  "tau_max_s": 47.741232974834425,
+  "n_tau": 96,
+  "method": "EIS real plus imaginary nonnegative regularized DRT surface"
+}

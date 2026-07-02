@@ -1,0 +1,4 @@
+temperature_c,rows,quality_pass_rows,quality_pass_fraction,median_corr_quality,median_abs_ocv_delta_v_quality,median_time_rmse_mv_quality,corr_ge_0p75_rows_quality
+-10,8,0,0.0,,,,0
+0,11,0,0.0,,,,0
+25,14,0,0.0,,,,0

@@ -1,0 +1,12 @@
+{
+  "section": 42,
+  "row_count": 198,
+  "missing_soc_rows": 0,
+  "aligned_rows_le_5pct_soc_delta": 16,
+  "misaligned_rows_gt_5pct_soc_delta": 182,
+  "aligned_drt_win_fraction_vs_best_ecm": 0.0,
+  "misaligned_drt_win_fraction_vs_best_ecm": 0.13186813186813187,
+  "aligned_median_drt_minus_best_ecm_rmse_mv": 1.9903829134623052,
+  "misaligned_median_drt_minus_best_ecm_rmse_mv": 3.5951693858624054,
+  "verdict": "drive_cycle_result_soc_misaligned_and_ecm_baseline_still_stronger"
+}

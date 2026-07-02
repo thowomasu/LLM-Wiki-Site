@@ -1,0 +1,136 @@
+{
+  "best_corr_row": {
+    "lambda_value": 3.0,
+    "rmse_mv": 1.606020905293428,
+    "r0_ohm": 0.0011242269307246457,
+    "residual_norm": 0.12440184439724812,
+    "smooth_norm": 0.0010503456048456623,
+    "overlap_corr_gamma": -0.06290097176658203,
+    "normalized_scaled_rmse": 0.9999758118785423,
+    "time_gamma_area": 0.00011542086107508307,
+    "eis_gamma_area": 0.00041158716038815625
+  },
+  "best_voltage_rmse_row": {
+    "lambda_value": 0.003,
+    "rmse_mv": 1.606010155798413,
+    "r0_ohm": 0.0011236705601877185,
+    "residual_norm": 0.12440101174494467,
+    "smooth_norm": 0.0011065221671348526,
+    "overlap_corr_gamma": -0.06347473248486245,
+    "normalized_scaled_rmse": 0.9999854340869229,
+    "time_gamma_area": 0.00011527224895333407,
+    "eis_gamma_area": 0.00041158716038815625
+  },
+  "rows": [
+    {
+      "lambda_value": 0.0001,
+      "rmse_mv": 1.6060101557984285,
+      "r0_ohm": 0.001123670561065089,
+      "residual_norm": 0.12440101174494586,
+      "smooth_norm": 0.0011065221858905304,
+      "overlap_corr_gamma": -0.06347473203542311,
+      "normalized_scaled_rmse": 0.9999854340865718,
+      "time_gamma_area": 0.00011527224900499526,
+      "eis_gamma_area": 0.00041158716038815625
+    },
+    {
+      "lambda_value": 0.0003,
+      "rmse_mv": 1.606010155798431,
+      "r0_ohm": 0.0011236705610572903,
+      "residual_norm": 0.12440101174494606,
+      "smooth_norm": 0.0011065221857236328,
+      "overlap_corr_gamma": -0.0634747320394219,
+      "normalized_scaled_rmse": 0.9999854340865749,
+      "time_gamma_area": 0.00011527224900453547,
+      "eis_gamma_area": 0.00041158716038815625
+    },
+    {
+      "lambda_value": 0.001,
+      "rmse_mv": 1.6060101557984316,
+      "r0_ohm": 0.0011236705609684763,
+      "residual_norm": 0.12440101174494608,
+      "smooth_norm": 0.0011065221838251172,
+      "overlap_corr_gamma": -0.06347473208491614,
+      "normalized_scaled_rmse": 0.9999854340866104,
+      "time_gamma_area": 0.00011527224899930599,
+      "eis_gamma_area": 0.00041158716038815625
+    },
+    {
+      "lambda_value": 0.003,
+      "rmse_mv": 1.606010155798413,
+      "r0_ohm": 0.0011236705601877185,
+      "residual_norm": 0.12440101174494467,
+      "smooth_norm": 0.0011065221671348526,
+      "overlap_corr_gamma": -0.06347473248486245,
+      "normalized_scaled_rmse": 0.9999854340869229,
+      "time_gamma_area": 0.00011527224895333407,
+      "eis_gamma_area": 0.00041158716038815625
+    },
+    {
+      "lambda_value": 0.01,
+      "rmse_mv": 1.6060101557984323,
+      "r0_ohm": 0.001123670551306599,
+      "residual_norm": 0.12440101174494612,
+      "smooth_norm": 0.0011065219772841365,
+      "overlap_corr_gamma": -0.06347473703423523,
+      "normalized_scaled_rmse": 0.9999854340904749,
+      "time_gamma_area": 0.00011527224843040386,
+      "eis_gamma_area": 0.00041158716038815625
+    },
+    {
+      "lambda_value": 0.03,
+      "rmse_mv": 1.6060101557984885,
+      "r0_ohm": 0.001123670473232739,
+      "residual_norm": 0.12440101174495048,
+      "smooth_norm": 0.0011065203083396315,
+      "overlap_corr_gamma": -0.06347477702717928,
+      "normalized_scaled_rmse": 0.9999854341217014,
+      "time_gamma_area": 0.00011527224383333948,
+      "eis_gamma_area": 0.00041158716038815625
+    },
+    {
+      "lambda_value": 0.1,
+      "rmse_mv": 1.606010155810369,
+      "r0_ohm": 0.0011236695853850318,
+      "residual_norm": 0.12440101174587075,
+      "smooth_norm": 0.0011065013333050582,
+      "overlap_corr_gamma": -0.06347523175195999,
+      "normalized_scaled_rmse": 0.9999854344768284,
+      "time_gamma_area": 0.00011527219155756002,
+      "eis_gamma_area": 0.00041158716038815625
+    },
+    {
+      "lambda_value": 0.3,
+      "rmse_mv": 1.6060101567628795,
+      "r0_ohm": 0.0011236617992502998,
+      "residual_norm": 0.1244010118196519,
+      "smooth_norm": 0.0011063352455866727,
+      "overlap_corr_gamma": -0.0634792139659162,
+      "normalized_scaled_rmse": 0.9999854375930243,
+      "time_gamma_area": 0.00011527173323877372,
+      "eis_gamma_area": 0.00041158716038815625
+    },
+    {
+      "lambda_value": 1.0,
+      "rmse_mv": 1.6060125192655226,
+      "r0_ohm": 0.0011239318164322,
+      "residual_norm": 0.12440119481831975,
+      "smooth_norm": 0.001077490872311613,
+      "overlap_corr_gamma": -0.0633150720594904,
+      "normalized_scaled_rmse": 0.999981679215122,
+      "time_gamma_area": 0.00011527757589681087,
+      "eis_gamma_area": 0.00041158716038815625
+    },
+    {
+      "lambda_value": 3.0,
+      "rmse_mv": 1.606020905293428,
+      "r0_ohm": 0.0011242269307246457,
+      "residual_norm": 0.12440184439724812,
+      "smooth_norm": 0.0010503456048456623,
+      "overlap_corr_gamma": -0.06290097176658203,
+      "normalized_scaled_rmse": 0.9999758118785423,
+      "time_gamma_area": 0.00011542086107508307,
+      "eis_gamma_area": 0.00041158716038815625
+    }
+  ]
+}

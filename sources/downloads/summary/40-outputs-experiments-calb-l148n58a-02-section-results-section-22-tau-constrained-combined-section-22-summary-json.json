@@ -1,0 +1,20 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperatures_c": [
+    10,
+    25,
+    40
+  ],
+  "cells_attempted_per_temperature": 11,
+  "rows": 123,
+  "quality_pass_rows": 66,
+  "error_count": 0,
+  "separate_lambda": 0.001,
+  "combined_lambda": 0.1,
+  "eis_weight_multiplier": 1.0,
+  "median_separate_corr_quality": 0.9020779325037587,
+  "median_combined_corr_quality": 0.4774624058504997,
+  "median_combined_minus_separate_corr_quality": -0.34825037739296205,
+  "combined_better_rows_quality": 12,
+  "verdict": "tau_constrained_combined_complete"
+}

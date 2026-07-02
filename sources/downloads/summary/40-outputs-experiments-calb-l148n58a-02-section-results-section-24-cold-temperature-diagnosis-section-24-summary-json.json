@@ -1,0 +1,28 @@
+{
+  "zip_path": "[local path redacted]",
+  "temperature_c": 10,
+  "hppc_protocols": [
+    "HPPC_1C",
+    "HPPC_C3"
+  ],
+  "cells_attempted_per_protocol": 11,
+  "candidate_probe_rows": 653,
+  "case_rows": 82,
+  "error_count": 0,
+  "lambda_value": 0.001,
+  "median_nearest_valid_corr": -0.024996621549416252,
+  "median_nearest_all_corr": 0.8165076252865685,
+  "median_best_within_20mv_corr": -0.024996621549416252,
+  "median_best_any_voltage_pass_corr": 0.9105986934027989,
+  "diagnosis_counts": [
+    {
+      "diagnosis": "nearest_ocv_ok",
+      "cases": 26
+    },
+    {
+      "diagnosis": "only_bad_ocv_candidate_rescues",
+      "cases": 56
+    }
+  ],
+  "verdict": "cold_temperature_diagnosis_complete"
+}

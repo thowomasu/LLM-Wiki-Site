@@ -1,0 +1,6 @@
+{
+  "screened_protocols": 6,
+  "recommended_first_fit_protocol": "HPPC_1C",
+  "reason": "HPPC gives clear pulse/rest excitation and shares cell/temp with EIS.",
+  "drive_cycle_warning": "WLTP, UDDS, and US06 are dynamic validation targets later, not the first clean pulse-relaxation inverse target."
+}
