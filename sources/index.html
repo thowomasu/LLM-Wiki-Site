@@ -232,11 +232,11 @@ code {
 .lead { max-width: 980px; color: var(--muted); font-size: 22px; }
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 16px;
   margin: 24px 0;
 }
-.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.two { grid-template-columns: 1fr; }
 .card {
   padding: 18px;
   border: 1px solid var(--line);
@@ -333,6 +333,10 @@ th { background: var(--table-head); }
 .catalog-table th:nth-child(3) { width: 27%; }
 .catalog-table th:nth-child(4) { width: 18%; }
 .catalog-table th:nth-child(5) { width: 16%; }
+.briefing-table th:nth-child(1) { width: 22%; }
+.briefing-table th:nth-child(2) { width: 35%; }
+.briefing-table th:nth-child(3) { width: 25%; }
+.briefing-table th:nth-child(4) { width: 18%; }
 .catalog-title {
   display: block;
   margin-bottom: 6px;
@@ -350,6 +354,15 @@ th { background: var(--table-head); }
   display: grid;
   gap: 8px;
 }
+.metric-inline {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--green);
+  font-size: 22px;
+  font-weight: 800;
+}
+.metric-inline.warn { color: var(--orange); }
+.metric-inline.bad { color: var(--red); }
 .status-pill {
   display: inline-block;
   padding: 4px 8px;
@@ -485,15 +498,50 @@ footer {
     <section class="note">
       <strong>Blunt boundary:</strong> this page lists the public-facing evidence package. It is not the raw private vault and it is not external validation.
     </section>
-    <section class="grid">
-      <article class="card"><h3>CALB reports</h3><span class="metric good">42</span><div class="label">Section reports used by the presentation.</div></article>
-      <article class="card"><h3>CALB summaries</h3><span class="metric good">42</span><div class="label">Machine-readable section summaries.</div></article>
-      <article class="card"><h3>External files</h3><span class="metric warn">76</span><div class="label">CALCE, RADAR4KIT, and NASA qualification artifacts.</div></article>
-    </section>
+    <div class="table-wrap">
+      <table class="briefing-table">
+        <thead><tr><th>Source group</th><th>What it contains</th><th>Count or status</th><th>Open</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong class="catalog-title">CALB reports</strong></td>
+            <td>Step-level reports used by the CALB presentation and public claim boundary.</td>
+            <td><span class="metric-inline">42</span> reports</td>
+            <td class="open-cell"><a class="button" href="calb/">Open CALB sources</a></td>
+          </tr>
+          <tr>
+            <td><strong class="catalog-title">CALB summaries</strong></td>
+            <td>Machine-readable JSON summaries used for exact counts, metrics, and status fields.</td>
+            <td><span class="metric-inline">42</span> summaries</td>
+            <td class="open-cell"><a class="button" href="calb/">Open CALB sources</a></td>
+          </tr>
+          <tr>
+            <td><strong class="catalog-title">External qualification artifacts</strong></td>
+            <td>CALCE, RADAR4KIT, NASA, and related dataset-screening artifacts used to decide what can and cannot be validated honestly.</td>
+            <td><span class="metric-inline warn">76</span> files</td>
+            <td class="open-cell"><a class="button" href="external/">Open external sources</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Source Groups</h2>
-    <div class="grid two">
-      <article class="card"><h3>CALB pipeline</h3><p>Internal section reports, summaries, manifests, and public plots.</p><p><a class="button" href="calb/">Open CALB sources</a></p></article>
-      <article class="card"><h3>External datasets</h3><p>CALCE and NASA manifest outputs, plus RADAR4KIT qualification context, used for dataset triage.</p><p><a class="button" href="external/">Open external sources</a></p></article>
+    <div class="table-wrap">
+      <table class="briefing-table">
+        <thead><tr><th>Group</th><th>What to look for</th><th>Claim boundary</th><th>Open</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong class="catalog-title">CALB pipeline</strong></td>
+            <td>Internal reports, summaries, manifests, and public plots for the CALB L148N58A pulse-to-EIS work.</td>
+            <td>Supports the internal CALB story only. It does not prove external generalization.</td>
+            <td class="open-cell"><a class="button" href="calb/">Open CALB sources</a></td>
+          </tr>
+          <tr>
+            <td><strong class="catalog-title">External datasets</strong></td>
+            <td>CALCE and NASA manifest outputs, plus RADAR4KIT and newer external qualification context.</td>
+            <td>Used for triage and validation-readiness checks. Some runs are blocked or no-support.</td>
+            <td class="open-cell"><a class="button" href="external/">Open external sources</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <h2>Literature And Public References</h2>
     <div class="source-list"><div class="source-item"><span class="source-kind">paper</span><strong><a href="https://www.sciencedirect.com/science/article/pii/S2352340925000332">Fasolato et al., Data in Brief 58, 111301, 2025</a></strong><div><code>https: / / www.sciencedirect.com / science / article / pii / S2352340925000332</code></div><div>Corresponding CALB L148N58A data article.</div></div>

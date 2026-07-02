@@ -232,11 +232,11 @@ code {
 .lead { max-width: 980px; color: var(--muted); font-size: 22px; }
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 16px;
   margin: 24px 0;
 }
-.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.two { grid-template-columns: 1fr; }
 .card {
   padding: 18px;
   border: 1px solid var(--line);
@@ -333,6 +333,10 @@ th { background: var(--table-head); }
 .catalog-table th:nth-child(3) { width: 27%; }
 .catalog-table th:nth-child(4) { width: 18%; }
 .catalog-table th:nth-child(5) { width: 16%; }
+.briefing-table th:nth-child(1) { width: 22%; }
+.briefing-table th:nth-child(2) { width: 35%; }
+.briefing-table th:nth-child(3) { width: 25%; }
+.briefing-table th:nth-child(4) { width: 18%; }
 .catalog-title {
   display: block;
   margin-bottom: 6px;
@@ -350,6 +354,15 @@ th { background: var(--table-head); }
   display: grid;
   gap: 8px;
 }
+.metric-inline {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--green);
+  font-size: 22px;
+  font-weight: 800;
+}
+.metric-inline.warn { color: var(--orange); }
+.metric-inline.bad { color: var(--red); }
 .status-pill {
   display: inline-block;
   padding: 4px 8px;
