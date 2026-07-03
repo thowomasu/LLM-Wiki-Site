@@ -1,0 +1,8 @@
+{
+  "section": 39,
+  "assets_reviewed": 13,
+  "blocker_count": 3,
+  "ready_for_external_replication": false,
+  "preferred_external_dataset": "KIT_RADAR4KIT",
+  "verdict": "external_replication_blocked_missing_corrected_eis"
+}
