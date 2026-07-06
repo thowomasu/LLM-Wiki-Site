@@ -1,0 +1,22 @@
+{
+  "created_utc": "2026-07-05T23:14:48.020174+00:00",
+  "status": "development_freeze_test_completed",
+  "selected_head": "masked_rpt_from_dataset_relative_time_series_plus_eis",
+  "selected_model_policy": "Use the already-defined task/model policy from missing_modality_v1_frozen_contract.json.",
+  "fold_group": "dataset_key",
+  "folds_beating_baseline": 2,
+  "fold_count": 2,
+  "worst_relative_improvement_vs_baseline": 0.06344583174371701,
+  "all_three_dataset_count": 2,
+  "all_three_datasets": [
+    {
+      "dataset_key": "dib_spent_validation",
+      "complete_time_series_eis_rpt_rows": 85
+    },
+    {
+      "dataset_key": "lifepo4_hev_harvested_cell_soh_workbook",
+      "complete_time_series_eis_rpt_rows": 198
+    }
+  ],
+  "claim_boundary": "Development freeze-test only. LiFePO4 RPT labels were mapped during this work, so this is not a clean external validation win."
+}

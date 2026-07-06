@@ -1,0 +1,6 @@
+dataset_key,dataset,rows,id_contract_status,missing_id_columns,time_series_contract_status,time_series_ready_rows,time_series_feature_columns_present,measured_time_series_feature_columns_present,eis_contract_status,eis_ready_rows,eis_target_columns_present,rpt_contract_status,rpt_ready_rows,rpt_target_columns_present,all_three_contract_status,all_three_ready_rows
+dib_spent_validation,Rashid and Faraji-Niri DIB battery SOH estimation dataset,85,pass,,pass,85,29,26,pass,85,20,pass,85,1,pass,85
+lifepo4_hev_harvested_cell_soh_workbook,LiFePO4 HEV harvested-cell SOH workbook,198,pass,,pass,198,26,25,pass,198,20,pass,198,1,pass,198
+molicell_p42a_local_high_power_characterization,Molicell P42A local high-power characterization,101,pass,,pass,101,28,26,pass,101,20,absent,0,0,absent,0
+radar4kit_repaired,RADAR4KIT corrected EIS plus PULSE,351,pass,,pass,351,32,26,pass,351,20,absent,0,0,absent,0
+stanford_secl,Stanford SECL INR21700-M50T,182,pass,,pass,182,32,26,pass,182,20,absent,0,0,absent,0

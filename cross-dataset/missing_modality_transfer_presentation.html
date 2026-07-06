@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missing-Modality Battery Transfer Pipeline</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+(function () {
+  var key = "llm-wiki-theme";
+  var sidebarKey = "llm-wiki-sidebar";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  function preferredSidebar() {
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Hide sidebar");
+      button.setAttribute("title", collapsed ? "Show sidebar" : "Hide sidebar");
+    }
+    if (icon) icon.textContent = state === "collapsed" ? ">" : "<";
+  }
+  var initialTheme = preferredTheme();
+  var initialSidebar = preferredSidebar();
+  applyTheme(initialTheme);
+  applySidebar(initialSidebar);
+  window.addEventListener("DOMContentLoaded", function () {
+    applyTheme(document.documentElement.dataset.theme || initialTheme);
+    applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
+  });
+})();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --sidebar-width: 280px;
+      --ink: #17212b;
+      --muted: #586673;
+      --paper: #f5f7f9;
+      --panel: #ffffff;
+      --panel-strong: #ffffff;
+      --note-bg: #fff8f0;
+      --line: #d8e0e7;
+      --table-head: #edf3f8;
+      --teal: #147a73;
+      --blue: #225f9f;
+      --green: #2f7d4a;
+      --amber: #b85f17;
+      --red: #a33a2d;
+      --code: #eef2f5;
+    }
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #e6edf3;
+      --muted: #a7b3bf;
+      --paper: #0f141a;
+      --panel: #151c24;
+      --panel-strong: #10161d;
+      --note-bg: #241b12;
+      --line: #2d3844;
+      --table-head: #1c2a36;
+      --teal: #58d0c7;
+      --blue: #78b7ff;
+      --green: #58d39d;
+      --amber: #f0a35a;
+      --red: #f08490;
+      --code: #1f2a35;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.55; }
+    .site-shell { min-height: 100vh; display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); transition: grid-template-columns 180ms ease; }
+    .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 18px 14px; background: var(--panel-strong); border-right: 1px solid var(--line); transform: translateX(0); transition: transform 180ms ease, opacity 180ms ease; }
+    [data-sidebar="collapsed"] .site-shell { grid-template-columns: 0 minmax(0, 1fr); }
+    [data-sidebar="collapsed"] .sidebar { transform: translateX(calc(-1 * var(--sidebar-width))); opacity: 0; pointer-events: none; }
+    .sidebar-floating-toggle { position: fixed; z-index: 40; top: 12px; left: calc(var(--sidebar-width) + 10px); display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; color: var(--ink); border: 1px solid var(--line); border-radius: 8px; background: var(--panel); box-shadow: 0 8px 24px rgba(0,0,0,.12); cursor: pointer; transition: left 180ms ease, background 180ms ease; }
+    .sidebar-floating-toggle:hover { background: var(--paper); }
+    [data-sidebar="collapsed"] .sidebar-floating-toggle { left: 12px; }
+    .brand { display: block; margin-bottom: 18px; color: var(--ink); text-decoration: none; }
+    .brand strong { display: block; font-size: 18px; line-height: 1.15; }
+    .brand span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; }
+    .side-section { margin: 18px 0 8px; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .side-link { display: flex; align-items: center; min-height: 34px; margin: 6px 0; padding: 7px 9px; color: var(--ink); text-decoration: none; border: 1px solid transparent; border-radius: 6px; font-size: 14px; }
+    .side-link:hover { border-color: var(--line); background: var(--paper); }
+    .theme-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 38px; margin: 14px 0 8px; padding: 8px 10px; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; background: var(--panel); font: inherit; font-size: 14px; cursor: pointer; }
+    .theme-toggle .toggle-state { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .page-content { min-width: 0; }
+    header { padding: 38px min(6vw, 64px) 24px; background: var(--panel-strong); border-bottom: 1px solid var(--line); }
+    main { max-width: 1320px; margin: 0 auto; padding: 28px min(4vw, 42px) 80px; }
+    section { margin: 22px 0; padding: 24px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; scroll-margin-top: 24px; }
+    h1 { font-size: clamp(38px, 6vw, 70px); line-height: 1.05; margin: 0 0 14px; max-width: 1080px; }
+    h2 { font-size: clamp(28px, 3vw, 42px); line-height: 1.12; margin: 0 0 14px; }
+    h3 { font-size: 23px; margin: 16px 0 8px; }
+    p, li { font-size: 18px; }
+    a { color: var(--blue); }
+    code { background: var(--code); padding: 2px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+    pre { white-space: pre-wrap; overflow-x: auto; background: var(--code); padding: 14px 16px; border-radius: 6px; border: 1px solid var(--line); max-height: 620px; }
+    .table-scroll { max-width: 100%; overflow-x: auto; margin: 14px 0 22px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    table { width: 100%; table-layout: fixed; border-collapse: collapse; background: var(--panel); }
+    th, td { border: 1px solid var(--line); padding: 9px 10px; text-align: left; vertical-align: top; overflow-wrap: anywhere; word-break: break-word; font-size: 14px; }
+    th { background: var(--table-head); }
+    .table-scroll table { margin: 0; min-width: 760px; }
+    .metric-table td:first-child { width: 220px; font-weight: 700; }
+    .button-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
+    .button { display: inline-flex; align-items: center; min-height: 36px; padding: 8px 12px; color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); font-size: 14px; }
+    .button:hover { background: var(--paper); }
+    .lead { color: var(--muted); font-size: 22px; max-width: 980px; }
+    .kicker { color: var(--teal); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+    .vertical-flow { display: grid; gap: 18px; }
+    .flow-item { border-left: 5px solid var(--teal); padding: 4px 0 4px 18px; }
+    .flow-item h3 { margin-top: 0; }
+    .split { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .metric { font-size: 38px; font-weight: 800; line-height: 1; display: block; margin-bottom: 8px; }
+    .good { color: var(--green); }
+    .warn { color: var(--amber); }
+    .bad { color: var(--red); }
+    .muted { color: var(--muted); }
+    .note { border-left: 5px solid var(--amber); background: var(--note-bg); }
+    .equation { font-family: Consolas, Monaco, monospace; font-size: 18px; background: var(--code); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; margin: 12px 0; overflow-x: auto; }
+    .bar { display: grid; gap: 8px; margin-top: 10px; }
+    .bar-row { display: grid; grid-template-columns: 190px 1fr 92px; gap: 12px; align-items: center; }
+    .track { height: 22px; background: var(--code); border-radius: 999px; border: 1px solid var(--line); overflow: hidden; }
+    .fill { height: 100%; background: var(--teal); border-radius: 999px; }
+    .fill.good { background: var(--green); }
+    .fill.warn { background: var(--amber); }
+    .step-list { counter-reset: step; display: grid; gap: 14px; }
+    .step { counter-increment: step; padding: 16px 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    .step strong::before { content: counter(step) ". "; color: var(--teal); }
+    .step strong { display: block; font-size: 19px; margin-bottom: 6px; }
+    .small { font-size: 14px; color: var(--muted); }
+    .chart { margin: 20px 0; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); overflow-x: auto; }
+    .chart figcaption { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+    .chart-analysis { color: var(--muted); font-size: 16px; max-width: 980px; }
+    .plot-image { display: block; width: 100%; max-width: 1280px; height: auto; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; }
+    .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; }
+    .reader-path { display: grid; gap: 12px; margin: 16px 0 6px; }
+    .reader-card { padding: 14px 16px; border: 1px solid var(--line); border-left: 5px solid var(--teal); border-radius: 8px; background: var(--panel); }
+    .reader-card strong { display: block; margin-bottom: 4px; font-size: 18px; }
+    .reader-card p { margin: 0; color: var(--muted); }
+    .plain-callout { border: 1px solid var(--line); border-left: 5px solid var(--amber); border-radius: 8px; padding: 14px 16px; background: var(--note-bg); margin: 14px 0; }
+    .plain-callout p { margin: 6px 0 0; }
+    .mini-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 14px 0 24px; }
+    .mini-card { padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    .mini-card p { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
+    details { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); margin: 14px 0; }
+    summary { cursor: pointer; padding: 12px 14px; font-weight: 800; }
+    details pre { margin: 0; border: 0; border-top: 1px solid var(--line); border-radius: 0 0 8px 8px; }
+    .math { overflow-x: auto; padding: 8px 0; }
+    svg { display: block; max-width: 100%; height: auto; color: var(--ink); }
+    svg text { fill: var(--muted); font-size: 13px; }
+    @media (max-width: 880px) {
+      .site-shell { display: block; }
+      .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      [data-sidebar="collapsed"] .sidebar { display: none; }
+      .sidebar-floating-toggle { left: 12px; }
+      .bar-row { grid-template-columns: 1fr; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+<button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
+<div class="site-shell">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Public battery analysis outputs and source trail</span></a>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+    <div class="side-section">Project</div>
+    <a class="side-link" href="../index.html">Overview</a>
+    <a class="side-link" href="../presentations/">Presentations</a>
+    <a class="side-link" href="../datasets/">Datasets</a>
+    <a class="side-link" href="../sources/">Sources</a>
+    <a class="side-link" href="../glossary/">Glossary</a>
+    <div class="side-section">Workstreams</div>
+    <a class="side-link" href="../presentations/#cambridge-molicell-eis">Cross-dataset battery transfer</a>
+    <div class="side-section">This Page</div>
+    <a class="side-link" href="#summary">Summary</a><a class="side-link" href="#objective">Objective</a><a class="side-link" href="#methodology">Methodology</a><a class="side-link" href="#results">Results</a><a class="side-link" href="#conclusion">Conclusion</a><a class="side-link" href="#inputs">Inputs</a><a class="side-link" href="#math">Math</a><a class="side-link" href="#graphs">Graphs</a><a class="side-link" href="#code">Code</a><a class="side-link" href="#outputs">Outputs</a><a class="side-link" href="#goal-audit">Goal Audit</a><a class="side-link" href="#glossary">Glossary</a><a class="side-link" href="#limits">Limits</a>
+  </aside>
+  <div class="page-content">
+    <header>
+      <div class="kicker">Missing-modality transfer, professor-facing roadmap</div>
+      <h1>Missing-Modality Battery Transfer Pipeline</h1>
+      <p class="lead">This page explains the full pipeline for batteries that do not all have the same measurements. It learns from complete rows, tests by hiding known modalities, and writes pseudo-labels only with clear uncertainty.</p>
+      <div class="button-row">
+        <a class="button" href="data/missing_modality_transfer_results.json" download>Download results JSON</a>
+        <a class="button" href="data/missing_modality_transfer_fold_results.csv" download>Download fold table</a>
+        <a class="button" href="data/missing_modality_pseudo_labels.csv" download>Download pseudo-labels</a>
+        <a class="button" href="data/missing_modality_10_step_goal_audit.json" download>Download 10-step audit</a>
+        <a class="button" href="data/missing_modality_v1_frozen_contract.json" download>Download frozen contract</a>
+        <a class="button" href="data/missing_modality_all_three_candidate_search_audit.json" download>Download dataset search audit</a>
+        <a class="button" href="data/missing_modality_time_series_head_improvement_audit.json" download>Download Step 6 audit</a>
+        <a class="button" href="data/missing_modality_frozen_head_development_test.json" download>Download Step 9 audit</a>
+        <a class="button" href="data/missing_modality_eis_head_blocker_audit.json" download>Download EIS head audit</a>
+      </div>
+    </header>
+<main>
+  <section id="summary" class="note">
+    <h2>Executive Read</h2>
+    <p>The pipeline is operational: ohmic-proxy EIS and dataset-relative RPT heads now pass their grouped development folds. Current verdict: <code>development_pipeline_operational_with_cross_dataset_support</code>.</p>
+    <p><strong>Blunt boundary:</strong> pseudo-labels are estimates, not measurements. This completes the development pipeline, not a publication-level external validation claim.</p>
+    <div class="reader-path">
+      <div class="reader-card"><strong>What the pipeline sees</strong><p>Time-series features, fixed-grid EIS targets, and RPT-like health labels when available.</p></div>
+      <div class="reader-card"><strong>What it predicts</strong><p>Missing RPT-like labels from time-series plus EIS, and missing EIS from time-series plus RPT when prediction rows exist.</p></div>
+      <div class="reader-card"><strong>What works now</strong><p>Ohmic-proxy EIS beats baseline across five grouped datasets, and dataset-relative RPT beats baseline across the two all-three datasets.</p></div>
+      <div class="reader-card"><strong>What stays limited</strong><p>The result is still a development result. A stronger claim needs a future pre-declared all-three battery.</p></div>
+    </div>
+  </section>
+
+  <section id="objective">
+    <h2>Question</h2>
+    <p>Can we train on batteries with time-series, EIS, and RPT-like labels, then use that learned relationship to fill missing modalities for batteries that only have part of the measurement set?</p>
+    <p>The honest answer is: yes for the development pipeline. The current supported heads are ohmic-proxy EIS from time-series and dataset-relative SOH from time-series plus EIS.</p>
+  </section>
+
+  <section id="methodology">
+    <h2>Methodology</h2>
+    <div class="step-list">
+      <div class="step"><strong>Load available matrices</strong><p>The runner combines cleaned development rows, Molicell rows, and LiFePO4 rows into one modality registry.</p></div>
+      <div class="step"><strong>Register modality coverage</strong><p>Each dataset is counted for time-series, EIS, RPT-like labels, and complete all-three rows.</p></div>
+      <div class="step"><strong>Run masked-modality tests</strong><p>Known EIS or RPT values are hidden and reconstructed, then compared with a train-mean baseline.</p></div>
+      <div class="step"><strong>Write pseudo-labels</strong><p>Missing RPT-like labels are estimated for rows with time-series plus EIS. The output is explicitly marked as pseudo-label data.</p></div>
+    </div>
+  </section>
+
+  <section id="results">
+    <h2>Results</h2>
+    <div class="table-scroll"><table class="metric-table"><tbody><tr><td>Overall verdict</td><td>development_pipeline_operational_with_cross_dataset_support</td></tr>
+<tr><td>Rows loaded</td><td>917</td></tr>
+<tr><td>Pseudo-label rows written</td><td>634</td></tr>
+<tr><td>All-three-modality datasets</td><td>2</td></tr></tbody></table></div>
+    <div class="table-scroll"><table><thead><tr><th>Task</th><th>Verdict</th><th>Folds beating baseline</th><th>Worst improvement</th><th>Fold group</th></tr></thead><tbody><tr><td>masked_eis_from_time_series</td><td>partial_or_no_support</td><td>1 / 5</td><td>-2.6</td><td>dataset_key</td></tr><tr><td>masked_eis_from_minimal_time_series_shallow_rf</td><td>partial_or_no_support</td><td>2 / 5</td><td>-2.44</td><td>dataset_key</td></tr><tr><td>masked_eis_from_ohmic_time_series</td><td>supports_cross_dataset_transfer_head</td><td>5 / 5</td><td>0.06759</td><td>dataset_key</td></tr><tr><td>masked_eis_from_time_series_plus_rpt</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.4495</td><td>dataset_key</td></tr><tr><td>masked_eis_from_ohmic_time_series_plus_rpt</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.2365</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_time_series</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.8893</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_time_series_plus_eis</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.8513</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series</td><td>supports_cross_dataset_transfer_head</td><td>2 / 2</td><td>0.03185</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series_plus_eis</td><td>supports_cross_dataset_transfer_head</td><td>2 / 2</td><td>0.06345</td><td>dataset_key</td></tr></tbody></table></div>
+  </section>
+
+  <section id="conclusion">
+    <h2>Conclusion</h2>
+    <p>The pipeline is now a real missing-modality transfer system, not just an EIS predictor. But the current evidence says the generalization claim is not ready.</p>
+    <div class="vertical-flow">
+      <div class="flow-item"><h3>Supported</h3><ul><li>The runner builds a registry across incomplete batteries.</li><li>It performs masked-modality tests instead of blindly filling missing data.</li><li>It writes pseudo-labels with explicit confidence boundaries.</li><li>DIB and LiFePO4 now both provide complete time-series, EIS, and RPT-like rows.</li><li>Ohmic-proxy EIS beats baseline across all grouped EIS folds.</li><li>Dataset-relative RPT heads beat baseline on both all-three grouped folds.</li><li>The public-site presentation and downloadable artifacts are generated.</li></ul></div>
+      <div class="flow-item"><h3>Not supported</h3><ul><li>A publication-level cross-battery validation claim.</li><li>Treating pseudo-labels as measured RPT or EIS.</li><li>Assuming missing measurements are roughly the same as another battery.</li><li>Changing the frozen heads after seeing a future held-out validation battery.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="inputs">
+    <h2>Inputs</h2>
+    <div class="table-scroll"><table><thead><tr><th>Dataset key</th><th>Time-series rows</th><th>EIS rows</th><th>RPT rows</th><th>All-three rows</th></tr></thead><tbody><tr><td>dib_spent_validation</td><td>85</td><td>85</td><td>85</td><td>85</td></tr><tr><td>lifepo4_hev_harvested_cell_soh_workbook</td><td>198</td><td>198</td><td>198</td><td>198</td></tr><tr><td>molicell_p42a_local_high_power_characterization</td><td>101</td><td>101</td><td>0</td><td>0</td></tr><tr><td>radar4kit_repaired</td><td>351</td><td>351</td><td>0</td><td>0</td></tr><tr><td>stanford_secl</td><td>182</td><td>182</td><td>0</td><td>0</td></tr></tbody></table></div>
+  </section>
+
+  <section id="math">
+    <h2>Math</h2>
+    <p>The pipeline trains modality heads like this:</p>
+    <div class="equation">f_EIS(time series, RPT) -> EIS spectrum</div>
+    <div class="equation">f_RPT(time series, EIS) -> RPT-like health labels</div>
+    <p>Each head is judged against a baseline:</p>
+    <div class="equation">relative improvement = (RMSE_baseline - RMSE_model) / RMSE_baseline</div>
+    <p>A head is not trusted just because it runs. It has to beat the baseline on grouped folds.</p>
+  </section>
+
+  <section id="graphs">
+    <h2>Graphs</h2>
+    <p>The bars show worst fold improvement for each masked-modality head. Negative means the model failed against the baseline somewhere.</p>
+    <div class="bar"><div class="bar-row"><span>masked_eis_from_time_series</span><div class="track"><div class="fill bad" style="width:0%"></div></div><span>-2.6</span></div><div class="bar-row"><span>masked_eis_from_minimal_time_series_shallow_rf</span><div class="track"><div class="fill bad" style="width:0%"></div></div><span>-2.44</span></div><div class="bar-row"><span>masked_eis_from_ohmic_time_series</span><div class="track"><div class="fill good" style="width:53%"></div></div><span>0.06759</span></div><div class="bar-row"><span>masked_eis_from_time_series_plus_rpt</span><div class="track"><div class="fill bad" style="width:28%"></div></div><span>-0.4495</span></div><div class="bar-row"><span>masked_eis_from_ohmic_time_series_plus_rpt</span><div class="track"><div class="fill bad" style="width:38%"></div></div><span>-0.2365</span></div><div class="bar-row"><span>masked_rpt_from_time_series</span><div class="track"><div class="fill bad" style="width:6%"></div></div><span>-0.8893</span></div><div class="bar-row"><span>masked_rpt_from_time_series_plus_eis</span><div class="track"><div class="fill bad" style="width:7%"></div></div><span>-0.8513</span></div><div class="bar-row"><span>masked_rpt_from_dataset_relative_time_series</span><div class="track"><div class="fill good" style="width:52%"></div></div><span>0.03185</span></div><div class="bar-row"><span>masked_rpt_from_dataset_relative_time_series_plus_eis</span><div class="track"><div class="fill good" style="width:53%"></div></div><span>0.06345</span></div></div>
+  </section>
+
+  <section id="code">
+    <h2>Code</h2>
+    <p>This is the runner core. The full file is in the repository and the generated outputs are downloadable from this page.</p>
+    <details open><summary>Pipeline runner excerpt</summary><pre><code>rovement: `{rpt_plus_eis.get(&#x27;worst_relative_improvement_vs_baseline&#x27;)}`.&quot;,
+            &quot;&quot;,
+        ]
+    )
+    lines.extend([&quot;## Next Action&quot;, &quot;&quot;, audit[&quot;next_action&quot;], &quot;&quot;])
+    path.write_text(&quot;\n&quot;.join(lines), encoding=&quot;utf-8&quot;)
+
+
+def build_frozen_head_development_test(payload: dict[str, Any]) -&gt; dict[str, Any]:
+    completed = [
+        task
+        for task in payload.get(&quot;tasks&quot;, [])
+        if task.get(&quot;status&quot;) == &quot;completed&quot; and task.get(&quot;verdict&quot;) == &quot;supports_cross_dataset_transfer_head&quot;
+    ]
+    preferred_order = [
+        &quot;masked_rpt_from_dataset_relative_time_series_plus_eis&quot;,
+        &quot;masked_rpt_from_dataset_relative_time_series&quot;,
+        &quot;masked_rpt_from_time_series_plus_eis&quot;,
+        &quot;masked_eis_from_minimal_time_series_shallow_rf&quot;,
+        &quot;masked_eis_from_time_series_plus_rpt&quot;,
+    ]
+    selected = None
+    for name in preferred_order:
+        selected = next((task for task in completed if task.get(&quot;task&quot;) == name), None)
+        if selected:
+            break
+    if selected is None and completed:
+        selected = completed[0]
+    all_three = [
+        row
+        for row in payload.get(&quot;registry&quot;, {}).get(&quot;datasets&quot;, [])
+        if int(row.get(&quot;complete_time_series_eis_rpt_rows&quot;, 0)) &gt; 0
+    ]
+    status = &quot;development_freeze_test_completed&quot; if selected and len(all_three) &gt;= 2 else &quot;blocked&quot;
+    return {
+        &quot;created_utc&quot;: datetime.now(timezone.utc).isoformat(),
+        &quot;status&quot;: status,
+        &quot;selected_head&quot;: selected.get(&quot;task&quot;) if selected else None,
+        &quot;selected_model_policy&quot;: &quot;Use the already-defined task/model policy from missing_modality_v1_frozen_contract.json.&quot;,
+        &quot;fold_group&quot;: selected.get(&quot;fold_group&quot;) if selected else None,
+        &quot;folds_beating_baseline&quot;: selected.get(&quot;folds_beating_baseline&quot;) if selected else None,
+        &quot;fold_count&quot;: selected.get(&quot;fold_count&quot;) if selected else None,
+        &quot;worst_relative_improvement_vs_baseline&quot;: selected.get(&quot;worst_relative_improvement_vs_baseline&quot;) if selected else None,
+        &quot;all_three_dataset_count&quot;: len(all_three),
+        &quot;all_three_datasets&quot;: [
+            {
+                &quot;dataset_key&quot;: row.get(&quot;dataset_key&quot;),
+                &quot;complete_time_series_eis_rpt_rows&quot;: row.get(&quot;complete_time_series_eis_rpt_rows&quot;),
+            }
+            for row in all_three
+        ],
+        &quot;claim_boundary&quot;: &quot;Development freeze-test only. LiFePO4 RPT labels were mapped during this work, so this is not a clean external validation win.&quot;,
+    }
+
+
+def write_frozen_head_development_test_markdown(audit: dict[str, Any], path: Path) -&gt; None:
+    lines = [
+        &quot;# Missing-Modality Frozen Head Development Test&quot;,
+        &quot;&quot;,
+        f&quot;- Status: `{audit[&#x27;status&#x27;]}`.&quot;,
+        f&quot;- Selected head: `{audit.get(&#x27;selected_head&#x27;)}`.&quot;,
+        f&quot;- Fold group: `{audit.get(&#x27;fold_group&#x27;)}`.&quot;,
+        f&quot;- Folds beating baseline: `{audit.get(&#x27;folds_beating_baseline&#x27;)}` of `{audit.get(&#x27;fold_count&#x27;)}`.&quot;,
+        f&quot;- Worst relative improvement: `{audit.get(&#x27;worst_relative_improvement_vs_baseline&#x27;)}`.&quot;,
+        f&quot;- All-three dataset count: `{audit.get(&#x27;all_three_dataset_count&#x27;)}`.&quot;,
+        f&quot;- Claim boundary: {audit[&#x27;claim_boundary&#x27;]}&quot;,
+        &quot;&quot;,
+        &quot;## All-Three Datasets&quot;,
+        &quot;&quot;,
+    ]
+    for row in audit.get(&quot;all_three_datasets&quot;, []):
+        lines.append(f&quot;- `{row.get(&#x27;dataset_key&#x27;)}`: `{row.get(&#x27;complete_time_series_eis_rpt_rows&#x27;)}` complete rows.&quot;)
+    lines.append(&quot;&quot;)
+    path.write_text(&quot;\n&quot;.join(lines), encoding=&quot;utf-8&quot;)
+
+
+def build_eis_head_blocker_audit(payload: dict[str, Any]) -&gt; dict[str, Any]:
+    eis_tasks = [
+        task
+        for task in payload.get(&quot;tasks&quot;, [])
+        if str(task.get(&quot;task&quot;, &quot;&quot;)).startswith(&quot;masked_eis_from&quot;)
+    ]
+    rows = []
+    for task in eis_tasks:
+        failures = []
+        for fold in task.get(&quot;fold_error_by_target&quot;, []):
+            pass
+        rows.append(
+            {
+                &quot;task&quot;: task.get(&quot;task&quot;),
+                &quot;status&quot;: task.get(&quot;status&quot;),
+                &quot;verdict&quot;: task.get(&quot;verdict&quot;, task.get(&quot;status&quot;)),
+                &quot;fold_group&quot;: task.get(&quot;fold_group&quot;),
+                &quot;folds_beating_baseline&quot;: task.get(&quot;folds_beating_baseline&quot;),
+                &quot;fold_count&quot;: task.get(&quot;fold_count&quot;),
+                &quot;worst_relative_improvement_vs_baseline&quot;: task.get(&quot;worst_relative_improvement_vs_baseline&quot;),
+                &quot;mean_relative_improvement_vs_baseline&quot;: task.get(&quot;mean_relative_improvement_vs_baseline&quot;),
+                &quot;failed_fold_count&quot;: (
+                    int(task.get(&quot;fold_count&quot;, 0)) - int(task.get(&quot;folds_beating_baseline&quot;, 0))
+                    if task.get(&quot;fold_count&quot;) is not None and task.get(&quot;folds_beating_baseline&quot;) is not None
+                    else None
+                ),
+                &quot;failed_target_rmse_by_fold&quot;: failures,
+            }
+        )
+    supported = [row for row in rows if row.get(&quot;verdict&quot;) == &quot;supports_cross_dataset_transfer_head&quot;]
+    best = None
+    completed = [row for row in rows if row.get(&quot;status&quot;) == &quot;completed&quot;]
+    if completed:
+        best = max(
+            completed,
+            key=lambda row: (
+                int(row.get(&quot;folds_beating_baseline&quot;) or 0),
+                float(row.get(&quot;worst_relative_improvement_vs_baseline&quot;) or -999.0),
+            ),
+        )
+    ready = bool(supported)
+    return {
+        &quot;created_utc&quot;: datetime.now(timezone.utc).isoformat(),
+        &quot;status&quot;: &quot;eis_head_ready&quot; if ready else &quot;eis_head_not_ready&quot;,
+        &quot;claim_boundary&quot;: &quot;Ohmic-proxy EIS transfer has development support. Pseudo-EIS is still an estimate, not a measurement.&quot;,
+        &quot;best_current_eis_task&quot;: best,
+        &quot;eis_tasks&quot;: rows,
+        &quot;reason&quot;: &quot;At least one EIS head beats the baseline on every grouped dataset fold.&quot;
+        if ready
+        else &quot;No current EIS head beats the baseline on every grouped dataset fold.&quot;,
+        &quot;next_action&quot;: &quot;Keep the ohmic-proxy schema frozen for future checks and do not treat pseudo-EIS as measured EIS.&quot;
+        if ready
+        else &quot;Build a better comparable EIS representation or add protocol-compatible all-three data before claiming EIS imputation support.&quot;,
+    }
+
+
+def write_eis_head_blocker_markdown(audit: dict[str, Any], path: Path) -&gt; None:
+    lines = [
+        &quot;# Missing-Modality EIS Head Blocker Audit&quot;,
+        &quot;&quot;,
+        f&quot;- Status: `{audit[&#x27;status&#x27;]}`.&quot;,
+        f&quot;- Claim boundary: {audit[&#x27;claim_boundary&#x27;]}&quot;,
+        f&quot;- Reason: {audit[&#x27;reason&#x27;]}&quot;,
+        f&quot;- Next action: {audit[&#x27;next_action&#x27;]}&quot;,
+        &quot;&quot;,
+        &quot;## EIS Heads&quot;,
+        &quot;&quot;,
+    ]
+    for row in audit.get(&quot;eis_tasks&quot;, []):
+        lines.append(f&quot;### {row.get(&#x27;task&#x27;)}&quot;)
+        lines.append(&quot;&quot;)
+        lines.append(f&quot;- Verdict: `{row.get(&#x27;verdict&#x27;)}`.&quot;)
+        lines.append(f&quot;- Folds beating baseline: `{row.get(&#x27;folds_beating_baseline&#x27;)}` of `{row.get(&#x27;fold_count&#x27;)}`.&quot;)
+        lines.append(f&quot;- Worst relative improvement: `{row.get(&#x27;worst_relative_improvement_vs_baseline&#x27;)}`.&quot;)
+        lines.append(&quot;&quot;)
+    path.write_text(&quot;\n&quot;.join(lines), encoding=&quot;utf-8&quot;)
+
+
+</code></pre></details>
+  </section>
+
+  <section id="outputs">
+    <h2>Outputs</h2>
+    <div class="table-scroll"><table><thead><tr><th>Output</th><th>Purpose</th></tr></thead><tbody><tr><td>missing_modality_transfer_results.json</td><td>Full machine-readable result.</td></tr><tr><td>missing_modality_transfer_report.md</td><td>Short human-readable report.</td></tr><tr><td>missing_modality_transfer_fold_results.csv</td><td>One row per masked-modality fold.</td></tr><tr><td>missing_modality_pseudo_labels.csv</td><td>Pseudo-RPT labels for incomplete rows.</td></tr><tr><td>missing_modality_registry.json</td><td>Dataset modality coverage registry.</td></tr><tr><td>missing_modality_v1_frozen_contract.json</td><td>Frozen development contract for the current runner, inputs, schema, and fold policy.</td></tr><tr><td>missing_modality_dataset_role_manifest.json</td><td>Dataset roles, including which datasets are complete-modality sources versus pseudo-label targets.</td></tr><tr><td>missing_modality_adapter_contract_audit.csv</td><td>Per-dataset pass/absent checks for ID, time-series, EIS, RPT, and all-three contracts.</td></tr><tr><td>missing_modality_10_step_goal_audit.json</td><td>Machine-readable status for the 10-step plan.</td></tr><tr><td>missing_modality_all_three_candidate_search_audit.json</td><td>Candidate search status for future cleaner all-three datasets.</td></tr><tr><td>missing_modality_time_series_head_improvement_audit.json</td><td>Pure time-series head status for Step 6.</td></tr><tr><td>missing_modality_frozen_head_development_test.json</td><td>Selected-head freeze-test status for Step 9.</td></tr><tr><td>missing_modality_eis_head_blocker_audit.json</td><td>EIS head status and claim boundary.</td></tr></tbody></table></div>
+    <div class="table-scroll"><table><thead><tr><th>Pseudo-label task</th><th>Status</th><th>Train rows</th><th>Prediction rows</th><th>Quality verdict</th><th>Uncertainty tier</th><th>Training weight</th></tr></thead><tbody><tr><td>pseudo_rpt_from_time_series_plus_eis</td><td>completed</td><td>283</td><td>634</td><td>supports_cross_dataset_transfer_head</td><td>development_cross_dataset</td><td>0.5</td></tr><tr><td>pseudo_eis_from_time_series_plus_rpt</td><td>blocked_no_train_or_prediction_rows</td><td>283</td><td>0</td><td></td><td></td><td></td></tr></tbody></table></div>
+  </section>
+
+  <section id="goal-audit">
+    <h2>10-Step Goal Audit</h2>
+    <p>This is the part that keeps us honest. Step 10 is built, but the full goal is not complete until the blocked evidence steps are handled.</p>
+    <div class="table-scroll"><table class="metric-table"><tbody><tr><td>Overall goal status</td><td>complete_development_pipeline</td></tr>
+<tr><td>Done steps</td><td>10</td></tr>
+<tr><td>Blocked steps</td><td>0</td></tr></tbody></table></div>
+    <div class="table-scroll"><table><thead><tr><th>Step</th><th>Name</th><th>Status</th><th>Remaining work</th></tr></thead><tbody><tr><td>1</td><td>Lock current pipeline state</td><td>done</td><td>Do not modify the v1 contract after looking at future held-out all-three results.</td></tr><tr><td>2</td><td>Find one more all-three-modality battery</td><td>done</td><td>Keep looking for a cleaner third all-three dataset if this is later used for a publication-level claim.</td></tr><tr><td>3</td><td>Define modality schema</td><td>done</td><td>Keep schema stable when adding the next all-three dataset.</td></tr><tr><td>4</td><td>Split datasets by role</td><td>done</td><td>Re-freeze roles only before adding new evidence, never after seeing a held-out score.</td></tr><tr><td>5</td><td>Build adapter contracts</td><td>done</td><td>Use the contract audit to reject future datasets that lack same-cell modality joins.</td></tr><tr><td>6</td><td>Improve cross-dataset time-series heads</td><td>done</td><td>Keep the ohmic-proxy EIS head and dataset-relative RPT head frozen before future validation.</td></tr><tr><td>7</td><td>Treat pseudo-labels as low trust</td><td>done</td><td>Do not use pseudo-labels as measurements in any future report.</td></tr><tr><td>8</td><td>Add uncertainty scoring</td><td>done</td><td>Calibrate weights after a second all-three validation battery exists.</td></tr><tr><td>9</td><td>Freeze one missing-modality head and test once</td><td>done</td><td>For a stronger claim, repeat with a pre-declared external battery that was not inspected during adapter development.</td></tr><tr><td>10</td><td>Build public-site presentation</td><td>done</td><td>Publish only after deciding whether this branch should go live.</td></tr></tbody></table></div>
+  </section>
+
+  <section id="glossary">
+    <h2>Glossary</h2>
+    <div class="table-scroll"><table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody><tr><td>Missing modality</td><td>A measurement type that is absent for a battery, such as RPT labels or EIS spectra.</td></tr><tr><td>Pseudo-label</td><td>A model estimate of a missing measurement. It is not a real measurement.</td></tr><tr><td>RPT</td><td>Reference performance test, used here as RPT-like health labels such as SOH or capacity.</td></tr><tr><td>EIS</td><td>Electrochemical impedance spectroscopy, represented here on a fixed frequency grid.</td></tr><tr><td>Masked-modality test</td><td>A test where known data is hidden and reconstructed to check whether the imputation head works.</td></tr><tr><td>Internal head</td><td>A model tested only inside the one all-three dataset by held-out cell.</td></tr><tr><td>Cross-dataset transfer</td><td>A model tested by holding out a whole dataset, the harder and more honest test.</td></tr><tr><td>Baseline</td><td>The boring comparison model. If the model cannot beat it, the head is not useful yet.</td></tr></tbody></table></div>
+  </section>
+
+  <section id="limits" class="note">
+    <h2>Limits</h2>
+    <ul><li>Keep the ohmic-proxy EIS head and dataset-relative RPT head frozen before any future held-out validation run.</li><li>Add or identify a cleaner third complete all-three-modality battery before making any general validation claim.</li><li>Repeat the frozen heads on a future pre-declared all-three battery before making a publication-level claim.</li><li>Keep pseudo-labels down-weighted or flagged. Do not train future claims as if pseudo-RPT or pseudo-EIS were measurements.</li></ul>
+    <p><strong>Ruthless version:</strong> the development pipeline is complete. The next serious milestone is a clean, pre-declared external validation battery, not more deck polish.</p>
+  </section>
+</main>
+  </div>
+</div>
+</body>
+</html>

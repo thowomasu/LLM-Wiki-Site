@@ -1,7 +1,7 @@
 {
   "cambridge_validation_ready": false,
-  "verdict": "molicell_p42a_external_support",
-  "reason": "Locked model beat the locked global-mean baseline by at least 5 percent overall and on both EIS components.",
+  "verdict": "no_support",
+  "reason": "No learned model family was freeze-ready before LiFePO4. The final frozen run therefore scored only a global-mean negative-control baseline. This does not support the learned time-domain-to-EIS pipeline.",
   "gates": {
     "cambridge_excluded_from_training_and_scoring": true,
     "no_random_row_split": true,
@@ -49,7 +49,56 @@
     "cross_dataset_goal_local_pipeline_complete": true,
     "cross_dataset_goal_remote_vm_verified": false,
     "demo_handoff_bundle_written": true,
-    "demo_handoff_bundle_status": "passed"
+    "demo_handoff_bundle_status": "passed",
+    "dib_holdout_matrix_written": true,
+    "dib_complete_target_rows": 85,
+    "dib_post_outcome_tuning_performed": false,
+    "dib_scored_once": true,
+    "dib_rows_scored": 85,
+    "dib_frozen_config_used": true,
+    "dib_no_random_row_split": true,
+    "dib_reclassified_as_spent_post_validation_development": true,
+    "post_dib_development_matrix_written": true,
+    "post_dib_lodo_results_written": true,
+    "post_dib_lodo_not_clean_validation": true,
+    "post_dib_transfer_diagnostics_written": true,
+    "post_dib_transfer_diagnostics_not_clean_validation": true,
+    "post_dib_normalized_target_lodo_written": true,
+    "post_dib_normalized_target_lodo_not_clean_validation": true,
+    "post_dib_adapter_contract_quality_written": true,
+    "post_dib_contract_pass_matrix_written": true,
+    "post_dib_adapter_contract_quality_not_clean_validation": true,
+    "post_dib_selected_window_matrix_written": true,
+    "post_dib_selected_window_matrix_not_clean_validation": true,
+    "selected_window_physical_scale_shape_lodo_written": true,
+    "selected_window_physical_scale_shape_lodo_not_clean_validation": true,
+    "selected_window_physical_scale_shape_lodo_plots_written": true,
+    "selected_window_pipeline_readiness_audit_written": true,
+    "final_development_model_family_locked": false,
+    "untouched_final_validation_dataset_reserved": true,
+    "panasonic_soc_metadata_audit_written": true,
+    "panasonic_explicit_soc_metadata_found": false,
+    "radar4kit_selected_window_contract_audit_written": true,
+    "radar4kit_ready_for_cleaned_v2": true,
+    "lifepo4_hev_holdout_candidate_audit_written": true,
+    "untouched_final_validation_dataset_scoring_ready": false,
+    "cleaned_training_set_v2_written": true,
+    "cleaned_training_set_v2_defensible_dataset_count": 3,
+    "cleaned_training_set_v2_three_dataset_lodo_possible": true,
+    "radar4kit_repaired_relaxation_window_matrix_written": true,
+    "cleaned_training_set_v2_shrinkage_lodo_written": true,
+    "cleaned_training_set_v2_physical_scale_shape_lodo_written": true,
+    "final_validation_contract_frozen": true,
+    "final_baseline_negative_control_contract_locked": true,
+    "final_lifepo4_validation_run_once": true,
+    "final_lifepo4_post_outcome_tuning_performed": false,
+    "final_plots_written": true,
+    "final_report_written": true,
+    "missing_modality_transfer_pipeline_written": true,
+    "missing_modality_registry_written": true,
+    "missing_modality_pseudo_labels_written": true,
+    "missing_modality_internal_heads_supported": true,
+    "missing_modality_cross_dataset_transfer_stable": false
   },
   "best_baseline": {
     "name": "global_train_target_mean",
@@ -60,12 +109,8 @@
     "rmse_all_ohm": 0.003940562454940317
   },
   "next_required_work": [
-    "If RADAR4KIT target extraction is corrected, rebuild a clearly labeled post-audit dev matrix and freeze a new validation contract.",
-    "Audit RADAR4KIT EIS target extraction because it dominates current KK failures in the development matrix.",
-    "For the next frozen holdout, declare whether KK quality gates are advisory metadata or hard exclusion gates before scoring.",
-    "Do not retune this Molicell result and still call it clean validation.",
-    "If the result is weak, diagnose it as post-validation analysis only.",
-    "Keep Cambridge labeled spent and NASA labeled blocked until its exact frequency vector is documented."
+    "Report no support for the learned time-domain-to-EIS model.",
+    "If continuing research, do it as a new development cycle with a new untouched validation dataset."
   ],
   "cambridge_validation_completed": true,
   "cambridge_validation_result": {
@@ -192,5 +237,188 @@
       }
     ],
     "claim_boundary": "This bundle regenerates and verifies the local demo handoff. VM connection is deferred by user and is not claimed."
+  },
+  "dib_holdout_matrix": {
+    "rows": 85,
+    "complete_target_rows": 85,
+    "selection_method": "protocol",
+    "claim_boundary": "External holdout matrix only. DIB is not used for training, model choice, alpha choice, feature choice, or frequency-grid choice."
+  },
+  "dib_validation_completed": true,
+  "dib_validation_result": {
+    "verdict": "no_support",
+    "baseline_rmse_all_ohm": 0.004692285359681146,
+    "model_rmse_all_ohm": 0.01584803306416833,
+    "relative_rmse_improvement_fraction": -2.3774657441646405
+  },
+  "post_dib_development_completed": true,
+  "post_dib_lodo_summary": {
+    "fold_count": 3,
+    "folds_where_best_model_beats_best_baseline": 2,
+    "results_json": "[local path redacted]",
+    "claim_boundary": "Post-validation development analysis. DIB failed as clean validation and is now included as spent development data. Molicell is included only as spent holdout development data when available. These LODO results are not a new clean external validation claim."
+  },
+  "post_dib_transfer_diagnostics_completed": true,
+  "post_dib_transfer_diagnostics": {
+    "baseline_dominates_folds": [
+      "stanford_secl"
+    ],
+    "diagnostics_json": "[local path redacted]",
+    "claim_boundary": "Post-validation diagnostic analysis. This explains weak LODO transfer after DIB was reclassified as development data. It is not clean validation and does not tune or select a final validated model."
+  },
+  "post_dib_normalized_target_lodo_completed": true,
+  "post_dib_normalized_target_lodo": {
+    "fold_count": 2,
+    "folds_where_best_normalized_target_model_beats_baseline": 1,
+    "weak_folds": [
+      "stanford_secl"
+    ],
+    "results_json": "[local path redacted]",
+    "claim_boundary": "Post-DIB development analysis using train-only target standardization inside each LODO fold. This is not clean validation and does not make DIB or Molicell untouched again."
+  },
+  "post_dib_adapter_contract_quality_completed": true,
+  "post_dib_adapter_contract_quality": {
+    "rows_total": 456,
+    "rows_contract_pass": 351,
+    "quality_json": "[local path redacted]",
+    "clean_matrix_csv": "[local path redacted]",
+    "claim_boundary": "Post-DIB development audit. This grades adapter rows against a proposed canonical contract. It does not prove validation and does not train a model."
+  },
+  "post_dib_selected_window_matrix_completed": true,
+  "post_dib_selected_window_matrix": {
+    "rows": 756,
+    "complete_target_rows": 756,
+    "matrix_csv": "[local path redacted]",
+    "claim_boundary": "Post-DIB development matrix using selected diagnostic windows from existing frozen adapter rows. DIB is spent development data. Molicell is excluded until a comparable selected-window adapter exists. This is not clean validation."
+  },
+  "selected_window_physical_scale_shape_lodo": {
+    "fold_count": 3,
+    "folds_where_best_model_beats_baseline": 2,
+    "weak_folds": [
+      "radar4kit_repaired"
+    ],
+    "results_json": "[local path redacted]",
+    "claim_boundary": "Post-DIB development experiment on strict selected-window contract-pass rows. It tests physical feature normalization and scale-shape target decomposition. It is not clean validation."
+  },
+  "selected_window_physical_scale_shape_lodo_plots": {
+    "summary_json": "[local path redacted]",
+    "combined_rmse_plot": "[local path redacted]",
+    "per_dataset_plot_count": 2
+  },
+  "selected_window_pipeline_readiness_audit": {
+    "audit_json": "[local path redacted]",
+    "audit_md": "[local path redacted]",
+    "overall_status": "not_ready_for_final_model_or_final_validation",
+    "final_model_family_status": "not_ready",
+    "final_validation_dataset_status": "reserved_needs_adapter_contract",
+    "reserved_final_validation_dataset": "LiFePO4 HEV harvested-cell SOH workbook",
+    "final_validation_dataset_scoring_ready": false,
+    "cleaned_training_set_v2_status": {
+      "verdict": "cleaned_v2_ready_for_lodo",
+      "cleaned_rows": 618,
+      "defensible_development_dataset_count": 3,
+      "minimum_three_dataset_lodo_possible": true,
+      "lodo_json": "[local path redacted]",
+      "lodo_fold_count": 3,
+      "lodo_support_count": 2,
+      "physical_scale_shape_lodo_json": "[local path redacted]",
+      "shrinkage_lodo_json": "[local path redacted]",
+      "shrinkage_verdict": "no_nonbaseline_model_ready_to_freeze",
+      "shrinkage_selected_family": "raw_extra_trees_shrinkage",
+      "shrinkage_selected_alpha": 0.05,
+      "shrinkage_support_count": 2,
+      "shrinkage_fold_count": 3,
+      "shrinkage_worst_fold_relative_improvement": -0.0037541661583245186
+    }
+  },
+  "panasonic_soc_metadata_audit": {
+    "audit_json": "[local path redacted]",
+    "audit_md": "[local path redacted]",
+    "verdict": "blocked_explicit_soc_not_found",
+    "reason": "Panasonic files mention EIS vs SOC in comments and include voltage/Ah fields, but no explicit SOC column or MAT SOC field was found in sampled source files. Using Panasonic in strict cleaned LODO would require an external protocol map or a declared SOC inference method."
+  },
+  "radar4kit_selected_window_contract_audit": {
+    "audit_json": "[local path redacted]",
+    "audit_md": "[local path redacted]",
+    "audit_csv": "[local path redacted]",
+    "verdict": "repair_possible_but_not_proven",
+    "reason": "RADAR4KIT selected windows are short, metadata-rich, and same-SOC, but the sampled windows remain mostly active at the finder's own rest-current threshold. Treating them as canonical pulse/rest windows would require an adapter repair, not a looser pass threshold."
+  },
+  "final_validation_candidate_reservation": {
+    "dataset_name": "LiFePO4 HEV harvested-cell SOH workbook",
+    "reservation_status": "reserved",
+    "verdict": "reserved_unscored_needs_adapter_contract",
+    "audit_json": "[local path redacted]",
+    "audit_md": "[local path redacted]",
+    "scoring_ready": false
+  },
+  "cleaned_training_set_v2": {
+    "decisions_json": "[local path redacted]",
+    "report_md": "[local path redacted]",
+    "cleaned_matrix_csv": "[local path redacted]",
+    "verdict": "cleaned_v2_ready_for_lodo",
+    "defensible_development_dataset_count": 3
+  },
+  "radar4kit_repaired_relaxation_window_matrix": {
+    "matrix_csv": "[local path redacted]",
+    "summary_json": "[local path redacted]",
+    "report_md": "[local path redacted]",
+    "rows": 456,
+    "claim_boundary": "Post-DIB development repair only. This is not validation and does not touch LiFePO4 holdout data."
+  },
+  "cleaned_training_set_v2_shrinkage_lodo": {
+    "results_json": "[local path redacted]",
+    "report_md": "[local path redacted]",
+    "verdict": "no_nonbaseline_model_ready_to_freeze",
+    "selected_candidate": {
+      "family": "raw_extra_trees_shrinkage",
+      "base_model": "raw_extra_trees_depth_8",
+      "alpha": 0.05,
+      "folds": 3,
+      "mean_relative_improvement": 0.006768467963013134,
+      "min_relative_improvement": -0.0037541661583245186,
+      "folds_beating_baseline": 2,
+      "max_rmse": 0.007115075180317329
+    },
+    "claim_boundary": "Post-DIB development model-family selection check. This is not validation and does not touch LiFePO4 holdout data."
+  },
+  "missing_modality_transfer_pipeline": {
+    "results_json": "[local path redacted]",
+    "report_md": "[local path redacted]",
+    "fold_results_csv": "[local path redacted]",
+    "pseudo_labels_csv": "[local path redacted]",
+    "registry_json": "[local path redacted]",
+    "overall_verdict": "development_pipeline_operational_internal_heads_supported_cross_dataset_unstable",
+    "row_count": 917,
+    "pseudo_label_rows": 832,
+    "all_three_modality_dataset_count": 1,
+    "internal_supported_heads": [
+      "masked_eis_from_time_series_plus_rpt",
+      "masked_rpt_from_time_series_plus_eis"
+    ],
+    "unstable_or_weak_heads": [
+      "masked_eis_from_time_series",
+      "masked_rpt_from_time_series"
+    ],
+    "claim_boundary": "Development missing-modality pipeline. Pseudo-labels are estimates, not measurements. Current all-three-modality support is internal to DIB, not cross-battery validation."
+  },
+  "final_lifepo4_validation_contract": {
+    "contract_json": "[local path redacted]",
+    "model_family": "global_train_target_mean",
+    "model_role": "negative_control_baseline",
+    "claim_boundary": "This contract freezes the final LiFePO4 scoring rule. If model_family is global_train_target_mean, the final run tests only a boring baseline, not support for a learned time-domain-to-EIS model."
+  },
+  "final_lifepo4_validation": {
+    "results_json": "[local path redacted]",
+    "report_md": "[local path redacted]",
+    "final_claim_verdict": "no_support",
+    "metrics": {
+      "rmse_all_ohm": 0.04991867690773594,
+      "mae_all_ohm": 0.03019659102320186,
+      "bias_all_ohm": -0.02979170388849836,
+      "rmse_zreal_ohm": 0.07059296084554,
+      "rmse_znegimag_ohm": 0.0006184557364232486
+    },
+    "post_outcome_tuning_performed": false
   }
 }

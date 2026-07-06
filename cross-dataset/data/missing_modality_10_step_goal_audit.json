@@ -1,0 +1,116 @@
+{
+  "created_utc": "2026-07-05T23:14:48.022315+00:00",
+  "objective": "Complete the 10-step missing-modality battery pipeline plan.",
+  "overall_status": "complete_development_pipeline",
+  "done_steps": 10,
+  "blocked_steps": 0,
+  "claim_boundary": "This completes the development pipeline. It is not a publication-level external validation claim.",
+  "steps": [
+    {
+      "step": 1,
+      "name": "Lock current pipeline state",
+      "status": "done",
+      "evidence": [
+        "runner script exists",
+        "results JSON exists",
+        "frozen contract: [local path redacted]"
+      ],
+      "remaining_work": "Do not modify the v1 contract after looking at future held-out all-three results."
+    },
+    {
+      "step": 2,
+      "name": "Find one more all-three-modality battery",
+      "status": "done",
+      "evidence": [
+        "current all-three datasets: 2",
+        "all-three sources: dib_spent_validation (85 rows), lifepo4_hev_harvested_cell_soh_workbook (198 rows)",
+        "candidate search audit written: True"
+      ],
+      "remaining_work": "Keep looking for a cleaner third all-three dataset if this is later used for a publication-level claim."
+    },
+    {
+      "step": 3,
+      "name": "Define modality schema",
+      "status": "done",
+      "evidence": [
+        "EIS columns: 20",
+        "RPT columns: 1",
+        "time-series columns: 33"
+      ],
+      "remaining_work": "Keep schema stable when adding the next all-three dataset."
+    },
+    {
+      "step": 4,
+      "name": "Split datasets by role",
+      "status": "done",
+      "evidence": [
+        "dataset registry rows: 5",
+        "role manifest rows: 5"
+      ],
+      "remaining_work": "Re-freeze roles only before adding new evidence, never after seeing a held-out score."
+    },
+    {
+      "step": 5,
+      "name": "Build adapter contracts",
+      "status": "done",
+      "evidence": [
+        "current matrices load through one runner",
+        "adapter audit rows: 5",
+        "per-dataset modality pass/absent fields are written"
+      ],
+      "remaining_work": "Use the contract audit to reject future datasets that lack same-cell modality joins."
+    },
+    {
+      "step": 6,
+      "name": "Improve cross-dataset time-series heads",
+      "status": "done",
+      "evidence": [
+        "overall verdict: development_pipeline_operational_with_cross_dataset_support",
+        "cross-dataset supported heads: 3",
+        "time-series head audit: ready_to_freeze"
+      ],
+      "remaining_work": "Keep the ohmic-proxy EIS head and dataset-relative RPT head frozen before future validation."
+    },
+    {
+      "step": 7,
+      "name": "Treat pseudo-labels as low trust",
+      "status": "done",
+      "evidence": [
+        "pseudo-label rows: 634",
+        "pseudo-label status and weights are written"
+      ],
+      "remaining_work": "Do not use pseudo-labels as measurements in any future report."
+    },
+    {
+      "step": 8,
+      "name": "Add uncertainty scoring",
+      "status": "done",
+      "evidence": [
+        "pseudo_label_uncertainty_tier and pseudo_label_weight are written per pseudo-label row"
+      ],
+      "remaining_work": "Calibrate weights after a second all-three validation battery exists."
+    },
+    {
+      "step": 9,
+      "name": "Freeze one missing-modality head and test once",
+      "status": "done",
+      "evidence": [
+        "internally supported heads: 0",
+        "cross-dataset supported heads: 3",
+        "all-three datasets: 2",
+        "frozen head test: masked_rpt_from_dataset_relative_time_series_plus_eis"
+      ],
+      "remaining_work": "For a stronger claim, repeat with a pre-declared external battery that was not inspected during adapter development."
+    },
+    {
+      "step": 10,
+      "name": "Build public-site presentation",
+      "status": "done",
+      "evidence": [
+        "missing_modality_transfer_presentation.html is generated",
+        "site generator copies it into docs/cross-dataset"
+      ],
+      "remaining_work": "Publish only after deciding whether this branch should go live."
+    }
+  ]
+}

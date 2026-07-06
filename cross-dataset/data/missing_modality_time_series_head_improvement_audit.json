@@ -1,0 +1,112 @@
+{
+  "created_utc": "2026-07-05T23:14:48.019306+00:00",
+  "purpose": "Step 6 audit for pure time-series missing-modality heads.",
+  "overall_status": "ready_to_freeze",
+  "claim_boundary": "This audit is diagnostic. It does not convert partial folds into a validated cross-battery head.",
+  "pure_time_series_tasks": [
+    {
+      "task": "masked_eis_from_time_series",
+      "status": "completed",
+      "verdict": "partial_or_no_support",
+      "fold_group": "dataset_key",
+      "folds_beating_baseline": 1,
+      "fold_count": 5,
+      "mean_relative_improvement_vs_baseline": -1.4020281869957976,
+      "worst_relative_improvement_vs_baseline": -2.599608818127244
+    },
+    {
+      "task": "masked_eis_from_minimal_time_series_shallow_rf",
+      "status": "completed",
+      "verdict": "partial_or_no_support",
+      "fold_group": "dataset_key",
+      "folds_beating_baseline": 2,
+      "fold_count": 5,
+      "mean_relative_improvement_vs_baseline": -1.1838425622956292,
+      "worst_relative_improvement_vs_baseline": -2.4398716346230533
+    },
+    {
+      "task": "masked_eis_from_ohmic_time_series",
+      "status": "completed",
+      "verdict": "supports_cross_dataset_transfer_head",
+      "fold_group": "dataset_key",
+      "folds_beating_baseline": 5,
+      "fold_count": 5,
+      "mean_relative_improvement_vs_baseline": 0.40945933275394086,
+      "worst_relative_improvement_vs_baseline": 0.06759356513218973
+    },
+    {
+      "task": "masked_eis_from_time_series_plus_rpt",
+      "status": "completed",
+      "verdict": "partial_or_no_support",
+      "fold_group": "dataset_key",
+      "folds_beating_baseline": 1,
+      "fold_count": 2,
+      "mean_relative_improvement_vs_baseline": -0.21510619432138103,
+      "worst_relative_improvement_vs_baseline": -0.4495111369834593
+    },
+    {
+      "task": "masked_eis_from_ohmic_time_series_plus_rpt",
+      "status": "completed",
+      "verdict": "partial_or_no_support",
+      "fold_group": "dataset_key",
+      "folds_beating_baseline": 1,
+      "fold_count": 2,
+      "mean_relative_improvement_vs_baseline": -0.10577081169665854,
+      "worst_relative_improvement_vs_baseline": -0.23647192451813742
+    },
+    {
+      "task": "masked_rpt_from_time_series",
+      "status": "completed",
+      "verdict": "partial_or_no_support",
+      "fold_group": "dataset_key",
+      "folds_beating_baseline": 1,
+      "fold_count": 2,
+      "mean_relative_improvement_vs_baseline": -0.41551011035452645,
+      "worst_relative_improvement_vs_baseline": -0.8892907615423314
+    },
+    {
+      "task": "masked_rpt_from_time_series_plus_eis",
+      "status": "completed",
+      "verdict": "partial_or_no_support",
+      "fold_group": "dataset_key",
+      "folds_beating_baseline": 1,
+      "fold_count": 2,
+      "mean_relative_improvement_vs_baseline": -0.3764045951212785,
+      "worst_relative_improvement_vs_baseline": -0.851274380006979
+    },
+    {
+      "task": "masked_rpt_from_dataset_relative_time_series",
+      "status": "completed",
+      "verdict": "supports_cross_dataset_transfer_head",
+      "fold_group": "dataset_key",
+      "folds_beating_baseline": 2,
+      "fold_count": 2,
+      "mean_relative_improvement_vs_baseline": 0.03710325128932887,
+      "worst_relative_improvement_vs_baseline": 0.03184557112435424
+    },
+    {
+      "task": "masked_rpt_from_dataset_relative_time_series_plus_eis",
+      "status": "completed",
+      "verdict": "supports_cross_dataset_transfer_head",
+      "fold_group": "dataset_key",
+      "folds_beating_baseline": 2,
+      "fold_count": 2,
+      "mean_relative_improvement_vs_baseline": 0.08228213135805038,
+      "worst_relative_improvement_vs_baseline": 0.06344583174371701
+    }
+  ],
+  "rpt_plus_eis_task": {
+    "task": "masked_rpt_from_dataset_relative_time_series_plus_eis",
+    "status": "completed",
+    "verdict": "supports_cross_dataset_transfer_head",
+    "fold_group": "dataset_key",
+    "folds_beating_baseline": 2,
+    "fold_count": 2,
+    "worst_relative_improvement_vs_baseline": 0.06344583174371701
+  },
+  "eis_head_ready": true,
+  "rpt_head_ready": true,
+  "rpt_plus_eis_head_ready": true,
+  "reason": "Both pure EIS and pure RPT time-series heads have cross-dataset support.",
+  "next_action": "Improve comparable time-domain adapters or add a second all-three dataset before freezing a pure time-series head."
+}
