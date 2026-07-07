@@ -1,0 +1,108 @@
+{
+  "experiment": "final_lifepo4_validation",
+  "created_utc": "2026-07-03T20:14:34.970897+00:00",
+  "contract_json": "[local path redacted]",
+  "contract_model_family": "global_train_target_mean",
+  "contract_model_role": "negative_control_baseline",
+  "holdout_matrix_csv": "[local path redacted]",
+  "training_matrix_csv": "[local path redacted]",
+  "prediction_csv": "[local path redacted]",
+  "nyquist_png": "[local path redacted]",
+  "frequency_rmse_png": "[local path redacted]",
+  "train_rows": 618,
+  "holdout_rows": 198,
+  "target_columns": [
+    "target_zreal_0p05hz_ohm",
+    "target_znegimag_0p05hz_ohm",
+    "target_zreal_0p1hz_ohm",
+    "target_znegimag_0p1hz_ohm",
+    "target_zreal_0p2hz_ohm",
+    "target_znegimag_0p2hz_ohm",
+    "target_zreal_0p5hz_ohm",
+    "target_znegimag_0p5hz_ohm",
+    "target_zreal_10hz_ohm",
+    "target_znegimag_10hz_ohm",
+    "target_zreal_1hz_ohm",
+    "target_znegimag_1hz_ohm",
+    "target_zreal_20hz_ohm",
+    "target_znegimag_20hz_ohm",
+    "target_zreal_2hz_ohm",
+    "target_znegimag_2hz_ohm",
+    "target_zreal_40hz_ohm",
+    "target_znegimag_40hz_ohm",
+    "target_zreal_5hz_ohm",
+    "target_znegimag_5hz_ohm"
+  ],
+  "metrics": {
+    "rmse_all_ohm": 0.04991867690773594,
+    "mae_all_ohm": 0.03019659102320186,
+    "bias_all_ohm": -0.02979170388849836,
+    "rmse_zreal_ohm": 0.07059296084554,
+    "rmse_znegimag_ohm": 0.0006184557364232486
+  },
+  "per_frequency_metrics": [
+    {
+      "frequency_hz": 0.05,
+      "rmse_pair_ohm": 0.04915940726305526,
+      "rmse_zreal_ohm": 0.06951462554590032,
+      "rmse_znegimag_ohm": 0.0010057236812978834
+    },
+    {
+      "frequency_hz": 0.1,
+      "rmse_pair_ohm": 0.04933588687929857,
+      "rmse_zreal_ohm": 0.06976685000580848,
+      "rmse_znegimag_ohm": 0.000803808808678367
+    },
+    {
+      "frequency_hz": 0.2,
+      "rmse_pair_ohm": 0.050045842732114446,
+      "rmse_zreal_ohm": 0.07077302160980802,
+      "rmse_znegimag_ohm": 0.0005934321803835986
+    },
+    {
+      "frequency_hz": 0.5,
+      "rmse_pair_ohm": 0.04974110340005407,
+      "rmse_zreal_ohm": 0.07034293793883672,
+      "rmse_znegimag_ohm": 0.0004752021072206869
+    },
+    {
+      "frequency_hz": 1.0,
+      "rmse_pair_ohm": 0.049390582073323815,
+      "rmse_zreal_ohm": 0.06984702093474678,
+      "rmse_znegimag_ohm": 0.0005028534821566512
+    },
+    {
+      "frequency_hz": 2.0,
+      "rmse_pair_ohm": 0.049796430324466935,
+      "rmse_zreal_ohm": 0.07042149236698222,
+      "rmse_znegimag_ohm": 0.0004270350407683579
+    },
+    {
+      "frequency_hz": 5.0,
+      "rmse_pair_ohm": 0.05069731395618183,
+      "rmse_zreal_ohm": 0.07169575500365082,
+      "rmse_znegimag_ohm": 0.0003924273178778703
+    },
+    {
+      "frequency_hz": 10.0,
+      "rmse_pair_ohm": 0.050644178008144546,
+      "rmse_zreal_ohm": 0.07162002676936124,
+      "rmse_znegimag_ohm": 0.0004871322174115043
+    },
+    {
+      "frequency_hz": 20.0,
+      "rmse_pair_ohm": 0.05031041651104713,
+      "rmse_zreal_ohm": 0.07114743243448109,
+      "rmse_znegimag_ohm": 0.0005646919611931082
+    },
+    {
+      "frequency_hz": 40.0,
+      "rmse_pair_ohm": 0.050039981562111355,
+      "rmse_zreal_ohm": 0.07076408408629231,
+      "rmse_znegimag_ohm": 0.000666267889845986
+    }
+  ],
+  "final_claim_verdict": "no_support",
+  "reason": "No learned model family was freeze-ready before LiFePO4. The final frozen run therefore scored only a global-mean negative-control baseline. This does not support the learned time-domain-to-EIS pipeline.",
+  "post_outcome_tuning_performed": false
+}

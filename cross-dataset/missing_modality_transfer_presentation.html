@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Missing-Modality Battery Transfer Pipeline</title>
+  <title>Predicting Missing Battery Measurements From Partial Test Data</title>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
 (function () {
@@ -210,13 +210,13 @@
     <div class="side-section">Workstreams</div>
     <a class="side-link" href="../presentations/#cambridge-molicell-eis">Cross-dataset battery transfer</a>
     <div class="side-section">This Page</div>
-    <a class="side-link" href="#summary">Summary</a><a class="side-link" href="#objective">Objective</a><a class="side-link" href="#methodology">Methodology</a><a class="side-link" href="#results">Results</a><a class="side-link" href="#conclusion">Conclusion</a><a class="side-link" href="#inputs">Inputs</a><a class="side-link" href="#math">Math</a><a class="side-link" href="#graphs">Graphs</a><a class="side-link" href="#code">Code</a><a class="side-link" href="#outputs">Outputs</a><a class="side-link" href="#goal-audit">Goal Audit</a><a class="side-link" href="#glossary">Glossary</a><a class="side-link" href="#limits">Limits</a>
+    <a class="side-link" href="#summary">Summary</a><a class="side-link" href="#objective">Objective</a><a class="side-link" href="#plain-language">Plain Language</a><a class="side-link" href="#data-coverage">Data Coverage</a><a class="side-link" href="#methodology">Methodology</a><a class="side-link" href="#results">Results</a><a class="side-link" href="#task-details">Task Details</a><a class="side-link" href="#claim-boundary">Claim Boundary</a><a class="side-link" href="#conclusion">Conclusion</a><a class="side-link" href="#inputs">Inputs</a><a class="side-link" href="#math">Math</a><a class="side-link" href="#graphs">Graphs</a><a class="side-link" href="#code">Code</a><a class="side-link" href="#outputs">Outputs</a><a class="side-link" href="#goal-audit">Goal Audit</a><a class="side-link" href="#glossary">Glossary</a><a class="side-link" href="#limits">Limits</a>
   </aside>
   <div class="page-content">
     <header>
-      <div class="kicker">Missing-modality transfer, professor-facing roadmap</div>
-      <h1>Missing-Modality Battery Transfer Pipeline</h1>
-      <p class="lead">This page explains the full pipeline for batteries that do not all have the same measurements. It learns from complete rows, tests by hiding known modalities, and writes pseudo-labels only with clear uncertainty.</p>
+      <div class="kicker">Incomplete battery test data, professor-facing roadmap</div>
+      <h1>Predicting Missing Battery Measurements From Partial Test Data</h1>
+      <p class="lead">This page explains the full pipeline for batteries that do not all have the same measurements. It learns from complete rows, tests by hiding known measurements, and writes pseudo-labels only with clear uncertainty.</p>
       <div class="button-row">
         <a class="button" href="data/missing_modality_transfer_results.json" download>Download results JSON</a>
         <a class="button" href="data/missing_modality_transfer_fold_results.csv" download>Download fold table</a>
@@ -232,7 +232,8 @@
 <main>
   <section id="summary" class="note">
     <h2>Executive Read</h2>
-    <p>The pipeline is operational: ohmic-proxy EIS and dataset-relative RPT heads now pass their grouped development folds. Current verdict: <code>development_pipeline_operational_with_cross_dataset_support</code>.</p>
+    <p>The pipeline is operational: it loaded 917 rows across 5 datasets, found 2 complete datasets with time-series, EIS, and RPT-like labels, and wrote 634 pseudo-label rows.</p>
+    <p>Current verdict: <code>development_pipeline_operational_with_cross_dataset_support</code>. That wording is intentionally dry. A flashy name would hide the real point: this is a development pipeline for incomplete battery test data, not a validated external claim.</p>
     <p><strong>Blunt boundary:</strong> pseudo-labels are estimates, not measurements. This completes the development pipeline, not a publication-level external validation claim.</p>
     <div class="reader-path">
       <div class="reader-card"><strong>What the pipeline sees</strong><p>Time-series features, fixed-grid EIS targets, and RPT-like health labels when available.</p></div>
@@ -248,6 +249,18 @@
     <p>The honest answer is: yes for the development pipeline. The current supported heads are ohmic-proxy EIS from time-series and dataset-relative SOH from time-series plus EIS.</p>
   </section>
 
+  <section id="plain-language">
+    <h2>Plain Language Version</h2>
+    <p>Different battery datasets measure different things. One dataset may have current and voltage traces. Another may have EIS. Another may have health labels. The old name, missing-modality transfer, describes that technically, but it is bad first-glance communication. The practical question is simpler: can we predict a missing battery measurement from the measurements we do have?</p>
+    <p>The answer is mixed. Some heads are useful inside the current development evidence. Some fail when the held-out dataset is too different. That is why this page separates <strong>working development machinery</strong> from <strong>external validation</strong>.</p>
+  </section>
+
+  <section id="data-coverage">
+    <h2>Data Coverage</h2>
+    <p>The pipeline only earns trust if the row contracts are clear. This table shows what each dataset actually contributes instead of pretending every dataset has every measurement.</p>
+    <div class="table-scroll"><table><thead><tr><th>Dataset key</th><th>Assigned role</th><th>All-three rows</th><th>Final validation?</th><th>Reason</th></tr></thead><tbody><tr><td>dib_spent_validation</td><td>complete_modality_development_source</td><td>85</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr><tr><td>lifepo4_hev_harvested_cell_soh_workbook</td><td>complete_modality_development_source</td><td>198</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr><tr><td>molicell_p42a_local_high_power_characterization</td><td>missing_rpt_pseudo_label_target</td><td>0</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr><tr><td>radar4kit_repaired</td><td>missing_rpt_pseudo_label_target</td><td>0</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr><tr><td>stanford_secl</td><td>missing_rpt_pseudo_label_target</td><td>0</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr></tbody></table></div>
+  </section>
+
   <section id="methodology">
     <h2>Methodology</h2>
     <div class="step-list">
@@ -256,20 +269,36 @@
       <div class="step"><strong>Run masked-modality tests</strong><p>Known EIS or RPT values are hidden and reconstructed, then compared with a train-mean baseline.</p></div>
       <div class="step"><strong>Write pseudo-labels</strong><p>Missing RPT-like labels are estimated for rows with time-series plus EIS. The output is explicitly marked as pseudo-label data.</p></div>
     </div>
+    <p>This is the right boring discipline: hide known values, predict them, compare against a baseline, and only then use the model to fill missing values. Anything else would be hand-wavy data decoration.</p>
   </section>
 
   <section id="results">
     <h2>Results</h2>
     <div class="table-scroll"><table class="metric-table"><tbody><tr><td>Overall verdict</td><td>development_pipeline_operational_with_cross_dataset_support</td></tr>
 <tr><td>Rows loaded</td><td>917</td></tr>
+<tr><td>Completed masked-measurement tasks</td><td>9</td></tr>
+<tr><td>Tasks beating every grouped baseline</td><td>3</td></tr>
 <tr><td>Pseudo-label rows written</td><td>634</td></tr>
-<tr><td>All-three-modality datasets</td><td>2</td></tr></tbody></table></div>
+<tr><td>All-three-measurement datasets</td><td>2</td></tr>
+<tr><td>Pseudo-label tasks</td><td>2</td></tr></tbody></table></div>
     <div class="table-scroll"><table><thead><tr><th>Task</th><th>Verdict</th><th>Folds beating baseline</th><th>Worst improvement</th><th>Fold group</th></tr></thead><tbody><tr><td>masked_eis_from_time_series</td><td>partial_or_no_support</td><td>1 / 5</td><td>-2.6</td><td>dataset_key</td></tr><tr><td>masked_eis_from_minimal_time_series_shallow_rf</td><td>partial_or_no_support</td><td>2 / 5</td><td>-2.44</td><td>dataset_key</td></tr><tr><td>masked_eis_from_ohmic_time_series</td><td>supports_cross_dataset_transfer_head</td><td>5 / 5</td><td>0.06759</td><td>dataset_key</td></tr><tr><td>masked_eis_from_time_series_plus_rpt</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.4495</td><td>dataset_key</td></tr><tr><td>masked_eis_from_ohmic_time_series_plus_rpt</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.2365</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_time_series</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.8893</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_time_series_plus_eis</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.8513</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series</td><td>supports_cross_dataset_transfer_head</td><td>2 / 2</td><td>0.03185</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series_plus_eis</td><td>supports_cross_dataset_transfer_head</td><td>2 / 2</td><td>0.06345</td><td>dataset_key</td></tr></tbody></table></div>
+  </section>
+
+  <section id="task-details">
+    <h2>Task Details</h2>
+    <p>These are the actual masked prediction tasks. The model family is not the story. The story is whether a task beats a boring baseline across grouped folds.</p>
+    <div class="table-scroll"><table><thead><tr><th>Task</th><th>Rows</th><th>Features</th><th>Targets</th><th>Candidate models</th><th>Verdict</th></tr></thead><tbody><tr><td>masked_eis_from_time_series</td><td>917</td><td>33</td><td>20</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_eis_from_minimal_time_series_shallow_rf</td><td>917</td><td>10</td><td>20</td><td>random_forest_shallow</td><td>partial_or_no_support</td></tr><tr><td>masked_eis_from_ohmic_time_series</td><td>917</td><td>16</td><td>20</td><td>ridge, random_forest, extra_trees</td><td>supports_cross_dataset_transfer_head</td></tr><tr><td>masked_eis_from_time_series_plus_rpt</td><td>283</td><td>30</td><td>20</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_eis_from_ohmic_time_series_plus_rpt</td><td>283</td><td>17</td><td>20</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_rpt_from_time_series</td><td>283</td><td>29</td><td>1</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_rpt_from_time_series_plus_eis</td><td>283</td><td>49</td><td>1</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series</td><td>283</td><td>25</td><td>1</td><td>ridge, random_forest, extra_trees</td><td>supports_cross_dataset_transfer_head</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series_plus_eis</td><td>283</td><td>45</td><td>1</td><td>ridge, random_forest, extra_trees</td><td>supports_cross_dataset_transfer_head</td></tr></tbody></table></div>
+  </section>
+
+  <section id="claim-boundary" class="note">
+    <h2>Claim Boundary</h2>
+    <p>Development pipeline. It estimates missing modalities; it does not convert pseudo-labels into measurements.</p>
+    <p>Do not oversell this. The pipeline is useful because it refuses to blur three different things: real measurements, hidden-measurement tests, and pseudo-labels. If you mix those up, the whole project starts lying to itself.</p>
   </section>
 
   <section id="conclusion">
     <h2>Conclusion</h2>
-    <p>The pipeline is now a real missing-modality transfer system, not just an EIS predictor. But the current evidence says the generalization claim is not ready.</p>
+    <p>The pipeline is now a real incomplete-test-data prediction system, not just an EIS predictor. But the current evidence says the generalization claim is not ready.</p>
     <div class="vertical-flow">
       <div class="flow-item"><h3>Supported</h3><ul><li>The runner builds a registry across incomplete batteries.</li><li>It performs masked-modality tests instead of blindly filling missing data.</li><li>It writes pseudo-labels with explicit confidence boundaries.</li><li>DIB and LiFePO4 now both provide complete time-series, EIS, and RPT-like rows.</li><li>Ohmic-proxy EIS beats baseline across all grouped EIS folds.</li><li>Dataset-relative RPT heads beat baseline on both all-three grouped folds.</li><li>The public-site presentation and downloadable artifacts are generated.</li></ul></div>
       <div class="flow-item"><h3>Not supported</h3><ul><li>A publication-level cross-battery validation claim.</li><li>Treating pseudo-labels as measured RPT or EIS.</li><li>Assuming missing measurements are roughly the same as another battery.</li><li>Changing the frozen heads after seeing a future held-out validation battery.</li></ul></div>
