@@ -258,7 +258,8 @@ code {
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   max-width: 760px;
-  margin: 18px 0 30px;
+  margin: 18px auto 30px;
+  text-align: center;
 }
 .journey-step {
   position: relative;
