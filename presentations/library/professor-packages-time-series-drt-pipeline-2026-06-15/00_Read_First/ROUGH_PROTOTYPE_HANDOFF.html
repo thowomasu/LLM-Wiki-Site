@@ -173,7 +173,7 @@ th {
 <ul><li>A multi-SOC Cell28 validation sweep.</li></ul>
 <ul><li>Scale, regularization, and SOC-alignment diagnostics.</li></ul>
 <ul><li>A generalized DIB batch runner tested on multiple cells.</li></ul>
-<ul><li>SOC-mapping, model-assumption, and viability reports when those outputs exist.</li></ul>
+<ul><li>SOC-mapping, model-assumption, and readiness reports when those outputs exist.</li></ul>
 <ul><li>A pre-declared model-rule step that selects lambda before EIS scoring.</li></ul>
 <ul><li>HTML mirrors of the main handoff docs when the export step has run.</li></ul>
 <h2>Reproduction Command</h2>
@@ -245,14 +245,14 @@ th {
 <ul><li>Median normalized RMSE after rule selection: 0.9784</li></ul>
 <p>Interpretation: this is the honest model-selection gate. It picks settings from time-domain fit quality and stability before EIS metrics are read.</p>
 <h2>Viability Report</h2>
-<ul><li>Engineering scaffold: research_scaffold_viable</li></ul>
+<ul><li>Engineering early workflow: research_early workflow_viable</li></ul>
 <ul><li>Scientific method: not_validated</li></ul>
 <ul><li>Batch median EIS correlation: 0.1046</li></ul>
 <ul><li>Rule-selected median EIS correlation: 0.1407</li></ul>
 <ul><li>Model-sensitive targets: 10</li></ul>
 <p>Interpretation: the prototype is useful for research iteration. It is not safe as a training-label generator.</p>
 <h2>Rough Prototype Verdict</h2>
-<p>The rough prototype is complete as a research scaffold. It can load time-series data, find pulse windows, estimate a time-domain DRT-like spectrum, compare against EIS-derived DRT, run diagnostics, batch-test multiple DIB cells, flag obvious low-quality windows, test assumption sensitivity, and apply a pre-declared model-selection rule.</p>
+<p>The rough prototype is complete as a research early workflow. It can load time-series data, find pulse windows, estimate a time-domain DRT-like spectrum, compare against EIS-derived DRT, run diagnostics, batch-test multiple DIB cells, flag obvious low-quality windows, test assumption sensitivity, and apply a pre-declared model-selection rule.</p>
 <p>It is not complete as a scientific method. The main blockers are baseline/OCV handling, EIS/time-domain comparability, pre-declared regularization, and stronger quality gates for selecting valid pulse windows.</p>
 <h2>What To Ask The Professor For</h2>
 <ul><li>Exact protocol annotations tying time-series steps to SOC targets.</li></ul>

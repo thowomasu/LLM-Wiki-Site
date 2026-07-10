@@ -235,8 +235,9 @@ code {
 .summary-grid,
 .terms-strip {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  max-width: 860px;
   margin: 20px 0 28px;
 }
 .start-card,
@@ -252,6 +253,38 @@ code {
   border-radius: 6px;
   background: var(--panel);
 }
+.journey {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  max-width: 760px;
+  margin: 18px 0 30px;
+}
+.journey-step {
+  position: relative;
+  min-width: 0;
+  padding: 13px 12px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.journey-step:not(:last-child)::after {
+  content: "v";
+  position: absolute;
+  right: 50%;
+  bottom: -14px;
+  z-index: 2;
+  width: 16px;
+  color: var(--muted);
+  background: var(--panel);
+  text-align: center;
+  font-weight: 800;
+}
+.journey-step strong,
+.journey-step span { display: block; }
+.journey-step strong { margin-bottom: 4px; font-size: 15px; }
+.journey-step span { color: var(--muted); font-size: 13px; }
 .start-card h3,
 .summary-card h3,
 .term-card h3 {
@@ -294,7 +327,8 @@ code {
   width: auto;
 }
 .terms-strip {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px;
 }
 .term-card {
   border-left-color: var(--green);

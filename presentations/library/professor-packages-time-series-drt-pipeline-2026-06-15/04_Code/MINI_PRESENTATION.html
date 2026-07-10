@@ -1,60 +1,6 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mini Presentation: Code</title>
-  <style>:root{color-scheme:light;--bg:#f6f7f9;--paper:#fff;--ink:#172026;--muted:#53616c;--line:#d8dee4;--risk:#b42318}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--bg)}main{max-width:1180px;margin:0 auto;padding:28px}h1{margin:0 0 8px;font-size:34px;line-height:1.1}.meta{margin:0 0 24px;color:var(--muted)}.slide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px;margin:18px 0}.slide h2{margin:0 0 12px;font-size:22px}.slide:nth-of-type(3){border-left:5px solid var(--risk)}ul{margin:0;padding-left:22px}li{margin:8px 0;line-height:1.45}code{background:#eef2f5;padding:2px 5px;border-radius:4px}.graphs{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border:1px solid #ccd3da;border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.35}.note{margin-top:22px;color:var(--muted);font-size:13px}@media print{body{background:#fff}main{padding:0}.slide{break-inside:avoid}}</style>
-</head>
-<body>
-<main>
-  <h1>Mini Presentation: Code</h1>
-  <p class="meta">Time-Series DRT Pipeline, professor handoff, 2026-06-15</p>
-
-  <section class="slide">
-    <h2>Slide 1: Results</h2>
-    <ul>
-      <li>The folder contains the scripts needed to inspect or rerun the pipeline logic.</li>
-      <li>Main workflow scripts cover synthetic testing, window finding, candidate fitting, EIS comparison, batch processing, sensitivity, model rule, viability reporting, plotting, and HTML export.</li>
-      <li>The copied code is mainly for review inside the professor package.</li>
-    </ul>
-    <div class="graphs">
-      <figure><img src="../03_Key_Plots/section_3_candidate_fit_plot.png" alt="The code produces inspectable plots and tables, not only terminal output."><figcaption>The code produces inspectable plots and tables, not only terminal output.</figcaption></figure>
-      <figure><img src="../03_Key_Plots/model_rule_summary.png" alt="The model-rule script reports EIS metrics only after model selection."><figcaption>The model-rule script reports EIS metrics only after model selection.</figcaption></figure>
-    </div>
-  </section>
-
-  <section class="slide">
-    <h2>Slide 2: Achievements</h2>
-    <ul>
-      <li>The pipeline is modular enough to audit one step at a time.</li>
-      <li>Outputs are written as reports, CSVs, JSON, logs, plots, and HTML mirrors.</li>
-      <li>The model-rule code keeps EIS metrics out of model selection.</li>
-      <li>Logs scrub local absolute paths where the runner supports it.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <h2>Slide 3: Open Issues</h2>
-    <ul>
-      <li>Full real-data reruns still need the external DIB dataset and EIS workbook.</li>
-      <li>The package does not vendor every dependency.</li>
-      <li>Code portability depends on path configuration and the correct Python environment.</li>
-      <li>Scientific validity is not solved by code organization.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <h2>Slide 4: Roadmap</h2>
-    <ul>
-      <li>Keep scripts runnable from the full project repo.</li>
-      <li>Add command-line arguments where paths are still hard-coded.</li>
-      <li>Add stricter tests around SOC mapping and model-rule selection.</li>
-      <li>Freeze a validation protocol before expanding results.</li>
-    </ul>
-  </section>
-
-
-</main>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Code | Time-Series DRT Pipeline</title><style>
+:root{color-scheme:light;--ink:#17212b;--muted:#586673;--paper:#f5f7f9;--panel:#fff;--line:#d8e0e7;--blue:#225f9f;--teal:#147a73;--amber:#b85f17;--note:#fff8f0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}.shell{min-height:100vh;display:grid;grid-template-columns:260px minmax(0,1fr)}aside{position:sticky;top:0;height:100vh;overflow:auto;padding:20px 14px;background:var(--panel);border-right:1px solid var(--line)}.brand{display:block;color:var(--ink);text-decoration:none;font-size:18px;font-weight:800}.brand span{display:block;margin-top:5px;color:var(--muted);font-size:13px;font-weight:400}.nav-title{margin:22px 8px 8px;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase}.nav-link{display:block;margin:5px 0;padding:8px 9px;color:var(--ink);text-decoration:none;border-radius:6px;font-size:14px}.nav-link:hover,.nav-link.active{background:var(--paper);color:var(--blue)}header{padding:42px min(6vw,64px) 26px;background:var(--panel);border-bottom:1px solid var(--line)}main{max-width:900px;margin:auto;padding:28px min(5vw,48px) 70px}h1{max-width:850px;margin:0 0 12px;font-size:clamp(38px,6vw,70px);line-height:1.05}h2{margin:0 0 14px;font-size:clamp(27px,3vw,40px);line-height:1.12}p,li{font-size:18px}.lead{max-width:760px;color:var(--muted);font-size:21px}.kicker{margin-bottom:10px;color:var(--teal);font-size:13px;font-weight:800;text-transform:uppercase}.path{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;max-width:720px;margin-top:22px}.path a{padding:10px;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:6px;color:var(--ink);text-decoration:none;background:var(--panel);font-size:14px}.path a.active{border-left-color:var(--teal);background:var(--paper);font-weight:800}.slide{margin:22px 0;padding:24px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:8px}.slide ul{margin:0;padding-left:22px}.slide li{margin:8px 0}.graphs{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin-top:18px}figure{margin:0}img{display:block;width:100%;max-height:620px;object-fit:contain;border:1px solid var(--line);border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:24px}.button{display:inline-flex;padding:9px 13px;border:1px solid var(--line);border-radius:6px;color:var(--ink);text-decoration:none;background:var(--panel)}.note{padding:15px 17px;border-left:5px solid var(--amber);background:var(--note)}code{background:#eef2f5;padding:2px 5px;border-radius:4px}@media(max-width:850px){.shell{display:block}aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}header{padding-top:28px}.slide{padding:18px}}
+</style></head>
+<body><div class="shell"><aside><a class="brand" href="../00_Read_First/MINI_PRESENTATION.html">Time-Series DRT Pipeline<span>One ordered research story</span></a><div class="nav-title">Presentation path</div><a class="nav-link" href="../00_Read_First/MINI_PRESENTATION.html">A. Read First</a><a class="nav-link" href="../01_Method_And_Math/MINI_PRESENTATION.html">B. Method And Math</a><a class="nav-link" href="../02_Key_Results/MINI_PRESENTATION.html">C. Key Results</a><a class="nav-link" href="../03_Key_Plots/MINI_PRESENTATION.html">D. Key Plots</a><a class="nav-link active" href="../04_Code/MINI_PRESENTATION.html">E. Code</a><a class="nav-link" href="../05_Reproduction/MINI_PRESENTATION.html">F. Reproduction</a></aside><div><header><div class="kicker">Stage E of 6</div><h1>Code</h1><p class="lead">Time-Series DRT Pipeline</p><nav class="path"><a class="" href="../00_Read_First/MINI_PRESENTATION.html">A. Read First</a><a class="" href="../01_Method_And_Math/MINI_PRESENTATION.html">B. Method And Math</a><a class="" href="../02_Key_Results/MINI_PRESENTATION.html">C. Key Results</a><a class="" href="../03_Key_Plots/MINI_PRESENTATION.html">D. Key Plots</a><a class="active" href="../04_Code/MINI_PRESENTATION.html">E. Code</a><a class="" href="../05_Reproduction/MINI_PRESENTATION.html">F. Reproduction</a></nav></header><main><nav class="pager"><a class="button" href="../03_Key_Plots/MINI_PRESENTATION.html">Previous: Key Plots</a><span></span><a class="button" href="../05_Reproduction/MINI_PRESENTATION.html">Next: Reproduction</a></nav><p class="note"><strong>Reading rule:</strong> follow the stages in order. Check the limits before accepting the conclusion.</p></main></div></div></body></html>

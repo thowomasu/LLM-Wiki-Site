@@ -194,7 +194,7 @@
     <header>
       <div class="kicker">CALB pipeline, self-contained technical page</div>
       <h1>CALB L148N58A Pulse-To-EIS Pipeline Viability</h1>
-      <p class="lead">This page uses the same structure as the cross-dataset presentation: objective, methodology, results, conclusion, inputs, math, graphs, code, outputs, glossary, and limits. The truth is mixed: the internal pulse bridge is strong, the drive-cycle extension is weak, and external validation is still blocked.</p>
+      <p class="lead">This page uses the same structure as the cross-dataset presentation: question, method, results, conclusion, inputs, math, graphs, code, outputs, glossary, and limits. The truth is mixed: the internal pulse bridge is strong, the drive-cycle extension is weak, and external validation is still blocked.</p>
       <div class="button-row">
         <a class="button" href="../data/section_33_summary.json" download>Download frozen pulse-to-EIS rule JSON</a>
         <a class="button" href="../data/section_34_summary.json" download>Download drive-cycle transfer test JSON</a>
@@ -206,7 +206,7 @@
   <section id="summary" class="note">
     <h2>Executive Read</h2>
     <p>The CALB pipeline has a real internal result: frozen pulse-to-EIS rule produces 246 quality-pass rows out of 246 for same-dataset HPPC pulse-to-EIS bridging.</p>
-    <p><strong>Blunt boundary:</strong> this is not external validation. external-validation claim boundary says external replication is blocked, leakage and claim audit labels the claim as <code>internal_engineering_result_not_clean_holdout_or_external_validation</code>, and SOC-stratified drive-cycle audit says the drive-cycle result is SOC-misaligned with the ECM baseline still stronger.</p>
+    <p><strong>Blunt boundary:</strong> this is not external validation. external-validation limit of the evidence says repeat test on outside data is blocked, leakage and claim audit labels the claim as <code>internal_engineering_result_not_clean_holdout_or_external_validation</code>, and SOC-stratified drive-cycle audit says the drive-cycle result is SOC-misaligned with the ECM baseline still stronger.</p>
     <div class="reader-path">
       <div class="reader-card"><strong>What works</strong><p>The internal HPPC-to-EIS bridge passes quality gates across 10 C, 25 C, and 40 C.</p></div>
       <div class="reader-card"><strong>What got weaker</strong><p>The drive-cycle transfer looked better than a baseline-only comparator in drive-cycle transfer test, then lost to a stronger ECM baseline in drive-cycle ECM baseline check.</p></div>
@@ -266,7 +266,7 @@
     <div class="math">internal target: y = measured EIS-derived behavior for the same cell, temperature, and diagnostic context</div>
     <div class="math">quality gate: pass if pulse/EIS alignment, correlation, OCV delta, and time-fit error stay inside the declared rule</div>
     <div class="math">drive-cycle test: compare fixed HPPC-derived dynamics against baseline and ECM variants on held-out dynamic voltage</div>
-    <div class="plain-callout"><strong>Weak spot:</strong><p>The drive-cycle extension is where the story breaks. drive-cycle ECM baseline check found median DRT holdout RMSE of 150.9172 mV versus 134.8626 mV for the best ECM baseline.</p></div>
+    <div class="plain-callout"><strong>Weak spot:</strong><p>The drive-cycle extension is where the story breaks. drive-cycle ECM baseline check found median DRT kept-back test RMSE of 150.9172 mV versus 134.8626 mV for the best ECM baseline.</p></div>
   </section>
 
   <section id="graphs">
@@ -312,7 +312,7 @@
         <tr><td>drive-cycle transfer test DRT vs baseline</td><td>100.0%</td><td>drive_cycle_transfer_supports_hppc_drt</td></tr>
         <tr><td>drive-cycle ECM baseline check DRT vs best ECM</td><td>12.1%</td><td>drive_cycle_ecm_baseline_beats_fixed_drt</td></tr>
         <tr><td>SOC alignment audit drive SOC delta &gt; 5 pct</td><td>182</td><td>Rows flagged as SOC-misaligned</td></tr>
-        <tr><td>external-validation claim boundary external ready</td><td>no</td><td>external_replication_blocked_missing_corrected_eis</td></tr>
+        <tr><td>external-validation limit of the evidence external ready</td><td>no</td><td>external_replication_blocked_missing_corrected_eis</td></tr>
         <tr><td>SOC-stratified drive-cycle audit aligned DRT win vs best ECM</td><td>0.0%</td><td>drive_cycle_result_soc_misaligned_and_ecm_baseline_still_stronger</td></tr>
       </tbody>
     </table>
@@ -328,7 +328,7 @@
 <tr><td>regression checks</td><td>Regression checks</td><td>49</td><td>calb_core_regression_checks_pass</td></tr>
 <tr><td>drive-cycle ECM baseline check</td><td>ECM baseline audit</td><td>198</td><td>drive_cycle_ecm_baseline_beats_fixed_drt</td></tr>
 <tr><td>SOC alignment audit</td><td>SOC alignment audit</td><td></td><td>soc_alignment_audit_complete</td></tr>
-<tr><td>external-validation claim boundary</td><td>External replication readiness</td><td>13</td><td>external_replication_blocked_missing_corrected_eis</td></tr>
+<tr><td>external-validation limit of the evidence</td><td>External replication readiness</td><td>13</td><td>external_replication_blocked_missing_corrected_eis</td></tr>
 <tr><td>leakage and claim audit</td><td>Leakage and claim audit</td><td></td><td>local_leakage_and_claim_limits_documented</td></tr>
 <tr><td>SOC-stratified drive-cycle audit</td><td>SOC-stratified drive-cycle audit</td><td>198</td><td>drive_cycle_result_soc_misaligned_and_ecm_baseline_still_stronger</td></tr></tbody></table></div>
   </section>
@@ -571,10 +571,10 @@ def run() -&gt; dict[str, object]:
 
   <section id="outputs">
     <h2>Outputs</h2>
-    <p>The key machine-readable summaries are included below. The public data page also exposes the main CALB CSV and JSON files.</p>
+    <p>The key downloadable summaries are included below. The public data page also exposes the main CALB CSV and JSON files.</p>
     <div class="button-row">
       <a class="button" href="../data/section_33_summary.json" download>Download frozen pulse-to-EIS rule JSON</a>
-      <a class="button" href="../data/section_39_summary.json" download>Download external-validation claim boundary JSON</a>
+      <a class="button" href="../data/section_39_summary.json" download>Download external-validation limit of the evidence JSON</a>
       <a class="button" href="../data/section_40_summary.json" download>Download leakage and claim audit JSON</a>
       <a class="button" href="../data/section_42_summary.json" download>Download SOC-stratified drive-cycle audit JSON</a>
     </div>
@@ -741,13 +741,13 @@ def run() -&gt; dict[str, object]:
 <tr><td>ECM</td><td>Equivalent Circuit Model, the stronger drive-cycle baseline in drive-cycle ECM baseline check.</td></tr>
 <tr><td>SOC</td><td>State of Charge. The drive-cycle SOC mismatch is one of the main weak spots.</td></tr>
 <tr><td>Frozen rule</td><td>A rule that should not be retuned after seeing external data.</td></tr>
-<tr><td>External validation</td><td>Not achieved here. external-validation claim boundary still blocks it.</td></tr></tbody></table></div>
+<tr><td>External validation</td><td>Not achieved here. external-validation limit of the evidence still blocks it.</td></tr></tbody></table></div>
   </section>
 
   <section id="limits">
     <h2>What This Proves, And What It Does Not</h2>
     <div class="vertical-flow">
-      <div class="flow-item"><h3>Supported</h3><ul><li>CALB internal HPPC pulse-to-EIS bridge viability.</li><li>Regression-checked frozen pulse-to-EIS rule output with 246 quality-pass rows.</li><li>Clear evidence that drive-cycle transfer needs stricter wording.</li><li>Public packaging with data, plots, summaries, code snippets, and claim boundaries.</li></ul></div>
+      <div class="flow-item"><h3>Supported</h3><ul><li>CALB internal HPPC pulse-to-EIS bridge readiness.</li><li>Regression-checked frozen pulse-to-EIS rule output with 246 quality-pass rows.</li><li>Clear evidence that drive-cycle transfer needs stricter wording.</li><li>Public packaging with data, plots, summaries, code snippets, and claim boundaries.</li></ul></div>
       <div class="flow-item"><h3>Not supported</h3><ul><li>No external validation claim.</li><li>No claim that drive-cycle DRT beats the best ECM baseline.</li><li>No retuning of the frozen CALB frozen pulse-to-EIS rule to rescue failed external checks.</li><li>No claim that one CALB source study proves broad cross-dataset generalization.</li></ul></div>
     </div>
   </section>

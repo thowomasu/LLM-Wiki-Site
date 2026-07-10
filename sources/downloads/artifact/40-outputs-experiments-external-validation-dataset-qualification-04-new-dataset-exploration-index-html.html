@@ -64,7 +64,7 @@
       </header>
       <main>
         <section class="note">
-          <strong>Claim boundary:</strong> this page started as a data-readiness screen. Since then, the Panasonic frozen-rule adapter has run and produced <strong>no support</strong>. That means the unchanged CALB pulse-to-EIS rule did not beat the simple voltage-only baseline on the mapped Panasonic rows.
+          <strong>Claim boundary:</strong> this page started as a data-readiness screen. Since then, the Panasonic frozen-rule test workflow has run and produced <strong>no support</strong>. That means the unchanged CALB pulse-to-EIS rule did not beat the simple voltage-only baseline on the mapped Panasonic rows.
         </section>
 
         <div class="tabs" aria-label="Section tabs">
@@ -102,7 +102,7 @@
         </section>
 
         <h2>Bottom Line</h2>
-        <p>Panasonic was the only dataset here that deserved a real frozen-rule adapter attempt. That attempt has now run. The result is not supportive: 3 adapter joins, 33 rule rows, 0 quality-pass rows, and the frozen rule did not beat the voltage-only baseline.</p>
+        <p>Panasonic was the only dataset here that deserved a real frozen-rule test workflow attempt. That attempt has now run. The result is not supportive: 3 test workflow joins, 33 rule rows, 0 quality-pass rows, and the fixed rule did not beat the voltage-only baseline.</p>
         <p>Samsung is useful for pulse-only exploration because it has large HPPC-style time-series archives. But no same-cell EIS was observed locally, so Samsung cannot validate the frozen pulse-to-EIS rule by itself.</p>
         <p>Graphite/LNMO has clean EIS and useful electrochemical protocols, but it does not line up cleanly with the frozen pulse-to-EIS gate. The qOCV file gives zero accepted candidates, and the rate file gives only one long candidate.</p>
         <p>None of the three is aging validation. Panasonic tested the pulse-to-EIS bridge on a different cell format and chemistry context, and the result was no support. That is not a disaster. It is information. But pretending it is validation would be bad science.</p>
@@ -118,7 +118,7 @@
         <table>
           <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
           <tr><td>EIS coverage</td><td>58 parsed EIS files across <code>25degC</code>, <code>10degC</code>, <code>0degC</code>, <code>-10degC</code>, and <code>-20degC</code>.</td><td>Strong for spectrum variability and SOC proxy review.</td></tr>
-          <tr><td>Pulse windows</td><td>14 pulse/time files screened; 8 files contain long candidates.</td><td>Strong enough for adapter work.</td></tr>
+          <tr><td>Pulse windows</td><td>14 pulse/time files screened; 8 files contain long candidates.</td><td>Strong enough for test workflow work.</td></tr>
           <tr><td>Clean matched IDs</td><td><code>3541</code> at 25 C, <code>3623</code> at 0 C, and <code>3740</code> at -10 C.</td><td>Best route for frozen-input construction.</td></tr>
           <tr><td>Claim limit</td><td>Not an aging validation dataset in this pass.</td><td>The unchanged rule has now run and does not support the claim.</td></tr>
         </table>
@@ -132,11 +132,11 @@
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_pulse_candidate_map.png" alt="Panasonic pulse candidate map showing long-window availability">
-          <figcaption>Pulse candidate map. The vertical line marks the frozen 250 second long-pulse gate. Files to the right of that line have windows long enough to be considered. Matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code> were the serious candidates used for the adapter smoke test.</figcaption>
+          <figcaption>Pulse candidate map. The vertical line marks the frozen 250 second long-pulse gate. Files to the right of that line have windows long enough to be considered. Matched IDs <code>3541</code>, <code>3623</code>, and <code>3740</code> were the serious candidates used for the test workflow basic test.</figcaption>
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_matched_long_discharge_examples.png" alt="Panasonic matched long-discharge current and voltage examples">
-          <figcaption>Current and voltage traces for the matched long-discharge candidates. These are not model results. They are the raw evidence that justifies building a frozen-input adapter next.</figcaption>
+          <figcaption>Current and voltage traces for the matched long-discharge candidates. These are not model results. They are the raw evidence that justifies building a frozen-input test workflow next.</figcaption>
         </figure>
 
         <h2>Samsung INR21700-50E HPPC</h2>
@@ -159,7 +159,7 @@
 
         <h2>Graphite/LNMO</h2>
         <p>The graphite/LNMO archive is scientifically interesting, but weaker for this specific validation question. It has full-cell EIS by SOC, qOCV, rate, GITT-style files, and parameter JSONs. That is a rich electrochemistry package, but richness is not the same as frozen-rule readiness.</p>
-        <p>The frozen window finder sees zero candidates in qOCV because the current is below the hard rest threshold. It sees one long candidate in the rate file, but that is not a clean HPPC-style EIS-pulse check-up join. So this dataset is useful for presentation and side experiments, not an honest external run for the frozen CALB rule.</p>
+        <p>The frozen window finder sees zero candidates in qOCV because the current is below the hard rest threshold. It sees one long candidate in the rate file, but that is not a clean HPPC-style EIS-pulse check-up join. So this dataset is useful for presentation and side experiments, not an honest external run for the fixed CALB rule.</p>
         <table>
           <tr><th>Signal</th><th>Exploratory finding</th><th>Usefulness</th></tr>
           <tr><td>EIS</td><td>22 full-cell EIS CSVs by SOC.</td><td>Good for spectrum-over-SOC presentation.</td></tr>
@@ -190,11 +190,11 @@
         </ul>
 
         <h2>Next Move</h2>
-        <p>The Panasonic adapter already ran, so do not describe Panasonic as the next target anymore. The current frozen-rule verdict is <strong>no support</strong>.</p>
-        <p>The next useful move is not to tune the failed rule. The next useful move is to use the cross-dataset supervised scaffold on another dataset that has same-cell EIS plus earlier current/voltage time series, then freeze the model and baseline before scoring it once.</p>
+        <p>The Panasonic test workflow already ran, so do not describe Panasonic as the next target anymore. The current frozen-rule verdict is <strong>no support</strong>.</p>
+        <p>The next useful move is not to tune the failed rule. The next useful move is to use the cross-dataset supervised early workflow on another dataset that has same-cell EIS plus earlier current/voltage time series, then freeze the model and baseline before scoring it once.</p>
       </main>
       <footer>
-        Public-facing static site generated from curated vault outputs. This is not the raw vault.
+        Public-facing static site generated from selected vault outputs. This is not the raw vault.
       </footer>
     </div>
   </div>

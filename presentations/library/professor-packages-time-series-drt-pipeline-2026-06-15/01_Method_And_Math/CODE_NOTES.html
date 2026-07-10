@@ -175,7 +175,7 @@ th {
 <ul><li><code>scripts/experiments/time_domain_soc_mapping_sensitivity.py</code>: reruns the same cases under multiple SOC mapping assumptions.</li></ul>
 <ul><li><code>scripts/experiments/time_domain_model_sensitivity.py</code>: reruns matched cases across baseline modes and lambda values.</li></ul>
 <ul><li><code>scripts/experiments/time_domain_model_rule.py</code>: applies the pre-declared model-selection rule before EIS scoring.</li></ul>
-<ul><li><code>scripts/experiments/time_domain_viability_report.py</code>: reads the latest outputs and writes a blunt viability report.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_viability_report.py</code>: reads the latest outputs and writes a blunt readiness report.</li></ul>
 <ul><li><code>scripts/experiments/time_domain_export_html.py</code>: writes HTML viewing copies of the main Markdown reports.</li></ul>
 <h2>Important Variables</h2>
 <ul><li><code>time_s</code>: elapsed time in seconds. For DIB files, this must be <code>Prog Time</code>, not <code>Step Time</code>, because <code>Step Time</code> resets.</li></ul>
@@ -207,7 +207,7 @@ th {
 <p>The sensitivity runner tests four SOC modes: <code>voltage</code>, <code>coulomb</code>, <code>endpoint</code>, and <code>linear</code>. On the first three DIB cases, all four modes selected the same pulse windows, so SOC mapping did not explain the weak EIS agreement.</p>
 <p>The model sensitivity runner tests baseline and lambda assumptions. On the first two DIB cases, every target changed correlation by more than 0.1 across model settings. That means baseline/regularization is now the main engineering weak point.</p>
 <p>The model-rule runner fixes <code>time_charge</code> baseline and chooses lambda from voltage RMSE, gamma roughness, and broad-band stability before EIS metrics are read. On the saved run, it selected 10 rows with 0 errors and 10 quality-pass rows, but median EIS correlation stayed weak at about 0.141.</p>
-<p>The viability report currently says <code>research_scaffold_viable</code> and <code>not_validated</code>. That is the right level of confidence. Use the code to test assumptions. Do not use it yet to generate final training labels.</p>
+<p>The readiness report currently says <code>research_scaffold_viable</code> and <code>not_validated</code>. That is the right level of confidence. Use the code to test assumptions. Do not use it yet to generate final training labels.</p>
 <h2>Commenting Rule For Future Code</h2>
 <p>When adding pipeline variables, explain them at the point where they are created:</p>
 <ul><li>unit</li></ul>

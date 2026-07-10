@@ -263,7 +263,7 @@ th {
 <tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
 <tr><td>54-70</td><td>Defines paths for raw DIB data, capacity CSVs, EIS workbook, and batch outputs.</td><td>These are not stored in the repo, so paths must be configurable.</td></tr>
 <tr><td>74-88</td><td>Defines target SOC values and quality thresholds.</td><td>These thresholds decide what is a rough engineering pass.</td></tr>
-<tr><td>91-119</td><td>Writes CSV/JSON-safe values.</td><td>Keeps batch outputs machine-readable.</td></tr>
+<tr><td>91-119</td><td>Writes CSV/JSON-safe values.</td><td>Keeps batch outputs downloadable.</td></tr>
 <tr><td>121-160</td><td>Discovers capacity files and EIS metadata.</td><td>Finds possible matched cases.</td></tr>
 <tr><td>162-187</td><td>Matches capacity files to EIS rows by cell, SOH, temperature, and cycle rule.</td><td>Prevents comparing unrelated files.</td></tr>
 <tr><td>189-250</td><td>Computes pre-rest voltage, capacity clues, and cumulative Ah.</td><td>Needed for SOC assignment.</td></tr>

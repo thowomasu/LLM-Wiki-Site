@@ -241,8 +241,9 @@ code {
 .summary-grid,
 .terms-strip {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  max-width: 860px;
   margin: 20px 0 28px;
 }
 .start-card,
@@ -258,6 +259,38 @@ code {
   border-radius: 6px;
   background: var(--panel);
 }
+.journey {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  max-width: 760px;
+  margin: 18px 0 30px;
+}
+.journey-step {
+  position: relative;
+  min-width: 0;
+  padding: 13px 12px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.journey-step:not(:last-child)::after {
+  content: "v";
+  position: absolute;
+  right: 50%;
+  bottom: -14px;
+  z-index: 2;
+  width: 16px;
+  color: var(--muted);
+  background: var(--panel);
+  text-align: center;
+  font-weight: 800;
+}
+.journey-step strong,
+.journey-step span { display: block; }
+.journey-step strong { margin-bottom: 4px; font-size: 15px; }
+.journey-step span { color: var(--muted); font-size: 13px; }
 .start-card h3,
 .summary-card h3,
 .term-card h3 {
@@ -300,7 +333,8 @@ code {
   width: auto;
 }
 .terms-strip {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px;
 }
 .term-card {
   border-left-color: var(--green);
@@ -593,7 +627,7 @@ footer {
 <body>
   <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
   <div class="site-shell">
-    <aside class="sidebar"><a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Public battery analysis outputs and source trail</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
+    <aside class="sidebar"><a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
 <a class="side-link" href="../../index.html">Overview</a>
 <a class="side-link" href="../../presentations/">Presentations</a>
 <a class="side-link" href="../../datasets/">Datasets</a>
@@ -615,7 +649,7 @@ footer {
       <main>
 <section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab" href="../../external-validation/">Dataset comparison</a><a class="tab" href="../dataset-exploration/">Dataset exploration screen</a><a class="tab" href="../calce/">CALCE Storage 25 C validation check</a><a class="tab active" href="./">NASA battery dataset screen</a><a class="tab" href="../../sources/external/">External validation sources</a></div><h2>NASA Battery External Validation Manifest</h2>
 <h2>Scope</h2>
-<p>This is dataset qualification only. It does not validate the frozen CALB rule.</p>
+<p>This is dataset check only. It does not validate the fixed CALB rule.</p>
 <p>The script inspected the wrapper ZIP and inner BatteryAgingARC ZIPs in memory. It did not bulk-extract the archive.</p>
 <h2>Input</h2>
 <ul>
@@ -645,7 +679,7 @@ footer {
 <li>These are candidates only. NASA has repeated same-cell charge/discharge/impedance operations, but not drive-cycle operation coverage like the CALB drive-cycle question needs.</li>
 </ul>
 <h2>Blunt Read</h2>
-<p>NASA is useful for checking whether a time-domain bridge can survive on a classic same-cell impedance/cycling dataset. It is third priority for the frozen CALB rule: CALCE goes first, RADAR4KIT goes second only when the corrected EIS addendum exists, and NASA stays a later robustness check. Its time-domain side is mostly charge/discharge cycling, not drive-cycle or HPPC-like pulse validation.</p>
+<p>NASA is useful for checking whether a time-domain bridge can survive on a classic same-cell impedance/cycling dataset. It is third priority for the fixed CALB rule: CALCE goes first, RADAR4KIT goes second only when the corrected EIS addendum exists, and NASA stays a later robustness check. Its time-domain side is mostly charge/discharge cycling, not drive-cycle or HPPC-like pulse validation.</p>
 <h2>Outputs</h2>
 <ul>
 <li><code>zip_listing.csv</code></li>
@@ -658,7 +692,7 @@ footer {
 </ul>
       </main>
       <footer>
-        Public-facing static site generated from curated vault outputs. This is not the raw vault.
+        Public site built from selected research outputs. The private working vault is not published here.
       </footer>
     </div>
   </div>

@@ -183,7 +183,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Main handoff:</p>
 <ul><li><code>ROUGH_PROTOTYPE_HANDOFF.md</code></li></ul>
 <ul><li><code>rough_prototype_runner_log.md</code></li></ul>
-<p>The runner rebuilds the synthetic checks and DIB-format smoke test everywhere. When local DIB data is available, it also rebuilds Cell28 time-domain DRT fits, EIS comparisons, regularization diagnostics, SOC-alignment diagnostics, generalized batch checks, SOC-mapping sensitivity, model sensitivity, the pre-declared model rule, viability reporting, HTML doc mirrors, and the final handoff summary.</p>
+<p>The runner rebuilds the synthetic checks and DIB-format basic test everywhere. When local DIB data is available, it also rebuilds Cell28 time-domain DRT fits, EIS comparisons, regularization diagnostics, SOC-alignment diagnostics, generalized batch checks, SOC-mapping sensitivity, model sensitivity, the pre-declared model rule, readiness reporting, HTML doc mirrors, and the final handoff summary.</p>
 <p>Key orientation docs:</p>
 <ul><li><code>ASSUMPTIONS.md</code></li></ul>
 <ul><li><code>CODE_NOTES.md</code></li></ul>
@@ -258,7 +258,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>HPPC window finder passes the synthetic integration test. The window finder and DRT solver work together on one accepted window.</p>
 <p>The important lesson is tau visibility. A single pulse/rest window only supports a bounded tau range. If the window is too short, slow processes are invisible no matter how good the solver is.</p>
 <h3>HPPC candidate fit: Real CSV pilot</h3>
-<p>Status: blocked on real professor/dataset CSV, but complete for DIB-style format smoke test.</p>
+<p>Status: blocked on real professor/dataset CSV, but complete for DIB-style format basic test.</p>
 <p>Smoke-test script:</p>
 <p><code>scripts/experiments/time_domain_real_csv_smoke_test.py</code></p>
 <p>Command:</p>
@@ -325,9 +325,9 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>Temperature drift inside the pulse candidate: about 0.9 C.</li></ul>
 <p>Interpretation:</p>
 <p>The local DIB data is usable now. The real-data pipeline runs end to end on one capacity-check file.</p>
-<p>But this is not yet matched-pair validation. The selected pulse has noticeable temperature drift, and we have not compared the time-domain DRT against the matching EIS-derived DRT. This is a real-data smoke test, not proof.</p>
+<p>But this is not yet matched-pair validation. The selected pulse has noticeable temperature drift, and we have not compared the time-domain DRT against the matching EIS-derived DRT. This is a real-data basic test, not proof.</p>
 <p>Follow-up:</p>
-<p>Cell27 is useful as a real-data smoke test, but it is a bad matched-validation target in the local DIB folder because the matching Cell27 EIS files are not present. Do not spend time forcing Cell27 into the validation story.</p>
+<p>Cell27 is useful as a real-data basic test, but it is a bad matched-validation target in the local DIB folder because the matching Cell27 EIS files are not present. Do not spend time forcing Cell27 into the validation story.</p>
 <h3>time-domain versus EIS bridge comparison: Cell28 matched-data target</h3>
 <p>Status: complete for first pass.</p>
 <p>Reason for switching from Cell27 to Cell28:</p>
@@ -637,7 +637,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li><code>VIABILITY_REPORT.md</code></li></ul>
 <ul><li><code>viability_summary.json</code></li></ul>
 <p>Current verdict:</p>
-<ul><li>Engineering scaffold: <code>research_scaffold_viable</code></li></ul>
+<ul><li>Engineering early workflow: <code>research_scaffold_viable</code></li></ul>
 <ul><li>Scientific method: <code>not_validated</code></li></ul>
 <ul><li>Synthetic inverse check: pass, RMSE about <code>0.801</code> mV</li></ul>
 <ul><li>DIB batch runner: pass, 15 rows, 0 errors, 15 quality-pass rows</li></ul>
@@ -678,7 +678,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Interpretation:</p>
 <p>This makes the pipeline more honest because lambda is selected without using EIS agreement. It also makes the bad news harder to dodge: the rule-selected EIS comparison is still weak.</p>
 <p>Blunt takeaway:</p>
-<p>The pipeline is now viable as a research scaffold. It is still not validated as a measurement method.</p>
+<p>The pipeline is now viable as a research early workflow. It is still not validated as a measurement method.</p>
 <h3>weighting probe: HTML documentation export</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
