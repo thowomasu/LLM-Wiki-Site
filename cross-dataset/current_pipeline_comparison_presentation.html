@@ -201,10 +201,10 @@
     <header>
       <div class="kicker">Cross-dataset presentation, Friday progress update</div>
       <h1>Two Current Cross-Dataset Pipelines</h1>
-      <p class="lead">This page compares the strict time-domain-to-EIS validation lane with the newer missing battery measurement prediction lane. Both use multiple datasets. Only one currently has the better development outlook.</p>
+      <p class="lead">This page compares two cross-dataset research lanes. Both now have negative external evidence, so neither is generally validated.</p>
       <div class="button-row">
         <a class="button" href="data/validation_readiness.json" download>Download readiness JSON</a>
-        <a class="button" href="data/missing_modality_transfer_results.json" download>Download transfer results</a>
+        <a class="button" href="data/missing_modality_v5_sicwell_one_shot_results.json" download>Download V5 SiCWell result</a>
         <a class="button" href="data/final_lifepo4_validation_results.json" download>Download final LiFePO4 results</a>
       </div>
     </header>
@@ -213,11 +213,11 @@
       <section id="summary" class="note">
         <h2>Executive Read</h2>
         <p>The time-domain-to-EIS pipeline is the stricter validation lane, and it currently says <code>no_support</code>. That is not a disaster. It means the pipeline caught a weak model instead of letting us overclaim.</p>
-        <p>The missing battery measurement prediction pipeline is the better current development bet. It is operational, it uses more of the available data, and some heads beat their grouped baselines. But it is still development evidence, not a clean external validation claim.</p>
+        <p>The missing-measurement V5 pipeline passed internal development, then failed its frozen SiCWell external test. The guard rejected all 892 external rows, so the result is <code>external_validation_failed</code>, <code>no support</code>.</p>
         <div class="reader-path">
-          <div class="reader-card"><strong>Best one-line meeting answer</strong><p>We built two cross-dataset tracks. The strict EIS prediction validation track failed honestly. The missing measurement prediction track is the more promising direction for the next two weeks.</p></div>
-          <div class="reader-card"><strong>What not to say</strong><p>Do not say the learned time-domain-to-EIS model is validated. Do not say pseudo-labels are measurements.</p></div>
-          <div class="reader-card"><strong>What to say instead</strong><p>The current work is progress in pipeline design and dataset discipline. The next bottleneck is stronger held-out complete data, not just a fancier model.</p></div>
+          <div class="reader-card"><strong>Best one-line meeting answer</strong><p>Both external paths failed honestly. V5 is a reproducible negative external result, not a general method.</p></div>
+          <div class="reader-card"><strong>What not to say</strong><p>Do not say either model is validated. Do not call a V5 estimate a measurement.</p></div>
+          <div class="reader-card"><strong>What to say instead</strong><p>The next bottleneck is an untouched, suitable kept-back test and a new frozen version, not post-hoc tuning.</p></div>
         </div>
       </section>
 
@@ -256,22 +256,22 @@
               <tr>
                 <td>Current verdict</td>
                 <td><span class="bad">No support.</span> Final LiFePO4 validation did not support the learned model.</td>
-                <td><span class="good">Best development bet.</span> Operational transfer pipeline with supported heads, but not final validation.</td>
+                <td><span class="bad">No support.</span> V5 passed internal development, but the frozen SiCWell test accepted zero of 892 rows.</td>
               </tr>
               <tr>
                 <td>Why it matters</td>
                 <td>It is the stricter honesty check. It prevents us from pretending a weak model generalizes.</td>
-                <td>It is more flexible. It can learn from datasets that do not all contain the same measurements.</td>
+                <td>It tests whether a fresh EIS spectrum plus matched pulse resistance can estimate later EIS and SOH.</td>
               </tr>
               <tr>
                 <td>Dataset coverage</td>
                 <td>Cleaned v2 development data uses 3 defensible datasets: DIB spent validation, repaired RADAR4KIT, and Stanford SECL.</td>
-                <td>Registry loads 5 dataset groups: DIB, LiFePO4 HEV, Molicell P42A, repaired RADAR4KIT, and Stanford SECL.</td>
+                <td>Internal development used eight Leonardi cells. The frozen external kept-back test was SiCWell, with 26 cells.</td>
               </tr>
               <tr>
                 <td>Scale</td>
                 <td>Cleaned v2 has 618 rows. LiFePO4 final kept-back test has 198 scored rows.</td>
-                <td>Transfer registry has 917 rows. Current report writes 634 pseudo-label rows.</td>
+                <td>SiCWell contains 892 linked rows from 223 checkups. The guard accepted 0 rows.</td>
               </tr>
               <tr>
                 <td>Best evidence</td>
@@ -291,12 +291,12 @@
               <tr>
                 <td>Two-week outlook</td>
                 <td><span class="warn">Low to medium.</span> Keep it as a baseline and validation guardrail. Do not tune it after failure to chase a win.</td>
-                <td><span class="good">Medium to high.</span> Freeze the promising heads, improve comparable test workflows, and find another complete held-out battery.</td>
+                <td><span class="warn">Blocked for V5.</span> Do not widen the guard after failure. A future V6 needs a new untouched all-three-modality kept-back test.</td>
               </tr>
               <tr>
                 <td>Current ranking</td>
                 <td><strong>Second.</strong> Better as an honesty check than as the main research bet right now.</td>
-                <td><strong>First.</strong> Better near-term path because it has more usable signal and more ways to improve without faking validation.</td>
+                <td><strong>Development only.</strong> Internal evidence was promising, but external support failed.</td>
               </tr>
             </tbody>
           </table>
@@ -312,14 +312,14 @@
             <p>Frozen model family was <code>global_train_target_mean</code>, which is a negative-control baseline. RMSE all was <code>0.0499186769</code> ohm. Post-outcome tuning was not performed.</p>
           </div>
           <div>
-            <span class="metric good">Better outlook</span>
-            <h3>Missing-modality transfer</h3>
-            <p>Operational development pipeline. Some heads beat grouped baselines, especially ohmic-proxy EIS and dataset-relative RPT. Pseudo-labels must remain down-weighted and clearly marked.</p>
+            <span class="metric bad">No support</span>
+            <h3>Missing-measurement V5</h3>
+            <p>All eight internal held-out Leonardi cells passed the chained SOH gate. The frozen SiCWell guard then rejected every external row, so no external predictive performance was released.</p>
           </div>
         </div>
         <div class="bar" aria-label="Development signal comparison">
           <div class="bar-row"><span>Time-domain to EIS</span><div class="track"><div class="fill bad" style="width: 30%"></div></div><span>No support</span></div>
-          <div class="bar-row"><span>Missing-modality</span><div class="track"><div class="fill good" style="width: 72%"></div></div><span>Promising</span></div>
+          <div class="bar-row"><span>Missing-measurement V5</span><div class="track"><div class="fill bad" style="width: 30%"></div></div><span>No support externally</span></div>
         </div>
       </section>
 
@@ -327,17 +327,17 @@
         <h2>Recommendation</h2>
         <div class="step-list">
           <div class="step"><strong>Lead with the honest negative</strong><p>The strict time-domain-to-EIS validation lane did not support the learned model. This is a real result, not a failure to hide.</p></div>
-          <div class="step"><strong>Shift the next two weeks toward missing measurement prediction</strong><p>It has the better development surface: more datasets, more measurement combinations, and supported heads that can be frozen before future testing.</p></div>
-          <div class="step"><strong>Do not inflate pseudo-labels</strong><p>Pseudo-EIS and pseudo-RPT are estimates. Treat them as lower-trust development labels until a future held-out complete battery tests the frozen heads.</p></div>
-          <div class="step"><strong>Ask for better data, not just more modeling</strong><p>The next bottleneck is a cleaner complete dataset with time-series, EIS, and RPT/SOH labels. Without that, model polish will mostly make the story prettier, not truer.</p></div>
+          <div class="step"><strong>Close V5 honestly</strong><p>Its SiCWell external test failed. Do not widen the domain guard, remap the data, or call it a near pass.</p></div>
+          <div class="step"><strong>Do not inflate estimates</strong><p>Predicted EIS and SOH are pseudo-measurements, not observed values.</p></div>
+          <div class="step"><strong>Ask for better data, not more tuning</strong><p>A future version needs a different untouched kept-back test with same-cell EIS, matched pulse resistance, and measured SOH or capacity.</p></div>
         </div>
       </section>
 
       <section id="limits">
         <h2>Claim Boundary</h2>
-        <p><strong>Defensible claim:</strong> we now have two cross-dataset battery pipelines. One strict validation lane found no support for the learned time-domain-to-EIS model. The newer missing-modality lane is the stronger near-term development direction.</p>
-        <p><strong>Not defensible:</strong> claiming the time-domain-to-EIS model is externally validated, or treating pseudo-labels as measured EIS/RPT values.</p>
-        <p class="small">Local evidence checked: validation_readiness.json, final_lifepo4_validation_report.md, missing_modality_transfer_report.md.</p>
+        <p><strong>Defensible claim:</strong> the strict time-domain-to-EIS lane found no support, and V5 missing-measurement development passed internally but found no external support on frozen SiCWell.</p>
+        <p><strong>Not defensible:</strong> claiming either model is generally validated, treating a V5 estimate as measured EIS or SOH, or changing the V5 guard after seeing SiCWell.</p>
+        <p class="small">Local evidence checked: validation_readiness.json, final_lifepo4_validation_report.md, missing_modality_v5_chain_development_results.json, and missing_modality_v5_sicwell_one_shot_results.json.</p>
       </section>
     </main>
   </div>

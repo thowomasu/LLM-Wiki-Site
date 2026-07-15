@@ -210,306 +210,73 @@
     <div class="side-section">Workstreams</div>
     <a class="side-link" href="../presentations/#cambridge-molicell-eis">Cross-dataset battery transfer</a>
     <div class="side-section">This Page</div>
-    <a class="side-link" href="#summary">Summary</a><a class="side-link" href="#objective">Objective</a><a class="side-link" href="#plain-language">Plain Language</a><a class="side-link" href="#data-coverage">Data Coverage</a><a class="side-link" href="#methodology">Methodology</a><a class="side-link" href="#results">Results</a><a class="side-link" href="#task-details">Task Details</a><a class="side-link" href="#claim-boundary">Claim Boundary</a><a class="side-link" href="#conclusion">Conclusion</a><a class="side-link" href="#inputs">Inputs</a><a class="side-link" href="#math">Math</a><a class="side-link" href="#graphs">Graphs</a><a class="side-link" href="#code">Code</a><a class="side-link" href="#outputs">Outputs</a><a class="side-link" href="#goal-audit">Goal Audit</a><a class="side-link" href="#glossary">Glossary</a><a class="side-link" href="#limits">Limits</a>
+    <a class="side-link" href="#summary">Summary</a><a class="side-link" href="#inputs">Inputs and outputs</a><a class="side-link" href="#v5">What V5 changed</a><a class="side-link" href="#development">Internal development</a><a class="side-link" href="#sicwell">SiCWell external test</a><a class="side-link" href="#boundary">What this does not prove</a><a class="side-link" href="#next">What would be needed next</a><a class="side-link" href="#terms">Terms</a>
   </aside>
   <div class="page-content">
     <header>
       <div class="kicker">Incomplete battery test data, professor-facing roadmap</div>
       <h1>Predicting Missing Battery Measurements From Partial Test Data</h1>
-      <p class="lead">This page explains the full pipeline for batteries that do not all have the same measurements. It learns from complete rows, tests by hiding known measurements, and writes pseudo-labels only with clear uncertainty.</p>
+      <p class="lead">A frozen V5 research method for estimating a current EIS spectrum and SOH from a fresh reference spectrum plus a matched pulse-resistance change. Its external test failed, so it is not a generally validated method.</p>
       <div class="button-row">
-        <a class="button" href="data/missing_modality_transfer_results.json" download>Download results JSON</a>
-        <a class="button" href="data/missing_modality_transfer_fold_results.csv" download>Download fold table</a>
-        <a class="button" href="data/missing_modality_pseudo_labels.csv" download>Download pseudo-labels</a>
-        <a class="button" href="data/missing_modality_10_step_goal_audit.json" download>Download 10-step audit</a>
-        <a class="button" href="data/missing_modality_v1_frozen_contract.json" download>Download frozen contract</a>
-        <a class="button" href="data/missing_modality_all_three_candidate_search_audit.json" download>Download dataset search audit</a>
-        <a class="button" href="data/missing_modality_time_series_head_improvement_audit.json" download>Download Step 6 audit</a>
-        <a class="button" href="data/missing_modality_frozen_head_development_test.json" download>Download Step 9 audit</a>
-        <a class="button" href="data/missing_modality_eis_head_blocker_audit.json" download>Download EIS head audit</a>
+        <a class="button" href="data/missing_modality_v5_chain_development_results.json" download>Development results</a>
+        <a class="button" href="data/missing_modality_v5_sicwell_one_shot_results.json" download>SiCWell result</a>
+        <a class="button" href="data/missing_modality_v5_sicwell_domain_failure_diagnostic.json" download>Domain diagnostic</a>
       </div>
     </header>
 <main>
   <section id="summary" class="note">
-    <h2>Executive Read</h2>
-    <p>The pipeline is operational: it loaded 917 rows across 5 datasets, found 2 complete datasets with time-series, EIS, and RPT-like labels, and wrote 634 pseudo-label rows.</p>
-    <p>Current verdict: <code>development_pipeline_operational_with_cross_dataset_support</code>. That wording is intentionally dry. A flashy name would hide the real point: this is a development pipeline for incomplete battery test data, not a validated external claim.</p>
-    <p><strong>Blunt boundary:</strong> pseudo-labels are estimates, not measurements. This completes the development pipeline, not a publication-level external validation claim.</p>
+    <h2>Bottom line</h2>
+    <p>V5 passed its internal development gate on eight held-out Leonardi cells. It then failed its frozen external test on SiCWell: the domain guard accepted 0 of 892 rows, so no external predictive score was released. Current verdict: <code>external_validation_failed</code>, <code>no support</code>.</p>
+    <p><strong>Blunt boundary:</strong> V5 is not generally validated. A prediction is an estimate, not an observed battery measurement.</p>
     <div class="reader-path">
-      <div class="reader-card"><strong>What the pipeline sees</strong><p>Time-series features, fixed-grid EIS targets, and RPT-like health labels when available.</p></div>
-      <div class="reader-card"><strong>What it predicts</strong><p>Missing RPT-like labels from time-series plus EIS, and missing EIS from time-series plus RPT when prediction rows exist.</p></div>
-      <div class="reader-card"><strong>What works now</strong><p>Ohmic-proxy EIS beats baseline across five grouped datasets, and dataset-relative RPT beats baseline across the two all-three datasets.</p></div>
-      <div class="reader-card"><strong>What stays limited</strong><p>The result is still a development result. A stronger claim needs a future pre-declared all-three battery.</p></div>
-    </div>
-  </section>
-
-  <section id="objective">
-    <h2>Question</h2>
-    <p>Can we train on batteries with time-series, EIS, and RPT-like labels, then use that learned relationship to fill missing modalities for batteries that only have part of the measurement set?</p>
-    <p>The honest answer is: yes for the development pipeline. The current supported heads are ohmic-proxy EIS from time-series and dataset-relative SOH from time-series plus EIS.</p>
-  </section>
-
-  <section id="plain-language">
-    <h2>Plain Language Version</h2>
-    <p>Different battery datasets measure different things. One dataset may have current and voltage traces. Another may have EIS. Another may have health labels. The old name, missing-modality transfer, describes that technically, but it is bad first-glance communication. The practical question is simpler: can we predict a missing battery measurement from the measurements we do have?</p>
-    <p>The answer is mixed. Some heads are useful inside the current development evidence. Some fail when the held-out dataset is too different. That is why this page separates <strong>working development machinery</strong> from <strong>external validation</strong>.</p>
-  </section>
-
-  <section id="data-coverage">
-    <h2>Data Coverage</h2>
-    <p>The pipeline only earns trust if the row contracts are clear. This table shows what each dataset actually contributes instead of pretending every dataset has every measurement.</p>
-    <div class="table-scroll"><table><thead><tr><th>Dataset key</th><th>Assigned role</th><th>All-three rows</th><th>Final validation?</th><th>Reason</th></tr></thead><tbody><tr><td>dib_spent_validation</td><td>complete_modality_development_source</td><td>85</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr><tr><td>lifepo4_hev_harvested_cell_soh_workbook</td><td>complete_modality_development_source</td><td>198</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr><tr><td>molicell_p42a_local_high_power_characterization</td><td>missing_rpt_pseudo_label_target</td><td>0</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr><tr><td>radar4kit_repaired</td><td>missing_rpt_pseudo_label_target</td><td>0</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr><tr><td>stanford_secl</td><td>missing_rpt_pseudo_label_target</td><td>0</td><td>False</td><td>Final validation requires a separately qualified complete all-three-modality battery held out before scoring.</td></tr></tbody></table></div>
-  </section>
-
-  <section id="methodology">
-    <h2>Methodology</h2>
-    <div class="step-list">
-      <div class="step"><strong>Load available matrices</strong><p>The runner combines cleaned development rows, Molicell rows, and LiFePO4 rows into one modality registry.</p></div>
-      <div class="step"><strong>Register modality coverage</strong><p>Each dataset is counted for time-series, EIS, RPT-like labels, and complete all-three rows.</p></div>
-      <div class="step"><strong>Run masked-modality tests</strong><p>Known EIS or RPT values are hidden and reconstructed, then compared with a train-mean baseline.</p></div>
-      <div class="step"><strong>Write pseudo-labels</strong><p>Missing RPT-like labels are estimated for rows with time-series plus EIS. The output is explicitly marked as pseudo-label data.</p></div>
-    </div>
-    <p>This is the right boring discipline: hide known values, predict them, compare against a baseline, and only then use the model to fill missing values. Anything else would be hand-wavy data decoration.</p>
-  </section>
-
-  <section id="results">
-    <h2>Results</h2>
-    <div class="table-scroll"><table class="metric-table"><tbody><tr><td>Overall verdict</td><td>development_pipeline_operational_with_cross_dataset_support</td></tr>
-<tr><td>Rows loaded</td><td>917</td></tr>
-<tr><td>Completed masked-measurement tasks</td><td>9</td></tr>
-<tr><td>Tasks beating every grouped baseline</td><td>3</td></tr>
-<tr><td>Pseudo-label rows written</td><td>634</td></tr>
-<tr><td>All-three-measurement datasets</td><td>2</td></tr>
-<tr><td>Pseudo-label tasks</td><td>2</td></tr></tbody></table></div>
-    <div class="table-scroll"><table><thead><tr><th>Task</th><th>Verdict</th><th>Folds beating baseline</th><th>Worst improvement</th><th>Fold group</th></tr></thead><tbody><tr><td>masked_eis_from_time_series</td><td>partial_or_no_support</td><td>1 / 5</td><td>-2.6</td><td>dataset_key</td></tr><tr><td>masked_eis_from_minimal_time_series_shallow_rf</td><td>partial_or_no_support</td><td>2 / 5</td><td>-2.44</td><td>dataset_key</td></tr><tr><td>masked_eis_from_ohmic_time_series</td><td>supports_cross_dataset_transfer_head</td><td>5 / 5</td><td>0.06759</td><td>dataset_key</td></tr><tr><td>masked_eis_from_time_series_plus_rpt</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.4495</td><td>dataset_key</td></tr><tr><td>masked_eis_from_ohmic_time_series_plus_rpt</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.2365</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_time_series</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.8893</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_time_series_plus_eis</td><td>partial_or_no_support</td><td>1 / 2</td><td>-0.8513</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series</td><td>supports_cross_dataset_transfer_head</td><td>2 / 2</td><td>0.03185</td><td>dataset_key</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series_plus_eis</td><td>supports_cross_dataset_transfer_head</td><td>2 / 2</td><td>0.06345</td><td>dataset_key</td></tr></tbody></table></div>
-  </section>
-
-  <section id="task-details">
-    <h2>Task Details</h2>
-    <p>These are the actual masked prediction tasks. The model family is not the story. The story is whether a task beats a boring baseline across grouped folds.</p>
-    <div class="table-scroll"><table><thead><tr><th>Task</th><th>Rows</th><th>Features</th><th>Targets</th><th>Candidate models</th><th>Verdict</th></tr></thead><tbody><tr><td>masked_eis_from_time_series</td><td>917</td><td>33</td><td>20</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_eis_from_minimal_time_series_shallow_rf</td><td>917</td><td>10</td><td>20</td><td>random_forest_shallow</td><td>partial_or_no_support</td></tr><tr><td>masked_eis_from_ohmic_time_series</td><td>917</td><td>16</td><td>20</td><td>ridge, random_forest, extra_trees</td><td>supports_cross_dataset_transfer_head</td></tr><tr><td>masked_eis_from_time_series_plus_rpt</td><td>283</td><td>30</td><td>20</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_eis_from_ohmic_time_series_plus_rpt</td><td>283</td><td>17</td><td>20</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_rpt_from_time_series</td><td>283</td><td>29</td><td>1</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_rpt_from_time_series_plus_eis</td><td>283</td><td>49</td><td>1</td><td>ridge, random_forest, extra_trees</td><td>partial_or_no_support</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series</td><td>283</td><td>25</td><td>1</td><td>ridge, random_forest, extra_trees</td><td>supports_cross_dataset_transfer_head</td></tr><tr><td>masked_rpt_from_dataset_relative_time_series_plus_eis</td><td>283</td><td>45</td><td>1</td><td>ridge, random_forest, extra_trees</td><td>supports_cross_dataset_transfer_head</td></tr></tbody></table></div>
-  </section>
-
-  <section id="claim-boundary" class="note">
-    <h2>Claim Boundary</h2>
-    <p>Development pipeline. It estimates missing modalities; it does not convert pseudo-labels into measurements.</p>
-    <p>Do not oversell this. The pipeline is useful because it refuses to blur three different things: real measurements, hidden-measurement tests, and pseudo-labels. If you mix those up, the whole project starts lying to itself.</p>
-  </section>
-
-  <section id="conclusion">
-    <h2>Conclusion</h2>
-    <p>The pipeline is now a real incomplete-test-data prediction system, not just an EIS predictor. But the current evidence says the generalization claim is not ready.</p>
-    <div class="vertical-flow">
-      <div class="flow-item"><h3>Supported</h3><ul><li>The runner builds a registry across incomplete batteries.</li><li>It performs masked-modality tests instead of blindly filling missing data.</li><li>It writes pseudo-labels with explicit confidence boundaries.</li><li>DIB and LiFePO4 now both provide complete time-series, EIS, and RPT-like rows.</li><li>Ohmic-proxy EIS beats baseline across all grouped EIS folds.</li><li>Dataset-relative RPT heads beat baseline on both all-three grouped folds.</li><li>The public-site presentation and downloadable artifacts are generated.</li></ul></div>
-      <div class="flow-item"><h3>Not supported</h3><ul><li>A publication-level cross-battery validation claim.</li><li>Treating pseudo-labels as measured RPT or EIS.</li><li>Assuming missing measurements are roughly the same as another battery.</li><li>Changing the frozen heads after seeing a future held-out validation battery.</li></ul></div>
+      <div class="reader-card"><strong>Inputs</strong><p>A fresh EIS reference spectrum, a matched pulse-resistance change, and state of charge.</p></div>
+      <div class="reader-card"><strong>Outputs</strong><p>Estimated current EIS, chained SOH, uncertainty intervals, and a refusal status.</p></div>
+      <div class="reader-card"><strong>Internal result</strong><p>All 8 held-out Leonardi cells passed the chained SOH development gate.</p></div>
+      <div class="reader-card"><strong>External result</strong><p>SiCWell was outside the frozen domain, so every row was refused.</p></div>
     </div>
   </section>
 
   <section id="inputs">
-    <h2>Inputs</h2>
-    <div class="table-scroll"><table><thead><tr><th>Dataset key</th><th>Time-series rows</th><th>EIS rows</th><th>RPT rows</th><th>All-three rows</th></tr></thead><tbody><tr><td>dib_spent_validation</td><td>85</td><td>85</td><td>85</td><td>85</td></tr><tr><td>lifepo4_hev_harvested_cell_soh_workbook</td><td>198</td><td>198</td><td>198</td><td>198</td></tr><tr><td>molicell_p42a_local_high_power_characterization</td><td>101</td><td>101</td><td>0</td><td>0</td></tr><tr><td>radar4kit_repaired</td><td>351</td><td>351</td><td>0</td><td>0</td></tr><tr><td>stanford_secl</td><td>182</td><td>182</td><td>0</td><td>0</td></tr></tbody></table></div>
+    <h2>Inputs and outputs</h2>
+    <p>For each battery row, V5 needs a fresh same-cell EIS spectrum at 0.1 to 40 Hz, state of charge, and the percentage change in pulse resistance from a matched 5 to 10 second test. The pulse direction, duration, state of charge, and temperature must match.</p>
+    <div class="step-list">
+      <div class="step"><strong>Estimate current EIS</strong><p>The method estimates the real and imaginary parts of the later EIS spectrum on that fixed grid.</p></div>
+      <div class="step"><strong>Estimate SOH</strong><p>It feeds the estimated EIS, not measured current EIS, into its chained SOH model.</p></div>
+      <div class="step"><strong>State uncertainty or refuse</strong><p>Each output includes a development-calibrated 90% interval. Inputs outside the frozen domain are refused.</p></div>
+    </div>
+    <p>If a complete current EIS spectrum is supplied, V5 can also run a separate measured-EIS-to-SOH comparison. A partial current spectrum is refused.</p>
   </section>
 
-  <section id="math">
-    <h2>Math</h2>
-    <p>The pipeline trains modality heads like this:</p>
-    <div class="equation">f_EIS(time series, RPT) -> EIS spectrum</div>
-    <div class="equation">f_RPT(time series, EIS) -> RPT-like health labels</div>
-    <p>Each head is judged against a baseline:</p>
-    <div class="equation">relative improvement = (RMSE_baseline - RMSE_model) / RMSE_baseline</div>
-    <p>A head is not trusted just because it runs. It has to beat the baseline on grouped folds.</p>
+  <section id="v5">
+    <h2>What V5 improved</h2>
+    <p>Earlier versions could use a measured current EIS spectrum when estimating SOH. That does not match the intended missing-measurement use case. V5 fixes this development mismatch: it trains the SOH chain using predicted EIS from other cells, adds 90% uncertainty intervals, freezes its inputs and model, and refuses out-of-domain rows instead of guessing.</p>
   </section>
 
-  <section id="graphs">
-    <h2>Graphs</h2>
-    <p>The bars show worst fold improvement for each masked-modality head. Negative means the model failed against the baseline somewhere.</p>
-    <div class="bar"><div class="bar-row"><span>masked_eis_from_time_series</span><div class="track"><div class="fill bad" style="width:0%"></div></div><span>-2.6</span></div><div class="bar-row"><span>masked_eis_from_minimal_time_series_shallow_rf</span><div class="track"><div class="fill bad" style="width:0%"></div></div><span>-2.44</span></div><div class="bar-row"><span>masked_eis_from_ohmic_time_series</span><div class="track"><div class="fill good" style="width:53%"></div></div><span>0.06759</span></div><div class="bar-row"><span>masked_eis_from_time_series_plus_rpt</span><div class="track"><div class="fill bad" style="width:28%"></div></div><span>-0.4495</span></div><div class="bar-row"><span>masked_eis_from_ohmic_time_series_plus_rpt</span><div class="track"><div class="fill bad" style="width:38%"></div></div><span>-0.2365</span></div><div class="bar-row"><span>masked_rpt_from_time_series</span><div class="track"><div class="fill bad" style="width:6%"></div></div><span>-0.8893</span></div><div class="bar-row"><span>masked_rpt_from_time_series_plus_eis</span><div class="track"><div class="fill bad" style="width:7%"></div></div><span>-0.8513</span></div><div class="bar-row"><span>masked_rpt_from_dataset_relative_time_series</span><div class="track"><div class="fill good" style="width:52%"></div></div><span>0.03185</span></div><div class="bar-row"><span>masked_rpt_from_dataset_relative_time_series_plus_eis</span><div class="track"><div class="fill good" style="width:53%"></div></div><span>0.06345</span></div></div>
+  <section id="development">
+    <h2>What internal development showed</h2>
+    <p>On a nested leave-one-cell-out test, V5 trained on other Leonardi cells and kept one complete cell out at a time. The chained predicted-EIS-to-SOH path passed all 8 held-out cells. Its mean relative improvement over the baseline was 83.3%; its weakest held-out cell still improved by 71.4%.</p>
+    <p>This is useful development evidence because the SOH model did not receive measured current EIS. It is still evidence from one development family, not proof that the method transfers to other batteries.</p>
   </section>
 
-  <section id="code">
-    <h2>Code</h2>
-    <p>This is the runner core. The full file is in the repository and the generated outputs are downloadable from this page.</p>
-    <details open><summary>Pipeline runner excerpt</summary><pre><code>rovement: `{rpt_plus_eis.get(&#x27;worst_relative_improvement_vs_baseline&#x27;)}`.&quot;,
-            &quot;&quot;,
-        ]
-    )
-    lines.extend([&quot;## Next Action&quot;, &quot;&quot;, audit[&quot;next_action&quot;], &quot;&quot;])
-    path.write_text(&quot;\n&quot;.join(lines), encoding=&quot;utf-8&quot;)
-
-
-def build_frozen_head_development_test(payload: dict[str, Any]) -&gt; dict[str, Any]:
-    completed = [
-        task
-        for task in payload.get(&quot;tasks&quot;, [])
-        if task.get(&quot;status&quot;) == &quot;completed&quot; and task.get(&quot;verdict&quot;) == &quot;supports_cross_dataset_transfer_head&quot;
-    ]
-    preferred_order = [
-        &quot;masked_rpt_from_dataset_relative_time_series_plus_eis&quot;,
-        &quot;masked_rpt_from_dataset_relative_time_series&quot;,
-        &quot;masked_rpt_from_time_series_plus_eis&quot;,
-        &quot;masked_eis_from_minimal_time_series_shallow_rf&quot;,
-        &quot;masked_eis_from_time_series_plus_rpt&quot;,
-    ]
-    selected = None
-    for name in preferred_order:
-        selected = next((task for task in completed if task.get(&quot;task&quot;) == name), None)
-        if selected:
-            break
-    if selected is None and completed:
-        selected = completed[0]
-    all_three = [
-        row
-        for row in payload.get(&quot;registry&quot;, {}).get(&quot;datasets&quot;, [])
-        if int(row.get(&quot;complete_time_series_eis_rpt_rows&quot;, 0)) &gt; 0
-    ]
-    status = &quot;development_freeze_test_completed&quot; if selected and len(all_three) &gt;= 2 else &quot;blocked&quot;
-    return {
-        &quot;created_utc&quot;: datetime.now(timezone.utc).isoformat(),
-        &quot;status&quot;: status,
-        &quot;selected_head&quot;: selected.get(&quot;task&quot;) if selected else None,
-        &quot;selected_model_policy&quot;: &quot;Use the already-defined task/model policy from missing_modality_v1_frozen_contract.json.&quot;,
-        &quot;fold_group&quot;: selected.get(&quot;fold_group&quot;) if selected else None,
-        &quot;folds_beating_baseline&quot;: selected.get(&quot;folds_beating_baseline&quot;) if selected else None,
-        &quot;fold_count&quot;: selected.get(&quot;fold_count&quot;) if selected else None,
-        &quot;worst_relative_improvement_vs_baseline&quot;: selected.get(&quot;worst_relative_improvement_vs_baseline&quot;) if selected else None,
-        &quot;all_three_dataset_count&quot;: len(all_three),
-        &quot;all_three_datasets&quot;: [
-            {
-                &quot;dataset_key&quot;: row.get(&quot;dataset_key&quot;),
-                &quot;complete_time_series_eis_rpt_rows&quot;: row.get(&quot;complete_time_series_eis_rpt_rows&quot;),
-            }
-            for row in all_three
-        ],
-        &quot;claim_boundary&quot;: &quot;Development freeze-test only. LiFePO4 RPT labels were mapped during this work, so this is not a clean external validation win.&quot;,
-    }
-
-
-def write_frozen_head_development_test_markdown(audit: dict[str, Any], path: Path) -&gt; None:
-    lines = [
-        &quot;# Missing-Modality Frozen Head Development Test&quot;,
-        &quot;&quot;,
-        f&quot;- Status: `{audit[&#x27;status&#x27;]}`.&quot;,
-        f&quot;- Selected head: `{audit.get(&#x27;selected_head&#x27;)}`.&quot;,
-        f&quot;- Fold group: `{audit.get(&#x27;fold_group&#x27;)}`.&quot;,
-        f&quot;- Folds beating baseline: `{audit.get(&#x27;folds_beating_baseline&#x27;)}` of `{audit.get(&#x27;fold_count&#x27;)}`.&quot;,
-        f&quot;- Worst relative improvement: `{audit.get(&#x27;worst_relative_improvement_vs_baseline&#x27;)}`.&quot;,
-        f&quot;- All-three dataset count: `{audit.get(&#x27;all_three_dataset_count&#x27;)}`.&quot;,
-        f&quot;- Claim boundary: {audit[&#x27;claim_boundary&#x27;]}&quot;,
-        &quot;&quot;,
-        &quot;## All-Three Datasets&quot;,
-        &quot;&quot;,
-    ]
-    for row in audit.get(&quot;all_three_datasets&quot;, []):
-        lines.append(f&quot;- `{row.get(&#x27;dataset_key&#x27;)}`: `{row.get(&#x27;complete_time_series_eis_rpt_rows&#x27;)}` complete rows.&quot;)
-    lines.append(&quot;&quot;)
-    path.write_text(&quot;\n&quot;.join(lines), encoding=&quot;utf-8&quot;)
-
-
-def build_eis_head_blocker_audit(payload: dict[str, Any]) -&gt; dict[str, Any]:
-    eis_tasks = [
-        task
-        for task in payload.get(&quot;tasks&quot;, [])
-        if str(task.get(&quot;task&quot;, &quot;&quot;)).startswith(&quot;masked_eis_from&quot;)
-    ]
-    rows = []
-    for task in eis_tasks:
-        failures = []
-        for fold in task.get(&quot;fold_error_by_target&quot;, []):
-            pass
-        rows.append(
-            {
-                &quot;task&quot;: task.get(&quot;task&quot;),
-                &quot;status&quot;: task.get(&quot;status&quot;),
-                &quot;verdict&quot;: task.get(&quot;verdict&quot;, task.get(&quot;status&quot;)),
-                &quot;fold_group&quot;: task.get(&quot;fold_group&quot;),
-                &quot;folds_beating_baseline&quot;: task.get(&quot;folds_beating_baseline&quot;),
-                &quot;fold_count&quot;: task.get(&quot;fold_count&quot;),
-                &quot;worst_relative_improvement_vs_baseline&quot;: task.get(&quot;worst_relative_improvement_vs_baseline&quot;),
-                &quot;mean_relative_improvement_vs_baseline&quot;: task.get(&quot;mean_relative_improvement_vs_baseline&quot;),
-                &quot;failed_fold_count&quot;: (
-                    int(task.get(&quot;fold_count&quot;, 0)) - int(task.get(&quot;folds_beating_baseline&quot;, 0))
-                    if task.get(&quot;fold_count&quot;) is not None and task.get(&quot;folds_beating_baseline&quot;) is not None
-                    else None
-                ),
-                &quot;failed_target_rmse_by_fold&quot;: failures,
-            }
-        )
-    supported = [row for row in rows if row.get(&quot;verdict&quot;) == &quot;supports_cross_dataset_transfer_head&quot;]
-    best = None
-    completed = [row for row in rows if row.get(&quot;status&quot;) == &quot;completed&quot;]
-    if completed:
-        best = max(
-            completed,
-            key=lambda row: (
-                int(row.get(&quot;folds_beating_baseline&quot;) or 0),
-                float(row.get(&quot;worst_relative_improvement_vs_baseline&quot;) or -999.0),
-            ),
-        )
-    ready = bool(supported)
-    return {
-        &quot;created_utc&quot;: datetime.now(timezone.utc).isoformat(),
-        &quot;status&quot;: &quot;eis_head_ready&quot; if ready else &quot;eis_head_not_ready&quot;,
-        &quot;claim_boundary&quot;: &quot;Ohmic-proxy EIS transfer has development support. Pseudo-EIS is still an estimate, not a measurement.&quot;,
-        &quot;best_current_eis_task&quot;: best,
-        &quot;eis_tasks&quot;: rows,
-        &quot;reason&quot;: &quot;At least one EIS head beats the baseline on every grouped dataset fold.&quot;
-        if ready
-        else &quot;No current EIS head beats the baseline on every grouped dataset fold.&quot;,
-        &quot;next_action&quot;: &quot;Keep the ohmic-proxy schema frozen for future checks and do not treat pseudo-EIS as measured EIS.&quot;
-        if ready
-        else &quot;Build a better comparable EIS representation or add protocol-compatible all-three data before claiming EIS imputation support.&quot;,
-    }
-
-
-def write_eis_head_blocker_markdown(audit: dict[str, Any], path: Path) -&gt; None:
-    lines = [
-        &quot;# Missing-Modality EIS Head Blocker Audit&quot;,
-        &quot;&quot;,
-        f&quot;- Status: `{audit[&#x27;status&#x27;]}`.&quot;,
-        f&quot;- Claim boundary: {audit[&#x27;claim_boundary&#x27;]}&quot;,
-        f&quot;- Reason: {audit[&#x27;reason&#x27;]}&quot;,
-        f&quot;- Next action: {audit[&#x27;next_action&#x27;]}&quot;,
-        &quot;&quot;,
-        &quot;## EIS Heads&quot;,
-        &quot;&quot;,
-    ]
-    for row in audit.get(&quot;eis_tasks&quot;, []):
-        lines.append(f&quot;### {row.get(&#x27;task&#x27;)}&quot;)
-        lines.append(&quot;&quot;)
-        lines.append(f&quot;- Verdict: `{row.get(&#x27;verdict&#x27;)}`.&quot;)
-        lines.append(f&quot;- Folds beating baseline: `{row.get(&#x27;folds_beating_baseline&#x27;)}` of `{row.get(&#x27;fold_count&#x27;)}`.&quot;)
-        lines.append(f&quot;- Worst relative improvement: `{row.get(&#x27;worst_relative_improvement_vs_baseline&#x27;)}`.&quot;)
-        lines.append(&quot;&quot;)
-    path.write_text(&quot;\n&quot;.join(lines), encoding=&quot;utf-8&quot;)
-
-
-</code></pre></details>
+  <section id="sicwell" class="note">
+    <h2>What the SiCWell external test showed</h2>
+    <p>V5 was frozen before SiCWell was inspected. The test joined 892 rows from 223 checkups across 26 cells. The unchanged domain guard accepted 0 rows and abstained from 892. With no accepted rows, there is no released external accuracy score.</p>
+    <p>The fresh SiCWell EIS shapes were far outside the frozen development domain, especially the normalized real impedance from 0.5 to 20 Hz. The frozen distance threshold was 0.406; even the nearest SiCWell row was outside it. The guard did its job by refusing to pretend that an out-of-domain prediction was trustworthy.</p>
   </section>
 
-  <section id="outputs">
-    <h2>Outputs</h2>
-    <div class="table-scroll"><table><thead><tr><th>Output</th><th>Purpose</th></tr></thead><tbody><tr><td>missing_modality_transfer_results.json</td><td>Full downloadable result.</td></tr><tr><td>missing_modality_transfer_report.md</td><td>Short human-readable report.</td></tr><tr><td>missing_modality_transfer_fold_results.csv</td><td>One row per masked-modality fold.</td></tr><tr><td>missing_modality_pseudo_labels.csv</td><td>Pseudo-RPT labels for incomplete rows.</td></tr><tr><td>missing_modality_registry.json</td><td>Dataset modality coverage registry.</td></tr><tr><td>missing_modality_v1_frozen_contract.json</td><td>Frozen development contract for the current runner, inputs, schema, and fold policy.</td></tr><tr><td>missing_modality_dataset_role_manifest.json</td><td>Dataset roles, including which datasets are complete-modality sources versus pseudo-label targets.</td></tr><tr><td>missing_modality_test workflow_contract_audit.csv</td><td>Per-dataset pass/absent checks for ID, time-series, EIS, RPT, and all-three contracts.</td></tr><tr><td>missing_modality_10_step_goal_audit.json</td><td>Machine-readable status for the 10-step plan.</td></tr><tr><td>missing_modality_all_three_candidate_search_audit.json</td><td>Candidate search status for future cleaner all-three datasets.</td></tr><tr><td>missing_modality_time_series_head_improvement_audit.json</td><td>Pure time-series head status for Step 6.</td></tr><tr><td>missing_modality_frozen_head_development_test.json</td><td>Selected-head freeze-test status for Step 9.</td></tr><tr><td>missing_modality_eis_head_blocker_audit.json</td><td>EIS head status and limit of the evidence.</td></tr></tbody></table></div>
-    <div class="table-scroll"><table><thead><tr><th>Pseudo-label task</th><th>Status</th><th>Train rows</th><th>Prediction rows</th><th>Quality verdict</th><th>Uncertainty tier</th><th>Training weight</th></tr></thead><tbody><tr><td>pseudo_rpt_from_time_series_plus_eis</td><td>completed</td><td>283</td><td>634</td><td>supports_cross_dataset_transfer_head</td><td>development_cross_dataset</td><td>0.5</td></tr><tr><td>pseudo_eis_from_time_series_plus_rpt</td><td>blocked_no_train_or_prediction_rows</td><td>283</td><td>0</td><td></td><td></td><td></td></tr></tbody></table></div>
+  <section id="boundary">
+    <h2>What this does not prove</h2>
+    <ul><li>It does not show that V5 works on SiCWell or on batteries in general.</li><li>It does not turn estimated EIS or SOH into observed measurements.</li><li>It does not justify widening the guard after seeing SiCWell.</li><li>It does not make SiCWell reusable as a clean V5 validation set.</li></ul>
   </section>
 
-  <section id="goal-audit">
-    <h2>10-Step Goal Audit</h2>
-    <p>This is the part that keeps us honest. Step 10 is built, but the full goal is not complete until the blocked evidence steps are handled.</p>
-    <div class="table-scroll"><table class="metric-table"><tbody><tr><td>Overall goal status</td><td>complete_development_pipeline</td></tr>
-<tr><td>Done steps</td><td>10</td></tr>
-<tr><td>Blocked steps</td><td>0</td></tr></tbody></table></div>
-    <div class="table-scroll"><table><thead><tr><th>Step</th><th>Name</th><th>Status</th><th>Remaining work</th></tr></thead><tbody><tr><td>1</td><td>Lock current pipeline state</td><td>done</td><td>Do not modify the v1 contract after looking at future held-out all-three results.</td></tr><tr><td>2</td><td>Find one more all-three-modality battery</td><td>done</td><td>Keep looking for a cleaner third all-three dataset if this is later used for a publication-level claim.</td></tr><tr><td>3</td><td>Define modality schema</td><td>done</td><td>Keep schema stable when adding the next all-three dataset.</td></tr><tr><td>4</td><td>Split datasets by role</td><td>done</td><td>Re-freeze roles only before adding new evidence, never after seeing a held-out score.</td></tr><tr><td>5</td><td>Build test workflow contracts</td><td>done</td><td>Use the contract audit to reject future datasets that lack same-cell modality joins.</td></tr><tr><td>6</td><td>Improve cross-dataset time-series heads</td><td>done</td><td>Keep the ohmic-proxy EIS head and dataset-relative RPT head frozen before future validation.</td></tr><tr><td>7</td><td>Treat pseudo-labels as low trust</td><td>done</td><td>Do not use pseudo-labels as measurements in any future report.</td></tr><tr><td>8</td><td>Add uncertainty scoring</td><td>done</td><td>Calibrate weights after a second all-three validation battery exists.</td></tr><tr><td>9</td><td>Freeze one missing-modality head and test once</td><td>done</td><td>For a stronger claim, repeat with a pre-declared external battery that was not inspected during test workflow development.</td></tr><tr><td>10</td><td>Build public-site presentation</td><td>done</td><td>Publish only after deciding whether this branch should go live.</td></tr></tbody></table></div>
+  <section id="next">
+    <h2>What would be needed next</h2>
+    <p>A future V6 could use SiCWell as development data, but it would need a different untouched external dataset. That kept-back test must link the same cell across fresh and later EIS, matched pulse resistance, and measured capacity or SOH. The V6 model, baseline, acceptance gates, and domain guard must be frozen before it is scored.</p>
   </section>
 
-  <section id="glossary">
-    <h2>Glossary</h2>
-    <div class="table-scroll"><table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody><tr><td>Missing modality</td><td>A measurement type that is absent for a battery, such as RPT labels or EIS spectra.</td></tr><tr><td>Pseudo-label</td><td>A model estimate of a missing measurement. It is not a real measurement.</td></tr><tr><td>RPT</td><td>Reference performance test, used here as RPT-like health labels such as SOH or capacity.</td></tr><tr><td>EIS</td><td>Electrochemical impedance spectroscopy, represented here on a fixed frequency grid.</td></tr><tr><td>Masked-modality test</td><td>A test where known data is hidden and reconstructed to check whether the imputation head works.</td></tr><tr><td>Internal head</td><td>A model tested only inside the one all-three dataset by held-out cell.</td></tr><tr><td>Cross-dataset transfer</td><td>A model tested by holding out a whole dataset, the harder and more honest test.</td></tr><tr><td>Baseline</td><td>The boring comparison model. If the model cannot beat it, the head is not useful yet.</td></tr></tbody></table></div>
-  </section>
-
-  <section id="limits" class="note">
-    <h2>Limits</h2>
-    <ul><li>Keep the ohmic-proxy EIS head and dataset-relative RPT head frozen before any future held-out validation run.</li><li>Add or identify a cleaner third complete all-three-modality battery before making any general validation claim.</li><li>Repeat the frozen heads on a future pre-declared all-three battery before making a publication-level claim.</li><li>Keep pseudo-labels down-weighted or flagged. Do not train future claims as if pseudo-RPT or pseudo-EIS were measurements.</li></ul>
-    <p><strong>Ruthless version:</strong> the development pipeline is complete. The next serious milestone is a clean, pre-declared external validation battery, not more deck polish.</p>
+  <section id="terms">
+    <h2>Terms</h2>
+    <div class="table-scroll"><table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody><tr><td>EIS</td><td>A frequency-by-frequency electrical response measurement of a battery.</td></tr><tr><td>SOH</td><td>State of health, here a measured health or capacity target.</td></tr><tr><td>Domain guard</td><td>A fixed check that refuses inputs too unlike the development data.</td></tr><tr><td>Chained prediction</td><td>Predict EIS first, then use that predicted EIS to estimate SOH.</td></tr><tr><td>Abstain</td><td>Return no prediction because the input is outside the method&#x27;s defined domain.</td></tr></tbody></table></div>
   </section>
 </main>
   </div>

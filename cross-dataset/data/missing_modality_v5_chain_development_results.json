@@ -1,0 +1,43 @@
+{
+  "created_utc": "2026-07-14T21:31:56.837898+00:00",
+  "status": "development_gate_passed",
+  "design": "Nested leave-one-cell-out chain. SOH is trained on out-of-cell predicted EIS and never receives measured current EIS.",
+  "training_cells": [
+    "Leonardi_Cell01",
+    "Leonardi_Cell02",
+    "Leonardi_Cell03",
+    "Leonardi_Cell04",
+    "Leonardi_Cell05",
+    "Leonardi_Cell06",
+    "Leonardi_Cell07",
+    "Leonardi_Cell08"
+  ],
+  "summary": {
+    "chain_predicted_eis_to_soh": {
+      "folds": 8,
+      "folds_passing": 8,
+      "mean_relative_improvement": 0.833178655405922,
+      "worst_relative_improvement": 0.7140023942375703
+    },
+    "direct_measured_eis_to_soh": {
+      "folds": 8,
+      "folds_passing": 8,
+      "mean_relative_improvement": 0.9296271506907172,
+      "worst_relative_improvement": 0.8696346144147579
+    },
+    "eis_znegimag": {
+      "folds": 8,
+      "folds_passing": 8,
+      "mean_relative_improvement": 0.8555742246304612,
+      "worst_relative_improvement": 0.7686270256928798
+    },
+    "eis_zreal": {
+      "folds": 8,
+      "folds_passing": 8,
+      "mean_relative_improvement": 0.8992741568477811,
+      "worst_relative_improvement": 0.8515958461202449
+    }
+  },
+  "external_freeze_allowed": true,
+  "claim_boundary": "Development evidence only. Oxford and every earlier scored dataset are spent and cannot validate v5."
+}

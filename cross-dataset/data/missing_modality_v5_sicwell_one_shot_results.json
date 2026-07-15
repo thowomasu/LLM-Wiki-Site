@@ -1,0 +1,145 @@
+{
+  "created_utc": "2026-07-15T08:04:25.869130+00:00",
+  "status": "external_validation_failed",
+  "verdict": "no support",
+  "dataset": "SiCWell Dataset cell checkups",
+  "dataset_doi": "10.21227/MNMW-8C42",
+  "frozen_model_version": "missing_measurement_v5_chained_frozen_1",
+  "frozen_model_manifest_sha256": "0e0f444f7a858bdb6ae8426b37ae4a7e145f8642c6539f971bbf2e4040b01bd1",
+  "validation_contract_sha256": "2aba7677a0653913e631c0126ac88f3a93bd30c626f0ed1e2574f1c20907aeeb",
+  "validation_matrix_sha256": "6ee27dae075a076301abae4d1d50ede95aad9785af5f112c8ef8d70740549e0a",
+  "rows": 892,
+  "cells": 26,
+  "checkups": 223,
+  "domain_retention": {
+    "total_rows": 892,
+    "accepted_rows": 0,
+    "abstained_rows": 892,
+    "accepted_fraction": 0.0,
+    "accepted_cells": 0,
+    "accepted_checkups": 0,
+    "passes": false
+  },
+  "overall_metrics_on_accepted_rows": {
+    "accepted_rows": 0
+  },
+  "metrics_by_soc": {
+    "20": {
+      "accepted_rows": 0
+    },
+    "40": {
+      "accepted_rows": 0
+    },
+    "60": {
+      "accepted_rows": 0
+    },
+    "80": {
+      "accepted_rows": 0
+    }
+  },
+  "metrics_by_cell": {
+    "AC01": {
+      "accepted_rows": 0
+    },
+    "AC02": {
+      "accepted_rows": 0
+    },
+    "AC03": {
+      "accepted_rows": 0
+    },
+    "AC04": {
+      "accepted_rows": 0
+    },
+    "AC07": {
+      "accepted_rows": 0
+    },
+    "AC08": {
+      "accepted_rows": 0
+    },
+    "AC10": {
+      "accepted_rows": 0
+    },
+    "AC13": {
+      "accepted_rows": 0
+    },
+    "AC16": {
+      "accepted_rows": 0
+    },
+    "AC19": {
+      "accepted_rows": 0
+    },
+    "AC25": {
+      "accepted_rows": 0
+    },
+    "DC01": {
+      "accepted_rows": 0
+    },
+    "DC02": {
+      "accepted_rows": 0
+    },
+    "DC03": {
+      "accepted_rows": 0
+    },
+    "Ka01": {
+      "accepted_rows": 0
+    },
+    "Ka02": {
+      "accepted_rows": 0
+    },
+    "Ka03": {
+      "accepted_rows": 0
+    },
+    "Ka04": {
+      "accepted_rows": 0
+    },
+    "Ka05": {
+      "accepted_rows": 0
+    },
+    "Ka06": {
+      "accepted_rows": 0
+    },
+    "Ka07": {
+      "accepted_rows": 0
+    },
+    "Ka08": {
+      "accepted_rows": 0
+    },
+    "Ka09": {
+      "accepted_rows": 0
+    },
+    "Ka10": {
+      "accepted_rows": 0
+    },
+    "Ka11": {
+      "accepted_rows": 0
+    },
+    "Ka12": {
+      "accepted_rows": 0
+    }
+  },
+  "acceptance_gates": {
+    "eis_zreal": {
+      "performance_pass": false,
+      "uncertainty_pass": false,
+      "passes": false
+    },
+    "eis_znegimag": {
+      "performance_pass": false,
+      "uncertainty_pass": false,
+      "passes": false
+    },
+    "direct_soh": {
+      "performance_pass": false,
+      "uncertainty_pass": false,
+      "passes": false
+    },
+    "chain_soh": {
+      "performance_pass": false,
+      "uncertainty_pass": false,
+      "passes": false
+    }
+  },
+  "all_frozen_gates_pass": false,
+  "post_holdout_tuning": false,
+  "claim_boundary": "One untouched external NMC pouch-cell dataset. Correlated SOC/checkup rows are reported with cell counts and do not become independent batteries."
+}

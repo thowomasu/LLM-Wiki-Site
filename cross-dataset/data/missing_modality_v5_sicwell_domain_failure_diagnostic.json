@@ -1,0 +1,96 @@
+{
+  "created_utc": "2026-07-15T08:07:01.714018+00:00",
+  "status": "post_failure_diagnostic_no_rescore_no_tuning",
+  "frozen_domain_threshold": 0.4059028481270963,
+  "distance_quantiles": {
+    "min": 3.292606281582568,
+    "q10": 3.885089956745346,
+    "q50": 5.500911031074839,
+    "q90": 12.750726841760816,
+    "max": 17.323719151902726
+  },
+  "top_feature_contributions": [
+    {
+      "feature": "normalized_baseline_zreal_2hz_ohm",
+      "mean_squared_distance_contribution": 9.28123829208886,
+      "external_standardized_range": [
+        -10.423993657740082,
+        1.30342255114383
+      ]
+    },
+    {
+      "feature": "normalized_baseline_zreal_5hz_ohm",
+      "mean_squared_distance_contribution": 7.0240935478972455,
+      "external_standardized_range": [
+        -8.874434190792828,
+        0.9823918641521924
+      ]
+    },
+    {
+      "feature": "normalized_baseline_zreal_0p5hz_ohm",
+      "mean_squared_distance_contribution": 6.223253255230002,
+      "external_standardized_range": [
+        -3.4793014243528275,
+        8.437949628409092
+      ]
+    },
+    {
+      "feature": "normalized_baseline_znegimag_40hz_ohm",
+      "mean_squared_distance_contribution": 4.713375719059554,
+      "external_standardized_range": [
+        -0.31497241910338514,
+        3.7217055750645476
+      ]
+    },
+    {
+      "feature": "normalized_baseline_zreal_1hz_ohm",
+      "mean_squared_distance_contribution": 4.151794508506422,
+      "external_standardized_range": [
+        -8.84844274147814,
+        0.8942560026840547
+      ]
+    },
+    {
+      "feature": "normalized_baseline_zreal_10hz_ohm",
+      "mean_squared_distance_contribution": 4.123703987081871,
+      "external_standardized_range": [
+        -7.089349226631026,
+        0.7596333188032498
+      ]
+    },
+    {
+      "feature": "normalized_baseline_znegimag_20hz_ohm",
+      "mean_squared_distance_contribution": 3.216628309324815,
+      "external_standardized_range": [
+        0.08670326589302717,
+        3.200662751785512
+      ]
+    },
+    {
+      "feature": "normalized_baseline_zreal_20hz_ohm",
+      "mean_squared_distance_contribution": 2.822791789815973,
+      "external_standardized_range": [
+        -5.805326238120109,
+        0.5010288869013386
+      ]
+    },
+    {
+      "feature": "normalized_baseline_zreal_40hz_ohm",
+      "mean_squared_distance_contribution": 2.7798819451344734,
+      "external_standardized_range": [
+        -5.095096495483779,
+        0.2599404799227099
+      ]
+    },
+    {
+      "feature": "normalized_baseline_znegimag_0p1hz_ohm",
+      "mean_squared_distance_contribution": 2.488495253398305,
+      "external_standardized_range": [
+        -1.6560745073538174,
+        -0.4418959101467763
+      ]
+    }
+  ],
+  "interpretation": "The fresh SiCWell EIS shape is far outside the frozen development domain, especially normalized Zreal from 0.5 to 20 Hz. The guard correctly refused every prediction.",
+  "prohibited_followup": "Do not widen the threshold or remap SiCWell and call it the same validation. SiCWell is spent and may only become development data for a future version."
+}
