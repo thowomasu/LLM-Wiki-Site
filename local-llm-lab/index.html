@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Battery DRT Research Outputs</title>
+  <title>Local LLM Wiki Lab | Battery DRT Research Outputs</title>
   <style>:root {
   color-scheme: light;
   --sidebar-width: 260px;
@@ -623,120 +623,55 @@ footer {
   });
 })();
 </script>
-  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
   <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
   <div class="site-shell">
-    <aside class="sidebar"><a class="brand" href="index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
-<a class="side-link" href="datasets/">Datasets</a>
-<a class="side-link" href="glossary/">Glossary</a>
-<a class="side-link" href="local-llm-lab/">Local LLM Wiki Lab</a>
-<a class="side-link" href="index.html">Overview</a>
-<a class="side-link" href="presentations/">Presentations</a>
-<a class="side-link" href="sources/">Sources</a>
+    <aside class="sidebar"><a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
+<a class="side-link" href="../datasets/">Datasets</a>
+<a class="side-link" href="../glossary/">Glossary</a>
+<a class="side-link" href="../local-llm-lab/">Local LLM Wiki Lab</a>
+<a class="side-link" href="../index.html">Overview</a>
+<a class="side-link" href="../presentations/">Presentations</a>
+<a class="side-link" href="../sources/">Sources</a>
 <div class="side-section">Workstreams</div>
-<a class="side-link" href="presentations/#calb-study">CALB L148N58A comprehensive characterization study</a>
-<a class="side-link" href="presentations/#cambridge-molicell-eis">Cambridge and Molicell EIS prediction study</a>
-<a class="side-link" href="external-validation/dataset-exploration/">Dataset exploration screen</a>
-<a class="side-link" href="external-validation/">External Dataset Checks</a>
-<a class="side-link" href="presentations/#lg-m50t-expt4">LG M50T 21700 degradation study, Expt 4 drive-cycle aging</a>
-<a class="side-link" href="presentations/#drt-pipeline">Rashid and Faraji-Niri DIB battery SOH estimation dataset</a></aside>
+<a class="side-link" href="../presentations/#calb-study">CALB L148N58A comprehensive characterization study</a>
+<a class="side-link" href="../presentations/#cambridge-molicell-eis">Cambridge and Molicell EIS prediction study</a>
+<a class="side-link" href="../external-validation/dataset-exploration/">Dataset exploration screen</a>
+<a class="side-link" href="../external-validation/">External Dataset Checks</a>
+<a class="side-link" href="../presentations/#lg-m50t-expt4">LG M50T 21700 degradation study, Expt 4 drive-cycle aging</a>
+<a class="side-link" href="../presentations/#drt-pipeline">Rashid and Faraji-Niri DIB battery SOH estimation dataset</a></aside>
     <div class="page-content">
       <header>
         <div class="kicker">Battery DRT Research Outputs</div>
-        <h1>Battery DRT Research Outputs</h1>
-        <p class="lead">Public battery research outputs with plain claim boundaries, source links, data tables, and reproduction trail.</p>
+        <h1>Local LLM Wiki Lab</h1>
+        <p class="lead">A private, provenance-preserving local retrieval lab for collaborators.</p>
       </header>
       <main>
 
+    <section class="note"><strong>Private collaborator tool:</strong> this lab is not part of the public research evidence. It is a separate local retrieval workspace for colleagues who have been granted access to its private repository.</section>
     <section>
-      <h2>Start Here</h2>
-      <p class="lead">Follow one path from the research question to the source files.</p>
-      <div class="journey" aria-label="Six-step site journey">
-        <div class="journey-step"><strong>A. Overview</strong><span>Choose a research question.</span></div>
-        <div class="journey-step"><strong>B. Presentations</strong><span>Read the study in a short, ordered format.</span></div>
-        <div class="journey-step"><strong>C. Datasets</strong><span>See which measurements were used.</span></div>
-        <div class="journey-step"><strong>D. Results</strong><span>Check what the tests found.</span></div>
-        <div class="journey-step"><strong>E. Limits</strong><span>See what failed or remains unproven.</span></div>
-        <div class="journey-step"><strong>F. Sources</strong><span>Open the papers, datasets, and result files.</span></div>
-      </div>
-      <div class="card-actions"><a class="button" href="presentations/">Start with presentations</a><a class="button" href="datasets/">Then view datasets</a><a class="button" href="external-validation/">Check the limits</a><a class="button" href="sources/">Trace the sources</a></div>
+      <h2>What it contains</h2>
+      <p>The lab holds an approved text corpus, a source manifest with file hashes, a deterministic retrieval index, and the previous mini index for rollback. It excludes raw PDFs, datasets, model files, runtime cache, credentials, generated experiments, and unsupported file types.</p>
     </section>
-    <section>
-      <h2>Two Different Research Tracks</h2>
-      <p><strong>CALB:</strong> compares pulse data with measured EIS from the same CALB tests. This is evidence from one study.</p>
-      <p><strong>Cross-dataset:</strong> trains a model on some datasets and tests EIS prediction on other datasets. This is a different research question.</p>
-    </section>
-    <section class="note">
-      <strong>Keep the claims separate:</strong> CALB has not passed an outside validation test. Panasonic, RADAR4KIT, and Stanford do not support the fixed CALB rule. Cambridge and Molicell belong to another prediction study. LG M50T Expt 4 studies health features, not DRT checked against measured EIS.
-    </section>
-    <h2>Public Shelf</h2>
     <section class="summary-grid">
-      <article class="summary-card"><h3>CALB L148N58A comprehensive characterization study</h3><p><span class="metric-inline">246 / 246</span> internal quality-pass rows for the CALB pulse-to-EIS analysis.</p><div class="card-actions"><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB readiness report</a><a class="button" href="calb/data/">View CALB L148N58A study data</a></div></article>
-      <article class="summary-card"><h3>Cambridge and Molicell EIS prediction study</h3><p>Separate EIS prediction track. Cambridge is partial support. Molicell belongs here, not under CALB validation.</p><div class="card-actions"><a class="button" href="presentations/#cambridge-molicell-eis">Open EIS prediction briefs</a></div></article>
-      <article class="summary-card"><h3>External validation checks</h3><p>CALCE is blocked for runnable rows. RADAR4KIT, Stanford, and Panasonic are no-support for the fixed CALB rule.</p><div class="card-actions"><a class="button" href="external-validation/">Open external validation checks</a></div></article>
-      <article class="summary-card"><h3>Presentations</h3><p><span class="metric-inline">10</span> presentation pages grouped by study.</p><div class="card-actions"><a class="button" href="presentations/">Open presentations</a></div></article>
-      <article class="summary-card"><h3>Local LLM Wiki Lab</h3><p>Private colleague tool for source-grounded local retrieval and bounded draft answers. It is tested for a small known-question set, not unattended factual use.</p><div class="card-actions"><a class="button" href="local-llm-lab/">Read local lab status</a></div></article>
-    </section>
-    <h2>Common Terms</h2>
-    <section class="terms-strip">
-      <article class="term-card"><strong>DRT</strong><span>Distribution of Relaxation Times, the relaxation representation used in analysis.</span></article>
-      <article class="term-card"><strong>EIS</strong><span>Electrochemical Impedance Spectroscopy, the frequency-domain target.</span></article>
-      <article class="term-card"><strong>HPPC</strong><span>Hybrid Pulse Power Characterization, the CALB pulse source.</span></article>
-      <article class="term-card"><strong>KK</strong><span>Kramers-Kronig, used here as an EIS quality screen.</span></article>
-      <article class="term-card"><strong>SOC</strong><span>State of Charge, a key alignment variable.</span></article>
+      <article class="summary-card"><h3>What works now</h3><p>125 approved Markdown files pass hash verification. The full corpus passes five retrieval questions, and two bounded five-question local-answer runs passed with manual review. A clean Windows clone also passed provenance and a dry-run answer check.</p></article>
+      <article class="summary-card"><h3>What is not proven</h3><p>This is not a general accuracy benchmark or an unattended-answer system. Longer responses can truncate an extra source-list item, and every factual draft still needs source review.</p></article>
+      <article class="summary-card"><h3>What happens next</h3><p>Keep the mini index for rollback. Re-run the fixed evaluation and manual review after any corpus, retrieval, prompt, or model change. Test a deliberate rollback after index-manager changes.</p></article>
     </section>
     <section>
-      <h2>What Has Been Done So Far</h2>
-      <div class="table-wrap">
-        <table class="briefing-table">
-          <thead><tr><th>Workstream</th><th>What was built</th><th>What to remember</th><th>Open</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong class="catalog-title">CALB L148N58A comprehensive characterization study: pulse-to-EIS analysis</strong><div class="catalog-detail">Internal evidence</div></td>
-              <td>Parsed the archive, published viewable data files, built the internal pulse-to-EIS evidence package, and kept the drive-cycle limitation visible.</td>
-              <td>The drive-cycle result is weaker than the HPPC/EIS bridge. Do not flatten those into one claim.</td>
-              <td class="open-cell"><a class="button" href="calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB readiness report</a></td>
-            </tr>
-            <tr>
-              <td><strong class="catalog-title">Distribution of Relaxation Times pipeline</strong><div class="catalog-detail">Method-development outputs</div></td>
-              <td>Time-domain battery pipeline that finds pulse/rest windows, fits relaxation behavior, compares against EIS, and reports where voltage-only fitting can look good while still failing impedance behavior.</td>
-              <td>This is method development. Strong voltage fit is not automatically strong impedance evidence.</td>
-              <td class="open-cell"><a class="button" href="presentations/#drt-pipeline">Open DRT method outputs</a></td>
-            </tr>
-            <tr>
-              <td><strong class="catalog-title">LG M50T 21700 degradation study, Expt 4 drive-cycle aging</strong><div class="catalog-detail">Expt 4 - Drive Cycle Aging (Control)</div></td>
-              <td>Mapped and tested the Expt 4 drive-cycle ageing subset, including data audit, feature extraction, held-out-cell checks, validation diagnostics, and reproduction material.</td>
-              <td>Good for pipeline mechanics and health-feature development. It is not the same thing as EIS external validation.</td>
-              <td class="open-cell"><a class="button" href="presentations/#lg-m50t-expt4">Open LG M50T Expt 4 outputs</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <h2>Use it correctly</h2>
+      <ul>
+        <li>Use it to retrieve and draft from the included sources.</li>
+        <li>Treat every generated answer as a draft that needs source review.</li>
+        <li>Do not treat a polished answer as new research evidence.</li>
+        <li>Do not add binary datasets or raw PDFs until a reviewed extractor and evaluation path exist.</li>
+      </ul>
     </section>
     <section>
-      <h2>Dataset Map</h2>
-      <p>The site tracks the datasets actually used or screened by the work: CALB L148N58A comprehensive characterization study, LG M50T 21700 degradation study, Expt 4 drive-cycle aging, CALCE Storage 25 C, KIT RADAR4KIT, NASA Battery, and the newer Panasonic/Samsung/Graphite-LNMO exploration set.</p>
-      <div class="table-wrap">
-        <table class="briefing-table">
-          <thead><tr><th>Dataset group</th><th>What it contributes</th><th>Status</th><th>Open</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong class="catalog-title">Current evidence datasets</strong></td>
-              <td>CALB L148N58A testing campaign provides the current internal EIS and HPPC pulse-bridge package. LG M50T 21700 degradation study, Expt 4 drive-cycle aging provides the drive-cycle ageing health-feature pipeline work.</td>
-              <td>Useful development datasets, but they answer different questions.</td>
-              <td class="open-cell"><a class="button" href="datasets/">Open dataset map</a></td>
-            </tr>
-            <tr>
-              <td><strong class="catalog-title">Validation candidates</strong></td>
-              <td>CALCE, KIT RADAR4KIT, Stanford SECL, Panasonic 18650PF, Samsung INR21700-50E, Graphite/LNMO, NASA, Cambridge, and Molicell are screened or used for external checks.</td>
-              <td>CALCE has 24 same-join qualification rows and 0 frozen-rule runnable rows. RADAR4KIT, Stanford, and Panasonic do not support the fixed CALB rule. Cambridge and Molicell belong to the separate EIS prediction track.</td>
-              <td class="open-cell"><a class="button" href="external-validation/">Open external validation checks</a><a class="button" href="external-validation/dataset-exploration/">Open dataset exploration</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <h2>Access</h2>
+      <p>The lab repository is private. Collaborators need an invitation and a local OpenAI-compatible model runtime. The model itself is not shipped with the repository.</p>
     </section>
 
       </main>
