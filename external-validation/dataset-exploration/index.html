@@ -54,6 +54,7 @@
     if (label) label.textContent = theme === "dark" ? "On" : "Off";
   }
   function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
     try {
       var saved = localStorage.getItem(sidebarKey);
       if (saved === "collapsed" || saved === "expanded") return saved;
@@ -64,12 +65,27 @@
     document.documentElement.dataset.sidebar = state;
     var button = document.querySelector("[data-sidebar-toggle]");
     var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
     if (button) {
       var collapsed = state === "collapsed";
-      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Hide sidebar");
-      button.setAttribute("title", collapsed ? "Show sidebar" : "Hide sidebar");
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
     }
-    if (icon) icon.textContent = state === "collapsed" ? ">" : "<";
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "☰" : "×";
+  }
+  function labelResponsiveTables() {
+    document.querySelectorAll("table").forEach(function (table) {
+      var headers = Array.from(table.querySelectorAll("thead th")).map(function (cell) {
+        return cell.textContent.trim();
+      });
+      table.querySelectorAll("tbody tr").forEach(function (row) {
+        Array.from(row.children).forEach(function (cell, index) {
+          if (cell.tagName === "TD" && headers[index]) cell.dataset.label = headers[index];
+        });
+      });
+    });
   }
   var initialTheme = preferredTheme();
   var initialSidebar = preferredSidebar();
@@ -78,6 +94,7 @@
   window.addEventListener("DOMContentLoaded", function () {
     applyTheme(document.documentElement.dataset.theme || initialTheme);
     applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
+    labelResponsiveTables();
     var toggle = document.querySelector("[data-theme-toggle]");
     if (toggle) {
       toggle.addEventListener("click", function () {
@@ -94,9 +111,26 @@
         applySidebar(next);
       });
     }
+    document.querySelectorAll(".sidebar a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) applySidebar("collapsed");
+      });
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") applySidebar("collapsed");
+    });
   });
 })();
 </script>
+
+  <meta name="description" content="Screening evidence for CALCE, RADAR4KIT, Panasonic, Stanford, NASA, and other external validation candidates.">
+  <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/external-validation/dataset-exploration/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="External dataset screening evidence | Battery DRT Research Outputs">
+  <meta property="og:description" content="Screening evidence for CALCE, RADAR4KIT, Panasonic, Stanford, NASA, and other external validation candidates.">
+  <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/external-validation/dataset-exploration/">
+  <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
+  <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
 </head>
 <body>
   <div class="site-shell">

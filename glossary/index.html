@@ -4,6 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Glossary | Battery DRT Research Outputs</title>
+  <meta name="description" content="Plain definitions for battery, DRT, EIS, dataset, and validation terms used across the research site.">
+  <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/glossary/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Glossary | Battery DRT Research Outputs">
+  <meta property="og:description" content="Plain definitions for battery, DRT, EIS, dataset, and validation terms used across the research site.">
+  <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/glossary/">
+  <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
+  <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
   <style>:root {
   color-scheme: light;
   --sidebar-width: 260px;
@@ -78,8 +86,10 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  gap: 7px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 13px;
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -121,7 +131,7 @@ body {
 .side-link {
   display: flex;
   align-items: center;
-  min-height: 34px;
+  min-height: 44px;
   margin: 6px 0;
   padding: 7px 9px;
   color: var(--ink);
@@ -129,6 +139,8 @@ body {
   border: 1px solid transparent;
   border-radius: 6px;
   font-size: 14px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 .side-link:hover {
   border-color: var(--line);
@@ -139,7 +151,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 38px;
+  min-height: 44px;
   margin: 14px 0 8px;
   padding: 8px 10px;
   color: var(--ink);
@@ -175,7 +187,7 @@ main {
 .button {
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
+  min-height: 44px;
   padding: 8px 12px;
   color: var(--ink);
   text-decoration: none;
@@ -195,7 +207,7 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 38px;
+  min-height: 44px;
   padding: 8px 14px;
   color: var(--ink);
   text-decoration: none;
@@ -211,6 +223,12 @@ main {
   background: var(--blue);
 }
 a { color: var(--blue); }
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
 h1, h2, h3 { margin: 0; line-height: 1.12; letter-spacing: 0; }
 h1 { max-width: 980px; font-size: clamp(38px, 6vw, 76px); }
 h2 { margin-top: 30px; margin-bottom: 14px; font-size: clamp(26px, 3.5vw, 42px); }
@@ -230,6 +248,37 @@ code {
   margin-bottom: 12px;
 }
 .lead { max-width: 980px; color: var(--muted); font-size: 22px; }
+.research-hero {
+  max-width: 1040px;
+}
+.research-question {
+  max-width: 980px;
+  margin: 8px 0 22px;
+  font-size: clamp(34px, 5vw, 64px);
+}
+.hero-evidence {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 960px;
+  margin: 20px 0;
+}
+.hero-point {
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  background: var(--panel);
+}
+.hero-point.limit { border-left-color: var(--red); }
+.hero-point strong,
+.hero-point span { display: block; }
+.hero-point span { margin-top: 5px; color: var(--muted); }
+.hero-cta { margin-top: 8px; }
+.hero-cta .button {
+  color: #fff;
+  border-color: var(--blue);
+  background: var(--blue);
+  font-weight: 800;
+}
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -258,6 +307,76 @@ code {
   border-left: 5px solid var(--blue);
   border-radius: 6px;
   background: var(--panel);
+}
+.reader-path {
+  color: inherit;
+  text-decoration: none;
+}
+.reader-path:hover { border-color: var(--blue); }
+.evidence-status {
+  max-width: 900px;
+  margin: 24px 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.status-list {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.status-list li {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.pipeline-visual {
+  max-width: 1050px;
+  margin: 26px 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.pipeline-flow {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  align-items: center;
+  margin: 18px 0 12px;
+}
+.pipeline-step {
+  grid-column: span 1;
+  min-height: 118px;
+  padding: 14px 12px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.pipeline-step strong,
+.pipeline-step span { display: block; }
+.pipeline-step span { margin-top: 7px; color: var(--muted); font-size: 14px; }
+.pipeline-arrow { color: var(--muted); text-align: center; font-size: 28px; }
+.pipeline-label {
+  color: var(--red);
+  font-weight: 800;
+}
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
 }
 .journey {
   display: grid;
@@ -531,19 +650,81 @@ footer {
   border-top: 1px solid var(--line);
   background: var(--panel-strong);
 }
+@media (min-width: 851px) {
+  .sidebar-floating-toggle [data-sidebar-label] { display: none; }
+}
 @media (max-width: 850px) {
   .site-shell { display: block; }
   .sidebar {
-    position: static;
-    height: auto;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
+    position: fixed;
+    z-index: 60;
+    inset: 0 auto 0 0;
+    width: min(86vw, 330px);
+    height: 100vh;
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+    box-shadow: 18px 0 40px rgba(0, 0, 0, .28);
   }
   [data-sidebar="collapsed"] .sidebar {
-    display: none;
+    display: block;
+    transform: translateX(-105%);
   }
   .sidebar-floating-toggle {
     left: 12px;
+  }
+  [data-sidebar="expanded"] .sidebar-floating-toggle {
+    left: min(calc(86vw + 10px), 340px);
+  }
+  .hero-evidence { grid-template-columns: 1fr; }
+  .pipeline-flow { grid-template-columns: 1fr; }
+  .pipeline-arrow { transform: rotate(90deg); }
+  .status-list li { grid-template-columns: 1fr; gap: 6px; }
+  .table-wrap {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+  .table-wrap table,
+  main > table {
+    display: block;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+  }
+  .table-wrap thead,
+  main > table thead { display: none; }
+  .table-wrap tbody,
+  .table-wrap tr,
+  .table-wrap td,
+  main > table tbody,
+  main > table tr,
+  main > table td { display: block; width: 100%; }
+  .table-wrap tr,
+  main > table tr {
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--blue);
+    border-radius: 7px;
+    background: var(--panel);
+  }
+  .table-wrap td,
+  main > table td {
+    padding: 9px 0;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .table-wrap td:last-child,
+  main > table td:last-child { border-bottom: 0; }
+  .table-wrap td::before,
+  main > table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
   }
   .grid, .grid.two { grid-template-columns: 1fr; }
   .card {
@@ -560,7 +741,7 @@ footer {
   h1 { font-size: clamp(32px, 10vw, 48px); }
   h2 { font-size: clamp(23px, 7vw, 32px); }
   main { padding: 24px min(4vw, 20px) 44px; }
-  header { padding: 34px min(5vw, 24px) 22px; }
+  header { padding: 76px min(5vw, 24px) 22px; }
   p { font-size: 17px; }
 }</style>
   <script>
@@ -580,6 +761,7 @@ footer {
     if (label) label.textContent = theme === "dark" ? "On" : "Off";
   }
   function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
     try {
       var saved = localStorage.getItem(sidebarKey);
       if (saved === "collapsed" || saved === "expanded") return saved;
@@ -590,12 +772,27 @@ footer {
     document.documentElement.dataset.sidebar = state;
     var button = document.querySelector("[data-sidebar-toggle]");
     var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
     if (button) {
       var collapsed = state === "collapsed";
-      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Hide sidebar");
-      button.setAttribute("title", collapsed ? "Show sidebar" : "Hide sidebar");
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
     }
-    if (icon) icon.textContent = state === "collapsed" ? ">" : "<";
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "☰" : "×";
+  }
+  function labelResponsiveTables() {
+    document.querySelectorAll("table").forEach(function (table) {
+      var headers = Array.from(table.querySelectorAll("thead th")).map(function (cell) {
+        return cell.textContent.trim();
+      });
+      table.querySelectorAll("tbody tr").forEach(function (row) {
+        Array.from(row.children).forEach(function (cell, index) {
+          if (cell.tagName === "TD" && headers[index]) cell.dataset.label = headers[index];
+        });
+      });
+    });
   }
   var initialTheme = preferredTheme();
   var initialSidebar = preferredSidebar();
@@ -604,6 +801,7 @@ footer {
   window.addEventListener("DOMContentLoaded", function () {
     applyTheme(document.documentElement.dataset.theme || initialTheme);
     applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
+    labelResponsiveTables();
     var toggle = document.querySelector("[data-theme-toggle]");
     if (toggle) {
       toggle.addEventListener("click", function () {
@@ -620,33 +818,48 @@ footer {
         applySidebar(next);
       });
     }
+    document.querySelectorAll(".sidebar a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) applySidebar("collapsed");
+      });
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") applySidebar("collapsed");
+    });
   });
 })();
 </script>
   <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
-  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">&times;</span><span data-sidebar-label>Close</span></button>
   <div class="site-shell">
-    <aside class="sidebar"><a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Project</div>
-<a class="side-link" href="../datasets/">Datasets</a>
-<a class="side-link" href="../glossary/">Glossary</a>
-<a class="side-link" href="../local-llm-lab/">Local LLM Wiki Lab</a>
-<a class="side-link" href="../index.html">Overview</a>
-<a class="side-link" href="../presentations/">Presentations</a>
-<a class="side-link" href="../sources/">Sources</a>
-<div class="side-section">Workstreams</div>
-<a class="side-link" href="../presentations/#calb-study">CALB L148N58A comprehensive characterization study</a>
-<a class="side-link" href="../presentations/#cambridge-molicell-eis">Cambridge and Molicell EIS prediction study</a>
-<a class="side-link" href="../external-validation/dataset-exploration/">Dataset exploration screen</a>
-<a class="side-link" href="../external-validation/">External Dataset Checks</a>
-<a class="side-link" href="../presentations/#lg-m50t-expt4">LG M50T 21700 degradation study, Expt 4 drive-cycle aging</a>
-<a class="side-link" href="../presentations/#drt-pipeline">Rashid and Faraji-Niri DIB battery SOH estimation dataset</a></aside>
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
+<a class="side-link" href="../index.html#project-summary">Project summary</a>
+<div class="side-section">Main study</div>
+<a class="side-link" href="../calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">CALB project overview</a>
+<a class="side-link" href="../presentations/#calb-study">CALB evidence and figures</a>
+<a class="side-link" href="../calb/manual/">CALB methods guide</a>
+<div class="side-section">Results and limitations</div>
+<a class="side-link" href="../external-validation/">External validation status</a>
+<a class="side-link" href="../datasets/">Dataset status map</a>
+<div class="side-section">Datasets and sources</div>
+<a class="side-link" href="../calb/data/">CALB public data</a>
+<a class="side-link" href="../sources/">Papers, data, and sources</a>
+<a class="side-link" href="../external-validation/dataset-exploration/">Dataset screening evidence</a>
+<div class="side-section">Other studies</div>
+<a class="side-link" href="../cross-dataset/">Cross-dataset EIS prediction</a>
+<a class="side-link" href="../presentations/#lg-m50t-expt4">LG M50T Expt 4 health features</a>
+<a class="side-link" href="../presentations/#drt-pipeline">DIB time-domain DRT pilot</a>
+<div class="side-section">Glossary</div>
+<a class="side-link" href="../glossary/">Plain-language glossary</a></aside>
     <div class="page-content">
       <header>
+
         <div class="kicker">Battery DRT Research Outputs</div>
         <h1>Glossary</h1>
-        <p class="lead">Plain definitions for acronyms and dataset codes used across the toolkit.</p>
+        <p class="lead">Plain definitions for battery, DRT, EIS, dataset, and validation terms used across the research site.</p>
+
       </header>
       <main>
 
@@ -681,7 +894,8 @@ footer {
 
       </main>
       <footer>
-        Public site built from selected research outputs. The private working vault is not published here.
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-16 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>
   </div>
