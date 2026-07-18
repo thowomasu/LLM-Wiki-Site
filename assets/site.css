@@ -389,7 +389,8 @@ code {
   cursor: pointer;
 }
 .math-block {
-  max-width: 900px;
+  width: 100%;
+  max-width: none;
   margin: 18px 0;
   padding: 16px;
   overflow-x: auto;
@@ -437,6 +438,16 @@ code {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
   margin: 18px 0;
+}
+.technical-flow.pipeline-six {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+.technical-flow.pipeline-six .flow-card {
+  padding: 13px 12px;
+}
+.technical-flow.pipeline-six .flow-card span {
+  font-size: 13px;
 }
 .technical-flow .flow-card {
   min-width: 0;
@@ -766,18 +777,47 @@ th { background: var(--table-head); }
   font-size: 14px;
 }
 .glossary-term {
+  display: inline !important;
   color: inherit;
-  border-bottom: 1px dotted var(--blue);
+  border: 0 !important;
   cursor: help;
-  text-decoration: none;
-  text-underline-offset: 3px;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .glossary-term:hover,
 .glossary-term:focus-visible,
 .glossary-term[aria-expanded="true"] {
   color: var(--blue);
-  border-bottom-style: solid;
+  text-decoration-style: solid;
   outline: none;
+}
+.code-variable.glossary-term {
+  display: inline-block !important;
+  padding: 2px 6px;
+  color: var(--ink);
+  background: var(--code-bg);
+  border-radius: 4px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: .9em;
+  white-space: nowrap;
+}
+.variable-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -7px 0 18px;
+}
+.variable-legend::before {
+  content: "Variables:";
+  align-self: center;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
 }
 .glossary-tooltip {
   position: fixed;
@@ -830,6 +870,7 @@ footer {
   p,
   li,
   .lead { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+  .technical-flow.pipeline-six { grid-template-columns: 1fr; }
   .tabs { width: 100%; max-width: 100%; }
   .sidebar {
     position: fixed;
