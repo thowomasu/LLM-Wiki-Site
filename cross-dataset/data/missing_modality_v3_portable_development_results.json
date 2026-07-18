@@ -1,0 +1,37 @@
+{
+  "created_utc": "2026-07-14T13:10:56.355731+00:00",
+  "status": "development_gate_passed",
+  "claim_boundary": "LOCO development evidence only. Cell08 was previously seen under v2 and is not claimed as a clean v3 test.",
+  "fixed_design": "ExtraTrees inherited from v2; OCV and cycle removed for protocol portability; no RWTH values accessed.",
+  "training_cells": [
+    "Leonardi_Cell01",
+    "Leonardi_Cell02",
+    "Leonardi_Cell03",
+    "Leonardi_Cell04",
+    "Leonardi_Cell05",
+    "Leonardi_Cell06",
+    "Leonardi_Cell07",
+    "Leonardi_Cell08"
+  ],
+  "summary": {
+    "eis_znegimag": {
+      "folds": 8,
+      "folds_passing": 8,
+      "mean_relative_improvement": 0.851035149038571,
+      "worst_relative_improvement": 0.7571374802561223
+    },
+    "eis_zreal": {
+      "folds": 8,
+      "folds_passing": 8,
+      "mean_relative_improvement": 0.893253060425869,
+      "worst_relative_improvement": 0.8388142649862121
+    },
+    "rpt_soh": {
+      "folds": 8,
+      "folds_passing": 8,
+      "mean_relative_improvement": 0.9044748372557563,
+      "worst_relative_improvement": 0.8113274938113989
+    }
+  },
+  "external_freeze_allowed": true
+}

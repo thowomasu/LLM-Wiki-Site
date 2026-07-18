@@ -1,0 +1,81 @@
+{
+  "created_utc": "2026-07-14T12:27:30.680454+00:00",
+  "status": "partial_external_test_completed",
+  "reservation_manifest": "[local path redacted]",
+  "qualification_audit": "[local path redacted]",
+  "holdout_matrix": "[local path redacted]",
+  "frozen_training_rows": 917,
+  "holdout_rows": 179,
+  "eis_head": {
+    "status": "completed_once_no_tuning",
+    "model": "extra_trees",
+    "features": [
+      "td_voltage_delta_abs_over_td_current_abs_mean_a",
+      "td_voltage_delta_abs_over_td_current_abs_max_a",
+      "td_voltage_delta_abs_over_td_total_throughput_ah",
+      "td_voltage_delta_abs_over_td_mean_abs_current_per_hour",
+      "td_voltage_range_over_td_current_abs_mean_a",
+      "td_voltage_range_over_td_current_abs_max_a",
+      "td_voltage_range_over_td_total_throughput_ah",
+      "td_voltage_range_over_td_mean_abs_current_per_hour",
+      "td_voltage_delta_abs_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_delta_abs_over_td_current_abs_max_a_dataset_ratio",
+      "td_voltage_delta_abs_over_td_total_throughput_ah_dataset_ratio",
+      "td_voltage_delta_abs_over_td_mean_abs_current_per_hour_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_max_a_dataset_ratio",
+      "td_voltage_range_over_td_total_throughput_ah_dataset_ratio",
+      "td_voltage_range_over_td_mean_abs_current_per_hour_dataset_ratio"
+    ],
+    "measured_targets_scored": [
+      "target_zreal_0p1hz_ohm",
+      "target_znegimag_0p1hz_ohm",
+      "target_zreal_0p2hz_ohm",
+      "target_znegimag_0p2hz_ohm",
+      "target_zreal_0p5hz_ohm",
+      "target_znegimag_0p5hz_ohm",
+      "target_zreal_10hz_ohm",
+      "target_znegimag_10hz_ohm",
+      "target_zreal_1hz_ohm",
+      "target_znegimag_1hz_ohm",
+      "target_zreal_20hz_ohm",
+      "target_znegimag_20hz_ohm",
+      "target_zreal_2hz_ohm",
+      "target_znegimag_2hz_ohm",
+      "target_zreal_40hz_ohm",
+      "target_znegimag_40hz_ohm",
+      "target_zreal_5hz_ohm",
+      "target_znegimag_5hz_ohm"
+    ],
+    "unmeasured_targets_not_scored": [
+      "target_zreal_0p05hz_ohm",
+      "target_znegimag_0p05hz_ohm"
+    ],
+    "model_rmse_ohm": 0.020882862757920295,
+    "baseline_rmse_ohm": 0.013071789603848237,
+    "relative_improvement_vs_baseline": -0.5975519336520331,
+    "verdict": "does_not_beat_baseline"
+  },
+  "rpt_head": {
+    "status": "rejected_by_frozen_interface",
+    "reason": "CMU Gamry EIS ends at 0.1 Hz. The frozen RPT head requires measured 0.05 Hz real and imaginary inputs. Extrapolation is forbidden.",
+    "missing_measured_features": [
+      "target_zreal_0p05hz_ohm",
+      "target_znegimag_0p05hz_ohm"
+    ]
+  },
+  "predicted_eis_to_rpt_chain": {
+    "status": "rejected_by_frozen_interface",
+    "reason": "predict_rpt_from_predicted_eis_chain is explicitly rejected by missing_modality_development_interface_v1.",
+    "contract_rejected_workflows": [
+      "predict_rpt_from_time_series_only",
+      "predict_eis_from_generic_time_series_without_ohmic_proxy_requirements",
+      "predict_rpt_from_predicted_eis_chain"
+    ]
+  },
+  "error_outputs": {
+    "frequency": "[local path redacted]",
+    "groups": "[local path redacted]"
+  },
+  "claim_boundary": "Only the frozen EIS head received an external score, and only on its measured 0.1 to 40 Hz overlap. RPT and chained results remain untested, not failed predictions."
+}

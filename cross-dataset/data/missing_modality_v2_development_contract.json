@@ -1,0 +1,48 @@
+{
+  "created_utc": "2026-07-14T12:41:57.394048+00:00",
+  "contract_version": "missing_modality_v2_development_only",
+  "status": "not_external_freeze_ready",
+  "common_frequency_grid_hz": [
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    2.0,
+    5.0,
+    10.0,
+    20.0,
+    40.0
+  ],
+  "component_heads": {
+    "zreal": {
+      "component": "zreal",
+      "feature_set": "v1_full_ohmic",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 5,
+      "mean_relative_improvement_vs_baseline": 0.3800621570384011,
+      "worst_relative_improvement_vs_baseline": 0.04099256875323314,
+      "median_relative_improvement_vs_baseline": 0.4653669814745039,
+      "selection_basis": "Development folds only. CMU metrics were excluded.",
+      "freeze_ready": true
+    },
+    "znegimag": {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy_plus_context",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 3,
+      "mean_relative_improvement_vs_baseline": -0.0006797139729942947,
+      "worst_relative_improvement_vs_baseline": -0.2011314102613002,
+      "median_relative_improvement_vs_baseline": 0.04625823306184966,
+      "selection_basis": "Development folds only. CMU metrics were excluded.",
+      "freeze_ready": false
+    }
+  },
+  "selection_source": "[local path redacted]",
+  "external_data_excluded_from_selection": [
+    "CMU Samsung INR18650-35E"
+  ],
+  "external_validation_allowed": false,
+  "reason": "This is a development comparison. RPT, chained behavior, serialized models, baselines, and final pass criteria are not frozen yet."
+}

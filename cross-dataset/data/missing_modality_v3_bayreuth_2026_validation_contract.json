@@ -1,0 +1,599 @@
+{
+  "created_utc": "2026-07-14T13:27:14.023436+00:00",
+  "status": "frozen_before_selected_raw_measurement_payload_download_and_before_model_scoring",
+  "dataset": "Bayreuth CoDeMoRe 2026",
+  "doi": "10.57880/rdspace-ubt-54",
+  "frozen_model_manifest_sha256": "d1cdf6dbb0583b8132a2a2f058b00e66b2b7c557647e5c11b570c4b0558f359d",
+  "frozen_model_version": "missing_measurement_v3_portable_frozen_1",
+  "qualification_basis": "Canonical released table coverage and missingness only; no model predictions used.",
+  "selection": {
+    "cells": [
+      6297,
+      6299,
+      6300,
+      6301,
+      6302,
+      6303,
+      6305,
+      6306,
+      6307,
+      6308,
+      6309,
+      6310,
+      6311,
+      6312
+    ],
+    "checkups": [
+      "CU1_BOL",
+      "CU2_MOL",
+      "CU3_EOL"
+    ],
+    "baseline_checkup": "CU1_BOL",
+    "score_checkups": [
+      "CU2_MOL",
+      "CU3_EOL"
+    ],
+    "temperature": "T25",
+    "soc_percent": 50,
+    "eis_direction": "CHA",
+    "hppc_path_direction": "CHA",
+    "hppc_pulse_direction": "DCH",
+    "electrode": "full cell",
+    "excluded_cells": [
+      {
+        "cell": 6298,
+        "reasons": [
+          "CU1_BOL: expected one SOC50 master EIS text marker, got 2"
+        ]
+      },
+      {
+        "cell": 6304,
+        "reasons": [
+          "CU3_EOL: missing canonical full-cell EIS quality row"
+        ]
+      },
+      {
+        "cell": 6313,
+        "reasons": [
+          "CU1_BOL: missing canonical full-cell EIS quality row",
+          "CU2_MOL: missing canonical full-cell EIS quality row",
+          "CU3_EOL: missing canonical full-cell EIS quality row"
+        ]
+      },
+      {
+        "cell": 6314,
+        "reasons": [
+          "CU1_BOL: missing canonical full-cell EIS quality row",
+          "CU2_MOL: missing canonical full-cell EIS quality row",
+          "CU3_EOL: missing canonical full-cell EIS quality row"
+        ]
+      }
+    ]
+  },
+  "adapter": {
+    "eis": "Read the selected full-cell Gamry spectrum and log-frequency interpolate real(Z) and -imag(Z) to the frozen nine-point grid. No scaling or fitting.",
+    "rint": "Follow publisher pulse segmentation: Line 5 is the pre-step rest; use its mean U and I, then choose the sample closest to exactly 5.0 s after the last Line 5 timestamp. R=abs((U5-Urest)/(I5-Irest)).",
+    "rint_increase_percent": "100*(R_current-R_CU1_BOL)/R_CU1_BOL",
+    "soh_target": "Use canonical df_pOCV_V1 discharge SOH_true, which equals 100*current discharge capacity/fresh same-cell discharge capacity."
+  },
+  "baselines": {
+    "eis": "fresh spectrum carried forward",
+    "rpt": "constant 100 percent SOH"
+  },
+  "acceptance": {
+    "minimum_cells": 3,
+    "each_head": "pooled error at least 5 percent below its frozen baseline",
+    "all_three_heads_required": true,
+    "no_post_holdout_tuning": true
+  },
+  "raw_members": [
+    {
+      "cell": 6297,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6297/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003726_0016_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6297,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6297/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3757_HPPC_DCH_SOC50_6297.txt"
+    },
+    {
+      "cell": 6297,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6297/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013083_0016_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6297,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6297/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13117HPPC_DCH_SOC50_6297.txt"
+    },
+    {
+      "cell": 6297,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6297/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022146_0016_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6297,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6297/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22175HPPC_DCH_SOC50_6297.txt"
+    },
+    {
+      "cell": 6299,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6299/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003727_0016_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6299,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6299/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3759_HPPC_DCH_SOC50_6299.txt"
+    },
+    {
+      "cell": 6299,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6299/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013085_0016_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6299,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6299/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13119HPPC_DCH_SOC50_6299.txt"
+    },
+    {
+      "cell": 6299,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6299/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022148_0016_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6299,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6299/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22177HPPC_DCH_SOC50_6299.txt"
+    },
+    {
+      "cell": 6300,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6300/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003728_0016_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6300,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6300/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3760_HPPC_DCH_SOC50_6300.txt"
+    },
+    {
+      "cell": 6300,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6300/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013086_0016_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6300,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6300/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13120HPPC_DCH_SOC50_6300.txt"
+    },
+    {
+      "cell": 6300,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6300/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022140_0016_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6300,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6300/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22178HPPC_DCH_SOC50_6300.txt"
+    },
+    {
+      "cell": 6301,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6301/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003729_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6301,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6301/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3761_HPPC_DCH_SOC50_6301.txt"
+    },
+    {
+      "cell": 6301,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6301/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013087_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6301,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6301/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13121HPPC_DCH_SOC50_6301.txt"
+    },
+    {
+      "cell": 6301,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6301/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022149_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6301,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6301/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22179HPPC_DCH_SOC50_6301.txt"
+    },
+    {
+      "cell": 6302,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6302/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003722_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6302,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6302/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3762_HPPC_DCH_SOC50_6302.txt"
+    },
+    {
+      "cell": 6302,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6302/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013088_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6302,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6302/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13122HPPC_DCH_SOC50_6302.txt"
+    },
+    {
+      "cell": 6302,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6302/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022141_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6302,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6302/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22180HPPC_DCH_SOC50_6302.txt"
+    },
+    {
+      "cell": 6303,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6303/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003730_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6303,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6303/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3763_HPPC_DCH_SOC50_6303.txt"
+    },
+    {
+      "cell": 6303,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6303/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013089_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6303,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6303/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13123HPPC_DCH_SOC50_6303.txt"
+    },
+    {
+      "cell": 6303,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6303/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022142_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6303,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6303/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22181HPPC_DCH_SOC50_6303.txt"
+    },
+    {
+      "cell": 6305,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6305/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003732_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6305,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6305/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3765_HPPC_DCH_SOC50_6305.txt"
+    },
+    {
+      "cell": 6305,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6305/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013091_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6305,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6305/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13125HPPC_DCH_SOC50_6305.txt"
+    },
+    {
+      "cell": 6305,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6305/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022151_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6305,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6305/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22183HPPC_DCH_SOC50_6305.txt"
+    },
+    {
+      "cell": 6306,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6306/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003723_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6306,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6306/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3766_HPPC_DCH_SOC50_6306.txt"
+    },
+    {
+      "cell": 6306,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6306/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013092_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6306,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6306/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13126HPPC_DCH_SOC50_6306.txt"
+    },
+    {
+      "cell": 6306,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6306/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022152_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6306,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6306/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22184HPPC_DCH_SOC50_6306.txt"
+    },
+    {
+      "cell": 6307,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6307/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003733_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6307,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6307/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3767_HPPC_DCH_SOC50_6307.txt"
+    },
+    {
+      "cell": 6307,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6307/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013093_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6307,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6307/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13127HPPC_DCH_SOC50_6307.txt"
+    },
+    {
+      "cell": 6307,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6307/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022143_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6307,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6307/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22185HPPC_DCH_SOC50_6307.txt"
+    },
+    {
+      "cell": 6308,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6308/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003734_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6308,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6308/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3768_HPPC_DCH_SOC50_6308.txt"
+    },
+    {
+      "cell": 6308,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6308/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013094_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6308,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6308/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13128HPPC_DCH_SOC50_6308.txt"
+    },
+    {
+      "cell": 6308,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6308/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022153_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6308,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6308/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22186HPPC_DCH_SOC50_6308.txt"
+    },
+    {
+      "cell": 6309,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6309/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003735_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6309,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6309/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3769_HPPC_DCH_SOC50_6309.txt"
+    },
+    {
+      "cell": 6309,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6309/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013095_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6309,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6309/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13129HPPC_DCH_SOC50_6309.txt"
+    },
+    {
+      "cell": 6309,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6309/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022144_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6309,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6309/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22187HPPC_DCH_SOC50_6309.txt"
+    },
+    {
+      "cell": 6310,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6310/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003724_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6310,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6310/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3770_HPPC_DCH_SOC50_6310.txt"
+    },
+    {
+      "cell": 6310,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6310/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013096_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6310,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6310/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13130HPPC_DCH_SOC50_6310.txt"
+    },
+    {
+      "cell": 6310,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6310/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022154_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6310,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6310/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22188HPPC_DCH_SOC50_6310.txt"
+    },
+    {
+      "cell": 6311,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6311/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003736_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6311,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6311/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3771_HPPC_DCH_SOC50_6311.txt"
+    },
+    {
+      "cell": 6311,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6311/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013081_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6311,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6311/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13131HPPC_DCH_SOC50_6311.txt"
+    },
+    {
+      "cell": 6311,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6311/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022145_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6311,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6311/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22189HPPC_DCH_SOC50_6311.txt"
+    },
+    {
+      "cell": 6312,
+      "checkup": "CU1_BOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6312/02_CU_ext/CU1_BOL/T25/EIS/CHA/Gamry_TE_0000003737_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6312,
+      "checkup": "CU1_BOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6312/02_CU_ext/CU1_BOL/T25/HPPC/CHA/3772_HPPC_DCH_SOC50_6312.txt"
+    },
+    {
+      "cell": 6312,
+      "checkup": "CU2_MOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6312/02_CU_ext/CU2_MOL/T25/EIS/CHA/Gamry_TE_0000013097_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6312,
+      "checkup": "CU2_MOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6312/02_CU_ext/CU2_MOL/T25/HPPC/CHA/13132HPPC_DCH_SOC50_6312.txt"
+    },
+    {
+      "cell": 6312,
+      "checkup": "CU3_EOL",
+      "kind": "eis_fc",
+      "member": "22_Raw_Data/6312/02_CU_ext/CU3_EOL/T25/EIS/CHA/Gamry_TE_0000022155_0017_0001_0001_0000.dta"
+    },
+    {
+      "cell": 6312,
+      "checkup": "CU3_EOL",
+      "kind": "hppc_dch",
+      "member": "22_Raw_Data/6312/02_CU_ext/CU3_EOL/T25/HPPC/CHA/22190HPPC_DCH_SOC50_6312.txt"
+    }
+  ],
+  "model_output_viewed": false,
+  "target_values_used_for_selection": false,
+  "known_process_note": "SOH ranges were viewed during exploratory coverage inspection, but no model was changed and every cell passing the predeclared coverage/missingness rule is retained.",
+  "contract_sha256": "4f7f0673c6c27335f83a9e4a8c48a28b0fab78c7d9bde792caeb531c325b2769"
+}

@@ -477,6 +477,24 @@ code {
 .technical-callout p { margin: 7px 0 0; }
 .technical-callout.bad { border-left-color: var(--red); color: var(--ink); }
 .technical-callout.good { border-left-color: var(--green); color: var(--ink); }
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.metric-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.metric-card span,
+.metric-card strong { display: block; }
+.metric-card span { color: var(--muted); font-size: 14px; }
+.metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -972,10 +990,11 @@ window.MathJax = {
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v6/">Version 6</a>
-<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 1 to 6</a>
 <div class="side-section">Results and limitations</div>
 <a class="side-link" href="../../cross-dataset/version-comparison/">Version results and limits</a>
 <a class="side-link" href="../../external-validation/">External validation status</a>
@@ -1004,8 +1023,25 @@ window.MathJax = {
       </header>
       <main>
 
-    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab active" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all three</a></div>
-    <nav class="technical-toc" aria-label="On this page"><a href="#summary">Executive read</a><a href="#pipeline">Pipeline</a><a href="#inputs">Inputs</a><a href="#math">Math</a><a href="#model">Model and split</a><a href="#validation">External test</a><a href="#results">Results</a><a href="#limits">Limits</a><a href="#files">Files</a></nav>
+    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../early-versions/">Versions 1 to 3</a><a class="tab active" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all versions</a></div>
+    <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#summary">Executive read</a><a href="#pipeline">Pipeline</a><a href="#inputs">Inputs</a><a href="#math">Math</a><a href="#model">Model and split</a><a href="#validation">External test</a><a href="#results">Results</a><a href="#limits">Limits</a><a href="#files">Files</a></nav>
+    <section id="start" class="technical-section">
+      <h2>Start here: Version 4 in everyday language</h2>
+      <p>Imagine measuring a battery when it is fresh, ageing it, and then running one short current pulse. Version 4 uses the fresh EIS measurement and the change in pulse resistance to estimate the battery's current EIS. A separate model then estimates health, but that health model still receives the real current EIS measurement.</p>
+      <div class="technical-flow">
+        <div class="flow-card"><strong>Known from the fresh cell</strong><span>The starting EIS spectrum at the same state of charge.</span></div>
+        <div class="flow-card"><strong>Cheap new measurement</strong><span>A 10-second pulse gives a resistance-change signal.</span></div>
+        <div class="flow-card"><strong>Predicted</strong><span>The current real and imaginary EIS values at nine frequencies.</span></div>
+        <div class="flow-card"><strong>Still measured</strong><span>The current EIS used by the Version 4 health model.</span></div>
+      </div>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>EIS spectrum</strong><span>A list of battery impedance values measured across several frequencies.</span></div>
+        <div class="definition-card"><strong>Real and imaginary EIS</strong><span>Two numerical parts of the same impedance measurement. Both must be predicted.</span></div>
+        <div class="definition-card"><strong>Normalization</strong><span>Rescaling values so large-impedance cells do not dominate smaller-impedance cells.</span></div>
+        <div class="definition-card"><strong>Prediction head</strong><span>One model responsible for one output, such as real EIS, imaginary EIS, or SOH.</span></div>
+      </div>
+      <div class="technical-callout warn"><strong>The important limitation:</strong><p>Version 4 did not complete the missing-EIS-to-health task. It predicted EIS, but its health result still depended on measured current EIS.</p></div>
+    </section>
     <section id="summary" class="technical-section note">
       <h2>Executive Read</h2>
       <p>Version 4 asked whether impedance-scale normalization could make one frozen model transfer to a different commercial NCA cell dataset. It used eight Leonardi cells for development, froze the models before Oxford measurement values were opened, and then scored three untouched Oxford cells once.</p>

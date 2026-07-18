@@ -1,0 +1,93 @@
+{
+  "created_utc": "2026-07-14T13:05:15.321893+00:00",
+  "dataset": "Cassino LFP, 10.17632/cb887gkmxw.2",
+  "freeze_manifest_sha256": "7bd214a91c336a0897d457d98d4433b05443a1b7c7adda3882e984b9d080f54e",
+  "qualification_only": true,
+  "model_predictions_computed": false,
+  "inventory": {
+    "eis_csv_files": 440,
+    "eis_xlsx_files": 1,
+    "eis_session_folders": 22,
+    "soc_levels": [
+      5,
+      10,
+      15,
+      20,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      60,
+      65,
+      70,
+      75,
+      80,
+      85,
+      90,
+      95,
+      100
+    ],
+    "capacity_csv_files": 11,
+    "capacity_batteries": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "eis_csv_headers": [
+      [
+        "Frequency(Hz)",
+        "R(ohm)",
+        "X(ohm)",
+        "V(V)",
+        "T(deg C)",
+        "Range(Ohm)"
+      ]
+    ],
+    "capacity_table_headers": [
+      "Time(S),Cur(A),Vol(V)"
+    ],
+    "unique_eis_file_hashes": 421,
+    "downloaded_files": 462
+  },
+  "frozen_input_gates": {
+    "at_least_3_external_cells": {
+      "status": "not_demonstrated",
+      "evidence": "EIS session folders exist, but measurement filenames contain no physical cell ID and the frozen local manifest did not preserve the dataset folder hierarchy needed for a defensible cell join."
+    },
+    "same_cell_fresh_and_later_eis": {
+      "status": "fail",
+      "evidence": "The official design repeats two discharge cycles on nominally new cells; no fresh-versus-aged checkpoint variable exists in the EIS files."
+    },
+    "five_second_rint_increase_percent": {
+      "status": "fail",
+      "evidence": "EIS schemas expose Frequency, R, X, V, T, and range only. Capacity logs include one constant-current discharge per battery, not fresh and current five-second resistance measurements at each EIS checkpoint and SOC."
+    },
+    "ocv_after_45_min_and_delta_from_fresh": {
+      "status": "fail",
+      "evidence": "EIS files include a V field but do not document the frozen 45-minute relaxation rule or provide fresh/current OCV checkpoint pairs."
+    },
+    "same_cell_fresh_and_current_capacity": {
+      "status": "fail",
+      "evidence": "Exactly one capacity result is present for each BATT1-BATT11, so same-cell SOH relative to a measured fresh capacity cannot be formed."
+    },
+    "comparable_full_equivalent_aging_cycles": {
+      "status": "fail",
+      "evidence": "The dataset has two repeated discharge cycles, not longitudinal aging-cycle checkpoints comparable to the frozen 0-to-400-cycle feature."
+    }
+  },
+  "verdict": "blocked_inconclusive",
+  "reason": "Cassino cannot instantiate the frozen longitudinal calibration-aware inputs or SOH target. Scoring it would require changing the model contract after holdout inspection.",
+  "claim_boundary": "Useful independent EIS/SOC dataset, but not a valid external test of this frozen missing-measurement pipeline.",
+  "next_action": "Keep Cassino as a documented negative qualification. Locate an untouched longitudinal dataset with same-cell fresh/later EIS, 5-second pulse resistance, rested OCV, and measured capacity."
+}

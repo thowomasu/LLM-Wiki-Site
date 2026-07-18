@@ -477,6 +477,24 @@ code {
 .technical-callout p { margin: 7px 0 0; }
 .technical-callout.bad { border-left-color: var(--red); color: var(--ink); }
 .technical-callout.good { border-left-color: var(--green); color: var(--ink); }
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.metric-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.metric-card span,
+.metric-card strong { display: block; }
+.metric-card span { color: var(--muted); font-size: 14px; }
+.metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -972,10 +990,11 @@ window.MathJax = {
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v6/">Version 6</a>
-<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 1 to 6</a>
 <div class="side-section">Results and limitations</div>
 <a class="side-link" href="../../cross-dataset/version-comparison/">Version results and limits</a>
 <a class="side-link" href="../../external-validation/">External validation status</a>
@@ -1004,8 +1023,26 @@ window.MathJax = {
       </header>
       <main>
 
-    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab active" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all three</a></div>
-    <nav class="technical-toc" aria-label="On this page"><a href="#summary">Executive read</a><a href="#question">Question</a><a href="#data">Data</a><a href="#design">Design</a><a href="#math">Math</a><a href="#zero-shot">Zero shot</a><a href="#few-shot">Few shot</a><a href="#guard">Guard and uncertainty</a><a href="#cell">Cell audit</a><a href="#decision">Decision</a><a href="#files">Files</a></nav>
+    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../early-versions/">Versions 1 to 3</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab active" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all versions</a></div>
+    <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#summary">Executive read</a><a href="#question">Question</a><a href="#data">Data</a><a href="#design">Design</a><a href="#math">Math</a><a href="#zero-shot">Zero shot</a><a href="#few-shot">Few shot</a><a href="#guard">Guard and uncertainty</a><a href="#cell">Cell audit</a><a href="#decision">Decision</a><a href="#files">Files</a></nav>
+    <section id="start" class="technical-section">
+      <h2>Start here: why Version 6 exists</h2>
+      <p>By Version 6, the project had seen strong results inside one dataset and weak results when moving between datasets. Version 6 tested several possible rescue ideas using only datasets that were already spent. It did not open another untouched external dataset.</p>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Zero-shot</strong><span>Train on some datasets and predict a new dataset without using any of its labelled cells.</span></div>
+        <div class="definition-card"><strong>Few-shot calibration</strong><span>Use one or two labelled cells from the target dataset, then test on different target cells.</span></div>
+        <div class="definition-card"><strong>Representation</strong><span>The fixed numerical form given to a model, such as scale-normalized changes or frequency ratios.</span></div>
+        <div class="definition-card"><strong>Dataset-level test</strong><span>Hold back an entire dataset. This is harder and more informative than holding back rows from the same dataset.</span></div>
+      </div>
+      <h3>The tests in one sentence each</h3>
+      <ul>
+        <li><strong>Zero-shot:</strong> can a model trained elsewhere work with no target labels?</li>
+        <li><strong>Few-shot:</strong> can one or two calibration cells repair the transfer problem?</li>
+        <li><strong>Guard:</strong> can the model reject unfamiliar and unsafe inputs?</li>
+        <li><strong>Uncertainty:</strong> do the claimed 90% ranges actually contain about 90% of the true values?</li>
+      </ul>
+      <div class="technical-callout bad"><strong>Answer:</strong><p>No tested combination passed all required dataset-level gates. Version 6 therefore ended the universal-model path instead of manufacturing another candidate.</p></div>
+    </section>
     <section id="summary" class="technical-section note">
       <h2>Executive Read</h2>
       <p>Version 6 was a bounded development study, not a new external-validation attempt. It tested whether representation changes, whole-dataset transfer, small target-cell calibration, applicability guards, or uncertainty estimates could produce a candidate worth freezing.</p>

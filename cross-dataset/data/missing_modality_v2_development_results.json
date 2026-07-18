@@ -1,0 +1,361 @@
+{
+  "created_utc": "2026-07-14T12:41:57.373316+00:00",
+  "status": "v2_component_development_comparison_completed",
+  "claim_boundary": "Development-only model selection. CMU is locked negative evidence and was not used in any v2 fold or selection.",
+  "v1_failure_lock": "[local path redacted]",
+  "v1_failure_lock_sha256": "e2ffbf14c988eaca0dace4964d9860eb591a3b14977f1ce7a87fba40814d9d2c",
+  "development_inputs": [
+    {
+      "path": "[local path redacted]",
+      "name": "cleaned_training_set_v2.csv",
+      "sha256": "eab2b3305605c50410d3e0950f3b9fb0802408f13ba28548ce8e5987fc740334"
+    },
+    {
+      "path": "[local path redacted]",
+      "name": "molicell_p42a_holdout_matrix.csv",
+      "sha256": "e89965f6772f9f4059a5e40d1698789da2886f965f86c5d00bd0cc543a516da6"
+    },
+    {
+      "path": "[local path redacted]",
+      "name": "lifepo4_hev_final_holdout_matrix.csv",
+      "sha256": "37a8b1865cdbd9d60701ccbfbd8bd75b0e717cb6697d19607ab2cbd166cbd610"
+    }
+  ],
+  "development_rows": 917,
+  "common_frequency_grid_hz": [
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    2.0,
+    5.0,
+    10.0,
+    20.0,
+    40.0
+  ],
+  "excluded_frequency_hz": [
+    0.05
+  ],
+  "feature_sets": {
+    "core_resistance_proxy": [
+      "td_voltage_delta_abs_over_td_current_abs_mean_a",
+      "td_voltage_delta_abs_over_td_current_abs_max_a",
+      "td_voltage_range_over_td_current_abs_mean_a",
+      "td_voltage_range_over_td_current_abs_max_a"
+    ],
+    "core_resistance_proxy_plus_dataset_ratio": [
+      "td_voltage_delta_abs_over_td_current_abs_mean_a",
+      "td_voltage_delta_abs_over_td_current_abs_max_a",
+      "td_voltage_range_over_td_current_abs_mean_a",
+      "td_voltage_range_over_td_current_abs_max_a",
+      "td_voltage_delta_abs_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_delta_abs_over_td_current_abs_max_a_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_max_a_dataset_ratio"
+    ],
+    "core_resistance_proxy_plus_context": [
+      "soc_percent",
+      "temperature_c",
+      "td_voltage_delta_abs_over_td_current_abs_mean_a",
+      "td_voltage_delta_abs_over_td_current_abs_max_a",
+      "td_voltage_range_over_td_current_abs_mean_a",
+      "td_voltage_range_over_td_current_abs_max_a",
+      "td_voltage_delta_abs_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_delta_abs_over_td_current_abs_max_a_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_max_a_dataset_ratio"
+    ],
+    "v1_full_ohmic": [
+      "td_voltage_delta_abs_over_td_current_abs_mean_a",
+      "td_voltage_delta_abs_over_td_current_abs_max_a",
+      "td_voltage_delta_abs_over_td_total_throughput_ah",
+      "td_voltage_delta_abs_over_td_mean_abs_current_per_hour",
+      "td_voltage_range_over_td_current_abs_mean_a",
+      "td_voltage_range_over_td_current_abs_max_a",
+      "td_voltage_range_over_td_total_throughput_ah",
+      "td_voltage_range_over_td_mean_abs_current_per_hour",
+      "td_voltage_delta_abs_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_delta_abs_over_td_current_abs_max_a_dataset_ratio",
+      "td_voltage_delta_abs_over_td_total_throughput_ah_dataset_ratio",
+      "td_voltage_delta_abs_over_td_mean_abs_current_per_hour_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_max_a_dataset_ratio",
+      "td_voltage_range_over_td_total_throughput_ah_dataset_ratio",
+      "td_voltage_range_over_td_mean_abs_current_per_hour_dataset_ratio"
+    ]
+  },
+  "models": [
+    "ridge",
+    "random_forest_shallow",
+    "extra_trees"
+  ],
+  "component_summaries": [
+    {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 1,
+      "mean_relative_improvement_vs_baseline": -1.788127374774292,
+      "worst_relative_improvement_vs_baseline": -8.188634870856683,
+      "median_relative_improvement_vs_baseline": -0.04826964943449237
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 1,
+      "mean_relative_improvement_vs_baseline": -0.5788444891109931,
+      "worst_relative_improvement_vs_baseline": -2.1986232505967016,
+      "median_relative_improvement_vs_baseline": -0.05780565389321264
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy",
+      "model": "ridge",
+      "fold_count": 5,
+      "folds_beating_baseline": 2,
+      "mean_relative_improvement_vs_baseline": -2.6210941692526504,
+      "worst_relative_improvement_vs_baseline": -8.507845579472201,
+      "median_relative_improvement_vs_baseline": -0.01858701282817371
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy_plus_context",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 3,
+      "mean_relative_improvement_vs_baseline": -0.0006797139729942947,
+      "worst_relative_improvement_vs_baseline": -0.2011314102613002,
+      "median_relative_improvement_vs_baseline": 0.04625823306184966
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy_plus_context",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 3,
+      "mean_relative_improvement_vs_baseline": -0.15880981481342538,
+      "worst_relative_improvement_vs_baseline": -0.811990927718051,
+      "median_relative_improvement_vs_baseline": 0.032372177922405786
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy_plus_context",
+      "model": "ridge",
+      "fold_count": 5,
+      "folds_beating_baseline": 1,
+      "mean_relative_improvement_vs_baseline": -3.1091286594974976,
+      "worst_relative_improvement_vs_baseline": -10.2965124297666,
+      "median_relative_improvement_vs_baseline": -0.3468338925313726
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy_plus_dataset_ratio",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 2,
+      "mean_relative_improvement_vs_baseline": -0.44212790474060226,
+      "worst_relative_improvement_vs_baseline": -1.7936901439539368,
+      "median_relative_improvement_vs_baseline": -0.044540646982491036
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy_plus_dataset_ratio",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 1,
+      "mean_relative_improvement_vs_baseline": -0.27342973771892143,
+      "worst_relative_improvement_vs_baseline": -0.9750228413103436,
+      "median_relative_improvement_vs_baseline": -0.07775307073241557
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy_plus_dataset_ratio",
+      "model": "ridge",
+      "fold_count": 5,
+      "folds_beating_baseline": 1,
+      "mean_relative_improvement_vs_baseline": -4.380121029300969,
+      "worst_relative_improvement_vs_baseline": -12.714556625096868,
+      "median_relative_improvement_vs_baseline": -0.761677903193935
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "v1_full_ohmic",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 2,
+      "mean_relative_improvement_vs_baseline": -0.08128339817917236,
+      "worst_relative_improvement_vs_baseline": -0.27654475053361266,
+      "median_relative_improvement_vs_baseline": -0.0785249753134759
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "v1_full_ohmic",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 1,
+      "mean_relative_improvement_vs_baseline": -0.2732866958737902,
+      "worst_relative_improvement_vs_baseline": -1.038586862239288,
+      "median_relative_improvement_vs_baseline": -0.10889778461274757
+    },
+    {
+      "component": "znegimag",
+      "feature_set": "v1_full_ohmic",
+      "model": "ridge",
+      "fold_count": 5,
+      "folds_beating_baseline": 0,
+      "mean_relative_improvement_vs_baseline": -75.32914433896848,
+      "worst_relative_improvement_vs_baseline": -366.37337097357846,
+      "median_relative_improvement_vs_baseline": -0.6209842028719663
+    },
+    {
+      "component": "zreal",
+      "feature_set": "core_resistance_proxy",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 4,
+      "mean_relative_improvement_vs_baseline": 0.15539071025329224,
+      "worst_relative_improvement_vs_baseline": -0.4606775303261459,
+      "median_relative_improvement_vs_baseline": 0.3396378709077561
+    },
+    {
+      "component": "zreal",
+      "feature_set": "core_resistance_proxy",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 4,
+      "mean_relative_improvement_vs_baseline": 0.21636409475361468,
+      "worst_relative_improvement_vs_baseline": -0.44348467450002266,
+      "median_relative_improvement_vs_baseline": 0.4171635717494422
+    },
+    {
+      "component": "zreal",
+      "feature_set": "core_resistance_proxy",
+      "model": "ridge",
+      "fold_count": 5,
+      "folds_beating_baseline": 3,
+      "mean_relative_improvement_vs_baseline": -1.7370009154550563,
+      "worst_relative_improvement_vs_baseline": -8.63435139629825,
+      "median_relative_improvement_vs_baseline": 0.09531703008084426
+    },
+    {
+      "component": "zreal",
+      "feature_set": "core_resistance_proxy_plus_context",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 5,
+      "mean_relative_improvement_vs_baseline": 0.20528170994738432,
+      "worst_relative_improvement_vs_baseline": 0.023306483580509896,
+      "median_relative_improvement_vs_baseline": 0.056909266944070225
+    },
+    {
+      "component": "zreal",
+      "feature_set": "core_resistance_proxy_plus_context",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 4,
+      "mean_relative_improvement_vs_baseline": 0.283777972506441,
+      "worst_relative_improvement_vs_baseline": -0.28372708499020877,
+      "median_relative_improvement_vs_baseline": 0.48680038241431317
+    },
+    {
+      "component": "zreal",
+      "feature_set": "core_resistance_proxy_plus_context",
+      "model": "ridge",
+      "fold_count": 5,
+      "folds_beating_baseline": 2,
+      "mean_relative_improvement_vs_baseline": -1.188660199845207,
+      "worst_relative_improvement_vs_baseline": -3.599452507960323,
+      "median_relative_improvement_vs_baseline": -0.206707989947121
+    },
+    {
+      "component": "zreal",
+      "feature_set": "core_resistance_proxy_plus_dataset_ratio",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 4,
+      "mean_relative_improvement_vs_baseline": 0.20874545382578497,
+      "worst_relative_improvement_vs_baseline": -0.032466404597958014,
+      "median_relative_improvement_vs_baseline": 0.1398492327478574
+    },
+    {
+      "component": "zreal",
+      "feature_set": "core_resistance_proxy_plus_dataset_ratio",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 4,
+      "mean_relative_improvement_vs_baseline": 0.24794163343907857,
+      "worst_relative_improvement_vs_baseline": -0.3525781403352341,
+      "median_relative_improvement_vs_baseline": 0.460538178671893
+    },
+    {
+      "component": "zreal",
+      "feature_set": "core_resistance_proxy_plus_dataset_ratio",
+      "model": "ridge",
+      "fold_count": 5,
+      "folds_beating_baseline": 2,
+      "mean_relative_improvement_vs_baseline": -1.236454526503213,
+      "worst_relative_improvement_vs_baseline": -3.4479400375194857,
+      "median_relative_improvement_vs_baseline": -0.23206038481055555
+    },
+    {
+      "component": "zreal",
+      "feature_set": "v1_full_ohmic",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 3,
+      "mean_relative_improvement_vs_baseline": -0.11867430990418378,
+      "worst_relative_improvement_vs_baseline": -0.8491992139635872,
+      "median_relative_improvement_vs_baseline": 0.07005418073425787
+    },
+    {
+      "component": "zreal",
+      "feature_set": "v1_full_ohmic",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 5,
+      "mean_relative_improvement_vs_baseline": 0.3800621570384011,
+      "worst_relative_improvement_vs_baseline": 0.04099256875323314,
+      "median_relative_improvement_vs_baseline": 0.4653669814745039
+    },
+    {
+      "component": "zreal",
+      "feature_set": "v1_full_ohmic",
+      "model": "ridge",
+      "fold_count": 5,
+      "folds_beating_baseline": 1,
+      "mean_relative_improvement_vs_baseline": -15.967580200081096,
+      "worst_relative_improvement_vs_baseline": -74.50123058160119,
+      "median_relative_improvement_vs_baseline": -0.5687335921317123
+    }
+  ],
+  "selected_development_heads": {
+    "zreal": {
+      "component": "zreal",
+      "feature_set": "v1_full_ohmic",
+      "model": "random_forest_shallow",
+      "fold_count": 5,
+      "folds_beating_baseline": 5,
+      "mean_relative_improvement_vs_baseline": 0.3800621570384011,
+      "worst_relative_improvement_vs_baseline": 0.04099256875323314,
+      "median_relative_improvement_vs_baseline": 0.4653669814745039,
+      "selection_basis": "Development folds only. CMU metrics were excluded.",
+      "freeze_ready": true
+    },
+    "znegimag": {
+      "component": "znegimag",
+      "feature_set": "core_resistance_proxy_plus_context",
+      "model": "extra_trees",
+      "fold_count": 5,
+      "folds_beating_baseline": 3,
+      "mean_relative_improvement_vs_baseline": -0.0006797139729942947,
+      "worst_relative_improvement_vs_baseline": -0.2011314102613002,
+      "median_relative_improvement_vs_baseline": 0.04625823306184966,
+      "selection_basis": "Development folds only. CMU metrics were excluded.",
+      "freeze_ready": false
+    }
+  },
+  "next_gate": "Both components must be freeze-ready under leave-one-development-dataset-out folds before a v2 external run is allowed."
+}

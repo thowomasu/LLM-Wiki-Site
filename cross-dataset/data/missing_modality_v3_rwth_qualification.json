@@ -1,0 +1,32 @@
+{
+  "created_utc": "2026-07-14T13:15:47.540024+00:00",
+  "dataset": "RWTH-2025-04811",
+  "archive_sha256": "7bc066ab249352f5e0654a747f5efdf66041b6f35814c6913b6e49f2d63d7de8",
+  "freeze_manifest_sha256": "d1cdf6dbb0583b8132a2a2f058b00e66b2b7c557647e5c11b570c4b0558f359d",
+  "qualification_only": true,
+  "model_predictions_computed": false,
+  "inventory": {
+    "outer_members": [
+      "RawData.zip",
+      "MatFiles.zip"
+    ],
+    "raw_csv_files": 60,
+    "temperature_folders": [
+      "15deg",
+      "25deg",
+      "35deg",
+      "45deg",
+      "5deg"
+    ],
+    "soc_measurement_files": 55,
+    "member_pattern": "one Overview plus SOC0..SOC100 per temperature"
+  },
+  "gates": {
+    "minimum_3_physical_cells": "fail: archive has no cell identifier or per-cell folders",
+    "same_cell_fresh_and_later_eis": "fail: one characterization sequence per temperature/SOC, no longitudinal checkpoint axis",
+    "fresh_and_current_rint": "fail: pulses exist only within one characterization sequence, not fresh/later pairs",
+    "fresh_and_current_capacity": "fail: no longitudinal same-cell capacity targets"
+  },
+  "verdict": "blocked_inconclusive",
+  "reason": "The public archive is a temperature/SOC characterization campaign, not a multi-cell longitudinal aging holdout. Frozen v3 cannot be scored without inventing cell or checkpoint joins."
+}

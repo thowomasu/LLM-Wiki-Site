@@ -1,0 +1,93 @@
+{
+  "created_utc": "2026-07-14T12:41:25.377064+00:00",
+  "status": "locked_negative_external_evidence",
+  "verdict": "no_external_support_for_v1_eis_head",
+  "result_summary": {
+    "status": "completed_once_no_tuning",
+    "model": "extra_trees",
+    "features": [
+      "td_voltage_delta_abs_over_td_current_abs_mean_a",
+      "td_voltage_delta_abs_over_td_current_abs_max_a",
+      "td_voltage_delta_abs_over_td_total_throughput_ah",
+      "td_voltage_delta_abs_over_td_mean_abs_current_per_hour",
+      "td_voltage_range_over_td_current_abs_mean_a",
+      "td_voltage_range_over_td_current_abs_max_a",
+      "td_voltage_range_over_td_total_throughput_ah",
+      "td_voltage_range_over_td_mean_abs_current_per_hour",
+      "td_voltage_delta_abs_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_delta_abs_over_td_current_abs_max_a_dataset_ratio",
+      "td_voltage_delta_abs_over_td_total_throughput_ah_dataset_ratio",
+      "td_voltage_delta_abs_over_td_mean_abs_current_per_hour_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_mean_a_dataset_ratio",
+      "td_voltage_range_over_td_current_abs_max_a_dataset_ratio",
+      "td_voltage_range_over_td_total_throughput_ah_dataset_ratio",
+      "td_voltage_range_over_td_mean_abs_current_per_hour_dataset_ratio"
+    ],
+    "measured_targets_scored": [
+      "target_zreal_0p1hz_ohm",
+      "target_znegimag_0p1hz_ohm",
+      "target_zreal_0p2hz_ohm",
+      "target_znegimag_0p2hz_ohm",
+      "target_zreal_0p5hz_ohm",
+      "target_znegimag_0p5hz_ohm",
+      "target_zreal_10hz_ohm",
+      "target_znegimag_10hz_ohm",
+      "target_zreal_1hz_ohm",
+      "target_znegimag_1hz_ohm",
+      "target_zreal_20hz_ohm",
+      "target_znegimag_20hz_ohm",
+      "target_zreal_2hz_ohm",
+      "target_znegimag_2hz_ohm",
+      "target_zreal_40hz_ohm",
+      "target_znegimag_40hz_ohm",
+      "target_zreal_5hz_ohm",
+      "target_znegimag_5hz_ohm"
+    ],
+    "unmeasured_targets_not_scored": [
+      "target_zreal_0p05hz_ohm",
+      "target_znegimag_0p05hz_ohm"
+    ],
+    "model_rmse_ohm": 0.020882862757920295,
+    "baseline_rmse_ohm": 0.013071789603848237,
+    "relative_improvement_vs_baseline": -0.5975519336520331,
+    "verdict": "does_not_beat_baseline"
+  },
+  "artifacts": [
+    {
+      "path": "[local path redacted]",
+      "sha256": "746be3a1977047aff029e753942be5315db5430795a125a3dc86c52f227ed10d",
+      "size_bytes": 1800
+    },
+    {
+      "path": "[local path redacted]",
+      "sha256": "009be7e05752d3bcb7f7b7bb5c42566499869bf00a2cd9a421a6c63d863692c7",
+      "size_bytes": 3159
+    },
+    {
+      "path": "[local path redacted]",
+      "sha256": "8ff565bf93b41a2ad02804d2e65637ba2fe7fb87ad557938d5e3c994be87bed9",
+      "size_bytes": 4035
+    },
+    {
+      "path": "[local path redacted]",
+      "sha256": "ad8e61fd30d4ae93d1d0fd475537b2b06a829a3a7455e43f7865a7579aece63e",
+      "size_bytes": 164027
+    },
+    {
+      "path": "[local path redacted]",
+      "sha256": "e174aa421b5d18b9b52a3eca55165198e4a1f66b43ea3b1ec3e3fc8910dbee0d",
+      "size_bytes": 1471
+    },
+    {
+      "path": "[local path redacted]",
+      "sha256": "f32dadfc05dce52afa4a631180e846b89dc96b08e6aadcd37c55acb1f0fd5833",
+      "size_bytes": 2013
+    }
+  ],
+  "prohibited_uses": [
+    "Do not select v2 features, models, hyperparameters, thresholds, or pass criteria from CMU performance.",
+    "Do not call CMU an untouched holdout again.",
+    "Do not overwrite or delete the v1 failure artifacts."
+  ],
+  "permitted_use": "Diagnostic explanation and permanent negative evidence only."
+}

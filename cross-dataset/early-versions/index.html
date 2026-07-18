@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NASA battery dataset screen | Battery DRT Research Outputs</title>
-  <meta name="description" content="Status, evidence, and source-grounded limits for NASA battery dataset screen.">
-  <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/external-validation/nasa/">
+  <title>Versions 1 to 3: Early Missing-Measurement Attempts | Battery DRT Research Outputs</title>
+  <meta name="description" content="A plain-language history of the first transfer models, their tests, their failures, and the changes that led to Version 4.">
+  <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/early-versions/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="NASA battery dataset screen | Battery DRT Research Outputs">
-  <meta property="og:description" content="Status, evidence, and source-grounded limits for NASA battery dataset screen.">
-  <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/external-validation/nasa/">
+  <meta property="og:title" content="Versions 1 to 3: Early Missing-Measurement Attempts | Battery DRT Research Outputs">
+  <meta property="og:description" content="A plain-language history of the first transfer models, their tests, their failures, and the changes that led to Version 4.">
+  <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/early-versions/">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
   <style>:root {
@@ -1017,54 +1017,113 @@ window.MathJax = {
       <header>
 
         <div class="kicker">Battery DRT Research Outputs</div>
-        <h1>NASA battery dataset screen</h1>
-        <p class="lead">Status, evidence, and source-grounded limits for NASA battery dataset screen.</p>
+        <h1>Versions 1 to 3: Early Missing-Measurement Attempts</h1>
+        <p class="lead">A plain-language history of the first transfer models, their tests, their failures, and the changes that led to Version 4.</p>
 
       </header>
       <main>
-<section class="note"><strong>Acronyms:</strong> EIS (Electrochemical Impedance Spectroscopy), SOC (State of Charge), PLN (CALCE cell identifier), CALCE (Center for Advanced Life Cycle Engineering), NASA (National Aeronautics and Space Administration).</section><div class="tabs" aria-label="Section tabs"><a class="tab" href="../../external-validation/">Dataset comparison</a><a class="tab" href="../dataset-exploration/">Dataset exploration screen</a><a class="tab" href="../calce/">CALCE Storage 25 C validation check</a><a class="tab active" href="./">NASA battery dataset screen</a><a class="tab" href="../../sources/external/">External validation sources</a></div><h2>NASA Battery External Validation Manifest</h2>
-<h2>Scope</h2>
-<p>This is dataset check only. It does not validate the fixed CALB rule.</p>
-<p>The script inspected the wrapper ZIP and inner BatteryAgingARC ZIPs in memory. It did not bulk-extract the archive.</p>
-<h2>Input</h2>
-<ul>
-<li>Archive: <code>[local path redacted]</code></li>
-<li>Archive size: 200.0 MB</li>
-</ul>
-<h2>Coverage</h2>
-<ul>
-<li>Inner ZIPs: 6</li>
-<li>MAT files parsed: 38</li>
-<li>Unique cells: 34</li>
-<li>Unique cells with charge: 34</li>
-<li>Unique cells with discharge: 34</li>
-<li>Unique cells with impedance: 34</li>
-<li>Ambient temperatures: 4 C, 22 C, 24 C, 43 C, 44 C</li>
-<li>Discharge capacity range: 0.0 to 2.6401491157387014 Ah</li>
-</ul>
-<h2>Impedance Fields</h2>
-<ul>
-<li>Fields seen: <code>Battery_current; Battery_impedance; Current_ratio; Rct; Re; Rectified_Impedance; Sense_current</code></li>
-<li>The common fields include <code>Battery_impedance</code>, <code>Rectified_Impedance</code>, <code>Re</code>, and <code>Rct</code>.</li>
-<li>The README says the EIS sweep is 0.1 Hz to 5 kHz, but the MAT records do not expose a plain <code>Frequency</code> vector in the sampled schema.</li>
-</ul>
-<h2>Candidate Pairings</h2>
-<ul>
-<li>Same-cell impedance plus charge/discharge pairing rows: 68</li>
-<li>These are candidates only. NASA has repeated same-cell charge/discharge/impedance operations, but not drive-cycle operation coverage like the CALB drive-cycle question needs.</li>
-</ul>
-<h2>Blunt Read</h2>
-<p>NASA is useful for checking whether a time-domain bridge can survive on a classic same-cell impedance/cycling dataset. It is third priority for the fixed CALB rule: CALCE goes first, RADAR4KIT goes second only when the corrected EIS addendum exists, and NASA stays a later robustness check. Its time-domain side is mostly charge/discharge cycling, not drive-cycle or HPPC-like pulse validation.</p>
-<h2>Outputs</h2>
-<ul>
-<li><code>zip_listing.csv</code></li>
-<li><code>cell_manifest.csv</code></li>
-<li><code>operation_counts.csv</code></li>
-<li><code>capacity_summary.csv</code></li>
-<li><code>impedance_schema.csv</code></li>
-<li><code>candidate_pairings.csv</code></li>
-<li><code>summary.json</code></li>
-</ul>
+
+    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab active" href="../early-versions/">Versions 1 to 3</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all versions</a></div>
+    <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#v1">Version 1</a><a href="#v2">Version 2</a><a href="#v3">Version 3</a><a href="#lessons">What changed</a><a href="#files">Evidence files</a></nav>
+
+    <section id="start" class="technical-section note">
+      <h2>Start here: what the project was trying to do</h2>
+      <p>A battery pulse is a short burst of current. It is cheap and fast to record. EIS is a slower laboratory measurement that shows how the battery responds across many frequencies. The project asked whether the cheap pulse could help reconstruct a missing EIS measurement and then estimate battery health.</p>
+      <p>Versions 1 to 3 were the first attempts. They matter because they exposed the core problem: a model can look good on familiar data and still fail when the battery type or test procedure changes.</p>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Model</strong><span>A fixed calculation learned from development data.</span></div>
+        <div class="definition-card"><strong>Baseline</strong><span>A simple fallback prediction. The model is useful only if it beats this.</span></div>
+        <div class="definition-card"><strong>Internal test</strong><span>A held-back cell from the same dataset family. Useful, but not independent proof.</span></div>
+        <div class="definition-card"><strong>External test</strong><span>A different dataset kept untouched until the model and pass rules are frozen.</span></div>
+      </div>
+      <div class="technical-callout bad"><strong>Bottom line:</strong><p>Versions 1 to 3 produced useful lessons, not external support. Version 1 failed, Version 2 never became ready for a valid external score, and Version 3 failed its all-head external gate.</p></div>
+    </section>
+
+    <section id="v1" class="technical-section">
+      <span class="status-pill bad">No external support</span>
+      <h2>Version 1: the first broad transfer model</h2>
+      <h3>What it did</h3>
+      <p>Version 1 converted pulse voltage and current into resistance-like features. An Extra Trees model used those features to predict the real and imaginary parts of EIS from 0.1 to 40 Hz.</p>
+      <div class="technical-flow">
+        <div class="flow-card"><strong>1. Read pulse</strong><span>Summarize voltage change, current, duration, and throughput.</span></div>
+        <div class="flow-card"><strong>2. Build proxies</strong><span>Divide voltage changes by current-like quantities to form resistance-style inputs.</span></div>
+        <div class="flow-card"><strong>3. Predict EIS</strong><span>Estimate the spectrum on the shared frequency grid.</span></div>
+        <div class="flow-card"><strong>4. Compare</strong><span>Test the fixed model against a simple EIS baseline on CMU Samsung data.</span></div>
+      </div>
+      <h3>What happened</h3>
+      <section class="metric-grid">
+        <article class="metric-card"><span>External rows</span><strong>179</strong></article>
+        <article class="metric-card"><span>Model EIS RMSE</span><strong>0.0209 ohm</strong></article>
+        <article class="metric-card"><span>Baseline EIS RMSE</span><strong>0.0131 ohm</strong></article>
+        <article class="metric-card"><span>Relative result</span><strong>-59.8%</strong></article>
+      </section>
+      <p>The negative percentage means the model was worse, not better. Its error was about 59.8% higher than the baseline. The health model could not be scored because the CMU spectrum did not include the frozen 0.05 Hz input. The full predicted-EIS-to-health chain was also outside the Version 1 contract.</p>
+      <div class="technical-callout bad"><strong>Why it failed:</strong><p>The resistance-style pulse features did not transfer reliably to the different CMU measurement domain. The correct response was to lock the failure and redesign the development process.</p></div>
+    </section>
+
+    <section id="v2" class="technical-section">
+      <span class="status-pill warn">Development only</span>
+      <h2>Version 2: separate the problem and add calibration</h2>
+      <h3>What changed</h3>
+      <p>Version 2 stopped treating EIS as one large output. It trained separate models for real EIS and imaginary EIS, compared smaller feature sets, and later used a fresh same-cell EIS reference plus pulse-resistance change. It also added an SOH model.</p>
+      <p>In simple terms, Version 2 asked a narrower question: if we know how this exact cell looked when fresh, can a later pulse help predict how its spectrum and health changed?</p>
+      <h3>What worked internally</h3>
+      <p>The calibrated Leonardi test used seven development cells and held back Cell 08 inside the same dataset. On that internal cell, all three heads beat their baselines:</p>
+      <section class="metric-grid">
+        <article class="metric-card"><span>Real EIS improvement</span><strong>83.3%</strong></article>
+        <article class="metric-card"><span>Imaginary EIS improvement</span><strong>75.2%</strong></article>
+        <article class="metric-card"><span>SOH improvement</span><strong>76.5%</strong></article>
+      </section>
+      <h3>Why this still was not external support</h3>
+      <p>The earlier general comparison used 917 development rows. Real EIS became freeze-ready, but imaginary EIS did not pass every development fold. The separate calibrated Leonardi result was still a same-dataset test.</p>
+      <p>Cassino could not provide the frozen longitudinal inputs or SOH target. Scoring it would have required changing the rules after inspecting the dataset, so its verdict was <code>blocked_inconclusive</code>.</p>
+      <div class="technical-callout warn"><strong>Lesson:</strong><p>Same-cell calibration helped, but it also narrowed the required data contract. A dataset with EIS alone was no longer enough to test the complete method.</p></div>
+    </section>
+
+    <section id="v3" class="technical-section">
+      <span class="status-pill bad">External validation failed</span>
+      <h2>Version 3: make the inputs more portable</h2>
+      <h3>What changed</h3>
+      <p>Version 3 removed cycle number and open-circuit voltage from the model because those values are defined differently across laboratories. It kept the calibrated fresh-EIS reference, pulse-resistance change, and Extra Trees models.</p>
+      <h3>Why it looked promising</h3>
+      <p>Eight leave-one-cell-out Leonardi folds passed for real EIS, imaginary EIS, and SOH. The worst-cell improvements were 83.9% for real EIS, 75.7% for imaginary EIS, and 81.1% for SOH.</p>
+      <h3>The untouched Bayreuth test</h3>
+      <p>The frozen model was scored once on 14 Bayreuth cells and 28 rows. Every head had to improve on its baseline by at least 5%.</p>
+      <section class="metric-grid">
+        <article class="metric-card"><span>Real EIS improvement</span><strong>0.34%</strong></article>
+        <article class="metric-card"><span>Imaginary EIS improvement</span><strong>0.45%</strong></article>
+        <article class="metric-card"><span>SOH improvement</span><strong>74.7%</strong></article>
+      </section>
+      <p>SOH passed, but both EIS heads missed the 5% gate by a wide margin. Because all three heads were required, the final verdict was <code>external_validation_failed</code> with <code>no support</code>.</p>
+      <div class="technical-callout bad"><strong>Why it failed:</strong><p>The portable inputs helped inside Leonardi but did not produce a meaningful EIS advantage on Bayreuth. Strong internal folds could not override the untouched external result.</p></div>
+    </section>
+
+    <section id="lessons" class="technical-section">
+      <h2>What Versions 1 to 3 taught the project</h2>
+      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Main idea</th><th>Result</th><th>What changed next</th></tr></thead><tbody>
+        <tr><td data-label="Version">1</td><td data-label="Main idea">Broad pulse-to-EIS transfer</td><td data-label="Result">External EIS error worse than baseline</td><td data-label="What changed next">Separate output heads and use a fresh same-cell reference</td></tr>
+        <tr><td data-label="Version">2</td><td data-label="Main idea">Calibration-aware component models</td><td data-label="Result">Strong same-dataset result, no valid external score</td><td data-label="What changed next">Remove protocol-specific inputs and freeze a portable model</td></tr>
+        <tr><td data-label="Version">3</td><td data-label="Main idea">Portable calibrated inputs</td><td data-label="Result">External EIS heads missed the pass gate</td><td data-label="What changed next">Normalize impedance scale in Version 4</td></tr>
+      </tbody></table></div>
+      <div class="card-actions"><a class="button" href="../missing-measurement-v4/">Continue to Version 4</a><a class="button" href="../version-comparison/">Compare Versions 1 to 6</a></div>
+    </section>
+
+    <section id="files" class="technical-section">
+      <h2>Downloadable evidence</h2>
+      <p>You do not need access to the private workspace. These public JSON files contain the fixed rules and recorded results used above.</p>
+      <div class="card-actions">
+        <a class="button" href="../data/missing_modality_v1_frozen_contract.json">V1 frozen contract</a>
+        <a class="button" href="../data/missing_modality_v1_external_failure_lock.json">V1 failure lock</a>
+        <a class="button" href="../data/missing_modality_v1_cmu_external_results.json">V1 CMU result</a>
+        <a class="button" href="../data/missing_modality_v2_development_results.json">V2 development</a>
+        <a class="button" href="../data/missing_modality_v2_leonardi_calibrated_results.json">V2 internal result</a>
+        <a class="button" href="../data/missing_modality_v2_cassino_qualification.json">V2 Cassino decision</a>
+        <a class="button" href="../data/missing_modality_v3_portable_development_results.json">V3 development</a>
+        <a class="button" href="../data/missing_modality_v3_bayreuth_2026_validation_contract.json">V3 Bayreuth contract</a>
+        <a class="button" href="../data/missing_modality_v3_bayreuth_2026_one_shot_results.json">V3 external result</a>
+      </div>
+    </section>
+
       </main>
       <footer>
         <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-18 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>

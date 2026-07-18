@@ -1,0 +1,39 @@
+{
+  "created_utc": "2026-07-14T13:33:03.805392+00:00",
+  "status": "external_validation_failed",
+  "verdict": "no support",
+  "dataset": "Bayreuth CoDeMoRe 2026",
+  "doi": "10.57880/rdspace-ubt-54",
+  "frozen_model_version": "missing_measurement_v3_portable_frozen_1",
+  "frozen_model_manifest_sha256": "d1cdf6dbb0583b8132a2a2f058b00e66b2b7c557647e5c11b570c4b0558f359d",
+  "validation_contract_sha256": "4f7f0673c6c27335f83a9e4a8c48a28b0fab78c7d9bde792caeb531c325b2769",
+  "validation_matrix_sha256": "409ac1e739c42e1ada1493a971811e05f3b0a6870b4a1ae41408bc2fa680616c",
+  "cells": 14,
+  "rows": 28,
+  "metrics": {
+    "eis_zreal": {
+      "error_metric": "pooled_rmse_ohm",
+      "model_error": 5.266292193768947,
+      "baseline_error": 5.284382513401091,
+      "relative_improvement": 0.003423355441485924,
+      "passes_5_percent_gate": false
+    },
+    "eis_znegimag": {
+      "error_metric": "pooled_rmse_ohm",
+      "model_error": 2.4241667881847375,
+      "baseline_error": 2.4350288774051623,
+      "relative_improvement": 0.00446076402674933,
+      "passes_5_percent_gate": false
+    },
+    "rpt_soh": {
+      "error_metric": "pooled_mae_percentage_points",
+      "model_error": 5.536242452281267,
+      "baseline_error": 21.88282559628116,
+      "relative_improvement": 0.7470051375256532,
+      "passes_5_percent_gate": true
+    }
+  },
+  "all_three_heads_pass": false,
+  "post_holdout_tuning": false,
+  "claim_boundary": "One untouched external dataset. No claim beyond this chemistry, protocol, temperature, SOC, and calibration-aware input contract."
+}

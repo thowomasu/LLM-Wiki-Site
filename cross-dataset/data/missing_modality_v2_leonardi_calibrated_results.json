@@ -1,0 +1,292 @@
+{
+  "created_utc": "2026-07-14T12:54:39.178702+00:00",
+  "status": "calibrated_v2_internal_test_completed",
+  "claim_boundary": "Same-dataset unseen-cell test. Not independent external validation.",
+  "reservation": {
+    "created_utc": "2026-07-14T12:51:55.112831+00:00",
+    "status": "reserved_before_any_model_metric",
+    "cell_id": "Leonardi_Cell08",
+    "source_rows_sha256": "6b501612018ffbbe12a53bf420f17882bb1de72674b0034f9ca6bf96cf194224",
+    "source_manifest_sha256": "992f0c0d266c2f9a3db5b22306f983e8c8d77d1a2ffcae498291f65cfac4fbca",
+    "inspection_boundary": "Workbook schemas and first cycle-zero rows were inspected; no Cell08 predictive metric was computed.",
+    "prohibited_until_selection": "Cell08 cannot influence feature sets, model families, hyperparameters, baselines, or pass criteria.",
+    "claim_boundary": "Internal unseen-cell test from the same dataset, not independent external validation."
+  },
+  "matrix_rows": 500,
+  "development_cells": [
+    "Leonardi_Cell01",
+    "Leonardi_Cell02",
+    "Leonardi_Cell03",
+    "Leonardi_Cell04",
+    "Leonardi_Cell05",
+    "Leonardi_Cell06",
+    "Leonardi_Cell07"
+  ],
+  "internal_test_cell": "Leonardi_Cell08",
+  "frequency_grid_hz": [
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    2.0,
+    5.0,
+    10.0,
+    20.0,
+    40.0
+  ],
+  "frequency_edge_snap_relative_tolerance": 0.001,
+  "selected_heads": {
+    "eis_zreal": {
+      "selected": {
+        "feature_set": "calibration_pulse",
+        "model": "extra_trees",
+        "folds": 7,
+        "folds_beating_baseline": 7,
+        "mean_relative_improvement": 0.8835933744716298,
+        "worst_relative_improvement": 0.7531870590856238
+      },
+      "candidates": [
+        {
+          "feature_set": "calibration_pulse",
+          "model": "extra_trees",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.8835933744716298,
+          "worst_relative_improvement": 0.7531870590856238
+        },
+        {
+          "feature_set": "calibration_pulse",
+          "model": "random_forest_shallow",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.7722068553794094,
+          "worst_relative_improvement": 0.5782722755182825
+        },
+        {
+          "feature_set": "calibration_full_spectrum_context",
+          "model": "random_forest_shallow",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.7748914810937595,
+          "worst_relative_improvement": 0.5434324778091112
+        },
+        {
+          "feature_set": "calibration_pulse_cycle",
+          "model": "random_forest_shallow",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.7652696857686511,
+          "worst_relative_improvement": 0.5279501971543665
+        },
+        {
+          "feature_set": "calibration_full_spectrum_context",
+          "model": "extra_trees",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.8377469917231425,
+          "worst_relative_improvement": 0.3699844906741619
+        },
+        {
+          "feature_set": "calibration_pulse_cycle",
+          "model": "extra_trees",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.8329935693250123,
+          "worst_relative_improvement": 0.3676292528115173
+        },
+        {
+          "feature_set": "calibration_pulse",
+          "model": "ridge",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.629878443857618,
+          "worst_relative_improvement": 0.3543732343462409
+        },
+        {
+          "feature_set": "calibration_full_spectrum_context",
+          "model": "ridge",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.6267379678517627,
+          "worst_relative_improvement": 0.06433603846050143
+        },
+        {
+          "feature_set": "calibration_pulse_cycle",
+          "model": "ridge",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.6293507750593934,
+          "worst_relative_improvement": 0.06396338910343342
+        }
+      ]
+    },
+    "eis_znegimag": {
+      "selected": {
+        "feature_set": "calibration_pulse",
+        "model": "extra_trees",
+        "folds": 7,
+        "folds_beating_baseline": 7,
+        "mean_relative_improvement": 0.8316461035448798,
+        "worst_relative_improvement": 0.5040649081644635
+      },
+      "candidates": [
+        {
+          "feature_set": "calibration_pulse",
+          "model": "extra_trees",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.8316461035448798,
+          "worst_relative_improvement": 0.5040649081644635
+        },
+        {
+          "feature_set": "calibration_pulse_cycle",
+          "model": "extra_trees",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.8028669006100567,
+          "worst_relative_improvement": 0.26465477631057355
+        },
+        {
+          "feature_set": "calibration_full_spectrum_context",
+          "model": "extra_trees",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.7861039911528857,
+          "worst_relative_improvement": 0.2525548482967648
+        },
+        {
+          "feature_set": "calibration_pulse",
+          "model": "ridge",
+          "folds": 7,
+          "folds_beating_baseline": 6,
+          "mean_relative_improvement": 0.417432524827988,
+          "worst_relative_improvement": -0.0849067593559815
+        },
+        {
+          "feature_set": "calibration_pulse",
+          "model": "random_forest_shallow",
+          "folds": 7,
+          "folds_beating_baseline": 6,
+          "mean_relative_improvement": 0.5547562428474052,
+          "worst_relative_improvement": -0.195634301410526
+        },
+        {
+          "feature_set": "calibration_full_spectrum_context",
+          "model": "random_forest_shallow",
+          "folds": 7,
+          "folds_beating_baseline": 6,
+          "mean_relative_improvement": 0.5648020096733496,
+          "worst_relative_improvement": -0.2342544419413254
+        },
+        {
+          "feature_set": "calibration_pulse_cycle",
+          "model": "random_forest_shallow",
+          "folds": 7,
+          "folds_beating_baseline": 6,
+          "mean_relative_improvement": 0.5490031651966915,
+          "worst_relative_improvement": -0.25174004349401274
+        },
+        {
+          "feature_set": "calibration_pulse_cycle",
+          "model": "ridge",
+          "folds": 7,
+          "folds_beating_baseline": 6,
+          "mean_relative_improvement": 0.4244468712303294,
+          "worst_relative_improvement": -0.5277899547047088
+        },
+        {
+          "feature_set": "calibration_full_spectrum_context",
+          "model": "ridge",
+          "folds": 7,
+          "folds_beating_baseline": 6,
+          "mean_relative_improvement": 0.4086425124757967,
+          "worst_relative_improvement": -0.5555170780477044
+        }
+      ]
+    },
+    "rpt_soh": {
+      "selected": {
+        "feature_set": "measured_eis_calibrated",
+        "model": "extra_trees",
+        "folds": 7,
+        "folds_beating_baseline": 7,
+        "mean_relative_improvement": 0.7783992594634958,
+        "worst_relative_improvement": 0.5424219799237625
+      },
+      "candidates": [
+        {
+          "feature_set": "measured_eis_calibrated",
+          "model": "extra_trees",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.7783992594634958,
+          "worst_relative_improvement": 0.5424219799237625
+        },
+        {
+          "feature_set": "measured_eis_calibrated",
+          "model": "random_forest_shallow",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.584785106840899,
+          "worst_relative_improvement": 0.5123449553664301
+        },
+        {
+          "feature_set": "measured_eis_no_cycle",
+          "model": "random_forest_shallow",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.5667195181374496,
+          "worst_relative_improvement": 0.4969462575425219
+        },
+        {
+          "feature_set": "measured_eis_no_cycle",
+          "model": "extra_trees",
+          "folds": 7,
+          "folds_beating_baseline": 7,
+          "mean_relative_improvement": 0.7137194442101941,
+          "worst_relative_improvement": 0.487596871944161
+        },
+        {
+          "feature_set": "measured_eis_calibrated",
+          "model": "ridge",
+          "folds": 7,
+          "folds_beating_baseline": 6,
+          "mean_relative_improvement": 0.4080525317192613,
+          "worst_relative_improvement": -0.1606154693205507
+        },
+        {
+          "feature_set": "measured_eis_no_cycle",
+          "model": "ridge",
+          "folds": 7,
+          "folds_beating_baseline": 5,
+          "mean_relative_improvement": 0.026146270928187252,
+          "worst_relative_improvement": -0.8510257455089302
+        }
+      ]
+    }
+  },
+  "internal_test": {
+    "eis_zreal": {
+      "rows": 80,
+      "model_rmse_ohm": 0.0007056535412337441,
+      "carry_forward_rmse_ohm": 0.004235163197631479,
+      "relative_improvement": 0.833382207885547,
+      "passes_5_percent_margin": true
+    },
+    "eis_znegimag": {
+      "rows": 80,
+      "model_rmse_ohm": 0.0003695220469310764,
+      "carry_forward_rmse_ohm": 0.0014884181070881695,
+      "relative_improvement": 0.7517350500028639,
+      "passes_5_percent_margin": true
+    },
+    "rpt_soh": {
+      "rows": 16,
+      "model_mae_percent": 0.7177518508360512,
+      "cycle_only_baseline_mae_percent": 3.0568505601202673,
+      "relative_improvement": 0.7651989075946806,
+      "passes_5_percent_margin": true
+    },
+    "overall_pass": true
+  }
+}

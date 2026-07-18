@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Technical Comparison: Versions 4, 5, and 6 | Battery DRT Research Outputs</title>
-  <meta name="description" content="A self-contained comparison of pipeline architecture, equations, splits, evidence strength, numerical results, claim boundaries, and the current stop decision.">
+  <title>Technical Comparison: Versions 1 to 6 | Battery DRT Research Outputs</title>
+  <meta name="description" content="A self-contained comparison of all six pipeline versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
   <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/version-comparison/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Technical Comparison: Versions 4, 5, and 6 | Battery DRT Research Outputs">
-  <meta property="og:description" content="A self-contained comparison of pipeline architecture, equations, splits, evidence strength, numerical results, claim boundaries, and the current stop decision.">
+  <meta property="og:title" content="Technical Comparison: Versions 1 to 6 | Battery DRT Research Outputs">
+  <meta property="og:description" content="A self-contained comparison of all six pipeline versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
   <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/version-comparison/">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
@@ -477,6 +477,24 @@ code {
 .technical-callout p { margin: 7px 0 0; }
 .technical-callout.bad { border-left-color: var(--red); color: var(--ink); }
 .technical-callout.good { border-left-color: var(--green); color: var(--ink); }
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.metric-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.metric-card span,
+.metric-card strong { display: block; }
+.metric-card span { color: var(--muted); font-size: 14px; }
+.metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -972,10 +990,11 @@ window.MathJax = {
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v6/">Version 6</a>
-<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 1 to 6</a>
 <div class="side-section">Results and limitations</div>
 <a class="side-link" href="../../cross-dataset/version-comparison/">Version results and limits</a>
 <a class="side-link" href="../../external-validation/">External validation status</a>
@@ -998,17 +1017,43 @@ window.MathJax = {
       <header>
 
         <div class="kicker">Battery DRT Research Outputs</div>
-        <h1>Technical Comparison: Versions 4, 5, and 6</h1>
-        <p class="lead">A self-contained comparison of pipeline architecture, equations, splits, evidence strength, numerical results, claim boundaries, and the current stop decision.</p>
+        <h1>Technical Comparison: Versions 1 to 6</h1>
+        <p class="lead">A self-contained comparison of all six pipeline versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.</p>
 
       </header>
       <main>
 
-    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab active" href="../version-comparison/">Compare all three</a></div>
-    <nav class="technical-toc" aria-label="On this page"><a href="#summary">Executive read</a><a href="#architecture">Architecture</a><a href="#math">Math evolution</a><a href="#splits">Splits</a><a href="#evidence">Evidence</a><a href="#results">Results</a><a href="#why">Why each changed</a><a href="#decision">Current decision</a><a href="#files">Files</a></nav>
+    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../early-versions/">Versions 1 to 3</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab active" href="../version-comparison/">Compare all versions</a></div>
+    <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#history">Versions 1 to 6</a><a href="#summary">Versions 4 to 6</a><a href="#architecture">Architecture</a><a href="#math">Math evolution</a><a href="#splits">Splits</a><a href="#evidence">Evidence</a><a href="#results">Results</a><a href="#why">Why each changed</a><a href="#decision">Current decision</a><a href="#files">Files</a></nav>
+    <section id="start" class="technical-section note">
+      <h2>Start here: how to read six versions</h2>
+      <p>This was not one model improved six times on one fixed test. Each version changed the question after the previous evidence exposed a weakness. Scores are therefore not directly interchangeable.</p>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Versions 1 to 3</strong><span>Established the task, added same-cell calibration, and tested portability. None earned external support.</span></div>
+        <div class="definition-card"><strong>Version 4</strong><span>Added impedance-scale normalization and achieved one narrow external pass.</span></div>
+        <div class="definition-card"><strong>Version 5</strong><span>Completed the missing-EIS-to-health chain, then failed to operate on SiCWell.</span></div>
+        <div class="definition-card"><strong>Version 6</strong><span>Tested rescue options across spent datasets and stopped the universal path.</span></div>
+      </div>
+      <h3>The standard used throughout</h3>
+      <p>A complicated model must beat a simple baseline under a split that keeps independent cells or datasets apart. Internal success supports development. Only a frozen result on untouched outside data supports an external claim.</p>
+    </section>
+
+    <section id="history" class="technical-section">
+      <h2>Versions 1 to 6 at a glance</h2>
+      <div class="table-wrap"><table><thead><tr><th>Version</th><th>What it tried</th><th>Strongest honest result</th><th>Why it moved on</th></tr></thead><tbody>
+        <tr><td data-label="Version">1</td><td data-label="What it tried">Broad pulse-feature to EIS transfer</td><td data-label="Strongest honest result">CMU external EIS model was 59.8% worse than baseline</td><td data-label="Why it moved on">Broad resistance proxies did not transfer</td></tr>
+        <tr><td data-label="Version">2</td><td data-label="What it tried">Separate EIS heads plus fresh-cell calibration</td><td data-label="Strongest honest result">Strong same-dataset Leonardi Cell 08 result</td><td data-label="Why it moved on">Not externally freeze-ready; Cassino could not satisfy the input contract</td></tr>
+        <tr><td data-label="Version">3</td><td data-label="What it tried">Remove protocol-specific inputs</td><td data-label="Strongest honest result">SOH passed on Bayreuth</td><td data-label="Why it moved on">Both external EIS heads missed the 5% gate</td></tr>
+        <tr><td data-label="Version">4</td><td data-label="What it tried">Normalize impedance scale</td><td data-label="Strongest honest result">All heads passed on three Oxford cells</td><td data-label="Why it moved on">Health still used measured current EIS</td></tr>
+        <tr><td data-label="Version">5</td><td data-label="What it tried">Full predicted-EIS-to-SOH chain</td><td data-label="Strongest honest result">All eight Leonardi cell folds passed</td><td data-label="Why it moved on">Frozen guard rejected all 892 SiCWell rows</td></tr>
+        <tr><td data-label="Version">6</td><td data-label="What it tried">Zero-shot, few-shot, guard, and uncertainty rescue study</td><td data-label="Strongest honest result">Large four-dataset failure analysis</td><td data-label="Why it moved on">No candidate passed all dataset-level gates</td></tr>
+      </tbody></table></div>
+      <p><a class="button" href="../early-versions/">Read the plain-language Versions 1 to 3 history</a></p>
+    </section>
+
     <section id="summary" class="technical-section note">
-      <h2>Executive Read</h2>
-      <p>The three versions are not three scores from one stable experiment. Each version answers a harder question and changes the allowed claim.</p>
+      <h2>Detailed comparison of Versions 4 to 6</h2>
+      <p>The last three versions contain the most complete frozen evidence. They are still not three scores from one stable experiment. Each answers a harder question and changes the allowed claim.</p>
       <div class="reader-path">
         <div class="reader-card"><strong>Version 4</strong><p>Can scale-normalized EIS and measured-EIS-to-SOH heads transfer to one tightly matched external dataset? Yes, narrowly.</p></div>
         <div class="reader-card"><strong>Version 5</strong><p>Can the complete predicted-EIS-to-SOH chain pass a new external dataset with a frozen guard? No.</p></div>

@@ -477,6 +477,24 @@ code {
 .technical-callout p { margin: 7px 0 0; }
 .technical-callout.bad { border-left-color: var(--red); color: var(--ink); }
 .technical-callout.good { border-left-color: var(--green); color: var(--ink); }
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.metric-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.metric-card span,
+.metric-card strong { display: block; }
+.metric-card span { color: var(--muted); font-size: 14px; }
+.metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -972,10 +990,11 @@ window.MathJax = {
 <a class="side-link" href="../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../cross-dataset/missing-measurement-v5/">Version 5</a>
 <a class="side-link" href="../cross-dataset/missing-measurement-v6/">Version 6</a>
-<a class="side-link" href="../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
+<a class="side-link" href="../cross-dataset/version-comparison/">Compare versions 1 to 6</a>
 <div class="side-section">Results and limitations</div>
 <a class="side-link" href="../cross-dataset/version-comparison/">Version results and limits</a>
 <a class="side-link" href="../external-validation/">External validation status</a>
@@ -1004,7 +1023,7 @@ window.MathJax = {
       </header>
       <main>
 
-    <div class="tabs" aria-label="Section tabs"><a class="tab active" href="">Overview</a><a class="tab" href="missing-measurement-v4/">Version 4</a><a class="tab" href="missing-measurement-v5/">Version 5</a><a class="tab" href="missing-measurement-v6/">Version 6</a><a class="tab" href="version-comparison/">Compare all three</a></div>
+    <div class="tabs" aria-label="Section tabs"><a class="tab active" href="">Overview</a><a class="tab" href="early-versions/">Versions 1 to 3</a><a class="tab" href="missing-measurement-v4/">Version 4</a><a class="tab" href="missing-measurement-v5/">Version 5</a><a class="tab" href="missing-measurement-v6/">Version 6</a><a class="tab" href="version-comparison/">Compare all versions</a></div>
     <section class="note">
       <strong>Current answer:</strong> a universal cross-dataset model is not supported. Version 4 passed one narrow external test, Version 5 failed its external test, and Version 6 found no model worth freezing. The next study is deliberately smaller: one exact cell model, one lot, and one fixed measurement protocol.
     </section>
@@ -1014,10 +1033,11 @@ window.MathJax = {
       <p>The hard part was not fitting one dataset. The hard part was staying reliable when the cell, chemistry, protocol, and instrument changed.</p>
     </section>
     <section class="summary-grid">
+      <article class="summary-card"><span class="status-pill bad">Versions 1 to 3</span><h3>Early transfer attempts</h3><p>These versions established the first pipeline, simplified it, and made it more portable. Their outside tests either failed, could not be run honestly, or missed the required EIS margin.</p><div class="card-actions"><a class="button" href="early-versions/">Read the early history</a></div></article>
       <article class="summary-card"><span class="status-pill good">Version 4</span><h3>Narrow external pass</h3><p>Three Oxford cells passed every fixed gate. This was real external evidence, but only for one narrow NCA protocol and a model that still used measured current EIS for the health step.</p><div class="card-actions"><a class="button" href="missing-measurement-v4/">Read Version 4</a></div></article>
       <article class="summary-card"><span class="status-pill bad">Version 5</span><h3>Full chain, external failure</h3><p>The model predicted EIS before predicting health. It worked internally on Leonardi, then rejected all 892 SiCWell rows under the fixed domain guard.</p><div class="card-actions"><a class="button" href="missing-measurement-v5/">Read Version 5</a></div></article>
       <article class="summary-card"><span class="status-pill bad">Version 6</span><h3>Universal path stopped</h3><p>Zero-shot, small-calibration, uncertainty, and guard studies produced no candidate that passed every dataset-level gate.</p><div class="card-actions"><a class="button" href="missing-measurement-v6/">Read Version 6</a></div></article>
-      <article class="summary-card"><span class="status-pill warn">Next study</span><h3>Controlled exact-cell campaign</h3><p>No measurements are authorized yet. The lab must first prove that it has at least 12 matching cells, safe equipment, calibration, channels, approval, and enough time.</p><div class="card-actions"><a class="button" href="version-comparison/">Compare all versions</a></div></article>
+      <article class="summary-card"><span class="status-pill warn">Next study</span><h3>Controlled exact-cell campaign</h3><p>No measurements are authorized yet. The lab must first prove that it has at least 12 matching cells, safe equipment, calibration, channels, approval, and enough time.</p><div class="card-actions"><a class="button" href="version-comparison/">Compare Versions 1 to 6</a></div></article>
     </section>
     <section>
       <h2>What happens next</h2>

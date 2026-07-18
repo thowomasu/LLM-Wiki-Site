@@ -477,6 +477,24 @@ code {
 .technical-callout p { margin: 7px 0 0; }
 .technical-callout.bad { border-left-color: var(--red); color: var(--ink); }
 .technical-callout.good { border-left-color: var(--green); color: var(--ink); }
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.metric-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.metric-card span,
+.metric-card strong { display: block; }
+.metric-card span { color: var(--muted); font-size: 14px; }
+.metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -972,10 +990,11 @@ window.MathJax = {
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v6/">Version 6</a>
-<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 1 to 6</a>
 <div class="side-section">Results and limitations</div>
 <a class="side-link" href="../../cross-dataset/version-comparison/">Version results and limits</a>
 <a class="side-link" href="../../external-validation/">External validation status</a>
@@ -1004,8 +1023,27 @@ window.MathJax = {
       </header>
       <main>
 
-    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab active" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all three</a></div>
-    <nav class="technical-toc" aria-label="On this page"><a href="#summary">Executive read</a><a href="#pipeline">Pipeline</a><a href="#inputs">Inputs</a><a href="#math">Math</a><a href="#training">Nested training</a><a href="#uncertainty">Uncertainty and guard</a><a href="#results">Development results</a><a href="#external">External test</a><a href="#limits">Limits</a><a href="#files">Files</a></nav>
+    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../early-versions/">Versions 1 to 3</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab active" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all versions</a></div>
+    <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#summary">Executive read</a><a href="#pipeline">Pipeline</a><a href="#inputs">Inputs</a><a href="#math">Math</a><a href="#training">Nested training</a><a href="#uncertainty">Uncertainty and guard</a><a href="#results">Development results</a><a href="#external">External test</a><a href="#limits">Limits</a><a href="#files">Files</a></nav>
+    <section id="start" class="technical-section">
+      <h2>Start here: what Version 5 fixed</h2>
+      <p>Version 4 could predict EIS, but its health model still needed the real current EIS measurement. Version 5 removed that shortcut. It first predicts the missing EIS, then feeds only that prediction into the health model.</p>
+      <div class="technical-flow">
+        <div class="flow-card"><strong>Fresh reference</strong><span>Store the cell's earlier EIS and pulse resistance.</span></div>
+        <div class="flow-card"><strong>Later pulse</strong><span>Measure how pulse resistance changed as the cell aged.</span></div>
+        <div class="flow-card"><strong>Predict missing EIS</strong><span>Estimate the current spectrum without measuring it.</span></div>
+        <div class="flow-card"><strong>Predict health</strong><span>Use predicted EIS, not measured current EIS, to estimate SOH.</span></div>
+      </div>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>SOH</strong><span>State of health, defined here from remaining capacity relative to the fresh cell.</span></div>
+        <div class="definition-card"><strong>Chained model</strong><span>The output of the EIS model becomes an input to the health model.</span></div>
+        <div class="definition-card"><strong>Domain guard</strong><span>A safety check that rejects an input when it is too different from development data.</span></div>
+        <div class="definition-card"><strong>Abstain</strong><span>Return no prediction because the input is outside the model's allowed domain.</span></div>
+      </div>
+      <h3>Why zero accepted SiCWell rows is a failure</h3>
+      <p>The guard behaved like a locked door. Every SiCWell input was too far from the Leonardi development domain, so no external prediction was allowed. That is safer than guessing, but it means the method provided no usable external result.</p>
+      <div class="technical-callout bad"><strong>Do not misread the result:</strong><p>Zero accepted rows does not mean zero prediction error. It means the frozen method could not operate on the external dataset at all.</p></div>
+    </section>
     <section id="summary" class="technical-section note">
       <h2>Executive Read</h2>
       <p>Version 5 fixed V4's biggest architecture gap. The health model was trained on EIS predicted without access to the held cell, so the deployed chain could estimate SOH when current EIS was missing.</p>
