@@ -510,6 +510,101 @@ code {
 .metric-card strong { display: block; }
 .metric-card span { color: var(--muted); font-size: 14px; }
 .metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
+.evidence-chart,
+.study-trajectory {
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+.evidence-chart figcaption,
+.study-trajectory figcaption {
+  display: block;
+  margin-bottom: 18px;
+}
+.evidence-chart figcaption strong,
+.evidence-chart figcaption span,
+.study-trajectory figcaption strong,
+.study-trajectory figcaption span { display: block; }
+.evidence-chart figcaption strong,
+.study-trajectory figcaption strong { font-size: 20px; }
+.evidence-chart figcaption span,
+.study-trajectory figcaption span {
+  max-width: 900px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.evidence-chart-row { margin-top: 14px; }
+.evidence-chart-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.evidence-chart-label strong { white-space: nowrap; }
+.evidence-chart-track {
+  position: relative;
+  width: 100%;
+  height: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--panel-strong);
+}
+.evidence-chart-bar {
+  display: block;
+  width: var(--bar-width);
+  height: 100%;
+  min-width: 0;
+  background: var(--blue);
+}
+.evidence-chart-bar.good { background: var(--green); }
+.evidence-chart-bar.bad { background: var(--red); }
+.evidence-chart-bar.warn { background: var(--amber); }
+.evidence-chart-bar.muted { background: var(--muted); }
+.evidence-chart-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.chart-source {
+  max-width: none;
+  margin: 15px 0 0;
+  padding-top: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.trajectory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+}
+.trajectory-node {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
+}
+.trajectory-node.good { border-top-color: var(--green); }
+.trajectory-node.bad { border-top-color: var(--red); }
+.trajectory-node.warn { border-top-color: var(--amber); }
+.trajectory-node > span,
+.trajectory-node > strong,
+.trajectory-node > small { display: block; }
+.trajectory-node strong { margin: 7px 0; }
+.trajectory-node small { margin-top: 8px; color: var(--muted); line-height: 1.45; }
+.trajectory-version { color: var(--muted); font-size: 13px; font-weight: 800; text-transform: uppercase; }
+.trajectory-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 25px; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -885,6 +980,10 @@ footer {
   li,
   .lead { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
   .technical-flow.pipeline-six { grid-template-columns: 1fr; }
+  .trajectory-grid { grid-template-columns: 1fr; }
+  .trajectory-arrow { min-height: 24px; transform: rotate(90deg); }
+  .evidence-chart,
+  .study-trajectory { padding: 15px; }
   .tabs { width: 100%; max-width: 100%; }
   .sidebar {
     position: fixed;
@@ -1261,6 +1360,30 @@ window.MathJax = {
       <h2>The research question</h2>
       <p>Can a short pulse measurement and an earlier battery reference recover a missing EIS spectrum and a useful state-of-health estimate?</p>
       <p>The hard part was not fitting one dataset. The hard part was staying reliable when the cell, chemistry, protocol, and instrument changed.</p>
+    </section>
+    <section>
+      <h2>The whole study in one picture</h2>
+
+    <figure class="study-trajectory" aria-labelledby="study-trajectory-title">
+      <figcaption id="study-trajectory-title"><strong>How the evidence changed the research direction</strong><span>This is a decision path, not a shared performance scale. Each version answered a different question.</span></figcaption>
+      <div class="trajectory-grid">
+        <article class="trajectory-node good"><span class="trajectory-version">V4</span><strong>Narrow outside-data pass</strong><span>3 Oxford cells</span><small>All three fixed output heads beat their baselines. The health step still used measured EIS.</small></article>
+        <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
+        <article class="trajectory-node bad"><span class="trajectory-version">V5</span><strong>Complete chain, outside-data failure</strong><span>0 of 892 SiCWell rows accepted</span><small>The frozen guard said the new dataset was outside the model's supported domain.</small></article>
+        <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
+        <article class="trajectory-node bad"><span class="trajectory-version">V6</span><strong>No universal candidate</strong><span>0 zero-shot or few-shot survivors</span><small>Broader development tests found no model worth freezing for another outside-data test.</small></article>
+        <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
+        <article class="trajectory-node warn"><span class="trajectory-version">Now</span><strong>Controlled exact-cell study</strong><span>Resource gate still blocked</span><small>Verify at least 12 matching cells and the full safety and equipment gate before measuring.</small></article>
+      </div>
+    </figure>
+
+    </section>
+    <section>
+      <h2>The numbers behind the decisions</h2>
+      <p>These three charts use different units because the versions answer different questions. Read each source note before comparing them.</p>
+      <figure class="evidence-chart"><figcaption><strong>Version 4: Oxford error reduction versus the fixed baseline</strong><span>Higher is better. Every output had to clear the pre-set 5% improvement rule.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Real EIS</span><strong>45.1%</strong></div><div class="evidence-chart-track" role="img" aria-label="Real EIS: 45.1%"><span class="evidence-chart-bar good" style="--bar-width:45.091%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Imaginary EIS</span><strong>25.7%</strong></div><div class="evidence-chart-track" role="img" aria-label="Imaginary EIS: 25.7%"><span class="evidence-chart-bar good" style="--bar-width:25.654%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Measured-EIS-to-SOH</span><strong>80.3%</strong></div><div class="evidence-chart-track" role="img" aria-label="Measured-EIS-to-SOH: 80.3%"><span class="evidence-chart-bar good" style="--bar-width:80.309%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>100% error reduction</span></div><p class="chart-source">External Oxford result, worst case across the two allowed frequency mappings, three independent cells.</p></figure>
+      <figure class="evidence-chart"><figcaption><strong>Version 5: frozen SiCWell guard result</strong><span>The guard accepted no rows, so no outside-data prediction error could be reported.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Rows accepted</span><strong>0</strong></div><div class="evidence-chart-track" role="img" aria-label="Rows accepted: 0"><span class="evidence-chart-bar good" style="--bar-width:0.000%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Rows rejected</span><strong>892</strong></div><div class="evidence-chart-track" role="img" aria-label="Rows rejected: 892"><span class="evidence-chart-bar bad" style="--bar-width:100.000%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>892 rows</span></div><p class="chart-source">One frozen external test covering 26 cells and 223 ageing checkups. Rows are correlated measurements, not independent batteries.</p></figure>
+      <figure class="evidence-chart"><figcaption><strong>Version 6: development rows by dataset</strong><span>This shows the audit&#x27;s data balance. It does not turn previously inspected datasets into new validation evidence.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Bayreuth CoDeMoRe 2026</span><strong>28 rows, 14 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="Bayreuth CoDeMoRe 2026: 28 rows, 14 cells"><span class="evidence-chart-bar muted" style="--bar-width:3.139%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Leonardi</span><strong>460 rows, 8 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="Leonardi: 460 rows, 8 cells"><span class="evidence-chart-bar muted" style="--bar-width:51.570%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Oxford Path Dependent</span><strong>3 rows, 3 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="Oxford Path Dependent: 3 rows, 3 cells"><span class="evidence-chart-bar muted" style="--bar-width:0.336%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>SiCWell</span><strong>892 rows, 26 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="SiCWell: 892 rows, 26 cells"><span class="evidence-chart-bar muted" style="--bar-width:100.000%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>largest dataset</span></div><p class="chart-source">V6 development matrix: 1383 rows from 51 independent cells across 4 spent datasets.</p></figure>
     </section>
     <section class="summary-grid">
       <article class="summary-card"><span class="status-pill bad">Versions 1 to 3</span><h3>Early transfer attempts</h3><p>These versions established the first pipeline, simplified it, and made it more portable. Their outside tests either failed, could not be run honestly, or missed the required EIS margin.</p><div class="card-actions"><a class="button" href="early-versions/">Read the early history</a></div></article>

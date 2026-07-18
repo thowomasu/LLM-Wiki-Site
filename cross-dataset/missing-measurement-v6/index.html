@@ -510,6 +510,101 @@ code {
 .metric-card strong { display: block; }
 .metric-card span { color: var(--muted); font-size: 14px; }
 .metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
+.evidence-chart,
+.study-trajectory {
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+.evidence-chart figcaption,
+.study-trajectory figcaption {
+  display: block;
+  margin-bottom: 18px;
+}
+.evidence-chart figcaption strong,
+.evidence-chart figcaption span,
+.study-trajectory figcaption strong,
+.study-trajectory figcaption span { display: block; }
+.evidence-chart figcaption strong,
+.study-trajectory figcaption strong { font-size: 20px; }
+.evidence-chart figcaption span,
+.study-trajectory figcaption span {
+  max-width: 900px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.evidence-chart-row { margin-top: 14px; }
+.evidence-chart-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.evidence-chart-label strong { white-space: nowrap; }
+.evidence-chart-track {
+  position: relative;
+  width: 100%;
+  height: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--panel-strong);
+}
+.evidence-chart-bar {
+  display: block;
+  width: var(--bar-width);
+  height: 100%;
+  min-width: 0;
+  background: var(--blue);
+}
+.evidence-chart-bar.good { background: var(--green); }
+.evidence-chart-bar.bad { background: var(--red); }
+.evidence-chart-bar.warn { background: var(--amber); }
+.evidence-chart-bar.muted { background: var(--muted); }
+.evidence-chart-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.chart-source {
+  max-width: none;
+  margin: 15px 0 0;
+  padding-top: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.trajectory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+}
+.trajectory-node {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
+}
+.trajectory-node.good { border-top-color: var(--green); }
+.trajectory-node.bad { border-top-color: var(--red); }
+.trajectory-node.warn { border-top-color: var(--amber); }
+.trajectory-node > span,
+.trajectory-node > strong,
+.trajectory-node > small { display: block; }
+.trajectory-node strong { margin: 7px 0; }
+.trajectory-node small { margin-top: 8px; color: var(--muted); line-height: 1.45; }
+.trajectory-version { color: var(--muted); font-size: 13px; font-weight: 800; text-transform: uppercase; }
+.trajectory-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 25px; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -885,6 +980,10 @@ footer {
   li,
   .lead { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
   .technical-flow.pipeline-six { grid-template-columns: 1fr; }
+  .trajectory-grid { grid-template-columns: 1fr; }
+  .trajectory-arrow { min-height: 24px; transform: rotate(90deg); }
+  .evidence-chart,
+  .study-trajectory { padding: 15px; }
   .tabs { width: 100%; max-width: 100%; }
   .sidebar {
     position: fixed;
@@ -1294,6 +1393,7 @@ window.MathJax = {
     <section id="data" class="technical-section">
       <h2>Development data and role boundary</h2>
       <section class="metric-grid"><article class="metric-card"><span>Datasets</span><strong>4</strong></article><article class="metric-card"><span>Rows</span><strong>1383</strong></article><article class="metric-card"><span>Independent cells</span><strong>51</strong></article></section>
+      <figure class="evidence-chart"><figcaption><strong>Independent cells in the Version 6 development matrix</strong><span>Cells, not correlated rows, are the main independent unit inside each dataset.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Bayreuth CoDeMoRe 2026</span><strong>14 cells, 28 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="Bayreuth CoDeMoRe 2026: 14 cells, 28 rows"><span class="evidence-chart-bar muted" style="--bar-width:53.846%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Leonardi</span><strong>8 cells, 460 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="Leonardi: 8 cells, 460 rows"><span class="evidence-chart-bar muted" style="--bar-width:30.769%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Oxford Path Dependent</span><strong>3 cells, 3 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="Oxford Path Dependent: 3 cells, 3 rows"><span class="evidence-chart-bar muted" style="--bar-width:11.538%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>SiCWell</span><strong>26 cells, 892 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="SiCWell: 26 cells, 892 rows"><span class="evidence-chart-bar muted" style="--bar-width:100.000%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>largest cell count</span></div><p class="chart-source">All four datasets were already inspected or scored before V6. This is development coverage, not a new external sample.</p></figure>
       <div class="table-wrap"><table><thead><tr><th>Dataset</th><th>Rows</th><th>Cells</th><th>Checkpoints</th><th>SOH range</th></tr></thead><tbody><tr><td data-label="Dataset">bayreuth codemore 2026</td><td data-label="Rows">28</td><td data-label="Cells">14</td><td data-label="Checkpoints">28</td><td data-label="SOH range">68.7% to 91.5%</td></tr><tr><td data-label="Dataset">leonardi</td><td data-label="Rows">460</td><td data-label="Cells">8</td><td data-label="Checkpoints">92</td><td data-label="SOH range">77.3% to 98.5%</td></tr><tr><td data-label="Dataset">oxford path dependent</td><td data-label="Rows">3</td><td data-label="Cells">3</td><td data-label="Checkpoints">3</td><td data-label="SOH range">79.4% to 81.6%</td></tr><tr><td data-label="Dataset">sicwell</td><td data-label="Rows">892</td><td data-label="Cells">26</td><td data-label="Checkpoints">223</td><td data-label="SOH range">55.2% to 99.6%</td></tr></tbody></table></div>
       <p>Leonardi, SiCWell, Oxford, and Bayreuth were development-only in V6. Mixing these rows into a matrix did not turn them into untouched validation data.</p>
     </section>
@@ -1358,6 +1458,7 @@ window.MathJax = {
 
     <section id="guard" class="technical-section">
       <h2>Applicability and uncertainty audit</h2>
+      <figure class="evidence-chart"><figcaption><strong>Why 100% guard coverage was unsafe</strong><span>The guard accepted every row, but most accepted rows had at least one output head that lost to its row-level baseline.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Safe on all four heads</span><strong>321 of 1383 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="Safe on all four heads: 321 of 1383 rows"><span class="evidence-chart-bar good" style="--bar-width:23.210%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>False accepts</span><strong>1062 of 1383 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="False accepts: 1062 of 1383 rows"><span class="evidence-chart-bar bad" style="--bar-width:76.790%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>1383 accepted rows</span></div><p class="chart-source">Spent-data diagnostic only. Row counts describe guard behavior and do not become independent validation units.</p></figure>
       <div class="table-wrap"><table><thead><tr><th>Held dataset</th><th>Accepted rows</th><th>False accepts</th><th>Safe all-head rows</th><th>Uncertainty gate</th></tr></thead><tbody><tr><td data-label="Dataset">bayreuth codemore 2026</td><td data-label="Accepted">28 / 28</td><td data-label="False accepts">25</td><td data-label="Safe all-head rows">3</td><td data-label="Uncertainty gate">Fail</td></tr><tr><td data-label="Dataset">leonardi</td><td data-label="Accepted">460 / 460</td><td data-label="False accepts">427</td><td data-label="Safe all-head rows">33</td><td data-label="Uncertainty gate">Fail</td></tr><tr><td data-label="Dataset">oxford path dependent</td><td data-label="Accepted">3 / 3</td><td data-label="False accepts">3</td><td data-label="Safe all-head rows">0</td><td data-label="Uncertainty gate">Fail</td></tr><tr><td data-label="Dataset">sicwell</td><td data-label="Accepted">892 / 892</td><td data-label="False accepts">607</td><td data-label="Safe all-head rows">285</td><td data-label="Uncertainty gate">Fail</td></tr></tbody></table></div>
       <p>The source-calibrated guard accepted every row in every dataset. That is high coverage, not safety. It also accepted many rows where at least one required head lost to its row-level baseline.</p>
     </section>
