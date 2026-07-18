@@ -1,0 +1,73 @@
+{
+  "created_utc": "2026-07-14T13:56:54.2064166Z",
+  "status": "frozen_before_measurement_value_inspection_or_model_scoring",
+  "dataset": "Oxford Path Dependent Battery Degradation Dataset Parts 1 and 2",
+  "cells": [
+    9,
+    15,
+    20
+  ],
+  "baseline": {
+    "stage": "Part 1 beginning of life",
+    "rpt_files": {
+      "9": "Group 1/TPG1 - Cell 9.mat",
+      "15": "Group 1/TPG1 - Cell 15.mat",
+      "20": "Group 1/TPG1 - Cell 20.mat"
+    },
+    "selection_rule": "first BoL RPT listed by the official Part 1 guide for every cell",
+    "eis_files": "Part 1 EIS/BoL/Group1_BoL_Cell{cell}_SOC50.mat"
+  },
+  "endpoint": {
+    "stage": "Part 2 RPT18 and end of life EIS",
+    "rpt_files": {
+      "9": "Group 1/TPG1.32-Cell9.mat",
+      "15": "Group 1/TPG1.30-Cell15.mat",
+      "20": "Group 1/TPG1.27-Cell20.mat"
+    },
+    "selection_rule": "RPT18 for every cell, the latest common numbered RPT in the official Part 2 guide",
+    "eis_files": "Part 2 EIS/EoL/Group1_EoL_Cell{cell}_SOC50.mat"
+  },
+  "capacity": {
+    "step": 8,
+    "measurement": "pseudo-OCV discharge capacity",
+    "calculation": "discharged ampere-hours within step 8, using the native capacity channel after confirming its reset convention",
+    "soh_percent": "100 * endpoint_capacity_ah / baseline_capacity_ah"
+  },
+  "rint": {
+    "soc_percent": 50,
+    "step": 22,
+    "selection_rule": "first documented 50 percent SOC pulse step, fixed before current or voltage inspection",
+    "duration_seconds": 10,
+    "calculation": "absolute value of (V at pulse start plus 10 seconds minus V at pulse start) divided by median nonzero pulse current",
+    "increase_percent": "100 * (endpoint_rint_ohm - baseline_rint_ohm) / baseline_rint_ohm"
+  },
+  "eis": {
+    "soc_percent": 50,
+    "frequency_grid_hz": [
+      0.1,
+      0.2,
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      20.0,
+      40.0
+    ],
+    "interpolation": "linear interpolation of each impedance component against log10 frequency after sorting and rejecting nonfinite or duplicate frequencies",
+    "imaginary_sign": "convert publisher Zimag to -Im(Z), confirmed by spectrum orientation and then applied identically to all files"
+  },
+  "baselines": {
+    "eis": "same-cell BoL 50 percent SOC spectrum carried forward",
+    "rpt_soh": 100.0
+  },
+  "acceptance": {
+    "minimum_cells": 3,
+    "each_head": "pooled error at least 5 percent below its frozen baseline",
+    "all_three_heads_required": true,
+    "no_post_holdout_tuning": true,
+    "no_cell_removal": true
+  },
+  "frozen_model_manifest_sha256": "9dc565b30b4f7419cc3b93a4cb7128b7a989e36592111b03bc97954647dbb925",
+  "model_scored": false
+}

@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Version 4: Narrow External Support | Battery DRT Research Outputs</title>
-  <meta name="description" content="Scale normalization passed one narrow Oxford test, but the health step still used measured EIS.">
+  <title>Version 4: Scale-Normalized External Test | Battery DRT Research Outputs</title>
+  <meta name="description" content="A self-contained technical account of the V4 inputs, equations, Extra Trees models, frozen Oxford test, results, and limits.">
   <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/missing-measurement-v4/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Version 4: Narrow External Support | Battery DRT Research Outputs">
-  <meta property="og:description" content="Scale normalization passed one narrow Oxford test, but the health step still used measured EIS.">
+  <meta property="og:title" content="Version 4: Scale-Normalized External Test | Battery DRT Research Outputs">
+  <meta property="og:description" content="A self-contained technical account of the V4 inputs, equations, Extra Trees models, frozen Oxford test, results, and limits.">
   <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/missing-measurement-v4/">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
@@ -412,6 +412,85 @@ code {
   border-radius: 7px;
   background: var(--panel);
 }
+.technical-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 28px;
+}
+.technical-toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 7px 11px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font-size: 14px;
+  font-weight: 700;
+}
+.technical-toc a:hover { border-color: var(--blue); }
+.technical-section {
+  margin: 22px 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  scroll-margin-top: 22px;
+}
+.technical-section > h2:first-child { margin-top: 0; }
+.technical-section > :last-child { margin-bottom: 0; }
+.technical-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.technical-flow .flow-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--teal);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.technical-flow .flow-card strong,
+.technical-flow .flow-card span { display: block; }
+.technical-flow .flow-card span { margin-top: 7px; color: var(--muted); font-size: 14px; }
+.formula-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+.technical-callout {
+  margin: 16px 0;
+  padding: 15px 17px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--amber);
+  border-radius: 7px;
+  background: var(--note-bg);
+}
+.technical-callout p { margin: 7px 0 0; }
+.technical-callout.bad { border-left-color: var(--red); color: var(--ink); }
+.technical-callout.good { border-left-color: var(--green); color: var(--ink); }
+.definition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.definition-card {
+  padding: 14px 15px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.definition-card strong { display: block; margin-bottom: 5px; }
+.definition-card span { color: var(--muted); font-size: 14px; }
 .journey {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -919,28 +998,130 @@ window.MathJax = {
       <header>
 
         <div class="kicker">Battery DRT Research Outputs</div>
-        <h1>Version 4: Narrow External Support</h1>
-        <p class="lead">Scale normalization passed one narrow Oxford test, but the health step still used measured EIS.</p>
+        <h1>Version 4: Scale-Normalized External Test</h1>
+        <p class="lead">A self-contained technical account of the V4 inputs, equations, Extra Trees models, frozen Oxford test, results, and limits.</p>
 
       </header>
       <main>
 
     <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab active" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all three</a></div>
-    <section class="note"><strong>Verdict:</strong> external support, limited to the Oxford NCA dataset, three cells, 24 C, 50% state of charge, and the fixed Version 4 input contract.</section>
-    <h2>What Version 4 changed</h2>
-    <p>Version 4 added scale normalization so large differences in impedance size would not dominate the model. The full method was fixed before the Oxford measurements were scored.</p>
-    <h2>The external test</h2>
-    <ul><li>Dataset: Oxford Path Dependent Battery Degradation Dataset.</li><li>Cells: 3 untouched cells.</li><li>Condition: 24 C and 50% state of charge.</li><li>Every prediction head had to beat its baseline by at least 5%.</li><li>No settings were changed after the result.</li></ul>
-    <h2>Result</h2>
-    <section class="metric-grid">
-      <article class="metric-card"><span>Real EIS improvement</span><strong>45.1%</strong></article>
-      <article class="metric-card"><span>Imaginary EIS improvement</span><strong>25.7%</strong></article>
-      <article class="metric-card"><span>Health improvement</span><strong>80.3%</strong></article>
+    <nav class="technical-toc" aria-label="On this page"><a href="#summary">Executive read</a><a href="#pipeline">Pipeline</a><a href="#inputs">Inputs</a><a href="#math">Math</a><a href="#model">Model and split</a><a href="#validation">External test</a><a href="#results">Results</a><a href="#limits">Limits</a><a href="#files">Files</a></nav>
+    <section id="summary" class="technical-section note">
+      <h2>Executive Read</h2>
+      <p>Version 4 asked whether impedance-scale normalization could make one frozen model transfer to a different commercial NCA cell dataset. It used eight Leonardi cells for development, froze the models before Oxford measurement values were opened, and then scored three untouched Oxford cells once.</p>
+      <div class="reader-path">
+        <div class="reader-card"><strong>What the model sees</strong><p>Fresh same-cell EIS, state of charge, and the percentage increase in 10-second pulse resistance.</p></div>
+        <div class="reader-card"><strong>What it predicts</strong><p>Changes in real and negative-imaginary EIS on nine frequencies. A separate health head uses measured current EIS.</p></div>
+        <div class="reader-card"><strong>What passed</strong><p>Both EIS heads and the measured-EIS-to-SOH head beat their frozen baselines under both defensible Oxford frequency mappings.</p></div>
+        <div class="reader-card"><strong>What it does not prove</strong><p>It does not prove the complete missing-EIS chain because the SOH head still receives measured current EIS.</p></div>
+      </div>
+      <div class="technical-callout good"><strong>Verdict:</strong><p>Limited external support for the exact Oxford NCA test: three cells, 24 C, 50% SOC, and the frozen Version 4 contract.</p></div>
     </section>
-    <h2>Why this was not the final answer</h2>
-    <p>The result was narrow and used only three cells. More importantly, the health model used the currently measured EIS spectrum. It did not prove the full chain where EIS is missing and must first be predicted.</p>
-    <section class="note"><strong>Keep:</strong> Version 4 is the strongest positive external result in this version family. <strong>Do not claim:</strong> universal transfer or a complete missing-EIS-to-health pipeline.</section>
-    <div class="card-actions"><a class="button" href="../data/missing_modality_v4_oxford_one_shot_results.json">Open the result JSON</a><a class="button" href="../missing-measurement-v5/">Next: Version 5</a></div>
+
+    <section id="pipeline" class="technical-section">
+      <h2>Pipeline</h2>
+      <div class="technical-flow">
+        <div class="flow-card"><strong>1. Fresh reference</strong><span>Same-cell EIS at the same SOC becomes the carry-forward baseline.</span></div>
+        <div class="flow-card"><strong>2. Pulse change</strong><span>A matched 5 to 10 second pulse gives relative resistance increase.</span></div>
+        <div class="flow-card"><strong>3. Normalize scale</strong><span>The 1 Hz baseline magnitude separates cell size from spectral shape.</span></div>
+        <div class="flow-card"><strong>4. Predict EIS change</strong><span>Two Extra Trees heads predict normalized real and imaginary deltas.</span></div>
+        <div class="flow-card"><strong>5. Reconstruct EIS</strong><span>Add the predicted scaled delta back to the fresh spectrum.</span></div>
+        <div class="flow-card"><strong>6. Predict SOH</strong><span>A separate Extra Trees head uses measured current EIS at 50% SOC.</span></div>
+      </div>
+      <div class="technical-callout"><strong>The key V4 change:</strong><p>V3 struggled when absolute impedance scale changed. V4 removed absolute scale from the model features and predicted relative spectral change instead.</p></div>
+    </section>
+
+    <section id="inputs" class="technical-section">
+      <h2>Inputs and outputs</h2>
+      <div class="table-wrap"><table><thead><tr><th>Item</th><th>Frozen definition</th><th>Reason</th></tr></thead><tbody>
+        <tr><td data-label="Item">Frequency grid</td><td data-label="Frozen definition">0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</td><td data-label="Reason">Common points available across development and Oxford spectra.</td></tr>
+        <tr><td data-label="Item">Fresh EIS baseline</td><td data-label="Frozen definition">Same cell and same SOC</td><td data-label="Reason">The boring carry-forward comparison and the spectral reference.</td></tr>
+        <tr><td data-label="Item">Pulse feature</td><td data-label="Frozen definition">10 second resistance increase at 50% SOC for Oxford</td><td data-label="Reason">Captures ageing change from a short time-domain measurement.</td></tr>
+        <tr><td data-label="Item">EIS targets</td><td data-label="Frozen definition">Nine real and nine negative-imaginary values</td><td data-label="Reason">Two heads avoid hiding failure in one impedance component.</td></tr>
+        <tr><td data-label="Item">SOH target</td><td data-label="Frozen definition">Capacity divided by fresh same-cell capacity</td><td data-label="Reason">Capacity-based SOH in percentage points.</td></tr>
+        <tr><td data-label="Item">Excluded</td><td data-label="Frozen definition">OCV, cycle count, temperature feature, absolute impedance scale</td><td data-label="Reason">Avoid protocol-specific shortcuts and scale leakage.</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="math" class="technical-section">
+      <h2>Math</h2>
+      <span class="formula-label">1. Reference impedance scale at 1 Hz</span>
+      <div class="math-block">\[s = \sqrt{B_{\mathrm{re},1}^2 + B_{-\mathrm{im},1}^2}\]</div>
+      <p><code>B</code> is the fresh same-cell baseline spectrum. The scalar <code>s</code> removes the large absolute-size difference between cell formats.</p>
+      <span class="formula-label">2. Normalized baseline shape and training target</span>
+      <div class="math-block">\[b_k = \frac{B_k}{s}, \qquad \Delta z_k = \frac{Z_k - B_k}{s}\]</div>
+      <p>The model predicts the change from fresh baseline, not the absolute aged spectrum.</p>
+      <span class="formula-label">3. EIS reconstruction</span>
+      <div class="math-block">\[\widehat{Z}_k = B_k + s\, f_k\!\left(\mathrm{SOC},\Delta R_{\mathrm{int}},b_1,\ldots,b_{18}\right)\]</div>
+      <span class="formula-label">4. Pulse resistance and SOH</span>
+      <div class="math-block">\[R_{10s} = \left|\frac{V(t_0+10)-V(t_0)}{\widetilde{I}_{\mathrm{pulse}}}\right|,\quad \Delta R_{\mathrm{int}}(\%)=100\frac{R_{\mathrm{now}}-R_{\mathrm{fresh}}}{R_{\mathrm{fresh}}},\quad \mathrm{SOH}(\%)=100\frac{Q_{\mathrm{now}}}{Q_{\mathrm{fresh}}}\]</div>
+      <span class="formula-label">5. Scoring and improvement gate</span>
+      <div class="math-block">\[\mathrm{RMSE}=\sqrt{\frac1N\sum_i(y_i-\widehat{y}_i)^2},\qquad I=\frac{E_{\mathrm{baseline}}-E_{\mathrm{model}}}{E_{\mathrm{baseline}}}\]</div>
+      <p>EIS uses pooled RMSE. SOH uses pooled MAE. Every head must satisfy <code>I &ge; 0.05</code>.</p>
+    </section>
+
+    <section id="model" class="technical-section">
+      <h2>Model and development split</h2>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Estimator</strong><span>ExtraTreesRegressor with 300 trees, maximum depth 8, minimum leaf size 2, random seed 19.</span></div>
+        <div class="definition-card"><strong>Preprocessing</strong><span>Median imputation followed by StandardScaler, then the tree ensemble.</span></div>
+        <div class="definition-card"><strong>Primary development split</strong><span>Leave one Leonardi cell out. Eight outer folds, with no held cell in training.</span></div>
+        <div class="definition-card"><strong>Baselines</strong><span>Fresh EIS carried forward for spectra and constant 100% for SOH.</span></div>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Head</th><th>Passing folds</th><th>Mean improvement</th><th>Worst-cell improvement</th></tr></thead><tbody><tr><td data-label="Head">eis znegimag</td><td data-label="Cell folds">8 / 8</td><td data-label="Mean improvement">85.6%</td><td data-label="Worst-cell improvement">76.9%</td></tr><tr><td data-label="Head">eis zreal</td><td data-label="Cell folds">8 / 8</td><td data-label="Mean improvement">89.9%</td><td data-label="Worst-cell improvement">85.2%</td></tr><tr><td data-label="Head">rpt soh</td><td data-label="Cell folds">8 / 8</td><td data-label="Mean improvement">93.0%</td><td data-label="Worst-cell improvement">87.0%</td></tr></tbody></table></div>
+      <p>This table is same-dataset development evidence only. It justified freezing the candidate, not claiming transfer.</p>
+    </section>
+
+    <section id="validation" class="technical-section">
+      <h2>Frozen Oxford external test</h2>
+      <div class="technical-flow">
+        <div class="flow-card"><strong>Reserve first</strong><span>Oxford was named before its measurement values were downloaded.</span></div>
+        <div class="flow-card"><strong>Freeze models</strong><span>Artifacts, feature order, baselines, and thresholds were hash-locked.</span></div>
+        <div class="flow-card"><strong>Build fixed rows</strong><span>Cells 9, 15, and 20 used BoL references and the latest common RPT18 endpoint.</span></div>
+        <div class="flow-card"><strong>Score once</strong><span>No cell removal, threshold change, or post-result tuning.</span></div>
+      </div>
+      <div class="table-wrap"><table><tbody>
+        <tr><td>Cell model and chemistry</td><td>Panasonic NCR18650BD, NCA</td></tr>
+        <tr><td>Condition</td><td>24 C and 50% SOC</td></tr>
+        <tr><td>Independent units</td><td>[9, 15, 20]</td></tr>
+        <tr><td>Capacity definition</td><td>100 * endpoint_capacity_ah / baseline_capacity_ah</td></tr>
+        <tr><td>Frequency mapping</td><td>Linear interpolation in log10 frequency, tested under two defensible publisher mappings</td></tr>
+        <tr><td>Pass rule</td><td>All three heads at least 5% below baseline under both mappings</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="results" class="technical-section">
+      <h2>External results</h2>
+      <section class="metric-grid">
+        <article class="metric-card"><span>Worst real-EIS improvement</span><strong>45.1%</strong></article>
+        <article class="metric-card"><span>Worst imaginary-EIS improvement</span><strong>25.7%</strong></article>
+        <article class="metric-card"><span>Worst SOH improvement</span><strong>80.3%</strong></article>
+      </section>
+      <div class="table-wrap"><table><thead><tr><th>Frequency mapping</th><th>Real EIS, model vs baseline</th><th>Imaginary EIS, model vs baseline</th><th>SOH, model vs baseline</th></tr></thead><tbody><tr><td data-label="Frequency mapping">inclusive documented endpoints</td><td data-label="Real EIS RMSE">0.01333 vs 0.02427 ohm</td><td data-label="Imaginary EIS RMSE">0.00989 vs 0.01330 ohm</td><td data-label="SOH MAE">3.79 vs 19.27 points</td></tr><tr><td data-label="Frequency mapping">exact six points per decade</td><td data-label="Real EIS RMSE">0.01304 vs 0.02478 ohm</td><td data-label="Imaginary EIS RMSE">0.00978 vs 0.01335 ohm</td><td data-label="SOH MAE">3.75 vs 19.27 points</td></tr></tbody></table></div>
+      <p>Both mappings passed. The result is positive external evidence, but the independent sample is still only three cells.</p>
+    </section>
+
+    <section id="limits" class="technical-section">
+      <h2>Limits and limit of the evidence</h2>
+      <ul>
+        <li>The external result covers one exact Oxford protocol, one NCA cell model, three cells, one temperature, and one SOC.</li>
+        <li>The SOH head uses measured current EIS. V4 does not solve the full missing-EIS-to-SOH problem.</li>
+        <li>The model is not a generic NMC or generic cylindrical-cell model.</li>
+        <li>The 5% gate is a predeclared comparison threshold, not proof of clinical or operational usefulness.</li>
+      </ul>
+      <div class="technical-callout"><strong>Correct claim:</strong><p>V4 has narrow external support under the frozen Oxford contract. It does not support universal transfer.</p></div>
+    </section>
+
+    <section id="files" class="technical-section">
+      <h2>Downloadable evidence</h2>
+      <div class="card-actions">
+        <a class="button" href="../data/missing_modality_v4_scale_normalized_development_results.json">Development results</a>
+        <a class="button" href="../data/missing_modality_v4_freeze_manifest.json">Frozen manifest</a>
+        <a class="button" href="../data/missing_modality_v4_oxford_validation_contract.json">Oxford contract</a>
+        <a class="button" href="../data/missing_modality_v4_oxford_one_shot_results.json">External results</a>
+        <a class="button" href="../missing-measurement-v5/">Next: Version 5</a>
+      </div>
+    </section>
 
       </main>
       <footer>

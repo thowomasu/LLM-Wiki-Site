@@ -1,0 +1,47 @@
+{
+  "created_utc": "2026-07-15T08:01:12.146356+00:00",
+  "status": "frozen_before_model_scoring",
+  "dataset": "SiCWell Dataset cell checkups",
+  "dataset_doi": "10.21227/MNMW-8C42",
+  "source_archive": "[local path redacted]",
+  "source_archive_sha256": "b5d399568aa4b96b542224bc39587f5551e6a95e126ab6fe0b9e8515c4ad1d1d",
+  "frozen_model_version": "missing_measurement_v5_chained_frozen_1",
+  "frozen_model_manifest_sha256": "0e0f444f7a858bdb6ae8426b37ae4a7e145f8642c6539f971bbf2e4040b01bd1",
+  "uncertainty_calibration_sha256": "3da0e6c9c868caf941be8703f9d411e160705008a8b3a3e3cfd0fbc2521b15eb",
+  "selection": {
+    "baseline": "CheckUp00 for each cell, using same-cell capacity, 10 s resistance, and same-SOC EIS",
+    "score_rows": "Every later checkup with finite capacity, finite 10 s resistance, and a complete EIS file",
+    "soc_percent": [
+      20,
+      40,
+      60,
+      80
+    ],
+    "cells": "All cells satisfying the baseline and score-row rules; no post-score cell filtering",
+    "frequency_grid_hz": [
+      0.1,
+      0.2,
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      20.0,
+      40.0
+    ],
+    "frequency_mapping": "Mean exact duplicate frequencies, then linear interpolation in log10 frequency without extrapolation",
+    "imaginary_sign": "znegimag = -1 * published Imaginary Part of Impedance",
+    "soh_percent": "100 * current measured capacity / CheckUp00 measured capacity",
+    "rint_increase_percent": "100 * (current published 10 s pulse resistance - CheckUp00 value) / CheckUp00 value"
+  },
+  "acceptance": {
+    "performance": "Each EIS head pooled RMSE and each SOH head MAE on accepted rows must be at least 5 percent below its frozen baseline",
+    "eis_baseline": "Fresh same-cell same-SOC EIS",
+    "soh_baseline": "100 percent SOH",
+    "uncertainty": "Each frozen nominal-90-percent interval must achieve at least 80 percent empirical coverage on accepted rows",
+    "domain_guard": "Use the frozen threshold unchanged; require at least 10 accepted rows from at least 3 cells",
+    "all_heads_required": true,
+    "no_post_holdout_tuning": true
+  },
+  "claim_boundary": "One untouched external NMC pouch-cell dataset. Correlated SOC/checkup rows are reported with cell counts and do not become independent batteries."
+}

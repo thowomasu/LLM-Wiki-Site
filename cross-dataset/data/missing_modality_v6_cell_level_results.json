@@ -1,0 +1,143 @@
+{
+  "created_utc": "2026-07-16T13:23:39.685449+00:00",
+  "status": "secondary_cell_level_audit_completed",
+  "candidate": {
+    "representation": "hybrid_small",
+    "model": "extra_trees"
+  },
+  "contract_sha256": "eadf8d088b0b8569026dd82bc41e330a6474987d5472e295445c4dd755080fae",
+  "matrix_sha256": "6a213b77ab59bd24d52c828bb5b3c8e54310e707a031a2a95919d705f565ef95",
+  "folds_sha256": "07267d7f4a9618dfd275e2405e93195fda5eb264f4529bc11b4a87fbedd17b07",
+  "summaries": [
+    {
+      "dataset_key": "bayreuth_codemore_2026",
+      "task": "eis_znegimag",
+      "cell_folds": 14,
+      "cells_passing_5_percent": 11,
+      "median_relative_improvement": 0.59894595102713,
+      "worst_cell_relative_improvement": -3.550144921328538
+    },
+    {
+      "dataset_key": "bayreuth_codemore_2026",
+      "task": "eis_zreal",
+      "cell_folds": 14,
+      "cells_passing_5_percent": 13,
+      "median_relative_improvement": 0.6776014910838287,
+      "worst_cell_relative_improvement": 0.0265482993463385
+    },
+    {
+      "dataset_key": "bayreuth_codemore_2026",
+      "task": "measured_eis_to_soh",
+      "cell_folds": 14,
+      "cells_passing_5_percent": 13,
+      "median_relative_improvement": 0.6405328403190609,
+      "worst_cell_relative_improvement": -0.03218641913467732
+    },
+    {
+      "dataset_key": "bayreuth_codemore_2026",
+      "task": "predicted_eis_to_soh",
+      "cell_folds": 14,
+      "cells_passing_5_percent": 11,
+      "median_relative_improvement": 0.46362126559953787,
+      "worst_cell_relative_improvement": -0.5397395301417662
+    },
+    {
+      "dataset_key": "leonardi",
+      "task": "eis_znegimag",
+      "cell_folds": 8,
+      "cells_passing_5_percent": 8,
+      "median_relative_improvement": 0.869238883506003,
+      "worst_cell_relative_improvement": 0.7568430324740255
+    },
+    {
+      "dataset_key": "leonardi",
+      "task": "eis_zreal",
+      "cell_folds": 8,
+      "cells_passing_5_percent": 8,
+      "median_relative_improvement": 0.8991956356216602,
+      "worst_cell_relative_improvement": 0.8463852681645961
+    },
+    {
+      "dataset_key": "leonardi",
+      "task": "measured_eis_to_soh",
+      "cell_folds": 8,
+      "cells_passing_5_percent": 8,
+      "median_relative_improvement": 0.7630568238089288,
+      "worst_cell_relative_improvement": 0.5263007151600336
+    },
+    {
+      "dataset_key": "leonardi",
+      "task": "predicted_eis_to_soh",
+      "cell_folds": 8,
+      "cells_passing_5_percent": 8,
+      "median_relative_improvement": 0.5400646429601179,
+      "worst_cell_relative_improvement": 0.19039466472006164
+    },
+    {
+      "dataset_key": "oxford_path_dependent",
+      "task": "eis_znegimag",
+      "cell_folds": 3,
+      "cells_passing_5_percent": 1,
+      "median_relative_improvement": -0.08252722002167649,
+      "worst_cell_relative_improvement": -0.44391265141213765
+    },
+    {
+      "dataset_key": "oxford_path_dependent",
+      "task": "eis_zreal",
+      "cell_folds": 3,
+      "cells_passing_5_percent": 0,
+      "median_relative_improvement": -0.9868332504753471,
+      "worst_cell_relative_improvement": -1.5528905658778243
+    },
+    {
+      "dataset_key": "oxford_path_dependent",
+      "task": "measured_eis_to_soh",
+      "cell_folds": 3,
+      "cells_passing_5_percent": 0,
+      "median_relative_improvement": -0.26885403763094196,
+      "worst_cell_relative_improvement": -0.5560234562094245
+    },
+    {
+      "dataset_key": "oxford_path_dependent",
+      "task": "predicted_eis_to_soh",
+      "cell_folds": 3,
+      "cells_passing_5_percent": 0,
+      "median_relative_improvement": -0.26885403763094196,
+      "worst_cell_relative_improvement": -0.5560234562094245
+    },
+    {
+      "dataset_key": "sicwell",
+      "task": "eis_znegimag",
+      "cell_folds": 26,
+      "cells_passing_5_percent": 25,
+      "median_relative_improvement": 0.63742126153759,
+      "worst_cell_relative_improvement": -0.06223506610955731
+    },
+    {
+      "dataset_key": "sicwell",
+      "task": "eis_zreal",
+      "cell_folds": 26,
+      "cells_passing_5_percent": 19,
+      "median_relative_improvement": 0.6580385377509181,
+      "worst_cell_relative_improvement": -1.1323616240731882
+    },
+    {
+      "dataset_key": "sicwell",
+      "task": "measured_eis_to_soh",
+      "cell_folds": 26,
+      "cells_passing_5_percent": 24,
+      "median_relative_improvement": 0.5727418845636079,
+      "worst_cell_relative_improvement": -2.058472736683967
+    },
+    {
+      "dataset_key": "sicwell",
+      "task": "predicted_eis_to_soh",
+      "cell_folds": 26,
+      "cells_passing_5_percent": 20,
+      "median_relative_improvement": 0.28801169869597143,
+      "worst_cell_relative_improvement": -2.978774175496139
+    }
+  ],
+  "chain_cross_fitting": "Within every outer held-cell fold, training-cell EIS is predicted with up to four GroupKFold splits; the held cell is absent from every fit.",
+  "claim_boundary": "Same-dataset unseen-cell development evidence only. Dataset-level holdouts remain primary and override attractive cell-level results."
+}

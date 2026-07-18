@@ -1,0 +1,100 @@
+{
+  "created_utc": "2026-07-16T13:20:01.538164+00:00",
+  "status": "applicability_and_uncertainty_audit_completed",
+  "candidate": {
+    "representation": "hybrid_small",
+    "model": "extra_trees"
+  },
+  "contract_sha256": "eadf8d088b0b8569026dd82bc41e330a6474987d5472e295445c4dd755080fae",
+  "matrix_sha256": "6a213b77ab59bd24d52c828bb5b3c8e54310e707a031a2a95919d705f565ef95",
+  "rows_sha256": "8fa8dade8e7cca709e9f59b681feb9710622098ea206a9bd3ef3b6a125c22840",
+  "guard_calibration": "Within each outer dataset fold, q95 nearest-standardized distance from inner source-dataset holdouts only.",
+  "uncertainty_calibration": "Within each outer dataset fold, q90 absolute residuals from inner source-dataset holdouts only.",
+  "false_accept_definition": "Guard accepts a row although at least one of four heads loses to its row-level baseline.",
+  "false_reject_definition": "Guard rejects a row although all four heads beat their row-level baselines. Diagnostic only on spent truth.",
+  "datasets": [
+    {
+      "held_dataset": "bayreuth_codemore_2026",
+      "rows": 28,
+      "cells": 14,
+      "threshold_q95_source_only": 17.884358362736016,
+      "accepted_rows": 28,
+      "accepted_cells": 14,
+      "coverage": 1.0,
+      "false_accept_rows": 25,
+      "false_reject_rows": 0,
+      "safe_all_heads_rows": 3,
+      "uncertainty_coverage_on_accepted": {
+        "eis_zreal": 0.003968253968253968,
+        "eis_znegimag": 0.003968253968253968,
+        "measured_eis_to_soh": 1.0,
+        "predicted_eis_to_soh": 1.0
+      },
+      "passes_retention_gates": true,
+      "passes_uncertainty_gates": false
+    },
+    {
+      "held_dataset": "leonardi",
+      "rows": 460,
+      "cells": 8,
+      "threshold_q95_source_only": 89.07855207203762,
+      "accepted_rows": 460,
+      "accepted_cells": 8,
+      "coverage": 1.0,
+      "false_accept_rows": 427,
+      "false_reject_rows": 0,
+      "safe_all_heads_rows": 33,
+      "uncertainty_coverage_on_accepted": {
+        "eis_zreal": 0.23768115942028983,
+        "eis_znegimag": 0.14396135265700483,
+        "measured_eis_to_soh": 0.7108695652173913,
+        "predicted_eis_to_soh": 0.8260869565217391
+      },
+      "passes_retention_gates": true,
+      "passes_uncertainty_gates": false
+    },
+    {
+      "held_dataset": "oxford_path_dependent",
+      "rows": 3,
+      "cells": 3,
+      "threshold_q95_source_only": 9.72356424757867,
+      "accepted_rows": 3,
+      "accepted_cells": 3,
+      "coverage": 1.0,
+      "false_accept_rows": 3,
+      "false_reject_rows": 0,
+      "safe_all_heads_rows": 0,
+      "uncertainty_coverage_on_accepted": {
+        "eis_zreal": 0.22222222222222224,
+        "eis_znegimag": 0.037037037037037035,
+        "measured_eis_to_soh": 1.0,
+        "predicted_eis_to_soh": 1.0
+      },
+      "passes_retention_gates": false,
+      "passes_uncertainty_gates": false
+    },
+    {
+      "held_dataset": "sicwell",
+      "rows": 892,
+      "cells": 26,
+      "threshold_q95_source_only": 58.782953286969715,
+      "accepted_rows": 892,
+      "accepted_cells": 26,
+      "coverage": 1.0,
+      "false_accept_rows": 607,
+      "false_reject_rows": 0,
+      "safe_all_heads_rows": 285,
+      "uncertainty_coverage_on_accepted": {
+        "eis_zreal": 1.0,
+        "eis_znegimag": 1.0,
+        "measured_eis_to_soh": 0.7051569506726457,
+        "predicted_eis_to_soh": 0.8150224215246636
+      },
+      "passes_retention_gates": true,
+      "passes_uncertainty_gates": false
+    }
+  ],
+  "all_dataset_retention_gates_pass": false,
+  "all_dataset_uncertainty_gates_pass": false,
+  "claim_boundary": "Spent-evidence audit. Abstention is evaluated, not tuned against a future holdout."
+}

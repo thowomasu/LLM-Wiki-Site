@@ -1,0 +1,481 @@
+{
+  "created_utc": "2026-07-16T13:17:55.485913+00:00",
+  "status": "few_shot_predictive_screen_completed",
+  "contract_sha256": "eadf8d088b0b8569026dd82bc41e330a6474987d5472e295445c4dd755080fae",
+  "matrix_sha256": "6a213b77ab59bd24d52c828bb5b3c8e54310e707a031a2a95919d705f565ef95",
+  "selected_zero_shot_base": {
+    "representation": "hybrid_small",
+    "model": "extra_trees",
+    "selection_record": {
+      "representation": "hybrid_small",
+      "model": "extra_trees",
+      "all_required_tasks_present": true,
+      "all_medians_pass": false,
+      "all_worst_folds_pass": false,
+      "all_tasks_pass_two_datasets": true,
+      "minimum_task_median_improvement": -0.18486728989373152,
+      "minimum_worst_dataset_improvement": -1.2741434059417192
+    }
+  },
+  "cell_selection_rule": "Lexically first target cells are calibration-only; all their later rows are excluded. Only each calibration cell's earliest checkpoint is exposed.",
+  "excluded_dataset_budgets": [
+    {
+      "dataset": "oxford_path_dependent",
+      "budget": "one_calibration_cell",
+      "cells": 3,
+      "reason": "Calibration would leave fewer than 3 disjoint evaluation cells."
+    },
+    {
+      "dataset": "oxford_path_dependent",
+      "budget": "two_calibration_cells",
+      "cells": 3,
+      "reason": "Calibration would leave fewer than 3 disjoint evaluation cells."
+    }
+  ],
+  "summaries": [
+    {
+      "budget": "one_calibration_cell",
+      "method": "additive_residual",
+      "task": "eis_znegimag",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.4635059143884536,
+      "worst_improvement_vs_baseline": -0.5117401250894736,
+      "median_error_reduction_vs_zero_shot": -0.010883017889126777,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "additive_residual",
+      "task": "eis_zreal",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.4291636185346565,
+      "worst_improvement_vs_baseline": 0.10924619256127766,
+      "median_error_reduction_vs_zero_shot": 0.02161701081330652,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "additive_residual",
+      "task": "measured_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.11600392023151666,
+      "worst_improvement_vs_baseline": -0.029414718372283547,
+      "median_error_reduction_vs_zero_shot": -0.00682095137812415,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "additive_residual",
+      "task": "predicted_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.19604795137804015,
+      "worst_improvement_vs_baseline": -0.08511615378413839,
+      "median_error_reduction_vs_zero_shot": 0.07445342044341978,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "component_affine",
+      "task": "eis_znegimag",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.05915173863721922,
+      "worst_improvement_vs_baseline": -0.16882575901501626,
+      "median_error_reduction_vs_zero_shot": -0.06293438448608536,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "component_affine",
+      "task": "eis_zreal",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.39511758640556893,
+      "worst_improvement_vs_baseline": 0.1801930522189407,
+      "median_error_reduction_vs_zero_shot": 0.09954336941609963,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "component_affine",
+      "task": "measured_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": -0.20353554809001986,
+      "worst_improvement_vs_baseline": -0.9080498081655201,
+      "median_error_reduction_vs_zero_shot": -0.006820951378124538,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "component_affine",
+      "task": "predicted_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": -0.2035355480900227,
+      "worst_improvement_vs_baseline": -0.9080498081655252,
+      "median_error_reduction_vs_zero_shot": 0.03402075344331366,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "no_adaptation",
+      "task": "eis_znegimag",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.4692817308061764,
+      "worst_improvement_vs_baseline": -0.638055032684037,
+      "median_error_reduction_vs_zero_shot": 0.0,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "no_adaptation",
+      "task": "eis_zreal",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.446097665992502,
+      "worst_improvement_vs_baseline": 0.08956531615580847,
+      "median_error_reduction_vs_zero_shot": 0.0,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "no_adaptation",
+      "task": "measured_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.08425748637883508,
+      "worst_improvement_vs_baseline": -1.2534394470392702,
+      "median_error_reduction_vs_zero_shot": 0.0,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "no_adaptation",
+      "task": "predicted_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.14229913709316575,
+      "worst_improvement_vs_baseline": -0.9752492768006442,
+      "median_error_reduction_vs_zero_shot": -1.8873312028216597e-16,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "target_ridge",
+      "task": "eis_znegimag",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.22104031312127723,
+      "worst_improvement_vs_baseline": 0.019961107501035656,
+      "median_error_reduction_vs_zero_shot": -0.4677461321653484,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "target_ridge",
+      "task": "eis_zreal",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": 0.09018119088211417,
+      "worst_improvement_vs_baseline": 0.025253511693002998,
+      "median_error_reduction_vs_zero_shot": -0.7168888359204616,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "target_ridge",
+      "task": "measured_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": -0.203535548090017,
+      "worst_improvement_vs_baseline": -0.9080498081655245,
+      "median_error_reduction_vs_zero_shot": -0.31427287713313445,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "target_ridge",
+      "task": "predicted_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 7,
+      "median_improvement_vs_baseline": -0.203535548090017,
+      "worst_improvement_vs_baseline": -0.9080498081655245,
+      "median_error_reduction_vs_zero_shot": -0.2273804583289147,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "additive_residual",
+      "task": "eis_znegimag",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.46895827937963913,
+      "worst_improvement_vs_baseline": -0.46887039539872155,
+      "median_error_reduction_vs_zero_shot": -0.014524822520395319,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "additive_residual",
+      "task": "eis_zreal",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.4375215484403338,
+      "worst_improvement_vs_baseline": 0.1273606615677793,
+      "median_error_reduction_vs_zero_shot": 0.04087315699973514,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "additive_residual",
+      "task": "measured_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.12366542955821182,
+      "worst_improvement_vs_baseline": -0.14820003209978092,
+      "median_error_reduction_vs_zero_shot": -0.005550052395899266,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "additive_residual",
+      "task": "predicted_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.1570726433461876,
+      "worst_improvement_vs_baseline": 0.03774795490528385,
+      "median_error_reduction_vs_zero_shot": -0.06711035470441047,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "component_affine",
+      "task": "eis_znegimag",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.41942837170833586,
+      "worst_improvement_vs_baseline": -0.14844488278409054,
+      "median_error_reduction_vs_zero_shot": -0.06889362480462051,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "component_affine",
+      "task": "eis_zreal",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.48710475126797886,
+      "worst_improvement_vs_baseline": 0.20762559679056383,
+      "median_error_reduction_vs_zero_shot": 0.129093170163661,
+      "datasets_passing_both_predictive_gates": 2
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "component_affine",
+      "task": "measured_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": -0.4786072267721809,
+      "worst_improvement_vs_baseline": -0.8923927365599035,
+      "median_error_reduction_vs_zero_shot": 0.09912751205376916,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "component_affine",
+      "task": "predicted_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": -0.8877657281061591,
+      "worst_improvement_vs_baseline": -3.490599163829245,
+      "median_error_reduction_vs_zero_shot": 0.03496539658432483,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "no_adaptation",
+      "task": "eis_znegimag",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.4765611359798097,
+      "worst_improvement_vs_baseline": -0.6390821577612533,
+      "median_error_reduction_vs_zero_shot": 0.0,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "no_adaptation",
+      "task": "eis_zreal",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.4466476444444587,
+      "worst_improvement_vs_baseline": 0.09017316656210016,
+      "median_error_reduction_vs_zero_shot": 0.0,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "no_adaptation",
+      "task": "measured_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.08737210177312983,
+      "worst_improvement_vs_baseline": -1.212048240571118,
+      "median_error_reduction_vs_zero_shot": 0.0,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "no_adaptation",
+      "task": "predicted_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.14261228329983944,
+      "worst_improvement_vs_baseline": -0.9561637701120136,
+      "median_error_reduction_vs_zero_shot": 4.175165260642596e-16,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "target_ridge",
+      "task": "eis_znegimag",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.2405218893499754,
+      "worst_improvement_vs_baseline": -0.28507167310398746,
+      "median_error_reduction_vs_zero_shot": -0.45093947517953065,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "target_ridge",
+      "task": "eis_zreal",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": 0.10301485349202599,
+      "worst_improvement_vs_baseline": -1.1932796734977091,
+      "median_error_reduction_vs_zero_shot": -0.6210017676846077,
+      "datasets_passing_both_predictive_gates": 1
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "target_ridge",
+      "task": "measured_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": -0.838482894770172,
+      "worst_improvement_vs_baseline": -3.7424154365205897,
+      "median_error_reduction_vs_zero_shot": -0.6228085959439791,
+      "datasets_passing_both_predictive_gates": 0
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "target_ridge",
+      "task": "predicted_eis_to_soh",
+      "dataset_folds": 3,
+      "minimum_evaluation_cells": 6,
+      "median_improvement_vs_baseline": -0.8382254532736505,
+      "worst_improvement_vs_baseline": -3.742761047131297,
+      "median_error_reduction_vs_zero_shot": -0.7273522525625336,
+      "datasets_passing_both_predictive_gates": 0
+    }
+  ],
+  "candidate_gate_screen": [
+    {
+      "budget": "one_calibration_cell",
+      "method": "additive_residual",
+      "all_required_heads_present": true,
+      "all_head_medians_beat_baseline": true,
+      "all_head_medians_improve_zero_shot": false,
+      "all_heads_pass_on_two_datasets": false,
+      "minimum_evaluation_cells": 7,
+      "minimum_head_median_vs_baseline": 0.11600392023151666,
+      "minimum_head_median_vs_zero_shot": -0.010883017889126777
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "component_affine",
+      "all_required_heads_present": true,
+      "all_head_medians_beat_baseline": false,
+      "all_head_medians_improve_zero_shot": false,
+      "all_heads_pass_on_two_datasets": false,
+      "minimum_evaluation_cells": 7,
+      "minimum_head_median_vs_baseline": -0.2035355480900227,
+      "minimum_head_median_vs_zero_shot": -0.06293438448608536
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "no_adaptation",
+      "all_required_heads_present": true,
+      "all_head_medians_beat_baseline": true,
+      "all_head_medians_improve_zero_shot": false,
+      "all_heads_pass_on_two_datasets": false,
+      "minimum_evaluation_cells": 7,
+      "minimum_head_median_vs_baseline": 0.08425748637883508,
+      "minimum_head_median_vs_zero_shot": -1.8873312028216597e-16
+    },
+    {
+      "budget": "one_calibration_cell",
+      "method": "target_ridge",
+      "all_required_heads_present": true,
+      "all_head_medians_beat_baseline": false,
+      "all_head_medians_improve_zero_shot": false,
+      "all_heads_pass_on_two_datasets": false,
+      "minimum_evaluation_cells": 7,
+      "minimum_head_median_vs_baseline": -0.203535548090017,
+      "minimum_head_median_vs_zero_shot": -0.7168888359204616
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "additive_residual",
+      "all_required_heads_present": true,
+      "all_head_medians_beat_baseline": true,
+      "all_head_medians_improve_zero_shot": false,
+      "all_heads_pass_on_two_datasets": false,
+      "minimum_evaluation_cells": 6,
+      "minimum_head_median_vs_baseline": 0.12366542955821182,
+      "minimum_head_median_vs_zero_shot": -0.06711035470441047
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "component_affine",
+      "all_required_heads_present": true,
+      "all_head_medians_beat_baseline": false,
+      "all_head_medians_improve_zero_shot": false,
+      "all_heads_pass_on_two_datasets": false,
+      "minimum_evaluation_cells": 6,
+      "minimum_head_median_vs_baseline": -0.8877657281061591,
+      "minimum_head_median_vs_zero_shot": -0.06889362480462051
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "no_adaptation",
+      "all_required_heads_present": true,
+      "all_head_medians_beat_baseline": true,
+      "all_head_medians_improve_zero_shot": false,
+      "all_heads_pass_on_two_datasets": false,
+      "minimum_evaluation_cells": 6,
+      "minimum_head_median_vs_baseline": 0.08737210177312983,
+      "minimum_head_median_vs_zero_shot": 0.0
+    },
+    {
+      "budget": "two_calibration_cells",
+      "method": "target_ridge",
+      "all_required_heads_present": true,
+      "all_head_medians_beat_baseline": false,
+      "all_head_medians_improve_zero_shot": false,
+      "all_heads_pass_on_two_datasets": false,
+      "minimum_evaluation_cells": 6,
+      "minimum_head_median_vs_baseline": -0.838482894770172,
+      "minimum_head_median_vs_zero_shot": -0.7273522525625336
+    }
+  ],
+  "uncertainty_and_abstention_status": "pending_for_any_predictive_candidate_that_survives_this_screen",
+  "claim_boundary": "Few-shot development evidence on previously spent datasets. Calibration and evaluation cells are disjoint. Not external validation."
+}

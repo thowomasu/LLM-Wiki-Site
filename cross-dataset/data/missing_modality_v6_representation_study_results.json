@@ -1,0 +1,437 @@
+{
+  "created_utc": "2026-07-16T13:15:03.522648+00:00",
+  "status": "preregistered_representation_comparison_completed",
+  "matrix_sha256": "6a213b77ab59bd24d52c828bb5b3c8e54310e707a031a2a95919d705f565ef95",
+  "contract_sha256": "eadf8d088b0b8569026dd82bc41e330a6474987d5472e295445c4dd755080fae",
+  "folds_sha256": "f7f9539083107e6a162f05df67974dbcd6a87a2e4008e641317881c49def330c",
+  "physical_summary_qualification": {
+    "created_utc": "2026-07-16T13:13:58.133268+00:00",
+    "status": "excluded_before_model_scoring",
+    "representation": "physical_summary",
+    "contract_sha256": "eadf8d088b0b8569026dd82bc41e330a6474987d5472e295445c4dd755080fae",
+    "grid_points": 9,
+    "required_repeatability_metadata": [
+      "eis_amplitude",
+      "instrument_id",
+      "raw_frequency_count",
+      "repeat_id",
+      "temperature_c"
+    ],
+    "missing_columns": [
+      "eis_amplitude",
+      "instrument_id",
+      "raw_frequency_count",
+      "repeat_id",
+      "temperature_c"
+    ],
+    "synthetic_stability_test": "not_sufficient_without_cross-dataset raw-spectrum repeatability evidence",
+    "reason": "The unified matrix contains only nine interpolated points and lacks instrument, excitation, raw-frequency, temperature, and repeated-spectrum identifiers. A common ECM or DRT extractor cannot be shown comparable across all four datasets without adding unsupported assumptions.",
+    "claim_boundary": "Excluded under the preregistered fallback before predictive comparison. This is not evidence that ECM or DRT features are generally useless."
+  },
+  "summaries": [
+    {
+      "representation": "dimensionless_change",
+      "task": "eis_znegimag",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.395500168910479,
+      "worst_dataset_relative_improvement": -0.7974857952483564,
+      "best_dataset_relative_improvement": 0.7671390694127009
+    },
+    {
+      "representation": "dimensionless_change",
+      "task": "eis_znegimag",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.5049256015323822,
+      "worst_dataset_relative_improvement": -1.9547799663408763,
+      "best_dataset_relative_improvement": 0.6931166068015675
+    },
+    {
+      "representation": "dimensionless_change",
+      "task": "eis_zreal",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 4,
+      "median_relative_improvement": 0.4226659528901452,
+      "worst_dataset_relative_improvement": 0.07386196440764786,
+      "best_dataset_relative_improvement": 0.6116914775648004
+    },
+    {
+      "representation": "dimensionless_change",
+      "task": "eis_zreal",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.4618555142391686,
+      "worst_dataset_relative_improvement": -0.17756903082648776,
+      "best_dataset_relative_improvement": 0.7603610411851058
+    },
+    {
+      "representation": "dimensionless_change",
+      "task": "measured_eis_to_soh",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 1,
+      "median_relative_improvement": -0.8265416643267157,
+      "worst_dataset_relative_improvement": -2.393714730744672,
+      "best_dataset_relative_improvement": 0.1411557993772853
+    },
+    {
+      "representation": "dimensionless_change",
+      "task": "measured_eis_to_soh",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 1,
+      "median_relative_improvement": -0.49724013254167443,
+      "worst_dataset_relative_improvement": -1.1311424429866315,
+      "best_dataset_relative_improvement": 0.4990208752084088
+    },
+    {
+      "representation": "dimensionless_change",
+      "task": "predicted_eis_to_soh",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 2,
+      "median_relative_improvement": -0.558271517307291,
+      "worst_dataset_relative_improvement": -1.4591367194375073,
+      "best_dataset_relative_improvement": 0.38049512301789323
+    },
+    {
+      "representation": "dimensionless_change",
+      "task": "predicted_eis_to_soh",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 0,
+      "median_relative_improvement": -1.716703735056148,
+      "worst_dataset_relative_improvement": -3.047495181803838,
+      "best_dataset_relative_improvement": -0.40110895959819554
+    },
+    {
+      "representation": "hybrid_small",
+      "task": "eis_znegimag",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.3777335423938837,
+      "worst_dataset_relative_improvement": -0.6746983495866875,
+      "best_dataset_relative_improvement": 0.711365708858924
+    },
+    {
+      "representation": "hybrid_small",
+      "task": "eis_znegimag",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.5044831009859831,
+      "worst_dataset_relative_improvement": -1.9183692245676793,
+      "best_dataset_relative_improvement": 0.5814547646058716
+    },
+    {
+      "representation": "hybrid_small",
+      "task": "eis_zreal",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 4,
+      "median_relative_improvement": 0.4303553597536076,
+      "worst_dataset_relative_improvement": 0.08744764607229116,
+      "best_dataset_relative_improvement": 0.5697965196853358
+    },
+    {
+      "representation": "hybrid_small",
+      "task": "eis_zreal",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.45789160747578056,
+      "worst_dataset_relative_improvement": 0.02968953390650114,
+      "best_dataset_relative_improvement": 0.5728201222203231
+    },
+    {
+      "representation": "hybrid_small",
+      "task": "measured_eis_to_soh",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.1013151598863972,
+      "worst_dataset_relative_improvement": -1.2741434059417192,
+      "best_dataset_relative_improvement": 0.4675170229569756
+    },
+    {
+      "representation": "hybrid_small",
+      "task": "measured_eis_to_soh",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 0,
+      "median_relative_improvement": -0.449716064559351,
+      "worst_dataset_relative_improvement": -2.642357692078976,
+      "best_dataset_relative_improvement": -0.04976031655702378
+    },
+    {
+      "representation": "hybrid_small",
+      "task": "predicted_eis_to_soh",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 2,
+      "median_relative_improvement": -0.18486728989373152,
+      "worst_dataset_relative_improvement": -0.9912564815145621,
+      "best_dataset_relative_improvement": 0.291425048520586
+    },
+    {
+      "representation": "hybrid_small",
+      "task": "predicted_eis_to_soh",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 1,
+      "median_relative_improvement": -1.2661810814711338,
+      "worst_dataset_relative_improvement": -5.366717488820829,
+      "best_dataset_relative_improvement": 0.21333345003401882
+    },
+    {
+      "representation": "reduced_frequency",
+      "task": "eis_znegimag",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.36412350638891,
+      "worst_dataset_relative_improvement": -0.8795398287822443,
+      "best_dataset_relative_improvement": 0.6874091442176178
+    },
+    {
+      "representation": "reduced_frequency",
+      "task": "eis_znegimag",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.4981776436426858,
+      "worst_dataset_relative_improvement": -1.9924169030931782,
+      "best_dataset_relative_improvement": 0.5965020569340117
+    },
+    {
+      "representation": "reduced_frequency",
+      "task": "eis_zreal",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 4,
+      "median_relative_improvement": 0.42121655803115987,
+      "worst_dataset_relative_improvement": 0.07619544227291902,
+      "best_dataset_relative_improvement": 0.5657142213473558
+    },
+    {
+      "representation": "reduced_frequency",
+      "task": "eis_zreal",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.4385023867578782,
+      "worst_dataset_relative_improvement": 0.015274433905779374,
+      "best_dataset_relative_improvement": 0.5924736690845918
+    },
+    {
+      "representation": "reduced_frequency",
+      "task": "measured_eis_to_soh",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 1,
+      "median_relative_improvement": -0.19241639948483363,
+      "worst_dataset_relative_improvement": -0.8894849953426834,
+      "best_dataset_relative_improvement": 0.44540276448496463
+    },
+    {
+      "representation": "reduced_frequency",
+      "task": "measured_eis_to_soh",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 0,
+      "median_relative_improvement": -0.2914516644381177,
+      "worst_dataset_relative_improvement": -2.810148543201414,
+      "best_dataset_relative_improvement": -0.048460016733424725
+    },
+    {
+      "representation": "reduced_frequency",
+      "task": "predicted_eis_to_soh",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 1,
+      "median_relative_improvement": -0.07316571220563234,
+      "worst_dataset_relative_improvement": -0.8026648095309642,
+      "best_dataset_relative_improvement": 0.1367777481825456
+    },
+    {
+      "representation": "reduced_frequency",
+      "task": "predicted_eis_to_soh",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 0,
+      "median_relative_improvement": -1.2474300146519863,
+      "worst_dataset_relative_improvement": -6.184346738538652,
+      "best_dataset_relative_improvement": -0.17471244233408795
+    },
+    {
+      "representation": "scale_shape",
+      "task": "eis_znegimag",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.37513837241780684,
+      "worst_dataset_relative_improvement": -0.9149095688017442,
+      "best_dataset_relative_improvement": 0.697139303945818
+    },
+    {
+      "representation": "scale_shape",
+      "task": "eis_znegimag",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.49608635786380617,
+      "worst_dataset_relative_improvement": -2.071479948980792,
+      "best_dataset_relative_improvement": 0.6003245722627861
+    },
+    {
+      "representation": "scale_shape",
+      "task": "eis_zreal",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 4,
+      "median_relative_improvement": 0.40465267496916385,
+      "worst_dataset_relative_improvement": 0.07382126566297603,
+      "best_dataset_relative_improvement": 0.5699608567392874
+    },
+    {
+      "representation": "scale_shape",
+      "task": "eis_zreal",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 3,
+      "median_relative_improvement": 0.4392684098140236,
+      "worst_dataset_relative_improvement": 0.00617846006262651,
+      "best_dataset_relative_improvement": 0.5914267260337144
+    },
+    {
+      "representation": "scale_shape",
+      "task": "measured_eis_to_soh",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 1,
+      "median_relative_improvement": -0.41463109599335407,
+      "worst_dataset_relative_improvement": -0.8732381348407733,
+      "best_dataset_relative_improvement": 0.46761658861340294
+    },
+    {
+      "representation": "scale_shape",
+      "task": "measured_eis_to_soh",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 0,
+      "median_relative_improvement": -0.23739848563392746,
+      "worst_dataset_relative_improvement": -2.5682406988660595,
+      "best_dataset_relative_improvement": -0.04646060543895479
+    },
+    {
+      "representation": "scale_shape",
+      "task": "predicted_eis_to_soh",
+      "model": "extra_trees",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 1,
+      "median_relative_improvement": -0.2096745951487897,
+      "worst_dataset_relative_improvement": -0.9549179102800744,
+      "best_dataset_relative_improvement": 0.11785584900845218
+    },
+    {
+      "representation": "scale_shape",
+      "task": "predicted_eis_to_soh",
+      "model": "ridge",
+      "dataset_folds": 4,
+      "datasets_passing_5_percent": 0,
+      "median_relative_improvement": -1.1535441112026108,
+      "worst_dataset_relative_improvement": -6.3433509075977925,
+      "best_dataset_relative_improvement": -0.10076647278108437
+    }
+  ],
+  "candidate_gate_screen": [
+    {
+      "representation": "dimensionless_change",
+      "model": "extra_trees",
+      "all_required_tasks_present": true,
+      "all_medians_pass": false,
+      "all_worst_folds_pass": false,
+      "all_tasks_pass_two_datasets": false,
+      "minimum_task_median_improvement": -0.8265416643267157,
+      "minimum_worst_dataset_improvement": -2.393714730744672
+    },
+    {
+      "representation": "dimensionless_change",
+      "model": "ridge",
+      "all_required_tasks_present": true,
+      "all_medians_pass": false,
+      "all_worst_folds_pass": false,
+      "all_tasks_pass_two_datasets": false,
+      "minimum_task_median_improvement": -1.716703735056148,
+      "minimum_worst_dataset_improvement": -3.047495181803838
+    },
+    {
+      "representation": "hybrid_small",
+      "model": "extra_trees",
+      "all_required_tasks_present": true,
+      "all_medians_pass": false,
+      "all_worst_folds_pass": false,
+      "all_tasks_pass_two_datasets": true,
+      "minimum_task_median_improvement": -0.18486728989373152,
+      "minimum_worst_dataset_improvement": -1.2741434059417192
+    },
+    {
+      "representation": "hybrid_small",
+      "model": "ridge",
+      "all_required_tasks_present": true,
+      "all_medians_pass": false,
+      "all_worst_folds_pass": false,
+      "all_tasks_pass_two_datasets": false,
+      "minimum_task_median_improvement": -1.2661810814711338,
+      "minimum_worst_dataset_improvement": -5.366717488820829
+    },
+    {
+      "representation": "reduced_frequency",
+      "model": "extra_trees",
+      "all_required_tasks_present": true,
+      "all_medians_pass": false,
+      "all_worst_folds_pass": false,
+      "all_tasks_pass_two_datasets": false,
+      "minimum_task_median_improvement": -0.19241639948483363,
+      "minimum_worst_dataset_improvement": -0.8894849953426834
+    },
+    {
+      "representation": "reduced_frequency",
+      "model": "ridge",
+      "all_required_tasks_present": true,
+      "all_medians_pass": false,
+      "all_worst_folds_pass": false,
+      "all_tasks_pass_two_datasets": false,
+      "minimum_task_median_improvement": -1.2474300146519863,
+      "minimum_worst_dataset_improvement": -6.184346738538652
+    },
+    {
+      "representation": "scale_shape",
+      "model": "extra_trees",
+      "all_required_tasks_present": true,
+      "all_medians_pass": false,
+      "all_worst_folds_pass": false,
+      "all_tasks_pass_two_datasets": false,
+      "minimum_task_median_improvement": -0.41463109599335407,
+      "minimum_worst_dataset_improvement": -0.9549179102800744
+    },
+    {
+      "representation": "scale_shape",
+      "model": "ridge",
+      "all_required_tasks_present": true,
+      "all_medians_pass": false,
+      "all_worst_folds_pass": false,
+      "all_tasks_pass_two_datasets": false,
+      "minimum_task_median_improvement": -1.1535441112026108,
+      "minimum_worst_dataset_improvement": -6.3433509075977925
+    }
+  ],
+  "selection_rule": "No candidate can advance unless every predictive-head median, worst-dataset, and minimum passing-dataset gate succeeds. Applicability and uncertainty gates are evaluated only for candidates surviving this screen.",
+  "claim_boundary": "Spent-evidence leave-one-dataset-out development comparison. Not external validation."
+}

@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Compare Versions 4, 5, and 6 | Battery DRT Research Outputs</title>
-  <meta name="description" content="What each version changed, what evidence it produced, and why the broad path stopped.">
+  <title>Technical Comparison: Versions 4, 5, and 6 | Battery DRT Research Outputs</title>
+  <meta name="description" content="A self-contained comparison of pipeline architecture, equations, splits, evidence strength, numerical results, claim boundaries, and the current stop decision.">
   <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/version-comparison/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Compare Versions 4, 5, and 6 | Battery DRT Research Outputs">
-  <meta property="og:description" content="What each version changed, what evidence it produced, and why the broad path stopped.">
+  <meta property="og:title" content="Technical Comparison: Versions 4, 5, and 6 | Battery DRT Research Outputs">
+  <meta property="og:description" content="A self-contained comparison of pipeline architecture, equations, splits, evidence strength, numerical results, claim boundaries, and the current stop decision.">
   <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/version-comparison/">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
@@ -412,6 +412,85 @@ code {
   border-radius: 7px;
   background: var(--panel);
 }
+.technical-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 28px;
+}
+.technical-toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 7px 11px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font-size: 14px;
+  font-weight: 700;
+}
+.technical-toc a:hover { border-color: var(--blue); }
+.technical-section {
+  margin: 22px 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  scroll-margin-top: 22px;
+}
+.technical-section > h2:first-child { margin-top: 0; }
+.technical-section > :last-child { margin-bottom: 0; }
+.technical-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.technical-flow .flow-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--teal);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.technical-flow .flow-card strong,
+.technical-flow .flow-card span { display: block; }
+.technical-flow .flow-card span { margin-top: 7px; color: var(--muted); font-size: 14px; }
+.formula-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+.technical-callout {
+  margin: 16px 0;
+  padding: 15px 17px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--amber);
+  border-radius: 7px;
+  background: var(--note-bg);
+}
+.technical-callout p { margin: 7px 0 0; }
+.technical-callout.bad { border-left-color: var(--red); color: var(--ink); }
+.technical-callout.good { border-left-color: var(--green); color: var(--ink); }
+.definition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.definition-card {
+  padding: 14px 15px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.definition-card strong { display: block; margin-bottom: 5px; }
+.definition-card span { color: var(--muted); font-size: 14px; }
 .journey {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -919,25 +998,115 @@ window.MathJax = {
       <header>
 
         <div class="kicker">Battery DRT Research Outputs</div>
-        <h1>Compare Versions 4, 5, and 6</h1>
-        <p class="lead">What each version changed, what evidence it produced, and why the broad path stopped.</p>
+        <h1>Technical Comparison: Versions 4, 5, and 6</h1>
+        <p class="lead">A self-contained comparison of pipeline architecture, equations, splits, evidence strength, numerical results, claim boundaries, and the current stop decision.</p>
 
       </header>
       <main>
 
     <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab active" href="../version-comparison/">Compare all three</a></div>
-    <section class="note"><strong>Short answer:</strong> Version 4 has the best narrow external result, Version 5 has the best complete internal chain, and Version 6 has the strongest negative diagnosis. None supports a universal model.</section>
-    <h2>Side-by-side comparison</h2>
-    <div class="table-wrap"><table><thead><tr><th>Version</th><th>Main change</th><th>Strongest evidence</th><th>Main weakness</th><th>Final status</th></tr></thead><tbody>
-      <tr><td data-label="Version"><strong>4</strong></td><td data-label="Main change">Scale normalization</td><td data-label="Strongest evidence">Three untouched Oxford cells passed all heads</td><td data-label="Main weakness">Narrow protocol; health step used measured EIS</td><td data-label="Final status"><span class="status-pill good">Limited external support</span></td></tr>
-      <tr><td data-label="Version"><strong>5</strong></td><td data-label="Main change">Predicted EIS feeds the health model</td><td data-label="Strongest evidence">All eight Leonardi held-out-cell folds passed</td><td data-label="Main weakness">All 892 SiCWell external rows were rejected</td><td data-label="Final status"><span class="status-pill bad">No external support</span></td></tr>
-      <tr><td data-label="Version"><strong>6</strong></td><td data-label="Main change">Zero-shot, calibration, guard, and uncertainty study</td><td data-label="Strongest evidence">1,383 rows and 51 cells across four development datasets</td><td data-label="Main weakness">No candidate passed every dataset-level gate</td><td data-label="Final status"><span class="status-pill bad">Universal path stopped</span></td></tr>
-    </tbody></table></div>
-    <h2>What improved, and what did not</h2>
-    <div class="reader-path"><div class="reader-card"><strong>Version 4 improved scaling</strong><p>It showed that a tightly matched outside dataset could work.</p></div><div class="reader-card"><strong>Version 5 improved usability</strong><p>It tested the real missing-EIS chain instead of quietly using measured EIS.</p></div><div class="reader-card"><strong>Version 6 improved the decision</strong><p>It stopped repeated rescue attempts after dataset-level evidence failed.</p></div><div class="reader-card"><strong>The universal claim did not improve</strong><p>Every broader test exposed chemistry, protocol, instrument, or domain mismatch.</p></div></div>
-    <h2>Current direction</h2>
-    <p>The project now needs controlled data, not another public-dataset search. The proposed campaign needs at least 12 matching cells, with 18 preferred. It stays blocked until the lab resource and safety evidence is confirmed.</p>
-    <div class="card-actions"><a class="button" href="../">Open the current study overview</a><a class="button" href="../data/narrow_domain_measurement_resource_gate.json">Open the current resource gate</a></div>
+    <nav class="technical-toc" aria-label="On this page"><a href="#summary">Executive read</a><a href="#architecture">Architecture</a><a href="#math">Math evolution</a><a href="#splits">Splits</a><a href="#evidence">Evidence</a><a href="#results">Results</a><a href="#why">Why each changed</a><a href="#decision">Current decision</a><a href="#files">Files</a></nav>
+    <section id="summary" class="technical-section note">
+      <h2>Executive Read</h2>
+      <p>The three versions are not three scores from one stable experiment. Each version answers a harder question and changes the allowed claim.</p>
+      <div class="reader-path">
+        <div class="reader-card"><strong>Version 4</strong><p>Can scale-normalized EIS and measured-EIS-to-SOH heads transfer to one tightly matched external dataset? Yes, narrowly.</p></div>
+        <div class="reader-card"><strong>Version 5</strong><p>Can the complete predicted-EIS-to-SOH chain pass a new external dataset with a frozen guard? No.</p></div>
+        <div class="reader-card"><strong>Version 6</strong><p>Can broader representations or tiny target-cell calibration rescue universal transfer? No candidate passed development gates.</p></div>
+        <div class="reader-card"><strong>Combined conclusion</strong><p>The best next move is controlled exact-cell data, not another universal-model rescue attempt.</p></div>
+      </div>
+    </section>
+
+    <section id="architecture" class="technical-section">
+      <h2>Architecture side by side</h2>
+      <div class="table-wrap"><table><thead><tr><th>Layer</th><th>Version 4</th><th>Version 5</th><th>Version 6</th></tr></thead><tbody>
+        <tr><td data-label="Layer">Primary input</td><td data-label="Version 4">Fresh EIS, SOC, pulse-resistance change</td><td data-label="Version 5">Same frozen contract</td><td data-label="Version 6">Fixed portable representations built from spent datasets</td></tr>
+        <tr><td data-label="Layer">EIS prediction</td><td data-label="Version 4">Scale-normalized Extra Trees delta heads</td><td data-label="Version 5">Same EIS heads inside a complete chain</td><td data-label="Version 6">Ridge and Extra Trees across five eligible representations</td></tr>
+        <tr><td data-label="Layer">SOH prediction</td><td data-label="Version 4">Measured current EIS only</td><td data-label="Version 5">Direct diagnostic plus out-of-cell predicted-EIS chain</td><td data-label="Version 6">Measured and predicted EIS heads both required</td></tr>
+        <tr><td data-label="Layer">Safety</td><td data-label="Version 4">Frozen input contract and no tuning</td><td data-label="Version 5">Nearest-distance guard plus residual intervals</td><td data-label="Version 6">Source-only guard, uncertainty, false-accept audit</td></tr>
+        <tr><td data-label="Layer">Calibration</td><td data-label="Version 4">None</td><td data-label="Version 5">None</td><td data-label="Version 6">One or two disjoint calibration cells tested</td></tr>
+      </tbody></table></div>
+      <div class="technical-flow">
+        <div class="flow-card"><strong>V4</strong><span>Pulse + fresh EIS &rarr; predicted EIS. Measured EIS &rarr; SOH.</span></div>
+        <div class="flow-card"><strong>V5</strong><span>Pulse + fresh EIS &rarr; predicted EIS &rarr; chained SOH.</span></div>
+        <div class="flow-card"><strong>V6</strong><span>Multiple representations and models &rarr; dataset LODO &rarr; few-shot and safety screens.</span></div>
+      </div>
+    </section>
+
+    <section id="math" class="technical-section">
+      <h2>How the math evolved</h2>
+      <span class="formula-label">Version 4: remove cell impedance scale and reconstruct change</span>
+      <div class="math-block">\[s=|B_{1\,\mathrm{Hz}}|,\qquad \widehat{Z}_k=B_k+s\,f_k\left(\mathrm{SOC},\Delta R_{\mathrm{int}},B/s\right)\]</div>
+      <span class="formula-label">Version 5: feed predicted EIS into the health head</span>
+      <div class="math-block">\[\widehat{h}_{V5}=g_c\left(\Delta R_{\mathrm{int}},\widehat{Z}/s,B/s\right),\qquad \widehat{Z}\text{ is cross-fitted by cell}\]</div>
+      <span class="formula-label">Version 6: compare representation and adaptation families by whole dataset</span>
+      <div class="math-block">\[I_{d,h}=\frac{E_{d,h}^{\mathrm{baseline}}-E_{d,h}^{\mathrm{model}}}{E_{d,h}^{\mathrm{baseline}}},\qquad \widehat{y}_{\mathrm{adapt}}=a\widehat{y}_0+b\quad\text{or}\quad\widehat{y}_0+\overline{e}_C\]</div>
+      <span class="formula-label">Shared rule: improvement must survive the correct independent unit</span>
+      <div class="math-block">\[\text{row metrics}\;\not\Rightarrow\;\text{cell validation}\;\not\Rightarrow\;\text{dataset validation}\]</div>
+    </section>
+
+    <section id="splits" class="technical-section">
+      <h2>Training and evaluation splits</h2>
+      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Development split</th><th>External or primary evaluation</th><th>Leakage control</th></tr></thead><tbody>
+        <tr><td data-label="Version">4</td><td data-label="Development split">Eight-fold leave-one-Leonardi-cell-out</td><td data-label="External evaluation">Three untouched Oxford cells, scored once</td><td data-label="Leakage control">Model and contract frozen before Oxford values</td></tr>
+        <tr><td data-label="Version">5</td><td data-label="Development split">Nested leave-one-cell-out with cross-fitted EIS for chain training</td><td data-label="External evaluation">26 untouched SiCWell cells, 223 checkups</td><td data-label="Leakage control">Frozen guard, intervals, feature order, and no post-test tuning</td></tr>
+        <tr><td data-label="Version">6</td><td data-label="Development split">Leave one whole dataset out; held-cell audit secondary</td><td data-label="External evaluation">None, because no candidate passed development</td><td data-label="Leakage control">Spent datasets only; calibration cells disjoint from evaluation cells</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="evidence" class="technical-section">
+      <h2>Evidence hierarchy</h2>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Row</strong><span>A correlated measurement at one SOC or checkpoint. Never counted as an independent battery.</span></div>
+        <div class="definition-card"><strong>Cell</strong><span>The independent unit for same-dataset held-cell development and calibration budgets.</span></div>
+        <div class="definition-card"><strong>Dataset</strong><span>The independent unit for protocol, chemistry, instrument, and lab transfer.</span></div>
+        <div class="definition-card"><strong>Untouched kept-back test</strong><span>A dataset that did not influence model, feature, threshold, or candidate selection.</span></div>
+      </div>
+      <div class="technical-callout"><strong>Why V6 overrides attractive cell results:</strong><p>A model may interpolate between cells inside one lab protocol and still fail when the entire dataset changes. Dataset-level LODO is the stronger test for the universal claim.</p></div>
+    </section>
+
+    <section id="results" class="technical-section">
+      <h2>Results and verdicts</h2>
+      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Strongest positive number</th><th>Decisive failure or limit</th><th>Final status</th></tr></thead><tbody>
+        <tr><td data-label="Version">4</td><td data-label="Strongest positive number">Oxford worst-case improvements: 45.1% real EIS, 25.7% imaginary EIS, 80.3% SOH</td><td data-label="Limit">Only three cells and SOH used measured current EIS</td><td data-label="Final status"><span class="status-pill good">Limited external support</span></td></tr>
+        <tr><td data-label="Version">5</td><td data-label="Strongest positive number">All four heads passed all eight Leonardi held-cell folds</td><td data-label="Failure">0 of 892 SiCWell rows accepted by frozen guard</td><td data-label="Final status"><span class="status-pill bad">External validation failed</span></td></tr>
+        <tr><td data-label="Version">6</td><td data-label="Strongest positive number">1383 rows and 51 cells audited across four datasets</td><td data-label="Failure">No zero-shot or few-shot candidate passed all gates</td><td data-label="Final status"><span class="status-pill bad">Universal path stopped</span></td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="why" class="technical-section">
+      <h2>Why each version changed</h2>
+      <div class="reader-path">
+        <div class="reader-card"><strong>V3 to V4: absolute scale was a transfer problem</strong><p>V4 divided spectral shape and change by the fresh 1 Hz impedance magnitude.</p></div>
+        <div class="reader-card"><strong>V4 to V5: the health chain was incomplete</strong><p>V5 trained SOH on EIS predicted without the held cell, removing measured current EIS from the required path.</p></div>
+        <div class="reader-card"><strong>V5 to V6: one guard failure was not enough diagnosis</strong><p>V6 separated representations, heads, datasets, calibration budgets, abstention, and uncertainty to test whether anything was worth freezing.</p></div>
+        <div class="reader-card"><strong>After V6: the bottleneck is controlled evidence</strong><p>More public-dataset searching cannot fix protocol and exact-cell mismatch. The next program needs planned measurements.</p></div>
+      </div>
+    </section>
+
+    <section id="decision" class="technical-section">
+      <h2>Current research decision</h2>
+      <ul>
+        <li>Keep V4 as narrow external support under its exact frozen Oxford contract.</li>
+        <li>Keep V5 as <code>external_validation_failed</code> with no external support.</li>
+        <li>Keep V6 as <code>stop_universal_model_path</code> with no model to validate.</li>
+        <li>Do not pool Leonardi and SiCWell as a generic NMC domain.</li>
+        <li>Continue only through the separate controlled exact-cell measurement gate.</li>
+      </ul>
+    </section>
+
+    <section id="files" class="technical-section">
+      <h2>Open the detailed pages and evidence</h2>
+      <div class="card-actions">
+        <a class="button" href="../missing-measurement-v4/">Technical Version 4</a>
+        <a class="button" href="../missing-measurement-v5/">Technical Version 5</a>
+        <a class="button" href="../missing-measurement-v6/">Technical Version 6</a>
+        <a class="button" href="../data/missing_modality_v4_oxford_one_shot_results.json">V4 result JSON</a>
+        <a class="button" href="../data/missing_modality_v5_sicwell_one_shot_results.json">V5 result JSON</a>
+        <a class="button" href="../data/missing_modality_v6_hard_decision.json">V6 decision JSON</a>
+        <a class="button" href="../data/narrow_domain_measurement_resource_gate.json">Current resource gate</a>
+      </div>
+    </section>
 
       </main>
       <footer>

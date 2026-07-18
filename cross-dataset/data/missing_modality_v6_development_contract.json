@@ -1,0 +1,161 @@
+{
+  "created_utc": "2026-07-16T13:05:32.323943+00:00",
+  "contract_version": "missing_measurement_v6_development_locked_1",
+  "status": "locked_before_v6_training_or_candidate_comparison",
+  "objective": "Decide whether zero-shot cross-dataset missing-measurement transfer is supportable, must be narrowed to fixed-budget calibration, or must be stopped.",
+  "immutable_v5_boundary": {
+    "status": "external_validation_failed",
+    "verdict": "no support",
+    "rows": 892,
+    "accepted_rows": 0,
+    "prohibited": [
+      "change or widen the V5 guard",
+      "rescore SiCWell as V5 validation",
+      "describe V5 as a near pass",
+      "use any future validation holdout during V6 development"
+    ],
+    "hashes": {
+      "v5_result": "99ffcacb555bf7c6f894eec1e6de0ff20ea184cc035756dd49507c94ff8d6c4a",
+      "v5_diagnostic": "c792438427fd8e5c7f7acf50ee8cd7f6f171f5d3727f14512a87ee1bc30a22bc",
+      "v5_development": "3d22b28a1e1aa56734f9fb31bc02011f6e70b6ec2e6cda61bfceb11928fe5b1b",
+      "v5_frozen_manifest": "0e0f444f7a858bdb6ae8426b37ae4a7e145f8642c6539f971bbf2e4040b01bd1"
+    }
+  },
+  "dataset_role_manifest_sha256": "3dbc82457969a44c568b8d4d516ad68fa27325c51b0b2757552a21bbd2f76064",
+  "separate_heads": [
+    "pulse_or_rint_to_eis_zreal",
+    "pulse_or_rint_to_eis_znegimag",
+    "measured_eis_to_soh",
+    "predicted_eis_to_soh",
+    "applicability_and_abstention"
+  ],
+  "operating_modes": {
+    "zero_shot": "No labels, target-derived normalization, or calibration rows from the held-out dataset.",
+    "few_shot": {
+      "claim_is_separate": true,
+      "calibration_budget_candidates": [
+        "one early checkup per calibration cell",
+        "two calibration cells"
+      ],
+      "evaluation_rule": "Calibration cells may not also be evaluation cells. Choose one budget using development folds only."
+    }
+  },
+  "preregistered_representations": [
+    {
+      "key": "v5_reference",
+      "contents": "V5 normalized baseline spectrum plus SOC and relative pulse resistance",
+      "purpose": "required reference"
+    },
+    {
+      "key": "scale_shape",
+      "contents": "separate absolute impedance scale, normalized spectral shape, and relative spectral change",
+      "purpose": "test whether cell scale is confounded with shape"
+    },
+    {
+      "key": "dimensionless_change",
+      "contents": "frequency-wise current-to-baseline ratios or scale-normalized deltas with SOC, temperature, and relative pulse resistance",
+      "purpose": "reduce cross-cell scale dependence"
+    },
+    {
+      "key": "reduced_frequency",
+      "contents": "predeclared low, mid, and high band summaries plus shared grid points",
+      "purpose": "reduce interpolation and protocol sensitivity"
+    },
+    {
+      "key": "physical_summary",
+      "contents": "stable ECM or DRT summaries only if one extractor passes identical synthetic and repeatability checks for every included dataset",
+      "purpose": "test interpretable domain-stable features",
+      "fallback": "exclude this representation before scoring if extraction comparability fails"
+    },
+    {
+      "key": "hybrid_small",
+      "contents": "SOC, temperature, relative pulse resistance, impedance scale, and a small fixed spectral-shape summary",
+      "purpose": "bounded portable candidate"
+    }
+  ],
+  "model_families": [
+    "ridge",
+    "extra_trees"
+  ],
+  "split_rules": {
+    "primary": "leave-one-dataset-out",
+    "secondary": "leave-one-cell-out within each development dataset",
+    "conditional": [
+      "leave-one-chemistry-out if at least two chemistries have complete compatible rows",
+      "temperature or protocol holdout if identifiers are explicit"
+    ],
+    "forbidden": [
+      "random row split as primary evidence",
+      "same cell in train and test",
+      "same checkup in train and test",
+      "target-informed feature or threshold selection"
+    ]
+  },
+  "baselines": {
+    "eis": [
+      "same-cell fresh spectrum carried forward",
+      "training mean spectrum",
+      "nearest development spectrum",
+      "SOC-temperature lookup when supported"
+    ],
+    "soh": [
+      "100 percent SOH",
+      "training mean",
+      "simple pulse-resistance ridge",
+      "measured-EIS ridge"
+    ]
+  },
+  "metrics": {
+    "eis": "RMSE by component and frequency, plus relative improvement versus the best eligible baseline",
+    "soh": "MAE in percentage points and relative improvement versus the best eligible baseline",
+    "applicability": [
+      "accepted rows",
+      "accepted cells",
+      "coverage",
+      "error versus domain score",
+      "false acceptance",
+      "false rejection"
+    ],
+    "uncertainty": "90 percent interval empirical coverage on accepted rows, reported by held-out dataset"
+  },
+  "zero_shot_freeze_gates": {
+    "minimum_complete_lodo_datasets": 3,
+    "minimum_cells_per_evaluated_dataset": 3,
+    "each_predictive_head_median_relative_improvement_min": 0.05,
+    "each_predictive_head_worst_dataset_relative_improvement_min": -0.1,
+    "minimum_datasets_passing_5_percent_gate_per_head": 2,
+    "minimum_domain_coverage_each_complete_dataset": 0.25,
+    "minimum_accepted_rows_each_complete_dataset": 10,
+    "minimum_accepted_cells_each_complete_dataset": 3,
+    "uncertainty_90_interval_coverage_range": [
+      0.8,
+      1.0
+    ],
+    "complete_chain_required": true,
+    "all_gates_required": true
+  },
+  "few_shot_gate": {
+    "evaluated_only_if_zero_shot_fails": true,
+    "fixed_budget_selected_without_evaluation_cell_labels": true,
+    "minimum_relative_improvement_over_best_baseline": 0.05,
+    "minimum_relative_error_reduction_versus_zero_shot": 0.1,
+    "minimum_evaluation_cells": 3,
+    "calibration_and_evaluation_cells_disjoint": true,
+    "all_required_heads_and_uncertainty_reported": true
+  },
+  "hard_decision": [
+    {
+      "verdict": "freeze_zero_shot_v6",
+      "condition": "Every zero-shot freeze gate passes."
+    },
+    {
+      "verdict": "narrow_to_few_shot_transfer",
+      "condition": "Zero-shot fails and every few-shot gate passes."
+    },
+    {
+      "verdict": "stop_universal_model_path",
+      "condition": "Neither preceding condition passes. Do not start V7 automatically."
+    }
+  ],
+  "claim_boundary": "This is a development contract, not evidence that V6 works. Spent datasets may select V6; only a later genuinely untouched one-shot run can validate a frozen candidate."
+}

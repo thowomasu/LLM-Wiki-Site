@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Version 5: Complete Chain, External Failure | Battery DRT Research Outputs</title>
-  <meta name="description" content="The full predicted-EIS-to-health chain worked internally, then rejected every SiCWell external row.">
+  <title>Version 5: Complete Chained Pipeline | Battery DRT Research Outputs</title>
+  <meta name="description" content="A self-contained technical account of the nested predicted-EIS-to-SOH chain, uncertainty, domain guard, internal results, and failed SiCWell test.">
   <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/missing-measurement-v5/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Version 5: Complete Chain, External Failure | Battery DRT Research Outputs">
-  <meta property="og:description" content="The full predicted-EIS-to-health chain worked internally, then rejected every SiCWell external row.">
+  <meta property="og:title" content="Version 5: Complete Chained Pipeline | Battery DRT Research Outputs">
+  <meta property="og:description" content="A self-contained technical account of the nested predicted-EIS-to-SOH chain, uncertainty, domain guard, internal results, and failed SiCWell test.">
   <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/missing-measurement-v5/">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
@@ -412,6 +412,85 @@ code {
   border-radius: 7px;
   background: var(--panel);
 }
+.technical-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 28px;
+}
+.technical-toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 7px 11px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font-size: 14px;
+  font-weight: 700;
+}
+.technical-toc a:hover { border-color: var(--blue); }
+.technical-section {
+  margin: 22px 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  scroll-margin-top: 22px;
+}
+.technical-section > h2:first-child { margin-top: 0; }
+.technical-section > :last-child { margin-bottom: 0; }
+.technical-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.technical-flow .flow-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--teal);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.technical-flow .flow-card strong,
+.technical-flow .flow-card span { display: block; }
+.technical-flow .flow-card span { margin-top: 7px; color: var(--muted); font-size: 14px; }
+.formula-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+.technical-callout {
+  margin: 16px 0;
+  padding: 15px 17px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--amber);
+  border-radius: 7px;
+  background: var(--note-bg);
+}
+.technical-callout p { margin: 7px 0 0; }
+.technical-callout.bad { border-left-color: var(--red); color: var(--ink); }
+.technical-callout.good { border-left-color: var(--green); color: var(--ink); }
+.definition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.definition-card {
+  padding: 14px 15px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.definition-card strong { display: block; margin-bottom: 5px; }
+.definition-card span { color: var(--muted); font-size: 14px; }
 .journey {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -919,30 +998,132 @@ window.MathJax = {
       <header>
 
         <div class="kicker">Battery DRT Research Outputs</div>
-        <h1>Version 5: Complete Chain, External Failure</h1>
-        <p class="lead">The full predicted-EIS-to-health chain worked internally, then rejected every SiCWell external row.</p>
+        <h1>Version 5: Complete Chained Pipeline</h1>
+        <p class="lead">A self-contained technical account of the nested predicted-EIS-to-SOH chain, uncertainty, domain guard, internal results, and failed SiCWell test.</p>
 
       </header>
       <main>
 
     <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab active" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all three</a></div>
-    <section class="note"><strong>Verdict:</strong> external validation failed. Version 5 has no external support.</section>
-    <h2>What Version 5 fixed</h2>
-    <p>Version 5 closed the main Version 4 gap. It predicted the current EIS spectrum first, then passed that predicted spectrum into the health model. It also added uncertainty ranges, strict input checks, and a fixed domain guard.</p>
-    <h2>Internal development result</h2>
-    <p>All eight Leonardi held-out-cell folds passed. The worst held-out-cell improvements were:</p>
-    <section class="metric-grid">
-      <article class="metric-card"><span>Real EIS</span><strong>85.2%</strong></article>
-      <article class="metric-card"><span>Imaginary EIS</span><strong>76.9%</strong></article>
-      <article class="metric-card"><span>Predicted-EIS-to-health chain</span><strong>71.4%</strong></article>
+    <nav class="technical-toc" aria-label="On this page"><a href="#summary">Executive read</a><a href="#pipeline">Pipeline</a><a href="#inputs">Inputs</a><a href="#math">Math</a><a href="#training">Nested training</a><a href="#uncertainty">Uncertainty and guard</a><a href="#results">Development results</a><a href="#external">External test</a><a href="#limits">Limits</a><a href="#files">Files</a></nav>
+    <section id="summary" class="technical-section note">
+      <h2>Executive Read</h2>
+      <p>Version 5 fixed V4's biggest architecture gap. The health model was trained on EIS predicted without access to the held cell, so the deployed chain could estimate SOH when current EIS was missing.</p>
+      <div class="reader-path">
+        <div class="reader-card"><strong>What the model sees</strong><p>Fresh same-cell EIS, SOC, and matched pulse-resistance change. Current EIS is optional, not required for the chain.</p></div>
+        <div class="reader-card"><strong>What it predicts</strong><p>Real EIS, negative-imaginary EIS, chained SOH, 90% residual intervals, domain distance, and an abstention reason.</p></div>
+        <div class="reader-card"><strong>What worked</strong><p>All four heads passed all eight Leonardi held-cell development folds.</p></div>
+        <div class="reader-card"><strong>What failed</strong><p>The frozen guard rejected every one of 892 SiCWell rows. Therefore V5 has no external support.</p></div>
+      </div>
+      <div class="technical-callout bad"><strong>Verdict:</strong><p><code>external_validation_failed</code>. This is not a near pass and the guard must not be widened after seeing SiCWell.</p></div>
     </section>
-    <p>This was good same-dataset evidence. It was not external validation.</p>
-    <h2>Frozen SiCWell external test</h2>
-    <ul><li>892 rows from 26 cells and 223 ageing checkups.</li><li>Accepted by the fixed guard: 0 rows.</li><li>Rejected before prediction: 892 rows.</li><li>No post-test tuning.</li></ul>
-    <h2>What the failure means</h2>
-    <p>The guard did its safety job, but the method did not cover the SiCWell domain. There is no accepted-row performance to report. This is not a near pass, and widening the guard after seeing the result would invalidate the test.</p>
-    <section class="note"><strong>Keep:</strong> Version 5 is the strongest complete internal architecture. <strong>Do not claim:</strong> external support. SiCWell is now development and failure-analysis evidence only.</section>
-    <div class="card-actions"><a class="button" href="../data/missing_modality_v5_chain_development_results.json">Open development JSON</a><a class="button" href="../data/missing_modality_v5_sicwell_one_shot_results.json">Open external result JSON</a><a class="button" href="../missing-measurement-v6/">Next: Version 6</a></div>
+
+    <section id="pipeline" class="technical-section">
+      <h2>Complete missing-EIS pipeline</h2>
+      <div class="technical-flow">
+        <div class="flow-card"><strong>1. Reference data</strong><span>Fresh same-cell, same-SOC EIS plus a fresh pulse resistance.</span></div>
+        <div class="flow-card"><strong>2. Current pulse</strong><span>The current matched pulse gives relative resistance increase.</span></div>
+        <div class="flow-card"><strong>3. Predict current EIS</strong><span>Separate real and imaginary Extra Trees heads reconstruct the nine-point spectrum.</span></div>
+        <div class="flow-card"><strong>4. Build chain features</strong><span>Normalize predicted EIS and combine it with the baseline spectral shape.</span></div>
+        <div class="flow-card"><strong>5. Predict SOH</strong><span>The chain head outputs capacity-based SOH without measured current EIS.</span></div>
+        <div class="flow-card"><strong>6. Guard and interval</strong><span>Abstain outside the frozen development domain and attach 90% residual ranges.</span></div>
+      </div>
+      <p>The optional direct head uses measured current EIS only as a diagnostic upper comparison. It is not the missing-measurement solution.</p>
+    </section>
+
+    <section id="inputs" class="technical-section">
+      <h2>Frozen input and output contract</h2>
+      <div class="table-wrap"><table><thead><tr><th>Layer</th><th>Required data</th><th>Output</th></tr></thead><tbody>
+        <tr><td data-label="Layer">EIS heads</td><td data-label="Required data">sample ID, SOC, pulse-resistance increase, fresh real and imaginary EIS at 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</td><td data-label="Output">Predicted current real and negative-imaginary EIS</td></tr>
+        <tr><td data-label="Layer">Direct SOH head</td><td data-label="Required data">Measured current EIS, baseline EIS, pulse feature</td><td data-label="Output">Diagnostic measured-EIS-to-SOH estimate</td></tr>
+        <tr><td data-label="Layer">Chain SOH head</td><td data-label="Required data">Out-of-cell predicted current EIS, baseline EIS, pulse feature</td><td data-label="Output">Missing-EIS-to-SOH estimate</td></tr>
+        <tr><td data-label="Layer">Safety layer</td><td data-label="Required data">Frozen standardized EIS-input feature vector</td><td data-label="Output">Domain distance, accept or abstain, residual interval</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="math" class="technical-section">
+      <h2>Math</h2>
+      <span class="formula-label">1. EIS reconstruction, inherited from V4</span>
+      <div class="math-block">\[\widehat{Z}_k = B_k + s\,f_k(x),\qquad s=\sqrt{B_{\mathrm{re},1}^2+B_{-\mathrm{im},1}^2}\]</div>
+      <span class="formula-label">2. Direct and chained health heads</span>
+      <div class="math-block">\[\widehat{h}_{\mathrm{direct}}=g\!\left(\Delta R_{\mathrm{int}}, Z/s, B/s\right),\qquad \widehat{h}_{\mathrm{chain}}=g_{c}\!\left(\Delta R_{\mathrm{int}}, \widehat{Z}/s, B/s\right)\]</div>
+      <p>The key distinction is <code>Z</code> versus <code>predicted Z</code>. The chained model is trained on out-of-cell predictions, not cleaned-up measured EIS.</p>
+      <span class="formula-label">3. Development-calibrated residual interval</span>
+      <div class="math-block">\[q_{0.90}=Q_{0.90}\!\left(\left|y_i-\widehat{y}_i\right|\right),\qquad \mathcal{I}(x)=\left[\widehat{y}(x)-q_{0.90},\widehat{y}(x)+q_{0.90}\right]\]</div>
+      <span class="formula-label">4. Applicability distance</span>
+      <div class="math-block">\[d(x)=\min_{i\in\mathrm{development}}\left\|T(x)-T(x_i)\right\|_2,\qquad \mathrm{accept}(x)\iff d(x)\le Q_{0.95}(d_{\mathrm{LOCO}})\]</div>
+      <p><code>T</code> is median imputation plus standardization fitted on development data. The frozen threshold is 0.405903.</p>
+    </section>
+
+    <section id="training" class="technical-section">
+      <h2>Nested leave-one-cell-out training</h2>
+      <div class="technical-flow">
+        <div class="flow-card"><strong>Outer held cell</strong><span>One of eight Leonardi cells is absent from every model fit used to score it.</span></div>
+        <div class="flow-card"><strong>Inner cross-fitting</strong><span>Training-cell EIS is predicted by models that did not see that training cell.</span></div>
+        <div class="flow-card"><strong>Chain training</strong><span>The SOH head learns from those out-of-cell EIS predictions.</span></div>
+        <div class="flow-card"><strong>Outer score</strong><span>The EIS heads and chained SOH head score the untouched outer cell.</span></div>
+      </div>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Estimator</strong><span>Extra Trees, 300 trees, depth 8, minimum leaf size 2, random seed 19.</span></div>
+        <div class="definition-card"><strong>Preprocessing</strong><span>Median imputation and StandardScaler in a fixed pipeline.</span></div>
+        <div class="definition-card"><strong>EIS baseline</strong><span>Fresh same-cell spectrum carried forward.</span></div>
+        <div class="definition-card"><strong>SOH baseline</strong><span>Constant 100% SOH.</span></div>
+      </div>
+    </section>
+
+    <section id="uncertainty" class="technical-section">
+      <h2>Uncertainty and domain guard</h2>
+      <div class="table-wrap"><table><thead><tr><th>Output</th><th>90% residual radius</th><th>Development samples</th><th>Development coverage</th></tr></thead><tbody><tr><td data-label="Output">eis zreal</td><td data-label="90% residual radius">0.00119547</td><td data-label="Development samples">4140</td><td data-label="Empirical coverage">90.0%</td></tr><tr><td data-label="Output">eis znegimag</td><td data-label="90% residual radius">0.000655498</td><td data-label="Development samples">4140</td><td data-label="Empirical coverage">90.0%</td></tr><tr><td data-label="Output">direct soh</td><td data-label="90% residual radius">1.74884</td><td data-label="Development samples">92</td><td data-label="Empirical coverage">90.2%</td></tr><tr><td data-label="Output">chain soh</td><td data-label="90% residual radius">4.31578</td><td data-label="Development samples">92</td><td data-label="Empirical coverage">90.2%</td></tr></tbody></table></div>
+      <p>These intervals are calibrated only on Leonardi leave-one-cell-out residuals. They are not universal confidence guarantees.</p>
+    </section>
+
+    <section id="results" class="technical-section">
+      <h2>Internal development results</h2>
+      <div class="table-wrap"><table><thead><tr><th>Head</th><th>Passing folds</th><th>Mean improvement</th><th>Worst held-cell improvement</th></tr></thead><tbody><tr><td data-label="Head">chain predicted eis to soh</td><td data-label="Passing folds">8 / 8</td><td data-label="Mean improvement">83.3%</td><td data-label="Worst improvement">71.4%</td></tr><tr><td data-label="Head">direct measured eis to soh</td><td data-label="Passing folds">8 / 8</td><td data-label="Mean improvement">93.0%</td><td data-label="Worst improvement">87.0%</td></tr><tr><td data-label="Head">eis znegimag</td><td data-label="Passing folds">8 / 8</td><td data-label="Mean improvement">85.6%</td><td data-label="Worst improvement">76.9%</td></tr><tr><td data-label="Head">eis zreal</td><td data-label="Passing folds">8 / 8</td><td data-label="Mean improvement">89.9%</td><td data-label="Worst improvement">85.2%</td></tr></tbody></table></div>
+      <div class="technical-callout"><strong>Evidence boundary:</strong><p>These are strong same-dataset held-cell results. They justified a frozen external test, but they are not external validation.</p></div>
+    </section>
+
+    <section id="external" class="technical-section">
+      <h2>Frozen SiCWell external test</h2>
+      <section class="metric-grid">
+        <article class="metric-card"><span>Rows</span><strong>892</strong></article>
+        <article class="metric-card"><span>Independent cells</span><strong>26</strong></article>
+        <article class="metric-card"><span>Ageing checkups</span><strong>223</strong></article>
+        <article class="metric-card"><span>Accepted rows</span><strong>0</strong></article>
+      </section>
+      <div class="table-wrap"><table><tbody>
+        <tr><td>Dataset</td><td>SiCWell Dataset cell checkups</td></tr>
+        <tr><td>Cell type</td><td>NMC pouch cells, kept separate from Leonardi's exact-cell evidence</td></tr>
+        <tr><td>SOC values</td><td>20, 40, 60, 80%</td></tr>
+        <tr><td>Guard retention requirement</td><td>At least 10 rows from at least 3 cells</td></tr>
+        <tr><td>Observed retention</td><td>0 rows from 0 cells</td></tr>
+        <tr><td>Post-test tuning</td><td>false</td></tr>
+      </tbody></table></div>
+      <p>The model was not allowed to score rejected rows as if they were valid predictions. With zero accepted rows, there is no external performance estimate.</p>
+    </section>
+
+    <section id="limits" class="technical-section">
+      <h2>Limits and failure meaning</h2>
+      <ul>
+        <li>The V5 architecture is complete, but it is supported only by same-dataset Leonardi development results.</li>
+        <li>The frozen SiCWell guard failure means the intended external domain was not covered.</li>
+        <li>Widening the guard now would spend the kept-back test again and invalidate the one-shot test.</li>
+        <li>SiCWell may be used for protocol diagnosis and later development, never relabeled as V5 validation.</li>
+      </ul>
+      <div class="technical-callout bad"><strong>Correct claim:</strong><p>V5 is the strongest complete internal chain in this family, with external validation failed and no external support.</p></div>
+    </section>
+
+    <section id="files" class="technical-section">
+      <h2>Downloadable evidence</h2>
+      <div class="card-actions">
+        <a class="button" href="../data/missing_modality_v5_chain_development_results.json">Development results</a>
+        <a class="button" href="../data/missing_modality_v5_freeze_manifest.json">Frozen manifest</a>
+        <a class="button" href="../data/missing_modality_v5_uncertainty_calibration.json">Uncertainty calibration</a>
+        <a class="button" href="../data/missing_modality_v5_sicwell_validation_contract.json">SiCWell contract</a>
+        <a class="button" href="../data/missing_modality_v5_sicwell_one_shot_results.json">External result</a>
+        <a class="button" href="../missing-measurement-v6/">Next: Version 6</a>
+      </div>
+    </section>
 
       </main>
       <footer>

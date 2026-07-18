@@ -398,6 +398,85 @@ code {
   border-radius: 7px;
   background: var(--panel);
 }
+.technical-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 28px;
+}
+.technical-toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 7px 11px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font-size: 14px;
+  font-weight: 700;
+}
+.technical-toc a:hover { border-color: var(--blue); }
+.technical-section {
+  margin: 22px 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  scroll-margin-top: 22px;
+}
+.technical-section > h2:first-child { margin-top: 0; }
+.technical-section > :last-child { margin-bottom: 0; }
+.technical-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.technical-flow .flow-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--teal);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.technical-flow .flow-card strong,
+.technical-flow .flow-card span { display: block; }
+.technical-flow .flow-card span { margin-top: 7px; color: var(--muted); font-size: 14px; }
+.formula-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+.technical-callout {
+  margin: 16px 0;
+  padding: 15px 17px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--amber);
+  border-radius: 7px;
+  background: var(--note-bg);
+}
+.technical-callout p { margin: 7px 0 0; }
+.technical-callout.bad { border-left-color: var(--red); color: var(--ink); }
+.technical-callout.good { border-left-color: var(--green); color: var(--ink); }
+.definition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.definition-card {
+  padding: 14px 15px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.definition-card strong { display: block; margin-bottom: 5px; }
+.definition-card span { color: var(--muted); font-size: 14px; }
 .journey {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

@@ -1,0 +1,33 @@
+{
+  "created_utc": "2026-07-14T21:31:56.837480+00:00",
+  "source": "development-only nested leave-one-cell-out residuals",
+  "coverage_target": 0.9,
+  "intervals": {
+    "eis_zreal": {
+      "absolute_error_q90": 0.001195467901969692,
+      "samples": 4140,
+      "development_empirical_coverage": 0.9002415458937199
+    },
+    "eis_znegimag": {
+      "absolute_error_q90": 0.0006554980728522702,
+      "samples": 4140,
+      "development_empirical_coverage": 0.9002415458937199
+    },
+    "direct_soh": {
+      "absolute_error_q90": 1.7488411652188347,
+      "samples": 92,
+      "development_empirical_coverage": 0.9021739130434783
+    },
+    "chain_soh": {
+      "absolute_error_q90": 4.3157791312335405,
+      "samples": 92,
+      "development_empirical_coverage": 0.9021739130434783
+    }
+  },
+  "domain_guard": {
+    "metric": "nearest standardized Euclidean distance in frozen EIS-input feature space",
+    "threshold_q95": 0.4059028481270963,
+    "development_distances": 460,
+    "policy": "abstain from every head when distance exceeds threshold"
+  }
+}
