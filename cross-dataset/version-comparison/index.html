@@ -442,6 +442,10 @@ code {
 }
 .technical-section > h2:first-child { margin-top: 0; }
 .technical-section > :last-child { margin-bottom: 0; }
+.evidence-language {
+  border-left: 5px solid var(--amber);
+  background: var(--note-bg);
+}
 .technical-flow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1025,6 +1029,22 @@ window.MathJax = {
 
     <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../early-versions/">Versions 1 to 3</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab active" href="../version-comparison/">Compare all versions</a></div>
     <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#history">Versions 1 to 6</a><a href="#summary">Versions 4 to 6</a><a href="#architecture">Architecture</a><a href="#math">Math evolution</a><a href="#splits">Splits</a><a href="#evidence">Evidence</a><a href="#results">Results</a><a href="#why">Why each changed</a><a href="#decision">Current decision</a><a href="#files">Files</a></nav>
+
+    <section class="technical-section evidence-language" aria-labelledby="evidence-words-heading">
+      <h2 id="evidence-words-heading">Evidence words used on this site</h2>
+      <p>These words describe how trustworthy a result is. They do not describe whether the software ran.</p>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Internal result</strong><span>A result from the same dataset family used to build the method. It is useful for development, but it is not independent proof.</span></div>
+        <div class="definition-card"><strong>Held-out-cell fold</strong><span>One repeated check where a whole cell is left out of training, tested, then replaced by another left-out cell.</span></div>
+        <div class="definition-card"><strong>External test</strong><span>A test on a different dataset that was not used to build or choose the method.</span></div>
+        <div class="definition-card"><strong>Untouched</strong><span>The final answers for those cells were not used to choose features, models, limits, or pass rules before scoring.</span></div>
+        <div class="definition-card"><strong>Frozen or locked</strong><span>The inputs, model, baseline, and pass rules were fixed before the outside answers were viewed.</span></div>
+        <div class="definition-card"><strong>Freeze-ready</strong><span>The method was complete and stable enough to lock before spending a new outside dataset. It does not mean the method had already passed externally.</span></div>
+        <div class="definition-card"><strong>Passed</strong><span>The result met every rule fixed in advance.</span></div>
+        <div class="definition-card"><strong>Failed</strong><span>The result missed at least one rule fixed in advance. It does not mean the code crashed.</span></div>
+      </div>
+    </section>
+
     <section id="start" class="technical-section note">
       <h2>Start here: how to read six versions</h2>
       <p>This was not one model improved six times on one fixed test. Each version changed the question after the previous evidence exposed a weakness. Scores are therefore not directly interchangeable.</p>
@@ -1035,14 +1055,14 @@ window.MathJax = {
         <div class="definition-card"><strong>Version 6</strong><span>Tested rescue options across spent datasets and stopped the universal path.</span></div>
       </div>
       <h3>The standard used throughout</h3>
-      <p>A complicated model must beat a simple baseline under a split that keeps independent cells or datasets apart. Internal success supports development. Only a frozen result on untouched outside data supports an external claim.</p>
+      <p>A complicated model must beat a simple comparison under a test that keeps whole cells or datasets apart. Results from the same dataset family support development. A claim about working elsewhere requires a different dataset whose final answers were not used before the model and pass rules were locked.</p>
     </section>
 
     <section id="history" class="technical-section">
       <h2>Versions 1 to 6 at a glance</h2>
       <div class="table-wrap"><table><thead><tr><th>Version</th><th>What it tried</th><th>Strongest honest result</th><th>Why it moved on</th></tr></thead><tbody>
         <tr><td data-label="Version">1</td><td data-label="What it tried">Broad pulse-feature to EIS transfer</td><td data-label="Strongest honest result">CMU external EIS model was 59.8% worse than baseline</td><td data-label="Why it moved on">Broad resistance proxies did not transfer</td></tr>
-        <tr><td data-label="Version">2</td><td data-label="What it tried">Separate EIS heads plus fresh-cell calibration</td><td data-label="Strongest honest result">Strong same-dataset Leonardi Cell 08 result</td><td data-label="Why it moved on">Not externally freeze-ready; Cassino could not satisfy the input contract</td></tr>
+        <tr><td data-label="Version">2</td><td data-label="What it tried">Separate EIS heads plus fresh-cell calibration</td><td data-label="Strongest honest result">Strong result on a held-back Leonardi cell from the same dataset family</td><td data-label="Why it moved on">The complete method was not stable enough to lock for a new outside test; Cassino could not provide the required inputs</td></tr>
         <tr><td data-label="Version">3</td><td data-label="What it tried">Remove protocol-specific inputs</td><td data-label="Strongest honest result">SOH passed on Bayreuth</td><td data-label="Why it moved on">Both external EIS heads missed the 5% gate</td></tr>
         <tr><td data-label="Version">4</td><td data-label="What it tried">Normalize impedance scale</td><td data-label="Strongest honest result">All heads passed on three Oxford cells</td><td data-label="Why it moved on">Health still used measured current EIS</td></tr>
         <tr><td data-label="Version">5</td><td data-label="What it tried">Full predicted-EIS-to-SOH chain</td><td data-label="Strongest honest result">All eight Leonardi cell folds passed</td><td data-label="Why it moved on">Frozen guard rejected all 892 SiCWell rows</td></tr>
@@ -1093,8 +1113,8 @@ window.MathJax = {
     <section id="splits" class="technical-section">
       <h2>Training and evaluation splits</h2>
       <div class="table-wrap"><table><thead><tr><th>Version</th><th>Development split</th><th>External or primary evaluation</th><th>Leakage control</th></tr></thead><tbody>
-        <tr><td data-label="Version">4</td><td data-label="Development split">Eight-fold leave-one-Leonardi-cell-out</td><td data-label="External evaluation">Three untouched Oxford cells, scored once</td><td data-label="Leakage control">Model and contract frozen before Oxford values</td></tr>
-        <tr><td data-label="Version">5</td><td data-label="Development split">Nested leave-one-cell-out with cross-fitted EIS for chain training</td><td data-label="External evaluation">26 untouched SiCWell cells, 223 checkups</td><td data-label="Leakage control">Frozen guard, intervals, feature order, and no post-test tuning</td></tr>
+        <tr><td data-label="Version">4</td><td data-label="Development split">Eight repeats, each leaving one whole Leonardi cell out of training</td><td data-label="External evaluation">Three Oxford cells from a different dataset, scored once</td><td data-label="Leakage control">Model and rules locked before the final Oxford answers were viewed</td></tr>
+        <tr><td data-label="Version">5</td><td data-label="Development split">Nested repeats that leave one whole cell out and build the health model from out-of-cell EIS predictions</td><td data-label="External evaluation">26 SiCWell cells from a different dataset, covering 223 checkups</td><td data-label="Leakage control">Guard, uncertainty ranges, feature order, and pass rules locked before scoring; no later tuning</td></tr>
         <tr><td data-label="Version">6</td><td data-label="Development split">Leave one whole dataset out; held-cell audit secondary</td><td data-label="External evaluation">None, because no candidate passed development</td><td data-label="Leakage control">Spent datasets only; calibration cells disjoint from evaluation cells</td></tr>
       </tbody></table></div>
     </section>
@@ -1114,7 +1134,7 @@ window.MathJax = {
       <h2>Results and verdicts</h2>
       <div class="table-wrap"><table><thead><tr><th>Version</th><th>Strongest positive number</th><th>Decisive failure or limit</th><th>Final status</th></tr></thead><tbody>
         <tr><td data-label="Version">4</td><td data-label="Strongest positive number">Oxford worst-case improvements: 45.1% real EIS, 25.7% imaginary EIS, 80.3% SOH</td><td data-label="Limit">Only three cells and SOH used measured current EIS</td><td data-label="Final status"><span class="status-pill good">Limited external support</span></td></tr>
-        <tr><td data-label="Version">5</td><td data-label="Strongest positive number">All four heads passed all eight Leonardi held-cell folds</td><td data-label="Failure">0 of 892 SiCWell rows accepted by frozen guard</td><td data-label="Final status"><span class="status-pill bad">External validation failed</span></td></tr>
+        <tr><td data-label="Version">5</td><td data-label="Strongest positive number">All four output models passed eight repeated held-cell checks within Leonardi</td><td data-label="Failure">The locked safety guard accepted 0 of 892 SiCWell rows</td><td data-label="Final status"><span class="status-pill bad">Outside-data test missed its required rule</span></td></tr>
         <tr><td data-label="Version">6</td><td data-label="Strongest positive number">1383 rows and 51 cells audited across four datasets</td><td data-label="Failure">No zero-shot or few-shot candidate passed all gates</td><td data-label="Final status"><span class="status-pill bad">Universal path stopped</span></td></tr>
       </tbody></table></div>
     </section>

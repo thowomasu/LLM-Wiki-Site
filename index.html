@@ -442,6 +442,10 @@ code {
 }
 .technical-section > h2:first-child { margin-top: 0; }
 .technical-section > :last-child { margin-bottom: 0; }
+.evidence-language {
+  border-left: 5px solid var(--amber);
+  background: var(--note-bg);
+}
 .technical-flow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1020,8 +1024,8 @@ window.MathJax = {
         <div class="kicker">Main study: cross-dataset missing measurements</div>
         <h1 class="research-question">Can a short battery pulse recover missing EIS and health information across different datasets?</h1>
         <div class="hero-evidence">
-          <div class="hero-point"><strong>What worked</strong><span>Version 4 passed one narrow external test on three Oxford cells. It remains useful evidence for that exact protocol.</span></div>
-          <div class="hero-point limit"><strong>Where the broad path ended</strong><span>Version 5 failed externally. Version 6 found no zero-shot or small-calibration candidate worth freezing. The next study needs controlled exact-cell data.</span></div>
+          <div class="hero-point"><strong>What worked</strong><span>Version 4 passed one locked test on three cells from a different Oxford dataset. It remains useful evidence only for that exact protocol.</span></div>
+          <div class="hero-point limit"><strong>Where the broad path ended</strong><span>Version 5 could not operate on the different SiCWell dataset under its locked safety rule. Version 6 found no zero-shot or small-calibration candidate stable enough to lock for another outside test. The next study needs controlled exact-cell data.</span></div>
         </div>
         <div class="hero-cta"><a class="button" href="cross-dataset/">Open the main study</a></div>
       </div>
@@ -1033,7 +1037,7 @@ window.MathJax = {
       <h2>Choose a reader path</h2>
       <div class="start-grid" aria-label="Reader paths">
         <a class="start-card reader-path" href="cross-dataset/"><strong>Project summary</strong><span>Read the main question, the Version 4 to Version 6 progression, and the current controlled-study plan.</span></a>
-        <a class="start-card reader-path" href="cross-dataset/version-comparison/"><strong>Compare the versions</strong><span>See what changed, what passed, what failed, and why the universal model path stopped.</span></a>
+        <a class="start-card reader-path" href="cross-dataset/version-comparison/"><strong>Compare the versions</strong><span>See what changed, which rules were met or missed, and why the universal model path stopped.</span></a>
         <a class="start-card reader-path" href="presentations/index.html#cambridge-molicell-eis"><strong>Evidence and figures</strong><span>Open the cross-dataset presentations, plots, methods, and downloadable public files.</span></a>
       </div>
     </section>

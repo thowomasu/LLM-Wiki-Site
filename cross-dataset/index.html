@@ -442,6 +442,10 @@ code {
 }
 .technical-section > h2:first-child { margin-top: 0; }
 .technical-section > :last-child { margin-bottom: 0; }
+.evidence-language {
+  border-left: 5px solid var(--amber);
+  background: var(--note-bg);
+}
 .technical-flow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1024,6 +1028,22 @@ window.MathJax = {
       <main>
 
     <div class="tabs" aria-label="Section tabs"><a class="tab active" href="">Overview</a><a class="tab" href="early-versions/">Versions 1 to 3</a><a class="tab" href="missing-measurement-v4/">Version 4</a><a class="tab" href="missing-measurement-v5/">Version 5</a><a class="tab" href="missing-measurement-v6/">Version 6</a><a class="tab" href="version-comparison/">Compare all versions</a></div>
+
+    <section class="technical-section evidence-language" aria-labelledby="evidence-words-heading">
+      <h2 id="evidence-words-heading">Evidence words used on this site</h2>
+      <p>These words describe how trustworthy a result is. They do not describe whether the software ran.</p>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Internal result</strong><span>A result from the same dataset family used to build the method. It is useful for development, but it is not independent proof.</span></div>
+        <div class="definition-card"><strong>Held-out-cell fold</strong><span>One repeated check where a whole cell is left out of training, tested, then replaced by another left-out cell.</span></div>
+        <div class="definition-card"><strong>External test</strong><span>A test on a different dataset that was not used to build or choose the method.</span></div>
+        <div class="definition-card"><strong>Untouched</strong><span>The final answers for those cells were not used to choose features, models, limits, or pass rules before scoring.</span></div>
+        <div class="definition-card"><strong>Frozen or locked</strong><span>The inputs, model, baseline, and pass rules were fixed before the outside answers were viewed.</span></div>
+        <div class="definition-card"><strong>Freeze-ready</strong><span>The method was complete and stable enough to lock before spending a new outside dataset. It does not mean the method had already passed externally.</span></div>
+        <div class="definition-card"><strong>Passed</strong><span>The result met every rule fixed in advance.</span></div>
+        <div class="definition-card"><strong>Failed</strong><span>The result missed at least one rule fixed in advance. It does not mean the code crashed.</span></div>
+      </div>
+    </section>
+
     <section class="note">
       <strong>Current answer:</strong> a universal cross-dataset model is not supported. Version 4 passed one narrow external test, Version 5 failed its external test, and Version 6 found no model worth freezing. The next study is deliberately smaller: one exact cell model, one lot, and one fixed measurement protocol.
     </section>

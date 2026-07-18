@@ -442,6 +442,10 @@ code {
 }
 .technical-section > h2:first-child { margin-top: 0; }
 .technical-section > :last-child { margin-bottom: 0; }
+.evidence-language {
+  border-left: 5px solid var(--amber);
+  background: var(--note-bg);
+}
 .technical-flow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1025,6 +1029,22 @@ window.MathJax = {
 
     <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../early-versions/">Versions 1 to 3</a><a class="tab active" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all versions</a></div>
     <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#summary">Executive read</a><a href="#pipeline">Pipeline</a><a href="#inputs">Inputs</a><a href="#math">Math</a><a href="#model">Model and split</a><a href="#validation">External test</a><a href="#results">Results</a><a href="#limits">Limits</a><a href="#files">Files</a></nav>
+
+    <section class="technical-section evidence-language" aria-labelledby="evidence-words-heading">
+      <h2 id="evidence-words-heading">Evidence words used on this site</h2>
+      <p>These words describe how trustworthy a result is. They do not describe whether the software ran.</p>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Internal result</strong><span>A result from the same dataset family used to build the method. It is useful for development, but it is not independent proof.</span></div>
+        <div class="definition-card"><strong>Held-out-cell fold</strong><span>One repeated check where a whole cell is left out of training, tested, then replaced by another left-out cell.</span></div>
+        <div class="definition-card"><strong>External test</strong><span>A test on a different dataset that was not used to build or choose the method.</span></div>
+        <div class="definition-card"><strong>Untouched</strong><span>The final answers for those cells were not used to choose features, models, limits, or pass rules before scoring.</span></div>
+        <div class="definition-card"><strong>Frozen or locked</strong><span>The inputs, model, baseline, and pass rules were fixed before the outside answers were viewed.</span></div>
+        <div class="definition-card"><strong>Freeze-ready</strong><span>The method was complete and stable enough to lock before spending a new outside dataset. It does not mean the method had already passed externally.</span></div>
+        <div class="definition-card"><strong>Passed</strong><span>The result met every rule fixed in advance.</span></div>
+        <div class="definition-card"><strong>Failed</strong><span>The result missed at least one rule fixed in advance. It does not mean the code crashed.</span></div>
+      </div>
+    </section>
+
     <section id="start" class="technical-section">
       <h2>Start here: Version 4 in everyday language</h2>
       <p>Imagine measuring a battery when it is fresh, ageing it, and then running one short current pulse. Version 4 uses the fresh EIS measurement and the change in pulse resistance to estimate the battery's current EIS. A separate model then estimates health, but that health model still receives the real current EIS measurement.</p>
@@ -1044,7 +1064,7 @@ window.MathJax = {
     </section>
     <section id="summary" class="technical-section note">
       <h2>Executive Read</h2>
-      <p>Version 4 asked whether impedance-scale normalization could make one frozen model transfer to a different commercial NCA cell dataset. It used eight Leonardi cells for development, froze the models before Oxford measurement values were opened, and then scored three untouched Oxford cells once.</p>
+      <p>Version 4 asked whether impedance-scale normalization could move one model to a different commercial NCA cell dataset. It used eight Leonardi cells for development. The model, simple comparisons, and pass rules were then locked before the final Oxford answers were viewed. Three Oxford cells were scored once.</p>
       <div class="reader-path">
         <div class="reader-card"><strong>What the model sees</strong><p>Fresh same-cell EIS, state of charge, and the percentage increase in 10-second pulse resistance.</p></div>
         <div class="reader-card"><strong>What it predicts</strong><p>Changes in real and negative-imaginary EIS on nine frequencies. A separate health head uses measured current EIS.</p></div>
@@ -1109,7 +1129,8 @@ window.MathJax = {
     </section>
 
     <section id="validation" class="technical-section">
-      <h2>Frozen Oxford external test</h2>
+      <h2>Locked Oxford outside-data test</h2>
+      <p>This is called an external test because Oxford is a different dataset and its final answers were not used to build or choose Version 4.</p>
       <div class="technical-flow">
         <div class="flow-card"><strong>Reserve first</strong><span>Oxford was named before its measurement values were downloaded.</span></div>
         <div class="flow-card"><strong>Freeze models</strong><span>Artifacts, feature order, baselines, and thresholds were hash-locked.</span></div>
@@ -1145,7 +1166,7 @@ window.MathJax = {
         <li>The model is not a generic NMC or generic cylindrical-cell model.</li>
         <li>The 5% gate is a predeclared comparison threshold, not proof of clinical or operational usefulness.</li>
       </ul>
-      <div class="technical-callout"><strong>Correct claim:</strong><p>V4 has narrow external support under the frozen Oxford contract. It does not support universal transfer.</p></div>
+      <div class="technical-callout"><strong>Correct claim:</strong><p>V4 has narrow support from one locked outside-data test under the exact Oxford rules. It does not show that the method works for every battery or laboratory.</p></div>
     </section>
 
     <section id="files" class="technical-section">

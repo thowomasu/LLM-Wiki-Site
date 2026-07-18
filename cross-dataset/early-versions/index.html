@@ -442,6 +442,10 @@ code {
 }
 .technical-section > h2:first-child { margin-top: 0; }
 .technical-section > :last-child { margin-bottom: 0; }
+.evidence-language {
+  border-left: 5px solid var(--amber);
+  background: var(--note-bg);
+}
 .technical-flow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1026,6 +1030,22 @@ window.MathJax = {
     <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab active" href="../early-versions/">Versions 1 to 3</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all versions</a></div>
     <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#v1">Version 1</a><a href="#v2">Version 2</a><a href="#v3">Version 3</a><a href="#lessons">What changed</a><a href="#files">Evidence files</a></nav>
 
+    <section class="technical-section evidence-language" aria-labelledby="evidence-words-heading">
+      <h2 id="evidence-words-heading">Evidence words used on this site</h2>
+      <p>These words describe how trustworthy a result is. They do not describe whether the software ran.</p>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Internal result</strong><span>A result from the same dataset family used to build the method. It is useful for development, but it is not independent proof.</span></div>
+        <div class="definition-card"><strong>Held-out-cell fold</strong><span>One repeated check where a whole cell is left out of training, tested, then replaced by another left-out cell.</span></div>
+        <div class="definition-card"><strong>External test</strong><span>A test on a different dataset that was not used to build or choose the method.</span></div>
+        <div class="definition-card"><strong>Untouched</strong><span>The final answers for those cells were not used to choose features, models, limits, or pass rules before scoring.</span></div>
+        <div class="definition-card"><strong>Frozen or locked</strong><span>The inputs, model, baseline, and pass rules were fixed before the outside answers were viewed.</span></div>
+        <div class="definition-card"><strong>Freeze-ready</strong><span>The method was complete and stable enough to lock before spending a new outside dataset. It does not mean the method had already passed externally.</span></div>
+        <div class="definition-card"><strong>Passed</strong><span>The result met every rule fixed in advance.</span></div>
+        <div class="definition-card"><strong>Failed</strong><span>The result missed at least one rule fixed in advance. It does not mean the code crashed.</span></div>
+      </div>
+    </section>
+
+
     <section id="start" class="technical-section note">
       <h2>Start here: what the project was trying to do</h2>
       <p>A battery pulse is a short burst of current. It is cheap and fast to record. EIS is a slower laboratory measurement that shows how the battery responds across many frequencies. The project asked whether the cheap pulse could help reconstruct a missing EIS measurement and then estimate battery health.</p>
@@ -1033,10 +1053,10 @@ window.MathJax = {
       <div class="definition-grid">
         <div class="definition-card"><strong>Model</strong><span>A fixed calculation learned from development data.</span></div>
         <div class="definition-card"><strong>Baseline</strong><span>A simple fallback prediction. The model is useful only if it beats this.</span></div>
-        <div class="definition-card"><strong>Internal test</strong><span>A held-back cell from the same dataset family. Useful, but not independent proof.</span></div>
-        <div class="definition-card"><strong>External test</strong><span>A different dataset kept untouched until the model and pass rules are frozen.</span></div>
+        <div class="definition-card"><strong>Internal test</strong><span>A whole cell is held back, but it still comes from the same dataset family used for development.</span></div>
+        <div class="definition-card"><strong>External test</strong><span>A different dataset is tested only after the method and pass rules are locked.</span></div>
       </div>
-      <div class="technical-callout bad"><strong>Bottom line:</strong><p>Versions 1 to 3 produced useful lessons, not external support. Version 1 failed, Version 2 never became ready for a valid external score, and Version 3 failed its all-head external gate.</p></div>
+      <div class="technical-callout bad"><strong>Bottom line:</strong><p>Versions 1 to 3 produced useful lessons, not outside proof. Version 1 missed its outside-data rule. Version 2 was not complete enough to lock for a new outside test. Version 3 missed the rule requiring all three outputs to pass.</p></div>
     </section>
 
     <section id="v1" class="technical-section">
@@ -1075,7 +1095,7 @@ window.MathJax = {
         <article class="metric-card"><span>SOH improvement</span><strong>76.5%</strong></article>
       </section>
       <h3>Why this still was not external support</h3>
-      <p>The earlier general comparison used 917 development rows. Real EIS became freeze-ready, but imaginary EIS did not pass every development fold. The separate calibrated Leonardi result was still a same-dataset test.</p>
+      <p>The earlier general comparison used 917 development rows. The real-EIS model was stable enough to lock, but the imaginary-EIS model did not pass every repeated held-cell check. Because both were required, the complete Version 2 method was not ready to lock for a new outside test. The separate calibrated Leonardi result still came from the same dataset family.</p>
       <p>Cassino could not provide the frozen longitudinal inputs or SOH target. Scoring it would have required changing the rules after inspecting the dataset, so its verdict was <code>blocked_inconclusive</code>.</p>
       <div class="technical-callout warn"><strong>Lesson:</strong><p>Same-cell calibration helped, but it also narrowed the required data contract. A dataset with EIS alone was no longer enough to test the complete method.</p></div>
     </section>
@@ -1087,15 +1107,15 @@ window.MathJax = {
       <p>Version 3 removed cycle number and open-circuit voltage from the model because those values are defined differently across laboratories. It kept the calibrated fresh-EIS reference, pulse-resistance change, and Extra Trees models.</p>
       <h3>Why it looked promising</h3>
       <p>Eight leave-one-cell-out Leonardi folds passed for real EIS, imaginary EIS, and SOH. The worst-cell improvements were 83.9% for real EIS, 75.7% for imaginary EIS, and 81.1% for SOH.</p>
-      <h3>The untouched Bayreuth test</h3>
-      <p>The frozen model was scored once on 14 Bayreuth cells and 28 rows. Every head had to improve on its baseline by at least 5%.</p>
+      <h3>The Bayreuth outside-data test</h3>
+      <p>The model and pass rules were locked first. The final Bayreuth answers had not been used to choose or change them. The locked model was then scored once on 14 Bayreuth cells and 28 rows. Every output model had to improve on its simple comparison by at least 5%.</p>
       <section class="metric-grid">
         <article class="metric-card"><span>Real EIS improvement</span><strong>0.34%</strong></article>
         <article class="metric-card"><span>Imaginary EIS improvement</span><strong>0.45%</strong></article>
         <article class="metric-card"><span>SOH improvement</span><strong>74.7%</strong></article>
       </section>
       <p>SOH passed, but both EIS heads missed the 5% gate by a wide margin. Because all three heads were required, the final verdict was <code>external_validation_failed</code> with <code>no support</code>.</p>
-      <div class="technical-callout bad"><strong>Why it failed:</strong><p>The portable inputs helped inside Leonardi but did not produce a meaningful EIS advantage on Bayreuth. Strong internal folds could not override the untouched external result.</p></div>
+      <div class="technical-callout bad"><strong>Why it failed:</strong><p>The portable inputs helped inside Leonardi but did not produce a meaningful EIS advantage on Bayreuth. Strong repeated checks within Leonardi could not override the outside-data result. Here, “failed” means the result missed a rule fixed in advance, not that the software crashed.</p></div>
     </section>
 
     <section id="lessons" class="technical-section">

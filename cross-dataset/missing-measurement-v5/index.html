@@ -442,6 +442,10 @@ code {
 }
 .technical-section > h2:first-child { margin-top: 0; }
 .technical-section > :last-child { margin-bottom: 0; }
+.evidence-language {
+  border-left: 5px solid var(--amber);
+  background: var(--note-bg);
+}
 .technical-flow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1025,6 +1029,22 @@ window.MathJax = {
 
     <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../early-versions/">Versions 1 to 3</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab active" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all versions</a></div>
     <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#summary">Executive read</a><a href="#pipeline">Pipeline</a><a href="#inputs">Inputs</a><a href="#math">Math</a><a href="#training">Nested training</a><a href="#uncertainty">Uncertainty and guard</a><a href="#results">Development results</a><a href="#external">External test</a><a href="#limits">Limits</a><a href="#files">Files</a></nav>
+
+    <section class="technical-section evidence-language" aria-labelledby="evidence-words-heading">
+      <h2 id="evidence-words-heading">Evidence words used on this site</h2>
+      <p>These words describe how trustworthy a result is. They do not describe whether the software ran.</p>
+      <div class="definition-grid">
+        <div class="definition-card"><strong>Internal result</strong><span>A result from the same dataset family used to build the method. It is useful for development, but it is not independent proof.</span></div>
+        <div class="definition-card"><strong>Held-out-cell fold</strong><span>One repeated check where a whole cell is left out of training, tested, then replaced by another left-out cell.</span></div>
+        <div class="definition-card"><strong>External test</strong><span>A test on a different dataset that was not used to build or choose the method.</span></div>
+        <div class="definition-card"><strong>Untouched</strong><span>The final answers for those cells were not used to choose features, models, limits, or pass rules before scoring.</span></div>
+        <div class="definition-card"><strong>Frozen or locked</strong><span>The inputs, model, baseline, and pass rules were fixed before the outside answers were viewed.</span></div>
+        <div class="definition-card"><strong>Freeze-ready</strong><span>The method was complete and stable enough to lock before spending a new outside dataset. It does not mean the method had already passed externally.</span></div>
+        <div class="definition-card"><strong>Passed</strong><span>The result met every rule fixed in advance.</span></div>
+        <div class="definition-card"><strong>Failed</strong><span>The result missed at least one rule fixed in advance. It does not mean the code crashed.</span></div>
+      </div>
+    </section>
+
     <section id="start" class="technical-section">
       <h2>Start here: what Version 5 fixed</h2>
       <p>Version 4 could predict EIS, but its health model still needed the real current EIS measurement. Version 5 removed that shortcut. It first predicts the missing EIS, then feeds only that prediction into the health model.</p>
@@ -1050,7 +1070,7 @@ window.MathJax = {
       <div class="reader-path">
         <div class="reader-card"><strong>What the model sees</strong><p>Fresh same-cell EIS, SOC, and matched pulse-resistance change. Current EIS is optional, not required for the chain.</p></div>
         <div class="reader-card"><strong>What it predicts</strong><p>Real EIS, negative-imaginary EIS, chained SOH, 90% residual intervals, domain distance, and an abstention reason.</p></div>
-        <div class="reader-card"><strong>What worked</strong><p>All four heads passed all eight Leonardi held-cell development folds.</p></div>
+        <div class="reader-card"><strong>What worked</strong><p>All four output models passed eight repeated checks. In each check, one whole Leonardi cell was left out of training and used only for testing.</p></div>
         <div class="reader-card"><strong>What failed</strong><p>The frozen guard rejected every one of 892 SiCWell rows. Therefore V5 has no external support.</p></div>
       </div>
       <div class="technical-callout bad"><strong>Verdict:</strong><p><code>external_validation_failed</code>. This is not a near pass and the guard must not be widened after seeing SiCWell.</p></div>
@@ -1118,11 +1138,12 @@ window.MathJax = {
     <section id="results" class="technical-section">
       <h2>Internal development results</h2>
       <div class="table-wrap"><table><thead><tr><th>Head</th><th>Passing folds</th><th>Mean improvement</th><th>Worst held-cell improvement</th></tr></thead><tbody><tr><td data-label="Head">chain predicted eis to soh</td><td data-label="Passing folds">8 / 8</td><td data-label="Mean improvement">83.3%</td><td data-label="Worst improvement">71.4%</td></tr><tr><td data-label="Head">direct measured eis to soh</td><td data-label="Passing folds">8 / 8</td><td data-label="Mean improvement">93.0%</td><td data-label="Worst improvement">87.0%</td></tr><tr><td data-label="Head">eis znegimag</td><td data-label="Passing folds">8 / 8</td><td data-label="Mean improvement">85.6%</td><td data-label="Worst improvement">76.9%</td></tr><tr><td data-label="Head">eis zreal</td><td data-label="Passing folds">8 / 8</td><td data-label="Mean improvement">89.9%</td><td data-label="Worst improvement">85.2%</td></tr></tbody></table></div>
-      <div class="technical-callout"><strong>Evidence boundary:</strong><p>These are strong same-dataset held-cell results. They justified a frozen external test, but they are not external validation.</p></div>
+      <div class="technical-callout"><strong>Evidence boundary:</strong><p>These are strong checks within the Leonardi dataset family. They were good enough to lock the method and justify one new outside-data test, but they are not independent outside proof.</p></div>
     </section>
 
     <section id="external" class="technical-section">
-      <h2>Frozen SiCWell external test</h2>
+      <h2>Locked SiCWell outside-data test</h2>
+      <p>This is called an external test because SiCWell is a different dataset and its final answers were not used to build or select Version 5.</p>
       <section class="metric-grid">
         <article class="metric-card"><span>Rows</span><strong>892</strong></article>
         <article class="metric-card"><span>Independent cells</span><strong>26</strong></article>

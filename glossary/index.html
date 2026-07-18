@@ -442,6 +442,10 @@ code {
 }
 .technical-section > h2:first-child { margin-top: 0; }
 .technical-section > :last-child { margin-bottom: 0; }
+.evidence-language {
+  border-left: 5px solid var(--amber);
+  background: var(--note-bg);
+}
 .technical-flow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1027,7 +1031,7 @@ window.MathJax = {
       <strong>Rule for this site:</strong> acronyms should be expanded the first time they appear on a page. This glossary is the backup, not the replacement for clear writing.
     </section>
     <table>
-      <thead><tr><th>Acronym or code</th><th>Expansion</th><th>Meaning in this project</th></tr></thead>
+      <thead><tr><th>Term or code</th><th>Plain expansion</th><th>Meaning in this project</th></tr></thead>
       <tbody><tr><td><strong>LLM</strong></td><td>Large Language Model</td><td>The AI tooling layer used to maintain this research wiki and generate public-facing outputs.</td></tr>
 <tr><td><strong>DRT</strong></td><td>Distribution of Relaxation Times</td><td>Battery-analysis method that represents relaxation behavior across time constants.</td></tr>
 <tr><td><strong>DIB</strong></td><td>Data in Brief</td><td>Journal style. Do not use it as the public name for the LG M50T Expt 4 dataset.</td></tr>
@@ -1049,7 +1053,15 @@ window.MathJax = {
 <tr><td><strong>UDDS</strong></td><td>Urban Dynamometer Driving Schedule</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
 <tr><td><strong>US06</strong></td><td>High-aggression supplemental driving schedule</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
 <tr><td><strong>WLTP</strong></td><td>Worldwide Harmonised Light Vehicles Test Procedure</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
-<tr><td><strong>RPT</strong></td><td>Reference Performance Test</td><td>Periodic characterization test. In CALB, HPPC and C/20 tests are RPT-like but not literally named RPT.</td></tr></tbody>
+<tr><td><strong>RPT</strong></td><td>Reference Performance Test</td><td>Periodic characterization test. In CALB, HPPC and C/20 tests are RPT-like but not literally named RPT.</td></tr>
+<tr><td><strong>Baseline</strong></td><td>Simple comparison prediction</td><td>The more complicated model must beat this under the rules fixed before final scoring.</td></tr>
+<tr><td><strong>Internal result</strong></td><td>Result from the development dataset family</td><td>Useful evidence for building the method, but not independent proof that it works elsewhere.</td></tr>
+<tr><td><strong>Held-out-cell fold</strong></td><td>One repeated whole-cell check</td><td>One cell is left out of training and tested. The process repeats with different cells left out.</td></tr>
+<tr><td><strong>External test</strong></td><td>Test on a different dataset</td><td>The outside dataset was not used to build or choose the method.</td></tr>
+<tr><td><strong>Untouched</strong></td><td>Final answers not used before scoring</td><td>The target answers were not used to select features, models, limits, or pass rules.</td></tr>
+<tr><td><strong>Frozen or locked</strong></td><td>Rules fixed before outside answers</td><td>Inputs, preprocessing, models, baselines, and pass rules cannot be changed after the outside answers are viewed.</td></tr>
+<tr><td><strong>Freeze-ready</strong></td><td>Complete enough to lock for a new outside test</td><td>This does not mean the method has passed externally. It means the method is ready to be tested without changing its rules.</td></tr>
+<tr><td><strong>Failed</strong></td><td>Missed at least one rule fixed in advance</td><td>This describes the evidence result. It does not mean the code crashed.</td></tr></tbody>
     </table>
 
       </main>
