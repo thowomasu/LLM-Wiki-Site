@@ -2,5 +2,108 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Results and limits | LG M50T 21700 degradation dataset, Expt 4 handoff</title><style>
 :root{color-scheme:light;--ink:#17212b;--muted:#586673;--paper:#f5f7f9;--panel:#fff;--line:#d8e0e7;--blue:#225f9f;--teal:#147a73;--amber:#b85f17;--note:#fff8f0}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}.shell{min-height:100vh;display:grid;grid-template-columns:260px minmax(0,1fr)}aside{position:sticky;top:0;height:100vh;overflow:auto;padding:20px 14px;background:var(--panel);border-right:1px solid var(--line)}.brand{display:block;color:var(--ink);text-decoration:none;font-size:18px;font-weight:800}.brand span{display:block;margin-top:5px;color:var(--muted);font-size:13px;font-weight:400}.nav-title{margin:22px 8px 8px;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase}.nav-link{display:block;margin:5px 0;padding:8px 9px;color:var(--ink);text-decoration:none;border-radius:6px;font-size:14px}.nav-link:hover,.nav-link.active{background:var(--paper);color:var(--blue)}header{padding:42px min(6vw,64px) 26px;background:var(--panel);border-bottom:1px solid var(--line)}main{max-width:900px;margin:auto;padding:28px min(5vw,48px) 70px}h1{max-width:850px;margin:0 0 12px;font-size:clamp(38px,6vw,70px);line-height:1.05}h2{margin:0 0 14px;font-size:clamp(27px,3vw,40px);line-height:1.12}p,li{font-size:18px}.lead{max-width:760px;color:var(--muted);font-size:21px}.kicker{margin-bottom:10px;color:var(--teal);font-size:13px;font-weight:800;text-transform:uppercase}.path{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;max-width:720px;margin:22px auto 0;text-align:center}.path a{padding:10px;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:6px;color:var(--ink);text-decoration:none;background:var(--panel);font-size:14px}.path a.active{border-left-color:var(--teal);background:var(--paper);font-weight:800}.slide{margin:22px 0;padding:24px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:8px}.slide ul{margin:0;padding-left:22px}.slide li{margin:8px 0}.graphs{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin-top:18px}figure{margin:0}img{display:block;width:100%;max-height:620px;object-fit:contain;border:1px solid var(--line);border-radius:6px;background:#fff}figcaption{margin-top:8px;color:var(--muted);font-size:14px}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:24px}.button{display:inline-flex;padding:9px 13px;border:1px solid var(--line);border-radius:6px;color:var(--ink);text-decoration:none;background:var(--panel)}.note{padding:15px 17px;border-left:5px solid var(--amber);background:var(--note)}code{background:#eef2f5;padding:2px 5px;border-radius:4px}@media(max-width:850px){.shell{display:block}aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}header{padding-top:28px}.slide{padding:18px}}
-</style></head>
-<body><div class="shell"><aside><a class="brand" href="../00_Read_First/MINI_PRESENTATION.html">LG M50T 21700 degradation dataset, Expt 4 handoff<span>One ordered research story</span></a><div class="nav-title">Presentation path</div><a class="nav-link" href="../00_Read_First/MINI_PRESENTATION.html">A. Study overview</a><a class="nav-link" href="../01_Dataset_Map/MINI_PRESENTATION.html">B. Data</a><a class="nav-link" href="../02_Pipeline_Report/MINI_PRESENTATION.html">C. Method</a><a class="nav-link" href="../03_Key_Plots/MINI_PRESENTATION.html">D. Figures</a><a class="nav-link active" href="../04_Validation_Audit/MINI_PRESENTATION.html">E. Results and limits</a><a class="nav-link" href="../05_Code/MINI_PRESENTATION.html">F. Code</a><a class="nav-link" href="../06_Reproduction/MINI_PRESENTATION.html">G. Reproduction</a></aside><div><header><div class="kicker">Stage E of 7</div><h1>Results and limits</h1><p class="lead">LG M50T 21700 degradation dataset, Expt 4 handoff</p><nav class="path"><a class="" href="../00_Read_First/MINI_PRESENTATION.html">A. Study overview</a><a class="" href="../01_Dataset_Map/MINI_PRESENTATION.html">B. Data</a><a class="" href="../02_Pipeline_Report/MINI_PRESENTATION.html">C. Method</a><a class="" href="../03_Key_Plots/MINI_PRESENTATION.html">D. Figures</a><a class="active" href="../04_Validation_Audit/MINI_PRESENTATION.html">E. Results and limits</a><a class="" href="../05_Code/MINI_PRESENTATION.html">F. Code</a><a class="" href="../06_Reproduction/MINI_PRESENTATION.html">G. Reproduction</a></nav></header><main><section class="slide"><h2>Results</h2><ul><li>This is the most important folder for judging scientific strength.</li><li>The audit found that some features may reveal part of the answer to the model, especially capacity, duration, and same-test resistance features.</li><li>Safer claim: Expt4 supports internal battery health-feature benchmarking, and GITT-derived resistance features are informative for resistance-like labels.</li></ul></section><section class="slide"><h2>Achievements</h2><ul><li>The package includes grouped validation metrics after stricter checks.</li><li>It includes a leakage feature audit and a feature-target correlation scan.</li><li>It separates raw score strength from scientific claim strength.</li><li>It explicitly blocks overclaims about EIS validation and checked against physical measurements DRT peaks.</li></ul></section><section class="slide"><h2>Open Issues</h2><ul><li>The modeling claim is weaker than raw scores suggest.</li><li>Leave-one-cell-out can still be too friendly.</li><li>Leave-one-temperature-out is harsher and should be treated as the main test.</li><li>DRT bands alone have not yet been proven to explain the result.</li></ul></section><section class="slide"><h2>Roadmap</h2><ul><li>Run the locked comparison: R0 only, DRT bands without R0, R0 plus DRT bands.</li><li>Remove target-proxy features before making any prediction claim.</li><li>Prefer leave-one-temperature-out for headline claims.</li><li>Bring in measured EIS DRT if the goal is real DRT physics validation.</li></ul></section><nav class="pager"><a class="button" href="../03_Key_Plots/MINI_PRESENTATION.html">Previous: Figures</a><span></span><a class="button" href="../05_Code/MINI_PRESENTATION.html">Next: Code</a></nav><p class="note"><strong>Reading rule:</strong> follow the stages in order. Check the limits before accepting the conclusion.</p></main></div></div></body></html>
+</style><script>
+(function () {
+  var key = "llm-wiki-theme";
+  var sidebarKey = "llm-wiki-sidebar";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "☰" : "×";
+  }
+  function labelResponsiveTables() {
+    document.querySelectorAll("table").forEach(function (table) {
+      var headers = Array.from(table.querySelectorAll("thead th")).map(function (cell) {
+        return cell.textContent.trim();
+      });
+      table.querySelectorAll("tbody tr").forEach(function (row) {
+        Array.from(row.children).forEach(function (cell, index) {
+          if (cell.tagName === "TD" && headers[index]) cell.dataset.label = headers[index];
+        });
+      });
+    });
+  }
+  var initialTheme = preferredTheme();
+  var initialSidebar = preferredSidebar();
+  applyTheme(initialTheme);
+  applySidebar(initialSidebar);
+  window.addEventListener("DOMContentLoaded", function () {
+    applyTheme(document.documentElement.dataset.theme || initialTheme);
+    applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
+    labelResponsiveTables();
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
+    document.querySelectorAll(".sidebar a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) applySidebar("collapsed");
+      });
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") applySidebar("collapsed");
+    });
+  });
+})();
+</script>
+<script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]},
+  options: {skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../assets/site.css">
+</head>
+<body>
+<button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button><div class="shell"><aside><a class="brand" href="../00_Read_First/MINI_PRESENTATION.html">LG M50T 21700 degradation dataset, Expt 4 handoff<span>One ordered research story</span></a><div class="nav-title">Presentation path</div><a class="nav-link" href="../00_Read_First/MINI_PRESENTATION.html">A. Study overview</a><a class="nav-link" href="../01_Dataset_Map/MINI_PRESENTATION.html">B. Data</a><a class="nav-link" href="../02_Pipeline_Report/MINI_PRESENTATION.html">C. Method</a><a class="nav-link" href="../03_Key_Plots/MINI_PRESENTATION.html">D. Figures</a><a class="nav-link active" href="../04_Validation_Audit/MINI_PRESENTATION.html">E. Results and limits</a><a class="nav-link" href="../05_Code/MINI_PRESENTATION.html">F. Code</a><a class="nav-link" href="../06_Reproduction/MINI_PRESENTATION.html">G. Reproduction</a></aside><div><header><div class="kicker">Stage E of 7</div><h1>Results and limits</h1><p class="lead">LG M50T 21700 degradation dataset, Expt 4 handoff</p><nav class="path"><a class="" href="../00_Read_First/MINI_PRESENTATION.html">A. Study overview</a><a class="" href="../01_Dataset_Map/MINI_PRESENTATION.html">B. Data</a><a class="" href="../02_Pipeline_Report/MINI_PRESENTATION.html">C. Method</a><a class="" href="../03_Key_Plots/MINI_PRESENTATION.html">D. Figures</a><a class="active" href="../04_Validation_Audit/MINI_PRESENTATION.html">E. Results and limits</a><a class="" href="../05_Code/MINI_PRESENTATION.html">F. Code</a><a class="" href="../06_Reproduction/MINI_PRESENTATION.html">G. Reproduction</a></nav></header><main><section class="slide"><h2>Results</h2><ul><li>This is the most important folder for judging scientific strength.</li><li>The audit found that some features may reveal part of the answer to the model, especially capacity, duration, and same-test resistance features.</li><li>Safer claim: Expt4 supports internal battery health-feature benchmarking, and GITT-derived resistance features are informative for resistance-like labels.</li></ul></section><section class="slide"><h2>Achievements</h2><ul><li>The package includes grouped validation metrics after stricter checks.</li><li>It includes a leakage feature audit and a feature-target correlation scan.</li><li>It separates raw score strength from scientific claim strength.</li><li>It explicitly blocks overclaims about EIS validation and checked against physical measurements DRT peaks.</li></ul></section><section class="slide"><h2>Open Issues</h2><ul><li>The modeling claim is weaker than raw scores suggest.</li><li>Leave-one-cell-out can still be too friendly.</li><li>Leave-one-temperature-out is harsher and should be treated as the main test.</li><li>DRT bands alone have not yet been proven to explain the result.</li></ul></section><section class="slide"><h2>Roadmap</h2><ul><li>Run the locked comparison: R0 only, DRT bands without R0, R0 plus DRT bands.</li><li>Remove target-proxy features before making any prediction claim.</li><li>Prefer leave-one-temperature-out for headline claims.</li><li>Bring in measured EIS DRT if the goal is real DRT physics validation.</li></ul></section><nav class="pager"><a class="button" href="../03_Key_Plots/MINI_PRESENTATION.html">Previous: Figures</a><span></span><a class="button" href="../05_Code/MINI_PRESENTATION.html">Next: Code</a></nav><p class="note"><strong>Reading rule:</strong> follow the stages in order. Check the limits before accepting the conclusion.</p></main></div></div><script>
+document.addEventListener('DOMContentLoaded', function () {
+  var back = document.querySelector('[data-history-back]');
+  if (back) back.addEventListener('click', function () {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = back.dataset.homeFallback;
+  });
+});
+</script>
+</body></html>

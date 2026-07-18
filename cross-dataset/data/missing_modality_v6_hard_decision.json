@@ -1,0 +1,27 @@
+{
+  "created_utc": "2026-07-16T13:25:04.214146+00:00",
+  "status": "bounded_v6_development_complete",
+  "verdict": "stop_universal_model_path",
+  "v6_candidate_frozen": false,
+  "future_holdout_search_authorized": false,
+  "zero_shot_predictive_survivors": [],
+  "few_shot_predictive_survivors": [],
+  "decisive_evidence": {
+    "zero_shot": "No preregistered representation and model passed all predictive dataset-level gates.",
+    "few_shot": "No disjoint-cell calibration budget and method passed all baseline, zero-shot-improvement, and multi-dataset gates.",
+    "applicability": "The source-calibrated guard accepted every row, produced many false accepts, and failed uncertainty gates on every dataset.",
+    "cell_level": "Strong same-dataset results on Leonardi and mostly on SiCWell do not overturn failed dataset transfer; Oxford also failed within-dataset."
+  },
+  "allowed_followup": [
+    "Treat V5 and V6 as negative evidence about a universal zero-shot or tiny-calibration model under the tested inputs.",
+    "If research continues, formulate a new chemistry-specific or protocol-specific question with a new contract; do not call it V7 automatically.",
+    "Use the dataset-qualification and abstention failure analysis as a separate research contribution if useful."
+  ],
+  "prohibited_followup": [
+    "Do not freeze or externally validate a V6 candidate.",
+    "Do not search for a fresh V6 holdout because no V6 candidate passed development gates.",
+    "Do not retune thresholds or representations and relabel this bounded study as the same decision.",
+    "Do not soften the verdict using strong same-dataset cell folds."
+  ],
+  "claim_boundary": "This is a negative bounded development result on four previously inspected or scored datasets. It does not prove every narrower chemistry-specific or protocol-specific model is impossible."
+}

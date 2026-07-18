@@ -48,6 +48,8 @@
 * { box-sizing: border-box; }
 body {
   margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   color: var(--ink);
   background: var(--paper);
   font-family: Arial, Helvetica, sans-serif;
@@ -61,6 +63,7 @@ body {
 }
 .sidebar {
   position: sticky;
+  z-index: 45;
   top: 0;
   height: 100vh;
   overflow-y: auto;
@@ -330,8 +333,8 @@ code {
 }
 .status-list li {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  gap: 18px;
   align-items: start;
   padding-top: 10px;
   border-top: 1px solid var(--line);
@@ -346,14 +349,14 @@ code {
 }
 .pipeline-flow {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 8px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
   margin: 18px 0 12px;
 }
 .pipeline-step {
   grid-column: span 1;
-  min-height: 118px;
+  min-height: 210px;
   padding: 14px 12px;
   border: 1px solid var(--line);
   border-top: 5px solid var(--blue);
@@ -364,6 +367,11 @@ code {
 .pipeline-step span { display: block; }
 .pipeline-step span { margin-top: 7px; color: var(--muted); font-size: 14px; }
 .pipeline-arrow { color: var(--muted); text-align: center; font-size: 28px; }
+.pipeline-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .pipeline-label {
   color: var(--red);
   font-weight: 800;
@@ -377,6 +385,32 @@ code {
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 14px;
+}
+.page-history {
+  position: fixed;
+  z-index: 38;
+  top: 12px;
+  right: 12px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 13px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.math-block {
+  max-width: 900px;
+  margin: 18px 0;
+  padding: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
 }
 .journey {
   display: grid;
@@ -654,7 +688,19 @@ footer {
   .sidebar-floating-toggle [data-sidebar-label] { display: none; }
 }
 @media (max-width: 850px) {
-  .site-shell { display: block; }
+  .site-shell { display: block; width: 100vw; max-width: 100vw; overflow-x: hidden; }
+  .page-content { width: 100vw; min-width: 0; max-width: 100vw; overflow-x: hidden; }
+  header,
+  main { width: 100%; min-width: 0; max-width: 100%; }
+  header > *,
+  main > * { min-width: 0; max-width: 100%; }
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  .lead { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+  .tabs { width: 100%; max-width: 100%; }
   .sidebar {
     position: fixed;
     z-index: 60;
@@ -678,6 +724,7 @@ footer {
   .hero-evidence { grid-template-columns: 1fr; }
   .pipeline-flow { grid-template-columns: 1fr; }
   .pipeline-arrow { transform: rotate(90deg); }
+  .pipeline-step { min-height: 0; }
   .status-list li { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap {
     overflow: visible;
@@ -829,28 +876,43 @@ footer {
   });
 })();
 </script>
+  <script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]},
+  options: {skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
+  <button class="page-history" type="button" data-history-back data-home-fallback="../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
   <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">&times;</span><span data-sidebar-label>Close</span></button>
   <div class="site-shell">
     <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
-<a class="side-link" href="../../calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">CALB project overview</a>
-<a class="side-link" href="../../presentations/#calb-study">CALB evidence and figures</a>
-<a class="side-link" href="../../calb/manual/">CALB methods guide</a>
+<a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
+<a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
+<a class="side-link" href="../../cross-dataset/missing-measurement-v6/">Version 6</a>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
 <div class="side-section">Results and limitations</div>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Version results and limits</a>
 <a class="side-link" href="../../external-validation/">External validation status</a>
 <a class="side-link" href="../../datasets/">Dataset status map</a>
 <div class="side-section">Datasets and sources</div>
-<a class="side-link" href="../../calb/data/">CALB public data</a>
+<a class="side-link" href="../../presentations/index.html#cambridge-molicell-eis">Cross-dataset evidence and figures</a>
+<a class="side-link" href="../../cross-dataset/demo_pipeline_presentation.html#methodology">Cross-dataset methods and downloads</a>
 <a class="side-link" href="../../sources/">Papers, data, and sources</a>
 <a class="side-link" href="../../external-validation/dataset-exploration/">Dataset screening evidence</a>
+<div class="side-section">Backup study</div>
+<a class="side-link" href="../../calb/">CALB project overview</a>
+<a class="side-link" href="../../presentations/index.html#calb-study">CALB evidence and figures</a>
+<a class="side-link" href="../../calb/manual/">CALB methods guide</a>
 <div class="side-section">Other studies</div>
-<a class="side-link" href="../../cross-dataset/">Cross-dataset EIS prediction</a>
-<a class="side-link" href="../../presentations/#lg-m50t-expt4">LG M50T Expt 4 health features</a>
-<a class="side-link" href="../../presentations/#drt-pipeline">DIB time-domain DRT pilot</a>
+<a class="side-link" href="../../presentations/index.html#lg-m50t-expt4">LG M50T Expt 4 health-feature study</a>
+<a class="side-link" href="../../presentations/index.html#drt-pipeline">DIB time-domain DRT pilot</a>
 <div class="side-section">Glossary</div>
 <a class="side-link" href="../../glossary/">Plain-language glossary</a></aside>
     <div class="page-content">
@@ -879,10 +941,16 @@ footer {
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-16 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-18 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>
   </div>
+  <script>
+  document.querySelector('[data-history-back]').addEventListener('click', function () {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = this.dataset.homeFallback;
+  });
+  </script>
 </body>
 </html>

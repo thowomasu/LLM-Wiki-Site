@@ -48,6 +48,8 @@
 * { box-sizing: border-box; }
 body {
   margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   color: var(--ink);
   background: var(--paper);
   font-family: Arial, Helvetica, sans-serif;
@@ -61,6 +63,7 @@ body {
 }
 .sidebar {
   position: sticky;
+  z-index: 45;
   top: 0;
   height: 100vh;
   overflow-y: auto;
@@ -330,8 +333,8 @@ code {
 }
 .status-list li {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  gap: 18px;
   align-items: start;
   padding-top: 10px;
   border-top: 1px solid var(--line);
@@ -346,14 +349,14 @@ code {
 }
 .pipeline-flow {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 8px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
   margin: 18px 0 12px;
 }
 .pipeline-step {
   grid-column: span 1;
-  min-height: 118px;
+  min-height: 210px;
   padding: 14px 12px;
   border: 1px solid var(--line);
   border-top: 5px solid var(--blue);
@@ -364,6 +367,11 @@ code {
 .pipeline-step span { display: block; }
 .pipeline-step span { margin-top: 7px; color: var(--muted); font-size: 14px; }
 .pipeline-arrow { color: var(--muted); text-align: center; font-size: 28px; }
+.pipeline-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .pipeline-label {
   color: var(--red);
   font-weight: 800;
@@ -377,6 +385,32 @@ code {
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 14px;
+}
+.page-history {
+  position: fixed;
+  z-index: 38;
+  top: 12px;
+  right: 12px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 13px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.math-block {
+  max-width: 900px;
+  margin: 18px 0;
+  padding: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
 }
 .journey {
   display: grid;
@@ -654,7 +688,19 @@ footer {
   .sidebar-floating-toggle [data-sidebar-label] { display: none; }
 }
 @media (max-width: 850px) {
-  .site-shell { display: block; }
+  .site-shell { display: block; width: 100vw; max-width: 100vw; overflow-x: hidden; }
+  .page-content { width: 100vw; min-width: 0; max-width: 100vw; overflow-x: hidden; }
+  header,
+  main { width: 100%; min-width: 0; max-width: 100%; }
+  header > *,
+  main > * { min-width: 0; max-width: 100%; }
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  .lead { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+  .tabs { width: 100%; max-width: 100%; }
   .sidebar {
     position: fixed;
     z-index: 60;
@@ -678,6 +724,7 @@ footer {
   .hero-evidence { grid-template-columns: 1fr; }
   .pipeline-flow { grid-template-columns: 1fr; }
   .pipeline-arrow { transform: rotate(90deg); }
+  .pipeline-step { min-height: 0; }
   .status-list li { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap {
     overflow: visible;
@@ -829,28 +876,43 @@ footer {
   });
 })();
 </script>
+  <script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]},
+  options: {skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
+  <button class="page-history" type="button" data-history-back data-home-fallback="../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
   <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">&times;</span><span data-sidebar-label>Close</span></button>
   <div class="site-shell">
     <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
 <a class="side-link" href="../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
-<a class="side-link" href="../calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">CALB project overview</a>
-<a class="side-link" href="../presentations/#calb-study">CALB evidence and figures</a>
-<a class="side-link" href="../calb/manual/">CALB methods guide</a>
+<a class="side-link" href="../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../cross-dataset/missing-measurement-v4/">Version 4</a>
+<a class="side-link" href="../cross-dataset/missing-measurement-v5/">Version 5</a>
+<a class="side-link" href="../cross-dataset/missing-measurement-v6/">Version 6</a>
+<a class="side-link" href="../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
 <div class="side-section">Results and limitations</div>
+<a class="side-link" href="../cross-dataset/version-comparison/">Version results and limits</a>
 <a class="side-link" href="../external-validation/">External validation status</a>
 <a class="side-link" href="../datasets/">Dataset status map</a>
 <div class="side-section">Datasets and sources</div>
-<a class="side-link" href="../calb/data/">CALB public data</a>
+<a class="side-link" href="../presentations/index.html#cambridge-molicell-eis">Cross-dataset evidence and figures</a>
+<a class="side-link" href="../cross-dataset/demo_pipeline_presentation.html#methodology">Cross-dataset methods and downloads</a>
 <a class="side-link" href="../sources/">Papers, data, and sources</a>
 <a class="side-link" href="../external-validation/dataset-exploration/">Dataset screening evidence</a>
+<div class="side-section">Backup study</div>
+<a class="side-link" href="../calb/">CALB project overview</a>
+<a class="side-link" href="../presentations/index.html#calb-study">CALB evidence and figures</a>
+<a class="side-link" href="../calb/manual/">CALB methods guide</a>
 <div class="side-section">Other studies</div>
-<a class="side-link" href="../cross-dataset/">Cross-dataset EIS prediction</a>
-<a class="side-link" href="../presentations/#lg-m50t-expt4">LG M50T Expt 4 health features</a>
-<a class="side-link" href="../presentations/#drt-pipeline">DIB time-domain DRT pilot</a>
+<a class="side-link" href="../presentations/index.html#lg-m50t-expt4">LG M50T Expt 4 health-feature study</a>
+<a class="side-link" href="../presentations/index.html#drt-pipeline">DIB time-domain DRT pilot</a>
 <div class="side-section">Glossary</div>
 <a class="side-link" href="../glossary/">Plain-language glossary</a></aside>
     <div class="page-content">
@@ -882,7 +944,7 @@ footer {
           </tr>
         </thead>
         <tbody>
-          <tr><td><strong>CALB L148N58A comprehensive characterization study</strong><div class="small-note">Dataset: CALB L148N58A testing campaign. This project used it for internal pulse-to-EIS evidence.</div></td><td>Yes, internal time-domain and EIS comparison work.</td><td>HPPC, drive cycles, C/20 charge/discharge.</td><td>Yes.</td><td>10 C, 25 C, 40 C.</td><td><span class="status-pill good">246 / 246 internal rows</span></td><td><p><a class="button" href="../calb/data/">View CALB L148N58A study data</a> <a class="button" href="../calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB readiness report</a></p></td></tr><tr><td><strong>CALCE Storage 25 C validation check</strong><div class="small-note">First outside-data check target for same-cell capacity plus EIS evidence.</div></td><td>Not runnable by the fixed rule yet.</td><td>Capacity workbooks, but no HPPC-compatible pulse windows in current inputs.</td><td>Yes, same-PLN impedance candidates.</td><td>25 C target subset.</td><td><span class="status-pill bad">24 joins, 0 runnable</span></td><td><p><a class="button" href="../external-validation/calce/">Open CALCE validation check</a> <a class="button" href="../external-validation/calce/data/candidate_pairings.csv">View CALCE pairings</a></p></td></tr><tr><td><strong>Cambridge and Molicell EIS prediction study</strong><div class="small-note">Predict measured EIS spectra from earlier current and voltage features, then score the model on separate datasets. Train on known rows, freeze a model, then score separate datasets once.</div></td><td>No frozen-rule DRT claim. It predicts measured EIS spectra from time-series features.</td><td>Uses pulse or GCPL current/voltage features before each EIS target.</td><td>Yes, fixed frequency grid real and negative-imaginary targets.</td><td>Mixed. Uses labels when available.</td><td><span class="status-pill warn">Cambridge partial support</span></td><td><p><a class="button" href="../presentations/#cambridge-molicell-eis">Open Cambridge and Molicell presentations</a></p></td></tr><tr><td><strong>Graphite/LNMO dataset screen</strong><div class="small-note">Useful electrochemistry side dataset, weak for the frozen pulse-to-EIS gate.</div></td><td>No clean unchanged-rule fit.</td><td>qOCV and rate files. Frozen window finder sees weak candidates.</td><td>Yes, full-cell EIS by SOC.</td><td>Not the main selection axis here.</td><td><span class="status-pill warn">Weak fit</span></td><td><p><a class="button" href="../external-validation/dataset-exploration/">Open Graphite/LNMO dataset screen</a></p></td></tr><tr><td><strong>KIT RADAR4KIT external validation check</strong><div class="small-note">Second external target after corrected EIS addendum became available.</div></td><td>Frozen CALB pulse-to-EIS test workflow ran, but did not beat the voltage-only baseline.</td><td>Pulse/profile ageing data.</td><td>Yes, corrected EIS addendum required.</td><td>Dataset-dependent.</td><td><span class="status-pill bad">No support</span></td><td><p><a class="button" href="../sources/external/">Open RADAR4KIT source artifacts</a></p></td></tr><tr><td><strong>LG M50T 21700 degradation study, Expt 4 drive-cycle aging</strong><div class="small-note">Subset used: Expt 4 - Drive Cycle Aging (Control). Health-feature and drive-cycle ageing work. Not an EIS validation source.</div></td><td>Time-series prototype and feature work only.</td><td>GITT and ageing time-series files.</td><td>No same-cell EIS found in local inspection.</td><td>Protocol-dependent.</td><td><span class="status-pill warn">Not EIS validation</span></td><td><p><a class="button" href="../presentations/#lg-m50t-expt4">Open LG M50T Expt 4 outputs</a></p></td></tr><tr><td><strong>NASA battery dataset screen</strong><div class="small-note">Later robustness check, not the first fight for the pulse failure mode.</div></td><td>Possible later, but not the clean frozen-rule target.</td><td>Charge and discharge cycling.</td><td>Yes, same-cell impedance evidence.</td><td>Mixed ambient conditions.</td><td><span class="status-pill warn">34 cells</span></td><td><p><a class="button" href="../external-validation/nasa/">Open NASA battery screen</a> <a class="button" href="../external-validation/nasa/data/candidate_pairings.csv">View NASA pairings</a></p></td></tr><tr><td><strong>Panasonic 18650PF frozen-rule basic test</strong><div class="small-note">Runnable external test workflow basic test from the new dataset exploration.</div></td><td>Frozen CALB pulse-to-EIS test workflow ran, but did not beat baseline.</td><td>Long discharge windows in selected dis5_10p files.</td><td>Yes.</td><td>25 C, 10 C, 0 C, -10 C, -20 C.</td><td><span class="status-pill bad">No support</span></td><td><p><a class="button" href="../external-validation/dataset-exploration/">Open Panasonic dataset exploration</a></p></td></tr><tr><td><strong>Samsung INR21700-50E dataset screen</strong><div class="small-note">Pulse-side exploration only unless matching EIS is found.</div></td><td>No, not for the frozen bridge rule by itself.</td><td>Large HPPC-style current, voltage, and temperature archives.</td><td>No local EIS observed.</td><td>Cell and chamber temperature columns in sample.</td><td><span class="status-pill bad">Blocked</span></td><td><p><a class="button" href="../external-validation/dataset-exploration/">Open Samsung dataset screen</a></p></td></tr><tr><td><strong>Stanford SECL INR21700-M50T external validation check</strong><div class="small-note">Clean same-cell HPPC plus EIS external check.</div></td><td>Frozen CALB pulse-to-EIS test workflow ran, 0 quality-pass rows.</td><td>HPPC diagnostic files.</td><td>Yes, SOC20, SOC50, SOC80.</td><td>23 C nominal.</td><td><span class="status-pill bad">No support</span></td><td><p><a class="button" href="../sources/external/">Open Stanford SECL source artifacts</a></p></td></tr>
+          <tr><td><strong>CALB L148N58A comprehensive characterization study</strong><div class="small-note">Dataset: CALB L148N58A testing campaign. This project used it for internal pulse-to-EIS evidence.</div></td><td>Yes, internal time-domain and EIS comparison work.</td><td>HPPC, drive cycles, C/20 charge/discharge.</td><td>Yes.</td><td>10 C, 25 C, 40 C.</td><td><span class="status-pill good">246 / 246 internal rows</span></td><td><p><a class="button" href="../calb/data/">View CALB L148N58A study data</a> <a class="button" href="../calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">Open CALB readiness report</a></p></td></tr><tr><td><strong>CALCE Storage 25 C validation check</strong><div class="small-note">First outside-data check target for same-cell capacity plus EIS evidence.</div></td><td>Not runnable by the fixed rule yet.</td><td>Capacity workbooks, but no HPPC-compatible pulse windows in current inputs.</td><td>Yes, same-PLN impedance candidates.</td><td>25 C target subset.</td><td><span class="status-pill bad">24 joins, 0 runnable</span></td><td><p><a class="button" href="../external-validation/calce/">Open CALCE validation check</a> <a class="button" href="../external-validation/calce/data/candidate_pairings.csv">View CALCE pairings</a></p></td></tr><tr><td><strong>Cross-dataset missing-measurement study</strong><div class="small-note">Test whether pulse measurements can recover missing EIS and battery health information across datasets. Train on known rows, freeze a model, then score separate datasets once.</div></td><td>No frozen-rule DRT claim. It predicts measured EIS spectra from time-series features.</td><td>Uses pulse or GCPL current/voltage features before each EIS target.</td><td>Yes, fixed frequency grid real and negative-imaginary targets.</td><td>Mixed. Uses labels when available.</td><td><span class="status-pill warn">Cambridge partial support</span></td><td><p><a class="button" href="../presentations/index.html#cambridge-molicell-eis">Open Cambridge and Molicell presentations</a></p></td></tr><tr><td><strong>Graphite/LNMO dataset screen</strong><div class="small-note">Useful electrochemistry side dataset, weak for the frozen pulse-to-EIS gate.</div></td><td>No clean unchanged-rule fit.</td><td>qOCV and rate files. Frozen window finder sees weak candidates.</td><td>Yes, full-cell EIS by SOC.</td><td>Not the main selection axis here.</td><td><span class="status-pill warn">Weak fit</span></td><td><p><a class="button" href="../external-validation/dataset-exploration/">Open Graphite/LNMO dataset screen</a></p></td></tr><tr><td><strong>KIT RADAR4KIT external validation check</strong><div class="small-note">Second external target after corrected EIS addendum became available.</div></td><td>Frozen CALB pulse-to-EIS test workflow ran, but did not beat the voltage-only baseline.</td><td>Pulse/profile ageing data.</td><td>Yes, corrected EIS addendum required.</td><td>Dataset-dependent.</td><td><span class="status-pill bad">No support</span></td><td><p><a class="button" href="../sources/external/">Open RADAR4KIT source artifacts</a></p></td></tr><tr><td><strong>LG M50T 21700 degradation study, Expt 4 drive-cycle aging</strong><div class="small-note">Subset used: Expt 4 - Drive Cycle Aging (Control). Health-feature and drive-cycle ageing work. Not an EIS validation source.</div></td><td>Time-series prototype and feature work only.</td><td>GITT and ageing time-series files.</td><td>No same-cell EIS found in local inspection.</td><td>Protocol-dependent.</td><td><span class="status-pill warn">Not EIS validation</span></td><td><p><a class="button" href="../presentations/index.html#lg-m50t-expt4">Open LG M50T Expt 4 outputs</a></p></td></tr><tr><td><strong>NASA battery dataset screen</strong><div class="small-note">Later robustness check, not the first fight for the pulse failure mode.</div></td><td>Possible later, but not the clean frozen-rule target.</td><td>Charge and discharge cycling.</td><td>Yes, same-cell impedance evidence.</td><td>Mixed ambient conditions.</td><td><span class="status-pill warn">34 cells</span></td><td><p><a class="button" href="../external-validation/nasa/">Open NASA battery screen</a> <a class="button" href="../external-validation/nasa/data/candidate_pairings.csv">View NASA pairings</a></p></td></tr><tr><td><strong>Panasonic 18650PF frozen-rule basic test</strong><div class="small-note">Runnable external test workflow basic test from the new dataset exploration.</div></td><td>Frozen CALB pulse-to-EIS test workflow ran, but did not beat baseline.</td><td>Long discharge windows in selected dis5_10p files.</td><td>Yes.</td><td>25 C, 10 C, 0 C, -10 C, -20 C.</td><td><span class="status-pill bad">No support</span></td><td><p><a class="button" href="../external-validation/dataset-exploration/">Open Panasonic dataset exploration</a></p></td></tr><tr><td><strong>Samsung INR21700-50E dataset screen</strong><div class="small-note">Pulse-side exploration only unless matching EIS is found.</div></td><td>No, not for the frozen bridge rule by itself.</td><td>Large HPPC-style current, voltage, and temperature archives.</td><td>No local EIS observed.</td><td>Cell and chamber temperature columns in sample.</td><td><span class="status-pill bad">Blocked</span></td><td><p><a class="button" href="../external-validation/dataset-exploration/">Open Samsung dataset screen</a></p></td></tr><tr><td><strong>Stanford SECL INR21700-M50T external validation check</strong><div class="small-note">Clean same-cell HPPC plus EIS external check.</div></td><td>Frozen CALB pulse-to-EIS test workflow ran, 0 quality-pass rows.</td><td>HPPC diagnostic files.</td><td>Yes, SOC20, SOC50, SOC80.</td><td>23 C nominal.</td><td><span class="status-pill bad">No support</span></td><td><p><a class="button" href="../sources/external/">Open Stanford SECL source artifacts</a></p></td></tr>
         </tbody>
       </table>
     </div>
@@ -893,10 +955,16 @@ footer {
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-16 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-18 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>
   </div>
+  <script>
+  document.querySelector('[data-history-back]').addEventListener('click', function () {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = this.dataset.homeFallback;
+  });
+  </script>
 </body>
 </html>

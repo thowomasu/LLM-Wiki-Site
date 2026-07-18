@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CALB Backup Study | Battery DRT Research Outputs</title>
+  <meta name="description" content="Detailed internal pulse-to-EIS work from one CALB testing campaign, kept separate from the main cross-dataset study.">
+  <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/calb/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CALB Backup Study | Battery DRT Research Outputs">
+  <meta property="og:description" content="Detailed internal pulse-to-EIS work from one CALB testing campaign, kept separate from the main cross-dataset study.">
+  <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/calb/">
+  <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
+  <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
+  <style>:root {
+  color-scheme: light;
+  --sidebar-width: 260px;
+  --ink: #17202a;
+  --muted: #5f6b76;
+  --line: #d9e0e6;
+  --paper: #f6f8fa;
+  --panel: #ffffff;
+  --panel-strong: #ffffff;
+  --note-bg: #fff8f0;
+  --code-bg: #eef2f5;
+  --table-head: #edf3f8;
+  --blue: #225f9f;
+  --green: #137458;
+  --orange: #b85f17;
+  --red: #a83d4a;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e6edf3;
+  --muted: #a7b3bf;
+  --line: #2d3844;
+  --paper: #0f141a;
+  --panel: #151c24;
+  --panel-strong: #10161d;
+  --note-bg: #241b12;
+  --code-bg: #1f2a35;
+  --table-head: #1c2a36;
+  --blue: #78b7ff;
+  --green: #58d39d;
+  --orange: #f0a35a;
+  --red: #f08490;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+.site-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  transition: grid-template-columns 180ms ease;
+}
+.sidebar {
+  position: sticky;
+  z-index: 45;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 18px 14px;
+  background: var(--panel-strong);
+  border-right: 1px solid var(--line);
+  transform: translateX(0);
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+[data-sidebar="collapsed"] .site-shell {
+  grid-template-columns: 0 minmax(0, 1fr);
+}
+[data-sidebar="collapsed"] .sidebar {
+  transform: translateX(calc(-1 * var(--sidebar-width)));
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar-floating-toggle {
+  position: fixed;
+  z-index: 40;
+  top: 12px;
+  left: calc(var(--sidebar-width) + 10px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 13px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+  cursor: pointer;
+  transition: left 180ms ease, background 180ms ease;
+}
+.sidebar-floating-toggle:hover {
+  background: var(--paper);
+}
+[data-sidebar="collapsed"] .sidebar-floating-toggle {
+  left: 12px;
+}
+.brand {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.15;
+}
+.brand span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.side-section {
+  margin: 18px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.side-link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 6px 0;
+  padding: 7px 9px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.side-link:hover {
+  border-color: var(--line);
+  background: var(--paper);
+}
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  margin: 14px 0 8px;
+  padding: 8px 10px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.theme-toggle:hover {
+  background: var(--paper);
+}
+.theme-toggle .toggle-state {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.page-content {
+  min-width: 0;
+}
+header {
+  padding: 38px min(6vw, 64px) 24px;
+  background: var(--panel-strong);
+  border-bottom: 1px solid var(--line);
+}
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px min(5vw, 48px) 56px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font-size: 14px;
+}
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  max-width: 520px;
+  margin: 14px 0 24px;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 8px 14px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  font-size: 14px;
+  font-weight: 700;
+}
+.tab.active {
+  color: #fff;
+  border-color: var(--blue);
+  background: var(--blue);
+}
+a { color: var(--blue); }
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+h1, h2, h3 { margin: 0; line-height: 1.12; letter-spacing: 0; }
+h1 { max-width: 980px; font-size: clamp(38px, 6vw, 76px); }
+h2 { margin-top: 30px; margin-bottom: 14px; font-size: clamp(26px, 3.5vw, 42px); }
+h3 { margin-top: 18px; margin-bottom: 8px; font-size: 21px; }
+p { max-width: 900px; font-size: 18px; }
+code {
+  font-family: Consolas, Monaco, monospace;
+  background: var(--code-bg);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.kicker {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.lead { max-width: 980px; color: var(--muted); font-size: 22px; }
+.research-hero {
+  max-width: 1040px;
+}
+.research-question {
+  max-width: 980px;
+  margin: 8px 0 22px;
+  font-size: clamp(34px, 5vw, 64px);
+}
+.hero-evidence {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 960px;
+  margin: 20px 0;
+}
+.hero-point {
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  background: var(--panel);
+}
+.hero-point.limit { border-left-color: var(--red); }
+.hero-point strong,
+.hero-point span { display: block; }
+.hero-point span { margin-top: 5px; color: var(--muted); }
+.hero-cta { margin-top: 8px; }
+.hero-cta .button {
+  color: #fff;
+  border-color: var(--blue);
+  background: var(--blue);
+  font-weight: 800;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.grid.two { grid-template-columns: 1fr; }
+.start-grid,
+.summary-grid,
+.terms-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  max-width: 860px;
+  margin: 20px 0 28px;
+}
+.start-card,
+.summary-card,
+.term-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 15px 16px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.reader-path {
+  color: inherit;
+  text-decoration: none;
+}
+.reader-path:hover { border-color: var(--blue); }
+.evidence-status {
+  max-width: 900px;
+  margin: 24px 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.status-list {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.status-list li {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.pipeline-visual {
+  max-width: 1050px;
+  margin: 26px 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.pipeline-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  margin: 18px 0 12px;
+}
+.pipeline-step {
+  grid-column: span 1;
+  min-height: 210px;
+  padding: 14px 12px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--paper);
+}
+.pipeline-step strong,
+.pipeline-step span { display: block; }
+.pipeline-step span { margin-top: 7px; color: var(--muted); font-size: 14px; }
+.pipeline-arrow { color: var(--muted); text-align: center; font-size: 28px; }
+.pipeline-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pipeline-label {
+  color: var(--red);
+  font-weight: 800;
+}
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+.page-history {
+  position: fixed;
+  z-index: 38;
+  top: 12px;
+  right: 12px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 13px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.math-block {
+  max-width: 900px;
+  margin: 18px 0;
+  padding: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
+}
+.journey {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  max-width: 760px;
+  margin: 18px auto 30px;
+  text-align: center;
+}
+.journey-step {
+  position: relative;
+  min-width: 0;
+  padding: 13px 12px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.journey-step:not(:last-child)::after {
+  content: "v";
+  position: absolute;
+  right: 50%;
+  bottom: -14px;
+  z-index: 2;
+  width: 16px;
+  color: var(--muted);
+  background: var(--panel);
+  text-align: center;
+  font-weight: 800;
+}
+.journey-step strong,
+.journey-step span { display: block; }
+.journey-step strong { margin-bottom: 4px; font-size: 15px; }
+.journey-step span { color: var(--muted); font-size: 13px; }
+.start-card h3,
+.summary-card h3,
+.term-card h3 {
+  margin: 0;
+  font-size: 19px;
+}
+.start-card p,
+.summary-card p,
+.term-card p {
+  margin: 0;
+  font-size: 15px;
+}
+.reader-path {
+  display: grid;
+  gap: 12px;
+  margin: 14px 0;
+}
+.reader-card {
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teal);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 14px 16px;
+}
+.reader-card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+.reader-card p {
+  margin: 0;
+  color: var(--muted);
+}
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+.card-actions .button {
+  width: auto;
+}
+.terms-strip {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px;
+}
+.term-card {
+  border-left-color: var(--green);
+}
+.term-card strong {
+  font-size: 14px;
+}
+.term-card span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.provenance-detail {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  word-break: break-word;
+}
+.provenance-note {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+}
+.provenance-note strong {
+  color: var(--text);
+}
+.card {
+  display: grid;
+  grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
+  gap: 12px 24px;
+  align-items: start;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.card h3 {
+  margin-top: 0;
+}
+.card p,
+.card ul,
+.card ol,
+.card .label,
+.card .metric {
+  grid-column: 2;
+}
+.card h3:first-child {
+  grid-column: 1;
+}
+.metric {
+  display: block;
+  margin: 8px 0;
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1;
+  font-weight: 800;
+}
+.good { color: var(--green); }
+.warn { color: var(--orange); }
+.bad { color: var(--red); }
+.label { color: var(--muted); font-size: 15px; }
+.note {
+  margin: 22px 0;
+  padding: 15px 17px;
+  border-left: 5px solid var(--orange);
+  background: var(--note-bg);
+}
+.source-list {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 28px;
+}
+.source-item {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.source-item code { word-break: break-word; }
+.source-kind {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: var(--panel);
+}
+th, td {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+th { background: var(--table-head); }
+.presentation-frame {
+  width: 100%;
+  height: 78vh;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.table-wrap table {
+  min-width: 980px;
+  margin: 0;
+  border: 0;
+}
+.table-wrap th,
+.table-wrap td {
+  border-top: 0;
+  border-left: 0;
+}
+.table-wrap th:last-child,
+.table-wrap td:last-child { border-right: 0; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.catalog-table {
+  table-layout: fixed;
+}
+.catalog-table th,
+.catalog-table td {
+  line-height: 1.45;
+}
+.catalog-table th:nth-child(1) { width: 21%; }
+.catalog-table th:nth-child(2) { width: 18%; }
+.catalog-table th:nth-child(3) { width: 27%; }
+.catalog-table th:nth-child(4) { width: 18%; }
+.catalog-table th:nth-child(5) { width: 16%; }
+.briefing-table th:nth-child(1) { width: 22%; }
+.briefing-table th:nth-child(2) { width: 35%; }
+.briefing-table th:nth-child(3) { width: 25%; }
+.briefing-table th:nth-child(4) { width: 18%; }
+.catalog-title {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+.catalog-detail {
+  color: var(--muted);
+  font-size: 14px;
+}
+.open-cell .button {
+  width: 100%;
+  justify-content: center;
+}
+.open-cell {
+  display: grid;
+  gap: 8px;
+}
+.metric-inline {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--green);
+  font-size: 22px;
+  font-weight: 800;
+}
+.metric-inline.warn { color: var(--orange); }
+.metric-inline.bad { color: var(--red); }
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status-pill.good { color: var(--green); }
+.status-pill.warn { color: var(--orange); }
+.status-pill.bad { color: var(--red); }
+.small-note {
+  color: var(--muted);
+  font-size: 14px;
+}
+footer {
+  padding: 22px min(7vw, 72px);
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  background: var(--panel-strong);
+}
+@media (min-width: 851px) {
+  .sidebar-floating-toggle [data-sidebar-label] { display: none; }
+}
+@media (max-width: 850px) {
+  .site-shell { display: block; width: 100vw; max-width: 100vw; overflow-x: hidden; }
+  .page-content { width: 100vw; min-width: 0; max-width: 100vw; overflow-x: hidden; }
+  header,
+  main { width: 100%; min-width: 0; max-width: 100%; }
+  header > *,
+  main > * { min-width: 0; max-width: 100%; }
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  .lead { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+  .tabs { width: 100%; max-width: 100%; }
+  .sidebar {
+    position: fixed;
+    z-index: 60;
+    inset: 0 auto 0 0;
+    width: min(86vw, 330px);
+    height: 100vh;
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+    box-shadow: 18px 0 40px rgba(0, 0, 0, .28);
+  }
+  [data-sidebar="collapsed"] .sidebar {
+    display: block;
+    transform: translateX(-105%);
+  }
+  .sidebar-floating-toggle {
+    left: 12px;
+  }
+  [data-sidebar="expanded"] .sidebar-floating-toggle {
+    left: min(calc(86vw + 10px), 340px);
+  }
+  .hero-evidence { grid-template-columns: 1fr; }
+  .pipeline-flow { grid-template-columns: 1fr; }
+  .pipeline-arrow { transform: rotate(90deg); }
+  .pipeline-step { min-height: 0; }
+  .status-list li { grid-template-columns: 1fr; gap: 6px; }
+  .table-wrap {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+  .table-wrap table,
+  main > table {
+    display: block;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+  }
+  .table-wrap thead,
+  main > table thead { display: none; }
+  .table-wrap tbody,
+  .table-wrap tr,
+  .table-wrap td,
+  main > table tbody,
+  main > table tr,
+  main > table td { display: block; width: 100%; }
+  .table-wrap tr,
+  main > table tr {
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--blue);
+    border-radius: 7px;
+    background: var(--panel);
+  }
+  .table-wrap td,
+  main > table td {
+    padding: 9px 0;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .table-wrap td:last-child,
+  main > table td:last-child { border-bottom: 0; }
+  .table-wrap td::before,
+  main > table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  .grid, .grid.two { grid-template-columns: 1fr; }
+  .card {
+    display: block;
+  }
+  .card p,
+  .card ul,
+  .card ol,
+  .card .label,
+  .card .metric,
+  .card h3:first-child {
+    grid-column: auto;
+  }
+  h1 { font-size: clamp(32px, 10vw, 48px); }
+  h2 { font-size: clamp(23px, 7vw, 32px); }
+  main { padding: 24px min(4vw, 20px) 44px; }
+  header { padding: 76px min(5vw, 24px) 22px; }
+  p { font-size: 17px; }
+}</style>
+  <script>
+(function () {
+  var key = "llm-wiki-theme";
+  var sidebarKey = "llm-wiki-sidebar";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "☰" : "×";
+  }
+  function labelResponsiveTables() {
+    document.querySelectorAll("table").forEach(function (table) {
+      var headers = Array.from(table.querySelectorAll("thead th")).map(function (cell) {
+        return cell.textContent.trim();
+      });
+      table.querySelectorAll("tbody tr").forEach(function (row) {
+        Array.from(row.children).forEach(function (cell, index) {
+          if (cell.tagName === "TD" && headers[index]) cell.dataset.label = headers[index];
+        });
+      });
+    });
+  }
+  var initialTheme = preferredTheme();
+  var initialSidebar = preferredSidebar();
+  applyTheme(initialTheme);
+  applySidebar(initialSidebar);
+  window.addEventListener("DOMContentLoaded", function () {
+    applyTheme(document.documentElement.dataset.theme || initialTheme);
+    applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
+    labelResponsiveTables();
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
+    document.querySelectorAll(".sidebar a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) applySidebar("collapsed");
+      });
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") applySidebar("collapsed");
+    });
+  });
+})();
+</script>
+  <script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]},
+  options: {skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <button class="page-history" type="button" data-history-back data-home-fallback="../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">&times;</span><span data-sidebar-label>Close</span></button>
+  <div class="site-shell">
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
+<a class="side-link" href="../index.html#project-summary">Project summary</a>
+<div class="side-section">Main study</div>
+<a class="side-link" href="../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../cross-dataset/missing-measurement-v4/">Version 4</a>
+<a class="side-link" href="../cross-dataset/missing-measurement-v5/">Version 5</a>
+<a class="side-link" href="../cross-dataset/missing-measurement-v6/">Version 6</a>
+<a class="side-link" href="../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
+<div class="side-section">Results and limitations</div>
+<a class="side-link" href="../cross-dataset/version-comparison/">Version results and limits</a>
+<a class="side-link" href="../external-validation/">External validation status</a>
+<a class="side-link" href="../datasets/">Dataset status map</a>
+<div class="side-section">Datasets and sources</div>
+<a class="side-link" href="../presentations/index.html#cambridge-molicell-eis">Cross-dataset evidence and figures</a>
+<a class="side-link" href="../cross-dataset/demo_pipeline_presentation.html#methodology">Cross-dataset methods and downloads</a>
+<a class="side-link" href="../sources/">Papers, data, and sources</a>
+<a class="side-link" href="../external-validation/dataset-exploration/">Dataset screening evidence</a>
+<div class="side-section">Backup study</div>
+<a class="side-link" href="../calb/">CALB project overview</a>
+<a class="side-link" href="../presentations/index.html#calb-study">CALB evidence and figures</a>
+<a class="side-link" href="../calb/manual/">CALB methods guide</a>
+<div class="side-section">Other studies</div>
+<a class="side-link" href="../presentations/index.html#lg-m50t-expt4">LG M50T Expt 4 health-feature study</a>
+<a class="side-link" href="../presentations/index.html#drt-pipeline">DIB time-domain DRT pilot</a>
+<div class="side-section">Glossary</div>
+<a class="side-link" href="../glossary/">Plain-language glossary</a></aside>
+    <div class="page-content">
+      <header>
+
+        <div class="kicker">Battery DRT Research Outputs</div>
+        <h1>CALB Backup Study</h1>
+        <p class="lead">Detailed internal pulse-to-EIS work from one CALB testing campaign, kept separate from the main cross-dataset study.</p>
+
+      </header>
+      <main>
+
+    <section class="note"><strong>Role on this site:</strong> CALB is the backup study. It provides detailed same-dataset pulse and EIS evidence, but it is not external validation.</section>
+    <section id="project-summary"><h2>What the CALB study contains</h2><p>The CALB L148N58A testing campaign contains EIS, pulse tests, capacity checks, and drive cycles from one commercial prismatic-cell study. This makes it useful for method development and careful internal comparisons.</p></section>
+    <section class="metric-grid"><article class="metric-card"><span>Internal quality-pass rows</span><strong>246 / 246</strong></article><article class="metric-card"><span>Evidence type</span><strong>Internal</strong></article><article class="metric-card"><span>External status</span><strong>Not validated</strong></article></section>
+    <h2>Use this study for</h2><ul><li>Understanding the pulse-to-EIS bridge inside one testing campaign.</li><li>Reviewing measured EIS, pulse, temperature, and drive-cycle outputs.</li><li>Inspecting method limits and failed external checks.</li></ul>
+    <h2>Do not use it for</h2><ul><li>Claiming that the fixed CALB rule works on other cell types.</li><li>Claiming that drive-cycle transfer is externally validated.</li><li>Rescuing the separate cross-dataset missing-measurement result.</li></ul>
+    <section class="summary-grid"><article class="summary-card"><h3>Study overview</h3><p>Read the CALB question, testing campaign, and main internal result.</p><div class="card-actions"><a class="button" href="03_Professor_Report/calb_l148n58a_professor_report.html">Open overview</a></div></article><article class="summary-card"><h3>Evidence and figures</h3><p>Open the project update and detailed result pages.</p><div class="card-actions"><a class="button" href="../presentations/index.html#calb-study">Open CALB evidence</a></div></article><article class="summary-card"><h3>Methods guide</h3><p>See how the public data and analysis outputs are organized.</p><div class="card-actions"><a class="button" href="manual/">Open methods guide</a></div></article><article class="summary-card"><h3>Results and limits</h3><p>Read the strongest result together with the drive-cycle and external-validation limits.</p><div class="card-actions"><a class="button" href="03_Professor_Report/calb_l148n58a_viability_presentation.html">Open results and limits</a></div></article></section>
+
+      </main>
+      <footer>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-18 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
+      </footer>
+    </div>
+  </div>
+  <script>
+  document.querySelector('[data-history-back]').addEventListener('click', function () {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = this.dataset.homeFallback;
+  });
+  </script>
+</body>
+</html>

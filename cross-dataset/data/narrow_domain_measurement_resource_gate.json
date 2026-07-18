@@ -1,0 +1,98 @@
+{
+  "created_date": "2026-07-18",
+  "study_name": "narrow_domain_calibration_and_controlled_measurement_study",
+  "not_a_version": "This is not V7.",
+  "decision": "no_go_for_purchase_measurement_or_model_training",
+  "verdict": "resource_gate_blocked_pending_information",
+  "data_collection_authorized": false,
+  "model_training_authorized": false,
+  "verification_scope": "Current repository evidence only. Physical lab inventory and approvals require confirmation by the supervisor or lab owner.",
+  "source_hashes_sha256": {
+    "narrow_domain_measurement_feasibility.md": "5486399c4b22c39270d18d4ec670af768863c71140d6145394a6975f543c3d79",
+    "narrow_domain_measurement_feasibility_audit.json": "3e0c1e639c2250cad3c4cc99ca34db0fcec3d7f4828e7e6050fd3c49cda50a81",
+    "missing_modality_v6_hard_decision.json": "667b095fa96e6abf1480bc52c936979fe536a5912848bcaaa3cbc7eda5d08f0b",
+    "missing_modality_v6_completion_audit.json": "8399144624191ee6b8c32e1ebcd5866fddf216d4425d64171311d49ddd81fd25"
+  },
+  "evidence_boundary": {
+    "v5_status": "external_validation_failed",
+    "v5_verdict": "no support",
+    "v6_verdict": "stop_universal_model_path",
+    "v6_candidate_frozen": false,
+    "future_v6_holdout_search_authorized": false,
+    "leonardi_role": "positive_exact_cell_same_dataset_prototype_only",
+    "sicwell_role": "development_protocol_reference_and_failure_analysis_only",
+    "pool_as_generic_nmc_domain": false
+  },
+  "campaign_floor": {
+    "minimum_cells": 12,
+    "minimum_split": {
+      "development": 6,
+      "calibration": 3,
+      "locked_evaluation": 3
+    },
+    "preferred_cells": 18,
+    "preferred_split": {
+      "development": 10,
+      "calibration": 4,
+      "locked_evaluation": 4
+    },
+    "pilot_cells_remain_development_only": true
+  },
+  "inventory": [
+    {
+      "item": "exact_cell_model_and_one_lot",
+      "status": "not_evidenced",
+      "hard_block": true
+    },
+    {
+      "item": "at_least_12_matching_independent_cells",
+      "status": "not_evidenced",
+      "hard_block": true
+    },
+    {
+      "item": "written_supervisor_and_safety_approval",
+      "status": "not_evidenced",
+      "hard_block": true
+    },
+    {
+      "item": "safe_temperature_control_at_25_c",
+      "status": "not_evidenced",
+      "hard_block": true
+    },
+    {
+      "item": "cycler_capacity_limits_channels_and_booking",
+      "status": "not_evidenced",
+      "hard_block": true
+    },
+    {
+      "item": "raw_pulse_logging",
+      "status": "not_evidenced",
+      "hard_block": false
+    },
+    {
+      "item": "calibrated_eis_system_fixture_and_booking",
+      "status": "not_evidenced",
+      "hard_block": true
+    },
+    {
+      "item": "time_for_meaningful_soh_range",
+      "status": "not_evidenced",
+      "hard_block": true
+    },
+    {
+      "item": "raw_data_storage_backup_and_join_plan",
+      "status": "not_evidenced",
+      "hard_block": false
+    },
+    {
+      "item": "trained_operator_and_access",
+      "status": "not_evidenced",
+      "hard_block": false
+    }
+  ],
+  "candidate_cell_rule": "Prefer Samsung INR18650-30Q only if at least 12 same-lot cells and safe testing are verified. Otherwise use one available exact model and remove any direct Leonardi-transfer claim.",
+  "pass_rule": "Pass only when every hard block is cleared with documentary evidence and at least 12 matching independent cells fit one executable campaign schedule.",
+  "fail_rule": "If any hard requirement is confirmed missing, record a failed gate and stop the study.",
+  "next_authorized_action": "Administrative verification with the supervisor or lab owner only.",
+  "claim_boundary": "A blocked resource gate is not a model result and does not authorize purchase, measurement, a pilot, or training."
+}

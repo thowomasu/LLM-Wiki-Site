@@ -21,6 +21,7 @@
     if (label) label.textContent = theme === "dark" ? "On" : "Off";
   }
   function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
     try {
       var saved = localStorage.getItem(sidebarKey);
       if (saved === "collapsed" || saved === "expanded") return saved;
@@ -31,12 +32,27 @@
     document.documentElement.dataset.sidebar = state;
     var button = document.querySelector("[data-sidebar-toggle]");
     var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
     if (button) {
       var collapsed = state === "collapsed";
-      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Hide sidebar");
-      button.setAttribute("title", collapsed ? "Show sidebar" : "Hide sidebar");
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
     }
-    if (icon) icon.textContent = state === "collapsed" ? ">" : "<";
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "☰" : "×";
+  }
+  function labelResponsiveTables() {
+    document.querySelectorAll("table").forEach(function (table) {
+      var headers = Array.from(table.querySelectorAll("thead th")).map(function (cell) {
+        return cell.textContent.trim();
+      });
+      table.querySelectorAll("tbody tr").forEach(function (row) {
+        Array.from(row.children).forEach(function (cell, index) {
+          if (cell.tagName === "TD" && headers[index]) cell.dataset.label = headers[index];
+        });
+      });
+    });
   }
   var initialTheme = preferredTheme();
   var initialSidebar = preferredSidebar();
@@ -45,6 +61,7 @@
   window.addEventListener("DOMContentLoaded", function () {
     applyTheme(document.documentElement.dataset.theme || initialTheme);
     applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
+    labelResponsiveTables();
     var toggle = document.querySelector("[data-theme-toggle]");
     if (toggle) {
       toggle.addEventListener("click", function () {
@@ -61,9 +78,17 @@
         applySidebar(next);
       });
     }
+    document.querySelectorAll(".sidebar a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) applySidebar("collapsed");
+      });
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") applySidebar("collapsed");
+    });
   });
 })();
-  </script>
+</script>
   <style>
     :root {
       color-scheme: light;
@@ -183,22 +208,45 @@
   <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/calb/03_Professor_Report/calb_l148n58a_viability_presentation.html">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
+<script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]},
+  options: {skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-<button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-label="Hide sidebar" title="Hide sidebar"><span data-sidebar-icon>&lt;</span></button>
+<button class="page-history" type="button" data-history-back data-home-fallback="../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
+<button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">&times;</span><span data-sidebar-label>Close</span></button>
 <div class="site-shell">
-  <aside class="sidebar">
-    <a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Public battery analysis outputs and source trail</span></a>
-    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
-    <div class="side-section">Project</div>
-    <a class="side-link" href="../../index.html">Overview</a>
-    <a class="side-link" href="../../presentations/">Presentations</a>
-    <a class="side-link" href="../data/">CALB data</a>
-    <a class="side-link" href="../../sources/">Sources</a>
-    <a class="side-link" href="../../glossary/">Glossary</a>
-    <div class="side-section">CALB Page</div>
-    <a class="side-link" href="#summary">Summary</a><a class="side-link" href="#objective">Objective</a><a class="side-link" href="#methodology">Methodology</a><a class="side-link" href="#results">Results</a><a class="side-link" href="#inputs">Inputs</a><a class="side-link" href="#math">Math</a><a class="side-link" href="#graphs">Graphs</a><a class="side-link" href="#code">Code</a><a class="side-link" href="#outputs">Outputs</a><a class="side-link" href="#glossary">Glossary</a><a class="side-link" href="#limits">Limits</a><a class="side-link" href="#conclusion">Conclusion</a>
-  </aside>
+  <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
+<a class="side-link" href="../../index.html#project-summary">Project summary</a>
+<div class="side-section">Main study</div>
+<a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
+<a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
+<a class="side-link" href="../../cross-dataset/missing-measurement-v6/">Version 6</a>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
+<div class="side-section">Results and limitations</div>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Version results and limits</a>
+<a class="side-link" href="../../external-validation/">External validation status</a>
+<a class="side-link" href="../../datasets/">Dataset status map</a>
+<div class="side-section">Datasets and sources</div>
+<a class="side-link" href="../../presentations/index.html#cambridge-molicell-eis">Cross-dataset evidence and figures</a>
+<a class="side-link" href="../../cross-dataset/demo_pipeline_presentation.html#methodology">Cross-dataset methods and downloads</a>
+<a class="side-link" href="../../sources/">Papers, data, and sources</a>
+<a class="side-link" href="../../external-validation/dataset-exploration/">Dataset screening evidence</a>
+<div class="side-section">Backup study</div>
+<a class="side-link" href="../../calb/">CALB project overview</a>
+<a class="side-link" href="../../presentations/index.html#calb-study">CALB evidence and figures</a>
+<a class="side-link" href="../../calb/manual/">CALB methods guide</a>
+<div class="side-section">Other studies</div>
+<a class="side-link" href="../../presentations/index.html#lg-m50t-expt4">LG M50T Expt 4 health-feature study</a>
+<a class="side-link" href="../../presentations/index.html#drt-pipeline">DIB time-domain DRT pilot</a>
+<div class="side-section">Glossary</div>
+<a class="side-link" href="../../glossary/">Plain-language glossary</a></aside>
   <div class="page-content">
     <header>
       <div class="kicker">CALB pipeline, self-contained technical page</div>
@@ -768,5 +816,14 @@ def run() -&gt; dict[str, object]:
 </main>
   </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var back = document.querySelector('[data-history-back]');
+  if (back) back.addEventListener('click', function () {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = back.dataset.homeFallback;
+  });
+});
+</script>
 </body>
 </html>

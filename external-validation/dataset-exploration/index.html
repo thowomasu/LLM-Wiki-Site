@@ -131,25 +131,43 @@
   <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/external-validation/dataset-exploration/">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
+<script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]},
+  options: {skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
+<button class="page-history" type="button" data-history-back data-home-fallback="../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
   <div class="site-shell">
-    <aside class="sidebar">
-      <a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Research outputs, presentations, data, and source trail</span></a>
-      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
-      <div class="side-section">Project</div>
-      <a class="side-link" href="../../index.html">Overview</a>
-      <a class="side-link" href="../../presentations/">Presentations</a>
-      <a class="side-link" href="../../datasets/">Datasets</a>
-      <a class="side-link" href="../../sources/">Sources</a>
-      <a class="side-link" href="../../glossary/">Glossary</a>
-      <div class="side-section">External Validation</div>
-      <a class="side-link" href="../">Dataset comparison</a>
-      <a class="side-link" href="./">New dataset exploration</a>
-      <a class="side-link" href="../calce/">CALCE</a>
-      <a class="side-link" href="../nasa/">NASA Battery</a>
-      <a class="side-link" href="../../sources/external/">External sources</a>
-    </aside>
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
+<a class="side-link" href="../../index.html#project-summary">Project summary</a>
+<div class="side-section">Main study</div>
+<a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
+<a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
+<a class="side-link" href="../../cross-dataset/missing-measurement-v6/">Version 6</a>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 4, 5, and 6</a>
+<div class="side-section">Results and limitations</div>
+<a class="side-link" href="../../cross-dataset/version-comparison/">Version results and limits</a>
+<a class="side-link" href="../../external-validation/">External validation status</a>
+<a class="side-link" href="../../datasets/">Dataset status map</a>
+<div class="side-section">Datasets and sources</div>
+<a class="side-link" href="../../presentations/index.html#cambridge-molicell-eis">Cross-dataset evidence and figures</a>
+<a class="side-link" href="../../cross-dataset/demo_pipeline_presentation.html#methodology">Cross-dataset methods and downloads</a>
+<a class="side-link" href="../../sources/">Papers, data, and sources</a>
+<a class="side-link" href="../../external-validation/dataset-exploration/">Dataset screening evidence</a>
+<div class="side-section">Backup study</div>
+<a class="side-link" href="../../calb/">CALB project overview</a>
+<a class="side-link" href="../../presentations/index.html#calb-study">CALB evidence and figures</a>
+<a class="side-link" href="../../calb/manual/">CALB methods guide</a>
+<div class="side-section">Other studies</div>
+<a class="side-link" href="../../presentations/index.html#lg-m50t-expt4">LG M50T Expt 4 health-feature study</a>
+<a class="side-link" href="../../presentations/index.html#drt-pipeline">DIB time-domain DRT pilot</a>
+<div class="side-section">Glossary</div>
+<a class="side-link" href="../../glossary/">Plain-language glossary</a></aside>
     <div class="page-content">
       <header>
         <div class="kicker">External validation scouting</div>
@@ -292,5 +310,14 @@
       </footer>
     </div>
   </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var back = document.querySelector('[data-history-back]');
+  if (back) back.addEventListener('click', function () {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = back.dataset.homeFallback;
+  });
+});
+</script>
 </body>
 </html>

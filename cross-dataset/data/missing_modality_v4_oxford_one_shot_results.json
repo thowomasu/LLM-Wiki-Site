@@ -1,0 +1,85 @@
+{
+  "created_utc": "2026-07-14T14:22:19.935117+00:00",
+  "status": "external_validation_passed",
+  "verdict": "external support",
+  "dataset": "Oxford Path Dependent Battery Degradation Dataset Parts 1 and 2",
+  "dataset_dois": [
+    "10.5287/bodleian:v0ervBv6p",
+    "10.5287/bodleian:2zvyknyRg"
+  ],
+  "frozen_model_version": "missing_measurement_v4_scale_normalized_frozen_1",
+  "frozen_model_manifest_sha256": "9dc565b30b4f7419cc3b93a4cb7128b7a989e36592111b03bc97954647dbb925",
+  "validation_contract_sha256": "efbcfeb0e914b7f0fe4365b467b20a2b50882434dd8fc1a83e35faf032df7492",
+  "frequency_uncertainty_lock_sha256": "0b2c873a0cf042018e691a49058d4a6d9ab28483a4c697dac8f6dd07d9bd5e71",
+  "validation_matrix_sha256": {
+    "inclusive_documented_endpoints": "8222cf1e476ebd2dfb98685ee912f4293499a9afc418ba491830b24c79d567e6",
+    "exact_six_points_per_decade": "cb3d3ea40e8f1ef6401f48060851b2d17a8a695734ee1e5749703e870ff82f8d"
+  },
+  "cells": 3,
+  "rows_per_mapping": 3,
+  "metrics_by_frequency_mapping": {
+    "inclusive_documented_endpoints": {
+      "eis_zreal": {
+        "error_metric": "pooled_rmse_ohm",
+        "model_error": 0.01332889356041136,
+        "baseline_error": 0.0242743564045634,
+        "relative_improvement": 0.4509064076398901,
+        "passes_5_percent_gate": true
+      },
+      "eis_znegimag": {
+        "error_metric": "pooled_rmse_ohm",
+        "model_error": 0.009889148066579869,
+        "baseline_error": 0.013301514632333864,
+        "relative_improvement": 0.256539699430851,
+        "passes_5_percent_gate": true
+      },
+      "rpt_soh": {
+        "error_metric": "pooled_mae_percentage_points",
+        "model_error": 3.7949738808639544,
+        "baseline_error": 19.272764018082473,
+        "relative_improvement": 0.8030913533054543,
+        "passes_5_percent_gate": true
+      }
+    },
+    "exact_six_points_per_decade": {
+      "eis_zreal": {
+        "error_metric": "pooled_rmse_ohm",
+        "model_error": 0.01304045884696554,
+        "baseline_error": 0.02477681978741009,
+        "relative_improvement": 0.47368310546489817,
+        "passes_5_percent_gate": true
+      },
+      "eis_znegimag": {
+        "error_metric": "pooled_rmse_ohm",
+        "model_error": 0.009781622195091589,
+        "baseline_error": 0.013346992154067159,
+        "relative_improvement": 0.26712909678972974,
+        "passes_5_percent_gate": true
+      },
+      "rpt_soh": {
+        "error_metric": "pooled_mae_percentage_points",
+        "model_error": 3.746243344943366,
+        "baseline_error": 19.272764018082473,
+        "relative_improvement": 0.8056198196881106,
+        "passes_5_percent_gate": true
+      }
+    }
+  },
+  "worst_case": {
+    "eis_zreal": {
+      "minimum_relative_improvement": 0.4509064076398901,
+      "passes_under_both_mappings": true
+    },
+    "eis_znegimag": {
+      "minimum_relative_improvement": 0.256539699430851,
+      "passes_under_both_mappings": true
+    },
+    "rpt_soh": {
+      "minimum_relative_improvement": 0.8030913533054543,
+      "passes_under_both_mappings": true
+    }
+  },
+  "all_three_heads_pass_under_both_mappings": true,
+  "post_holdout_tuning": false,
+  "claim_boundary": "One untouched external NCA dataset at 24 C and 50 percent SOC, with both defensible publisher-frequency mappings required to pass."
+}

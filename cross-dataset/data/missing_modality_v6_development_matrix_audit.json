@@ -1,0 +1,94 @@
+{
+  "created_utc": "2026-07-16T13:06:54.893376+00:00",
+  "status": "pass",
+  "purpose": "Unified V6 development matrix from spent evidence only; not validation.",
+  "matrix_sha256": "6a213b77ab59bd24d52c828bb5b3c8e54310e707a031a2a95919d705f565ef95",
+  "contract_sha256": "eadf8d088b0b8569026dd82bc41e330a6474987d5472e295445c4dd755080fae",
+  "dataset_role_manifest_sha256": "3dbc82457969a44c568b8d4d516ad68fa27325c51b0b2757552a21bbd2f76064",
+  "rows": 1383,
+  "cells": 51,
+  "datasets": 4,
+  "by_dataset": {
+    "bayreuth_codemore_2026": {
+      "rows": 28,
+      "cells": 14,
+      "checkpoints": 28,
+      "soc_values": [
+        50.0
+      ],
+      "soh_range_percent": [
+        68.70684940966869,
+        91.47499786200592
+      ],
+      "rint_increase_range_percent": [
+        13.84692633155448,
+        424.0778532810696
+      ]
+    },
+    "leonardi": {
+      "rows": 460,
+      "cells": 8,
+      "checkpoints": 92,
+      "soc_values": [
+        0.0,
+        25.0,
+        50.0,
+        75.0,
+        100.0
+      ],
+      "soh_range_percent": [
+        77.30402761431795,
+        98.53820798402704
+      ],
+      "rint_increase_range_percent": [
+        -7.174985968063822,
+        551.4212145672443
+      ]
+    },
+    "oxford_path_dependent": {
+      "rows": 3,
+      "cells": 3,
+      "checkpoints": 3,
+      "soc_values": [
+        50.0
+      ],
+      "soh_range_percent": [
+        79.4383670933877,
+        81.57133598232512
+      ],
+      "rint_increase_range_percent": [
+        70.99296899360236,
+        124.0486291120114
+      ]
+    },
+    "sicwell": {
+      "rows": 892,
+      "cells": 26,
+      "checkpoints": 223,
+      "soc_values": [
+        20.0,
+        40.0,
+        60.0,
+        80.0
+      ],
+      "soh_range_percent": [
+        55.20883510131465,
+        99.57361161034036
+      ],
+      "rint_increase_range_percent": [
+        -38.19201713256257,
+        114.07009435031722
+      ]
+    }
+  },
+  "checks": {
+    "future_holdout_absent": true,
+    "only_locked_development_roles": true,
+    "explicit_cell_ids": true,
+    "unique_sample_ids": true,
+    "numeric_values_finite": true,
+    "positive_baseline_impedance_scale": true,
+    "leonardi_fresh_identity_rows_removed": true
+  },
+  "claim_boundary": "All four datasets were inspected or scored before V6. Dataset and cell groups must remain intact in evaluation."
+}
