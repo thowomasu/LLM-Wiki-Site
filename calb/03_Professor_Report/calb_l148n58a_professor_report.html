@@ -120,6 +120,7 @@
 (function () {
   var key = "llm-wiki-theme";
   var sidebarKey = "llm-wiki-sidebar";
+  var glossaryEntries = [{"term": "EIS", "expansion": "Electrochemical Impedance Spectroscopy", "definition": "A laboratory test that measures how a battery resists and stores electrical signals across many frequencies.", "aliases": ["EIS"]}, {"term": "SOH", "expansion": "State of Health", "definition": "A measure of how much useful battery health remains, usually compared with the battery when it was new.", "aliases": ["SOH", "state of health"]}, {"term": "SOC", "expansion": "State of Charge", "definition": "How full the battery is at the time of a measurement, usually shown as a percentage.", "aliases": ["SOC", "state of charge"]}, {"term": "DRT", "expansion": "Distribution of Relaxation Times", "definition": "A way to separate a battery response into processes that act over different time scales.", "aliases": ["DRT", "distribution of relaxation times"]}, {"term": "TDM", "expansion": "Time-Domain Measurement", "definition": "Voltage and current recorded over time during a pulse, rest period, or other battery test.", "aliases": ["TDM", "time-domain measurement", "time-domain measurements"]}, {"term": "HPPC", "expansion": "Hybrid Pulse Power Characterization", "definition": "A battery test that uses fixed charge and discharge pulses to measure resistance and power behaviour.", "aliases": ["HPPC"]}, {"term": "OCV", "expansion": "Open-Circuit Voltage", "definition": "Battery voltage measured while no current is flowing after the battery has had time to rest.", "aliases": ["OCV", "open-circuit voltage"]}, {"term": "ECM", "expansion": "Equivalent Circuit Model", "definition": "A simplified electrical circuit used to copy important parts of battery behaviour.", "aliases": ["ECM", "equivalent circuit model", "equivalent circuit models"]}, {"term": "RPT", "expansion": "Reference Performance Test", "definition": "A repeated check-up used to track battery capacity, resistance, and health during ageing.", "aliases": ["RPT", "reference performance test", "reference performance tests"]}, {"term": "Baseline", "expansion": "Simple comparison method", "definition": "A basic prediction that the proposed method must beat to show that its extra complexity is useful.", "aliases": ["baseline", "baselines"]}, {"term": "Internal result", "expansion": "Result from development data", "definition": "A result from the same dataset family used to build the method. It helps development, but it is not independent proof.", "aliases": ["internal result", "internal results", "internal evidence", "internal test", "internal tests", "same-dataset evidence", "same-dataset result", "same-dataset results", "development result", "development results"]}, {"term": "Held-out-cell fold", "expansion": "One repeated left-out-cell check", "definition": "One whole cell is left out of training and tested. The check is repeated with another cell left out each time.", "aliases": ["held-out-cell fold", "held-out-cell folds", "held-cell fold", "held-cell folds", "held-out-cell validation", "held-out-cell", "held-out cell", "held-out cells"]}, {"term": "External test", "expansion": "Test on separate data", "definition": "A test on a different dataset that was not used to build the method or choose its settings.", "aliases": ["external test", "external tests", "external validation", "external holdout", "external result", "external results", "external evidence"]}, {"term": "Untouched", "expansion": "Not used before final scoring", "definition": "The final answers were hidden while features, models, limits, and pass rules were being chosen.", "aliases": ["untouched", "locked evaluation", "locked evaluation data", "locked evaluation cells", "unseen evaluation data"]}, {"term": "Frozen or locked", "expansion": "Fixed before outside answers were viewed", "definition": "The inputs, model, baseline, and pass rules could not be changed after the outside or final data were seen.", "aliases": ["frozen", "locked", "frozen model", "frozen rule", "frozen rules", "frozen contract", "locked model", "locked rules"]}, {"term": "Freeze-ready", "expansion": "Ready to lock for a fair outside test", "definition": "The method was complete and stable enough to lock. This does not mean it had already passed an external test.", "aliases": ["freeze-ready", "externally freeze-ready", "ready to freeze"]}, {"term": "Passed", "expansion": "Met every rule fixed in advance", "definition": "The scored result met every required pass rule. It does not automatically prove that the method works everywhere.", "aliases": ["passed", "passes", "passing result", "pass result"]}, {"term": "Failed", "expansion": "Missed at least one rule fixed in advance", "definition": "The scored result missed a required pass rule. This describes the evidence, not whether the code crashed.", "aliases": ["failed", "fails", "failing result", "failure result"]}, {"term": "Domain guard", "expansion": "Input safety check", "definition": "A rule that rejects data that are too different from the data the model knows.", "aliases": ["domain guard", "domain guards", "applicability guard", "applicability guards"]}, {"term": "Abstain", "expansion": "Refuse to make an unsafe prediction", "definition": "The model gives no prediction because the input is outside its safe or supported range.", "aliases": ["abstain", "abstains", "abstained", "abstention", "rejected before prediction"]}, {"term": "Zero-shot", "expansion": "No target-data calibration", "definition": "The model is tested on a new dataset without learning from any labelled examples from that dataset.", "aliases": ["zero-shot", "zero shot"]}, {"term": "Few-shot calibration", "expansion": "Small target-data adjustment", "definition": "A small number of labelled cells or check-ups from the new dataset are used to adjust the model before evaluation.", "aliases": ["few-shot calibration", "few shot calibration", "small calibration", "target-cell calibration"]}, {"term": "Uncertainty range", "expansion": "Range showing prediction uncertainty", "definition": "An interval around a prediction that shows how uncertain the model is. A useful range must be tested for coverage.", "aliases": ["uncertainty range", "uncertainty ranges", "uncertainty interval", "uncertainty intervals", "prediction interval", "prediction intervals"]}, {"term": "Leave-one-dataset-out", "expansion": "Whole-dataset transfer check", "definition": "The model learns from all but one dataset, then the missing dataset is used as a separate test.", "aliases": ["leave-one-dataset-out", "leave one dataset out"]}];
   function preferredTheme() {
     try {
       var saved = localStorage.getItem(key);
@@ -166,6 +167,146 @@
       });
     });
   }
+  function glossaryPatternAndLookup() {
+    var lookup = {};
+    var aliases = [];
+    glossaryEntries.forEach(function (entry) {
+      entry.aliases.forEach(function (alias) {
+        lookup[alias.toLowerCase()] = entry;
+        aliases.push(alias);
+      });
+    });
+    aliases.sort(function (left, right) { return right.length - left.length; });
+    var escaped = aliases.map(function (value) {
+      return value.replace(/[^A-Za-z0-9 ]/g, function (character) {
+        return String.fromCharCode(92) + character;
+      });
+    });
+    return {
+      lookup: lookup,
+      pattern: new RegExp("(^|[^A-Za-z0-9_])(" + escaped.join("|") + ")(?=$|[^A-Za-z0-9_])", "gi")
+    };
+  }
+  function applyGlossaryTerms() {
+    var root = document.querySelector("main");
+    if (!root || !glossaryEntries.length || !document.createTreeWalker) return;
+    var glossary = glossaryPatternAndLookup();
+    var skipSelector = [
+      "a", "button", "code", "pre", "script", "style", "textarea", "select", "option",
+      "svg", "math", "mjx-container", ".glossary-term", ".glossary-tooltip",
+      ".definition-card", ".term-card", "[data-no-glossary]"
+    ].join(",");
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var textNodes = [];
+    var node;
+    while ((node = walker.nextNode())) {
+      if (!node.nodeValue.trim()) continue;
+      if (node.parentElement && node.parentElement.closest(skipSelector)) continue;
+      glossary.pattern.lastIndex = 0;
+      if (glossary.pattern.test(node.nodeValue)) textNodes.push(node);
+    }
+    textNodes.forEach(function (textNode) {
+      var text = textNode.nodeValue;
+      var fragment = document.createDocumentFragment();
+      var lastIndex = 0;
+      var match;
+      glossary.pattern.lastIndex = 0;
+      while ((match = glossary.pattern.exec(text))) {
+        var prefixEnd = match.index + match[1].length;
+        if (prefixEnd > lastIndex) fragment.appendChild(document.createTextNode(text.slice(lastIndex, prefixEnd)));
+        var visibleTerm = match[2];
+        var entry = glossary.lookup[visibleTerm.toLowerCase()];
+        var term = document.createElement("span");
+        term.className = "glossary-term";
+        term.tabIndex = 0;
+        term.textContent = visibleTerm;
+        term.dataset.glossaryTerm = entry.term;
+        term.dataset.glossaryExpansion = entry.expansion;
+        term.dataset.glossaryDefinition = entry.definition;
+        term.setAttribute("aria-expanded", "false");
+        term.setAttribute("aria-describedby", "site-glossary-tooltip");
+        fragment.appendChild(term);
+        lastIndex = glossary.pattern.lastIndex;
+        if (match[0].length === 0) glossary.pattern.lastIndex += 1;
+      }
+      if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+      textNode.parentNode.replaceChild(fragment, textNode);
+    });
+    if (!textNodes.length) return;
+
+    var tooltip = document.createElement("div");
+    tooltip.id = "site-glossary-tooltip";
+    tooltip.className = "glossary-tooltip";
+    tooltip.setAttribute("role", "tooltip");
+    tooltip.hidden = true;
+    tooltip.innerHTML = '<strong></strong><span class="glossary-expansion"></span><span class="glossary-definition"></span>';
+    document.body.appendChild(tooltip);
+    var activeTerm = null;
+    var termWasOpenOnPointerDown = false;
+
+    function positionTooltip(term) {
+      var gap = 9;
+      var margin = 12;
+      var termBox = term.getBoundingClientRect();
+      var tooltipBox = tooltip.getBoundingClientRect();
+      var left = termBox.left + (termBox.width - tooltipBox.width) / 2;
+      left = Math.max(margin, Math.min(left, window.innerWidth - tooltipBox.width - margin));
+      var top = termBox.bottom + gap;
+      if (top + tooltipBox.height > window.innerHeight - margin) top = termBox.top - tooltipBox.height - gap;
+      top = Math.max(margin, Math.min(top, window.innerHeight - tooltipBox.height - margin));
+      tooltip.style.left = Math.round(left) + "px";
+      tooltip.style.top = Math.round(top) + "px";
+    }
+    function showTooltip(term) {
+      if (activeTerm && activeTerm !== term) activeTerm.setAttribute("aria-expanded", "false");
+      activeTerm = term;
+      tooltip.querySelector("strong").textContent = term.dataset.glossaryTerm;
+      tooltip.querySelector(".glossary-expansion").textContent = term.dataset.glossaryExpansion;
+      tooltip.querySelector(".glossary-definition").textContent = term.dataset.glossaryDefinition;
+      tooltip.hidden = false;
+      term.setAttribute("aria-expanded", "true");
+      positionTooltip(term);
+    }
+    function hideTooltip() {
+      if (activeTerm) activeTerm.setAttribute("aria-expanded", "false");
+      activeTerm = null;
+      tooltip.hidden = true;
+    }
+    root.addEventListener("mouseover", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (term) showTooltip(term);
+    });
+    root.addEventListener("mouseout", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (term && event.relatedTarget !== term) hideTooltip();
+    });
+    root.addEventListener("focusin", function (event) {
+      if (event.target.classList && event.target.classList.contains("glossary-term")) showTooltip(event.target);
+    });
+    root.addEventListener("focusout", function (event) {
+      if (event.target.classList && event.target.classList.contains("glossary-term")) hideTooltip();
+    });
+    root.addEventListener("pointerdown", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      termWasOpenOnPointerDown = Boolean(term && activeTerm === term && !tooltip.hidden);
+    });
+    root.addEventListener("click", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (!term) return;
+      event.stopPropagation();
+      if (termWasOpenOnPointerDown) hideTooltip();
+      else showTooltip(term);
+      termWasOpenOnPointerDown = false;
+    });
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest || !event.target.closest(".glossary-term")) hideTooltip();
+    });
+    window.addEventListener("resize", hideTooltip);
+    window.addEventListener("scroll", hideTooltip, true);
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") hideTooltip();
+    });
+  }
   var initialTheme = preferredTheme();
   var initialSidebar = preferredSidebar();
   applyTheme(initialTheme);
@@ -174,6 +315,7 @@
     applyTheme(document.documentElement.dataset.theme || initialTheme);
     applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
     labelResponsiveTables();
+    applyGlossaryTerms();
     var toggle = document.querySelector("[data-theme-toggle]");
     if (toggle) {
       toggle.addEventListener("click", function () {
