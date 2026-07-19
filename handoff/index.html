@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Version 4: Scale-Normalized External Test | Battery DRT Research Outputs</title>
-  <meta name="description" content="A self-contained technical account of the V4 inputs, equations, Extra Trees models, frozen Oxford test, results, and limits.">
-  <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/missing-measurement-v4/">
+  <title>Quick pipeline handoff | Battery DRT Research Outputs</title>
+  <meta name="description" content="The current state, evidence boundary, first takeover tasks, and rerun checks for the cross-dataset missing-measurement pipeline.">
+  <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/handoff/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Version 4: Scale-Normalized External Test | Battery DRT Research Outputs">
-  <meta property="og:description" content="A self-contained technical account of the V4 inputs, equations, Extra Trees models, frozen Oxford test, results, and limits.">
-  <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/missing-measurement-v4/">
+  <meta property="og:title" content="Quick pipeline handoff | Battery DRT Research Outputs">
+  <meta property="og:description" content="The current state, evidence boundary, first takeover tasks, and rerun checks for the cross-dataset missing-measurement pipeline.">
+  <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/handoff/">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
   <style>:root {
@@ -1345,192 +1345,97 @@ window.MathJax = {
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <link rel="stylesheet" href="../../assets/site.css">
+  <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
-  <button class="page-history" type="button" data-history-back data-home-fallback="../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
+  <button class="page-history" type="button" data-history-back data-home-fallback="../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
   <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">&times;</span><span data-sidebar-label>Close</span></button>
   <div class="site-shell">
-    <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
-<a class="side-link" href="../../index.html#project-summary">Project summary</a>
-<a class="side-link" href="../../handoff/">Quick handoff</a>
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
+<a class="side-link" href="../index.html#project-summary">Project summary</a>
+<a class="side-link" href="../handoff/">Quick handoff</a>
 <div class="side-section">Main study</div>
-<a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
-<a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
-<a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
-<a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
-<a class="side-link" href="../../cross-dataset/missing-measurement-v6/">Version 6</a>
-<a class="side-link" href="../../cross-dataset/version-comparison/">Compare versions 1 to 6</a>
+<a class="side-link" href="../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
+<a class="side-link" href="../cross-dataset/missing-measurement-v4/">Version 4</a>
+<a class="side-link" href="../cross-dataset/missing-measurement-v5/">Version 5</a>
+<a class="side-link" href="../cross-dataset/missing-measurement-v6/">Version 6</a>
+<a class="side-link" href="../cross-dataset/version-comparison/">Compare versions 1 to 6</a>
 <div class="side-section">Results and limitations</div>
-<a class="side-link" href="../../cross-dataset/version-comparison/">Version results and limits</a>
-<a class="side-link" href="../../external-validation/">External validation status</a>
-<a class="side-link" href="../../datasets/">Dataset status map</a>
+<a class="side-link" href="../cross-dataset/version-comparison/">Version results and limits</a>
+<a class="side-link" href="../external-validation/">External validation status</a>
+<a class="side-link" href="../datasets/">Dataset status map</a>
 <div class="side-section">Datasets and sources</div>
-<a class="side-link" href="../../presentations/index.html#cambridge-molicell-eis">Cross-dataset evidence and figures</a>
-<a class="side-link" href="../../cross-dataset/demo_pipeline_presentation.html#methodology">Cross-dataset methods and downloads</a>
-<a class="side-link" href="../../sources/">Papers, data, and sources</a>
-<a class="side-link" href="../../external-validation/dataset-exploration/">Dataset screening evidence</a>
+<a class="side-link" href="../presentations/index.html#cambridge-molicell-eis">Cross-dataset evidence and figures</a>
+<a class="side-link" href="../cross-dataset/demo_pipeline_presentation.html#methodology">Cross-dataset methods and downloads</a>
+<a class="side-link" href="../sources/">Papers, data, and sources</a>
+<a class="side-link" href="../external-validation/dataset-exploration/">Dataset screening evidence</a>
 <div class="side-section">Backup study</div>
-<a class="side-link" href="../../calb/">CALB project overview</a>
-<a class="side-link" href="../../presentations/index.html#calb-study">CALB evidence and figures</a>
-<a class="side-link" href="../../calb/manual/">CALB methods guide</a>
+<a class="side-link" href="../calb/">CALB project overview</a>
+<a class="side-link" href="../presentations/index.html#calb-study">CALB evidence and figures</a>
+<a class="side-link" href="../calb/manual/">CALB methods guide</a>
 <div class="side-section">Other studies</div>
-<a class="side-link" href="../../presentations/index.html#lg-m50t-expt4">LG M50T Expt 4 health-feature study</a>
-<a class="side-link" href="../../presentations/index.html#drt-pipeline">DIB time-domain DRT pilot</a>
+<a class="side-link" href="../presentations/index.html#lg-m50t-expt4">LG M50T Expt 4 health-feature study</a>
+<a class="side-link" href="../presentations/index.html#drt-pipeline">DIB time-domain DRT pilot</a>
 <div class="side-section">Glossary</div>
-<a class="side-link" href="../../glossary/">Plain-language glossary</a></aside>
+<a class="side-link" href="../glossary/">Plain-language glossary</a></aside>
     <div class="page-content">
       <header>
 
         <div class="kicker">Battery DRT Research Outputs</div>
-        <h1>Version 4: Scale-Normalized External Test</h1>
-        <p class="lead">A self-contained technical account of the V4 inputs, equations, Extra Trees models, frozen Oxford test, results, and limits.</p>
+        <h1>Quick pipeline handoff</h1>
+        <p class="lead">The current state, evidence boundary, first takeover tasks, and rerun checks for the cross-dataset missing-measurement pipeline.</p>
 
       </header>
       <main>
 
-    <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../early-versions/">Versions 1 to 3</a><a class="tab active" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab" href="../version-comparison/">Compare all versions</a></div>
-    <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#summary">Executive read</a><a href="#pipeline">Pipeline</a><a href="#inputs">Inputs</a><a href="#math">Math</a><a href="#model">Model and split</a><a href="#validation">External test</a><a href="#results">Results</a><a href="#limits">Limits</a><a href="#files">Files</a></nav>
-    <section id="start" class="technical-section">
-      <h2>Start here: Version 4 in everyday language</h2>
-      <p>Imagine measuring a battery when it is fresh, ageing it, and then running one short current pulse. Version 4 uses the fresh EIS measurement and the change in pulse resistance to estimate the battery's current EIS. A separate model then estimates health, but that health model still receives the real current EIS measurement.</p>
-      <div class="technical-flow">
-        <div class="flow-card"><strong>Known from the fresh cell</strong><span>The starting EIS spectrum at the same state of charge.</span></div>
-        <div class="flow-card"><strong>Cheap new measurement</strong><span>A 10-second pulse gives a resistance-change signal.</span></div>
-        <div class="flow-card"><strong>Predicted</strong><span>The current real and imaginary EIS values at nine frequencies.</span></div>
-        <div class="flow-card"><strong>Still measured</strong><span>The current EIS used by the Version 4 health model.</span></div>
-      </div>
-      <div class="definition-grid">
-        <div class="definition-card"><strong>EIS spectrum</strong><span>A list of battery impedance values measured across several frequencies.</span></div>
-        <div class="definition-card"><strong>Real and imaginary EIS</strong><span>Two numerical parts of the same impedance measurement. Both must be predicted.</span></div>
-        <div class="definition-card"><strong>Normalization</strong><span>Rescaling values so large-impedance cells do not dominate smaller-impedance cells.</span></div>
-        <div class="definition-card"><strong>Prediction head</strong><span>One model responsible for one output, such as real EIS, imaginary EIS, or SOH.</span></div>
-      </div>
-      <div class="technical-callout warn"><strong>The important limitation:</strong><p>Version 4 did not complete the missing-EIS-to-health task. It predicted EIS, but its health result still depended on measured current EIS.</p></div>
+    <section class="note">
+      <strong>Takeover rule:</strong> preserve the recorded failures. Do not retune a spent kept-back test, rename the blocked controlled study as Version 7, or turn a completed negative stage into a success claim.
     </section>
-    <section id="summary" class="technical-section note">
-      <h2>Executive Read</h2>
-      <p>Version 4 asked whether impedance-scale normalization could move one model to a different commercial NCA cell dataset. It used eight Leonardi cells for development. The model, simple comparisons, and pass rules were then locked before the final Oxford answers were viewed. Three Oxford cells were scored once.</p>
-      <div class="reader-path">
-        <div class="reader-card"><strong>What the model sees</strong><p>Fresh same-cell EIS, state of charge, and the percentage increase in 10-second pulse resistance.</p></div>
-        <div class="reader-card"><strong>What it predicts</strong><p>Changes in real and negative-imaginary EIS on nine frequencies. A separate health head uses measured current EIS.</p></div>
-        <div class="reader-card"><strong>What passed</strong><p>Both EIS heads and the measured-EIS-to-SOH head beat their frozen baselines under both defensible Oxford frequency mappings.</p></div>
-        <div class="reader-card"><strong>What it does not prove</strong><p>It does not prove the complete missing-EIS chain because the SOH head still receives measured current EIS.</p></div>
-      </div>
-      <div class="technical-callout good"><strong>Verdict:</strong><p>Limited external support for the exact Oxford NCA test: three cells, 24 C, 50% SOC, and the frozen Version 4 contract.</p></div>
-    </section>
-
-    <section id="pipeline" class="technical-section">
-      <h2>Pipeline</h2>
-      <div class="technical-flow pipeline-six">
-        <div class="flow-card"><strong>1. Fresh reference</strong><span>Same-cell EIS at the same SOC becomes the carry-forward baseline.</span></div>
-        <div class="flow-card"><strong>2. Pulse change</strong><span>A matched 5 to 10 second pulse gives relative resistance increase.</span></div>
-        <div class="flow-card"><strong>3. Normalize scale</strong><span>The 1 Hz baseline magnitude separates cell size from spectral shape.</span></div>
-        <div class="flow-card"><strong>4. Predict EIS change</strong><span>Two Extra Trees heads predict normalized real and imaginary deltas.</span></div>
-        <div class="flow-card"><strong>5. Reconstruct EIS</strong><span>Add the predicted scaled delta back to the fresh spectrum.</span></div>
-        <div class="flow-card"><strong>6. Predict SOH</strong><span>A separate Extra Trees head uses measured current EIS at 50% SOC.</span></div>
-      </div>
-      <div class="technical-callout"><strong>The key V4 change:</strong><p>V3 struggled when absolute impedance scale changed. V4 removed absolute scale from the model features and predicted relative spectral change instead.</p></div>
-    </section>
-
-    <section id="inputs" class="technical-section">
-      <h2>Inputs and outputs</h2>
-      <div class="table-wrap"><table><thead><tr><th>Item</th><th>Frozen definition</th><th>Reason</th></tr></thead><tbody>
-        <tr><td data-label="Item">Frequency grid</td><td data-label="Frozen definition">0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</td><td data-label="Reason">Common points available across development and Oxford spectra.</td></tr>
-        <tr><td data-label="Item">Fresh EIS baseline</td><td data-label="Frozen definition">Same cell and same SOC</td><td data-label="Reason">The boring carry-forward comparison and the spectral reference.</td></tr>
-        <tr><td data-label="Item">Pulse feature</td><td data-label="Frozen definition">10 second resistance increase at 50% SOC for Oxford</td><td data-label="Reason">Captures ageing change from a short time-domain measurement.</td></tr>
-        <tr><td data-label="Item">EIS targets</td><td data-label="Frozen definition">Nine real and nine negative-imaginary values</td><td data-label="Reason">Two heads avoid hiding failure in one impedance component.</td></tr>
-        <tr><td data-label="Item">SOH target</td><td data-label="Frozen definition">Capacity divided by fresh same-cell capacity</td><td data-label="Reason">Capacity-based SOH in percentage points.</td></tr>
-        <tr><td data-label="Item">Excluded</td><td data-label="Frozen definition">OCV, cycle count, temperature feature, absolute impedance scale</td><td data-label="Reason">Avoid protocol-specific shortcuts and scale leakage.</td></tr>
-      </tbody></table></div>
-    </section>
-
-    <section id="math" class="technical-section">
-      <h2>Math</h2>
-      <span class="formula-label">1. Reference impedance scale at 1 Hz</span>
-      <div class="math-block">\[s = \sqrt{B_{\mathrm{re},1}^2 + B_{-\mathrm{im},1}^2}\]</div>
-      <div class="variable-legend"><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="B" data-glossary-expansion="B means the fresh baseline spectrum" data-glossary-definition="The measured EIS spectrum from the same cell while it was fresh.">B</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="s" data-glossary-expansion="s means the reference impedance scale" data-glossary-definition="The magnitude of the fresh 1 Hz impedance used to remove absolute cell-size differences.">s</code></div>
-      <p><code>B</code> is the fresh same-cell baseline spectrum. The scalar <code>s</code> removes the large absolute-size difference between cell formats.</p>
-      <span class="formula-label">2. Normalized baseline shape and training target</span>
-      <div class="math-block">\[b_k = \frac{B_k}{s}, \qquad \Delta z_k = \frac{Z_k - B_k}{s}\]</div>
-      <div class="variable-legend"><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="b_k" data-glossary-expansion="Lowercase b means normalized baseline at k" data-glossary-definition="The fresh baseline value B_k divided by the reference scale s.">b_k</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="B_k" data-glossary-expansion="B at frequency index k" data-glossary-definition="The fresh baseline impedance value at one frequency point k.">B_k</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="s" data-glossary-expansion="s means the reference impedance scale" data-glossary-definition="The magnitude of the fresh 1 Hz impedance used to remove absolute cell-size differences.">s</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="delta_z_k" data-glossary-expansion="Delta means change, so this is normalized impedance change at k" data-glossary-definition="The difference between current and fresh impedance at frequency k, divided by s.">delta_z_k</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="Z_k" data-glossary-expansion="Z at frequency index k" data-glossary-definition="The current measured impedance value at one frequency point k.">Z_k</code></div>
-      <p>The model predicts the change from fresh baseline, not the absolute aged spectrum.</p>
-      <span class="formula-label">3. EIS reconstruction</span>
-      <div class="math-block">\[\widehat{Z}_k = B_k + s\, f_k\!\left(\mathrm{SOC},\Delta R_{\mathrm{int}},b_1,\ldots,b_{18}\right)\]</div>
-      <div class="variable-legend"><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="Z_hat_k" data-glossary-expansion="A hat means predicted, so this is predicted Z at k" data-glossary-definition="The model&#x27;s reconstructed impedance value at frequency point k.">Z_hat_k</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="B_k" data-glossary-expansion="B at frequency index k" data-glossary-definition="The fresh baseline impedance value at one frequency point k.">B_k</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="s" data-glossary-expansion="s means the reference impedance scale" data-glossary-definition="The magnitude of the fresh 1 Hz impedance used to remove absolute cell-size differences.">s</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="f_k" data-glossary-expansion="f means the learned EIS prediction function at k" data-glossary-definition="The model that predicts normalized impedance change at one frequency point.">f_k</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="delta_R_int" data-glossary-expansion="Relative change in internal pulse resistance" data-glossary-definition="The percentage increase from the fresh pulse resistance to the current pulse resistance.">delta_R_int</code></div>
-      <span class="formula-label">4. Pulse resistance and SOH</span>
-      <div class="math-block">\[R_{10s} = \left|\frac{V(t_0+10)-V(t_0)}{\widetilde{I}_{\mathrm{pulse}}}\right|,\quad \Delta R_{\mathrm{int}}(\%)=100\frac{R_{\mathrm{now}}-R_{\mathrm{fresh}}}{R_{\mathrm{fresh}}},\quad \mathrm{SOH}(\%)=100\frac{Q_{\mathrm{now}}}{Q_{\mathrm{fresh}}}\]</div>
-      <div class="variable-legend"><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="R_10s" data-glossary-expansion="Resistance estimated from a 10-second pulse" data-glossary-definition="The absolute voltage change over ten seconds divided by the typical pulse current.">R_10s</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="delta_R_int" data-glossary-expansion="Relative change in internal pulse resistance" data-glossary-definition="The percentage increase from the fresh pulse resistance to the current pulse resistance.">delta_R_int</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="Q_now" data-glossary-expansion="Current measured capacity" data-glossary-definition="The capacity measured at the present ageing checkpoint.">Q_now</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="Q_fresh" data-glossary-expansion="Fresh reference capacity" data-glossary-definition="The same cell&#x27;s capacity before ageing.">Q_fresh</code></div>
-      <span class="formula-label">5. Scoring and improvement gate</span>
-      <div class="math-block">\[\mathrm{RMSE}=\sqrt{\frac1N\sum_i(y_i-\widehat{y}_i)^2},\qquad I=\frac{E_{\mathrm{baseline}}-E_{\mathrm{model}}}{E_{\mathrm{baseline}}}\]</div>
-      <div class="variable-legend"><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="I" data-glossary-expansion="I means relative improvement" data-glossary-definition="The fraction by which model error is lower than baseline error. Positive is better.">I</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="E_baseline" data-glossary-expansion="Baseline prediction error" data-glossary-definition="The RMSE or MAE produced by the simple comparison method.">E_baseline</code><code class="code-variable glossary-term" tabindex="0" aria-expanded="false" aria-describedby="site-glossary-tooltip" data-glossary-term="E_model" data-glossary-expansion="Model prediction error" data-glossary-definition="The RMSE or MAE produced by the tested model.">E_model</code></div>
-      <p>EIS uses pooled RMSE. SOH uses pooled MAE. Every head must satisfy <code>I &ge; 0.05</code>.</p>
-    </section>
-
-    <section id="model" class="technical-section">
-      <h2>Model and development split</h2>
-      <div class="definition-grid">
-        <div class="definition-card"><strong>Estimator</strong><span>ExtraTreesRegressor with 300 trees, maximum depth 8, minimum leaf size 2, random seed 19.</span></div>
-        <div class="definition-card"><strong>Preprocessing</strong><span>Median imputation followed by StandardScaler, then the tree ensemble.</span></div>
-        <div class="definition-card"><strong>Primary development split</strong><span>Leave one Leonardi cell out. Eight outer folds, with no held cell in training.</span></div>
-        <div class="definition-card"><strong>Baselines</strong><span>Fresh EIS carried forward for spectra and constant 100% for SOH.</span></div>
-      </div>
-      <div class="table-wrap"><table><thead><tr><th>Head</th><th>Passing folds</th><th>Mean improvement</th><th>Worst-cell improvement</th></tr></thead><tbody><tr><td data-label="Head">eis znegimag</td><td data-label="Cell folds">8 / 8</td><td data-label="Mean improvement">85.6%</td><td data-label="Worst-cell improvement">76.9%</td></tr><tr><td data-label="Head">eis zreal</td><td data-label="Cell folds">8 / 8</td><td data-label="Mean improvement">89.9%</td><td data-label="Worst-cell improvement">85.2%</td></tr><tr><td data-label="Head">rpt soh</td><td data-label="Cell folds">8 / 8</td><td data-label="Mean improvement">93.0%</td><td data-label="Worst-cell improvement">87.0%</td></tr></tbody></table></div>
-      <p>This table is same-dataset development evidence only. It justified freezing the candidate, not claiming transfer.</p>
-    </section>
-
-    <section id="validation" class="technical-section">
-      <h2>Locked Oxford outside-data test</h2>
-      <p>This is called an external test because Oxford is a different dataset and its final answers were not used to build or choose Version 4.</p>
-      <div class="technical-flow">
-        <div class="flow-card"><strong>Reserve first</strong><span>Oxford was named before its measurement values were downloaded.</span></div>
-        <div class="flow-card"><strong>Freeze models</strong><span>Artifacts, feature order, baselines, and thresholds were hash-locked.</span></div>
-        <div class="flow-card"><strong>Build fixed rows</strong><span>Cells 9, 15, and 20 used BoL references and the latest common RPT18 endpoint.</span></div>
-        <div class="flow-card"><strong>Score once</strong><span>No cell removal, threshold change, or post-result tuning.</span></div>
-      </div>
-      <div class="table-wrap"><table><tbody>
-        <tr><td>Cell model and chemistry</td><td>Panasonic NCR18650BD, NCA</td></tr>
-        <tr><td>Condition</td><td>24 C and 50% SOC</td></tr>
-        <tr><td>Independent units</td><td>[9, 15, 20]</td></tr>
-        <tr><td>Capacity definition</td><td>100 * endpoint_capacity_ah / baseline_capacity_ah</td></tr>
-        <tr><td>Frequency mapping</td><td>Linear interpolation in log10 frequency, tested under two defensible publisher mappings</td></tr>
-        <tr><td>Pass rule</td><td>All three heads at least 5% below baseline under both mappings</td></tr>
-      </tbody></table></div>
-    </section>
-
-    <section id="results" class="technical-section">
-      <h2>External results</h2>
-      <figure class="evidence-chart"><figcaption><strong>Oxford external error reduction</strong><span>Higher bars mean the model removed more error relative to the frozen baseline. The pass line was 5% for every output.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Real EIS</span><strong>45.1%</strong></div><div class="evidence-chart-track" role="img" aria-label="Real EIS: 45.1%"><span class="evidence-chart-bar good" style="--bar-width:45.091%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Imaginary EIS</span><strong>25.7%</strong></div><div class="evidence-chart-track" role="img" aria-label="Imaginary EIS: 25.7%"><span class="evidence-chart-bar good" style="--bar-width:25.654%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Measured-EIS-to-SOH</span><strong>80.3%</strong></div><div class="evidence-chart-track" role="img" aria-label="Measured-EIS-to-SOH: 80.3%"><span class="evidence-chart-bar good" style="--bar-width:80.309%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>100% error reduction</span></div><p class="chart-source">Worst result across both allowed Oxford frequency mappings. External evidence from three independent cells at 24 C and 50% SOC.</p></figure>
-      <section class="metric-grid">
-        <article class="metric-card"><span>Worst real-EIS improvement</span><strong>45.1%</strong></article>
-        <article class="metric-card"><span>Worst imaginary-EIS improvement</span><strong>25.7%</strong></article>
-        <article class="metric-card"><span>Worst SOH improvement</span><strong>80.3%</strong></article>
-      </section>
-      <div class="table-wrap"><table><thead><tr><th>Frequency mapping</th><th>Real EIS, model vs baseline</th><th>Imaginary EIS, model vs baseline</th><th>SOH, model vs baseline</th></tr></thead><tbody><tr><td data-label="Frequency mapping">inclusive documented endpoints</td><td data-label="Real EIS RMSE">0.01333 vs 0.02427 ohm</td><td data-label="Imaginary EIS RMSE">0.00989 vs 0.01330 ohm</td><td data-label="SOH MAE">3.79 vs 19.27 points</td></tr><tr><td data-label="Frequency mapping">exact six points per decade</td><td data-label="Real EIS RMSE">0.01304 vs 0.02478 ohm</td><td data-label="Imaginary EIS RMSE">0.00978 vs 0.01335 ohm</td><td data-label="SOH MAE">3.75 vs 19.27 points</td></tr></tbody></table></div>
-      <p>Both mappings passed. The result is positive external evidence, but the independent sample is still only three cells.</p>
-    </section>
-
-    <section id="limits" class="technical-section">
-      <h2>Limits and limit of the evidence</h2>
-      <ul>
-        <li>The external result covers one exact Oxford protocol, one NCA cell model, three cells, one temperature, and one SOC.</li>
-        <li>The SOH head uses measured current EIS. V4 does not solve the full missing-EIS-to-SOH problem.</li>
-        <li>The model is not a generic NMC or generic cylindrical-cell model.</li>
-        <li>The 5% gate is a predeclared comparison threshold, not proof of clinical or operational usefulness.</li>
-      </ul>
-      <div class="technical-callout"><strong>Correct claim:</strong><p>V4 has narrow support from one locked outside-data test under the exact Oxford rules. It does not show that the method works for every battery or laboratory.</p></div>
-    </section>
-
-    <section id="files" class="technical-section">
-      <h2>Downloadable evidence</h2>
-      <div class="card-actions">
-        <a class="button" href="../data/missing_modality_v4_scale_normalized_development_results.json">Development results</a>
-        <a class="button" href="../data/missing_modality_v4_freeze_manifest.json">Frozen manifest</a>
-        <a class="button" href="../data/missing_modality_v4_oxford_validation_contract.json">Oxford contract</a>
-        <a class="button" href="../data/missing_modality_v4_oxford_one_shot_results.json">External results</a>
-        <a class="button" href="../missing-measurement-v5/">Next: Version 5</a>
-      </div>
-    </section>
+    <p>Last checked: 2026-07-19</p>
+<h2>Current state</h2>
+<p>Versions 1 to 6 are finished as research stages. That does not mean all six succeeded.</p>
+<ul>
+<li>Versions 1 to 3 tested early transfer designs and did not produce reliable outside support.</li>
+<li>Version 4 passed one narrow locked test on three Oxford NCA cells at 24 C and 50% state of charge.</li>
+<li>Version 5 failed its locked SiCWell test. The domain guard rejected all 892 rows before prediction.</li>
+<li>Version 6 found no universal zero-shot or small-calibration candidate that passed every dataset-level gate. The universal path is stopped.</li>
+<li>The current next step is a new narrow controlled study. It is not Version 7 and it has not started.</li>
+</ul>
+<h2>Current blocker</h2>
+<p>The controlled study is blocked at the resource gate. No purchase, measurement, pilot, or model training is authorized from the repository evidence alone.</p>
+<p>Before launch, the lab owner or supervisor must confirm at least 12 matching same-lot cells, written safety approval, safe 25 C control, cycler limits and booking, a calibrated EIS system and fixture, operator access, raw-data storage, and enough time to create a meaningful health range.</p>
+<p>If any hard requirement is missing, record a failed gate and stop. Do not shrink the study after seeing what is available and still call it clean validation.</p>
+<h2>First takeover tasks</h2>
+<p>1. Read <code>narrow_domain_measurement_resource_gate.json</code> and <code>missing_modality_v6_hard_decision.json</code> first.</p>
+<p>2. Ask the supervisor or lab owner to verify every hard-block resource in writing.</p>
+<p>3. If the gate passes, freeze one exact cell model, one lot, one protocol, the cell-level split, the baseline, and the pass rules before measurements or scoring.</p>
+<p>4. If the gate fails, preserve the blocked verdict. The honest next action is a new research question or a dataset search, not threshold tuning.</p>
+<p>5. Update this handoff and the homepage progress block only when a new decision is backed by a current artifact.</p>
+<h2>Files that control the claim</h2>
+<ul>
+<li><code>missing_modality_v4_oxford_one_shot_results.json</code>: narrow Version 4 outside pass.</li>
+<li><code>missing_modality_v5_sicwell_one_shot_results.json</code>: Version 5 external failure, no support.</li>
+<li><code>missing_modality_v6_hard_decision.json</code>: stop the universal model path.</li>
+<li><code>narrow_domain_measurement_resource_gate.json</code>: current blocked gate and authorized next action.</li>
+<li><code>narrow_domain_measurement_feasibility.md</code>: proposed narrow-study design and resource needs.</li>
+<li><code>README.md</code>: full experiment history and artifact index.</li>
+</ul>
+<h2>Do not do this</h2>
+<ul>
+<li>Do not retune Version 5 with SiCWell. That kept-back test is spent.</li>
+<li>Do not freeze a Version 6 candidate. None passed development gates.</li>
+<li>Do not search for a fresh Version 6 kept-back test. The recorded decision forbids it.</li>
+<li>Do not pool unrelated cell chemistries and protocols into a fake generic domain.</li>
+<li>Do not describe a blocked resource gate as model evidence.</li>
+</ul>
+<h2>Rerun checks before handoff or publication</h2>
+<pre><code>powershell -ExecutionPolicy Bypass -File scripts/wiki.ps1 build
+powershell -ExecutionPolicy Bypass -File scripts/wiki.ps1 lint
+powershell -ExecutionPolicy Bypass -File scripts/wiki.ps1 source-lint
+&amp; &quot;[DRT python]&quot; -B scripts/site/build_github_pages_site.py
+&amp; &quot;[DRT python]&quot; -B scripts/audit_public.py</code></pre>
+<p>The public site is generated under <code>docs/</code>. Publishing to the public mirror is a separate reviewed step. A clean source worktree does not prove mirror parity or a successful live deployment.</p>
 
       </main>
       <footer>

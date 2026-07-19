@@ -339,6 +339,41 @@ code {
   padding-top: 10px;
   border-top: 1px solid var(--line);
 }
+.progress-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+  margin: 10px 0 16px;
+}
+.progress-summary strong { font-size: 22px; }
+.progress-summary span { color: var(--muted); }
+.progress-track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 18px;
+}
+.progress-segment {
+  min-height: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+.progress-segment.complete { border-color: var(--green); background: var(--green); }
+.progress-segment.current { border-color: var(--orange); background: var(--orange); }
+.progress-stage {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.progress-stage:last-child { padding-bottom: 0; }
+.progress-stage p { margin: 0; }
+.progress-stage .stage-label { font-weight: 800; }
+.progress-stage.current .stage-label { color: var(--orange); }
 .pipeline-visual {
   max-width: 1050px;
   margin: 26px 0;
@@ -1009,7 +1044,8 @@ footer {
   .pipeline-flow { grid-template-columns: 1fr; }
   .pipeline-arrow { transform: rotate(90deg); }
   .pipeline-step { min-height: 0; }
-  .status-list li { grid-template-columns: 1fr; gap: 6px; }
+  .status-list li,
+  .progress-stage { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap {
     overflow: visible;
     border: 0;
@@ -1317,6 +1353,7 @@ window.MathJax = {
   <div class="site-shell">
     <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
+<a class="side-link" href="../../handoff/">Quick handoff</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
 <a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
@@ -1458,7 +1495,7 @@ window.MathJax = {
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-18 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-19 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>

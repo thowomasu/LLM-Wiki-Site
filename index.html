@@ -339,6 +339,41 @@ code {
   padding-top: 10px;
   border-top: 1px solid var(--line);
 }
+.progress-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+  margin: 10px 0 16px;
+}
+.progress-summary strong { font-size: 22px; }
+.progress-summary span { color: var(--muted); }
+.progress-track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 18px;
+}
+.progress-segment {
+  min-height: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+.progress-segment.complete { border-color: var(--green); background: var(--green); }
+.progress-segment.current { border-color: var(--orange); background: var(--orange); }
+.progress-stage {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.progress-stage:last-child { padding-bottom: 0; }
+.progress-stage p { margin: 0; }
+.progress-stage .stage-label { font-weight: 800; }
+.progress-stage.current .stage-label { color: var(--orange); }
 .pipeline-visual {
   max-width: 1050px;
   margin: 26px 0;
@@ -1009,7 +1044,8 @@ footer {
   .pipeline-flow { grid-template-columns: 1fr; }
   .pipeline-arrow { transform: rotate(90deg); }
   .pipeline-step { min-height: 0; }
-  .status-list li { grid-template-columns: 1fr; gap: 6px; }
+  .status-list li,
+  .progress-stage { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap {
     overflow: visible;
     border: 0;
@@ -1317,6 +1353,7 @@ window.MathJax = {
   <div class="site-shell">
     <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
 <a class="side-link" href="index.html#project-summary">Project summary</a>
+<a class="side-link" href="handoff/">Quick handoff</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="cross-dataset/">Cross-dataset study overview</a>
 <a class="side-link" href="cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
@@ -1366,14 +1403,23 @@ window.MathJax = {
         <a class="start-card reader-path" href="presentations/index.html#cambridge-molicell-eis"><strong>Evidence and figures</strong><span>Open the cross-dataset presentations, plots, methods, and downloadable public files.</span></a>
       </div>
     </section>
-    <section class="evidence-status" aria-labelledby="evidence-status-title">
-      <h2 id="evidence-status-title">Evidence status</h2>
-      <ul class="status-list">
-        <li><span class="status-pill good">Version 4</span><span><strong>Narrow external support:</strong> all fixed heads passed on three Oxford NCA cells at 24 C and 50% state of charge.</span></li>
-        <li><span class="status-pill bad">Version 5</span><span><strong>No external support:</strong> the fixed guard rejected all 892 SiCWell rows before prediction.</span></li>
-        <li><span class="status-pill bad">Version 6</span><span><strong>Universal path stopped:</strong> no zero-shot or small-calibration candidate passed every dataset-level gate.</span></li>
-        <li><span class="status-pill warn">Current gate</span><span><strong>Controlled study blocked:</strong> no measurements start until the lab proves the cells, equipment, safety approval, channels, calibration, and schedule.</span></li>
-      </ul>
+    <section class="evidence-status" aria-labelledby="pipeline-progress-title">
+      <h2 id="pipeline-progress-title">Current pipeline progress</h2>
+      <div class="progress-summary"><strong>Four research stages completed</strong><span>Next study not started</span></div>
+      <div class="progress-track" role="img" aria-label="Versions 1 to 3, Version 4, Version 5, and Version 6 are complete. The controlled study is the current blocked stage.">
+        <span class="progress-segment complete" title="Versions 1 to 3 complete"></span>
+        <span class="progress-segment complete" title="Version 4 complete"></span>
+        <span class="progress-segment complete" title="Version 5 complete"></span>
+        <span class="progress-segment complete" title="Version 6 complete"></span>
+        <span class="progress-segment current" title="Controlled study blocked"></span>
+      </div>
+      <div class="progress-stage"><span class="stage-label">Versions 1 to 3: complete</span><p>Early transfer attempts were tested and closed. None produced reliable outside support.</p></div>
+      <div class="progress-stage"><span class="stage-label">Version 4: complete</span><p>Passed one narrow locked test on three Oxford NCA cells at 24 C and 50% state of charge.</p></div>
+      <div class="progress-stage"><span class="stage-label">Version 5: complete</span><p>Failed the locked SiCWell test. The safety guard rejected all 892 rows before prediction.</p></div>
+      <div class="progress-stage"><span class="stage-label">Version 6: complete</span><p>No universal zero-shot or small-calibration candidate passed every dataset-level gate. This path is stopped.</p></div>
+      <div class="progress-stage current"><span class="stage-label">Now: blocked before launch</span><p>The next step is a narrower controlled study, not Version 7. It cannot start until the lab confirms matching cells, equipment, safety approval, channels, calibration, operator access, and schedule.</p></div>
+      <p class="small-note"><strong>Important:</strong> “complete” means the stage reached a recorded decision. It does not mean the model succeeded.</p>
+      <div class="card-actions"><a class="button" href="handoff/">Open the quick handoff</a><a class="button" href="cross-dataset/version-comparison/">Compare all versions</a></div>
     </section>
     <section>
       <h2>How the versions connect</h2>
@@ -1478,7 +1524,7 @@ window.MathJax = {
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-18 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-19 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>
