@@ -391,7 +391,7 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/model_rule_summary_EXPLANATION.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Graph Explanation: Model Rule Summary</h1>
@@ -400,16 +400,16 @@ window.MathJax = {
 <h2>What This Figure Shows</h2>
 <p>This figure shows the result after applying the pre-declared model-selection rule.</p>
 <p>The rule selects lambda using time-domain information only:</p>
-<ul><li>voltage RMSE</li></ul>
+<ul><li>voltage typical prediction error</li></ul>
 <ul><li>gamma roughness</li></ul>
 <ul><li>fast/mid/slow band stability</li></ul>
 <ul><li>penalties for edge lambda values or nearly flat gamma</li></ul>
 <p>EIS agreement is checked after selection, not during selection.</p>
 <h2>How To Read It</h2>
-<p>First check which lambda values the rule selected. Then check voltage RMSE to make sure the selected models still reconstruct voltage. Finally check EIS correlation and normalized RMSE.</p>
+<p>First check which lambda values the rule selected. Then check voltage typical prediction error to make sure the selected models still reconstruct voltage. Finally check EIS correlation and normalized typical prediction error.</p>
 <p>If EIS agreement is weak after the rule, that is an honest weak result. Do not treat it as a presentation problem.</p>
 <h2>What We Can Learn</h2>
-<p>The current rule-selected EIS agreement is still weak. That is bad news scientifically, but good news methodologically: it means the pipeline is no longer hiding behind after-the-fact lambda selection.</p>
+<p>The current rule-selected EIS agreement is still weak. That is bad news scientifically, but good news methodologically: it means the analysis chain is no longer hiding behind after-the-fact lambda selection.</p>
 <h2>Why It Matters</h2>
 <p>This is the fairest validation plot in the current package. It asks: if we choose model settings before looking at EIS, does the time-domain DRT still agree? Right now, not strongly enough.</p>
 <h2>Caveat</h2>

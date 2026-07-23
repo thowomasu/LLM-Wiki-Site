@@ -367,6 +367,7 @@ window.MathJax = {
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/decision-report/">Plain-language decision report</a>
 <a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
@@ -392,7 +393,7 @@ window.MathJax = {
 <a class="side-link" href="../../glossary/">Plain-language glossary</a></aside>
   <div class="page-content">
     <header>
-      <div class="kicker">CALB pipeline, self-contained technical page</div>
+      <div class="kicker">CALB analysis chain, self-contained technical page</div>
       <h1>CALB L148N58A Pulse-To-EIS Pipeline Viability</h1>
       <p class="lead">This page uses the same structure as the cross-dataset presentation: question, method, results, conclusion, inputs, math, graphs, code, outputs, glossary, and limits. The truth is mixed: the internal pulse bridge is strong, the drive-cycle extension is weak, and external validation is still blocked.</p>
       <div class="button-row">
@@ -402,10 +403,10 @@ window.MathJax = {
         <a class="button" href="../data/section_42_summary.json" download>Download SOC-stratified drive-cycle audit JSON</a>
       </div>
     </header>
-<main>
+<main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
   <section id="summary" class="note">
     <h2>Executive Read</h2>
-    <p>The CALB pipeline has a real internal result: frozen pulse-to-EIS rule produces 246 quality-pass rows out of 246 for same-dataset HPPC pulse-to-EIS bridging.</p>
+    <p>The CALB analysis chain has a real internal result: frozen pulse-to-EIS rule produces 246 quality-pass rows out of 246 for same-dataset HPPC pulse-to-EIS bridging.</p>
     <p><strong>Blunt boundary:</strong> this is not external validation. external-validation limit of the evidence says repeat test on outside data is blocked, leakage and claim audit labels the claim as <code>internal_engineering_result_not_clean_holdout_or_external_validation</code>, and SOC-stratified drive-cycle audit says the drive-cycle result is SOC-misaligned with the ECM baseline still stronger.</p>
     <div class="reader-path">
       <div class="reader-card"><strong>What works</strong><p>The internal HPPC-to-EIS bridge passes quality gates across 10 C, 25 C, and 40 C.</p></div>
@@ -417,13 +418,13 @@ window.MathJax = {
 
   <section id="objective">
     <h2>Question</h2>
-    <p>Can CALB HPPC pulse windows reconstruct or approximate same-cell EIS behavior well enough to justify a pulse-to-EIS pipeline?</p>
+    <p>Can CALB HPPC pulse windows reconstruct or approximate same-cell EIS behavior well enough to justify a pulse-to-EIS analysis chain?</p>
     <p>The honest answer is yes for internal CALB pulse-bridge evidence. It is not yes for external validation, and it is not yes for unrestricted drive-cycle claims.</p>
   </section>
 
   <section id="methodology">
     <h2>Methodology</h2>
-    <p>The pipeline uses paired CALB HPPC and EIS records from the same study. It builds candidate pulse windows, fits time-domain DRT-style behavior, compares against measured EIS-derived targets, then audits the result through later sections.</p>
+    <p>The analysis chain uses paired CALB HPPC and EIS records from the same study. It builds candidate pulse windows, fits time-domain DRT-style behavior, compares against measured EIS-derived targets, then audits the result through later sections.</p>
     <div class="step-list">
       <div class="step"><strong>Load CALB archive-derived outputs</strong><p>Use parsed local files from the CALB package, not a loose manual spreadsheet.</p></div>
       <div class="step"><strong>Build HPPC pulse candidates</strong><p>Identify pulse/rest windows around HPPC events and track temperature, cell, protocol, and EIS record.</p></div>
@@ -461,12 +462,12 @@ window.MathJax = {
 
   <section id="math">
     <h2>Feature-To-Target Math And Scoring Logic</h2>
-    <p>This presentation is not pretending the CALB pipeline and the cross-dataset supervised model are identical. The page structure matches. The math is the CALB bridge math.</p>
+    <p>This presentation is not pretending the CALB analysis chain and the cross-dataset supervised model are identical. The page structure matches. The math is the CALB bridge math.</p>
     <div class="math">pulse window: x(t) = [I(t), V(t), T, SOC context, rest/pulse timing]</div>
     <div class="math">internal target: y = measured EIS-derived behavior for the same cell, temperature, and diagnostic context</div>
     <div class="math">quality gate: pass if pulse/EIS alignment, correlation, OCV delta, and time-fit error stay inside the declared rule</div>
     <div class="math">drive-cycle test: compare fixed HPPC-derived dynamics against baseline and ECM variants on held-out dynamic voltage</div>
-    <div class="plain-callout"><strong>Weak spot:</strong><p>The drive-cycle extension is where the story breaks. drive-cycle ECM baseline check found median DRT kept-back test RMSE of 150.9172 mV versus 134.8626 mV for the best ECM baseline.</p></div>
+    <div class="plain-callout"><strong>Weak spot:</strong><p>The drive-cycle extension is where the story breaks. drive-cycle ECM baseline check found median DRT kept-back test typical prediction error of 150.9172 mV versus 134.8626 mV for the best ECM baseline.</p></div>
   </section>
 
   <section id="graphs">
@@ -536,7 +537,7 @@ window.MathJax = {
   <section id="code">
     <h2>Code Walkthrough: Included In The Page</h2>
     <p>The cross-dataset page embeds the code path. This CALB page now does the same. The point is inspection, not decoration.</p>
-    <details open><summary>Final adaptive multitemperature rule runner</summary><pre><code>ile: `section_33_adaptive_final_rule_multitemp.png`\n\n"
+    <details open><summary>Final adaptive multitemperature rule runner</summary><details class="implementation-details"><summary>Show implementation details</summary><pre><code>ile: `section_33_adaptive_final_rule_multitemp.png`\n\n"
         "This graph checks final multi-temperature coverage after adding a narrow EIS lambda fallback for correlation-only failures. Red points mark rows that used the fallback.\n",
         encoding="utf-8",
     )
@@ -615,9 +616,9 @@ def run(
         "time_lambda": time_lambda,
         "baseline_mode": baseline_mode,
         "include_pre_s": include_pre_s,
-        "include_post_s": include_post_s,</code></pre></details>
+        "include_post_s": include_post_s,</code></pre></details></details>
     <p class="chart-analysis">This is the internal bridge path behind frozen pulse-to-EIS rule. Do not retune it after seeing external data.</p>
-    <details><summary>Drive-cycle ECM baseline audit runner</summary><pre><code>oses. The next real proof step is external replication and better protocol/SOC alignment, not another internal rescue plot.",
+    <details><summary>Drive-cycle ECM baseline audit runner</summary><details class="implementation-details"><summary>Show implementation details</summary><pre><code>oses. The next real proof step is external replication and better protocol/SOC alignment, not another internal rescue plot.",
         )
         text = text.rstrip() + "\n\nSection 36 ECM-baseline note: " + note[2:] + "\n"
         method.write_text(text, encoding="utf-8")
@@ -685,9 +686,9 @@ def run(
     write_csv(OUTPUT_DIR / "section_36_best_ecm_by_drive_protocol.csv", by_protocol)
     write_csv(OUTPUT_DIR / "section_36_best_ecm_by_temperature.csv", by_temp)
     write_csv(OUTPUT_DIR / "section_36_errors.csv", errors)
-    write_json(OUTPUT_DIR / "section_36_summ</code></pre></details>
+    write_json(OUTPUT_DIR / "section_36_summ</code></pre></details></details>
     <p class="chart-analysis">This is the audit that weakens the drive-cycle claim. Ignoring it would be dishonest.</p>
-    <details><summary>External replication readiness runner</summary><pre><code>kdir(parents=True, exist_ok=True)
+    <details><summary>External replication readiness runner</summary><details class="implementation-details"><summary>Show implementation details</summary><pre><code>kdir(parents=True, exist_ok=True)
     if not rows:
         path.write_text("", encoding="utf-8")
         return
@@ -765,7 +766,7 @@ def run() -&gt; dict[str, object]:
                 "needed_action": "Do not use the local DIB comparison as final external validation.",
             }
         )
-    summary =</code></pre></details>
+    summary =</code></pre></details></details>
     <p class="chart-analysis">This is the check that keeps the external-validation claim blocked until the missing data problem is solved.</p>
   </section>
 
@@ -778,7 +779,7 @@ def run() -&gt; dict[str, object]:
       <a class="button" href="../data/section_40_summary.json" download>Download leakage and claim audit JSON</a>
       <a class="button" href="../data/section_42_summary.json" download>Download SOC-stratified drive-cycle audit JSON</a>
     </div>
-    <pre><code>{
+    <details class="implementation-details"><summary>Show implementation details</summary><pre><code>{
   "section_33": {
     "zip_path": "[local path redacted]",
     "temperatures_c": [
@@ -928,7 +929,7 @@ def run() -&gt; dict[str, object]:
     "misaligned_median_drt_minus_best_ecm_rmse_mv": 3.5951693858624054,
     "verdict": "drive_cycle_result_soc_misaligned_and_ecm_baseline_still_stronger"
   }
-}</code></pre>
+}</code></pre></details>
   </section>
 
   <section id="glossary">
@@ -937,7 +938,7 @@ def run() -&gt; dict[str, object]:
     <div class="table-scroll"><table><thead><tr><th>Term</th><th>Plain meaning</th></tr></thead><tbody><tr><td>CALB</td><td>Cell manufacturer and dataset shorthand for L148N58A prismatic cells.</td></tr>
 <tr><td>EIS</td><td>Electrochemical Impedance Spectroscopy, the measured impedance target.</td></tr>
 <tr><td>HPPC</td><td>Hybrid Pulse Power Characterization, the pulse protocol used for the internal bridge.</td></tr>
-<tr><td>DRT</td><td>Distribution of Relaxation Times, the relaxation representation used in the analysis.</td></tr>
+<tr><td>DRT</td><td>Distribution of Relaxation Times, the relaxation description of the measurements used in the analysis.</td></tr>
 <tr><td>ECM</td><td>Equivalent Circuit Model, the stronger drive-cycle baseline in drive-cycle ECM baseline check.</td></tr>
 <tr><td>SOC</td><td>State of Charge. The drive-cycle SOC mismatch is one of the main weak spots.</td></tr>
 <tr><td>Frozen rule</td><td>A rule that should not be retuned after seeing external data.</td></tr>

@@ -391,7 +391,7 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/Model Rule/model_rule_report.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Pre-Declared Model Rule</h1>
@@ -401,8 +401,8 @@ window.MathJax = {
 <ul><li>Baseline mode is fixed at <code>time_charge</code>.</li></ul>
 <ul><li>SOC selection is <code>coulomb</code> when raw data is available.</li></ul>
 <ul><li>Tested lambda values: 0.001, 0.1, 1.0, 3.0</li></ul>
-<ul><li>Lambda must stay within best voltage RMSE plus max 5% or 0.25 mV.</li></ul>
-<ul><li>Within that RMSE band, prefer lower gamma roughness and more stable fast/mid/slow band areas.</li></ul>
+<ul><li>Lambda must stay within best voltage typical prediction error plus max 5% or 0.25 mV.</li></ul>
+<ul><li>Within that typical prediction error band, prefer lower gamma roughness and more stable fast/mid/slow band areas.</li></ul>
 <ul><li>EIS metrics are reported after selection. They are not allowed into the selection score.</li></ul>
 <h2>Run Summary</h2>
 <ul><li>Input mode: existing model-sensitivity CSV</li></ul>
@@ -411,26 +411,26 @@ window.MathJax = {
 <ul><li>Lambda candidates scored: 40</li></ul>
 <ul><li>Errors: 0</li></ul>
 <ul><li>Quality-pass comparisons: 10 of 10</li></ul>
-<ul><li>Median voltage RMSE: 1.7106937066290135 mV</li></ul>
+<ul><li>Median voltage typical prediction error: 1.7106937066290135 mV</li></ul>
 <ul><li>Median EIS correlation after rule selection: 0.1406798483387754</li></ul>
-<ul><li>Median normalized RMSE after rule selection: 0.978374331390654</li></ul>
+<ul><li>Median normalized typical prediction error after rule selection: 0.978374331390654</li></ul>
 <h2>Selected Settings</h2>
-<ul><li>Cell 15, SOH 80, SOC 5: lambda 0.001, RMSE 2.453939421743068 mV, corr -0.1265397461419299, norm_RMSE 0.8348886970647139</li></ul>
-<ul><li>Cell 15, SOH 80, SOC 20: lambda 0.001, RMSE 1.7602909654926566 mV, corr 0.1711563289826563, norm_RMSE 0.963384725467954</li></ul>
-<ul><li>Cell 15, SOH 80, SOC 50: lambda 0.001, RMSE 1.707345639066683 mV, corr 0.1235206298583345, norm_RMSE 1.1449411226020272</li></ul>
-<ul><li>Cell 15, SOH 80, SOC 70: lambda 0.001, RMSE 1.7140417741913443 mV, corr 0.1431196141299693, norm_RMSE 0.993363937313354</li></ul>
-<ul><li>Cell 15, SOH 80, SOC 95: lambda 0.001, RMSE 1.843328008934464 mV, corr 0.1205178183642547, norm_RMSE 1.148760961863879</li></ul>
-<ul><li>Cell 18, SOH 80, SOC 5: lambda 0.001, RMSE 2.2677522881010104 mV, corr -0.0966331156982791, norm_RMSE 1.0599420440685534</li></ul>
-<ul><li>Cell 18, SOH 80, SOC 20: lambda 0.001, RMSE 1.5860296058503212 mV, corr 0.1813068040303565, norm_RMSE 0.918411490941448</li></ul>
-<ul><li>Cell 18, SOH 80, SOC 50: lambda 0.001, RMSE 1.5106343240204447 mV, corr 0.1382400825475815, norm_RMSE 1.0545358802461242</li></ul>
-<ul><li>Cell 18, SOH 80, SOC 70: lambda 0.001, RMSE 1.5052806002076426 mV, corr 0.157819597243833, norm_RMSE 0.9111891114649304</li></ul>
-<ul><li>Cell 18, SOH 80, SOC 95: lambda 0.001, RMSE 1.544494474143958 mV, corr 0.1720153824416916, norm_RMSE 0.8136607016125303</li></ul>
+<ul><li>Cell 15, SOH 80, SOC 5: lambda 0.001, typical prediction error 2.453939421743068 mV, corr -0.1265397461419299, norm_typical prediction error 0.8348886970647139</li></ul>
+<ul><li>Cell 15, SOH 80, SOC 20: lambda 0.001, typical prediction error 1.7602909654926566 mV, corr 0.1711563289826563, norm_typical prediction error 0.963384725467954</li></ul>
+<ul><li>Cell 15, SOH 80, SOC 50: lambda 0.001, typical prediction error 1.707345639066683 mV, corr 0.1235206298583345, norm_typical prediction error 1.1449411226020272</li></ul>
+<ul><li>Cell 15, SOH 80, SOC 70: lambda 0.001, typical prediction error 1.7140417741913443 mV, corr 0.1431196141299693, norm_typical prediction error 0.993363937313354</li></ul>
+<ul><li>Cell 15, SOH 80, SOC 95: lambda 0.001, typical prediction error 1.843328008934464 mV, corr 0.1205178183642547, norm_typical prediction error 1.148760961863879</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 5: lambda 0.001, typical prediction error 2.2677522881010104 mV, corr -0.0966331156982791, norm_typical prediction error 1.0599420440685534</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 20: lambda 0.001, typical prediction error 1.5860296058503212 mV, corr 0.1813068040303565, norm_typical prediction error 0.918411490941448</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 50: lambda 0.001, typical prediction error 1.5106343240204447 mV, corr 0.1382400825475815, norm_typical prediction error 1.0545358802461242</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 70: lambda 0.001, typical prediction error 1.5052806002076426 mV, corr 0.157819597243833, norm_typical prediction error 0.9111891114649304</li></ul>
+<ul><li>Cell 18, SOH 80, SOC 95: lambda 0.001, typical prediction error 1.544494474143958 mV, corr 0.1720153824416916, norm_typical prediction error 0.8136607016125303</li></ul>
 <h2>Selection Diagnostics</h2>
 <ul><li>Selected lambda values: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001]</li></ul>
 <ul><li>Median selection score: 1.4</li></ul>
 <h2>Interpretation</h2>
-<p>This improves the pipeline because the model choice is now explicit and reproducible. It still does not validate time-domain DRT as a substitute for EIS. If the post-selection EIS metrics remain weak, believe the weakness.</p>
-<p>Blunt takeaway: this script makes the pipeline more honest. It does not make the science magically true.</p>
+<p>This improves the analysis chain because the model choice is now explicit and reproducible. It still does not validate time-domain DRT as a substitute for EIS. If the post-selection EIS metrics remain weak, believe the weakness.</p>
+<p>Blunt takeaway: this script makes the analysis chain more honest. It does not make the science magically true.</p>
 <h2>Outputs</h2>
 <ul><li><code>model_rule_results.csv</code>: one selected setting per target with EIS metrics added afterward.</li></ul>
 <ul><li><code>model_rule_lambda_candidates.csv</code>: every lambda candidate and internal selection score.</li></ul>
@@ -444,7 +444,7 @@ window.MathJax = {
 <p>If we choose lambda after seeing EIS, we are tuning to the answer key. That makes the validation look better than it really is.</p>
 <h3>The rule</h3>
 <p>The rule prefers candidates with:</p>
-<ul><li>low voltage RMSE</li></ul>
+<ul><li>low voltage typical prediction error</li></ul>
 <ul><li>smoother gamma</li></ul>
 <ul><li>stable broad-band areas</li></ul>
 <ul><li>enough nonzero gamma points</li></ul>
@@ -456,7 +456,7 @@ window.MathJax = {
 <div class="math-display">$$
 \mathrm{score}
 =
-w_1\,\widetilde{\mathrm{RMSE}}
+w_1\,\widetilde{\mathrm{typical prediction error}}
 +w_2\,\widetilde{\left\|L\gamma\right\|_2}
 +w_3\,\widetilde{\mathrm{band\ instability}}
 +w_4\,\widetilde{\mathrm{sparsity\ penalty}}

@@ -391,7 +391,7 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/01_Method_And_Math/CODE_NOTES.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Prototype Code Notes</h1>
@@ -407,7 +407,7 @@ window.MathJax = {
 <ul><li><code>scripts/experiments/time_domain_window_finder.py</code>: loads messy battery CSVs and finds pulse/rest windows.</li></ul>
 <ul><li><code>scripts/experiments/time_domain_candidate_fit.py</code>: fits one selected pulse window into a DRT-like tau/gamma curve.</li></ul>
 <ul><li><code>scripts/experiments/time_domain_eis_compare.py</code>: derives an EIS DRT and compares it against a time-domain DRT.</li></ul>
-<ul><li><code>scripts/experiments/time_domain_dib_batch.py</code>: discovers multiple DIB cells, runs the pipeline, and writes batch summaries.</li></ul>
+<ul><li><code>scripts/experiments/time_domain_dib_batch.py</code>: discovers multiple DIB cells, runs the analysis chain, and writes batch summaries.</li></ul>
 <ul><li><code>scripts/experiments/time_domain_soc_mapping_sensitivity.py</code>: reruns the same cases under multiple SOC mapping assumptions.</li></ul>
 <ul><li><code>scripts/experiments/time_domain_model_sensitivity.py</code>: reruns matched cases across baseline modes and lambda values.</li></ul>
 <ul><li><code>scripts/experiments/time_domain_model_rule.py</code>: applies the pre-declared model-selection rule before EIS scoring.</li></ul>
@@ -427,7 +427,7 @@ window.MathJax = {
 <ul><li><code>capacity_ah_used</code>: capacity estimate read from DIB <code>AhPrev</code> or <code>AhAccu</code>.</li></ul>
 <ul><li><code>cumulative_ah_start</code>: integrated current at the selected pulse start.</li></ul>
 <ul><li><code>quality_pass</code>: rough engineering triage. It is not scientific validation.</li></ul>
-<ul><li><code>quality_flags</code>: why a row failed triage, such as high voltage RMSE or temperature drift.</li></ul>
+<ul><li><code>quality_flags</code>: why a row failed triage, such as high voltage typical prediction error or temperature drift.</li></ul>
 <ul><li><code>baseline_mode</code>: free voltage-baseline model used by the fitter. Options are <code>offset</code>, <code>time</code>, <code>charge</code>, and <code>time_charge</code>.</li></ul>
 <ul><li><code>time_drift_v_per_s</code>: linear voltage drift term when a time baseline is enabled.</li></ul>
 <ul><li><code>charge_drift_v_per_as</code>: voltage drift per amp-second, used as a local OCV-change proxy.</li></ul>
@@ -442,10 +442,10 @@ window.MathJax = {
 <p>The batch runner now uses anchored coulomb counting by default. This is better than pure pre-rest voltage sorting, but it still assumes the highest-voltage selected pulse is the high-SOC anchor and that the raw capacity column is the right scale. Treat it as a useful prototype rule, not ground truth.</p>
 <p>The sensitivity runner tests four SOC modes: <code>voltage</code>, <code>coulomb</code>, <code>endpoint</code>, and <code>linear</code>. On the first three DIB cases, all four modes selected the same pulse windows, so SOC mapping did not explain the weak EIS agreement.</p>
 <p>The model sensitivity runner tests baseline and lambda assumptions. On the first two DIB cases, every target changed correlation by more than 0.1 across model settings. That means baseline/regularization is now the main engineering weak point.</p>
-<p>The model-rule runner fixes <code>time_charge</code> baseline and chooses lambda from voltage RMSE, gamma roughness, and broad-band stability before EIS metrics are read. On the saved run, it selected 10 rows with 0 errors and 10 quality-pass rows, but median EIS correlation stayed weak at about 0.141.</p>
+<p>The model-rule runner fixes <code>time_charge</code> baseline and chooses lambda from voltage typical prediction error, gamma roughness, and broad-band stability before EIS metrics are read. On the saved run, it selected 10 rows with 0 errors and 10 quality-pass rows, but median EIS correlation stayed weak at about 0.141.</p>
 <p>The readiness report currently says <code>research_scaffold_viable</code> and <code>not_validated</code>. That is the right level of confidence. Use the code to test assumptions. Do not use it yet to generate final training labels.</p>
 <h2>Commenting Rule For Future Code</h2>
-<p>When adding pipeline variables, explain them at the point where they are created:</p>
+<p>When adding analysis chain variables, explain them at the point where they are created:</p>
 <ul><li>unit</li></ul>
 <ul><li>source</li></ul>
 <ul><li>whether it is a measured value, fitted value, assumption, or diagnostic</li></ul>

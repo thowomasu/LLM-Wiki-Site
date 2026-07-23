@@ -391,20 +391,20 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/00_Read_First/MEETING_WALKTHROUGH.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Meeting Walkthrough: Time-Series To DRT Pipeline</h1>
 <p>Use this as a live walkthrough path. Do not treat it like slides. Open the files in this order and talk through the evidence.</p>
 <h2>Goal For The Meeting</h2>
-<p>Show that the pipeline is now a serious research early workflow, then ask for the protocol information needed to validate it properly.</p>
+<p>Show that the analysis chain is now a serious research early analysis procedure, then ask for the protocol information needed to validate it properly.</p>
 <p>The main message:</p>
 <p>The code works mechanically. The science is not validated yet. I need your help checking whether the time-series pulse windows are truly comparable to the EIS conditions.</p>
 <h2>0. Start With The Honest Status</h2>
 <p>Open:</p>
-<pre><code>00_Read_First/VIABILITY_REPORT.md</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>00_Read_First/VIABILITY_REPORT.md</code></pre></details>
 <p>Say:</p>
-<p>I built a pipeline that can go from current-voltage-time data to a DRT-like curve, then compare that curve against EIS-derived DRT. The engineering early workflow is viable, but the method is not validated yet.</p>
+<p>I built a analysis chain that can go from current-voltage-time data to a DRT-like curve, then compare that curve against EIS-derived DRT. The engineering early analysis procedure is viable, but the method is not validated yet.</p>
 <p>Point to:</p>
 <ul><li>synthetic inverse check passes</li></ul>
 <ul><li>DIB batch runner passes</li></ul>
@@ -418,25 +418,25 @@ window.MathJax = {
 <p>Does this framing sound scientifically honest to you?</p>
 <h2>1. Show The Pipeline Map</h2>
 <p>Open:</p>
-<pre><code>00_Read_First/ROUGH_PROTOTYPE_HANDOFF.md</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>00_Read_First/ROUGH_PROTOTYPE_HANDOFF.md</code></pre></details>
 <p>Show this path:</p>
-<pre><code>time series CSV
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>time series CSV
 -&gt; column normalization
 -&gt; pulse/rest window finder
 -&gt; candidate window fit
 -&gt; time-domain DRT-like tau/gamma curve
 -&gt; EIS-derived DRT comparison
 -&gt; sensitivity checks
--&gt; pre-declared model rule</code></pre>
+-&gt; pre-declared model rule</code></pre></details>
 <p>Say:</p>
 <p>I did not just fit one hand-picked curve. I built the checks around the curve: window detection, SOC alignment diagnostics, batch testing, SOC mapping sensitivity, model sensitivity, and a rule that chooses lambda before EIS scoring.</p>
 <p>Achievement to highlight:</p>
-<p>The pipeline is no longer just plotting. It has diagnostics and failure modes.</p>
+<p>The analysis chain is no longer just plotting. It has diagnostics and failure modes.</p>
 <p>What to ask:</p>
-<p>Which part of this workflow seems scientifically weakest to you?</p>
+<p>Which part of this analysis procedure seems scientifically weakest to you?</p>
 <h2>2. Show The Math</h2>
 <p>Open:</p>
-<pre><code>01_Method_And_Math/TIME_DOMAIN_DRT_MATH.html</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>01_Method_And_Math/TIME_DOMAIN_DRT_MATH.html</code></pre></details>
 <p>Show these sections:</p>
 <ul><li>Forward Model</li></ul>
 <ul><li>Discrete RC Kernel</li></ul>
@@ -450,11 +450,11 @@ window.MathJax = {
 <p>Is this baseline treatment acceptable as a first approximation, or should the OCV/baseline model be more protocol-aware?</p>
 <h2>3. Show The Synthetic Sanity Check</h2>
 <p>Open plot:</p>
-<pre><code>03_Key_Plots/synthetic_section_1_plots.png</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>03_Key_Plots/synthetic_section_1_plots.png</code></pre></details>
 <p>Open report if needed:</p>
-<pre><code>02_Key_Results/../00_Read_First/README.md</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>02_Key_Results/../00_Read_First/README.md</code></pre></details>
 <p>Say:</p>
-<p>Before using real data, I tested the inverse on synthetic data with known RC branches. It reconstructs voltage near the injected noise level, about 0.8 mV RMSE.</p>
+<p>Before using real data, I tested the inverse on synthetic data with known RC branches. It reconstructs voltage near the injected noise level, about 0.8 mV typical prediction error.</p>
 <p>Achievement to highlight:</p>
 <p>The math and code pass a controlled inverse check.</p>
 <p>Weakness to say out loud:</p>
@@ -463,9 +463,9 @@ window.MathJax = {
 <p>For this project, should we care about exact DRT peak locations, or should we focus on broad tau-band areas?</p>
 <h2>4. Show Real Cell28 Sweep</h2>
 <p>Open plot:</p>
-<pre><code>03_Key_Plots/section_8_cell28_soc_sweep_summary.png</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>03_Key_Plots/section_8_cell28_soc_sweep_summary.png</code></pre></details>
 <p>Open table:</p>
-<pre><code>02_Key_Results/section_8_cell28_soc_sweep_summary.csv</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>02_Key_Results/section_8_cell28_soc_sweep_summary.csv</code></pre></details>
 <p>Say:</p>
 <p>I tested Cell28 across multiple SOC labels. Voltage reconstruction is good, but EIS agreement is weak.</p>
 <p>Achievement to highlight:</p>
@@ -476,9 +476,9 @@ window.MathJax = {
 <p>Are these Cell28 pulse windows actually the right windows to compare against the EIS SOC labels?</p>
 <h2>5. Show SOC Alignment Problem</h2>
 <p>Open plot:</p>
-<pre><code>03_Key_Plots/section_10_soc_alignment.png</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>03_Key_Plots/section_10_soc_alignment.png</code></pre></details>
 <p>Open table:</p>
-<pre><code>02_Key_Results/section_10_matched_soc_alignment.csv</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>02_Key_Results/section_10_matched_soc_alignment.csv</code></pre></details>
 <p>Say:</p>
 <p>I added coulomb-counting checks. The nominal 70 percent case looks closer to about 76 percent under the simple anchor method. That contaminates the matched validation story.</p>
 <p>Achievement to highlight:</p>
@@ -487,10 +487,10 @@ window.MathJax = {
 <p>Can you provide protocol annotations that map exact time-series steps to exact SOC targets?</p>
 <h2>6. Show Generalized Batch Result</h2>
 <p>Open:</p>
-<pre><code>02_Key_Results/DIB Batch/dib_batch_report.md
-02_Key_Results/DIB Batch/dib_batch_results.csv</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>02_Key_Results/DIB Batch/dib_batch_report.md
+02_Key_Results/DIB Batch/dib_batch_results.csv</code></pre></details>
 <p>Say:</p>
-<p>I generalized beyond Cell28. The first batch processed cells 15, 18, and 20, with 15 SOC comparisons and no errors. Median voltage RMSE is about 1.586 mV, but median EIS correlation is only about 0.105.</p>
+<p>I generalized beyond Cell28. The first batch processed cells 15, 18, and 20, with 15 SOC comparisons and no errors. Median voltage typical prediction error is about 1.586 mV, but median EIS correlation is only about 0.105.</p>
 <p>Achievement to highlight:</p>
 <p>The code runs across multiple cells and exports quality flags.</p>
 <p>Weakness to say out loud:</p>
@@ -499,8 +499,8 @@ window.MathJax = {
 <p>Does weak EIS agreement surprise you, given the difference between pulse relaxation and frequency-domain EIS?</p>
 <h2>7. Show Sensitivity Checks</h2>
 <p>Open:</p>
-<pre><code>02_Key_Results/SOC Mapping Sensitivity/soc_mapping_sensitivity_report.md
-02_Key_Results/Model Sensitivity/model_sensitivity_report.md</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>02_Key_Results/SOC Mapping Sensitivity/soc_mapping_sensitivity_report.md
+02_Key_Results/Model Sensitivity/model_sensitivity_report.md</code></pre></details>
 <p>Say:</p>
 <p>SOC mapping was not the easy explanation in the first sensitivity run. Different SOC mapping modes selected the same windows. But model sensitivity showed baseline and lambda choices change the EIS comparison a lot.</p>
 <p>Achievement to highlight:</p>
@@ -511,9 +511,9 @@ window.MathJax = {
 <p>What baseline or OCV correction would you consider scientifically defensible for these pulse windows?</p>
 <h2>8. Show The Pre-Declared Model Rule</h2>
 <p>Open:</p>
-<pre><code>02_Key_Results/Model Rule/model_rule_report.md</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>02_Key_Results/Model Rule/model_rule_report.md</code></pre></details>
 <p>Say:</p>
-<p>To avoid cherry-picking, I added a rule that selects lambda before looking at EIS metrics. It chooses from voltage RMSE, gamma roughness, and broad-band stability. Only after selection does it report EIS agreement.</p>
+<p>To avoid cherry-picking, I added a rule that selects lambda before looking at EIS metrics. It chooses from voltage typical prediction error, gamma roughness, and broad-band stability. Only after selection does it report EIS agreement.</p>
 <p>Achievement to highlight:</p>
 <p>This blocks validation leakage.</p>
 <p>Weakness to say out loud:</p>
@@ -522,7 +522,7 @@ window.MathJax = {
 <p>Should the model-selection rule use repeated-pulse stability, EIS agreement, or some other criterion?</p>
 <h2>9. End With The Concrete Ask</h2>
 <p>Open:</p>
-<pre><code>00_Read_First/QUESTIONS_FOR_PROFESSOR.md</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>00_Read_First/QUESTIONS_FOR_PROFESSOR.md</code></pre></details>
 <p>Say:</p>
 <p>The next step is not training a model. The next step is validating the experimental alignment.</p>
 <p>Ask for:</p>
@@ -536,15 +536,15 @@ window.MathJax = {
 <p>Show only:</p>
 <p>1. <code>00_Read_First/VIABILITY_REPORT.md</code> 2. <code>01_Method_And_Math/TIME_DOMAIN_DRT_MATH.html</code> 3. <code>02_Key_Results/Model Rule/model_rule_report.md</code> 4. <code>00_Read_First/QUESTIONS_FOR_PROFESSOR.md</code></p>
 <p>Say:</p>
-<p>I built the early workflow. It runs. It is honest about not being validated. I need your protocol knowledge to decide whether the mismatch is a modeling problem or an experimental-comparability problem.</p>
+<p>I built the early analysis procedure. It runs. It is honest about not being validated. I need your protocol knowledge to decide whether the mismatch is a modeling problem or an experimental-comparability problem.</p>
 <h2>What Not To Say</h2>
 <p>Do not say:</p>
 <ul><li>I solved time-series DRT.</li></ul>
 <ul><li>This replaces EIS.</li></ul>
 <ul><li>These are training labels.</li></ul>
-<ul><li>The model works because voltage RMSE is low.</li></ul>
+<ul><li>The model works because voltage typical prediction error is low.</li></ul>
 <p>Say instead:</p>
-<ul><li>I built a reproducible research early workflow.</li></ul>
+<ul><li>I built a reproducible research early analysis procedure.</li></ul>
 <ul><li>The first validation comparison is weak.</li></ul>
 <ul><li>The next step is protocol-confirmed matching and baseline modeling.</li></ul>
 <ul><li>I want your feedback on the experimental assumptions.</li></ul>

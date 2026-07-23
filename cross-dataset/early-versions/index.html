@@ -812,6 +812,43 @@ code {
   background: var(--panel);
 }
 .source-item code { word-break: break-word; }
+.skim-first-note {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  background: var(--panel);
+}
+.skim-first-note strong {
+  font-size: 18px;
+}
+.skim-first-note span {
+  color: var(--muted);
+}
+.implementation-details {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.implementation-details summary {
+  min-height: 44px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.implementation-details pre {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 8px 8px;
+}
+main > p,
+main > section > p,
+.slide > p {
+  max-width: 78ch;
+}
 .source-kind {
   display: inline-block;
   margin-right: 8px;
@@ -1355,6 +1392,7 @@ window.MathJax = {
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/decision-report/">Plain-language decision report</a>
 <a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
@@ -1419,8 +1457,8 @@ window.MathJax = {
       <figure class="evidence-chart"><figcaption><strong>Version 1 external EIS error</strong><span>Lower is better. The simple baseline is fixed at 100%. Version 1 produced 159.8% of that error.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Baseline</span><strong>100% of baseline error</strong></div><div class="evidence-chart-track" role="img" aria-label="Baseline: 100% of baseline error"><span class="evidence-chart-bar muted" style="--bar-width:55.556%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Version 1 model</span><strong>159.8% of baseline error</strong></div><div class="evidence-chart-track" role="img" aria-label="Version 1 model: 159.8% of baseline error"><span class="evidence-chart-bar bad" style="--bar-width:88.753%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>180% of baseline error</span></div><p class="chart-source">Frozen CMU outside-data test on 179 rows. The model was worse than the simple baseline.</p></figure>
       <section class="metric-grid">
         <article class="metric-card"><span>External rows</span><strong>179</strong></article>
-        <article class="metric-card"><span>Model EIS RMSE</span><strong>0.0209 ohm</strong></article>
-        <article class="metric-card"><span>Baseline EIS RMSE</span><strong>0.0131 ohm</strong></article>
+        <article class="metric-card"><span>Model EIS typical prediction error</span><strong>0.0209 ohm</strong></article>
+        <article class="metric-card"><span>Baseline EIS typical prediction error</span><strong>0.0131 ohm</strong></article>
         <article class="metric-card"><span>Relative result</span><strong>-59.8%</strong></article>
       </section>
       <p>The negative percentage means the model was worse, not better. Its error was about 59.8% higher than the baseline. The health model could not be scored because the CMU spectrum did not include the frozen 0.05 Hz input. The full predicted-EIS-to-health chain was also outside the Version 1 contract.</p>
@@ -1469,7 +1507,7 @@ window.MathJax = {
     <section id="lessons" class="technical-section">
       <h2>What Versions 1 to 3 taught the project</h2>
       <div class="table-wrap"><table><thead><tr><th>Version</th><th>Main idea</th><th>Result</th><th>What changed next</th></tr></thead><tbody>
-        <tr><td data-label="Version">1</td><td data-label="Main idea">Broad pulse-to-EIS transfer</td><td data-label="Result">External EIS error worse than baseline</td><td data-label="What changed next">Separate output heads and use a fresh same-cell reference</td></tr>
+        <tr><td data-label="Version">1</td><td data-label="Main idea">Broad pulse-to-EIS transfer</td><td data-label="Result">External EIS error worse than baseline</td><td data-label="What changed next">Separate predicted quantitys and use a fresh same-cell reference</td></tr>
         <tr><td data-label="Version">2</td><td data-label="Main idea">Calibration-aware component models</td><td data-label="Result">Strong same-dataset result, no valid external score</td><td data-label="What changed next">Remove protocol-specific inputs and freeze a portable model</td></tr>
         <tr><td data-label="Version">3</td><td data-label="Main idea">Portable calibrated inputs</td><td data-label="Result">External EIS heads missed the pass gate</td><td data-label="What changed next">Normalize impedance scale in Version 4</td></tr>
       </tbody></table></div>
@@ -1494,7 +1532,7 @@ window.MathJax = {
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-19 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-23 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>

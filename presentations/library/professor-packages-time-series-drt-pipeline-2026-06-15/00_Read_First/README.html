@@ -391,13 +391,13 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/00_Read_First/README.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Time Domain DRT Pilot</h1>
 <h2>Purpose</h2>
 <p>This folder tracks the time-series-to-DRT prototype section by section.</p>
-<p>The current goal is not to train a model. The current goal is to prove that the data pipeline can estimate a DRT-like relaxation spectrum from current-voltage-time data in a controlled setting, then compare it against EIS-derived DRT when real matched data is available.</p>
+<p>The current goal is not to train a model. The current goal is to prove that the data analysis chain can estimate a DRT-like relaxation spectrum from current-voltage-time data in a controlled setting, then compare it against EIS-derived DRT when real matched data is available.</p>
 <p>If you only read three files, read these first:</p>
 <p>1. <code>PLAIN_ENGLISH_OVERVIEW.md</code> 2. <code>DRIVE_CYCLE_DATASET_RECOMMENDATION.md</code> 3. <code>../01_Method_And_Math/CODE_WALKTHROUGH_FOR_PROFESSOR.md</code></p>
 <p>The professor&#x27;s drive-cycle criticism is valid. DIB is useful for pulse/rest and EIS comparison, but it should not be presented as the main drive-cycle dataset.</p>
@@ -405,16 +405,16 @@ window.MathJax = {
 <p>Status: complete for first pass.</p>
 <h2>Local Data Configuration</h2>
 <p>The DIB dataset is not stored in this repo. Set these environment variables before running the DIB-dependent sections:</p>
-<pre><code>$env:DIB_DATA_ROOT = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH estimation dataset&quot;
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>$env:DIB_DATA_ROOT = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH estimation dataset&quot;
 $env:DIB_CAPACITY_ROOT = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH estimation dataset\.csvfiles\Capacity_Check&quot;
-$env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH estimation dataset\WholeDataRealSOH.xlsx&quot;</code></pre>
+$env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH estimation dataset\WholeDataRealSOH.xlsx&quot;</code></pre></details>
 <p><code>DIB_DATA_ROOT</code> is enough when the extracted dataset keeps the original DIB folder structure. Use the narrower variables only when your files live somewhere else.</p>
 <p>Runner:</p>
 <p><code>scripts/experiments/run_time_domain_rough_prototype.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\run_time_domain_rough_prototype.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\run_time_domain_rough_prototype.py&quot;</code></pre></details>
 <p>Plotting scripts now use Matplotlib with the headless <code>Agg</code> backend. Use a Python environment with <code>numpy</code>, <code>pandas</code>, and <code>matplotlib</code> installed. On this Windows machine, the tested interpreter is:</p>
-<pre><code>&amp; &quot;[local path redacted]</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;[local path redacted]</code></pre></details>
 <p>Use <code>--synthetic-only</code> if the local DIB folder is not available.</p>
 <p>Main handoff:</p>
 <ul><li><code>ROUGH_PROTOTYPE_HANDOFF.md</code></li></ul>
@@ -432,7 +432,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_drt_pilot.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_drt_pilot.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_drt_pilot.py&quot;</code></pre></details>
 <p>Outputs:</p>
 <ul><li><code>section_1_synthetic_report.md</code></li></ul>
 <ul><li><code>synthetic_section_1_timeseries.csv</code></li></ul>
@@ -442,7 +442,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Result:</p>
 <ul><li>Synthetic truth: R0 = 0.002 ohm, RC branches at 8 s, 45 s, and 180 s.</li></ul>
 <ul><li>Recovered R0: about 0.00181 ohm.</li></ul>
-<ul><li>Voltage reconstruction RMSE: about 0.801 mV, close to the injected 0.8 mV noise.</li></ul>
+<ul><li>Voltage reconstruction typical prediction error: about 0.801 mV, close to the injected 0.8 mV noise.</li></ul>
 <ul><li>Fast and mid relaxation bands are recovered reasonably.</li></ul>
 <ul><li>The slow branch is smeared and shifted, which is a warning that exact DRT peak location is fragile in pulse-based time-domain fitting.</li></ul>
 <p>Interpretation:</p>
@@ -452,7 +452,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_window_finder.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_window_finder.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_window_finder.py&quot;</code></pre></details>
 <p>Outputs:</p>
 <ul><li><code>section_2_window_finder_report.md</code></li></ul>
 <ul><li><code>section_2_window_candidates.csv</code></li></ul>
@@ -475,7 +475,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_candidate_fit.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_candidate_fit.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_candidate_fit.py&quot;</code></pre></details>
 <p>Outputs:</p>
 <ul><li><code>section_3_candidate_fit_report.md</code></li></ul>
 <ul><li><code>section_3_selected_window.csv</code></li></ul>
@@ -487,7 +487,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>Fit rows: 245 after including 30 seconds before the pulse and 180 seconds after it.</li></ul>
 <ul><li>Estimated tau range: 2 s to about 81.33 s.</li></ul>
 <ul><li>Recovered R0: about 0.00175 ohm.</li></ul>
-<ul><li>Voltage reconstruction RMSE: about 0.803 mV, close to the injected 0.8 mV noise.</li></ul>
+<ul><li>Voltage reconstruction typical prediction error: about 0.803 mV, close to the injected 0.8 mV noise.</li></ul>
 <ul><li>Recovered fast-band resistance around 10 s and mid-band resistance around 60 s.</li></ul>
 <ul><li>Did not recover the true 180 s branch because this selected window cannot support tau above about 81 s. That is the correct limitation, not a bug.</li></ul>
 <p>Interpretation:</p>
@@ -498,7 +498,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Smoke-test script:</p>
 <p><code>scripts/experiments/time_domain_real_csv_smoke_test.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_real_csv_smoke_test.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_real_csv_smoke_test.py&quot;</code></pre></details>
 <p>Smoke-test outputs:</p>
 <ul><li><code>section_4_real_csv_smoke_test_report.md</code></li></ul>
 <ul><li><code>section_4_synthetic_dib_like_timeseries.csv</code></li></ul>
@@ -513,14 +513,14 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>Rewrote the synthetic first-slice protocol inventory signal with DIB-style columns: <code>Step Time</code>, <code>Current</code>, <code>Voltage</code>, <code>LogTemp001</code>.</li></ul>
 <ul><li>Loader correctly mapped those columns to <code>time_s</code>, <code>current_a</code>, <code>voltage_v</code>, and <code>temperature_c</code>.</li></ul>
 <ul><li>Window finder detected 5 candidates and accepted all 5.</li></ul>
-<ul><li>Candidate-window fit produced the same result family as HPPC window finder: R0 about 0.00175 ohm and voltage RMSE about 0.803 mV.</li></ul>
+<ul><li>Candidate-window fit produced the same result family as HPPC window finder: R0 about 0.00175 ohm and voltage typical prediction error about 0.803 mV.</li></ul>
 <p>Interpretation:</p>
 <p>HPPC candidate fit proves column compatibility and end-to-end mechanics for a realistic CSV layout. It does not prove real-data performance.</p>
 <p>Real CSV pilot:</p>
 <p>Use the same file and protocol screen and HPPC window finder scripts on one real battery time-series CSV.</p>
 <p>Expected command pattern:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_window_finder.py&quot; --input &quot;path\to\real_timeseries.csv&quot;
-&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_candidate_fit.py&quot; --input &quot;path\to\real_timeseries.csv&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_window_finder.py&quot; --input &quot;path\to\real_timeseries.csv&quot;
+&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_candidate_fit.py&quot; --input &quot;path\to\real_timeseries.csv&quot;</code></pre></details>
 <p>Expected checks:</p>
 <ul><li>Does the loader map the real columns correctly?</li></ul>
 <ul><li>Are pulse/rest windows detected?</li></ul>
@@ -542,8 +542,8 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Key fix:</p>
 <p>The DIB CSV has metadata rows before the data table, and both <code>Step Time</code> and <code>Prog Time</code>. <code>Step Time</code> resets at each protocol step, so the loader must use <code>Prog Time</code> as the continuous time axis.</p>
 <p>Commands:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_window_finder.py&quot; --input &quot;$DIB_CAPACITY_ROOT\100per_Cells_Capacity_Check_09112021_000cycle\Cell27_100SOH_Capacity_Check_25degC_000cycle.csv&quot; --output-prefix section_5_dib
-&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_candidate_fit.py&quot; --input &quot;$DIB_CAPACITY_ROOT\100per_Cells_Capacity_Check_09112021_000cycle\Cell27_100SOH_Capacity_Check_25degC_000cycle.csv&quot; --candidates &quot;40 Outputs\Experiments\Time Domain DRT Pilot\section_5_dib_window_candidates.csv&quot; --candidate-id 12 --include-pre-s 120 --include-post-s 1200 --output-prefix section_5_dib</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_window_finder.py&quot; --input &quot;$DIB_CAPACITY_ROOT\100per_Cells_Capacity_Check_09112021_000cycle\Cell27_100SOH_Capacity_Check_25degC_000cycle.csv&quot; --output-prefix section_5_dib
+&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_candidate_fit.py&quot; --input &quot;$DIB_CAPACITY_ROOT\100per_Cells_Capacity_Check_09112021_000cycle\Cell27_100SOH_Capacity_Check_25degC_000cycle.csv&quot; --candidates &quot;40 Outputs\Experiments\Time Domain DRT Pilot\section_5_dib_window_candidates.csv&quot; --candidate-id 12 --include-pre-s 120 --include-post-s 1200 --output-prefix section_5_dib</code></pre></details>
 <p>Window finder result:</p>
 <ul><li>Loaded 112531 finite rows.</li></ul>
 <ul><li>Continuous duration: about 103879 s.</li></ul>
@@ -556,11 +556,11 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>Candidate tau range from window finder: about 2 s to 410 s.</li></ul>
 <ul><li>Fit tau range: about 1.95 s to 449 s.</li></ul>
 <ul><li>R0 estimate: about 0.02697 ohm.</li></ul>
-<ul><li>Voltage reconstruction RMSE: about 5.77 mV.</li></ul>
+<ul><li>Voltage reconstruction typical prediction error: about 5.77 mV.</li></ul>
 <ul><li>Main recovered DRT peak: about 113 s.</li></ul>
 <ul><li>Temperature drift inside the pulse candidate: about 0.9 C.</li></ul>
 <p>Interpretation:</p>
-<p>The local DIB data is usable now. The real-data pipeline runs end to end on one capacity-check file.</p>
+<p>The local DIB data is usable now. The real-data analysis chain runs end to end on one capacity-check file.</p>
 <p>But this is not yet matched-pair validation. The selected pulse has noticeable temperature drift, and we have not compared the time-domain DRT against the matching EIS-derived DRT. This is a real-data basic test, not proof.</p>
 <p>Follow-up:</p>
 <p>Cell27 is useful as a real-data basic test, but it is a bad matched-validation target in the local DIB folder because the matching Cell27 EIS files are not present. Do not spend time forcing Cell27 into the validation story.</p>
@@ -573,7 +573,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>EIS workbook: <code>$DIB_EIS_WORKBOOK</code></li></ul>
 <ul><li>Matching EIS conditions found for Cell28: 100 SOH, 25 C, SOC 5, 20, 50, 70, and 95 percent.</li></ul>
 <p>Window-finder command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_window_finder.py&quot; --input &quot;$DIB_CAPACITY_ROOT\100per_Cells_Capacity_Check_09112021_000cycle\Cell28_100SOH_Capacity_Check_25degC_000cycle.csv&quot; --output-prefix section_6_cell28</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_window_finder.py&quot; --input &quot;$DIB_CAPACITY_ROOT\100per_Cells_Capacity_Check_09112021_000cycle\Cell28_100SOH_Capacity_Check_25degC_000cycle.csv&quot; --output-prefix section_6_cell28</code></pre></details>
 <p>Result:</p>
 <ul><li>Loaded 112932 finite rows.</li></ul>
 <ul><li>Continuous duration: about 104275 s.</li></ul>
@@ -583,11 +583,11 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Best first matched candidate:</p>
 <p>Candidate id 10 is the cleaner first target because it has a roughly 30 s, -2.5 A pulse, no measured temperature drift in the pulse, and pre-pulse voltage near 4.01 V, which lines up with the 70 percent SOC EIS condition better than the colder-smoke-test Cell27 window.</p>
 <p>Candidate-fit command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_candidate_fit.py&quot; --input &quot;$DIB_CAPACITY_ROOT\100per_Cells_Capacity_Check_09112021_000cycle\Cell28_100SOH_Capacity_Check_25degC_000cycle.csv&quot; --candidates &quot;40 Outputs\Experiments\Time Domain DRT Pilot\section_6_cell28_window_candidates.csv&quot; --candidate-id 10 --include-pre-s 120 --include-post-s 1200 --output-prefix section_6_cell28_70soc_lowtempdrift</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_candidate_fit.py&quot; --input &quot;$DIB_CAPACITY_ROOT\100per_Cells_Capacity_Check_09112021_000cycle\Cell28_100SOH_Capacity_Check_25degC_000cycle.csv&quot; --candidates &quot;40 Outputs\Experiments\Time Domain DRT Pilot\section_6_cell28_window_candidates.csv&quot; --candidate-id 10 --include-pre-s 120 --include-post-s 1200 --output-prefix section_6_cell28_70soc_lowtempdrift</code></pre></details>
 <p>Fit result:</p>
 <ul><li>Fit rows: 2163.</li></ul>
 <ul><li>R0 estimate: about 0.02726 ohm.</li></ul>
-<ul><li>Voltage reconstruction RMSE: about 1.44 mV.</li></ul>
+<ul><li>Voltage reconstruction typical prediction error: about 1.44 mV.</li></ul>
 <ul><li>Fit tau range: about 1.94 s to 449 s.</li></ul>
 <ul><li>Main recovered structures: about 45 s, 90 s, and a boundary peak near 449 s.</li></ul>
 <p>Interpretation:</p>
@@ -604,7 +604,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>Time-domain DRT: <code>section_6_cell28_70soc_lowtempdrift_window_drt.csv</code></li></ul>
 <ul><li>EIS source: <code>WholeDataRealSOH.xlsx</code></li></ul>
 <p>pyDRTtools comparison command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_eis_compare.py&quot; --time-drt &quot;40 Outputs\Experiments\Time Domain DRT Pilot\section_6_cell28_70soc_lowtempdrift_window_drt.csv&quot; --cell 28 --soh 100 --temp 25 --soc 70 --eis-method pydrttools --output-prefix section_7_cell28_70soc_compare_pydrttools</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_eis_compare.py&quot; --time-drt &quot;40 Outputs\Experiments\Time Domain DRT Pilot\section_6_cell28_70soc_lowtempdrift_window_drt.csv&quot; --cell 28 --soh 100 --temp 25 --soc 70 --eis-method pydrttools --output-prefix section_7_cell28_70soc_compare_pydrttools</code></pre></details>
 <p>Outputs:</p>
 <ul><li><code>section_7_cell28_70soc_compare_pydrttools_comparison_report.md</code></li></ul>
 <ul><li><code>section_7_cell28_70soc_compare_pydrttools_comparison_summary.json</code></li></ul>
@@ -626,18 +626,18 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>tune the time-domain regularization and EIS DRT regularization as a pair</li></ul>
 <ul><li>check whether repeated pulses at the same approximate SOC give similar band areas</li></ul>
 <p>Blunt takeaway:</p>
-<p>One matched-pair plot is not evidence. A small table across SOC points is evidence. If the trend is not repeatable, the pipeline is still a curve generator, not a measurement pipeline.</p>
+<p>One matched-pair plot is not evidence. A small table across SOC points is evidence. If the trend is not repeatable, the analysis chain is still a curve generator, not a measurement analysis chain.</p>
 <h3>combined EIS and time-domain DRT prototype: Cell28 SOC sweep</h3>
 <p>Status: complete for first pass, not validated yet.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_cell28_soc_sweep.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_cell28_soc_sweep.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_cell28_soc_sweep.py&quot;</code></pre></details>
 <p>Purpose:</p>
 <p>combined EIS and time-domain DRT prototype repeats the Cell28 matched comparison across SOC points using the lower-current pulse windows. This is the first useful validation table.</p>
 <p>Cases:</p>
 <table>
-<tr><th>SOC percent</th><th>Candidate</th><th>Pre-rest V</th><th>Temp drift C</th><th>Time RMSE mV</th><th>Corr</th><th>Time overlap area</th><th>EIS overlap area</th></tr>
+<tr><th>SOC percent</th><th>Candidate</th><th>Pre-rest V</th><th>Temp drift C</th><th>Time typical prediction error mV</th><th>Corr</th><th>Time overlap area</th><th>EIS overlap area</th></tr>
 <tr><td>95</td><td>6</td><td>4.16472</td><td>0.0</td><td>1.492</td><td>-0.0417</td><td>0.00139</td><td>0.01220</td></tr>
 <tr><td>70</td><td>10</td><td>4.01062</td><td>0.0</td><td>1.437</td><td>0.1209</td><td>0.00191</td><td>0.01705</td></tr>
 <tr><td>50</td><td>14</td><td>3.70286</td><td>0.0</td><td>1.427</td><td>0.0848</td><td>0.00128</td><td>0.01233</td></tr>
@@ -652,8 +652,8 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>per-SOC time-domain fit files: <code>section_8_cell28_*soc_*</code></li></ul>
 <ul><li>per-SOC EIS comparison files: <code>section_8_cell28_*soc_compare_pydrttools_*</code></li></ul>
 <p>Interpretation:</p>
-<p>The time-domain voltage fits are good across SOC, roughly 1.4 mV to 2.3 mV RMSE. That means the model can explain the local voltage window.</p>
-<p>But the matched EIS comparison is weak. Correlations stay low, and the EIS overlap area grows strongly at low SOC while the time-domain overlap area stays small. That means the present time-domain DRT pipeline is not yet a validated substitute for EIS-derived DRT.</p>
+<p>The time-domain voltage fits are good across SOC, roughly 1.4 mV to 2.3 mV typical prediction error. That means the model can explain the local voltage window.</p>
+<p>But the matched EIS comparison is weak. Correlations stay low, and the EIS overlap area grows strongly at low SOC while the time-domain overlap area stays small. That means the present time-domain DRT analysis chain is not yet a validated substitute for EIS-derived DRT.</p>
 <p>This is still progress. We now have a repeatable validation harness instead of one cherry-picked plot.</p>
 <p>Next technical questions:</p>
 <ul><li>Is the time-domain solver underestimating gamma because of scaling, regularization, or baseline drift handling?</li></ul>
@@ -661,13 +661,13 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>Should validation compare broad band areas after normalization instead of raw gamma magnitude?</li></ul>
 <ul><li>Should SOC be assigned by integrated capacity rather than pre-rest voltage?</li></ul>
 <p>Blunt takeaway:</p>
-<p>The pipeline is mechanically real now. Scientifically, it is not proven. The next job is to find out whether the mismatch is a bug, a modeling assumption, or a real limitation of pulse-only time-domain data.</p>
+<p>The analysis chain is mechanically real now. Scientifically, it is not proven. The next job is to find out whether the mismatch is a bug, a modeling assumption, or a real limitation of pulse-only time-domain data.</p>
 <h3>time-series 2D DRT surface: Validation diagnostics</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_validation_diagnostics.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_validation_diagnostics.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_validation_diagnostics.py&quot;</code></pre></details>
 <p>Purpose:</p>
 <p>time-series 2D DRT surface checks whether the combined EIS and time-domain DRT prototype mismatch is mostly a scale problem or a shape problem. This matters because a constant scale problem could be fixed by units or normalization. A shape problem means the time-domain inverse is not measuring the same thing as EIS under the current assumptions.</p>
 <p>Outputs:</p>
@@ -678,7 +678,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li><code>section_9_validation_diagnostics.png</code></li></ul>
 <p>Scale diagnostic result:</p>
 <table>
-<tr><th>SOC percent</th><th>Corr</th><th>EIS/time area ratio</th><th>Best scale time to EIS</th><th>Normalized RMSE</th></tr>
+<tr><th>SOC percent</th><th>Corr</th><th>EIS/time area ratio</th><th>Best scale time to EIS</th><th>Normalized typical prediction error</th></tr>
 <tr><td>95</td><td>-0.0417</td><td>8.79</td><td>0.412</td><td>0.861</td></tr>
 <tr><td>70</td><td>0.1209</td><td>8.91</td><td>0.626</td><td>0.875</td></tr>
 <tr><td>50</td><td>0.0848</td><td>9.63</td><td>0.608</td><td>0.891</td></tr>
@@ -688,10 +688,10 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Interpretation:</p>
 <p>This is not just a constant unit-conversion problem. The best scale factor varies by SOC, and the low-SOC EIS/time area ratio is much larger than the high-SOC ratio.</p>
 <p>70 percent SOC lambda sweep result:</p>
-<ul><li>Default lambda 0.001 gives correlation about 0.121 and normalized RMSE about 0.875.</li></ul>
+<ul><li>Default lambda 0.001 gives correlation about 0.121 and normalized typical prediction error about 0.875.</li></ul>
 <ul><li>Lambda 0.3 gives the best correlation in the tested range, about 0.353.</li></ul>
-<ul><li>Lambda 3.0 gives the best normalized RMSE in the tested range, about 0.259, but correlation drops to about 0.281.</li></ul>
-<ul><li>Voltage RMSE barely changes across the sweep, staying around 1.437 mV.</li></ul>
+<ul><li>Lambda 3.0 gives the best normalized typical prediction error in the tested range, about 0.259, but correlation drops to about 0.281.</li></ul>
+<ul><li>Voltage typical prediction error barely changes across the sweep, staying around 1.437 mV.</li></ul>
 <p>Interpretation:</p>
 <p>The default time-domain regularization was probably too weak for EIS comparison. Stronger smoothing makes the time-domain curve less spiky and more EIS-like.</p>
 <p>But this does not validate the method. Heavier smoothing can make curves look more similar while destroying interpretability. If the regularization has to be tuned against EIS, then it must be selected by a transparent rule, not by eyeballing the best plot.</p>
@@ -709,7 +709,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_soc_alignment.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_soc_alignment.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_soc_alignment.py&quot;</code></pre></details>
 <p>Purpose:</p>
 <p>EIS 2D DRT surface checks whether the pulse windows used for matched EIS validation line up with the intended EIS SOC labels. Earlier matching mostly used pre-rest voltage. This section adds coulomb counting from the measured current.</p>
 <p>Capacity clues from the raw Cell28 CSV:</p>
@@ -746,7 +746,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_dib_batch.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_dib_batch.py&quot; --max-cases 3 --soc-selection coulomb</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_dib_batch.py&quot; --max-cases 3 --soc-selection coulomb</code></pre></details>
 <p>Purpose:</p>
 <p>time-series versus EIS 2D comparison tests whether the prototype can run on multiple DIB cells instead of only the hand-picked Cell28 case.</p>
 <p>What it does:</p>
@@ -771,7 +771,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>SOH labels processed: 80 and 85</li></ul>
 <ul><li>SOC comparisons produced: 15</li></ul>
 <ul><li>Errors: 0</li></ul>
-<ul><li>Median voltage RMSE: about 1.586 mV</li></ul>
+<ul><li>Median voltage typical prediction error: about 1.586 mV</li></ul>
 <ul><li>Median EIS correlation: about 0.105</li></ul>
 <ul><li>Quality-pass comparisons: 15 of 15</li></ul>
 <ul><li>Quality flag counts: none in this small run</li></ul>
@@ -787,12 +787,12 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li><code>shape_corr</code>: same value family as overlap correlation, included with the other shape metrics.</li></ul>
 <ul><li><code>area_ratio_eis_over_time</code>: EIS DRT overlap area divided by time-domain DRT overlap area.</li></ul>
 <ul><li><code>best_scale_time_to_eis</code>: least-squares scale factor that best maps time-domain gamma onto EIS gamma over the shared tau grid.</li></ul>
-<ul><li><code>scaled_rmse</code>: RMSE after applying the best scale factor.</li></ul>
-<ul><li><code>normalized_rmse</code>: scaled RMSE divided by the EIS gamma norm, useful for comparing cases with different absolute DRT size.</li></ul>
+<ul><li><code>scaled_rmse</code>: typical prediction error after applying the best scale factor.</li></ul>
+<ul><li><code>normalized_rmse</code>: scaled typical prediction error divided by the EIS gamma norm, useful for comparing cases with different absolute DRT size.</li></ul>
 <ul><li><code>quality_pass</code>: basic engineering triage result.</li></ul>
-<ul><li><code>quality_flags</code>: comma-separated reasons when a row fails triage, for example high voltage RMSE, high temperature drift, weak current excitation, or too few shared tau points.</li></ul>
+<ul><li><code>quality_flags</code>: comma-separated reasons when a row fails triage, for example high voltage typical prediction error, high temperature drift, weak current excitation, or too few shared tau points.</li></ul>
 <p>Interpretation:</p>
-<p>The generalized DIB pipeline works mechanically across multiple cells. It can discover files, load DIB CSVs, find pulse windows, select SOC-like windows, fit time-domain DRT, and compare against matched 25 C EIS rows.</p>
+<p>The generalized DIB analysis chain works mechanically across multiple cells. It can discover files, load DIB CSVs, find pulse windows, select SOC-like windows, fit time-domain DRT, and compare against matched 25 C EIS rows.</p>
 <p>But the validation remains weak. EIS correlations are still low. The new quality gates only say the selected windows are not obviously broken under simple engineering checks. They do not say the time-domain DRT agrees with EIS in a scientifically strong way.</p>
 <p>The SOC assignment is now better than pure voltage sorting, but it is still anchored coulomb counting. It assumes the highest-voltage selected pulse is the high-SOC anchor and that <code>AhPrev</code> or <code>AhAccu</code> is the right capacity scale. That is defensible for a prototype. It is not enough for a thesis claim without protocol confirmation.</p>
 <p>Important correction:</p>
@@ -804,7 +804,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_soc_mapping_sensitivity.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_soc_mapping_sensitivity.py&quot; --max-cases 3</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_soc_mapping_sensitivity.py&quot; --max-cases 3</code></pre></details>
 <p>Purpose:</p>
 <p>multi-cell 2D batch check treats SOC matching as an assumption layer instead of pretending it is known ground truth. It reruns the same three DIB cases under four SOC mapping modes:</p>
 <ul><li><code>voltage</code>: assign SOC by pre-rest voltage order.</li></ul>
@@ -825,7 +825,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>Targets with different candidate IDs across modes: 0</li></ul>
 <ul><li>Targets with correlation range above 0.1 across modes: 0</li></ul>
 <ul><li>Median EIS correlation under every mode: about 0.105</li></ul>
-<ul><li>Median normalized RMSE under every mode: about 0.866</li></ul>
+<ul><li>Median normalized typical prediction error under every mode: about 0.866</li></ul>
 <p>Interpretation:</p>
 <p>For these first three DIB cases, SOC mapping assumptions do not change the selected pulse windows. The weak EIS agreement survives all four mapping assumptions.</p>
 <p>That is not proof that the method fails. It means the current mismatch is probably not just an artifact of voltage sorting versus coulomb counting. The next weak points are time-domain model assumptions, EIS/time-domain comparability, baseline handling, and regularization.</p>
@@ -836,7 +836,7 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_model_sensitivity.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_model_sensitivity.py&quot; --max-cases 2</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_model_sensitivity.py&quot; --max-cases 2</code></pre></details>
 <p>Purpose:</p>
 <p>multi-temperature 2D batch check tests whether EIS agreement changes when the time-domain model assumptions change. It varies:</p>
 <ul><li>baseline mode: <code>offset</code>, <code>charge</code>, and <code>time_charge</code></li></ul>
@@ -854,13 +854,13 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>Errors: 0</li></ul>
 <ul><li>EIS cache entries: 10</li></ul>
 <ul><li>Quality-pass comparisons: 112 of 120</li></ul>
-<ul><li>Main quality flag: 8 high-voltage-RMSE rows</li></ul>
-<ul><li>Best median normalized RMSE: <code>time_charge</code>, lambda <code>3.0</code>, about <code>0.301</code></li></ul>
+<ul><li>Main quality flag: 8 high-voltage-typical prediction error rows</li></ul>
+<ul><li>Best median normalized typical prediction error: <code>time_charge</code>, lambda <code>3.0</code>, about <code>0.301</code></li></ul>
 <ul><li>Best median correlation: <code>offset</code>, lambda <code>3.0</code>, about <code>0.374</code></li></ul>
 <ul><li>Targets with correlation range above 0.1 across model settings: 10 of 10</li></ul>
 <p>Interpretation:</p>
 <p>The EIS comparison is highly sensitive to baseline and regularization choices. That is the biggest weak point right now.</p>
-<p>Stronger smoothing often improves normalized shape metrics while barely changing voltage RMSE. That does not automatically mean the smoother DRT is more correct. It may just mean the curve became easier to match after removing structure.</p>
+<p>Stronger smoothing often improves normalized shape metrics while barely changing voltage typical prediction error. That does not automatically mean the smoother DRT is more correct. It may just mean the curve became easier to match after removing structure.</p>
 <p>Blunt takeaway:</p>
 <p>SOC mapping was not the easy excuse. Model assumptions are now the main suspect. Do not pick the prettiest baseline/lambda after seeing EIS. Define the rule first, then test it.</p>
 <h3>combined DRT mirror check: Viability report</h3>
@@ -868,14 +868,14 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_viability_report.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_viability_report.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_viability_report.py&quot;</code></pre></details>
 <p>Outputs:</p>
 <ul><li><code>VIABILITY_REPORT.md</code></li></ul>
 <ul><li><code>viability_summary.json</code></li></ul>
 <p>Current verdict:</p>
-<ul><li>Engineering early workflow: <code>research_scaffold_viable</code></li></ul>
+<ul><li>Engineering early analysis procedure: <code>research_scaffold_viable</code></li></ul>
 <ul><li>Scientific method: <code>not_validated</code></li></ul>
-<ul><li>Synthetic inverse check: pass, RMSE about <code>0.801</code> mV</li></ul>
+<ul><li>Synthetic inverse check: pass, typical prediction error about <code>0.801</code> mV</li></ul>
 <ul><li>DIB batch runner: pass, 15 rows, 0 errors, 15 quality-pass rows</li></ul>
 <ul><li>SOC mapping sensitivity: pass, 4 modes, 0 errors</li></ul>
 <ul><li>Model sensitivity: pass, 120 rows, 0 errors, 112 quality-pass rows</li></ul>
@@ -893,9 +893,9 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_model_rule.py</code></p>
 <p>Command using existing model-sensitivity outputs:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_model_rule.py&quot; --from-existing-sensitivity</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_model_rule.py&quot; --from-existing-sensitivity</code></pre></details>
 <p>Command from raw DIB files when available:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_model_rule.py&quot; --max-cases 2</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_model_rule.py&quot; --max-cases 2</code></pre></details>
 <p>Outputs:</p>
 <ul><li><code>Model Rule/model_rule_report.md</code></li></ul>
 <ul><li><code>Model Rule/model_rule_results.csv</code></li></ul>
@@ -907,20 +907,20 @@ $env:DIB_EIS_WORKBOOK = &quot;path\to\Rashid and Faraji-Niri DIB battery SOH est
 <ul><li>Lambda candidates scored: 40</li></ul>
 <ul><li>Errors: 0</li></ul>
 <ul><li>Quality-pass comparisons: 10 of 10</li></ul>
-<ul><li>Median voltage RMSE: about <code>1.711</code> mV</li></ul>
+<ul><li>Median voltage typical prediction error: about <code>1.711</code> mV</li></ul>
 <ul><li>Median EIS correlation after rule selection: about <code>0.141</code></li></ul>
-<ul><li>Median normalized RMSE after rule selection: about <code>0.978</code></li></ul>
+<ul><li>Median normalized typical prediction error after rule selection: about <code>0.978</code></li></ul>
 <ul><li>Selected lambda: <code>0.001</code> for every saved target in this first rule run</li></ul>
 <p>Interpretation:</p>
-<p>This makes the pipeline more honest because lambda is selected without using EIS agreement. It also makes the bad news harder to dodge: the rule-selected EIS comparison is still weak.</p>
+<p>This makes the analysis chain more honest because lambda is selected without using EIS agreement. It also makes the bad news harder to dodge: the rule-selected EIS comparison is still weak.</p>
 <p>Blunt takeaway:</p>
-<p>The pipeline is now viable as a research early workflow. It is still not validated as a measurement method.</p>
+<p>The analysis chain is now viable as a research early analysis procedure. It is still not validated as a measurement method.</p>
 <h3>weighting probe: HTML documentation export</h3>
 <p>Status: complete for first pass.</p>
 <p>Script:</p>
 <p><code>scripts/experiments/time_domain_export_html.py</code></p>
 <p>Command:</p>
-<pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_export_html.py&quot;</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>&amp; &quot;python&quot; &quot;scripts\experiments\time_domain_export_html.py&quot;</code></pre></details>
 <p>Purpose:</p>
 <p>The Markdown files remain the source of truth because this is an Obsidian vault. The HTML files are viewing copies with better spacing, tables, and typography.</p>
 <p>The math HTML uses MathJax to render LaTeX equations. If the browser is offline, the raw TeX will still be visible but may not render prettily.</p>

@@ -812,6 +812,43 @@ code {
   background: var(--panel);
 }
 .source-item code { word-break: break-word; }
+.skim-first-note {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  background: var(--panel);
+}
+.skim-first-note strong {
+  font-size: 18px;
+}
+.skim-first-note span {
+  color: var(--muted);
+}
+.implementation-details {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.implementation-details summary {
+  min-height: 44px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.implementation-details pre {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 8px 8px;
+}
+main > p,
+main > section > p,
+.slide > p {
+  max-width: 78ch;
+}
 .source-kind {
   display: inline-block;
   margin-right: 8px;
@@ -1355,6 +1392,7 @@ window.MathJax = {
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/decision-report/">Plain-language decision report</a>
 <a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
@@ -1422,7 +1460,7 @@ window.MathJax = {
     </section>
 
     <section id="pipeline" class="technical-section">
-      <h2>Complete missing-EIS pipeline</h2>
+      <h2>Complete missing-EIS analysis chain</h2>
       <div class="technical-flow">
         <div class="flow-card"><strong>1. Reference data</strong><span>Fresh same-cell, same-SOC EIS plus a fresh pulse resistance.</span></div>
         <div class="flow-card"><strong>2. Current pulse</strong><span>The current matched pulse gives relative resistance increase.</span></div>
@@ -1472,7 +1510,7 @@ window.MathJax = {
       </div>
       <div class="definition-grid">
         <div class="definition-card"><strong>Estimator</strong><span>Extra Trees, 300 trees, depth 8, minimum leaf size 2, random seed 19.</span></div>
-        <div class="definition-card"><strong>Preprocessing</strong><span>Median imputation and StandardScaler in a fixed pipeline.</span></div>
+        <div class="definition-card"><strong>Preprocessing</strong><span>Median imputation and StandardScaler in a fixed analysis chain.</span></div>
         <div class="definition-card"><strong>EIS baseline</strong><span>Fresh same-cell spectrum carried forward.</span></div>
         <div class="definition-card"><strong>SOH baseline</strong><span>Constant 100% SOH.</span></div>
       </div>
@@ -1537,7 +1575,7 @@ window.MathJax = {
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-19 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-23 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>

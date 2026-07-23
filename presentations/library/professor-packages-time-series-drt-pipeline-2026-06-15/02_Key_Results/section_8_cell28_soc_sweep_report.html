@@ -391,20 +391,20 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/02_Key_Results/section_8_cell28_soc_sweep_report.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Time-Domain DRT Pilot, combined EIS and time-domain DRT prototype</h1>
 <h2>Purpose</h2>
 <p>This section repeats the matched-pair comparison across Cell28 SOC points using the lower-current pulse windows. The goal is not to declare success. The goal is to see whether the comparison behaves consistently enough to deserve more work.</p>
 <h2>Cases</h2>
-<ul><li>SOC 95 percent, candidate 6, pre-rest V 4.1647, RMSE 1.492 mV, corr -0.04172860596212766, time area 0.0013867039131956322, EIS area 0.012195073716696127</li></ul>
-<ul><li>SOC 70 percent, candidate 10, pre-rest V 4.0106, RMSE 1.437 mV, corr 0.12090836447803378, time area 0.001912685167764021, EIS area 0.01704595838692804</li></ul>
-<ul><li>SOC 50 percent, candidate 14, pre-rest V 3.7029, RMSE 1.427 mV, corr 0.08483606676782145, time area 0.0012801401061692812, EIS area 0.012325637164550778</li></ul>
-<ul><li>SOC 20 percent, candidate 20, pre-rest V 3.4611, RMSE 1.493 mV, corr 0.19066266200150614, time area 0.0010519013202975173, EIS area 0.04802585997259331</li></ul>
-<ul><li>SOC 5 percent, candidate 24, pre-rest V 3.1803, RMSE 2.277 mV, corr 0.10918997059877449, time area 0.0018530087312008787, EIS area 0.07002205926142595</li></ul>
+<ul><li>SOC 95 percent, candidate 6, pre-rest V 4.1647, typical prediction error 1.492 mV, corr -0.04172860596212766, time area 0.0013867039131956322, EIS area 0.012195073716696127</li></ul>
+<ul><li>SOC 70 percent, candidate 10, pre-rest V 4.0106, typical prediction error 1.437 mV, corr 0.12090836447803378, time area 0.001912685167764021, EIS area 0.01704595838692804</li></ul>
+<ul><li>SOC 50 percent, candidate 14, pre-rest V 3.7029, typical prediction error 1.427 mV, corr 0.08483606676782145, time area 0.0012801401061692812, EIS area 0.012325637164550778</li></ul>
+<ul><li>SOC 20 percent, candidate 20, pre-rest V 3.4611, typical prediction error 1.493 mV, corr 0.19066266200150614, time area 0.0010519013202975173, EIS area 0.04802585997259331</li></ul>
+<ul><li>SOC 5 percent, candidate 24, pre-rest V 3.1803, typical prediction error 2.277 mV, corr 0.10918997059877449, time area 0.0018530087312008787, EIS area 0.07002205926142595</li></ul>
 <h2>Interpretation</h2>
-<p>This is the first real validation table. Treat it as a stress test. If correlations and band areas jump around with no SOC pattern, the pipeline is still not validated. If broad band trends are repeatable across SOC, then the next step is tuning regularization and reporting band-level features instead of peak-level claims.</p>
+<p>This is the first real validation table. Treat it as a stress test. If correlations and band areas jump around with no SOC pattern, the analysis chain is still not validated. If broad band trends are repeatable across SOC, then the next step is tuning regularization and reporting band-level features instead of peak-level claims.</p>
 <p>Blunt warning: matching by pre-rest voltage is only an approximation. Proper validation needs exact SOC labels from the protocol or a capacity-integrated SOC estimate.</p>
 <h2>Outputs</h2>
 <ul><li><code>section_8_cell28_soc_sweep_summary.csv</code></li></ul>
@@ -416,21 +416,21 @@ window.MathJax = {
 <h3>Why a sweep is better than one plot</h3>
 <p>One comparison can be lucky. A sweep asks whether the method behaves consistently across 95, 70, 50, 20, and 5 percent SOC.</p>
 <p>For each SOC:</p>
-<pre><code>1. choose a pulse window
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>1. choose a pulse window
 2. fit time-domain DRT
 3. compute EIS-derived DRT
 4. compare both curves on shared tau
-5. store voltage RMSE, correlation, and area</code></pre>
+5. store voltage RMSE, correlation, and area</code></pre></details>
 <h3>What the metrics mean</h3>
-<p>Voltage RMSE says whether the local voltage fit is good.</p>
+<p>Voltage typical prediction error says whether the local voltage fit is good.</p>
 <p>Correlation says whether time-domain and EIS DRT shapes agree.</p>
 <p>Area ratio says whether one curve has much more total resistance weight than the other.</p>
 <h3>What this section proves</h3>
 <p>It gives repeatability evidence. In the current run, voltage fits are good, but EIS agreement is weak. That means the code is working mechanically, but the scientific method is not validated.</p>
 <h3>Actual Equations Used</h3>
-<p>For each SOC label \(s\), the pipeline stores:</p>
+<p>For each SOC label \(s\), the analysis chain stores:</p>
 <div class="math-display">$$
-\mathrm{RMSE}_{\mathrm{mV}}(s)
+\mathrm{typical prediction error}_{\mathrm{mV}}(s)
 =1000\sqrt{\frac{1}{N_s}\sum_{n=1}^{N_s}
 \left(V_{s,n}-\hat{V}_{s,n}\right)^2}
 $$</div>
@@ -446,7 +446,7 @@ $$</div>
 \frac{\int \gamma_{\text{TD}}(\tau,s)\,d\log\tau}
 {\int \gamma_{\text{EIS}}(\tau,s)\,d\log\tau}
 $$</div>
-<p>If voltage RMSE is low but \(r(s)\) is weak, the voltage fit is good but the DRT validation is weak. &lt;!-- END BEGINNER_MATH_EXPLANATION --&gt;</p>
+<p>If voltage typical prediction error is low but \(r(s)\) is weak, the voltage fit is good but the DRT validation is weak. &lt;!-- END BEGINNER_MATH_EXPLANATION --&gt;</p>
     </article>
   </main>
 <script>

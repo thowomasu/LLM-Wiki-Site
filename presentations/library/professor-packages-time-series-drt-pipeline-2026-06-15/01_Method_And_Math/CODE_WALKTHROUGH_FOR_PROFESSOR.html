@@ -391,7 +391,7 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/01_Method_And_Math/CODE_WALKTHROUGH_FOR_PROFESSOR.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Code Walkthrough For Professor</h1>
@@ -413,7 +413,7 @@ window.MathJax = {
 <tr><td><code>gamma_ohm</code></td><td>Ohm</td><td>DRT-like resistance weight at each tau.</td></tr>
 <tr><td><code>R0</code></td><td>Ohm</td><td>Instantaneous ohmic resistance term.</td></tr>
 <tr><td><code>lambda_value</code></td><td>none</td><td>Smoothness strength. Larger values make gamma smoother.</td></tr>
-<tr><td><code>rmse_mv</code></td><td>mV</td><td>Voltage reconstruction error. Good RMSE does not prove the DRT shape is correct.</td></tr>
+<tr><td><code>rmse_mv</code></td><td>mV</td><td>Voltage reconstruction error. Good typical prediction error does not prove the DRT shape is correct.</td></tr>
 <tr><td><code>overlap_corr_gamma</code></td><td>none</td><td>Shape correlation between time-domain gamma and EIS gamma on the shared tau range.</td></tr>
 <tr><td><code>normalized_rmse</code></td><td>none</td><td>Shape error after scaling the time-domain gamma to EIS.</td></tr>
 </table>
@@ -428,7 +428,7 @@ window.MathJax = {
 <tr><td>79-97</td><td>Loads JSON and CSV result files.</td><td>Used later to build a readable final summary.</td></tr>
 <tr><td>99-126</td><td>Converts values to floats, computes medians, counts boolean values, and formats numbers.</td><td>Keeps the summary stable even when files contain missing values.</td></tr>
 <tr><td>128-393</td><td><code>write_final_summary</code> reads all output summaries and writes the handoff report.</td><td>This is where results become a readable narrative.</td></tr>
-<tr><td>396-512</td><td><code>main</code> parses flags, decides whether raw DIB data is available, runs each pipeline section, and writes logs.</td><td>This is the full workflow controller.</td></tr>
+<tr><td>396-512</td><td><code>main</code> parses flags, decides whether raw DIB data is available, runs each analysis chain section, and writes logs.</td><td>This is the full analysis procedure controller.</td></tr>
 <tr><td>514</td><td>Calls <code>main</code> when the script is run directly.</td><td>Standard Python entry point.</td></tr>
 </table>
 <h2>Synthetic Solver</h2>
@@ -446,7 +446,7 @@ window.MathJax = {
 <tr><td>416-447</td><td>Summarizes peaks and broad tau bands.</td><td>Makes the DRT result readable without inspecting every tau point.</td></tr>
 <tr><td>449-594</td><td>Writes CSVs and Matplotlib plots.</td><td>Saves evidence, not just terminal output.</td></tr>
 <tr><td>597-656</td><td>Writes the first-slice protocol inventory report.</td><td>Explains whether the synthetic sanity check passed.</td></tr>
-<tr><td>659-726</td><td>Main workflow for first-slice protocol inventory.</td><td>Runs simulation, fit, plots, and report.</td></tr>
+<tr><td>659-726</td><td>Main analysis procedure for first-slice protocol inventory.</td><td>Runs simulation, fit, plots, and report.</td></tr>
 </table>
 <h2>Window Finder</h2>
 <p>File: <code>scripts/experiments/time_domain_window_finder.py</code></p>
@@ -517,11 +517,11 @@ window.MathJax = {
 <p>File: <code>scripts/experiments/time_domain_model_rule.py</code></p>
 <table>
 <tr><th>Lines</th><th>What The Code Does</th><th>Why It Matters</th></tr>
-<tr><td>39-54</td><td>Sets output path, lambda candidates, baseline mode, RMSE slack, and band labels.</td><td>This defines the rule before EIS scoring.</td></tr>
+<tr><td>39-54</td><td>Sets output path, lambda candidates, baseline mode, typical prediction error slack, and band labels.</td><td>This defines the rule before EIS scoring.</td></tr>
 <tr><td>61-105</td><td>Writes CSVs, parses cell filters, ranks values, and cleans numbers.</td><td>Utility layer for robust reports.</td></tr>
 <tr><td>107-137</td><td>Computes gamma roughness and band-area changes.</td><td>Measures whether a DRT curve is too jagged or unstable.</td></tr>
 <tr><td>139-157</td><td>Attaches band-stability metrics to lambda candidates.</td><td>Helps the rule avoid unstable curves.</td></tr>
-<tr><td>159-217</td><td>Selects lambda using voltage RMSE, roughness, band stability, and penalties.</td><td>This is the pre-declared model-selection rule. It must not use EIS agreement.</td></tr>
+<tr><td>159-217</td><td>Selects lambda using voltage typical prediction error, roughness, band stability, and penalties.</td><td>This is the pre-declared model-selection rule. It must not use EIS agreement.</td></tr>
 <tr><td>219-257</td><td>Fits all lambda candidates for one case.</td><td>Builds the candidate set the rule will choose from.</td></tr>
 <tr><td>259-288</td><td>Adds EIS comparison only after the rule has selected a candidate.</td><td>This is the honesty guardrail.</td></tr>
 <tr><td>290-397</td><td>Selects cases and processes raw DIB files.</td><td>Full-data mode.</td></tr>

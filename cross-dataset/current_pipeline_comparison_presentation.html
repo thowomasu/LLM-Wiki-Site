@@ -367,6 +367,7 @@ window.MathJax = {
 <a class="side-link" href="../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../cross-dataset/decision-report/">Plain-language decision report</a>
 <a class="side-link" href="../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../cross-dataset/missing-measurement-v5/">Version 5</a>
@@ -402,11 +403,11 @@ window.MathJax = {
       </div>
     </header>
 
-    <main>
+    <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
       <section id="summary" class="note">
         <h2>Executive Read</h2>
         <p>The strict time-domain-to-EIS validation lane did not beat the pre-declared baseline on its final LiFePO4 test. In plain language, the learned model was not more useful than the simple comparison model on that untouched dataset. This is labeled <code>no_support</code>.</p>
-        <p>The missing-measurement V5 pipeline passed internal development, then failed its frozen SiCWell external test. Its fixed domain guard rejected all 892 external rows, so it produced no accepted external predictions. This is labeled <code>external_validation_failed</code>, or <code>no support</code>.</p>
+        <p>The missing-measurement V5 analysis chain passed internal development, then failed its frozen SiCWell external test. Its fixed domain guard rejected all 892 external rows, so it produced no accepted external predictions. This is labeled <code>external_validation_failed</code>, or <code>no support</code>.</p>
         <div class="reader-path">
           <div class="reader-card"><strong>Best one-line meeting answer</strong><p>Both external paths failed honestly. V5 is a reproducible negative external result, not a general method.</p></div>
           <div class="reader-card"><strong>What not to say</strong><p>Do not say either model is validated. Do not call a V5 estimate a measurement.</p></div>
@@ -416,7 +417,7 @@ window.MathJax = {
 
       <section id="question">
         <h2>Question</h2>
-        <p>Which cross-dataset pipeline is stronger right now, and which one has the better two-week development outlook?</p>
+        <p>Which cross-dataset analysis chain is stronger right now, and which one has the better two-week development outlook?</p>
         <div class="split">
           <div class="plain-callout">
             <strong>Pipeline A: Time-domain to EIS</strong>
@@ -502,7 +503,7 @@ window.MathJax = {
           <div>
             <span class="metric bad">Did not beat baseline</span>
             <h3>Final time-domain-to-EIS validation</h3>
-            <p>Frozen model family was <code>global_train_target_mean</code>, which is a negative-control baseline. RMSE all was <code>0.0499186769</code> ohm. Post-outcome tuning was not performed.</p>
+            <p>Frozen model family was <code>global_train_target_mean</code>, which is a negative-control baseline. typical prediction error all was <code>0.0499186769</code> ohm. Post-outcome tuning was not performed.</p>
           </div>
           <div>
             <span class="metric bad">0 of 892 rows accepted</span>

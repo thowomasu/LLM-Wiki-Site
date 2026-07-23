@@ -812,6 +812,43 @@ code {
   background: var(--panel);
 }
 .source-item code { word-break: break-word; }
+.skim-first-note {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  background: var(--panel);
+}
+.skim-first-note strong {
+  font-size: 18px;
+}
+.skim-first-note span {
+  color: var(--muted);
+}
+.implementation-details {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.implementation-details summary {
+  min-height: 44px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.implementation-details pre {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 8px 8px;
+}
+main > p,
+main > section > p,
+.slide > p {
+  max-width: 78ch;
+}
 .source-kind {
   display: inline-block;
   margin-right: 8px;
@@ -1355,6 +1392,7 @@ window.MathJax = {
 <a class="side-link" href="../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../cross-dataset/decision-report/">Plain-language decision report</a>
 <a class="side-link" href="../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../cross-dataset/missing-measurement-v5/">Version 5</a>
@@ -1403,11 +1441,11 @@ window.MathJax = {
     <figure class="study-trajectory" aria-labelledby="study-trajectory-title">
       <figcaption id="study-trajectory-title"><strong>How the evidence changed the research direction</strong><span>This is a decision path, not a shared performance scale. Each version answered a different question.</span></figcaption>
       <div class="trajectory-grid">
-        <article class="trajectory-node good"><span class="trajectory-version">V4</span><strong>Narrow outside-data pass</strong><span>3 Oxford cells</span><small>All three fixed output heads beat their baselines. The health step still used measured EIS.</small></article>
+        <article class="trajectory-node good"><span class="trajectory-version">V4</span><strong>Narrow outside-data pass</strong><span>3 Oxford cells</span><small>All three fixed predicted quantitys beat their baselines. The health step still used measured EIS.</small></article>
         <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
         <article class="trajectory-node bad"><span class="trajectory-version">V5</span><strong>Complete chain, outside-data failure</strong><span>0 of 892 SiCWell rows accepted</span><small>The frozen guard said the new dataset was outside the model's supported domain.</small></article>
         <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
-        <article class="trajectory-node bad"><span class="trajectory-version">V6</span><strong>No universal candidate</strong><span>0 zero-shot or few-shot survivors</span><small>Broader development tests found no model worth freezing for another outside-data test.</small></article>
+        <article class="trajectory-node bad"><span class="trajectory-version">V6</span><strong>No universal candidate</strong><span>0 without target-dataset calibration or with one or two target cells for calibration survivors</span><small>Broader development tests found no model worth freezing for another outside-data test.</small></article>
         <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
         <article class="trajectory-node warn"><span class="trajectory-version">Now</span><strong>Controlled exact-cell study</strong><span>Resource gate still blocked</span><small>Verify at least 12 matching cells and the full safety and equipment gate before measuring.</small></article>
       </div>
@@ -1422,7 +1460,7 @@ window.MathJax = {
       <figure class="evidence-chart"><figcaption><strong>Version 6: development rows by dataset</strong><span>This shows the audit&#x27;s data balance. It does not turn previously inspected datasets into new validation evidence.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Bayreuth CoDeMoRe 2026</span><strong>28 rows, 14 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="Bayreuth CoDeMoRe 2026: 28 rows, 14 cells"><span class="evidence-chart-bar muted" style="--bar-width:3.139%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Leonardi</span><strong>460 rows, 8 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="Leonardi: 460 rows, 8 cells"><span class="evidence-chart-bar muted" style="--bar-width:51.570%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Oxford Path Dependent</span><strong>3 rows, 3 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="Oxford Path Dependent: 3 rows, 3 cells"><span class="evidence-chart-bar muted" style="--bar-width:0.336%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>SiCWell</span><strong>892 rows, 26 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="SiCWell: 892 rows, 26 cells"><span class="evidence-chart-bar muted" style="--bar-width:100.000%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>largest dataset</span></div><p class="chart-source">V6 development matrix: 1383 rows from 51 independent cells across 4 spent datasets.</p></figure>
     </section>
     <section class="summary-grid">
-      <article class="summary-card"><span class="status-pill bad">Versions 1 to 3</span><h3>Early transfer attempts</h3><p>These versions established the first pipeline, simplified it, and made it more portable. Their outside tests either failed, could not be run honestly, or missed the required EIS margin.</p><div class="card-actions"><a class="button" href="early-versions/">Read the early history</a></div></article>
+      <article class="summary-card"><span class="status-pill bad">Versions 1 to 3</span><h3>Early transfer attempts</h3><p>These versions established the first analysis chain, simplified it, and made it more portable. Their outside tests either failed, could not be run honestly, or missed the required EIS margin.</p><div class="card-actions"><a class="button" href="early-versions/">Read the early history</a></div></article>
       <article class="summary-card"><span class="status-pill good">Version 4</span><h3>Narrow external pass</h3><p>Three Oxford cells passed every fixed gate. This was real external evidence, but only for one narrow NCA protocol and a model that still used measured current EIS for the health step.</p><div class="card-actions"><a class="button" href="missing-measurement-v4/">Read Version 4</a></div></article>
       <article class="summary-card"><span class="status-pill bad">Version 5</span><h3>Full chain, external failure</h3><p>The model predicted EIS before predicting health. It worked internally on Leonardi, then rejected all 892 SiCWell rows under the fixed domain guard.</p><div class="card-actions"><a class="button" href="missing-measurement-v5/">Read Version 5</a></div></article>
       <article class="summary-card"><span class="status-pill bad">Version 6</span><h3>Universal path stopped</h3><p>Zero-shot, small-calibration, uncertainty, and guard studies produced no candidate that passed every dataset-level gate.</p><div class="card-actions"><a class="button" href="missing-measurement-v6/">Read Version 6</a></div></article>
@@ -1441,7 +1479,7 @@ window.MathJax = {
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-19 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-23 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>

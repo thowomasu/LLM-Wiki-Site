@@ -391,7 +391,7 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/section_3_candidate_fit_plot_EXPLANATION.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Graph Explanation: HPPC window finder Candidate Fit Plot</h1>
@@ -404,14 +404,14 @@ window.MathJax = {
 <ul><li>The voltage panel compares measured voltage against reconstructed voltage.</li></ul>
 <ul><li>The DRT panel shows resistance weight versus tau.</li></ul>
 <ul><li>The residual panel shows measured minus fitted voltage in millivolts.</li></ul>
-<p>This is where the pipeline moves from &quot;this window looks usable&quot; to &quot;the solver can or cannot explain this voltage response.&quot;</p>
+<p>This is where the analysis chain moves from &quot;this window looks usable&quot; to &quot;the solver can or cannot explain this voltage response.&quot;</p>
 <h2>How To Read It</h2>
 <p>Start with current. If the current does not contain a clear pulse/rest event, the DRT fit is weak before it starts.</p>
 <p>Then look at voltage reconstruction. The fitted voltage should follow the measured voltage through the pulse and the relaxation period. Next look at the residual. A good residual should be small and not show obvious leftover pulse structure.</p>
 <p>Finally, read the DRT curve. A peak at small tau means fast relaxation. A peak at larger tau means slower relaxation. A boundary peak near the maximum tau is suspicious because it may mean the window is too short or the baseline is leaking into gamma.</p>
 <h2>What We Can Learn</h2>
-<p>This graph tells us whether the local voltage fit is mechanically credible. If voltage RMSE is bad, the DRT curve should not be trusted at all.</p>
-<p>If voltage RMSE is good, the result is only partly encouraging. It means the model can reconstruct voltage, not that the gamma shape is physically correct. Baseline terms and lambda can still move resistance between fast, mid, and slow tau ranges.</p>
+<p>This graph tells us whether the local voltage fit is mechanically credible. If voltage typical prediction error is bad, the DRT curve should not be trusted at all.</p>
+<p>If voltage typical prediction error is good, the result is only partly encouraging. It means the model can reconstruct voltage, not that the gamma shape is physically correct. Baseline terms and lambda can still move resistance between fast, mid, and slow tau ranges.</p>
 <h2>Why It Matters</h2>
 <p>This is the most tempting plot to overread. A smooth DRT curve next to a nice voltage fit feels convincing. Do not fall for that. The real validation question comes later: does this gamma shape agree with EIS under a pre-declared model rule?</p>
 <h2>Caveat</h2>

@@ -573,10 +573,10 @@ window.MathJax = {
   <header id="message">
     <div class="kicker">Meeting brief</div>
     <h1>CALB L148N58A Progress Update</h1>
-    <p class="lead">This is the meeting version of the project. The honest story is not "the method is validated." The honest story is stronger: we built the pipeline, found a strong internal pulse-to-EIS bridge, then stress-tested the claim until the weak parts were visible.</p>
+    <p class="lead">This is the meeting version of the project. The honest story is not "the method is validated." The honest story is stronger: we built the analysis chain, found a strong internal pulse-to-EIS bridge, then stress-tested the claim until the weak parts were visible.</p>
   </header>
 
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <section class="note">
       <strong>Use this framing:</strong> this is a research progress update, not a victory lap. The project has a defensible internal result on CALB. The external-validation story is still open and partly negative. That is not failure. That is the exact thing a serious project has to expose before writing claims.
     </section>
@@ -591,7 +591,7 @@ window.MathJax = {
       <article class="card">
         <div class="kicker">Internal CALB bridge</div>
         <span class="metric good">246 / 246</span>
-        <p>frozen pulse-to-EIS rule quality-pass rows across 10, 25, and 40 C. Median bridge correlation is <code>0.928</code>, median OCV delta is about <code>3.3 mV</code>, and median time fit RMSE is about <code>3.1 mV</code>.</p>
+        <p>frozen pulse-to-EIS rule quality-pass rows across 10, 25, and 40 C. Median bridge correlation is <code>0.928</code>, median OCV delta is about <code>3.3 mV</code>, and median time fit typical prediction error is about <code>3.1 mV</code>.</p>
       </article>
       <article class="card">
         <div class="kicker">Drive-cycle transfer</div>
@@ -632,7 +632,7 @@ window.MathJax = {
         <tr>
           <td>Early HPPC and EIS runs</td>
           <td>The files loaded and the first pulse/EIS comparisons could be generated.</td>
-          <td>The pipeline was technically viable, but early gamma-shape agreement was weak.</td>
+          <td>The analysis chain was technically viable, but early gamma-shape agreement was weak.</td>
         </tr>
         <tr>
           <td>Broad 2D comparisons</td>
@@ -651,7 +651,7 @@ window.MathJax = {
         </tr>
         <tr>
           <td>Drive-cycle and external checks</td>
-          <td>Drive-cycle transfer loses to a stronger ECM baseline. External test workflow checks do not validate the rule.</td>
+          <td>Drive-cycle transfer loses to a stronger ECM baseline. External test analysis procedure checks do not validate the rule.</td>
           <td>The honest next step is validation design, not more internal polish.</td>
         </tr>
       </tbody>
@@ -672,7 +672,7 @@ window.MathJax = {
     </figure>
 
     <h2 id="external">External Dataset Checks</h2>
-    <p>The external work is dataset check plus frozen-rule test workflow testing. The important guardrail is that the frozen pulse-to-EIS rule should not be tuned after looking at external data. If we tune on the validation dataset, the result becomes self-deception with nicer plots.</p>
+    <p>The external work is dataset check plus frozen-rule test analysis procedure testing. The important guardrail is that the frozen pulse-to-EIS rule should not be tuned after looking at external data. If we tune on the validation dataset, the result becomes self-deception with nicer plots.</p>
     <section class="grid">
       <article class="card">
         <h3>CALCE Storage 25 C</h3>
@@ -687,7 +687,7 @@ window.MathJax = {
       <article class="card">
         <h3>Panasonic 18650PF</h3>
         <p><strong>Verdict:</strong> <code>no support</code></p>
-        <p>Panasonic is a smoke-test test workflow case. It produced 33 frozen-rule rows and 0 quality-pass rows. It should not be sold as validation or aging support.</p>
+        <p>Panasonic is a smoke-test test analysis procedure case. It produced 33 frozen-rule rows and 0 quality-pass rows. It should not be sold as validation or aging support.</p>
       </article>
     </section>
 
@@ -755,7 +755,7 @@ window.MathJax = {
       <tbody>
         <tr>
           <td>What is the actual contribution?</td>
-          <td>A reproducible CALB pipeline plus a strong internal pulse-to-EIS bridge result, with explicit failure audits instead of vague success claims.</td>
+          <td>A reproducible CALB analysis chain plus a strong internal pulse-to-EIS bridge result, with explicit failure audits instead of vague success claims.</td>
         </tr>
         <tr>
           <td>Why not claim validation?</td>

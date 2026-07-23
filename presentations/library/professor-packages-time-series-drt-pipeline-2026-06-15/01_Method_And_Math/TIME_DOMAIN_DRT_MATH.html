@@ -391,7 +391,7 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/01_Method_And_Math/TIME_DOMAIN_DRT_MATH.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Time-Series To DRT Math</h1>
@@ -706,7 +706,7 @@ $$</div>
 <ul><li>Fit nonnegative resistance terms to what is left.</li></ul>
 <ul><li>Then add the best baseline back.</li></ul>
 <p>This keeps gamma from being forced to explain every slow voltage movement.</p>
-<h2>Step 13: Reconstructed Voltage And RMSE</h2>
+<h2>Step 13: Reconstructed Voltage And typical prediction error</h2>
 <p>After fitting, reconstructed voltage is:</p>
 <div class="math-display">$$
 \widehat{v}
@@ -718,9 +718,9 @@ $$</div>
 <div class="math-display">$$
 r_n = v_n-\widehat{v}_n
 $$</div>
-<p>Voltage RMSE is:</p>
+<p>Voltage typical prediction error is:</p>
 <div class="math-display">$$
-\mathrm{RMSE}_{V}
+\mathrm{typical prediction error}_{V}
 =
 \sqrt{
 \frac{1}{N}
@@ -730,12 +730,12 @@ $$</div>
 $$</div>
 <p>The reports usually show millivolts:</p>
 <div class="math-display">$$
-\mathrm{RMSE}_{mV}
+\mathrm{typical prediction error}_{mV}
 =
-1000\,\mathrm{RMSE}_{V}
+1000\,\mathrm{typical prediction error}_{V}
 $$</div>
-<p>Low RMSE is required. It is not enough.</p>
-<p>A low RMSE only says the model can reconstruct terminal voltage. It does not prove the tau distribution is physically right.</p>
+<p>Low typical prediction error is required. It is not enough.</p>
+<p>A low typical prediction error only says the model can reconstruct terminal voltage. It does not prove the tau distribution is physically right.</p>
 <h2>Step 14: Broad Tau Bands</h2>
 <p>Exact DRT peak locations are fragile, especially for pulse data.</p>
 <p>So the reports also summarize broad tau bands:</p>
@@ -758,7 +758,7 @@ $$</div>
 <div class="math-display">$$
 \gamma_{\mathrm{TD}}(\tau)
 $$</div>
-<p>The EIS pipeline gives:</p>
+<p>The EIS analysis chain gives:</p>
 <div class="math-display">$$
 \gamma_{\mathrm{EIS}}(\tau)
 $$</div>
@@ -820,9 +820,9 @@ s^*
 \gamma_{\mathrm{TD}}^{T}\gamma_{\mathrm{TD}}
 }
 $$</div>
-<p>Then scaled RMSE is:</p>
+<p>Then scaled typical prediction error is:</p>
 <div class="math-display">$$
-\mathrm{RMSE}_{\mathrm{scaled}}
+\mathrm{typical prediction error}_{\mathrm{scaled}}
 =
 \sqrt{
 \frac{1}{M}
@@ -834,9 +834,9 @@ s^*\gamma_{\mathrm{TD},m}
 \right)^2
 }
 $$</div>
-<p>The normalized RMSE compares shapes after area normalization:</p>
+<p>The normalized typical prediction error compares shapes after area normalization:</p>
 <div class="math-display">$$
-\mathrm{NRMSE}
+\mathrm{Ntypical prediction error}
 =
 \sqrt{
 \frac{1}{M}
@@ -852,12 +852,12 @@ $$</div>
 <ul><li>Correlation checks shape direction.</li></ul>
 <ul><li>Area ratio checks total gamma scale.</li></ul>
 <ul><li>Best scale checks whether one curve is mostly a scaled version of the other.</li></ul>
-<ul><li>Normalized RMSE checks shape mismatch after removing total area.</li></ul>
+<ul><li>Normalized typical prediction error checks shape mismatch after removing total area.</li></ul>
 <h2>Step 17: Model-Rule Selection</h2>
 <p>The sensitivity runs showed that lambda and baseline choices can change EIS agreement.</p>
 <p>So the model-rule script chooses lambda before EIS scoring.</p>
 <p>The current rule:</p>
-<p>1. Fix <code>baseline_mode = time_charge</code>. 2. Fit the same window across a lambda grid. 3. Find the best voltage RMSE. 4. Keep lambdas within best RMSE plus max 5 percent or 0.25 mV. 5. Prefer lower gamma roughness. 6. Prefer stable fast/mid/slow band areas across neighboring lambdas. 7. Penalize edge lambda values and nearly flat gamma curves. 8. Only after lambda is selected, compare against EIS.</p>
+<p>1. Fix <code>baseline_mode = time_charge</code>. 2. Fit the same window across a lambda grid. 3. Find the best voltage typical prediction error. 4. Keep lambdas within best typical prediction error plus max 5 percent or 0.25 mV. 5. Prefer lower gamma roughness. 6. Prefer stable fast/mid/slow band areas across neighboring lambdas. 7. Penalize edge lambda values and nearly flat gamma curves. 8. Only after lambda is selected, compare against EIS.</p>
 <p>Gamma roughness is:</p>
 <div class="math-display">$$
 \mathrm{roughness}
@@ -872,14 +872,14 @@ $$</div>
 <div class="math-display">$$
 \mathrm{score}
 =
-2r_{\mathrm{RMSE}}
+2r_{\mathrm{typical prediction error}}
 + r_{\mathrm{roughness}}
 + r_{\mathrm{band}}
 + p_{\mathrm{boundary}}
 + p_{\mathrm{flat}}
 $$</div>
 <p>Where:</p>
-<ul><li><code>r_RMSE</code> ranks voltage RMSE, lower is better.</li></ul>
+<ul><li><code>r_RMSE</code> ranks voltage typical prediction error, lower is better.</li></ul>
 <ul><li><code>r_roughness</code> ranks gamma roughness, lower is better.</li></ul>
 <ul><li><code>r_band</code> ranks band instability, lower is better.</li></ul>
 <ul><li><code>p_boundary</code> penalizes the smallest or largest tested lambda.</li></ul>
@@ -897,10 +897,10 @@ $$</div>
 <ul><li>EIS and pulse/rest data may not excite the same processes.</li></ul>
 <ul><li>SOC mismatch can compare the time-domain curve against the wrong EIS row.</li></ul>
 <ul><li>Temperature drift can move voltage for reasons unrelated to relaxation resistance.</li></ul>
-<p>That is why the pipeline reports more than one metric.</p>
+<p>That is why the analysis chain reports more than one metric.</p>
 <h2>What The Current Numbers Mean</h2>
 <p>The current readiness report says:</p>
-<ul><li>synthetic inverse check passes, RMSE about 0.801 mV</li></ul>
+<ul><li>synthetic inverse check passes, typical prediction error about 0.801 mV</li></ul>
 <ul><li>DIB batch runner produces 15 rows with 0 errors</li></ul>
 <ul><li>SOC mapping sensitivity produces 60 comparisons with 0 errors</li></ul>
 <ul><li>model sensitivity produces 120 comparisons with 0 errors</li></ul>
@@ -908,7 +908,7 @@ $$</div>
 <p>But the science is still weak:</p>
 <ul><li>first DIB batch median EIS correlation is about 0.105</li></ul>
 <ul><li>pre-declared rule median EIS correlation is about 0.141</li></ul>
-<ul><li>pre-declared rule median normalized RMSE is about 0.978</li></ul>
+<ul><li>pre-declared rule median normalized typical prediction error is about 0.978</li></ul>
 <ul><li>model sensitivity found 10 of 10 targets where correlation range changed by more than 0.1 across settings</li></ul>
 <p>Translation:</p>
 <p>The code can fit voltage and generate curves. The recovered DRT shape is still too assumption-sensitive to call validated.</p>

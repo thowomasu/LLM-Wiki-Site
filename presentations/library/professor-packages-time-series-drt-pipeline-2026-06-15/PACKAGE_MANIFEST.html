@@ -391,24 +391,24 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/PACKAGE_MANIFEST.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Package Manifest</h1>
 <h2>Folder Layout</h2>
-<pre><code>00_Read_First/</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>00_Read_First/</code></pre></details>
 <p>Professor-facing summary files: readiness report, rough handoff, and HTML copies for quick reading. New plain-English files are included here:</p>
 <ul><li><code>PLAIN_ENGLISH_OVERVIEW.md</code></li></ul>
 <ul><li><code>DRIVE_CYCLE_DATASET_RECOMMENDATION.md</code></li></ul>
-<pre><code>01_Method_And_Math/</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>01_Method_And_Math/</code></pre></details>
 <p>Method explanation, assumptions, code notes, line-range code walkthrough, and LaTeX-rendered math HTML.</p>
-<pre><code>02_Key_Results/</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>02_Key_Results/</code></pre></details>
 <p>Core result reports and compact CSV/JSON summaries. This includes model-rule, DIB batch, SOC mapping, model sensitivity, Cell28 sweep, validation diagnostics, and SOC alignment summaries.</p>
-<pre><code>03_Key_Plots/</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>03_Key_Plots/</code></pre></details>
 <p>Selected PNG plots for quick visual inspection. These were regenerated with Matplotlib from saved CSV/JSON outputs. <code>PLOT_GUIDE.md</code> explains every plot.</p>
-<pre><code>04_Code/</code></pre>
-<p>The Python scripts needed to inspect or rerun the pipeline.</p>
-<pre><code>05_Reproduction/</code></pre>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>04_Code/</code></pre></details>
+<p>The Python scripts needed to inspect or rerun the analysis chain.</p>
+<details class="implementation-details"><summary>Show implementation details</summary><pre><code>05_Reproduction/</code></pre></details>
 <p>Runner logs and downloadable run summaries.</p>
 <h2>Deliberately Excluded</h2>
 <ul><li>Raw DIB data files.</li></ul>
@@ -416,7 +416,7 @@ window.MathJax = {
 <ul><li>Per-SOC EIS DRT curve dumps except where compact summaries are useful.</li></ul>
 <ul><li>Local dependency folders such as <code>.deps</code>.</li></ul>
 <h2>Current Evidence Level</h2>
-<p>Evidence supports: engineering early workflow is viable.</p>
+<p>Evidence supports: engineering early analysis procedure is viable.</p>
 <p>Evidence does not support: time-series DRT is validated as an EIS replacement.</p>
 <p>The current saved rule-selected EIS agreement is weak, with median correlation around 0.141.</p>
 <p>Dataset correction: DIB should not be presented as the main drive-cycle dataset. Use DIB for the EIS/pulse prototype, and use a drive-cycle dataset such as CALCE dynamic profiles for the drive-cycle part.</p>

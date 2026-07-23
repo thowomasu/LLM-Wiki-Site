@@ -391,7 +391,7 @@ window.MathJax = {
 </head>
 <body>
 <button class="page-history" type="button" data-history-back data-home-fallback="../../../../index.html" aria-label="Go back to the previous page">&#8592; Back</button>
-  <main>
+  <main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
     <article>
       <div class="meta">Generated HTML mirror from 40 Outputs/Professor Packages/Time-Series DRT Pipeline - 2026-06-15/03_Key_Plots/PLOT_GUIDE.md. Edit the Markdown source, then rerun the exporter.</div>
 <h1>Plot Guide</h1>
@@ -404,10 +404,10 @@ window.MathJax = {
 <tr><td><code>synthetic_section_1_plots.png</code></td><td>Synthetic current input, voltage fit, recovered DRT, and residuals.</td><td>Current A, voltage V, residual mV, tau s, gamma mOhm</td></tr>
 <tr><td><code>section_2_window_plot.png</code></td><td>Accepted pulse/rest windows on synthetic current and voltage.</td><td>Time s, current A, voltage V</td></tr>
 <tr><td><code>section_3_candidate_fit_plot.png</code></td><td>Selected-window fit and recovered DRT.</td><td>Local time s, current A, voltage V, residual mV, tau s, gamma mOhm</td></tr>
-<tr><td><code>section_8_cell28_soc_sweep_summary.png</code></td><td>Cell28 comparison across SOC labels.</td><td>SOC %, RMSE mV, DRT area Ohm</td></tr>
-<tr><td><code>section_9_validation_diagnostics.png</code></td><td>Scale and lambda diagnostics.</td><td>SOC %, lambda, correlation, normalized RMSE</td></tr>
+<tr><td><code>section_8_cell28_soc_sweep_summary.png</code></td><td>Cell28 comparison across SOC labels.</td><td>SOC %, typical prediction error mV, DRT area Ohm</td></tr>
+<tr><td><code>section_9_validation_diagnostics.png</code></td><td>Scale and lambda diagnostics.</td><td>SOC %, lambda, correlation, normalized typical prediction error</td></tr>
 <tr><td><code>section_10_soc_alignment.png</code></td><td>SOC label versus coulomb-counted SOC.</td><td>SOC %, voltage V, error percentage points</td></tr>
-<tr><td><code>dib_batch_summary.png</code></td><td>Generalized DIB batch validation across cells.</td><td>SOC %, RMSE mV, correlation, normalized RMSE, area ratio</td></tr>
+<tr><td><code>dib_batch_summary.png</code></td><td>Generalized DIB batch validation across cells.</td><td>SOC %, typical prediction error mV, correlation, normalized typical prediction error, area ratio</td></tr>
 </table>
 <h2>Added Summary Plots</h2>
 <table>
@@ -419,7 +419,7 @@ window.MathJax = {
 <h2>Blunt Reading</h2>
 <p>The plots are now readable, but the scientific result did not become prettier. That is good. The figures should not hide the problem.</p>
 <p>The story is:</p>
-<p>1. The pipeline reconstructs voltage well. 2. The DRT-like shape does not match EIS strongly. 3. SOC uncertainty exists. 4. Model assumptions matter. 5. A drive-cycle dataset is needed if the project claim is about drive-cycle behavior.</p>
+<p>1. The analysis chain reconstructs voltage well. 2. The DRT-like shape does not match EIS strongly. 3. SOC uncertainty exists. 4. Model assumptions matter. 5. A drive-cycle dataset is needed if the project claim is about drive-cycle behavior.</p>
     </article>
   </main>
 <script>

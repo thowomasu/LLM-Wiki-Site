@@ -798,6 +798,43 @@ code {
   background: var(--panel);
 }
 .source-item code { word-break: break-word; }
+.skim-first-note {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  background: var(--panel);
+}
+.skim-first-note strong {
+  font-size: 18px;
+}
+.skim-first-note span {
+  color: var(--muted);
+}
+.implementation-details {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.implementation-details summary {
+  min-height: 44px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.implementation-details pre {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 8px 8px;
+}
+main > p,
+main > section > p,
+.slide > p {
+  max-width: 78ch;
+}
 .source-kind {
   display: inline-block;
   margin-right: 8px;

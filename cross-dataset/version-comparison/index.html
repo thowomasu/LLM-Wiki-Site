@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Technical Comparison: Versions 1 to 6 | Battery DRT Research Outputs</title>
-  <meta name="description" content="A self-contained comparison of all six pipeline versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
+  <meta name="description" content="A self-contained comparison of all six analysis chain versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
   <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/version-comparison/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Technical Comparison: Versions 1 to 6 | Battery DRT Research Outputs">
-  <meta property="og:description" content="A self-contained comparison of all six pipeline versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
+  <meta property="og:description" content="A self-contained comparison of all six analysis chain versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
   <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/version-comparison/">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
@@ -812,6 +812,43 @@ code {
   background: var(--panel);
 }
 .source-item code { word-break: break-word; }
+.skim-first-note {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  background: var(--panel);
+}
+.skim-first-note strong {
+  font-size: 18px;
+}
+.skim-first-note span {
+  color: var(--muted);
+}
+.implementation-details {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.implementation-details summary {
+  min-height: 44px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.implementation-details pre {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 8px 8px;
+}
+main > p,
+main > section > p,
+.slide > p {
+  max-width: 78ch;
+}
 .source-kind {
   display: inline-block;
   margin-right: 8px;
@@ -1355,6 +1392,7 @@ window.MathJax = {
 <a class="side-link" href="../../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../../cross-dataset/">Cross-dataset study overview</a>
+<a class="side-link" href="../../cross-dataset/decision-report/">Plain-language decision report</a>
 <a class="side-link" href="../../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../../cross-dataset/missing-measurement-v5/">Version 5</a>
@@ -1383,7 +1421,7 @@ window.MathJax = {
 
         <div class="kicker">Battery DRT Research Outputs</div>
         <h1>Technical Comparison: Versions 1 to 6</h1>
-        <p class="lead">A self-contained comparison of all six pipeline versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.</p>
+        <p class="lead">A self-contained comparison of all six analysis chain versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.</p>
 
       </header>
       <main>
@@ -1411,7 +1449,7 @@ window.MathJax = {
         <tr><td data-label="Version">3</td><td data-label="What it tried">Remove protocol-specific inputs</td><td data-label="Strongest honest result">SOH passed on Bayreuth</td><td data-label="Why it moved on">Both external EIS heads missed the 5% gate</td></tr>
         <tr><td data-label="Version">4</td><td data-label="What it tried">Normalize impedance scale</td><td data-label="Strongest honest result">All heads passed on three Oxford cells</td><td data-label="Why it moved on">Health still used measured current EIS</td></tr>
         <tr><td data-label="Version">5</td><td data-label="What it tried">Full predicted-EIS-to-SOH chain</td><td data-label="Strongest honest result">All eight Leonardi cell folds passed</td><td data-label="Why it moved on">Frozen guard rejected all 892 SiCWell rows</td></tr>
-        <tr><td data-label="Version">6</td><td data-label="What it tried">Zero-shot, few-shot, guard, and uncertainty rescue study</td><td data-label="Strongest honest result">Large four-dataset failure analysis</td><td data-label="Why it moved on">No candidate passed all dataset-level gates</td></tr>
+        <tr><td data-label="Version">6</td><td data-label="What it tried">Zero-shot, with one or two target cells for calibration, guard, and uncertainty rescue study</td><td data-label="Strongest honest result">Large four-dataset failure analysis</td><td data-label="Why it moved on">No candidate passed all dataset-level gates</td></tr>
       </tbody></table></div>
       <p><a class="button" href="../early-versions/">Read the plain-language Versions 1 to 3 history</a></p>
     </section>
@@ -1423,11 +1461,11 @@ window.MathJax = {
     <figure class="study-trajectory" aria-labelledby="study-trajectory-title">
       <figcaption id="study-trajectory-title"><strong>How the evidence changed the research direction</strong><span>This is a decision path, not a shared performance scale. Each version answered a different question.</span></figcaption>
       <div class="trajectory-grid">
-        <article class="trajectory-node good"><span class="trajectory-version">V4</span><strong>Narrow outside-data pass</strong><span>3 Oxford cells</span><small>All three fixed output heads beat their baselines. The health step still used measured EIS.</small></article>
+        <article class="trajectory-node good"><span class="trajectory-version">V4</span><strong>Narrow outside-data pass</strong><span>3 Oxford cells</span><small>All three fixed predicted quantitys beat their baselines. The health step still used measured EIS.</small></article>
         <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
         <article class="trajectory-node bad"><span class="trajectory-version">V5</span><strong>Complete chain, outside-data failure</strong><span>0 of 892 SiCWell rows accepted</span><small>The frozen guard said the new dataset was outside the model's supported domain.</small></article>
         <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
-        <article class="trajectory-node bad"><span class="trajectory-version">V6</span><strong>No universal candidate</strong><span>0 zero-shot or few-shot survivors</span><small>Broader development tests found no model worth freezing for another outside-data test.</small></article>
+        <article class="trajectory-node bad"><span class="trajectory-version">V6</span><strong>No universal candidate</strong><span>0 without target-dataset calibration or with one or two target cells for calibration survivors</span><small>Broader development tests found no model worth freezing for another outside-data test.</small></article>
         <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
         <article class="trajectory-node warn"><span class="trajectory-version">Now</span><strong>Controlled exact-cell study</strong><span>Resource gate still blocked</span><small>Verify at least 12 matching cells and the full safety and equipment gate before measuring.</small></article>
       </div>
@@ -1435,11 +1473,11 @@ window.MathJax = {
 
       <figure class="evidence-chart"><figcaption><strong>Oxford external error reduction</strong><span>Higher bars mean the model removed more error relative to the frozen baseline. The pass line was 5% for every output.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Real EIS</span><strong>45.1%</strong></div><div class="evidence-chart-track" role="img" aria-label="Real EIS: 45.1%"><span class="evidence-chart-bar good" style="--bar-width:45.091%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Imaginary EIS</span><strong>25.7%</strong></div><div class="evidence-chart-track" role="img" aria-label="Imaginary EIS: 25.7%"><span class="evidence-chart-bar good" style="--bar-width:25.654%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Measured-EIS-to-SOH</span><strong>80.3%</strong></div><div class="evidence-chart-track" role="img" aria-label="Measured-EIS-to-SOH: 80.3%"><span class="evidence-chart-bar good" style="--bar-width:80.309%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>100% error reduction</span></div><p class="chart-source">Worst result across both allowed Oxford frequency mappings. External evidence from three independent cells at 24 C and 50% SOC.</p></figure>
       <figure class="evidence-chart"><figcaption><strong>What the frozen SiCWell guard did</strong><span>The guard rejected the full dataset before prediction. Zero accepted rows means there is no valid external error score.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Accepted</span><strong>0</strong></div><div class="evidence-chart-track" role="img" aria-label="Accepted: 0"><span class="evidence-chart-bar good" style="--bar-width:0.000%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Rejected</span><strong>892</strong></div><div class="evidence-chart-track" role="img" aria-label="Rejected: 892"><span class="evidence-chart-bar bad" style="--bar-width:100.000%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>892 rows</span></div><p class="chart-source">Frozen outside-data test: 892 correlated rows, 223 checkups, and 26 independent SiCWell cells.</p></figure>
-      <figure class="evidence-chart"><figcaption><strong>Why 100% guard coverage was unsafe</strong><span>The guard accepted every row, but most accepted rows had at least one output head that lost to its row-level baseline.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Safe on all four heads</span><strong>321 of 1383 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="Safe on all four heads: 321 of 1383 rows"><span class="evidence-chart-bar good" style="--bar-width:23.210%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>False accepts</span><strong>1062 of 1383 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="False accepts: 1062 of 1383 rows"><span class="evidence-chart-bar bad" style="--bar-width:76.790%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>1383 accepted rows</span></div><p class="chart-source">Spent-data diagnostic only. Row counts describe guard behavior and do not become independent validation units.</p></figure>
+      <figure class="evidence-chart"><figcaption><strong>Why 100% guard coverage was unsafe</strong><span>The guard accepted every row, but most accepted rows had at least one predicted quantity that lost to its row-level baseline.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Safe on all four heads</span><strong>321 of 1383 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="Safe on all four heads: 321 of 1383 rows"><span class="evidence-chart-bar good" style="--bar-width:23.210%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>False accepts</span><strong>1062 of 1383 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="False accepts: 1062 of 1383 rows"><span class="evidence-chart-bar bad" style="--bar-width:76.790%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>1383 accepted rows</span></div><p class="chart-source">Spent-data diagnostic only. Row counts describe guard behavior and do not become independent validation units.</p></figure>
       <div class="reader-path">
         <div class="reader-card"><strong>Version 4</strong><p>Can scale-normalized EIS and measured-EIS-to-SOH heads transfer to one tightly matched external dataset? Yes, narrowly.</p></div>
         <div class="reader-card"><strong>Version 5</strong><p>Can the complete predicted-EIS-to-SOH chain pass a new external dataset with a frozen guard? No.</p></div>
-        <div class="reader-card"><strong>Version 6</strong><p>Can broader representations or tiny target-cell calibration rescue universal transfer? No candidate passed development gates.</p></div>
+        <div class="reader-card"><strong>Version 6</strong><p>Can broader description of the measurementss or tiny target-cell calibration rescue universal transfer? No candidate passed development gates.</p></div>
         <div class="reader-card"><strong>Combined conclusion</strong><p>The best next move is controlled exact-cell data, not another universal-model rescue attempt.</p></div>
       </div>
     </section>
@@ -1447,8 +1485,8 @@ window.MathJax = {
     <section id="architecture" class="technical-section">
       <h2>Architecture side by side</h2>
       <div class="table-wrap"><table><thead><tr><th>Layer</th><th>Version 4</th><th>Version 5</th><th>Version 6</th></tr></thead><tbody>
-        <tr><td data-label="Layer">Primary input</td><td data-label="Version 4">Fresh EIS, SOC, pulse-resistance change</td><td data-label="Version 5">Same frozen contract</td><td data-label="Version 6">Fixed portable representations built from spent datasets</td></tr>
-        <tr><td data-label="Layer">EIS prediction</td><td data-label="Version 4">Scale-normalized Extra Trees delta heads</td><td data-label="Version 5">Same EIS heads inside a complete chain</td><td data-label="Version 6">Ridge and Extra Trees across five eligible representations</td></tr>
+        <tr><td data-label="Layer">Primary input</td><td data-label="Version 4">Fresh EIS, SOC, pulse-resistance change</td><td data-label="Version 5">Same frozen contract</td><td data-label="Version 6">Fixed portable description of the measurementss built from spent datasets</td></tr>
+        <tr><td data-label="Layer">EIS prediction</td><td data-label="Version 4">Scale-normalized Extra Trees delta heads</td><td data-label="Version 5">Same EIS heads inside a complete chain</td><td data-label="Version 6">Ridge and Extra Trees across five eligible description of the measurementss</td></tr>
         <tr><td data-label="Layer">SOH prediction</td><td data-label="Version 4">Measured current EIS only</td><td data-label="Version 5">Direct diagnostic plus out-of-cell predicted-EIS chain</td><td data-label="Version 6">Measured and predicted EIS heads both required</td></tr>
         <tr><td data-label="Layer">Safety</td><td data-label="Version 4">Frozen input contract and no tuning</td><td data-label="Version 5">Nearest-distance guard plus residual intervals</td><td data-label="Version 6">Source-only guard, uncertainty, false-accept audit</td></tr>
         <tr><td data-label="Layer">Calibration</td><td data-label="Version 4">None</td><td data-label="Version 5">None</td><td data-label="Version 6">One or two disjoint calibration cells tested</td></tr>
@@ -1456,7 +1494,7 @@ window.MathJax = {
       <div class="technical-flow">
         <div class="flow-card"><strong>V4</strong><span>Pulse + fresh EIS &rarr; predicted EIS. Measured EIS &rarr; SOH.</span></div>
         <div class="flow-card"><strong>V5</strong><span>Pulse + fresh EIS &rarr; predicted EIS &rarr; chained SOH.</span></div>
-        <div class="flow-card"><strong>V6</strong><span>Multiple representations and models &rarr; dataset LODO &rarr; few-shot and safety screens.</span></div>
+        <div class="flow-card"><strong>V6</strong><span>Multiple description of the measurementss and models &rarr; dataset LODO &rarr; with one or two target cells for calibration and safety screens.</span></div>
       </div>
     </section>
 
@@ -1466,7 +1504,7 @@ window.MathJax = {
       <div class="math-block">\[s=|B_{1\,\mathrm{Hz}}|,\qquad \widehat{Z}_k=B_k+s\,f_k\left(\mathrm{SOC},\Delta R_{\mathrm{int}},B/s\right)\]</div>
       <span class="formula-label">Version 5: feed predicted EIS into the health head</span>
       <div class="math-block">\[\widehat{h}_{V5}=g_c\left(\Delta R_{\mathrm{int}},\widehat{Z}/s,B/s\right),\qquad \widehat{Z}\text{ is cross-fitted by cell}\]</div>
-      <span class="formula-label">Version 6: compare representation and adaptation families by whole dataset</span>
+      <span class="formula-label">Version 6: compare description of the measurements and adaptation families by whole dataset</span>
       <div class="math-block">\[I_{d,h}=\frac{E_{d,h}^{\mathrm{baseline}}-E_{d,h}^{\mathrm{model}}}{E_{d,h}^{\mathrm{baseline}}},\qquad \widehat{y}_{\mathrm{adapt}}=a\widehat{y}_0+b\quad\text{or}\quad\widehat{y}_0+\overline{e}_C\]</div>
       <span class="formula-label">Shared rule: improvement must survive the correct independent unit</span>
       <div class="math-block">\[\text{row metrics}\;\not\Rightarrow\;\text{cell validation}\;\not\Rightarrow\;\text{dataset validation}\]</div>
@@ -1497,7 +1535,7 @@ window.MathJax = {
       <div class="table-wrap"><table><thead><tr><th>Version</th><th>Strongest positive number</th><th>Decisive failure or limit</th><th>Final status</th></tr></thead><tbody>
         <tr><td data-label="Version">4</td><td data-label="Strongest positive number">Oxford worst-case improvements: 45.1% real EIS, 25.7% imaginary EIS, 80.3% SOH</td><td data-label="Limit">Only three cells and SOH used measured current EIS</td><td data-label="Final status"><span class="status-pill good">Limited external support</span></td></tr>
         <tr><td data-label="Version">5</td><td data-label="Strongest positive number">All four output models passed eight repeated held-cell checks within Leonardi</td><td data-label="Failure">The locked safety guard accepted 0 of 892 SiCWell rows</td><td data-label="Final status"><span class="status-pill bad">Outside-data test missed its required rule</span></td></tr>
-        <tr><td data-label="Version">6</td><td data-label="Strongest positive number">1383 rows and 51 cells audited across four datasets</td><td data-label="Failure">No zero-shot or few-shot candidate passed all gates</td><td data-label="Final status"><span class="status-pill bad">Universal path stopped</span></td></tr>
+        <tr><td data-label="Version">6</td><td data-label="Strongest positive number">1383 rows and 51 cells audited across four datasets</td><td data-label="Failure">No without target-dataset calibration or with one or two target cells for calibration candidate passed all gates</td><td data-label="Final status"><span class="status-pill bad">Universal path stopped</span></td></tr>
       </tbody></table></div>
     </section>
 
@@ -1506,7 +1544,7 @@ window.MathJax = {
       <div class="reader-path">
         <div class="reader-card"><strong>V3 to V4: absolute scale was a transfer problem</strong><p>V4 divided spectral shape and change by the fresh 1 Hz impedance magnitude.</p></div>
         <div class="reader-card"><strong>V4 to V5: the health chain was incomplete</strong><p>V5 trained SOH on EIS predicted without the held cell, removing measured current EIS from the required path.</p></div>
-        <div class="reader-card"><strong>V5 to V6: one guard failure was not enough diagnosis</strong><p>V6 separated representations, heads, datasets, calibration budgets, abstention, and uncertainty to test whether anything was worth freezing.</p></div>
+        <div class="reader-card"><strong>V5 to V6: one guard failure was not enough diagnosis</strong><p>V6 separated description of the measurementss, heads, datasets, calibration budgets, abstention, and uncertainty to test whether anything was worth freezing.</p></div>
         <div class="reader-card"><strong>After V6: the bottleneck is controlled evidence</strong><p>More public-dataset searching cannot fix protocol and exact-cell mismatch. The next program needs planned measurements.</p></div>
       </div>
     </section>
@@ -1537,7 +1575,7 @@ window.MathJax = {
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-19 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-23 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>
