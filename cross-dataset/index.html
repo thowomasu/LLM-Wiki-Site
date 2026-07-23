@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cross-Dataset Missing-Measurement Study | Battery DRT Research Outputs</title>
-  <meta name="description" content="Versions 4, 5, and 6 show why the broad model path stopped and why the next study needs controlled measurements.">
+  <title>Can Pulse Tests Replace Missing EIS Measurements? | Battery DRT Research Outputs</title>
+  <meta name="description" content="A physics-first summary of what was tested, what worked, what failed, and what should happen next.">
   <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Cross-Dataset Missing-Measurement Study | Battery DRT Research Outputs">
-  <meta property="og:description" content="Versions 4, 5, and 6 show why the broad model path stopped and why the next study needs controlled measurements.">
+  <meta property="og:title" content="Can Pulse Tests Replace Missing EIS Measurements? | Battery DRT Research Outputs">
+  <meta property="og:description" content="A physics-first summary of what was tested, what worked, what failed, and what should happen next.">
   <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/cross-dataset/">
   <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
@@ -1392,7 +1392,6 @@ window.MathJax = {
 <a class="side-link" href="../index.html#project-summary">Project summary</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="../cross-dataset/">Cross-dataset study overview</a>
-<a class="side-link" href="../cross-dataset/decision-report/">Plain-language decision report</a>
 <a class="side-link" href="../cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
 <a class="side-link" href="../cross-dataset/missing-measurement-v4/">Version 4</a>
 <a class="side-link" href="../cross-dataset/missing-measurement-v5/">Version 5</a>
@@ -1420,23 +1419,42 @@ window.MathJax = {
       <header>
 
         <div class="kicker">Battery DRT Research Outputs</div>
-        <h1>Cross-Dataset Missing-Measurement Study</h1>
-        <p class="lead">Versions 4, 5, and 6 show why the broad model path stopped and why the next study needs controlled measurements.</p>
+        <h1>Can Pulse Tests Replace Missing EIS Measurements?</h1>
+        <p class="lead">A physics-first summary of what was tested, what worked, what failed, and what should happen next.</p>
 
       </header>
       <main>
 
     <div class="tabs" aria-label="Section tabs"><a class="tab active" href="">Overview</a><a class="tab" href="early-versions/">Versions 1 to 3</a><a class="tab" href="missing-measurement-v4/">Version 4</a><a class="tab" href="missing-measurement-v5/">Version 5</a><a class="tab" href="missing-measurement-v6/">Version 6</a><a class="tab" href="version-comparison/">Compare all versions</a></div>
     <section class="note">
-      <strong>Current answer:</strong> a universal cross-dataset model is not supported. Version 4 passed one narrow external test, Version 5 failed its external test, and Version 6 found no model worth freezing. The next study is deliberately smaller: one exact cell model, one lot, and one fixed measurement protocol.
+      <strong>Answer in one sentence:</strong> the method can work when two datasets are closely matched, but it is not reliable across different cells and test methods.
     </section>
     <section id="project-summary">
-      <h2>The research question</h2>
-      <p>Can a short pulse measurement and an earlier battery reference recover a missing EIS spectrum and a useful state-of-health estimate?</p>
-      <p>The hard part was not fitting one dataset. The hard part was staying reliable when the cell, chemistry, protocol, and instrument changed.</p>
+      <h2>What this study tried to do</h2>
+      <p>An EIS test shows how a battery responds at different time scales.</p>
+      <p>EIS is useful, but it needs special equipment and takes extra test time.</p>
+      <p>A pulse test is faster and easier to collect.</p>
+      <p>This study asked whether a pulse test could replace a missing EIS test.</p>
+      <p>It also asked whether the estimated EIS could support a State of Health estimate.</p>
     </section>
     <section>
-      <h2>The whole study in one picture</h2>
+      <h2>Why transfer between datasets is difficult</h2>
+      <p>Each dataset came from a different experimental domain.</p>
+      <p>The cell chemistry, cell design, temperature, ageing history, instrument, and test protocol were not always the same.</p>
+      <p>These differences can change the impedance spectrum even when two cells have similar health.</p>
+      <p>A model can therefore learn the habits of one experiment instead of learning a general battery relation.</p>
+    </section>
+    <section>
+      <h2>What the study found</h2>
+      <div class="reader-path">
+        <div class="reader-card"><strong>Some EIS features can be estimated</strong><p>The model found useful links between pulse behaviour and parts of the impedance spectrum.</p></div>
+        <div class="reader-card"><strong>The result does not transfer broadly</strong><p>The links changed when the cell family or measurement procedure changed.</p></div>
+        <div class="reader-card"><strong>Health prediction is the weaker step</strong><p>An estimated spectrum did not give a reliable health result across all datasets.</p></div>
+        <div class="reader-card"><strong>A larger model is not the answer</strong><p>The main limit is physical mismatch between experiments, not a lack of model complexity.</p></div>
+      </div>
+    </section>
+    <section>
+      <h2>How the conclusion changed</h2>
 
     <figure class="study-trajectory" aria-labelledby="study-trajectory-title">
       <figcaption id="study-trajectory-title"><strong>How the evidence changed the research direction</strong><span>This is a decision path, not a shared performance scale. Each version answered a different question.</span></figcaption>
@@ -1453,28 +1471,33 @@ window.MathJax = {
 
     </section>
     <section>
-      <h2>The numbers behind the decisions</h2>
-      <p>These three charts use different units because the versions answer different questions. Read each source note before comparing them.</p>
+      <h2>The three decisive results</h2>
+      <p>Each version tested a different part of the idea.</p>
+      <p>The charts therefore use different units and should not be combined into one score.</p>
       <figure class="evidence-chart"><figcaption><strong>Version 4: Oxford error reduction versus the fixed baseline</strong><span>Higher is better. Every output had to clear the pre-set 5% improvement rule.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Real EIS</span><strong>45.1%</strong></div><div class="evidence-chart-track" role="img" aria-label="Real EIS: 45.1%"><span class="evidence-chart-bar good" style="--bar-width:45.091%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Imaginary EIS</span><strong>25.7%</strong></div><div class="evidence-chart-track" role="img" aria-label="Imaginary EIS: 25.7%"><span class="evidence-chart-bar good" style="--bar-width:25.654%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Measured-EIS-to-SOH</span><strong>80.3%</strong></div><div class="evidence-chart-track" role="img" aria-label="Measured-EIS-to-SOH: 80.3%"><span class="evidence-chart-bar good" style="--bar-width:80.309%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>100% error reduction</span></div><p class="chart-source">External Oxford result, worst case across the two allowed frequency mappings, three independent cells.</p></figure>
       <figure class="evidence-chart"><figcaption><strong>Version 5: frozen SiCWell guard result</strong><span>The guard accepted no rows, so no outside-data prediction error could be reported.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Rows accepted</span><strong>0</strong></div><div class="evidence-chart-track" role="img" aria-label="Rows accepted: 0"><span class="evidence-chart-bar good" style="--bar-width:0.000%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Rows rejected</span><strong>892</strong></div><div class="evidence-chart-track" role="img" aria-label="Rows rejected: 892"><span class="evidence-chart-bar bad" style="--bar-width:100.000%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>892 rows</span></div><p class="chart-source">One frozen external test covering 26 cells and 223 ageing checkups. Rows are correlated measurements, not independent batteries.</p></figure>
       <figure class="evidence-chart"><figcaption><strong>Version 6: development rows by dataset</strong><span>This shows the audit&#x27;s data balance. It does not turn previously inspected datasets into new validation evidence.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Bayreuth CoDeMoRe 2026</span><strong>28 rows, 14 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="Bayreuth CoDeMoRe 2026: 28 rows, 14 cells"><span class="evidence-chart-bar muted" style="--bar-width:3.139%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Leonardi</span><strong>460 rows, 8 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="Leonardi: 460 rows, 8 cells"><span class="evidence-chart-bar muted" style="--bar-width:51.570%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Oxford Path Dependent</span><strong>3 rows, 3 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="Oxford Path Dependent: 3 rows, 3 cells"><span class="evidence-chart-bar muted" style="--bar-width:0.336%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>SiCWell</span><strong>892 rows, 26 cells</strong></div><div class="evidence-chart-track" role="img" aria-label="SiCWell: 892 rows, 26 cells"><span class="evidence-chart-bar muted" style="--bar-width:100.000%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>largest dataset</span></div><p class="chart-source">V6 development matrix: 1383 rows from 51 independent cells across 4 spent datasets.</p></figure>
     </section>
     <section class="summary-grid">
-      <article class="summary-card"><span class="status-pill bad">Versions 1 to 3</span><h3>Early transfer attempts</h3><p>These versions established the first analysis chain, simplified it, and made it more portable. Their outside tests either failed, could not be run honestly, or missed the required EIS margin.</p><div class="card-actions"><a class="button" href="early-versions/">Read the early history</a></div></article>
-      <article class="summary-card"><span class="status-pill good">Version 4</span><h3>Narrow external pass</h3><p>Three Oxford cells passed every fixed gate. This was real external evidence, but only for one narrow NCA protocol and a model that still used measured current EIS for the health step.</p><div class="card-actions"><a class="button" href="missing-measurement-v4/">Read Version 4</a></div></article>
-      <article class="summary-card"><span class="status-pill bad">Version 5</span><h3>Full chain, external failure</h3><p>The model predicted EIS before predicting health. It worked internally on Leonardi, then rejected all 892 SiCWell rows under the fixed domain guard.</p><div class="card-actions"><a class="button" href="missing-measurement-v5/">Read Version 5</a></div></article>
-      <article class="summary-card"><span class="status-pill bad">Version 6</span><h3>Universal path stopped</h3><p>Zero-shot, small-calibration, uncertainty, and guard studies produced no candidate that passed every dataset-level gate.</p><div class="card-actions"><a class="button" href="missing-measurement-v6/">Read Version 6</a></div></article>
-      <article class="summary-card"><span class="status-pill warn">Next study</span><h3>Controlled exact-cell campaign</h3><p>No measurements are authorized yet. The lab must first prove that it has at least 12 matching cells, safe equipment, calibration, channels, approval, and enough time.</p><div class="card-actions"><a class="button" href="version-comparison/">Compare Versions 1 to 6</a></div></article>
+      <article class="summary-card"><span class="status-pill bad">Versions 1 to 3</span><h3>The broad idea did not hold</h3><p>The first models worked inside familiar data. They failed, or could not be tested fairly, when the dataset changed.</p><div class="card-actions"><a class="button" href="early-versions/">Read Versions 1 to 3</a></div></article>
+      <article class="summary-card"><span class="status-pill good">Version 4</span><h3>One narrow success</h3><p>Three Oxford cells passed the fixed test. The Oxford experiment was closely matched to the training data. The health step still used a measured EIS spectrum.</p><div class="card-actions"><a class="button" href="missing-measurement-v4/">Read Version 4</a></div></article>
+      <article class="summary-card"><span class="status-pill bad">Version 5</span><h3>The complete chain failed outside its domain</h3><p>The model estimated EIS before estimating health. Its safety rule rejected all 892 measurements from the outside SiCWell dataset.</p><div class="card-actions"><a class="button" href="missing-measurement-v5/">Read Version 5</a></div></article>
+      <article class="summary-card"><span class="status-pill bad">Version 6</span><h3>Calibration did not rescue the broad model</h3><p>Several input forms, small calibration sets, safety rules, and uncertainty estimates were tested. No candidate worked reliably across every dataset.</p><div class="card-actions"><a class="button" href="missing-measurement-v6/">Read Version 6</a></div></article>
+      <article class="summary-card"><span class="status-pill warn">Next study</span><h3>Match the physics before fitting a model</h3><p>Use one cell model, one production lot, one temperature, one ageing plan, and fixed pulse and EIS procedures. First show that ageing changes are larger than measurement noise.</p><div class="card-actions"><a class="button" href="version-comparison/">Compare all versions</a></div></article>
     </section>
     <section>
-      <h2>What happens next</h2>
+      <h2>What should happen next</h2>
       <ol>
-        <li>Verify the cells, safety approval, temperature control, cycler, EIS equipment, channels, logging, and schedule.</li>
-        <li>If the resource gate passes, run a two-cell repeatability pilot.</li>
-        <li>Continue only if ageing changes are larger than measurement noise.</li>
-        <li>Keep development, calibration, and locked evaluation cells separate.</li>
+        <li>Confirm that enough identical cells and the required equipment are available.</li>
+        <li>Measure two cells repeatedly to quantify normal measurement variation.</li>
+        <li>Continue only if the change caused by ageing is larger than that variation.</li>
+        <li>Use different cells for model development, calibration, and the final test.</li>
       </ol>
-      <p><strong>Current gate:</strong> <code>resource_gate_blocked_pending_information</code>. This is a temporary no-go because the physical lab evidence has not been supplied.</p>
+      <p><strong>Current status:</strong> the new experiment is paused.</p>
+      <p>The required cells, equipment, safety approval, and schedule have not yet been confirmed.</p>
+    </section>
+    <section class="note">
+      <strong>Claim boundary:</strong> the study does not show that pulse measurements can replace EIS for every battery. It shows one narrow success and several clear limits.
     </section>
 
       </main>
