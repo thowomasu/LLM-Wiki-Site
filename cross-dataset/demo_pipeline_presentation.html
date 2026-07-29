@@ -9,6 +9,7 @@
 (function () {
   var key = "llm-wiki-theme";
   var sidebarKey = "llm-wiki-sidebar";
+  var glossaryEntries = [{"term": "EIS", "expansion": "Electrochemical Impedance Spectroscopy", "definition": "A laboratory test that measures how a battery resists and stores electrical signals across many frequencies.", "aliases": ["EIS"]}, {"term": "SOH", "expansion": "State of Health", "definition": "A measure of how much useful battery health remains, usually compared with the battery when it was new.", "aliases": ["SOH", "state of health"]}, {"term": "SOC", "expansion": "State of Charge", "definition": "How full the battery is at the time of a measurement, usually shown as a percentage.", "aliases": ["SOC", "state of charge"]}, {"term": "DRT", "expansion": "Distribution of Relaxation Times", "definition": "A way to separate a battery response into processes that act over different time scales.", "aliases": ["DRT", "distribution of relaxation times"]}, {"term": "TDM", "expansion": "Time-Domain Measurement", "definition": "Voltage and current recorded over time during a pulse, rest period, or other battery test.", "aliases": ["TDM", "time-domain measurement", "time-domain measurements"]}, {"term": "HPPC", "expansion": "Hybrid Pulse Power Characterization", "definition": "A battery test that uses fixed charge and discharge pulses to measure resistance and power behaviour.", "aliases": ["HPPC"]}, {"term": "OCV", "expansion": "Open-Circuit Voltage", "definition": "Battery voltage measured while no current is flowing after the battery has had time to rest.", "aliases": ["OCV", "open-circuit voltage"]}, {"term": "ECM", "expansion": "Equivalent Circuit Model", "definition": "A simplified electrical circuit used to copy important parts of battery behaviour.", "aliases": ["ECM", "equivalent circuit model", "equivalent circuit models"]}, {"term": "RPT", "expansion": "Reference Performance Test", "definition": "A repeated check-up used to track battery capacity, resistance, and health during ageing.", "aliases": ["RPT", "reference performance test", "reference performance tests"]}, {"term": "Baseline", "expansion": "Simple comparison method", "definition": "A basic prediction that the proposed method must beat to show that its extra complexity is useful.", "aliases": ["baseline", "baselines"]}, {"term": "Internal result", "expansion": "Result from development data", "definition": "A result from the same dataset family used to build the method. It helps development, but it is not independent proof.", "aliases": ["internal result", "internal results", "internal evidence", "internal test", "internal tests", "same-dataset evidence", "same-dataset result", "same-dataset results", "development result", "development results"]}, {"term": "Held-out-cell fold", "expansion": "One repeated left-out-cell check", "definition": "One whole cell is left out of training and tested. The check is repeated with another cell left out each time.", "aliases": ["held-out-cell fold", "held-out-cell folds", "held-cell fold", "held-cell folds", "held-out-cell validation", "held-out-cell", "held-out cell", "held-out cells"]}, {"term": "External test", "expansion": "Test on separate data", "definition": "A test on a different dataset that was not used to build the method or choose its settings.", "aliases": ["external test", "external tests", "external validation", "external holdout", "external result", "external results", "external evidence"]}, {"term": "Untouched", "expansion": "Not used before final scoring", "definition": "The final answers were hidden while features, models, limits, and pass rules were being chosen.", "aliases": ["untouched", "locked evaluation", "locked evaluation data", "locked evaluation cells", "unseen evaluation data"]}, {"term": "Frozen or locked", "expansion": "Fixed before outside answers were viewed", "definition": "The inputs, model, baseline, and pass rules could not be changed after the outside or final data were seen.", "aliases": ["frozen", "locked", "frozen model", "frozen rule", "frozen rules", "frozen contract", "locked model", "locked rules"]}, {"term": "Freeze-ready", "expansion": "Ready to lock for a fair outside test", "definition": "The method was complete and stable enough to lock. This does not mean it had already passed an external test.", "aliases": ["freeze-ready", "externally freeze-ready", "ready to freeze"]}, {"term": "Passed", "expansion": "Met every rule fixed in advance", "definition": "The scored result met every required pass rule. It does not automatically prove that the method works everywhere.", "aliases": ["passed", "passes", "passing result", "pass result"]}, {"term": "Failed", "expansion": "Missed at least one rule fixed in advance", "definition": "The scored result missed a required pass rule. This describes the evidence, not whether the code crashed.", "aliases": ["failed", "fails", "failing result", "failure result"]}, {"term": "Domain guard", "expansion": "Input safety check", "definition": "A rule that rejects data that are too different from the data the model knows.", "aliases": ["domain guard", "domain guards", "applicability guard", "applicability guards"]}, {"term": "Abstain", "expansion": "Refuse to make an unsafe prediction", "definition": "The model gives no prediction because the input is outside its safe or supported range.", "aliases": ["abstain", "abstains", "abstained", "abstention", "rejected before prediction"]}, {"term": "Zero-shot", "expansion": "No target-data calibration", "definition": "The model is tested on a new dataset without learning from any labelled examples from that dataset.", "aliases": ["zero-shot", "zero shot"]}, {"term": "Few-shot calibration", "expansion": "Small target-data adjustment", "definition": "A small number of labelled cells or check-ups from the new dataset are used to adjust the model before evaluation.", "aliases": ["few-shot calibration", "few shot calibration", "small calibration", "target-cell calibration"]}, {"term": "Uncertainty range", "expansion": "Range showing prediction uncertainty", "definition": "An interval around a prediction that shows how uncertain the model is. A useful range must be tested for coverage.", "aliases": ["uncertainty range", "uncertainty ranges", "uncertainty interval", "uncertainty intervals", "prediction interval", "prediction intervals"]}, {"term": "Leave-one-dataset-out", "expansion": "Whole-dataset transfer check", "definition": "The model learns from all but one dataset, then the missing dataset is used as a separate test.", "aliases": ["leave-one-dataset-out", "leave one dataset out"]}, {"term": "Representation", "expansion": "The numerical form given to a model", "definition": "The same measurements can be expressed as raw values, ratios, normalized changes, or smaller summaries before modeling.", "aliases": ["representation", "representations"]}, {"term": "Dataset-level test", "expansion": "Hold back one complete dataset", "definition": "The model learns from other datasets and is tested on a dataset it did not use for training.", "aliases": ["dataset-level test", "dataset-level tests", "whole-dataset test", "whole-dataset transfer"]}, {"term": "Normalization", "expansion": "Rescale values before modeling", "definition": "Values are put on a comparable scale so a large cell or instrument range does not dominate only because its numbers are bigger.", "aliases": ["normalization", "normalize", "normalized", "standardization", "standardized"]}, {"term": "Prediction head", "expansion": "One model output branch", "definition": "A separate model or output branch responsible for one target, such as real EIS, imaginary EIS, or SOH.", "aliases": ["prediction head", "prediction heads", "model head", "model heads", "output head", "output heads"]}, {"term": "Chained model", "expansion": "One prediction feeds another model", "definition": "The predicted EIS becomes an input to the SOH model, so EIS does not need to be measured at prediction time.", "aliases": ["chained model", "chained models", "complete chain", "full chain"]}, {"term": "Cross-fitting", "expansion": "Build training predictions without self-exposure", "definition": "Each training cell receives an EIS prediction from a model that did not train on that cell before the health model is fitted.", "aliases": ["cross-fitting", "cross fitting", "cross-fitted", "out-of-cell prediction", "out-of-cell predictions"]}, {"term": "Predeclared", "expansion": "Written down before scoring", "definition": "The inputs, comparisons, splits, models, and pass rules were chosen before looking at the result being judged.", "aliases": ["predeclared", "pre-declared", "predeclared design", "pre-declared design"]}, {"term": "Scale and shape", "expansion": "Separate impedance size from curve pattern", "definition": "Overall impedance magnitude is stored separately from the normalized spectral shape and its change.", "aliases": ["scale and shape", "scale-shape", "scale shape"]}, {"term": "Dimensionless change", "expansion": "Relative change without physical units", "definition": "Current impedance is divided by or scaled against the fresh reference so different absolute sizes are easier to compare.", "aliases": ["dimensionless change", "dimensionless changes"]}, {"term": "Reduced frequency", "expansion": "Smaller fixed set of frequency features", "definition": "The full spectrum is replaced by selected shared points and low-, middle-, and high-frequency summaries.", "aliases": ["reduced frequency", "reduced-frequency"]}, {"term": "Hybrid small", "expansion": "Small mixed feature set", "definition": "A compact representation combining SOC, temperature, pulse change, impedance scale, and a short shape summary.", "aliases": ["hybrid small", "small hybrid"]}, {"term": "Physical summary", "expansion": "Compact physically motivated features", "definition": "A planned representation that was excluded because the repeatability, instrument, amplitude, and temperature metadata needed to build it safely were missing.", "aliases": ["physical summary", "physical summaries"]}, {"term": "RMSE", "expansion": "Root Mean Squared Error", "definition": "A prediction-error score that gives extra weight to larger mistakes. Lower is better.", "aliases": ["RMSE", "root mean squared error"]}, {"term": "MAE", "expansion": "Mean Absolute Error", "definition": "The average absolute prediction mistake. Lower is better.", "aliases": ["MAE", "mean absolute error"]}, {"term": "Ridge", "expansion": "Regularized linear regression", "definition": "A simple linear model that discourages very large fitted weights and serves as a strong basic comparison.", "aliases": ["Ridge", "ridge model", "ridge regression"]}, {"term": "Extra Trees", "expansion": "Extremely Randomized Trees", "definition": "A nonlinear ensemble that averages many randomized decision trees.", "aliases": ["Extra Trees", "ExtraTrees", "ExtraTreesRegressor"]}, {"term": "Frequency grid", "expansion": "Fixed list of EIS frequencies", "definition": "The exact frequency points where impedance values are aligned, predicted, and compared.", "aliases": ["frequency grid", "frequency grids", "shared grid", "shared grid points"]}, {"term": "Pulse resistance", "expansion": "Resistance estimated from a current pulse", "definition": "Voltage change divided by pulse current over a fixed time window, used here as a short ageing-sensitive measurement.", "aliases": ["pulse resistance", "pulse-resistance", "pulse resistance change", "pulse-resistance change"]}];
   function preferredTheme() {
     try {
       var saved = localStorage.getItem(key);
@@ -55,6 +56,146 @@
       });
     });
   }
+  function glossaryPatternAndLookup() {
+    var lookup = {};
+    var aliases = [];
+    glossaryEntries.forEach(function (entry) {
+      entry.aliases.forEach(function (alias) {
+        lookup[alias.toLowerCase()] = entry;
+        aliases.push(alias);
+      });
+    });
+    aliases.sort(function (left, right) { return right.length - left.length; });
+    var escaped = aliases.map(function (value) {
+      return value.replace(/[^A-Za-z0-9 ]/g, function (character) {
+        return String.fromCharCode(92) + character;
+      });
+    });
+    return {
+      lookup: lookup,
+      pattern: new RegExp("(^|[^A-Za-z0-9_])(" + escaped.join("|") + ")(?=$|[^A-Za-z0-9_])", "gi")
+    };
+  }
+  function applyGlossaryTerms() {
+    var root = document.querySelector("main");
+    if (!root || !glossaryEntries.length || !document.createTreeWalker) return;
+    var glossary = glossaryPatternAndLookup();
+    var skipSelector = [
+      "a", "button", "code", "pre", "script", "style", "textarea", "select", "option",
+      "svg", "math", "mjx-container", ".glossary-term", ".glossary-tooltip",
+      ".definition-card", ".term-card", "[data-no-glossary]"
+    ].join(",");
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var textNodes = [];
+    var node;
+    while ((node = walker.nextNode())) {
+      if (!node.nodeValue.trim()) continue;
+      if (node.parentElement && node.parentElement.closest(skipSelector)) continue;
+      glossary.pattern.lastIndex = 0;
+      if (glossary.pattern.test(node.nodeValue)) textNodes.push(node);
+    }
+    textNodes.forEach(function (textNode) {
+      var text = textNode.nodeValue;
+      var fragment = document.createDocumentFragment();
+      var lastIndex = 0;
+      var match;
+      glossary.pattern.lastIndex = 0;
+      while ((match = glossary.pattern.exec(text))) {
+        var prefixEnd = match.index + match[1].length;
+        if (prefixEnd > lastIndex) fragment.appendChild(document.createTextNode(text.slice(lastIndex, prefixEnd)));
+        var visibleTerm = match[2];
+        var entry = glossary.lookup[visibleTerm.toLowerCase()];
+        var term = document.createElement("span");
+        term.className = "glossary-term";
+        term.tabIndex = 0;
+        term.textContent = visibleTerm;
+        term.dataset.glossaryTerm = entry.term;
+        term.dataset.glossaryExpansion = entry.expansion;
+        term.dataset.glossaryDefinition = entry.definition;
+        term.setAttribute("aria-expanded", "false");
+        term.setAttribute("aria-describedby", "site-glossary-tooltip");
+        fragment.appendChild(term);
+        lastIndex = glossary.pattern.lastIndex;
+        if (match[0].length === 0) glossary.pattern.lastIndex += 1;
+      }
+      if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+      textNode.parentNode.replaceChild(fragment, textNode);
+    });
+    if (!textNodes.length && !root.querySelector(".glossary-term")) return;
+
+    var tooltip = document.createElement("div");
+    tooltip.id = "site-glossary-tooltip";
+    tooltip.className = "glossary-tooltip";
+    tooltip.setAttribute("role", "tooltip");
+    tooltip.hidden = true;
+    tooltip.innerHTML = '<strong></strong><span class="glossary-expansion"></span><span class="glossary-definition"></span>';
+    document.body.appendChild(tooltip);
+    var activeTerm = null;
+    var termWasOpenOnPointerDown = false;
+
+    function positionTooltip(term) {
+      var gap = 9;
+      var margin = 12;
+      var termBox = term.getBoundingClientRect();
+      var tooltipBox = tooltip.getBoundingClientRect();
+      var left = termBox.left + (termBox.width - tooltipBox.width) / 2;
+      left = Math.max(margin, Math.min(left, window.innerWidth - tooltipBox.width - margin));
+      var top = termBox.bottom + gap;
+      if (top + tooltipBox.height > window.innerHeight - margin) top = termBox.top - tooltipBox.height - gap;
+      top = Math.max(margin, Math.min(top, window.innerHeight - tooltipBox.height - margin));
+      tooltip.style.left = Math.round(left) + "px";
+      tooltip.style.top = Math.round(top) + "px";
+    }
+    function showTooltip(term) {
+      if (activeTerm && activeTerm !== term) activeTerm.setAttribute("aria-expanded", "false");
+      activeTerm = term;
+      tooltip.querySelector("strong").textContent = term.dataset.glossaryTerm;
+      tooltip.querySelector(".glossary-expansion").textContent = term.dataset.glossaryExpansion;
+      tooltip.querySelector(".glossary-definition").textContent = term.dataset.glossaryDefinition;
+      tooltip.hidden = false;
+      term.setAttribute("aria-expanded", "true");
+      positionTooltip(term);
+    }
+    function hideTooltip() {
+      if (activeTerm) activeTerm.setAttribute("aria-expanded", "false");
+      activeTerm = null;
+      tooltip.hidden = true;
+    }
+    root.addEventListener("mouseover", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (term) showTooltip(term);
+    });
+    root.addEventListener("mouseout", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (term && event.relatedTarget !== term) hideTooltip();
+    });
+    root.addEventListener("focusin", function (event) {
+      if (event.target.classList && event.target.classList.contains("glossary-term")) showTooltip(event.target);
+    });
+    root.addEventListener("focusout", function (event) {
+      if (event.target.classList && event.target.classList.contains("glossary-term")) hideTooltip();
+    });
+    root.addEventListener("pointerdown", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      termWasOpenOnPointerDown = Boolean(term && activeTerm === term && !tooltip.hidden);
+    });
+    root.addEventListener("click", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (!term) return;
+      event.stopPropagation();
+      if (termWasOpenOnPointerDown) hideTooltip();
+      else showTooltip(term);
+      termWasOpenOnPointerDown = false;
+    });
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest || !event.target.closest(".glossary-term")) hideTooltip();
+    });
+    window.addEventListener("resize", hideTooltip);
+    window.addEventListener("scroll", hideTooltip, true);
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") hideTooltip();
+    });
+  }
   var initialTheme = preferredTheme();
   var initialSidebar = preferredSidebar();
   applyTheme(initialTheme);
@@ -63,6 +204,7 @@
     applyTheme(document.documentElement.dataset.theme || initialTheme);
     applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
     labelResponsiveTables();
+    applyGlossaryTerms();
     var toggle = document.querySelector("[data-theme-toggle]");
     if (toggle) {
       toggle.addEventListener("click", function () {
@@ -272,7 +414,7 @@
         <a class="button" href="data/demo_pipeline_results.json" download>Download results JSON</a>
       </div>
     </header>
-<main>
+<main><section class="skim-first-note"><strong>How to skim this page</strong><span>Read the result, physical meaning, limit, and next step first. Open implementation details only when needed.</span></section>
   <section id="summary" class="note">
     <h2>Executive Read</h2>
     <p>The demo learns from development rows, predicts measured EIS spectra for Molicell rows kept back from training, and compares that prediction with a simple mean baseline.</p>
@@ -287,7 +429,7 @@
 
   <section id="objective">
     <h2>Question</h2>
-    <p>Can a small, honest supervised pipeline connect time-domain battery behavior to measured EIS spectra without leaking the answer into training?</p>
+    <p>Can a small, honest supervised analysis chain connect time-domain battery behavior to measured EIS spectra without leaking the answer into training?</p>
     <p>The answer here is limited but useful: yes for this fixed-grid demo. It is not a full-frequency model and it does not validate the separate CALB rule with additional data from other cells.</p>
   </section>
 
@@ -309,7 +451,7 @@
       <div class="step"><strong>Build features</strong><p>Use base time-domain statistics and derived features. Derived features include log duration, voltage delta, voltage range, coefficient of variation, current load factor, and throughput ratios.</p></div>
       <div class="step"><strong>Build target vector</strong><p>Use real impedance and negative-imaginary impedance at the fixed grid: <code>0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40 Hz</code>. The grid is sparse on purpose: dense enough to track the broad EIS shape, small enough to remain comparable across datasets and readable in a presentation.</p></div>
       <div class="step"><strong>Fit baseline and model</strong><p>Compare a global train-mean vector against a conservative KNN shrinkage model. The KNN model receives only time-domain features.</p></div>
-      <div class="step"><strong>Score</strong><p>Compute full-vector RMSE, component RMSE, per-target RMSE, relative improvement, and per-frequency error.</p></div>
+      <div class="step"><strong>Score</strong><p>Compute full-vector typical prediction error, component typical prediction error, per-target typical prediction error, relative improvement, and per-frequency error.</p></div>
       <div class="step"><strong>Screen EIS target quality</strong><p>Run finite-range RC-basis Kramer-Kronig validation on the measured EIS spectra for the rows kept back. This is quality metadata, not a prediction score.</p></div>
     </div>
   </section>
@@ -359,12 +501,12 @@
     <div class="math">\[\hat{y}_{\mathrm{mean}} = \frac{1}{N_{\mathrm{train}}}\sum_{i=1}^{N_{\mathrm{train}}} y_i\]</div>
     <p>The demo model is conservative. It keeps most of the train-mean prediction and only blends in a small KNN contribution.</p>
     <div class="math">\[\hat{y}_{\mathrm{demo}} = 0.8\hat{y}_{\mathrm{mean}} + 0.2\hat{y}_{\mathrm{KNN}}\]</div>
-    <p>The scoring uses full-vector RMSE and relative improvement.</p>
-    <div class="math">\[\mathrm{RMSE} = \sqrt{\frac{1}{NM}\sum_{i=1}^{N}\sum_{j=1}^{M}(y_{ij} - \hat{y}_{ij})^2}\]</div>
-    <div class="math">\[\mathrm{Improvement} = \frac{\mathrm{RMSE}_{\mathrm{baseline}} - \mathrm{RMSE}_{\mathrm{model}}}{\mathrm{RMSE}_{\mathrm{baseline}}}\]</div>
+    <p>The scoring uses full-vector typical prediction error and relative improvement.</p>
+    <div class="math">\[\mathrm{typical prediction error} = \sqrt{\frac{1}{NM}\sum_{i=1}^{N}\sum_{j=1}^{M}(y_{ij} - \hat{y}_{ij})^2}\]</div>
+    <div class="math">\[\mathrm{Improvement} = \frac{\mathrm{typical prediction error}_{\mathrm{baseline}} - \mathrm{typical prediction error}_{\mathrm{model}}}{\mathrm{typical prediction error}_{\mathrm{baseline}}}\]</div>
     <p>The EIS target screen fits a finite RC basis over the available frequency range.</p>
     <div class="math">\[Z_{\mathrm{KK}}(f) \approx R_{\infty} + \sum_k \frac{R_k}{1 + j2\pi f\tau_k}\]</div>
-    <div class="math">\[\mathrm{residual}_{\mathrm{norm}} = \frac{\mathrm{RMSE}(Z_{\mathrm{measured}}, Z_{\mathrm{KK-fit}})}{\mathrm{scale}(Z_{\mathrm{measured}})}\]</div>
+    <div class="math">\[\mathrm{residual}_{\mathrm{norm}} = \frac{\mathrm{typical prediction error}(Z_{\mathrm{measured}}, Z_{\mathrm{KK-fit}})}{\mathrm{scale}(Z_{\mathrm{measured}})}\]</div>
   </section>
 
   <section id="graphs">
@@ -397,19 +539,19 @@
     <p class="chart-analysis">Analysis: this measured Molicell Nyquist plot labels the expanded target grid through 6 kHz. It shows why the original 40 Hz grid was conservative: the high-frequency points move into a separate left/down tail where contact, wiring, and inductive behavior can start to matter. That does not make those frequencies useless, but it does mean the expanded run should be treated as a separate high-frequency target contract.</p>
 
 <figure class="chart">
-  <figcaption>Per-frequency RMSE, baseline versus demo model</figcaption>
+  <figcaption>Per-frequency typical prediction error, baseline versus demo model</figcaption>
   <div class="legend">
     <span class="legend-item"><span class="swatch" style="background:#b85f17"></span>baseline</span>
     <span class="legend-item"><span class="swatch" style="background:#2f7d4a"></span>demo model</span>
   </div>
-  <svg width="980" height="434" viewbox="0 0 980 434" role="img" aria-label="Per-frequency RMSE bars">
+  <svg width="980" height="434" viewbox="0 0 980 434" role="img" aria-label="Per-frequency typical prediction error bars">
     <rect x="0" y="0" width="980" height="434" fill="var(--panel)"></rect>
     <text x="118" y="71" text-anchor="end">0.05 Hz</text><rect x="130" y="55" width="802.0" height="11" fill="#b85f17"></rect><rect x="130" y="70" width="632.8" height="11" fill="#2f7d4a"></rect><text x="118" y="105" text-anchor="end">0.1 Hz</text><rect x="130" y="89" width="709.5" height="11" fill="#b85f17"></rect><rect x="130" y="104" width="588.8" height="11" fill="#2f7d4a"></rect><text x="118" y="139" text-anchor="end">0.2 Hz</text><rect x="130" y="123" width="606.5" height="11" fill="#b85f17"></rect><rect x="130" y="138" width="516.2" height="11" fill="#2f7d4a"></rect><text x="118" y="173" text-anchor="end">0.5 Hz</text><rect x="130" y="157" width="498.4" height="11" fill="#b85f17"></rect><rect x="130" y="172" width="429.3" height="11" fill="#2f7d4a"></rect><text x="118" y="207" text-anchor="end">1 Hz</text><rect x="130" y="191" width="429.5" height="11" fill="#b85f17"></rect><rect x="130" y="206" width="392.4" height="11" fill="#2f7d4a"></rect><text x="118" y="241" text-anchor="end">2 Hz</text><rect x="130" y="225" width="384.0" height="11" fill="#b85f17"></rect><rect x="130" y="240" width="360.7" height="11" fill="#2f7d4a"></rect><text x="118" y="275" text-anchor="end">5 Hz</text><rect x="130" y="259" width="339.2" height="11" fill="#b85f17"></rect><rect x="130" y="274" width="328.8" height="11" fill="#2f7d4a"></rect><text x="118" y="309" text-anchor="end">10 Hz</text><rect x="130" y="293" width="339.9" height="11" fill="#b85f17"></rect><rect x="130" y="308" width="328.5" height="11" fill="#2f7d4a"></rect><text x="118" y="343" text-anchor="end">20 Hz</text><rect x="130" y="327" width="344.5" height="11" fill="#b85f17"></rect><rect x="130" y="342" width="335.0" height="11" fill="#2f7d4a"></rect><text x="118" y="377" text-anchor="end">40 Hz</text><rect x="130" y="361" width="340.6" height="11" fill="#b85f17"></rect><rect x="130" y="376" width="332.7" height="11" fill="#2f7d4a"></rect>
-    <text x="130" y="422">RMSE in ohm, shorter is better</text>
+    <text x="130" y="422">typical prediction error in ohm, shorter is better</text>
   </svg>
 </figure>
 
-    <p class="chart-analysis">Analysis: the per-frequency RMSE bars show where the model improves over the baseline and where it still struggles. Shorter green bars than orange bars mean the demo model reduced error at that frequency pair.</p>
+    <p class="chart-analysis">Analysis: the per-frequency typical prediction error bars show where the model improves over the baseline and where it still struggles. Shorter green bars than orange bars mean the demo model reduced error at that frequency pair.</p>
     <h3>Representative Spectrum Data</h3>
     <p>The table below is the data behind the Nyquist plot. It is included so an external user can inspect the numeric values without rerunning the script.</p>
     <div class="table-scroll"><table><thead><tr><th>frequency_hz</th><th>true_zreal_ohm</th><th>true_znegimag_ohm</th><th>baseline_zreal_ohm</th><th>baseline_znegimag_ohm</th><th>model_zreal_ohm</th><th>model_znegimag_ohm</th></tr></thead><tbody><tr><td>0.05</td><td>0.03486</td><td>0.00442</td><td>0.04908</td><td>0.0117</td><td>0.04388</td><td>0.01038</td></tr><tr><td>0.1</td><td>0.03354</td><td>0.0035</td><td>0.04463</td><td>0.0109</td><td>0.04111</td><td>0.00952</td></tr><tr><td>0.2</td><td>0.03246</td><td>0.00312</td><td>0.04024</td><td>0.00974</td><td>0.0374</td><td>0.00839</td></tr><tr><td>0.5</td><td>0.03113</td><td>0.00328</td><td>0.03596</td><td>0.00784</td><td>0.033</td><td>0.00658</td></tr><tr><td>1</td><td>0.02966</td><td>0.00415</td><td>0.0331</td><td>0.00646</td><td>0.03128</td><td>0.00554</td></tr><tr><td>2</td><td>0.0275</td><td>0.00505</td><td>0.03099</td><td>0.00536</td><td>0.02945</td><td>0.00465</td></tr><tr><td>5</td><td>0.024</td><td>0.00507</td><td>0.02748</td><td>0.00413</td><td>0.02578</td><td>0.00354</td></tr><tr><td>10</td><td>0.02175</td><td>0.00479</td><td>0.02636</td><td>0.00384</td><td>0.02532</td><td>0.00334</td></tr><tr><td>20</td><td>0.01967</td><td>0.0046</td><td>0.0251</td><td>0.00367</td><td>0.02433</td><td>0.00331</td></tr><tr><td>40</td><td>0.01757</td><td>0.00431</td><td>0.02309</td><td>0.00316</td><td>0.02235</td><td>0.00283</td></tr></tbody></table></div>
@@ -417,20 +559,20 @@
 
   <section id="results">
     <h2>Numerical Results</h2>
-    <p>The result is positive but modest. The model beats the train-mean baseline on this bounded demo. That is useful for showing the pipeline works, but it is not enough to claim broad external validation.</p>
+    <p>The result is positive but modest. The model beats the train-mean baseline on this bounded demo. That is useful for showing the analysis chain works, but it is not enough to claim broad external validation.</p>
     <table class="metric-table">
       <tbody>
         <tr><td>Demo verdict</td><td>working_demo_model_beats_baseline</td><td>The model beats the baseline on this bounded demo.</td></tr>
-        <tr><td>Baseline RMSE</td><td>0.00921 ohm</td><td>Global train-mean target vector.</td></tr>
-        <tr><td>Model RMSE</td><td>0.00798 ohm</td><td>Shrinkage KNN demo model.</td></tr>
+        <tr><td>Baseline typical prediction error</td><td>0.00921 ohm</td><td>Global train-mean target vector.</td></tr>
+        <tr><td>Model typical prediction error</td><td>0.00798 ohm</td><td>Shrinkage KNN demo model.</td></tr>
         <tr><td>Relative improvement</td><td>13.38%</td><td>Positive, but this is still demo-sized evidence.</td></tr>
         <tr><td>KK valid fraction</td><td>1</td><td>Target-quality screen for the demo EIS rows.</td></tr>
         <tr><td>KK valid rows</td><td>30 / 30</td><td>Rows passing the finite-range RC-basis screen.</td></tr>
       </tbody>
     </table>
     <div class="bar">
-      <div class="bar-row"><strong>Baseline RMSE</strong><div class="track"><div class="fill" style="width:100.0%"></div></div><code>0.00921</code></div>
-      <div class="bar-row"><strong>Model RMSE</strong><div class="track"><div class="fill good" style="width:86.6%"></div></div><code>0.00798</code></div>
+      <div class="bar-row"><strong>Baseline typical prediction error</strong><div class="track"><div class="fill" style="width:100.0%"></div></div><code>0.00921</code></div>
+      <div class="bar-row"><strong>Model typical prediction error</strong><div class="track"><div class="fill good" style="width:86.6%"></div></div><code>0.00798</code></div>
       <div class="bar-row"><strong>Relative improvement</strong><div class="track"><div class="fill good" style="width:4.0%"></div></div><code>13.38%</code></div>
       <div class="bar-row"><strong>KK valid rows</strong><div class="track"><div class="fill good" style="width:100.0%"></div></div><code>30 / 30</code></div>
     </div>
@@ -444,9 +586,9 @@
 
   <section id="code">
     <h2>Code Walkthrough: Included In The Page</h2>
-    <p>This is the core code path. It is embedded here so readers can inspect the pipeline without switching to the repository during the presentation. Each block is intentionally paired with a plain explanation, because raw code alone is not a presentation.</p>
-    <p><strong>How to read it:</strong> the demo first loads fixed matrices, builds time-domain-only derived features, fits a baseline and a conservative KNN blend, computes vector RMSE, then runs the KK screen on the EIS target rows.</p>
-    <details open><summary>Demo scoring function</summary><pre><code class="language-python">def demo_score(max_train_rows: int, max_holdout_rows: int) -&gt; dict[str, Any]:
+    <p>This is the core code path. It is embedded here so readers can inspect the analysis chain without switching to the repository during the presentation. Each block is intentionally paired with a plain explanation, because raw code alone is not a presentation.</p>
+    <p><strong>How to read it:</strong> the demo first loads fixed matrices, builds time-domain-only derived features, fits a baseline and a conservative KNN blend, computes vector typical prediction error, then runs the KK screen on the EIS target rows.</p>
+    <details open><summary>Demo scoring function</summary><details class="implementation-details"><summary>Show implementation details</summary><pre><code class="language-python">def demo_score(max_train_rows: int, max_holdout_rows: int) -&gt; dict[str, Any]:
     dev = pd.read_csv(DEV_MATRIX_CSV)
     holdout = pd.read_csv(MOLICELL_MATRIX_CSV)
     targets = target_columns(dev)
@@ -545,9 +687,9 @@
             &quot;data_bundle&quot;: str(DEMO_DATA_BUNDLE),
         },
     }
-    return results</code></pre></details>
-    <p class="chart-analysis">This function is the pipeline spine. It defines the split, creates predictions, computes improvement, attaches KK metadata, and writes the output payload consumed by this page.</p>
-    <details><summary>Derived feature builder</summary><pre><code class="language-python">def add_derived_features(frame: pd.DataFrame) -&gt; pd.DataFrame:
+    return results</code></pre></details></details>
+    <p class="chart-analysis">This function is the analysis chain spine. It defines the split, creates predictions, computes improvement, attaches KK metadata, and writes the output payload consumed by this page.</p>
+    <details><summary>Derived feature builder</summary><details class="implementation-details"><summary>Show implementation details</summary><pre><code class="language-python">def add_derived_features(frame: pd.DataFrame) -&gt; pd.DataFrame:
     &quot;&quot;&quot;Add time-domain-only features without touching target-side EIS values.&quot;&quot;&quot;
 
     frame = frame.copy()
@@ -573,9 +715,9 @@
     frame[&quot;td_net_throughput_ah&quot;] = charge - discharge
     frame[&quot;td_discharge_to_charge_ratio&quot;] = safe_divide(discharge, charge.replace(0, np.nan))
     frame[&quot;td_mean_abs_current_per_hour&quot;] = safe_divide(frame[&quot;td_current_abs_mean_a&quot;], duration_hours)
-    return frame</code></pre></details>
+    return frame</code></pre></details></details>
     <p class="chart-analysis">This block is the feature layer. The important guardrail is that derived features are computed only from time-domain columns, not target-side EIS values.</p>
-    <details><summary>Model construction</summary><pre><code class="language-python">def build_model(estimator: Any, feature_columns: list[str] | None = None) -&gt; Pipeline:
+    <details><summary>Model construction</summary><details class="implementation-details"><summary>Show implementation details</summary><pre><code class="language-python">def build_model(estimator: Any, feature_columns: list[str] | None = None) -&gt; Pipeline:
     columns = feature_columns or FEATURE_COLUMNS
     preprocessor = ColumnTransformer(
         [
@@ -591,9 +733,9 @@
             )
         ]
     )
-    return Pipeline([(&quot;preprocess&quot;, preprocessor), (&quot;model&quot;, estimator)])</code></pre></details>
+    return Pipeline([(&quot;preprocess&quot;, preprocessor), (&quot;model&quot;, estimator)])</code></pre></details></details>
     <p class="chart-analysis">This block uses median imputation and standard scaling before the estimator. That keeps the feature space stable when columns have different units.</p>
-    <details><summary>Metric payload</summary><pre><code class="language-python">def metric_payload(y_true: np.ndarray, y_pred: np.ndarray, target_cols: list[str]) -&gt; dict[str, Any]:
+    <details><summary>Metric payload</summary><details class="implementation-details"><summary>Show implementation details</summary><pre><code class="language-python">def metric_payload(y_true: np.ndarray, y_pred: np.ndarray, target_cols: list[str]) -&gt; dict[str, Any]:
     zreal_idx = [idx for idx, col in enumerate(target_cols) if &quot;zreal&quot; in col]
     znegimag_idx = [idx for idx, col in enumerate(target_cols) if &quot;znegimag&quot; in col]
     per_target = {
@@ -611,9 +753,9 @@
         &quot;r2_uniform_average&quot;: float(r2_score(y_true, y_pred, multioutput=&quot;uniform_average&quot;)),
         &quot;per_target_rmse_ohm&quot;: per_target,
     }
-    return payload</code></pre></details>
-    <p class="chart-analysis">This block computes the headline RMSE and the component-level RMSE. The split between real and negative-imaginary error matters because one component can improve while the other stays weak.</p>
-    <details><summary>Kramer-Kronig matrix validation</summary><pre><code class="language-python">def validate_matrix(
+    return payload</code></pre></details></details>
+    <p class="chart-analysis">This block computes the headline typical prediction error and the component-level typical prediction error. The split between real and negative-imaginary error matters because one component can improve while the other stays weak.</p>
+    <details><summary>Kramer-Kronig matrix validation</summary><details class="implementation-details"><summary>Show implementation details</summary><pre><code class="language-python">def validate_matrix(
     frame: pd.DataFrame,
     matrix_name: str,
     residual_limit: float = DEFAULT_RESIDUAL_LIMIT,
@@ -668,7 +810,7 @@
             &quot;not as proof that a prediction model is valid.&quot;
         ),
     }
-    return result, summary</code></pre></details>
+    return result, summary</code></pre></details></details>
     <p class="chart-analysis">This block loops over fixed-grid spectra and attaches KK status to each row. Treat this as target-quality metadata, not a model-performance score.</p>
   </section>
 
@@ -680,7 +822,7 @@
       <a class="button" href="data/demo_pipeline_data_bundle.json" download>Download data bundle</a>
       <a class="button" href="data/demo_pipeline_results.json" download>Download results JSON</a>
     </div>
-    <pre><code class="language-json">{
+    <details class="implementation-details"><summary>Show implementation details</summary><pre><code class="language-json">{
   &quot;experiment&quot;: &quot;cross_dataset_pulse_to_eis_training_demo&quot;,
   &quot;created_utc&quot;: &quot;2026-07-03T07:52:55.608594+00:00&quot;,
   &quot;claim_boundary&quot;: &quot;Demo only. Uses a bounded subset and does not create a new validation claim.&quot;,
@@ -1299,13 +1441,13 @@
     &quot;code_bundle&quot;: &quot;[local path redacted]
     &quot;data_bundle&quot;: &quot;[local path redacted]
   }
-}</code></pre>
+}</code></pre></details>
   </section>
 
   <section id="glossary">
     <h2>Glossary</h2>
-    <p>This glossary defines the terms used in the page so an external user can read the pipeline without guessing what each abbreviation or metric means.</p>
-    <div class="table-scroll"><table><tbody><tr><td><strong>EIS</strong></td><td>Electrochemical impedance spectroscopy, a frequency-domain measurement of battery impedance.</td></tr><tr><td><strong>DRT</strong></td><td>Distribution of relaxation times. Used in the broader project to interpret impedance-like behavior.</td></tr><tr><td><strong>Fixed-grid EIS</strong></td><td>A spectrum represented on the same frequency grid for every row, so supervised models can compare like with like.</td></tr><tr><td><strong>Zreal</strong></td><td>The real component of impedance, stored as ohm values.</td></tr><tr><td><strong>-Zimag</strong></td><td>The negative imaginary impedance component. Battery EIS plots commonly use the negative sign for readability.</td></tr><tr><td><strong>Kramer-Kronig</strong></td><td>A consistency check for causal, linear, stable impedance behavior. Here it is a quality screen, not proof of model validity.</td></tr><tr><td><strong>RMSE</strong></td><td>Root mean squared error. Lower means the predicted impedance vector is closer to the target vector.</td></tr><tr><td><strong>Baseline</strong></td><td>The boring comparison model. Here it predicts the train-set mean target vector.</td></tr><tr><td><strong>KNN</strong></td><td>K-nearest neighbors. Here it predicts from nearby time-domain feature rows after scaling and imputation.</td></tr><tr><td><strong>Shrinkage blend</strong></td><td>The demo prediction uses 80 percent mean baseline and 20 percent KNN prediction to avoid overclaiming from a small demo.</td></tr><tr><td><strong>Rows kept back for scoring</strong></td><td>Rows not used to fit or choose the model. They are used only to check whether the trained model still works on a separate dataset.</td></tr><tr><td><strong>Leakage</strong></td><td>Invalid information flow from evaluation data into training or model selection.</td></tr><tr><td><strong>External user</strong></td><td>A reader outside the implementation loop who needs enough context to judge the demo without running it.</td></tr></tbody></table></div>
+    <p>This glossary defines the terms used in the page so an external user can read the analysis chain without guessing what each abbreviation or metric means.</p>
+    <div class="table-scroll"><table><tbody><tr><td><strong>EIS</strong></td><td>Electrochemical impedance spectroscopy, a frequency-domain measurement of battery impedance.</td></tr><tr><td><strong>DRT</strong></td><td>Distribution of relaxation times. Used in the broader project to interpret impedance-like behavior.</td></tr><tr><td><strong>Fixed-grid EIS</strong></td><td>A spectrum represented on the same frequency grid for every row, so supervised models can compare like with like.</td></tr><tr><td><strong>Zreal</strong></td><td>The real component of impedance, stored as ohm values.</td></tr><tr><td><strong>-Zimag</strong></td><td>The negative imaginary impedance component. Battery EIS plots commonly use the negative sign for readability.</td></tr><tr><td><strong>Kramer-Kronig</strong></td><td>A consistency check for causal, linear, stable impedance behavior. Here it is a quality screen, not proof of model validity.</td></tr><tr><td><strong>typical prediction error</strong></td><td>Root mean squared error. Lower means the predicted impedance vector is closer to the target vector.</td></tr><tr><td><strong>Baseline</strong></td><td>The boring comparison model. Here it predicts the train-set mean target vector.</td></tr><tr><td><strong>KNN</strong></td><td>K-nearest neighbors. Here it predicts from nearby time-domain feature rows after scaling and imputation.</td></tr><tr><td><strong>Shrinkage blend</strong></td><td>The demo prediction uses 80 percent mean baseline and 20 percent KNN prediction to avoid overclaiming from a small demo.</td></tr><tr><td><strong>Rows kept back for scoring</strong></td><td>Rows not used to fit or choose the model. They are used only to check whether the trained model still works on a separate dataset.</td></tr><tr><td><strong>Leakage</strong></td><td>Invalid information flow from evaluation data into training or model selection.</td></tr><tr><td><strong>External user</strong></td><td>A reader outside the implementation loop who needs enough context to judge the demo without running it.</td></tr></tbody></table></div>
   </section>
 
   <section id="limits">
@@ -1318,7 +1460,7 @@
 
   <section id="conclusion" class="note">
     <h2>Conclusion</h2>
-    <p>The demo pipeline is now packaged as a self-contained technical page. It follows the question, method, results, conclusion structure and includes input rows, output payload, vector target definition, LaTeX equations, scoring math, KK quality screen, SVG graphs, source code snippets, numerical results, glossary, and limit of the evidence. The local demo is ready for external-user review. VM execution stays deferred until the colleague-provided VM is available.</p>
+    <p>The demo analysis chain is now packaged as a self-contained technical page. It follows the question, method, results, conclusion structure and includes input rows, output payload, vector target definition, LaTeX equations, scoring math, KK quality screen, SVG graphs, source code snippets, numerical results, glossary, and limit of the evidence. The local demo is ready for external-user review. VM execution stays deferred until the colleague-provided VM is available.</p>
   </section>
 
   <section>

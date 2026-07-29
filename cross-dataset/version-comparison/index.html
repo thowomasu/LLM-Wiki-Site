@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Technical Comparison: Versions 1 to 6 | Battery DRT Research Outputs</title>
-  <meta name="description" content="A self-contained comparison of all six pipeline versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
+  <meta name="description" content="A self-contained comparison of all six analysis chain versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
   <link rel="canonical" href="https://nayeemfaisal.github.io/LLM-Wiki-Site/cross-dataset/version-comparison/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Technical Comparison: Versions 1 to 6 | Battery DRT Research Outputs">
-  <meta property="og:description" content="A self-contained comparison of all six pipeline versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
+  <meta property="og:description" content="A self-contained comparison of all six analysis chain versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.">
   <meta property="og:url" content="https://nayeemfaisal.github.io/LLM-Wiki-Site/cross-dataset/version-comparison/">
   <meta property="og:image" content="https://nayeemfaisal.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
@@ -339,6 +339,41 @@ code {
   padding-top: 10px;
   border-top: 1px solid var(--line);
 }
+.progress-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+  margin: 10px 0 16px;
+}
+.progress-summary strong { font-size: 22px; }
+.progress-summary span { color: var(--muted); }
+.progress-track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 18px;
+}
+.progress-segment {
+  min-height: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+.progress-segment.complete { border-color: var(--green); background: var(--green); }
+.progress-segment.current { border-color: var(--orange); background: var(--orange); }
+.progress-stage {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.progress-stage:last-child { padding-bottom: 0; }
+.progress-stage p { margin: 0; }
+.progress-stage .stage-label { font-weight: 800; }
+.progress-stage.current .stage-label { color: var(--orange); }
 .pipeline-visual {
   max-width: 1050px;
   margin: 26px 0;
@@ -403,7 +438,8 @@ code {
   cursor: pointer;
 }
 .math-block {
-  max-width: 900px;
+  width: 100%;
+  max-width: none;
   margin: 18px 0;
   padding: 16px;
   overflow-x: auto;
@@ -452,6 +488,16 @@ code {
   gap: 12px;
   margin: 18px 0;
 }
+.technical-flow.pipeline-six {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+.technical-flow.pipeline-six .flow-card {
+  padding: 13px 12px;
+}
+.technical-flow.pipeline-six .flow-card span {
+  font-size: 13px;
+}
 .technical-flow .flow-card {
   min-width: 0;
   padding: 15px;
@@ -499,6 +545,101 @@ code {
 .metric-card strong { display: block; }
 .metric-card span { color: var(--muted); font-size: 14px; }
 .metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
+.evidence-chart,
+.study-trajectory {
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+.evidence-chart figcaption,
+.study-trajectory figcaption {
+  display: block;
+  margin-bottom: 18px;
+}
+.evidence-chart figcaption strong,
+.evidence-chart figcaption span,
+.study-trajectory figcaption strong,
+.study-trajectory figcaption span { display: block; }
+.evidence-chart figcaption strong,
+.study-trajectory figcaption strong { font-size: 20px; }
+.evidence-chart figcaption span,
+.study-trajectory figcaption span {
+  max-width: 900px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.evidence-chart-row { margin-top: 14px; }
+.evidence-chart-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.evidence-chart-label strong { white-space: nowrap; }
+.evidence-chart-track {
+  position: relative;
+  width: 100%;
+  height: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--panel-strong);
+}
+.evidence-chart-bar {
+  display: block;
+  width: var(--bar-width);
+  height: 100%;
+  min-width: 0;
+  background: var(--blue);
+}
+.evidence-chart-bar.good { background: var(--green); }
+.evidence-chart-bar.bad { background: var(--red); }
+.evidence-chart-bar.warn { background: var(--amber); }
+.evidence-chart-bar.muted { background: var(--muted); }
+.evidence-chart-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.chart-source {
+  max-width: none;
+  margin: 15px 0 0;
+  padding-top: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.trajectory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+}
+.trajectory-node {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
+}
+.trajectory-node.good { border-top-color: var(--green); }
+.trajectory-node.bad { border-top-color: var(--red); }
+.trajectory-node.warn { border-top-color: var(--amber); }
+.trajectory-node > span,
+.trajectory-node > strong,
+.trajectory-node > small { display: block; }
+.trajectory-node strong { margin: 7px 0; }
+.trajectory-node small { margin-top: 8px; color: var(--muted); line-height: 1.45; }
+.trajectory-version { color: var(--muted); font-size: 13px; font-weight: 800; text-transform: uppercase; }
+.trajectory-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 25px; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -671,6 +812,43 @@ code {
   background: var(--panel);
 }
 .source-item code { word-break: break-word; }
+.skim-first-note {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  background: var(--panel);
+}
+.skim-first-note strong {
+  font-size: 18px;
+}
+.skim-first-note span {
+  color: var(--muted);
+}
+.implementation-details {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.implementation-details summary {
+  min-height: 44px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.implementation-details pre {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 8px 8px;
+}
+main > p,
+main > section > p,
+.slide > p {
+  max-width: 78ch;
+}
 .source-kind {
   display: inline-block;
   margin-right: 8px;
@@ -779,6 +957,78 @@ th { background: var(--table-head); }
   color: var(--muted);
   font-size: 14px;
 }
+.glossary-term {
+  display: inline !important;
+  color: inherit;
+  border: 0 !important;
+  cursor: help;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.glossary-term:hover,
+.glossary-term:focus-visible,
+.glossary-term[aria-expanded="true"] {
+  color: var(--blue);
+  text-decoration-style: solid;
+  outline: none;
+}
+.code-variable.glossary-term {
+  display: inline-block !important;
+  padding: 2px 6px;
+  color: var(--ink);
+  background: var(--code-bg);
+  border-radius: 4px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: .9em;
+  white-space: nowrap;
+}
+.variable-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -7px 0 18px;
+}
+.variable-legend::before {
+  content: "Variables:";
+  align-self: center;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+.glossary-tooltip {
+  position: fixed;
+  z-index: 2000;
+  width: min(340px, calc(100vw - 24px));
+  padding: 12px 14px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .24);
+  pointer-events: none;
+}
+.glossary-tooltip[hidden] { display: none; }
+.glossary-tooltip strong,
+.glossary-tooltip span { display: block; }
+.glossary-tooltip strong { line-height: 1.3; }
+.glossary-tooltip .glossary-expansion {
+  margin-top: 3px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+}
+.glossary-tooltip .glossary-definition {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
 footer {
   padding: 22px min(7vw, 72px);
   color: var(--muted);
@@ -801,6 +1051,11 @@ footer {
   p,
   li,
   .lead { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+  .technical-flow.pipeline-six { grid-template-columns: 1fr; }
+  .trajectory-grid { grid-template-columns: 1fr; }
+  .trajectory-arrow { min-height: 24px; transform: rotate(90deg); }
+  .evidence-chart,
+  .study-trajectory { padding: 15px; }
   .tabs { width: 100%; max-width: 100%; }
   .sidebar {
     position: fixed;
@@ -826,7 +1081,8 @@ footer {
   .pipeline-flow { grid-template-columns: 1fr; }
   .pipeline-arrow { transform: rotate(90deg); }
   .pipeline-step { min-height: 0; }
-  .status-list li { grid-template-columns: 1fr; gap: 6px; }
+  .status-list li,
+  .progress-stage { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap {
     overflow: visible;
     border: 0;
@@ -896,6 +1152,7 @@ footer {
 (function () {
   var key = "llm-wiki-theme";
   var sidebarKey = "llm-wiki-sidebar";
+  var glossaryEntries = [{"term": "EIS", "expansion": "Electrochemical Impedance Spectroscopy", "definition": "A laboratory test that measures how a battery resists and stores electrical signals across many frequencies.", "aliases": ["EIS"]}, {"term": "SOH", "expansion": "State of Health", "definition": "A measure of how much useful battery health remains, usually compared with the battery when it was new.", "aliases": ["SOH", "state of health"]}, {"term": "SOC", "expansion": "State of Charge", "definition": "How full the battery is at the time of a measurement, usually shown as a percentage.", "aliases": ["SOC", "state of charge"]}, {"term": "DRT", "expansion": "Distribution of Relaxation Times", "definition": "A way to separate a battery response into processes that act over different time scales.", "aliases": ["DRT", "distribution of relaxation times"]}, {"term": "TDM", "expansion": "Time-Domain Measurement", "definition": "Voltage and current recorded over time during a pulse, rest period, or other battery test.", "aliases": ["TDM", "time-domain measurement", "time-domain measurements"]}, {"term": "HPPC", "expansion": "Hybrid Pulse Power Characterization", "definition": "A battery test that uses fixed charge and discharge pulses to measure resistance and power behaviour.", "aliases": ["HPPC"]}, {"term": "OCV", "expansion": "Open-Circuit Voltage", "definition": "Battery voltage measured while no current is flowing after the battery has had time to rest.", "aliases": ["OCV", "open-circuit voltage"]}, {"term": "ECM", "expansion": "Equivalent Circuit Model", "definition": "A simplified electrical circuit used to copy important parts of battery behaviour.", "aliases": ["ECM", "equivalent circuit model", "equivalent circuit models"]}, {"term": "RPT", "expansion": "Reference Performance Test", "definition": "A repeated check-up used to track battery capacity, resistance, and health during ageing.", "aliases": ["RPT", "reference performance test", "reference performance tests"]}, {"term": "Baseline", "expansion": "Simple comparison method", "definition": "A basic prediction that the proposed method must beat to show that its extra complexity is useful.", "aliases": ["baseline", "baselines"]}, {"term": "Internal result", "expansion": "Result from development data", "definition": "A result from the same dataset family used to build the method. It helps development, but it is not independent proof.", "aliases": ["internal result", "internal results", "internal evidence", "internal test", "internal tests", "same-dataset evidence", "same-dataset result", "same-dataset results", "development result", "development results"]}, {"term": "Held-out-cell fold", "expansion": "One repeated left-out-cell check", "definition": "One whole cell is left out of training and tested. The check is repeated with another cell left out each time.", "aliases": ["held-out-cell fold", "held-out-cell folds", "held-cell fold", "held-cell folds", "held-out-cell validation", "held-out-cell", "held-out cell", "held-out cells"]}, {"term": "External test", "expansion": "Test on separate data", "definition": "A test on a different dataset that was not used to build the method or choose its settings.", "aliases": ["external test", "external tests", "external validation", "external holdout", "external result", "external results", "external evidence"]}, {"term": "Untouched", "expansion": "Not used before final scoring", "definition": "The final answers were hidden while features, models, limits, and pass rules were being chosen.", "aliases": ["untouched", "locked evaluation", "locked evaluation data", "locked evaluation cells", "unseen evaluation data"]}, {"term": "Frozen or locked", "expansion": "Fixed before outside answers were viewed", "definition": "The inputs, model, baseline, and pass rules could not be changed after the outside or final data were seen.", "aliases": ["frozen", "locked", "frozen model", "frozen rule", "frozen rules", "frozen contract", "locked model", "locked rules"]}, {"term": "Freeze-ready", "expansion": "Ready to lock for a fair outside test", "definition": "The method was complete and stable enough to lock. This does not mean it had already passed an external test.", "aliases": ["freeze-ready", "externally freeze-ready", "ready to freeze"]}, {"term": "Passed", "expansion": "Met every rule fixed in advance", "definition": "The scored result met every required pass rule. It does not automatically prove that the method works everywhere.", "aliases": ["passed", "passes", "passing result", "pass result"]}, {"term": "Failed", "expansion": "Missed at least one rule fixed in advance", "definition": "The scored result missed a required pass rule. This describes the evidence, not whether the code crashed.", "aliases": ["failed", "fails", "failing result", "failure result"]}, {"term": "Domain guard", "expansion": "Input safety check", "definition": "A rule that rejects data that are too different from the data the model knows.", "aliases": ["domain guard", "domain guards", "applicability guard", "applicability guards"]}, {"term": "Abstain", "expansion": "Refuse to make an unsafe prediction", "definition": "The model gives no prediction because the input is outside its safe or supported range.", "aliases": ["abstain", "abstains", "abstained", "abstention", "rejected before prediction"]}, {"term": "Zero-shot", "expansion": "No target-data calibration", "definition": "The model is tested on a new dataset without learning from any labelled examples from that dataset.", "aliases": ["zero-shot", "zero shot"]}, {"term": "Few-shot calibration", "expansion": "Small target-data adjustment", "definition": "A small number of labelled cells or check-ups from the new dataset are used to adjust the model before evaluation.", "aliases": ["few-shot calibration", "few shot calibration", "small calibration", "target-cell calibration"]}, {"term": "Uncertainty range", "expansion": "Range showing prediction uncertainty", "definition": "An interval around a prediction that shows how uncertain the model is. A useful range must be tested for coverage.", "aliases": ["uncertainty range", "uncertainty ranges", "uncertainty interval", "uncertainty intervals", "prediction interval", "prediction intervals"]}, {"term": "Leave-one-dataset-out", "expansion": "Whole-dataset transfer check", "definition": "The model learns from all but one dataset, then the missing dataset is used as a separate test.", "aliases": ["leave-one-dataset-out", "leave one dataset out"]}, {"term": "Representation", "expansion": "The numerical form given to a model", "definition": "The same measurements can be expressed as raw values, ratios, normalized changes, or smaller summaries before modeling.", "aliases": ["representation", "representations"]}, {"term": "Dataset-level test", "expansion": "Hold back one complete dataset", "definition": "The model learns from other datasets and is tested on a dataset it did not use for training.", "aliases": ["dataset-level test", "dataset-level tests", "whole-dataset test", "whole-dataset transfer"]}, {"term": "Normalization", "expansion": "Rescale values before modeling", "definition": "Values are put on a comparable scale so a large cell or instrument range does not dominate only because its numbers are bigger.", "aliases": ["normalization", "normalize", "normalized", "standardization", "standardized"]}, {"term": "Prediction head", "expansion": "One model output branch", "definition": "A separate model or output branch responsible for one target, such as real EIS, imaginary EIS, or SOH.", "aliases": ["prediction head", "prediction heads", "model head", "model heads", "output head", "output heads"]}, {"term": "Chained model", "expansion": "One prediction feeds another model", "definition": "The predicted EIS becomes an input to the SOH model, so EIS does not need to be measured at prediction time.", "aliases": ["chained model", "chained models", "complete chain", "full chain"]}, {"term": "Cross-fitting", "expansion": "Build training predictions without self-exposure", "definition": "Each training cell receives an EIS prediction from a model that did not train on that cell before the health model is fitted.", "aliases": ["cross-fitting", "cross fitting", "cross-fitted", "out-of-cell prediction", "out-of-cell predictions"]}, {"term": "Predeclared", "expansion": "Written down before scoring", "definition": "The inputs, comparisons, splits, models, and pass rules were chosen before looking at the result being judged.", "aliases": ["predeclared", "pre-declared", "predeclared design", "pre-declared design"]}, {"term": "Scale and shape", "expansion": "Separate impedance size from curve pattern", "definition": "Overall impedance magnitude is stored separately from the normalized spectral shape and its change.", "aliases": ["scale and shape", "scale-shape", "scale shape"]}, {"term": "Dimensionless change", "expansion": "Relative change without physical units", "definition": "Current impedance is divided by or scaled against the fresh reference so different absolute sizes are easier to compare.", "aliases": ["dimensionless change", "dimensionless changes"]}, {"term": "Reduced frequency", "expansion": "Smaller fixed set of frequency features", "definition": "The full spectrum is replaced by selected shared points and low-, middle-, and high-frequency summaries.", "aliases": ["reduced frequency", "reduced-frequency"]}, {"term": "Hybrid small", "expansion": "Small mixed feature set", "definition": "A compact representation combining SOC, temperature, pulse change, impedance scale, and a short shape summary.", "aliases": ["hybrid small", "small hybrid"]}, {"term": "Physical summary", "expansion": "Compact physically motivated features", "definition": "A planned representation that was excluded because the repeatability, instrument, amplitude, and temperature metadata needed to build it safely were missing.", "aliases": ["physical summary", "physical summaries"]}, {"term": "RMSE", "expansion": "Root Mean Squared Error", "definition": "A prediction-error score that gives extra weight to larger mistakes. Lower is better.", "aliases": ["RMSE", "root mean squared error"]}, {"term": "MAE", "expansion": "Mean Absolute Error", "definition": "The average absolute prediction mistake. Lower is better.", "aliases": ["MAE", "mean absolute error"]}, {"term": "Ridge", "expansion": "Regularized linear regression", "definition": "A simple linear model that discourages very large fitted weights and serves as a strong basic comparison.", "aliases": ["Ridge", "ridge model", "ridge regression"]}, {"term": "Extra Trees", "expansion": "Extremely Randomized Trees", "definition": "A nonlinear ensemble that averages many randomized decision trees.", "aliases": ["Extra Trees", "ExtraTrees", "ExtraTreesRegressor"]}, {"term": "Frequency grid", "expansion": "Fixed list of EIS frequencies", "definition": "The exact frequency points where impedance values are aligned, predicted, and compared.", "aliases": ["frequency grid", "frequency grids", "shared grid", "shared grid points"]}, {"term": "Pulse resistance", "expansion": "Resistance estimated from a current pulse", "definition": "Voltage change divided by pulse current over a fixed time window, used here as a short ageing-sensitive measurement.", "aliases": ["pulse resistance", "pulse-resistance", "pulse resistance change", "pulse-resistance change"]}];
   function preferredTheme() {
     try {
       var saved = localStorage.getItem(key);
@@ -942,6 +1199,146 @@ footer {
       });
     });
   }
+  function glossaryPatternAndLookup() {
+    var lookup = {};
+    var aliases = [];
+    glossaryEntries.forEach(function (entry) {
+      entry.aliases.forEach(function (alias) {
+        lookup[alias.toLowerCase()] = entry;
+        aliases.push(alias);
+      });
+    });
+    aliases.sort(function (left, right) { return right.length - left.length; });
+    var escaped = aliases.map(function (value) {
+      return value.replace(/[^A-Za-z0-9 ]/g, function (character) {
+        return String.fromCharCode(92) + character;
+      });
+    });
+    return {
+      lookup: lookup,
+      pattern: new RegExp("(^|[^A-Za-z0-9_])(" + escaped.join("|") + ")(?=$|[^A-Za-z0-9_])", "gi")
+    };
+  }
+  function applyGlossaryTerms() {
+    var root = document.querySelector("main");
+    if (!root || !glossaryEntries.length || !document.createTreeWalker) return;
+    var glossary = glossaryPatternAndLookup();
+    var skipSelector = [
+      "a", "button", "code", "pre", "script", "style", "textarea", "select", "option",
+      "svg", "math", "mjx-container", ".glossary-term", ".glossary-tooltip",
+      ".definition-card", ".term-card", "[data-no-glossary]"
+    ].join(",");
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var textNodes = [];
+    var node;
+    while ((node = walker.nextNode())) {
+      if (!node.nodeValue.trim()) continue;
+      if (node.parentElement && node.parentElement.closest(skipSelector)) continue;
+      glossary.pattern.lastIndex = 0;
+      if (glossary.pattern.test(node.nodeValue)) textNodes.push(node);
+    }
+    textNodes.forEach(function (textNode) {
+      var text = textNode.nodeValue;
+      var fragment = document.createDocumentFragment();
+      var lastIndex = 0;
+      var match;
+      glossary.pattern.lastIndex = 0;
+      while ((match = glossary.pattern.exec(text))) {
+        var prefixEnd = match.index + match[1].length;
+        if (prefixEnd > lastIndex) fragment.appendChild(document.createTextNode(text.slice(lastIndex, prefixEnd)));
+        var visibleTerm = match[2];
+        var entry = glossary.lookup[visibleTerm.toLowerCase()];
+        var term = document.createElement("span");
+        term.className = "glossary-term";
+        term.tabIndex = 0;
+        term.textContent = visibleTerm;
+        term.dataset.glossaryTerm = entry.term;
+        term.dataset.glossaryExpansion = entry.expansion;
+        term.dataset.glossaryDefinition = entry.definition;
+        term.setAttribute("aria-expanded", "false");
+        term.setAttribute("aria-describedby", "site-glossary-tooltip");
+        fragment.appendChild(term);
+        lastIndex = glossary.pattern.lastIndex;
+        if (match[0].length === 0) glossary.pattern.lastIndex += 1;
+      }
+      if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+      textNode.parentNode.replaceChild(fragment, textNode);
+    });
+    if (!textNodes.length && !root.querySelector(".glossary-term")) return;
+
+    var tooltip = document.createElement("div");
+    tooltip.id = "site-glossary-tooltip";
+    tooltip.className = "glossary-tooltip";
+    tooltip.setAttribute("role", "tooltip");
+    tooltip.hidden = true;
+    tooltip.innerHTML = '<strong></strong><span class="glossary-expansion"></span><span class="glossary-definition"></span>';
+    document.body.appendChild(tooltip);
+    var activeTerm = null;
+    var termWasOpenOnPointerDown = false;
+
+    function positionTooltip(term) {
+      var gap = 9;
+      var margin = 12;
+      var termBox = term.getBoundingClientRect();
+      var tooltipBox = tooltip.getBoundingClientRect();
+      var left = termBox.left + (termBox.width - tooltipBox.width) / 2;
+      left = Math.max(margin, Math.min(left, window.innerWidth - tooltipBox.width - margin));
+      var top = termBox.bottom + gap;
+      if (top + tooltipBox.height > window.innerHeight - margin) top = termBox.top - tooltipBox.height - gap;
+      top = Math.max(margin, Math.min(top, window.innerHeight - tooltipBox.height - margin));
+      tooltip.style.left = Math.round(left) + "px";
+      tooltip.style.top = Math.round(top) + "px";
+    }
+    function showTooltip(term) {
+      if (activeTerm && activeTerm !== term) activeTerm.setAttribute("aria-expanded", "false");
+      activeTerm = term;
+      tooltip.querySelector("strong").textContent = term.dataset.glossaryTerm;
+      tooltip.querySelector(".glossary-expansion").textContent = term.dataset.glossaryExpansion;
+      tooltip.querySelector(".glossary-definition").textContent = term.dataset.glossaryDefinition;
+      tooltip.hidden = false;
+      term.setAttribute("aria-expanded", "true");
+      positionTooltip(term);
+    }
+    function hideTooltip() {
+      if (activeTerm) activeTerm.setAttribute("aria-expanded", "false");
+      activeTerm = null;
+      tooltip.hidden = true;
+    }
+    root.addEventListener("mouseover", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (term) showTooltip(term);
+    });
+    root.addEventListener("mouseout", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (term && event.relatedTarget !== term) hideTooltip();
+    });
+    root.addEventListener("focusin", function (event) {
+      if (event.target.classList && event.target.classList.contains("glossary-term")) showTooltip(event.target);
+    });
+    root.addEventListener("focusout", function (event) {
+      if (event.target.classList && event.target.classList.contains("glossary-term")) hideTooltip();
+    });
+    root.addEventListener("pointerdown", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      termWasOpenOnPointerDown = Boolean(term && activeTerm === term && !tooltip.hidden);
+    });
+    root.addEventListener("click", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (!term) return;
+      event.stopPropagation();
+      if (termWasOpenOnPointerDown) hideTooltip();
+      else showTooltip(term);
+      termWasOpenOnPointerDown = false;
+    });
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest || !event.target.closest(".glossary-term")) hideTooltip();
+    });
+    window.addEventListener("resize", hideTooltip);
+    window.addEventListener("scroll", hideTooltip, true);
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") hideTooltip();
+    });
+  }
   var initialTheme = preferredTheme();
   var initialSidebar = preferredSidebar();
   applyTheme(initialTheme);
@@ -950,6 +1347,7 @@ footer {
     applyTheme(document.documentElement.dataset.theme || initialTheme);
     applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
     labelResponsiveTables();
+    applyGlossaryTerms();
     var toggle = document.querySelector("[data-theme-toggle]");
     if (toggle) {
       toggle.addEventListener("click", function () {
@@ -1022,29 +1420,13 @@ window.MathJax = {
 
         <div class="kicker">Battery DRT Research Outputs</div>
         <h1>Technical Comparison: Versions 1 to 6</h1>
-        <p class="lead">A self-contained comparison of all six pipeline versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.</p>
+        <p class="lead">A self-contained comparison of all six analysis chain versions, followed by the detailed architecture, equations, splits, evidence, and claim limits for Versions 4 to 6.</p>
 
       </header>
       <main>
 
     <div class="tabs" aria-label="Section tabs"><a class="tab" href="../">Overview</a><a class="tab" href="../early-versions/">Versions 1 to 3</a><a class="tab" href="../missing-measurement-v4/">Version 4</a><a class="tab" href="../missing-measurement-v5/">Version 5</a><a class="tab" href="../missing-measurement-v6/">Version 6</a><a class="tab active" href="../version-comparison/">Compare all versions</a></div>
     <nav class="technical-toc" aria-label="On this page"><a href="#start">Start here</a><a href="#history">Versions 1 to 6</a><a href="#summary">Versions 4 to 6</a><a href="#architecture">Architecture</a><a href="#math">Math evolution</a><a href="#splits">Splits</a><a href="#evidence">Evidence</a><a href="#results">Results</a><a href="#why">Why each changed</a><a href="#decision">Current decision</a><a href="#files">Files</a></nav>
-
-    <section class="technical-section evidence-language" aria-labelledby="evidence-words-heading">
-      <h2 id="evidence-words-heading">Evidence words used on this site</h2>
-      <p>These words describe how trustworthy a result is. They do not describe whether the software ran.</p>
-      <div class="definition-grid">
-        <div class="definition-card"><strong>Internal result</strong><span>A result from the same dataset family used to build the method. It is useful for development, but it is not independent proof.</span></div>
-        <div class="definition-card"><strong>Held-out-cell fold</strong><span>One repeated check where a whole cell is left out of training, tested, then replaced by another left-out cell.</span></div>
-        <div class="definition-card"><strong>External test</strong><span>A test on a different dataset that was not used to build or choose the method.</span></div>
-        <div class="definition-card"><strong>Untouched</strong><span>The final answers for those cells were not used to choose features, models, limits, or pass rules before scoring.</span></div>
-        <div class="definition-card"><strong>Frozen or locked</strong><span>The inputs, model, baseline, and pass rules were fixed before the outside answers were viewed.</span></div>
-        <div class="definition-card"><strong>Freeze-ready</strong><span>The method was complete and stable enough to lock before spending a new outside dataset. It does not mean the method had already passed externally.</span></div>
-        <div class="definition-card"><strong>Passed</strong><span>The result met every rule fixed in advance.</span></div>
-        <div class="definition-card"><strong>Failed</strong><span>The result missed at least one rule fixed in advance. It does not mean the code crashed.</span></div>
-      </div>
-    </section>
-
     <section id="start" class="technical-section note">
       <h2>Start here: how to read six versions</h2>
       <p>This was not one model improved six times on one fixed test. Each version changed the question after the previous evidence exposed a weakness. Scores are therefore not directly interchangeable.</p>
@@ -1066,7 +1448,7 @@ window.MathJax = {
         <tr><td data-label="Version">3</td><td data-label="What it tried">Remove protocol-specific inputs</td><td data-label="Strongest honest result">SOH passed on Bayreuth</td><td data-label="Why it moved on">Both external EIS heads missed the 5% gate</td></tr>
         <tr><td data-label="Version">4</td><td data-label="What it tried">Normalize impedance scale</td><td data-label="Strongest honest result">All heads passed on three Oxford cells</td><td data-label="Why it moved on">Health still used measured current EIS</td></tr>
         <tr><td data-label="Version">5</td><td data-label="What it tried">Full predicted-EIS-to-SOH chain</td><td data-label="Strongest honest result">All eight Leonardi cell folds passed</td><td data-label="Why it moved on">Frozen guard rejected all 892 SiCWell rows</td></tr>
-        <tr><td data-label="Version">6</td><td data-label="What it tried">Zero-shot, few-shot, guard, and uncertainty rescue study</td><td data-label="Strongest honest result">Large four-dataset failure analysis</td><td data-label="Why it moved on">No candidate passed all dataset-level gates</td></tr>
+        <tr><td data-label="Version">6</td><td data-label="What it tried">Zero-shot, with one or two target cells for calibration, guard, and uncertainty rescue study</td><td data-label="Strongest honest result">Large four-dataset failure analysis</td><td data-label="Why it moved on">No candidate passed all dataset-level gates</td></tr>
       </tbody></table></div>
       <p><a class="button" href="../early-versions/">Read the plain-language Versions 1 to 3 history</a></p>
     </section>
@@ -1074,10 +1456,27 @@ window.MathJax = {
     <section id="summary" class="technical-section note">
       <h2>Detailed comparison of Versions 4 to 6</h2>
       <p>The last three versions contain the most complete frozen evidence. They are still not three scores from one stable experiment. Each answers a harder question and changes the allowed claim.</p>
+
+    <figure class="study-trajectory" aria-labelledby="study-trajectory-title">
+      <figcaption id="study-trajectory-title"><strong>How the evidence changed the research direction</strong><span>This is a decision path, not a shared performance scale. Each version answered a different question.</span></figcaption>
+      <div class="trajectory-grid">
+        <article class="trajectory-node good"><span class="trajectory-version">V4</span><strong>Narrow outside-data pass</strong><span>3 Oxford cells</span><small>All three fixed predicted quantitys beat their baselines. The health step still used measured EIS.</small></article>
+        <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
+        <article class="trajectory-node bad"><span class="trajectory-version">V5</span><strong>Complete chain, outside-data failure</strong><span>0 of 892 SiCWell rows accepted</span><small>The frozen guard said the new dataset was outside the model's supported domain.</small></article>
+        <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
+        <article class="trajectory-node bad"><span class="trajectory-version">V6</span><strong>No universal candidate</strong><span>0 without target-dataset calibration or with one or two target cells for calibration survivors</span><small>Broader development tests found no model worth freezing for another outside-data test.</small></article>
+        <span class="trajectory-arrow" aria-hidden="true">&rarr;</span>
+        <article class="trajectory-node warn"><span class="trajectory-version">Now</span><strong>Controlled exact-cell study</strong><span>Resource gate still blocked</span><small>Verify at least 12 matching cells and the full safety and equipment gate before measuring.</small></article>
+      </div>
+    </figure>
+
+      <figure class="evidence-chart"><figcaption><strong>Oxford external error reduction</strong><span>Higher bars mean the model removed more error relative to the frozen baseline. The pass line was 5% for every output.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Real EIS</span><strong>45.1%</strong></div><div class="evidence-chart-track" role="img" aria-label="Real EIS: 45.1%"><span class="evidence-chart-bar good" style="--bar-width:45.091%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Imaginary EIS</span><strong>25.7%</strong></div><div class="evidence-chart-track" role="img" aria-label="Imaginary EIS: 25.7%"><span class="evidence-chart-bar good" style="--bar-width:25.654%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Measured-EIS-to-SOH</span><strong>80.3%</strong></div><div class="evidence-chart-track" role="img" aria-label="Measured-EIS-to-SOH: 80.3%"><span class="evidence-chart-bar good" style="--bar-width:80.309%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>100% error reduction</span></div><p class="chart-source">Worst result across both allowed Oxford frequency mappings. External evidence from three independent cells at 24 C and 50% SOC.</p></figure>
+      <figure class="evidence-chart"><figcaption><strong>What the frozen SiCWell guard did</strong><span>The guard rejected the full dataset before prediction. Zero accepted rows means there is no valid external error score.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Accepted</span><strong>0</strong></div><div class="evidence-chart-track" role="img" aria-label="Accepted: 0"><span class="evidence-chart-bar good" style="--bar-width:0.000%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Rejected</span><strong>892</strong></div><div class="evidence-chart-track" role="img" aria-label="Rejected: 892"><span class="evidence-chart-bar bad" style="--bar-width:100.000%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>892 rows</span></div><p class="chart-source">Frozen outside-data test: 892 correlated rows, 223 checkups, and 26 independent SiCWell cells.</p></figure>
+      <figure class="evidence-chart"><figcaption><strong>Why 100% guard coverage was unsafe</strong><span>The guard accepted every row, but most accepted rows had at least one predicted quantity that lost to its row-level baseline.</span></figcaption><div class="evidence-chart-row"><div class="evidence-chart-label"><span>Safe on all four heads</span><strong>321 of 1383 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="Safe on all four heads: 321 of 1383 rows"><span class="evidence-chart-bar good" style="--bar-width:23.210%"></span></div></div><div class="evidence-chart-row"><div class="evidence-chart-label"><span>False accepts</span><strong>1062 of 1383 rows</strong></div><div class="evidence-chart-track" role="img" aria-label="False accepts: 1062 of 1383 rows"><span class="evidence-chart-bar bad" style="--bar-width:76.790%"></span></div></div><div class="evidence-chart-scale"><span>0</span><span>1383 accepted rows</span></div><p class="chart-source">Spent-data diagnostic only. Row counts describe guard behavior and do not become independent validation units.</p></figure>
       <div class="reader-path">
         <div class="reader-card"><strong>Version 4</strong><p>Can scale-normalized EIS and measured-EIS-to-SOH heads transfer to one tightly matched external dataset? Yes, narrowly.</p></div>
         <div class="reader-card"><strong>Version 5</strong><p>Can the complete predicted-EIS-to-SOH chain pass a new external dataset with a frozen guard? No.</p></div>
-        <div class="reader-card"><strong>Version 6</strong><p>Can broader representations or tiny target-cell calibration rescue universal transfer? No candidate passed development gates.</p></div>
+        <div class="reader-card"><strong>Version 6</strong><p>Can broader description of the measurementss or tiny target-cell calibration rescue universal transfer? No candidate passed development gates.</p></div>
         <div class="reader-card"><strong>Combined conclusion</strong><p>The best next move is controlled exact-cell data, not another universal-model rescue attempt.</p></div>
       </div>
     </section>
@@ -1085,8 +1484,8 @@ window.MathJax = {
     <section id="architecture" class="technical-section">
       <h2>Architecture side by side</h2>
       <div class="table-wrap"><table><thead><tr><th>Layer</th><th>Version 4</th><th>Version 5</th><th>Version 6</th></tr></thead><tbody>
-        <tr><td data-label="Layer">Primary input</td><td data-label="Version 4">Fresh EIS, SOC, pulse-resistance change</td><td data-label="Version 5">Same frozen contract</td><td data-label="Version 6">Fixed portable representations built from spent datasets</td></tr>
-        <tr><td data-label="Layer">EIS prediction</td><td data-label="Version 4">Scale-normalized Extra Trees delta heads</td><td data-label="Version 5">Same EIS heads inside a complete chain</td><td data-label="Version 6">Ridge and Extra Trees across five eligible representations</td></tr>
+        <tr><td data-label="Layer">Primary input</td><td data-label="Version 4">Fresh EIS, SOC, pulse-resistance change</td><td data-label="Version 5">Same frozen contract</td><td data-label="Version 6">Fixed portable description of the measurementss built from spent datasets</td></tr>
+        <tr><td data-label="Layer">EIS prediction</td><td data-label="Version 4">Scale-normalized Extra Trees delta heads</td><td data-label="Version 5">Same EIS heads inside a complete chain</td><td data-label="Version 6">Ridge and Extra Trees across five eligible description of the measurementss</td></tr>
         <tr><td data-label="Layer">SOH prediction</td><td data-label="Version 4">Measured current EIS only</td><td data-label="Version 5">Direct diagnostic plus out-of-cell predicted-EIS chain</td><td data-label="Version 6">Measured and predicted EIS heads both required</td></tr>
         <tr><td data-label="Layer">Safety</td><td data-label="Version 4">Frozen input contract and no tuning</td><td data-label="Version 5">Nearest-distance guard plus residual intervals</td><td data-label="Version 6">Source-only guard, uncertainty, false-accept audit</td></tr>
         <tr><td data-label="Layer">Calibration</td><td data-label="Version 4">None</td><td data-label="Version 5">None</td><td data-label="Version 6">One or two disjoint calibration cells tested</td></tr>
@@ -1094,7 +1493,7 @@ window.MathJax = {
       <div class="technical-flow">
         <div class="flow-card"><strong>V4</strong><span>Pulse + fresh EIS &rarr; predicted EIS. Measured EIS &rarr; SOH.</span></div>
         <div class="flow-card"><strong>V5</strong><span>Pulse + fresh EIS &rarr; predicted EIS &rarr; chained SOH.</span></div>
-        <div class="flow-card"><strong>V6</strong><span>Multiple representations and models &rarr; dataset LODO &rarr; few-shot and safety screens.</span></div>
+        <div class="flow-card"><strong>V6</strong><span>Multiple description of the measurementss and models &rarr; dataset LODO &rarr; with one or two target cells for calibration and safety screens.</span></div>
       </div>
     </section>
 
@@ -1104,7 +1503,7 @@ window.MathJax = {
       <div class="math-block">\[s=|B_{1\,\mathrm{Hz}}|,\qquad \widehat{Z}_k=B_k+s\,f_k\left(\mathrm{SOC},\Delta R_{\mathrm{int}},B/s\right)\]</div>
       <span class="formula-label">Version 5: feed predicted EIS into the health head</span>
       <div class="math-block">\[\widehat{h}_{V5}=g_c\left(\Delta R_{\mathrm{int}},\widehat{Z}/s,B/s\right),\qquad \widehat{Z}\text{ is cross-fitted by cell}\]</div>
-      <span class="formula-label">Version 6: compare representation and adaptation families by whole dataset</span>
+      <span class="formula-label">Version 6: compare description of the measurements and adaptation families by whole dataset</span>
       <div class="math-block">\[I_{d,h}=\frac{E_{d,h}^{\mathrm{baseline}}-E_{d,h}^{\mathrm{model}}}{E_{d,h}^{\mathrm{baseline}}},\qquad \widehat{y}_{\mathrm{adapt}}=a\widehat{y}_0+b\quad\text{or}\quad\widehat{y}_0+\overline{e}_C\]</div>
       <span class="formula-label">Shared rule: improvement must survive the correct independent unit</span>
       <div class="math-block">\[\text{row metrics}\;\not\Rightarrow\;\text{cell validation}\;\not\Rightarrow\;\text{dataset validation}\]</div>
@@ -1135,7 +1534,7 @@ window.MathJax = {
       <div class="table-wrap"><table><thead><tr><th>Version</th><th>Strongest positive number</th><th>Decisive failure or limit</th><th>Final status</th></tr></thead><tbody>
         <tr><td data-label="Version">4</td><td data-label="Strongest positive number">Oxford worst-case improvements: 45.1% real EIS, 25.7% imaginary EIS, 80.3% SOH</td><td data-label="Limit">Only three cells and SOH used measured current EIS</td><td data-label="Final status"><span class="status-pill good">Limited external support</span></td></tr>
         <tr><td data-label="Version">5</td><td data-label="Strongest positive number">All four output models passed eight repeated held-cell checks within Leonardi</td><td data-label="Failure">The locked safety guard accepted 0 of 892 SiCWell rows</td><td data-label="Final status"><span class="status-pill bad">Outside-data test missed its required rule</span></td></tr>
-        <tr><td data-label="Version">6</td><td data-label="Strongest positive number">1383 rows and 51 cells audited across four datasets</td><td data-label="Failure">No zero-shot or few-shot candidate passed all gates</td><td data-label="Final status"><span class="status-pill bad">Universal path stopped</span></td></tr>
+        <tr><td data-label="Version">6</td><td data-label="Strongest positive number">1383 rows and 51 cells audited across four datasets</td><td data-label="Failure">No without target-dataset calibration or with one or two target cells for calibration candidate passed all gates</td><td data-label="Final status"><span class="status-pill bad">Universal path stopped</span></td></tr>
       </tbody></table></div>
     </section>
 
@@ -1144,7 +1543,7 @@ window.MathJax = {
       <div class="reader-path">
         <div class="reader-card"><strong>V3 to V4: absolute scale was a transfer problem</strong><p>V4 divided spectral shape and change by the fresh 1 Hz impedance magnitude.</p></div>
         <div class="reader-card"><strong>V4 to V5: the health chain was incomplete</strong><p>V5 trained SOH on EIS predicted without the held cell, removing measured current EIS from the required path.</p></div>
-        <div class="reader-card"><strong>V5 to V6: one guard failure was not enough diagnosis</strong><p>V6 separated representations, heads, datasets, calibration budgets, abstention, and uncertainty to test whether anything was worth freezing.</p></div>
+        <div class="reader-card"><strong>V5 to V6: one guard failure was not enough diagnosis</strong><p>V6 separated description of the measurementss, heads, datasets, calibration budgets, abstention, and uncertainty to test whether anything was worth freezing.</p></div>
         <div class="reader-card"><strong>After V6: the bottleneck is controlled evidence</strong><p>More public-dataset searching cannot fix protocol and exact-cell mismatch. The next program needs planned measurements.</p></div>
       </div>
     </section>
@@ -1175,7 +1574,7 @@ window.MathJax = {
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-18 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-23 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>

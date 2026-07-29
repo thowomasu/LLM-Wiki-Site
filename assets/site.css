@@ -325,6 +325,41 @@ code {
   padding-top: 10px;
   border-top: 1px solid var(--line);
 }
+.progress-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+  margin: 10px 0 16px;
+}
+.progress-summary strong { font-size: 22px; }
+.progress-summary span { color: var(--muted); }
+.progress-track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 18px;
+}
+.progress-segment {
+  min-height: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+.progress-segment.complete { border-color: var(--green); background: var(--green); }
+.progress-segment.current { border-color: var(--orange); background: var(--orange); }
+.progress-stage {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.progress-stage:last-child { padding-bottom: 0; }
+.progress-stage p { margin: 0; }
+.progress-stage .stage-label { font-weight: 800; }
+.progress-stage.current .stage-label { color: var(--orange); }
 .pipeline-visual {
   max-width: 1050px;
   margin: 26px 0;
@@ -389,7 +424,8 @@ code {
   cursor: pointer;
 }
 .math-block {
-  max-width: 900px;
+  width: 100%;
+  max-width: none;
   margin: 18px 0;
   padding: 16px;
   overflow-x: auto;
@@ -438,6 +474,16 @@ code {
   gap: 12px;
   margin: 18px 0;
 }
+.technical-flow.pipeline-six {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+.technical-flow.pipeline-six .flow-card {
+  padding: 13px 12px;
+}
+.technical-flow.pipeline-six .flow-card span {
+  font-size: 13px;
+}
 .technical-flow .flow-card {
   min-width: 0;
   padding: 15px;
@@ -485,6 +531,101 @@ code {
 .metric-card strong { display: block; }
 .metric-card span { color: var(--muted); font-size: 14px; }
 .metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
+.evidence-chart,
+.study-trajectory {
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+.evidence-chart figcaption,
+.study-trajectory figcaption {
+  display: block;
+  margin-bottom: 18px;
+}
+.evidence-chart figcaption strong,
+.evidence-chart figcaption span,
+.study-trajectory figcaption strong,
+.study-trajectory figcaption span { display: block; }
+.evidence-chart figcaption strong,
+.study-trajectory figcaption strong { font-size: 20px; }
+.evidence-chart figcaption span,
+.study-trajectory figcaption span {
+  max-width: 900px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.evidence-chart-row { margin-top: 14px; }
+.evidence-chart-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.evidence-chart-label strong { white-space: nowrap; }
+.evidence-chart-track {
+  position: relative;
+  width: 100%;
+  height: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--panel-strong);
+}
+.evidence-chart-bar {
+  display: block;
+  width: var(--bar-width);
+  height: 100%;
+  min-width: 0;
+  background: var(--blue);
+}
+.evidence-chart-bar.good { background: var(--green); }
+.evidence-chart-bar.bad { background: var(--red); }
+.evidence-chart-bar.warn { background: var(--amber); }
+.evidence-chart-bar.muted { background: var(--muted); }
+.evidence-chart-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.chart-source {
+  max-width: none;
+  margin: 15px 0 0;
+  padding-top: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.trajectory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+}
+.trajectory-node {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
+}
+.trajectory-node.good { border-top-color: var(--green); }
+.trajectory-node.bad { border-top-color: var(--red); }
+.trajectory-node.warn { border-top-color: var(--amber); }
+.trajectory-node > span,
+.trajectory-node > strong,
+.trajectory-node > small { display: block; }
+.trajectory-node strong { margin: 7px 0; }
+.trajectory-node small { margin-top: 8px; color: var(--muted); line-height: 1.45; }
+.trajectory-version { color: var(--muted); font-size: 13px; font-weight: 800; text-transform: uppercase; }
+.trajectory-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 25px; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -657,6 +798,43 @@ code {
   background: var(--panel);
 }
 .source-item code { word-break: break-word; }
+.skim-first-note {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  background: var(--panel);
+}
+.skim-first-note strong {
+  font-size: 18px;
+}
+.skim-first-note span {
+  color: var(--muted);
+}
+.implementation-details {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.implementation-details summary {
+  min-height: 44px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.implementation-details pre {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 8px 8px;
+}
+main > p,
+main > section > p,
+.slide > p {
+  max-width: 78ch;
+}
 .source-kind {
   display: inline-block;
   margin-right: 8px;
@@ -765,6 +943,78 @@ th { background: var(--table-head); }
   color: var(--muted);
   font-size: 14px;
 }
+.glossary-term {
+  display: inline !important;
+  color: inherit;
+  border: 0 !important;
+  cursor: help;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.glossary-term:hover,
+.glossary-term:focus-visible,
+.glossary-term[aria-expanded="true"] {
+  color: var(--blue);
+  text-decoration-style: solid;
+  outline: none;
+}
+.code-variable.glossary-term {
+  display: inline-block !important;
+  padding: 2px 6px;
+  color: var(--ink);
+  background: var(--code-bg);
+  border-radius: 4px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: .9em;
+  white-space: nowrap;
+}
+.variable-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -7px 0 18px;
+}
+.variable-legend::before {
+  content: "Variables:";
+  align-self: center;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+.glossary-tooltip {
+  position: fixed;
+  z-index: 2000;
+  width: min(340px, calc(100vw - 24px));
+  padding: 12px 14px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .24);
+  pointer-events: none;
+}
+.glossary-tooltip[hidden] { display: none; }
+.glossary-tooltip strong,
+.glossary-tooltip span { display: block; }
+.glossary-tooltip strong { line-height: 1.3; }
+.glossary-tooltip .glossary-expansion {
+  margin-top: 3px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+}
+.glossary-tooltip .glossary-definition {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
 footer {
   padding: 22px min(7vw, 72px);
   color: var(--muted);
@@ -787,6 +1037,11 @@ footer {
   p,
   li,
   .lead { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+  .technical-flow.pipeline-six { grid-template-columns: 1fr; }
+  .trajectory-grid { grid-template-columns: 1fr; }
+  .trajectory-arrow { min-height: 24px; transform: rotate(90deg); }
+  .evidence-chart,
+  .study-trajectory { padding: 15px; }
   .tabs { width: 100%; max-width: 100%; }
   .sidebar {
     position: fixed;
@@ -812,7 +1067,8 @@ footer {
   .pipeline-flow { grid-template-columns: 1fr; }
   .pipeline-arrow { transform: rotate(90deg); }
   .pipeline-step { min-height: 0; }
-  .status-list li { grid-template-columns: 1fr; gap: 6px; }
+  .status-list li,
+  .progress-stage { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap {
     overflow: visible;
     border: 0;

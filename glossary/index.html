@@ -339,6 +339,41 @@ code {
   padding-top: 10px;
   border-top: 1px solid var(--line);
 }
+.progress-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+  margin: 10px 0 16px;
+}
+.progress-summary strong { font-size: 22px; }
+.progress-summary span { color: var(--muted); }
+.progress-track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 18px;
+}
+.progress-segment {
+  min-height: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+.progress-segment.complete { border-color: var(--green); background: var(--green); }
+.progress-segment.current { border-color: var(--orange); background: var(--orange); }
+.progress-stage {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.progress-stage:last-child { padding-bottom: 0; }
+.progress-stage p { margin: 0; }
+.progress-stage .stage-label { font-weight: 800; }
+.progress-stage.current .stage-label { color: var(--orange); }
 .pipeline-visual {
   max-width: 1050px;
   margin: 26px 0;
@@ -403,7 +438,8 @@ code {
   cursor: pointer;
 }
 .math-block {
-  max-width: 900px;
+  width: 100%;
+  max-width: none;
   margin: 18px 0;
   padding: 16px;
   overflow-x: auto;
@@ -452,6 +488,16 @@ code {
   gap: 12px;
   margin: 18px 0;
 }
+.technical-flow.pipeline-six {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+.technical-flow.pipeline-six .flow-card {
+  padding: 13px 12px;
+}
+.technical-flow.pipeline-six .flow-card span {
+  font-size: 13px;
+}
 .technical-flow .flow-card {
   min-width: 0;
   padding: 15px;
@@ -499,6 +545,101 @@ code {
 .metric-card strong { display: block; }
 .metric-card span { color: var(--muted); font-size: 14px; }
 .metric-card strong { margin-top: 7px; font-size: 20px; line-height: 1.25; }
+.evidence-chart,
+.study-trajectory {
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+.evidence-chart figcaption,
+.study-trajectory figcaption {
+  display: block;
+  margin-bottom: 18px;
+}
+.evidence-chart figcaption strong,
+.evidence-chart figcaption span,
+.study-trajectory figcaption strong,
+.study-trajectory figcaption span { display: block; }
+.evidence-chart figcaption strong,
+.study-trajectory figcaption strong { font-size: 20px; }
+.evidence-chart figcaption span,
+.study-trajectory figcaption span {
+  max-width: 900px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.evidence-chart-row { margin-top: 14px; }
+.evidence-chart-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.evidence-chart-label strong { white-space: nowrap; }
+.evidence-chart-track {
+  position: relative;
+  width: 100%;
+  height: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--panel-strong);
+}
+.evidence-chart-bar {
+  display: block;
+  width: var(--bar-width);
+  height: 100%;
+  min-width: 0;
+  background: var(--blue);
+}
+.evidence-chart-bar.good { background: var(--green); }
+.evidence-chart-bar.bad { background: var(--red); }
+.evidence-chart-bar.warn { background: var(--amber); }
+.evidence-chart-bar.muted { background: var(--muted); }
+.evidence-chart-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.chart-source {
+  max-width: none;
+  margin: 15px 0 0;
+  padding-top: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.trajectory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+}
+.trajectory-node {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
+}
+.trajectory-node.good { border-top-color: var(--green); }
+.trajectory-node.bad { border-top-color: var(--red); }
+.trajectory-node.warn { border-top-color: var(--amber); }
+.trajectory-node > span,
+.trajectory-node > strong,
+.trajectory-node > small { display: block; }
+.trajectory-node strong { margin: 7px 0; }
+.trajectory-node small { margin-top: 8px; color: var(--muted); line-height: 1.45; }
+.trajectory-version { color: var(--muted); font-size: 13px; font-weight: 800; text-transform: uppercase; }
+.trajectory-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 25px; }
 .definition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -779,6 +920,78 @@ th { background: var(--table-head); }
   color: var(--muted);
   font-size: 14px;
 }
+.glossary-term {
+  display: inline !important;
+  color: inherit;
+  border: 0 !important;
+  cursor: help;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.glossary-term:hover,
+.glossary-term:focus-visible,
+.glossary-term[aria-expanded="true"] {
+  color: var(--blue);
+  text-decoration-style: solid;
+  outline: none;
+}
+.code-variable.glossary-term {
+  display: inline-block !important;
+  padding: 2px 6px;
+  color: var(--ink);
+  background: var(--code-bg);
+  border-radius: 4px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: .9em;
+  white-space: nowrap;
+}
+.variable-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -7px 0 18px;
+}
+.variable-legend::before {
+  content: "Variables:";
+  align-self: center;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+.glossary-tooltip {
+  position: fixed;
+  z-index: 2000;
+  width: min(340px, calc(100vw - 24px));
+  padding: 12px 14px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 7px;
+  background: var(--panel);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .24);
+  pointer-events: none;
+}
+.glossary-tooltip[hidden] { display: none; }
+.glossary-tooltip strong,
+.glossary-tooltip span { display: block; }
+.glossary-tooltip strong { line-height: 1.3; }
+.glossary-tooltip .glossary-expansion {
+  margin-top: 3px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+}
+.glossary-tooltip .glossary-definition {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
 footer {
   padding: 22px min(7vw, 72px);
   color: var(--muted);
@@ -801,6 +1014,11 @@ footer {
   p,
   li,
   .lead { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+  .technical-flow.pipeline-six { grid-template-columns: 1fr; }
+  .trajectory-grid { grid-template-columns: 1fr; }
+  .trajectory-arrow { min-height: 24px; transform: rotate(90deg); }
+  .evidence-chart,
+  .study-trajectory { padding: 15px; }
   .tabs { width: 100%; max-width: 100%; }
   .sidebar {
     position: fixed;
@@ -826,7 +1044,8 @@ footer {
   .pipeline-flow { grid-template-columns: 1fr; }
   .pipeline-arrow { transform: rotate(90deg); }
   .pipeline-step { min-height: 0; }
-  .status-list li { grid-template-columns: 1fr; gap: 6px; }
+  .status-list li,
+  .progress-stage { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap {
     overflow: visible;
     border: 0;
@@ -896,6 +1115,7 @@ footer {
 (function () {
   var key = "llm-wiki-theme";
   var sidebarKey = "llm-wiki-sidebar";
+  var glossaryEntries = [{"term": "EIS", "expansion": "Electrochemical Impedance Spectroscopy", "definition": "A laboratory test that measures how a battery resists and stores electrical signals across many frequencies.", "aliases": ["EIS"]}, {"term": "SOH", "expansion": "State of Health", "definition": "A measure of how much useful battery health remains, usually compared with the battery when it was new.", "aliases": ["SOH", "state of health"]}, {"term": "SOC", "expansion": "State of Charge", "definition": "How full the battery is at the time of a measurement, usually shown as a percentage.", "aliases": ["SOC", "state of charge"]}, {"term": "DRT", "expansion": "Distribution of Relaxation Times", "definition": "A way to separate a battery response into processes that act over different time scales.", "aliases": ["DRT", "distribution of relaxation times"]}, {"term": "TDM", "expansion": "Time-Domain Measurement", "definition": "Voltage and current recorded over time during a pulse, rest period, or other battery test.", "aliases": ["TDM", "time-domain measurement", "time-domain measurements"]}, {"term": "HPPC", "expansion": "Hybrid Pulse Power Characterization", "definition": "A battery test that uses fixed charge and discharge pulses to measure resistance and power behaviour.", "aliases": ["HPPC"]}, {"term": "OCV", "expansion": "Open-Circuit Voltage", "definition": "Battery voltage measured while no current is flowing after the battery has had time to rest.", "aliases": ["OCV", "open-circuit voltage"]}, {"term": "ECM", "expansion": "Equivalent Circuit Model", "definition": "A simplified electrical circuit used to copy important parts of battery behaviour.", "aliases": ["ECM", "equivalent circuit model", "equivalent circuit models"]}, {"term": "RPT", "expansion": "Reference Performance Test", "definition": "A repeated check-up used to track battery capacity, resistance, and health during ageing.", "aliases": ["RPT", "reference performance test", "reference performance tests"]}, {"term": "Baseline", "expansion": "Simple comparison method", "definition": "A basic prediction that the proposed method must beat to show that its extra complexity is useful.", "aliases": ["baseline", "baselines"]}, {"term": "Internal result", "expansion": "Result from development data", "definition": "A result from the same dataset family used to build the method. It helps development, but it is not independent proof.", "aliases": ["internal result", "internal results", "internal evidence", "internal test", "internal tests", "same-dataset evidence", "same-dataset result", "same-dataset results", "development result", "development results"]}, {"term": "Held-out-cell fold", "expansion": "One repeated left-out-cell check", "definition": "One whole cell is left out of training and tested. The check is repeated with another cell left out each time.", "aliases": ["held-out-cell fold", "held-out-cell folds", "held-cell fold", "held-cell folds", "held-out-cell validation", "held-out-cell", "held-out cell", "held-out cells"]}, {"term": "External test", "expansion": "Test on separate data", "definition": "A test on a different dataset that was not used to build the method or choose its settings.", "aliases": ["external test", "external tests", "external validation", "external holdout", "external result", "external results", "external evidence"]}, {"term": "Untouched", "expansion": "Not used before final scoring", "definition": "The final answers were hidden while features, models, limits, and pass rules were being chosen.", "aliases": ["untouched", "locked evaluation", "locked evaluation data", "locked evaluation cells", "unseen evaluation data"]}, {"term": "Frozen or locked", "expansion": "Fixed before outside answers were viewed", "definition": "The inputs, model, baseline, and pass rules could not be changed after the outside or final data were seen.", "aliases": ["frozen", "locked", "frozen model", "frozen rule", "frozen rules", "frozen contract", "locked model", "locked rules"]}, {"term": "Freeze-ready", "expansion": "Ready to lock for a fair outside test", "definition": "The method was complete and stable enough to lock. This does not mean it had already passed an external test.", "aliases": ["freeze-ready", "externally freeze-ready", "ready to freeze"]}, {"term": "Passed", "expansion": "Met every rule fixed in advance", "definition": "The scored result met every required pass rule. It does not automatically prove that the method works everywhere.", "aliases": ["passed", "passes", "passing result", "pass result"]}, {"term": "Failed", "expansion": "Missed at least one rule fixed in advance", "definition": "The scored result missed a required pass rule. This describes the evidence, not whether the code crashed.", "aliases": ["failed", "fails", "failing result", "failure result"]}, {"term": "Domain guard", "expansion": "Input safety check", "definition": "A rule that rejects data that are too different from the data the model knows.", "aliases": ["domain guard", "domain guards", "applicability guard", "applicability guards"]}, {"term": "Abstain", "expansion": "Refuse to make an unsafe prediction", "definition": "The model gives no prediction because the input is outside its safe or supported range.", "aliases": ["abstain", "abstains", "abstained", "abstention", "rejected before prediction"]}, {"term": "Zero-shot", "expansion": "No target-data calibration", "definition": "The model is tested on a new dataset without learning from any labelled examples from that dataset.", "aliases": ["zero-shot", "zero shot"]}, {"term": "Few-shot calibration", "expansion": "Small target-data adjustment", "definition": "A small number of labelled cells or check-ups from the new dataset are used to adjust the model before evaluation.", "aliases": ["few-shot calibration", "few shot calibration", "small calibration", "target-cell calibration"]}, {"term": "Uncertainty range", "expansion": "Range showing prediction uncertainty", "definition": "An interval around a prediction that shows how uncertain the model is. A useful range must be tested for coverage.", "aliases": ["uncertainty range", "uncertainty ranges", "uncertainty interval", "uncertainty intervals", "prediction interval", "prediction intervals"]}, {"term": "Leave-one-dataset-out", "expansion": "Whole-dataset transfer check", "definition": "The model learns from all but one dataset, then the missing dataset is used as a separate test.", "aliases": ["leave-one-dataset-out", "leave one dataset out"]}, {"term": "Representation", "expansion": "The numerical form given to a model", "definition": "The same measurements can be expressed as raw values, ratios, normalized changes, or smaller summaries before modeling.", "aliases": ["representation", "representations"]}, {"term": "Dataset-level test", "expansion": "Hold back one complete dataset", "definition": "The model learns from other datasets and is tested on a dataset it did not use for training.", "aliases": ["dataset-level test", "dataset-level tests", "whole-dataset test", "whole-dataset transfer"]}, {"term": "Normalization", "expansion": "Rescale values before modeling", "definition": "Values are put on a comparable scale so a large cell or instrument range does not dominate only because its numbers are bigger.", "aliases": ["normalization", "normalize", "normalized", "standardization", "standardized"]}, {"term": "Prediction head", "expansion": "One model output branch", "definition": "A separate model or output branch responsible for one target, such as real EIS, imaginary EIS, or SOH.", "aliases": ["prediction head", "prediction heads", "model head", "model heads", "output head", "output heads"]}, {"term": "Chained model", "expansion": "One prediction feeds another model", "definition": "The predicted EIS becomes an input to the SOH model, so EIS does not need to be measured at prediction time.", "aliases": ["chained model", "chained models", "complete chain", "full chain"]}, {"term": "Cross-fitting", "expansion": "Build training predictions without self-exposure", "definition": "Each training cell receives an EIS prediction from a model that did not train on that cell before the health model is fitted.", "aliases": ["cross-fitting", "cross fitting", "cross-fitted", "out-of-cell prediction", "out-of-cell predictions"]}, {"term": "Predeclared", "expansion": "Written down before scoring", "definition": "The inputs, comparisons, splits, models, and pass rules were chosen before looking at the result being judged.", "aliases": ["predeclared", "pre-declared", "predeclared design", "pre-declared design"]}, {"term": "Scale and shape", "expansion": "Separate impedance size from curve pattern", "definition": "Overall impedance magnitude is stored separately from the normalized spectral shape and its change.", "aliases": ["scale and shape", "scale-shape", "scale shape"]}, {"term": "Dimensionless change", "expansion": "Relative change without physical units", "definition": "Current impedance is divided by or scaled against the fresh reference so different absolute sizes are easier to compare.", "aliases": ["dimensionless change", "dimensionless changes"]}, {"term": "Reduced frequency", "expansion": "Smaller fixed set of frequency features", "definition": "The full spectrum is replaced by selected shared points and low-, middle-, and high-frequency summaries.", "aliases": ["reduced frequency", "reduced-frequency"]}, {"term": "Hybrid small", "expansion": "Small mixed feature set", "definition": "A compact representation combining SOC, temperature, pulse change, impedance scale, and a short shape summary.", "aliases": ["hybrid small", "small hybrid"]}, {"term": "Physical summary", "expansion": "Compact physically motivated features", "definition": "A planned representation that was excluded because the repeatability, instrument, amplitude, and temperature metadata needed to build it safely were missing.", "aliases": ["physical summary", "physical summaries"]}, {"term": "RMSE", "expansion": "Root Mean Squared Error", "definition": "A prediction-error score that gives extra weight to larger mistakes. Lower is better.", "aliases": ["RMSE", "root mean squared error"]}, {"term": "MAE", "expansion": "Mean Absolute Error", "definition": "The average absolute prediction mistake. Lower is better.", "aliases": ["MAE", "mean absolute error"]}, {"term": "Ridge", "expansion": "Regularized linear regression", "definition": "A simple linear model that discourages very large fitted weights and serves as a strong basic comparison.", "aliases": ["Ridge", "ridge model", "ridge regression"]}, {"term": "Extra Trees", "expansion": "Extremely Randomized Trees", "definition": "A nonlinear ensemble that averages many randomized decision trees.", "aliases": ["Extra Trees", "ExtraTrees", "ExtraTreesRegressor"]}, {"term": "Frequency grid", "expansion": "Fixed list of EIS frequencies", "definition": "The exact frequency points where impedance values are aligned, predicted, and compared.", "aliases": ["frequency grid", "frequency grids", "shared grid", "shared grid points"]}, {"term": "Pulse resistance", "expansion": "Resistance estimated from a current pulse", "definition": "Voltage change divided by pulse current over a fixed time window, used here as a short ageing-sensitive measurement.", "aliases": ["pulse resistance", "pulse-resistance", "pulse resistance change", "pulse-resistance change"]}];
   function preferredTheme() {
     try {
       var saved = localStorage.getItem(key);
@@ -942,6 +1162,146 @@ footer {
       });
     });
   }
+  function glossaryPatternAndLookup() {
+    var lookup = {};
+    var aliases = [];
+    glossaryEntries.forEach(function (entry) {
+      entry.aliases.forEach(function (alias) {
+        lookup[alias.toLowerCase()] = entry;
+        aliases.push(alias);
+      });
+    });
+    aliases.sort(function (left, right) { return right.length - left.length; });
+    var escaped = aliases.map(function (value) {
+      return value.replace(/[^A-Za-z0-9 ]/g, function (character) {
+        return String.fromCharCode(92) + character;
+      });
+    });
+    return {
+      lookup: lookup,
+      pattern: new RegExp("(^|[^A-Za-z0-9_])(" + escaped.join("|") + ")(?=$|[^A-Za-z0-9_])", "gi")
+    };
+  }
+  function applyGlossaryTerms() {
+    var root = document.querySelector("main");
+    if (!root || !glossaryEntries.length || !document.createTreeWalker) return;
+    var glossary = glossaryPatternAndLookup();
+    var skipSelector = [
+      "a", "button", "code", "pre", "script", "style", "textarea", "select", "option",
+      "svg", "math", "mjx-container", ".glossary-term", ".glossary-tooltip",
+      ".definition-card", ".term-card", "[data-no-glossary]"
+    ].join(",");
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var textNodes = [];
+    var node;
+    while ((node = walker.nextNode())) {
+      if (!node.nodeValue.trim()) continue;
+      if (node.parentElement && node.parentElement.closest(skipSelector)) continue;
+      glossary.pattern.lastIndex = 0;
+      if (glossary.pattern.test(node.nodeValue)) textNodes.push(node);
+    }
+    textNodes.forEach(function (textNode) {
+      var text = textNode.nodeValue;
+      var fragment = document.createDocumentFragment();
+      var lastIndex = 0;
+      var match;
+      glossary.pattern.lastIndex = 0;
+      while ((match = glossary.pattern.exec(text))) {
+        var prefixEnd = match.index + match[1].length;
+        if (prefixEnd > lastIndex) fragment.appendChild(document.createTextNode(text.slice(lastIndex, prefixEnd)));
+        var visibleTerm = match[2];
+        var entry = glossary.lookup[visibleTerm.toLowerCase()];
+        var term = document.createElement("span");
+        term.className = "glossary-term";
+        term.tabIndex = 0;
+        term.textContent = visibleTerm;
+        term.dataset.glossaryTerm = entry.term;
+        term.dataset.glossaryExpansion = entry.expansion;
+        term.dataset.glossaryDefinition = entry.definition;
+        term.setAttribute("aria-expanded", "false");
+        term.setAttribute("aria-describedby", "site-glossary-tooltip");
+        fragment.appendChild(term);
+        lastIndex = glossary.pattern.lastIndex;
+        if (match[0].length === 0) glossary.pattern.lastIndex += 1;
+      }
+      if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+      textNode.parentNode.replaceChild(fragment, textNode);
+    });
+    if (!textNodes.length && !root.querySelector(".glossary-term")) return;
+
+    var tooltip = document.createElement("div");
+    tooltip.id = "site-glossary-tooltip";
+    tooltip.className = "glossary-tooltip";
+    tooltip.setAttribute("role", "tooltip");
+    tooltip.hidden = true;
+    tooltip.innerHTML = '<strong></strong><span class="glossary-expansion"></span><span class="glossary-definition"></span>';
+    document.body.appendChild(tooltip);
+    var activeTerm = null;
+    var termWasOpenOnPointerDown = false;
+
+    function positionTooltip(term) {
+      var gap = 9;
+      var margin = 12;
+      var termBox = term.getBoundingClientRect();
+      var tooltipBox = tooltip.getBoundingClientRect();
+      var left = termBox.left + (termBox.width - tooltipBox.width) / 2;
+      left = Math.max(margin, Math.min(left, window.innerWidth - tooltipBox.width - margin));
+      var top = termBox.bottom + gap;
+      if (top + tooltipBox.height > window.innerHeight - margin) top = termBox.top - tooltipBox.height - gap;
+      top = Math.max(margin, Math.min(top, window.innerHeight - tooltipBox.height - margin));
+      tooltip.style.left = Math.round(left) + "px";
+      tooltip.style.top = Math.round(top) + "px";
+    }
+    function showTooltip(term) {
+      if (activeTerm && activeTerm !== term) activeTerm.setAttribute("aria-expanded", "false");
+      activeTerm = term;
+      tooltip.querySelector("strong").textContent = term.dataset.glossaryTerm;
+      tooltip.querySelector(".glossary-expansion").textContent = term.dataset.glossaryExpansion;
+      tooltip.querySelector(".glossary-definition").textContent = term.dataset.glossaryDefinition;
+      tooltip.hidden = false;
+      term.setAttribute("aria-expanded", "true");
+      positionTooltip(term);
+    }
+    function hideTooltip() {
+      if (activeTerm) activeTerm.setAttribute("aria-expanded", "false");
+      activeTerm = null;
+      tooltip.hidden = true;
+    }
+    root.addEventListener("mouseover", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (term) showTooltip(term);
+    });
+    root.addEventListener("mouseout", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (term && event.relatedTarget !== term) hideTooltip();
+    });
+    root.addEventListener("focusin", function (event) {
+      if (event.target.classList && event.target.classList.contains("glossary-term")) showTooltip(event.target);
+    });
+    root.addEventListener("focusout", function (event) {
+      if (event.target.classList && event.target.classList.contains("glossary-term")) hideTooltip();
+    });
+    root.addEventListener("pointerdown", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      termWasOpenOnPointerDown = Boolean(term && activeTerm === term && !tooltip.hidden);
+    });
+    root.addEventListener("click", function (event) {
+      var term = event.target.closest && event.target.closest(".glossary-term");
+      if (!term) return;
+      event.stopPropagation();
+      if (termWasOpenOnPointerDown) hideTooltip();
+      else showTooltip(term);
+      termWasOpenOnPointerDown = false;
+    });
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest || !event.target.closest(".glossary-term")) hideTooltip();
+    });
+    window.addEventListener("resize", hideTooltip);
+    window.addEventListener("scroll", hideTooltip, true);
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") hideTooltip();
+    });
+  }
   var initialTheme = preferredTheme();
   var initialSidebar = preferredSidebar();
   applyTheme(initialTheme);
@@ -950,6 +1310,7 @@ footer {
     applyTheme(document.documentElement.dataset.theme || initialTheme);
     applySidebar(document.documentElement.dataset.sidebar || initialSidebar);
     labelResponsiveTables();
+    applyGlossaryTerms();
     var toggle = document.querySelector("[data-theme-toggle]");
     if (toggle) {
       toggle.addEventListener("click", function () {
@@ -1028,45 +1389,106 @@ window.MathJax = {
       <main>
 
     <section class="note">
-      <strong>Rule for this site:</strong> acronyms should be expanded the first time they appear on a page. This glossary is the backup, not the replacement for clear writing.
+      <strong>One glossary for the whole site:</strong> this table contains battery terms, evidence language, code names, and equation variables. Words with a dotted underline use these same definitions when you hover, focus, or tap them.
     </section>
-    <table>
-      <thead><tr><th>Term or code</th><th>Plain expansion</th><th>Meaning in this project</th></tr></thead>
-      <tbody><tr><td><strong>LLM</strong></td><td>Large Language Model</td><td>The AI tooling layer used to maintain this research wiki and generate public-facing outputs.</td></tr>
-<tr><td><strong>DRT</strong></td><td>Distribution of Relaxation Times</td><td>Battery-analysis method that represents relaxation behavior across time constants.</td></tr>
-<tr><td><strong>DIB</strong></td><td>Data in Brief</td><td>Journal style. Do not use it as the public name for the LG M50T Expt 4 dataset.</td></tr>
+    <table data-no-glossary>
+      <thead><tr><th>Term, code, or variable</th><th>Plain name or reason for the name</th><th>What it means or does here</th></tr></thead>
+      <tbody><tr><td><strong>a, b</strong></td><td>Affine calibration slope and offset</td><td>Two fitted numbers that rescale and shift a zero-shot prediction using calibration cells only.</td></tr>
+<tr><td><strong>Abstain</strong></td><td>Refuse to make an unsafe prediction</td><td>The model gives no prediction because the input is outside its safe or supported range.</td></tr>
+<tr><td><strong>alpha</strong></td><td>Ridge penalty strength</td><td>Controls how strongly large model weights are discouraged.</td></tr>
+<tr><td><strong>B</strong></td><td>B means the fresh baseline spectrum</td><td>The measured EIS spectrum from the same cell while it was fresh.</td></tr>
+<tr><td><strong>B_k</strong></td><td>B at frequency index k</td><td>The fresh baseline impedance value at one frequency point k.</td></tr>
+<tr><td><strong>Baseline</strong></td><td>Simple comparison prediction</td><td>The more complicated model must beat this under the rules fixed before final scoring.</td></tr>
+<tr><td><strong>C</strong></td><td>Calibration-cell set</td><td>Only the fixed target cells allowed for few-shot adjustment. Evaluation cells are excluded.</td></tr>
 <tr><td><strong>CALB</strong></td><td>China Aviation Lithium Battery</td><td>Manufacturer name used for the CALB L148N58A prismatic cell dataset.</td></tr>
-<tr><td><strong>L148N58A</strong></td><td>58 Ah large prismatic lithium-ion cell model</td><td>The specific cell model in the CALB paper and Mendeley repository.</td></tr>
-<tr><td><strong>LG M50T</strong></td><td>Commercial 21700 cylindrical lithium-ion cell</td><td>Cell family in the degradation study where this project used Expt 4 drive-cycle ageing data.</td></tr>
+<tr><td><strong>CALCE</strong></td><td>Center for Advanced Life Cycle Engineering</td><td>External battery-data source used for candidate validation planning.</td></tr>
+<tr><td><strong>Chained model</strong></td><td>One prediction feeds another model</td><td>The predicted EIS becomes an input to the SOH model, so EIS does not need to be measured at prediction time.</td></tr>
+<tr><td><strong>Cross-fitting</strong></td><td>Build training predictions without self-exposure</td><td>Each training cell receives an EIS prediction from a model that did not train on that cell before the health model is fitted.</td></tr>
+<tr><td><strong>d(x)</strong></td><td>Distance from x to known development data</td><td>The nearest-source distance used by the applicability guard.</td></tr>
+<tr><td><strong>Dataset-level test</strong></td><td>Hold back one complete dataset</td><td>The model learns from other datasets and is tested on a dataset it did not use for training.</td></tr>
+<tr><td><strong>delta_k</strong></td><td>Scale-normalized change at frequency k</td><td>The difference Z_k minus B_k divided by the reference scale s.</td></tr>
+<tr><td><strong>delta_R_int</strong></td><td>Relative change in internal pulse resistance</td><td>The percentage increase from the fresh pulse resistance to the current pulse resistance.</td></tr>
+<tr><td><strong>delta_z_k</strong></td><td>Delta means change, so this is normalized impedance change at k</td><td>The difference between current and fresh impedance at frequency k, divided by s.</td></tr>
+<tr><td><strong>DIB</strong></td><td>Data in Brief</td><td>Journal style. Do not use it as the public name for the LG M50T Expt 4 dataset.</td></tr>
+<tr><td><strong>Dimensionless change</strong></td><td>Relative change without physical units</td><td>Current impedance is divided by or scaled against the fresh reference so different absolute sizes are easier to compare.</td></tr>
+<tr><td><strong>dimensionless_change</strong></td><td>Why the name: ratios remove physical units</td><td>What it does: expresses each current spectrum value as a ratio or scale-normalized change from the fresh reference.</td></tr>
+<tr><td><strong>Domain guard</strong></td><td>Input safety check</td><td>A rule that rejects data that are too different from the data the model knows.</td></tr>
+<tr><td><strong>DRT</strong></td><td>Distribution of Relaxation Times</td><td>Battery-analysis method that represents relaxation behavior across time constants.</td></tr>
+<tr><td><strong>E_baseline</strong></td><td>Baseline prediction error</td><td>The RMSE or MAE produced by the simple comparison method.</td></tr>
+<tr><td><strong>E_model</strong></td><td>Model prediction error</td><td>The RMSE or MAE produced by the tested model.</td></tr>
+<tr><td><strong>ECM</strong></td><td>Equivalent Circuit Model</td><td>Compact battery model used as a baseline in drive-cycle audits.</td></tr>
 <tr><td><strong>EIS</strong></td><td>Electrochemical Impedance Spectroscopy</td><td>Frequency-domain impedance test used as the comparison target for DRT outputs.</td></tr>
-<tr><td><strong>TDM</strong></td><td>Time-Domain Measurement</td><td>Time-series voltage/current data used to fit relaxation behavior from pulses or dynamic tests.</td></tr>
+<tr><td><strong>External test</strong></td><td>Test on a different dataset</td><td>The outside dataset was not used to build or choose the method.</td></tr>
+<tr><td><strong>Extra Trees</strong></td><td>Extremely Randomized Trees</td><td>A nonlinear ensemble that averages many randomized decision trees.</td></tr>
+<tr><td><strong>f_k</strong></td><td>f means the learned EIS prediction function at k</td><td>The model that predicts normalized impedance change at one frequency point.</td></tr>
+<tr><td><strong>Failed</strong></td><td>Missed at least one rule fixed in advance</td><td>This describes the evidence result. It does not mean the code crashed.</td></tr>
+<tr><td><strong>Few-shot calibration</strong></td><td>Small target-data adjustment</td><td>A small number of labelled cells or check-ups from the new dataset are used to adjust the model before evaluation.</td></tr>
+<tr><td><strong>Freeze-ready</strong></td><td>Complete enough to lock for a new outside test</td><td>This does not mean the method has passed externally. It means the method is ready to be tested without changing its rules.</td></tr>
+<tr><td><strong>Frequency grid</strong></td><td>Fixed list of EIS frequencies</td><td>The exact frequency points where impedance values are aligned, predicted, and compared.</td></tr>
+<tr><td><strong>Frozen or locked</strong></td><td>Rules fixed before outside answers</td><td>Inputs, preprocessing, models, baselines, and pass rules cannot be changed after the outside answers are viewed.</td></tr>
+<tr><td><strong>h_chain</strong></td><td>Chained health prediction</td><td>SOH predicted from reconstructed EIS, without using measured current EIS at prediction time.</td></tr>
+<tr><td><strong>h_direct</strong></td><td>Direct health prediction</td><td>SOH predicted using measured current EIS. It is a diagnostic upper comparison, not the missing-EIS solution.</td></tr>
+<tr><td><strong>Held-out-cell fold</strong></td><td>One repeated whole-cell check</td><td>One cell is left out of training and tested. The process repeats with different cells left out.</td></tr>
 <tr><td><strong>HPPC</strong></td><td>Hybrid Pulse Power Characterization</td><td>Pulse protocol used to extract time-domain relaxation windows.</td></tr>
+<tr><td><strong>Hybrid small</strong></td><td>Small mixed feature set</td><td>A compact representation combining SOC, temperature, pulse change, impedance scale, and a short shape summary.</td></tr>
+<tr><td><strong>hybrid_small</strong></td><td>Why the name: it mixes several signal types in a small feature set</td><td>What it does: combines SOC, temperature, pulse change, scale, and a compact spectral-shape summary.</td></tr>
+<tr><td><strong>I</strong></td><td>I means relative improvement</td><td>The fraction by which model error is lower than baseline error. Positive is better.</td></tr>
+<tr><td><strong>I_d,h</strong></td><td>Improvement for dataset d and output head h</td><td>The relative error improvement is calculated separately for each dataset and prediction target.</td></tr>
+<tr><td><strong>Internal result</strong></td><td>Result from the development dataset family</td><td>Useful evidence for building the method, but not independent proof that it works elsewhere.</td></tr>
+<tr><td><strong>KK</strong></td><td>Kramers-Kronig</td><td>EIS consistency screen. In this project it is a quality gate, not a model feature.</td></tr>
+<tr><td><strong>L148N58A</strong></td><td>58 Ah large prismatic lithium-ion cell model</td><td>The specific cell model in the CALB paper and Mendeley repository.</td></tr>
+<tr><td><strong>Leave-one-dataset-out</strong></td><td>Whole-dataset transfer check</td><td>The model learns from all but one dataset, then the missing dataset is used as a separate test.</td></tr>
+<tr><td><strong>LG M50T</strong></td><td>Commercial 21700 cylindrical lithium-ion cell</td><td>Cell family in the degradation study where this project used Expt 4 drive-cycle ageing data.</td></tr>
+<tr><td><strong>LLM</strong></td><td>Large Language Model</td><td>The AI tooling layer used to maintain this research wiki and generate public-facing outputs.</td></tr>
+<tr><td><strong>m</strong></td><td>Number of calibration examples</td><td>The count used when averaging calibration residuals.</td></tr>
+<tr><td><strong>MAE</strong></td><td>Mean Absolute Error</td><td>The average absolute prediction mistake. Lower is better.</td></tr>
+<tr><td><strong>NASA</strong></td><td>National Aeronautics and Space Administration</td><td>External battery dataset source considered after CALCE and corrected-EIS RADAR4KIT.</td></tr>
+<tr><td><strong>Normalization</strong></td><td>Rescale values before modeling</td><td>Values are put on a comparable scale so a large cell or instrument range does not dominate only because its numbers are bigger.</td></tr>
+<tr><td><strong>OCV</strong></td><td>Open Circuit Voltage</td><td>Rested voltage used to match pulse candidates with EIS records.</td></tr>
+<tr><td><strong>Passed</strong></td><td>Met every rule fixed in advance</td><td>The scored result met every required pass rule. It does not automatically prove that the method works everywhere.</td></tr>
+<tr><td><strong>Physical summary</strong></td><td>Compact physically motivated features</td><td>A planned representation that was excluded because the repeatability, instrument, amplitude, and temperature metadata needed to build it safely were missing.</td></tr>
+<tr><td><strong>physical_summary</strong></td><td>Why the name: it was meant to summarize physically meaningful response features</td><td>What it does: this candidate was stopped before scoring because the raw repeatability and instrument metadata needed to build it safely were missing.</td></tr>
+<tr><td><strong>PLN</strong></td><td>CALCE cell identifier</td><td>Identifier used in CALCE storage files to join capacity, SOC, temperature, storage period, and impedance records.</td></tr>
+<tr><td><strong>Predeclared</strong></td><td>Written down before scoring</td><td>The inputs, comparisons, splits, models, and pass rules were chosen before looking at the result being judged.</td></tr>
+<tr><td><strong>Prediction head</strong></td><td>One model output branch</td><td>A separate model or output branch responsible for one target, such as real EIS, imaginary EIS, or SOH.</td></tr>
+<tr><td><strong>Pulse resistance</strong></td><td>Resistance estimated from a current pulse</td><td>Voltage change divided by pulse current over a fixed time window, used here as a short ageing-sensitive measurement.</td></tr>
+<tr><td><strong>q_0.90</strong></td><td>The 90th percentile absolute residual</td><td>The development error radius used to form the stated 90% prediction range.</td></tr>
+<tr><td><strong>Q_fresh</strong></td><td>Fresh reference capacity</td><td>The same cell&#x27;s capacity before ageing.</td></tr>
+<tr><td><strong>Q_now</strong></td><td>Current measured capacity</td><td>The capacity measured at the present ageing checkpoint.</td></tr>
+<tr><td><strong>R_10s</strong></td><td>Resistance estimated from a 10-second pulse</td><td>The absolute voltage change over ten seconds divided by the typical pulse current.</td></tr>
+<tr><td><strong>r_k</strong></td><td>Dimensionless ratio at frequency k</td><td>The current impedance Z_k divided by the fresh baseline B_k.</td></tr>
+<tr><td><strong>RADAR4KIT</strong></td><td>KIT battery research dataset</td><td>External validation check. Current frozen test workflow result does not support the CALB rule.</td></tr>
+<tr><td><strong>Reduced frequency</strong></td><td>Smaller fixed set of frequency features</td><td>The full spectrum is replaced by selected shared points and low-, middle-, and high-frequency summaries.</td></tr>
+<tr><td><strong>reduced_frequency</strong></td><td>Why the name: it uses fewer frequency features</td><td>What it does: replaces the full spectrum with fixed low-, middle-, and high-frequency summaries plus selected shared points.</td></tr>
+<tr><td><strong>Representation</strong></td><td>The numerical form given to a model</td><td>The same measurements can be expressed as raw values, ratios, normalized changes, or smaller summaries before modeling.</td></tr>
+<tr><td><strong>Ridge</strong></td><td>Regularized linear regression</td><td>A simple linear model that discourages very large fitted weights and serves as a strong basic comparison.</td></tr>
+<tr><td><strong>RMSE</strong></td><td>Root Mean Squared Error</td><td>A prediction-error score that gives extra weight to larger mistakes. Lower is better.</td></tr>
+<tr><td><strong>RPT</strong></td><td>Reference Performance Test</td><td>Periodic characterization test. In CALB, HPPC and C/20 tests are RPT-like but not literally named RPT.</td></tr>
+<tr><td><strong>s</strong></td><td>s means the reference impedance scale</td><td>The magnitude of the fresh 1 Hz impedance used to remove absolute cell-size differences.</td></tr>
+<tr><td><strong>Scale and shape</strong></td><td>Separate impedance size from curve pattern</td><td>Overall impedance magnitude is stored separately from the normalized spectral shape and its change.</td></tr>
+<tr><td><strong>scale_shape</strong></td><td>Why the name: scale and spectral shape are stored separately</td><td>What it does: keeps overall impedance size apart from the normalized curve pattern.</td></tr>
 <tr><td><strong>SOC</strong></td><td>State of Charge</td><td>Battery charge level. Bad SOC alignment can make comparisons unfair.</td></tr>
 <tr><td><strong>SOH</strong></td><td>State of Health</td><td>Battery ageing or degradation state. The current CALB work does not validate SOH prediction.</td></tr>
-<tr><td><strong>KK</strong></td><td>Kramers-Kronig</td><td>EIS consistency screen. In this project it is a quality gate, not a model feature.</td></tr>
-<tr><td><strong>OCV</strong></td><td>Open Circuit Voltage</td><td>Rested voltage used to match pulse candidates with EIS records.</td></tr>
-<tr><td><strong>ECM</strong></td><td>Equivalent Circuit Model</td><td>Compact battery model used as a baseline in drive-cycle audits.</td></tr>
-<tr><td><strong>CALCE</strong></td><td>Center for Advanced Life Cycle Engineering</td><td>External battery-data source used for candidate validation planning.</td></tr>
-<tr><td><strong>NASA</strong></td><td>National Aeronautics and Space Administration</td><td>External battery dataset source considered after CALCE and corrected-EIS RADAR4KIT.</td></tr>
-<tr><td><strong>PLN</strong></td><td>CALCE cell identifier</td><td>Identifier used in CALCE storage files to join capacity, SOC, temperature, storage period, and impedance records.</td></tr>
-<tr><td><strong>RADAR4KIT</strong></td><td>KIT battery research dataset</td><td>External validation check. Current frozen test workflow result does not support the CALB rule.</td></tr>
+<tr><td><strong>T(x)</strong></td><td>The transformed feature vector</td><td>Input x after the frozen imputation and standardization steps.</td></tr>
+<tr><td><strong>TDM</strong></td><td>Time-Domain Measurement</td><td>Time-series voltage/current data used to fit relaxation behavior from pulses or dynamic tests.</td></tr>
 <tr><td><strong>UDDS</strong></td><td>Urban Dynamometer Driving Schedule</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
-<tr><td><strong>US06</strong></td><td>High-aggression supplemental driving schedule</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
-<tr><td><strong>WLTP</strong></td><td>Worldwide Harmonised Light Vehicles Test Procedure</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
-<tr><td><strong>RPT</strong></td><td>Reference Performance Test</td><td>Periodic characterization test. In CALB, HPPC and C/20 tests are RPT-like but not literally named RPT.</td></tr>
-<tr><td><strong>Baseline</strong></td><td>Simple comparison prediction</td><td>The more complicated model must beat this under the rules fixed before final scoring.</td></tr>
-<tr><td><strong>Internal result</strong></td><td>Result from the development dataset family</td><td>Useful evidence for building the method, but not independent proof that it works elsewhere.</td></tr>
-<tr><td><strong>Held-out-cell fold</strong></td><td>One repeated whole-cell check</td><td>One cell is left out of training and tested. The process repeats with different cells left out.</td></tr>
-<tr><td><strong>External test</strong></td><td>Test on a different dataset</td><td>The outside dataset was not used to build or choose the method.</td></tr>
+<tr><td><strong>Uncertainty range</strong></td><td>Range showing prediction uncertainty</td><td>An interval around a prediction that shows how uncertain the model is. A useful range must be tested for coverage.</td></tr>
 <tr><td><strong>Untouched</strong></td><td>Final answers not used before scoring</td><td>The target answers were not used to select features, models, limits, or pass rules.</td></tr>
-<tr><td><strong>Frozen or locked</strong></td><td>Rules fixed before outside answers</td><td>Inputs, preprocessing, models, baselines, and pass rules cannot be changed after the outside answers are viewed.</td></tr>
-<tr><td><strong>Freeze-ready</strong></td><td>Complete enough to lock for a new outside test</td><td>This does not mean the method has passed externally. It means the method is ready to be tested without changing its rules.</td></tr>
-<tr><td><strong>Failed</strong></td><td>Missed at least one rule fixed in advance</td><td>This describes the evidence result. It does not mean the code crashed.</td></tr></tbody>
+<tr><td><strong>US06</strong></td><td>High-aggression supplemental driving schedule</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
+<tr><td><strong>v5_reference</strong></td><td>Why the name: the unchanged Version 5 feature design</td><td>What it does: acts as the control representation that every new Version 6 representation must beat.</td></tr>
+<tr><td><strong>W</strong></td><td>Ridge coefficient matrix</td><td>The fitted linear weights that map X to Y.</td></tr>
+<tr><td><strong>WLTP</strong></td><td>Worldwide Harmonised Light Vehicles Test Procedure</td><td>Dynamic driving profile used in CALB drive-cycle tests.</td></tr>
+<tr><td><strong>X</strong></td><td>Input feature matrix</td><td>Rows contain model inputs and columns contain the fixed representation features.</td></tr>
+<tr><td><strong>Y</strong></td><td>Target matrix</td><td>The true EIS or health values the model learns to predict.</td></tr>
+<tr><td><strong>Z</strong></td><td>Z means the current measured EIS spectrum</td><td>The aged or current impedance spectrum that the model is trying to reconstruct.</td></tr>
+<tr><td><strong>Z_hat_k</strong></td><td>A hat means predicted, so this is predicted Z at k</td><td>The model&#x27;s reconstructed impedance value at frequency point k.</td></tr>
+<tr><td><strong>Z_k</strong></td><td>Z at frequency index k</td><td>The current measured impedance value at one frequency point k.</td></tr>
+<tr><td><strong>Zero-shot</strong></td><td>No target-data calibration</td><td>The model is tested on a new dataset without learning from any labelled examples from that dataset.</td></tr></tbody>
     </table>
 
       </main>
       <footer>
-        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-18 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
+        <div><strong>Project owner:</strong> Long Tran &nbsp; <strong>Last updated:</strong> 2026-07-19 &nbsp; <a href="https://github.com/thowomasu">Contact via GitHub</a></div>
         <div class="small-note">Public site built from selected research outputs. No university or advisor affiliation is stated because none is approved in the public project record.</div>
       </footer>
     </div>
