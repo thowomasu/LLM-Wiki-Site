@@ -2,7 +2,7 @@
 type: Research Site
 title: LLM Wiki Site
 description: Static GitHub Pages site containing human-readable battery DRT research outputs, validation pages, sources, and presentations.
-resource: https://github.com/thowomasu/LLM-Wiki-Site
+resource: https://github.com/Nayeemfaisal/LLM-Wiki-Site
 tags: [llm-wiki, github-pages, research-site, battery-drt]
 timestamp: 2026-07-21T00:00:00+02:00
 ---
