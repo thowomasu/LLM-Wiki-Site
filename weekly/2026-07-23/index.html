@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weekly Update 2026-07-23 | Battery DRT Research Outputs</title>
+  <meta name="description" content="Weekly research update for 2026-07-23.">
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="professional-page">
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">X</span><span data-sidebar-label>Close</span></button>
+  <div class="site-shell">
+
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation">
+      <a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Readable research, code evidence, and weekly progress</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+      <div class="side-section">Overview</div>
+      <a class="side-link" href="../../pipeline-handoff/">Research handoff</a>
+      <a class="side-link" href="../../weekly/">Weekly progress</a>
+      <a class="side-link" href="../../findings/">Research findings</a>
+      <a class="side-link" href="../../dataset-targets/">Dataset targets</a>
+      <a class="side-link" href="../../implementation/">Implementation plan</a>
+      <div class="side-section">Evidence</div>
+      <a class="side-link" href="../../okf/">OKF knowledge bundle</a>
+      <a class="side-link" href="../../demo-api-hpc/">API/HPC demo code</a>
+      <a class="side-link" href="../../cross-dataset/">Cross-dataset study</a>
+      <a class="side-link" href="../../external-validation/">External validation</a>
+      <a class="side-link" href="../../datasets/">Dataset map</a>
+      <div class="side-section">Reference</div>
+      <a class="side-link" href="../../sources/">Sources and papers</a>
+      <a class="side-link" href="../../glossary/">Plain-language glossary</a>
+    </aside>
+
+    <div class="page-content">
+
+      <header>
+        <div class="professional-hero">
+          <div class="eyebrow-row">
+            <span class="eyebrow">Weekly update</span>
+            <span class="eyebrow">2026-07-23</span>
+            <span class="eyebrow">Ready for supervisor review</span>
+          </div>
+          <h1>Wiki redesign and research handoff update</h1>
+          <p class="lead">This week I made the research wiki easier to read, separated the work into clear sections, and documented a new direction using Open Knowledge Format.</p>
+          <div class="summary-strip">
+            <div class="summary-metric"><strong>Readable</strong><span>plain-language pages</span></div>
+            <div class="summary-metric"><strong>Clickable</strong><span>evidence links</span></div>
+            <div class="summary-metric"><strong>Dated</strong><span>weekly progress page</span></div>
+            <div class="summary-metric"><strong>TS/EIS/DRT</strong><span>dataset matching target</span></div>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section>
+          <div class="section-kicker">Main progress</div>
+          <h2>What I completed today</h2>
+          <div class="professional-grid">
+            <article class="professional-card">
+              <span class="tag green">Completed</span>
+              <h3>Cleaner wiki layout</h3>
+              <p>The page now looks like a research dashboard instead of a raw task note. It has a clearer top summary, status cards, and separate evidence links.</p>
+            </article>
+            <article class="professional-card">
+              <span class="tag green">Completed</span>
+              <h3>Simple language</h3>
+              <p>The text was rewritten so a professor or team member can understand the work quickly without reading code first.</p>
+            </article>
+            <article class="professional-card">
+              <span class="tag green">Completed</span>
+              <h3>Separate sections</h3>
+              <p>Findings, implementation work, weekly progress, and evidence are now separate and clickable.</p>
+            </article>
+            <article class="professional-card">
+              <span class="tag green">Completed</span>
+              <h3>Dataset target frame</h3>
+              <p>The main research direction is now clear: search and rank datasets that connect time-series cycling data, EIS spectra, and DRT-ready impedance analysis.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-kicker">Research finding</div>
+          <h2>New direction: human-readable plus structured knowledge</h2>
+          <div class="research-panel">
+            <p>The useful finding from the professor's OKF link is that the wiki can have two layers. The first layer is the website, written for humans. The second layer is structured Markdown with metadata, written so future tools can read the project more reliably.</p>
+            <p>This matters because the project has many kinds of material: datasets, validation notes, scripts, presentation pages, pipeline decisions, VM/HPC blockers, and weekly updates. A structured layer makes the work easier to audit, reuse, and extend.</p>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-kicker">Evidence</div>
+          <h2>Clickable evidence</h2>
+          <div class="link-board">
+            <a href="../../pipeline-handoff/">Research handoff<small>Main overview page</small></a>
+            <a href="../../findings/">Research findings<small>Scientific and technical findings</small></a>
+            <a href="../../dataset-targets/">Dataset targets<small>TS, EIS, and DRT matching plan</small></a>
+            <a href="../../implementation/">Implementation plan<small>VM, API, HPC, and local prototype</small></a>
+            <a href="../../okf/">OKF bundle<small>Structured knowledge files</small></a>
+            <a href="../../demo-api-hpc/">API/HPC demo<small>Prototype code folder</small></a>
+            <a href="../../datasets/">Dataset map<small>Dataset status and selection</small></a>
+          </div>
+        </section>
+
+        <section class="compact-reader" aria-labelledby="next-week-drt-title">
+          <div class="section-kicker">Upcoming week · 23–30 July 2026</div>
+          <h2 id="next-week-drt-title">Next: benchmark DRT methods</h2>
+          <ul>
+            <li>Read <a href="https://github.com/ciuccislab/GP-DRT" target="_blank" rel="noopener">GP-DRT</a> as the main open-source technical comparator.</li>
+            <li>Use its uncertainty output to strengthen our DRT quality checks.</li>
+            <li>Use the <a href="https://iestbattery.com/case/drt-analysis-eis-deconvolution-guide/" target="_blank" rel="noopener">IEST guide</a> to document regularisation and interpretation risks.</li>
+            <li>Run one controlled comparison on selected Panasonic EIS data.</li>
+            <li>Keep the result separate from TS-to-EIS validation until the dataset match is demonstrated.</li>
+          </ul>
+        </section>
+
+        <!-- external-dataset-screen-2026-07-23:start -->
+        <section class="compact-reader" aria-labelledby="five-dataset-screen-title">
+          <div class="section-kicker">New dataset screen · 23 July 2026</div>
+          <h2 id="five-dataset-screen-title">Five external datasets compared</h2>
+          <ul>
+            <li><strong>Best full match:</strong> Cambridge uneven-usage EIS, with same-cell GCPL and GEIS records in the local manifest probe.</li>
+            <li><strong>Strong candidates:</strong> NASA PCoE and CALCE, both with same-cell time-domain or capacity evidence plus impedance evidence.</li>
+            <li><strong>Partial candidate:</strong> Battery Archive, because the public page shows cycling data but does not confirm an EIS match.</li>
+            <li><strong>EIS control:</strong> the 54-cell Zenodo set has EIS and machine-readable metadata, but no time-series side.</li>
+            <li><strong>Next:</strong> use a frozen cell-level holdout, reconstruction error, residual checks, and uncertainty before calling any source validation.</li>
+          </ul>
+          <p class="small-note"><a href="../../external-validation/external-dataset-screen-2026-07-23/">Open the full five-source comparison</a></p>
+        </section>
+<!-- external-dataset-screen-2026-07-23:end -->
+<section>
+          <div class="section-kicker">Message for professor</div>
+          <h2>Short update text</h2>
+          <blockquote>
+            This week I improved the LLM Wiki into a more readable research handoff. I separated the work into dated weekly progress, research findings, implementation plan, dataset targets, and evidence links. The main research target is now clearer: find and rank battery datasets that connect time-series cycling data, EIS spectra, and DRT-ready impedance analysis. I also documented the OKF direction so the project can later be searched, reused, and connected to the pipeline more reliably.
+          </blockquote>
+        </section>
+      </main>
+
+    </div>
+  </div>
+
+<script>
+(function () {
+  var key = "battery-drt-site-theme";
+  var sidebarKey = "battery-drt-site-sidebar";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "Menu" : "X";
+  }
+  applyTheme(preferredTheme());
+  applySidebar(preferredSidebar());
+  window.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

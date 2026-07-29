@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weekly Update 2026-07-29 | Battery DRT Research Outputs</title>
+  <meta name="description" content="Focused public dataset intake for the TS, EIS, and DRT pipeline.">
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="professional-page">
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">X</span><span data-sidebar-label>Close</span></button>
+  <div class="site-shell">
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation">
+      <a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Readable research, code evidence, and weekly progress</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+      <div class="side-section">Overview</div>
+      <a class="side-link" href="../../pipeline-handoff/">Research handoff</a>
+      <a class="side-link" href="../" aria-current="page">Weekly progress</a>
+      <a class="side-link" href="../../findings/">Research findings</a>
+      <a class="side-link" href="../../dataset-targets/">Dataset targets</a>
+      <a class="side-link" href="../../implementation/">Implementation plan</a>
+      <div class="side-section">Evidence</div>
+      <a class="side-link" href="../../external-validation/">External validation</a>
+      <a class="side-link" href="../../external-validation/external-dataset-screen-2026-07-23/">Five-source screen</a>
+      <a class="side-link" href="../../okf/">OKF knowledge bundle</a>
+      <div class="side-section">Reference</div>
+      <a class="side-link" href="../../sources/">Sources and papers</a>
+      <a class="side-link" href="../../glossary/">Plain-language glossary</a>
+    </aside>
+    <div class="page-content">
+      <header>
+        <div class="professional-hero">
+          <div class="eyebrow-row"><span class="eyebrow">Weekly update</span><span class="eyebrow">29 July 2026</span><span class="eyebrow">Dataset intake</span></div>
+          <h1>Focused dataset intake for the TS + EIS + DRT pipeline</h1>
+          <p class="lead">This week adds a small, traceable shortlist. The work is an intake screen, not a validation result: each source must still pass a file-level matching check.</p>
+          <p class="research-owner">Research workspace maintained by <strong>Nayeem Faisal</strong>.</p>
+        </div>
+      </header>
+      <main>
+        <section class="compact-reader">
+          <div class="section-kicker">What was completed</div>
+          <h2>Three sources were checked against the same rule</h2>
+          <ul>
+            <li>Does the source contain a time-domain side, such as current, voltage, charge-discharge, or cycling data?</li>
+            <li>Does it contain an EIS side with frequency and complex impedance information?</li>
+            <li>Can the two sides be joined by an honest shared key, such as a cell ID, test ID, SOC, temperature, or protocol?</li>
+            <li>Can the resulting EIS be used for DRT only after quality, residual, stability, and uncertainty checks?</li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="section-kicker">Candidate shortlist</div>
+          <h2>What the public records say</h2>
+          <div class="professional-grid">
+            <article class="professional-card">
+              <span class="tag green">Highest priority</span>
+              <h3>Samsung ICR18650-26J companion records</h3>
+              <p><strong>Evidence:</strong> the published SOC-estimation work links a raw current/voltage record and an EIS record for Samsung ICR18650-26J cells. The related EIS description reports four cells, repeated spectra, and SOC levels from 10% to 100%.</p>
+              <p><strong>Why it fits:</strong> it is the closest new candidate to a TS + EIS bridge.</p>
+              <p><strong>Open check:</strong> confirm matching cell IDs and SOC labels in the downloaded files before using it as a paired dataset.</p>
+              <a href="https://data.mendeley.com/datasets/mbv3bx847g" target="_blank" rel="noopener">Open EIS record</a> · <a href="https://data.mendeley.com/datasets/zdsgxwksn5" target="_blank" rel="noopener">Open current/voltage record</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag">Importer check</span>
+              <h3>WO3 Li-ion electrode data</h3>
+              <p><strong>Evidence:</strong> the Zenodo record provides charge-discharge and EIS CSV files, plus a README and diffusion-coefficient table.</p>
+              <p><strong>Why it fits:</strong> it is a small open source for testing CSV ingestion, impedance column detection, and DRT input validation.</p>
+              <p><strong>Limit:</strong> it is a material-level half-cell experiment, so it is not a replacement for the main commercial full-cell study.</p>
+              <a href="https://zenodo.org/records/18704171" target="_blank" rel="noopener">Open Zenodo record</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag warn">Format check</span>
+              <h3>Cycle + EIS + CV material data</h3>
+              <p><strong>Evidence:</strong> the Mendeley package states that it contains CV, EIS, cycle, and full battery data, under a CC BY 4.0 licence.</p>
+              <p><strong>Why it fits:</strong> it provides a second independent format to test protocol metadata and raw impedance handling.</p>
+              <p><strong>Limit:</strong> the source is materials-focused. It stays a format candidate until its files show reusable IDs and comparable test conditions.</p>
+              <a href="https://data.mendeley.com/datasets/h63ydcsjd6" target="_blank" rel="noopener">Open Mendeley record</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="compact-reader">
+          <div class="section-kicker">Next small task</div>
+          <h2>Work planned before the next supervisor update</h2>
+          <ul>
+            <li>Download a small sample from each candidate, not the full archive.</li>
+            <li>Record file names, columns, units, and available matching keys in the dataset intake sheet.</li>
+            <li>Reject sources that cannot prove a join between the time-series and EIS sides.</li>
+            <li>Choose one passing source for a controlled DRT preparation run; keep the result separate from full pipeline validation.</li>
+          </ul>
+        </section>
+
+        <section class="research-panel">
+          <div class="section-kicker">Supervisor summary</div>
+          <h2>Short update</h2>
+          <p>I completed a focused public-dataset intake for the TS + EIS + DRT pipeline. Three candidate sources were documented with their available time-series and impedance evidence. The next step is deliberately small: inspect file-level keys and formats before treating any source as a matched dataset or a validation result.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var themeKey = "battery-drt-site-theme";
+    var sidebarKey = "battery-drt-site-sidebar";
+    function setTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      var label = document.querySelector("[data-theme-label]");
+      if (label) label.textContent = theme === "dark" ? "On" : "Off";
+    }
+    function setSidebar(state) {
+      document.documentElement.dataset.sidebar = state;
+      var button = document.querySelector("[data-sidebar-toggle]");
+      var icon = document.querySelector("[data-sidebar-icon]");
+      var label = document.querySelector("[data-sidebar-label]");
+      var collapsed = state === "collapsed";
+      if (button) { button.setAttribute("aria-expanded", collapsed ? "false" : "true"); button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu"); }
+      if (icon) icon.textContent = collapsed ? "Menu" : "X";
+      if (label) label.textContent = collapsed ? "Menu" : "Close";
+    }
+    var savedTheme; var savedSidebar;
+    try { savedTheme = localStorage.getItem(themeKey); savedSidebar = localStorage.getItem(sidebarKey); } catch (error) {}
+    setTheme(savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light");
+    setSidebar(savedSidebar === "collapsed" || savedSidebar === "expanded" ? savedSidebar : (window.matchMedia("(max-width: 850px)").matches ? "collapsed" : "expanded"));
+    window.addEventListener("DOMContentLoaded", function () {
+      document.querySelector("[data-theme-toggle]").addEventListener("click", function () { var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem(themeKey, next); } catch (error) {} setTheme(next); });
+      document.querySelector("[data-sidebar-toggle]").addEventListener("click", function () { var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed"; try { localStorage.setItem(sidebarKey, next); } catch (error) {} setSidebar(next); });
+    });
+  })();
+  </script>
+</body>
+</html>

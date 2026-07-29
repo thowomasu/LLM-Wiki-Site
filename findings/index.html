@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Findings | Battery DRT Research Outputs</title>
+  <meta name="description" content="Plain-language research findings for the LLM Wiki and pipeline work.">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="professional-page">
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">X</span><span data-sidebar-label>Close</span></button>
+  <div class="site-shell">
+
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation">
+      <a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Readable research, code evidence, and weekly progress</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+      <div class="side-section">Overview</div>
+      <a class="side-link" href="../pipeline-handoff/">Research handoff</a>
+      <a class="side-link" href="../weekly/">Weekly progress</a>
+      <a class="side-link" href="../findings/">Research findings</a>
+      <a class="side-link" href="../dataset-targets/">Dataset targets</a>
+      <a class="side-link" href="../implementation/">Implementation plan</a>
+      <div class="side-section">Evidence</div>
+      <a class="side-link" href="../okf/">OKF knowledge bundle</a>
+      <a class="side-link" href="../demo-api-hpc/">API/HPC demo code</a>
+      <a class="side-link" href="../cross-dataset/">Cross-dataset study</a>
+      <a class="side-link" href="../external-validation/">External validation</a>
+      <a class="side-link" href="../datasets/">Dataset map</a>
+      <div class="side-section">Reference</div>
+      <a class="side-link" href="../sources/">Sources and papers</a>
+      <a class="side-link" href="../glossary/">Plain-language glossary</a>
+    </aside>
+
+    <div class="page-content">
+
+      <header>
+        <div class="professional-hero">
+          <div class="eyebrow-row"><span class="eyebrow">Research findings</span><span class="eyebrow">Plain-language summary</span></div>
+          <h1>Findings from the current wiki and pipeline work</h1>
+          <p class="lead">This page keeps the research ideas separate from the implementation tasks. The aim is to make the scientific direction easy to review.</p>
+        </div>
+      </header>
+      <main>
+        <section>
+          <table class="evidence-table">
+            <thead>
+              <tr><th>Finding</th><th>Simple explanation</th><th>Why it matters</th><th>Evidence</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dataset matching is the main target</td>
+                <td>The best datasets connect time-series cycling data, EIS spectra, and DRT-ready impedance analysis.</td>
+                <td>This gives the project a clear selection rule and avoids collecting datasets that cannot support the model.</td>
+                <td><a href="../dataset-targets/">Dataset target plan</a></td>
+              </tr>
+              <tr>
+                <td>OKF can improve the wiki structure</td>
+                <td>The website can stay readable for people, while OKF files describe the same work in a structured way.</td>
+                <td>This supports future search, reuse, pipeline connection, and cleaner handoff.</td>
+                <td><a href="../okf/">OKF bundle</a></td>
+              </tr>
+              <tr>
+                <td>Local prototype is enough before VM access</td>
+                <td>The API/HPC flow can first be shown locally with a small job runner.</td>
+                <td>This avoids waiting for FAU server access and still gives the team something working to review.</td>
+                <td><a href="../demo-api-hpc/">API/HPC demo</a></td>
+              </tr>
+              <tr>
+                <td>DRT validation needs layered checks</td>
+                <td>DRT does not have one single Kramers-Kronig-style replacement. The safer path is to check EIS quality, DRT reconstruction, residuals, stability, and uncertainty.</td>
+                <td>This gives the professor a careful answer and avoids overclaiming.</td>
+                <td><a href="../okf/drt-validation-workflow.md">DRT validation note</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="compact-reader" aria-labelledby="drt-competitor-title">
+          <div class="section-kicker">Upcoming week · 23–30 July 2026</div>
+          <h2 id="drt-competitor-title">DRT competitor review</h2>
+          <ul>
+            <li><strong>GP-DRT:</strong> an open-source Gaussian-process method for recovering a distribution of relaxation times from EIS data.</li>
+            <li><strong>Useful feature:</strong> it reports a DRT estimate together with covariance, so uncertainty can be recorded instead of hiding it.</li>
+            <li><strong>Stress cases:</strong> the project documents tests involving noise, overlapping processes, truncated frequency ranges, inductive features, and experimental EIS.</li>
+            <li><strong>IEST guide:</strong> explains the inverse-problem difficulty and the practical balance between regularisation, resolution, and noise suppression.</li>
+            <li><strong>Important limit:</strong> these references analyse EIS and DRT. They do not by themselves validate our time-series-to-EIS dataset matching.</li>
+            <li><strong>Our research gap:</strong> connect matched time-series cycling data, EIS, and DRT-ready outputs with traceable cell, SOC, temperature, and protocol metadata.</li>
+            <li><strong>Next experiment:</strong> run GP-DRT on selected Panasonic EIS files, save the DRT mean and uncertainty, test reconstruction at held-out frequencies, and compare with a simpler baseline.</li>
+            <li><strong>Decision:</strong> use GP-DRT as a technical comparator and uncertainty reference, not as proof that the full TS + EIS + DRT bridge works.</li>
+          </ul>
+          <p class="small-note">Sources: <a href="https://github.com/ciuccislab/GP-DRT" target="_blank" rel="noopener">GP-DRT repository</a> · <a href="https://iestbattery.com/case/drt-analysis-eis-deconvolution-guide/" target="_blank" rel="noopener">IEST DRT guide</a></p>
+        </section>
+        <section class="compact-reader" aria-labelledby="candidate-intake-title">
+          <div class="section-kicker">Dataset intake · 29 July 2026</div>
+          <h2 id="candidate-intake-title">Three candidates added to the research queue</h2>
+          <ul>
+            <li><strong>Samsung ICR18650-26J paired records:</strong> a current/voltage record and an EIS record are published as companion data for the same SOC-estimation study. The required check is whether cell IDs, SOC points, and cycle records can be joined file by file.</li>
+            <li><strong>WO3 Li-ion electrode record:</strong> Zenodo publishes raw charge-discharge and EIS CSV files. It is useful for a small importer and DRT-format check, but it is a material-level half-cell study, not the primary full-cell validation dataset.</li>
+            <li><strong>Cycle + EIS + CV material record:</strong> a Mendeley package states that it includes cycle, EIS, CV, and full battery data. It remains a screening candidate until the files show repeatable IDs and compatible impedance columns.</li>
+            <li><strong>Decision:</strong> this week we will inspect the metadata and a small file sample from each source before downloading large archives or calling any candidate a match.</li>
+          </ul>
+          <p class="small-note"><a href="../weekly/2026-07-29/">Open the dated intake note</a></p>
+        </section>
+<!-- external-dataset-screen-2026-07-23:start -->
+        <section class="compact-reader" aria-labelledby="five-dataset-screen-title">
+          <div class="section-kicker">New dataset screen · 23 July 2026</div>
+          <h2 id="five-dataset-screen-title">Five external datasets compared</h2>
+          <ul>
+            <li><strong>Best full match:</strong> Cambridge uneven-usage EIS, with same-cell GCPL and GEIS records in the local manifest probe.</li>
+            <li><strong>Strong candidates:</strong> NASA PCoE and CALCE, both with same-cell time-domain or capacity evidence plus impedance evidence.</li>
+            <li><strong>Partial candidate:</strong> Battery Archive, because the public page shows cycling data but does not confirm an EIS match.</li>
+            <li><strong>EIS control:</strong> the 54-cell Zenodo set has EIS and machine-readable metadata, but no time-series side.</li>
+            <li><strong>Next:</strong> use a frozen cell-level holdout, reconstruction error, residual checks, and uncertainty before calling any source validation.</li>
+          </ul>
+          <p class="small-note"><a href="../external-validation/external-dataset-screen-2026-07-23/">Open the full five-source comparison</a></p>
+        </section>
+<!-- external-dataset-screen-2026-07-23:end -->
+      </main>
+
+    </div>
+  </div>
+
+<script>
+(function () {
+  var key = "battery-drt-site-theme";
+  var sidebarKey = "battery-drt-site-sidebar";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "Menu" : "X";
+  }
+  applyTheme(preferredTheme());
+  applySidebar(preferredSidebar());
+  window.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

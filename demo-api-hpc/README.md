@@ -1,0 +1,74 @@
+# Demo API to HPC Pipeline
+
+This folder is the first local prototype for the VM/HPC pipeline handoff.
+
+The goal is to prove the control flow before FAU VM/HPC access is ready:
+
+1. A client submits a small battery-processing job to an API.
+2. The API creates a job folder and stores the input.
+3. A local mock runner processes the job.
+4. The result is written as JSON.
+5. The API can return job status and result.
+
+Later, the local mock runner can be replaced by a real HPC scheduler call, for example `sbatch`.
+
+## Files
+
+- `app.py` - FastAPI demo service.
+- `worker.py` - small battery CSV processing script.
+- `sample_battery.csv` - tiny demo input file.
+- `requirements.txt` - minimal Python packages.
+- `jobs/` - runtime output folder, ignored by Git.
+
+## Local Run
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app:app --reload --port 8090
+```
+
+Open:
+
+```text
+http://localhost:8090/docs
+```
+
+## Demo Requests
+
+Submit a job:
+
+```bash
+curl -X POST http://localhost:8090/jobs \
+  -H "Content-Type: application/json" \
+  -d '{"input_csv":"sample_battery.csv"}'
+```
+
+Check status:
+
+```bash
+curl http://localhost:8090/jobs/<job_id>
+```
+
+Get result:
+
+```bash
+curl http://localhost:8090/jobs/<job_id>/result
+```
+
+## HPC Replacement Point
+
+In `app.py`, the current demo calls:
+
+```python
+subprocess.run([sys.executable, "worker.py", ...])
+```
+
+On a real HPC cluster this becomes:
+
+```bash
+sbatch run_battery_job.slurm <job_id> <input_csv> <output_json>
+```
+
+The API contract can stay the same while the execution backend changes.

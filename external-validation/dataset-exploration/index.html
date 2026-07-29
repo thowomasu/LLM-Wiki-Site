@@ -26,6 +26,28 @@
       color: var(--muted);
       font-size: 15px;
     }
+
+    .figure-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--paper);
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .figure-note strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .figure-note ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .figure-note li {
+      margin: 5px 0;
+    }
     .verdict {
       display: inline-block;
       margin-top: 10px;
@@ -266,12 +288,12 @@
 </script>
 
   <meta name="description" content="Screening evidence for CALCE, RADAR4KIT, Panasonic, Stanford, NASA, and other external validation candidates.">
-  <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/external-validation/dataset-exploration/">
+  <link rel="canonical" href="https://nayeemfaisal.github.io/LLM-Wiki-Site/external-validation/dataset-exploration/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="External dataset screening evidence | Battery DRT Research Outputs">
   <meta property="og:description" content="Screening evidence for CALCE, RADAR4KIT, Panasonic, Stanford, NASA, and other external validation candidates.">
-  <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/external-validation/dataset-exploration/">
-  <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
+  <meta property="og:url" content="https://nayeemfaisal.github.io/LLM-Wiki-Site/external-validation/dataset-exploration/">
+  <meta property="og:image" content="https://nayeemfaisal.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
 <script>
 window.MathJax = {
@@ -334,6 +356,16 @@ window.MathJax = {
         <p><strong>The frozen CALB pulse-to-EIS rule</strong> is the internal rule previously labeled frozen pulse-to-EIS rule. In simple terms, it asks whether a current/voltage pulse can recover impedance-like information that agrees with EIS, which means Electrochemical Impedance Spectroscopy.</p>
         <p>A dataset is useful for that test only if it has both sides of the bridge: same-cell EIS spectra and matching time-domain pulse or rest windows with current, voltage, temperature, and state labels. More files do not automatically mean better validation. A huge pulse dataset without EIS still cannot validate this rule.</p>
         <p><strong>Frozen inputs</strong> means the rule is not allowed to change after seeing the external data. No tuning lambda, thresholds, windows, candidate rules, fallback logic, or pass criteria. That is the whole point. If we tune after looking, we are fooling ourselves.</p>
+        <section class="note">
+          <strong>QOCV in time-series data</strong>
+          <ul>
+            <li><strong>QOCV</strong> means quasi-open-circuit voltage.</li>
+            <li>It is measured after the battery is allowed to relax.</li>
+            <li>It is close to OCV, but it is not a perfect equilibrium value.</li>
+            <li>It can provide a practical SOC estimate for screening.</li>
+            <li>Here, it helps align TS data with EIS and DRT analysis.</li>
+          </ul>
+        </section>
 
         <section class="grid">
           <article class="card">
@@ -383,7 +415,15 @@ window.MathJax = {
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_eis_voltage_coverage.png" alt="Panasonic EIS voltage coverage as SOC proxy">
-          <figcaption>EIS voltage coverage used as a rough SOC proxy. SOC means State of Charge. This helps check whether pulse windows can be paired to nearby EIS states without inventing labels.</figcaption>
+          <figcaption class="figure-note">
+            <strong>What this figure shows</strong>
+            <ul>
+              <li>Each dot is one EIS voltage measurement.</li>
+              <li>Each box shows the voltage spread for one temperature group.</li>
+              <li>SOC means State of Charge; voltage is used here only as a rough SOC proxy.</li>
+              <li>The goal is to check whether EIS states can be paired with nearby pulse windows without inventing labels.</li>
+            </ul>
+          </figcaption>
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_pulse_candidate_map.png" alt="Panasonic pulse candidate map showing long-window availability">
@@ -391,7 +431,16 @@ window.MathJax = {
         </figure>
         <figure class="figure">
           <img src="plots/panasonic_matched_long_discharge_examples.png" alt="Panasonic matched long-discharge current and voltage examples">
-          <figcaption>Current and voltage traces for the matched long-discharge candidates. These are not model results. They are the raw evidence that justifies building a frozen-input test workflow next.</figcaption>
+          <figcaption class="figure-note">
+            <strong>Panasonic matched long-discharge examples in scatter format</strong>
+            <ul>
+              <li>Each panel uses small, unconnected dots, following the supervisor's sine-curve reference style.</li>
+              <li>Left side: current profile for each matched long-discharge candidate.</li>
+              <li>Right side: voltage response for the same candidate window.</li>
+              <li>The purpose is to check whether the TS window is strong enough to pair with nearby EIS data.</li>
+              <li>This supports the main research frame: matching TS, EIS, and DRT-ready battery data.</li>
+            </ul>
+          </figcaption>
         </figure>
 
         <h2>Samsung INR21700-50E HPPC</h2>

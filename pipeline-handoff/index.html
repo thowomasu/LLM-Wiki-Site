@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Handoff | Battery DRT Research Outputs</title>
+  <meta name="description" content="Professional research handoff page for the battery DRT wiki.">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="professional-page">
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">X</span><span data-sidebar-label>Close</span></button>
+  <div class="site-shell">
+
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation">
+      <a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Readable research, code evidence, and weekly progress</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+      <div class="side-section">Overview</div>
+      <a class="side-link" href="../pipeline-handoff/">Research handoff</a>
+      <a class="side-link" href="../weekly/">Weekly progress</a>
+      <a class="side-link" href="../findings/">Research findings</a>
+      <a class="side-link" href="../dataset-targets/">Dataset targets</a>
+      <a class="side-link" href="../implementation/">Implementation plan</a>
+      <div class="side-section">Evidence</div>
+      <a class="side-link" href="../okf/">OKF knowledge bundle</a>
+      <a class="side-link" href="../demo-api-hpc/">API/HPC demo code</a>
+      <a class="side-link" href="../cross-dataset/">Cross-dataset study</a>
+      <a class="side-link" href="../external-validation/">External validation</a>
+      <a class="side-link" href="../datasets/">Dataset map</a>
+      <div class="side-section">Reference</div>
+      <a class="side-link" href="../sources/">Sources and papers</a>
+      <a class="side-link" href="../glossary/">Plain-language glossary</a>
+    </aside>
+
+    <div class="page-content">
+
+      <header>
+        <div class="professional-hero">
+          <div class="eyebrow-row">
+            <span class="eyebrow">Updated 2026-07-23</span>
+            <span class="eyebrow">Supervisor view</span>
+            <span class="eyebrow">LLM-Wiki-Site handoff</span>
+          </div>
+          <h1>Battery research wiki: progress, findings, and next pipeline work</h1>
+          <p class="lead">This page gives a clean overview of the current research work. It explains what was added, why it matters, where the evidence is, and what needs to happen next.</p>
+          <div class="summary-strip">
+            <div class="summary-metric"><strong>3</strong><span>new readable sections</span></div>
+            <div class="summary-metric"><strong>1</strong><span>weekly update page</span></div>
+            <div class="summary-metric"><strong>OKF</strong><span>new knowledge-structure finding</span></div>
+            <div class="summary-metric"><strong>API/HPC</strong><span>demo path prepared</span></div>
+          </div>
+          <div class="button-row">
+            <a class="primary-button" href="../weekly/2026-07-23/">Read this week's update</a>
+            <a class="secondary-button" href="../findings/">Open findings</a>
+            <a class="secondary-button" href="../dataset-targets/">Open dataset targets</a>
+            <a class="secondary-button" href="../implementation/">Open implementation plan</a>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section>
+          <div class="section-kicker">Short answer</div>
+          <h2>What changed?</h2>
+          <div class="research-panel">
+            <p>The wiki has been reorganized into a more professional research format. Instead of one long technical note, the work is split into plain-language pages for progress, findings, implementation, and evidence.</p>
+            <p>The main research direction added this week is the Open Knowledge Format idea: the site can stay readable for people, while a structured OKF layer can make the same knowledge easier to reuse later in tools, pipelines, and agent workflows.</p>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-kicker">Current status</div>
+          <h2>Work package overview</h2>
+          <div class="professional-grid">
+            <article class="professional-card">
+              <span class="tag green">Done locally</span>
+              <h3>Readable weekly update</h3>
+              <p>A dated weekly page now explains the work in simple language and links to the evidence.</p>
+            </article>
+            <article class="professional-card">
+              <span class="tag green">Done locally</span>
+              <h3>Research finding page</h3>
+              <p>Findings are separated from implementation notes, so the professor can review the scientific value first.</p>
+            </article>
+            <article class="professional-card">
+              <span class="tag warn">Next</span>
+              <h3>Push to GitHub Pages</h3>
+              <p>The public link will work only after the local changes are committed and pushed to GitHub.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-kicker">Evidence</div>
+          <h2>Open the separate pages</h2>
+          <div class="link-board">
+            <a href="../weekly/2026-07-23/">Weekly update<small>Dated summary for 2026-07-23</small></a>
+            <a href="../findings/">Research findings<small>OKF, DRT validation, and pipeline direction</small></a>
+            <a href="../dataset-targets/">Dataset targets<small>TS, EIS, and DRT matching frame</small></a>
+            <a href="../implementation/">Implementation plan<small>VM, API, HPC, and local prototype plan</small></a>
+            <a href="../okf/">OKF knowledge bundle<small>Structured Markdown concept files</small></a>
+            <a href="../demo-api-hpc/">API/HPC demo code<small>Prototype folder for compute workflow</small></a>
+            <a href="../cross-dataset/">Cross-dataset study<small>Main research evidence area</small></a>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-kicker">Next decision</div>
+          <h2>What we need from the team</h2>
+          <ol class="clean-list">
+            <li>Confirm whether the FAU VM will be available soon, or whether the first demo should stay local in Git.</li>
+            <li>Decide which battery dataset should be used for the first public pipeline example.</li>
+            <li>Push the site changes so the professor can open the GitHub Pages links without a local server.</li>
+          </ol>
+        </section>
+      </main>
+
+    </div>
+  </div>
+
+<script>
+(function () {
+  var key = "battery-drt-site-theme";
+  var sidebarKey = "battery-drt-site-sidebar";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "Menu" : "X";
+  }
+  applyTheme(preferredTheme());
+  applySidebar(preferredSidebar());
+  window.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
