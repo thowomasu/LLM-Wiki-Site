@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dataset Targets | Battery DRT Research Outputs</title>
+  <meta name="description" content="Plain-language dataset search and matching plan for TS, EIS, and DRT battery research datasets.">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="professional-page">
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">X</span><span data-sidebar-label>Close</span></button>
+  <div class="site-shell">
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation">
+      <a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Readable research, code evidence, and weekly progress</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+      <div class="side-section">Overview</div>
+      <a class="side-link" href="../pipeline-handoff/">Research handoff</a>
+      <a class="side-link" href="../weekly/">Weekly progress</a>
+      <a class="side-link" href="../findings/">Research findings</a>
+      <a class="side-link" href="../dataset-targets/">Dataset targets</a>
+      <a class="side-link" href="../implementation/">Implementation plan</a>
+      <div class="side-section">Evidence</div>
+      <a class="side-link" href="../okf/">OKF knowledge bundle</a>
+      <a class="side-link" href="../demo-api-hpc/">API/HPC demo code</a>
+      <a class="side-link" href="../cross-dataset/">Cross-dataset study</a>
+      <a class="side-link" href="../external-validation/">External validation</a>
+      <a class="side-link" href="../datasets/">Dataset map</a>
+      <div class="side-section">Reference</div>
+      <a class="side-link" href="../sources/">Sources and papers</a>
+      <a class="side-link" href="../glossary/">Plain-language glossary</a>
+    </aside>
+
+    <div class="page-content">
+      <header>
+        <div class="professional-hero">
+          <div class="eyebrow-row">
+            <span class="eyebrow">Main research target</span>
+            <span class="eyebrow">TS + EIS + DRT</span>
+            <span class="eyebrow">Updated 2026-07-29</span>
+          </div>
+          <h1>Dataset search and matching plan</h1>
+          <p class="lead">Our main target is to find and improve battery datasets that connect time-series cycling data, EIS measurements, and DRT-ready impedance analysis. The goal is not only to collect more data, but to find datasets that can actually support the pipeline.</p>
+          <div class="summary-strip">
+            <div class="summary-metric"><strong>TS</strong><span>time-series cycling, current, voltage, temperature, capacity</span></div>
+            <div class="summary-metric"><strong>EIS</strong><span>frequency, real impedance, imaginary impedance, test conditions</span></div>
+            <div class="summary-metric"><strong>DRT</strong><span>impedance data good enough for distribution-of-relaxation-time analysis</span></div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section>
+          <div class="section-kicker">Simple research question</div>
+          <h2>What are we looking for?</h2>
+          <div class="research-panel">
+            <p>We are looking for datasets where the same cell or battery experiment has both normal cycling data and impedance data. The time-series data tells us how the cell behaves during charge and discharge. The EIS data tells us about internal electrochemical behavior. If the EIS quality is good enough, we can also use it for DRT analysis.</p>
+            <p>The best datasets are the ones where these parts can be matched together by cell ID, cycle number, state of charge, temperature, aging condition, or test date.</p>
+          </div>
+        </section>
+
+        <section class="compact-reader" aria-labelledby="intake-title">
+          <div class="section-kicker">This week's intake</div>
+          <h2 id="intake-title">Three candidates are ready for file checks</h2>
+          <ul>
+            <li>Samsung ICR18650-26J: paired current/voltage and EIS records from the same published study.</li>
+            <li>WO3 Li-ion electrode record: open charge-discharge and EIS CSV files for an importer and format check.</li>
+            <li>Cycle + EIS + CV material record: a compact source to test whether protocol labels and impedance columns can be normalised.</li>
+            <li>None is called a pipeline match yet. The next gate is a file-level check for shared cell, test, SOC, temperature, or protocol keys.</li>
+          </ul>
+          <div class="button-row"><a class="primary-button" href="../weekly/2026-07-29/">Open this week's intake note</a></div>
+        </section>
+
+        <section>
+          <div class="section-kicker">Dataset matching frame</div>
+          <h2>How we rank datasets</h2>
+          <table class="evidence-table">
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Dataset condition</th>
+                <th>Usefulness for us</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Best match</td>
+                <td>Time-series cycling data and EIS spectra exist for the same cells, with cycle/SOC/temperature labels.</td>
+                <td>Can support TS to EIS modelling and later DRT analysis.</td>
+              </tr>
+              <tr>
+                <td>Good match</td>
+                <td>EIS exists with aging labels, but time-series cycling data is incomplete or separate.</td>
+                <td>Useful for DRT validation and EIS-based health analysis.</td>
+              </tr>
+              <tr>
+                <td>Partial match</td>
+                <td>Strong cycling data exists, but EIS is missing or only available for a few checkpoints.</td>
+                <td>Useful for pipeline testing, but weaker for DRT.</td>
+              </tr>
+              <tr>
+                <td>Low match</td>
+                <td>Only summary capacity/SOH data exists without raw time-series or impedance spectra.</td>
+                <td>Can be used as background evidence, not as the main pipeline dataset.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <div class="section-kicker">Candidate sources</div>
+          <h2>Where we should search next</h2>
+          <div class="professional-grid">
+            <article class="professional-card">
+              <span class="tag green">High priority</span>
+              <h3>BatteryArchive</h3>
+              <p>Good place to screen public battery aging and cycling datasets. We should look for entries that include impedance, pulse tests, or linked characterization data.</p>
+              <a href="https://www.batteryarchive.org/" target="_blank" rel="noopener">Open BatteryArchive</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag green">High priority</span>
+              <h3>NASA battery datasets</h3>
+              <p>NASA battery aging data is useful because it includes cycling and impedance-style measurements for aging studies. It is a good baseline source to compare with our pipeline.</p>
+              <a href="https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/" target="_blank" rel="noopener">Open NASA repository</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag">Search target</span>
+              <h3>Zenodo</h3>
+              <p>Zenodo has battery and impedance datasets from individual research groups. We should search for lithium-ion EIS, aging, SOC, and temperature-labelled experiments.</p>
+              <a href="https://zenodo.org/search?q=lithium%20ion%20battery%20EIS%20dataset" target="_blank" rel="noopener">Search Zenodo</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag">Search target</span>
+              <h3>Mendeley Data</h3>
+              <p>Mendeley often hosts supporting datasets for battery papers. We should screen for datasets with raw impedance spectra and cycling labels.</p>
+              <a href="https://data.mendeley.com/research-data/?search=lithium%20ion%20battery%20EIS" target="_blank" rel="noopener">Search Mendeley Data</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag warn">Paper-linked</span>
+              <h3>Data in Brief / ScienceDirect</h3>
+              <p>Some battery papers publish companion datasets. These are useful when the article explains the test protocol clearly.</p>
+              <a href="https://www.sciencedirect.com/search?qs=lithium%20ion%20battery%20EIS%20dataset" target="_blank" rel="noopener">Search ScienceDirect</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag warn">Paper-linked</span>
+              <h3>Nature Scientific Data</h3>
+              <p>Good place for curated battery datasets with strong documentation. We should screen for datasets that include EIS or diagnostic measurements.</p>
+              <a href="https://www.nature.com/search?q=lithium%20ion%20battery%20EIS%20dataset" target="_blank" rel="noopener">Search Nature</a>
+            </article>
+          </div>
+        </section>
+
+        <!-- external-dataset-screen-2026-07-23:start -->
+        <section class="compact-reader" aria-labelledby="five-dataset-screen-title">
+          <div class="section-kicker">New dataset screen · 23 July 2026</div>
+          <h2 id="five-dataset-screen-title">Five external datasets compared</h2>
+          <ul>
+            <li><strong>Best full match:</strong> Cambridge uneven-usage EIS, with same-cell GCPL and GEIS records in the local manifest probe.</li>
+            <li><strong>Strong candidates:</strong> NASA PCoE and CALCE, both with same-cell time-domain or capacity evidence plus impedance evidence.</li>
+            <li><strong>Partial candidate:</strong> Battery Archive, because the public page shows cycling data but does not confirm an EIS match.</li>
+            <li><strong>EIS control:</strong> the 54-cell Zenodo set has EIS and machine-readable metadata, but no time-series side.</li>
+            <li><strong>Next:</strong> use a frozen cell-level holdout, reconstruction error, residual checks, and uncertainty before calling any source validation.</li>
+          </ul>
+          <p class="small-note"><a href="../external-validation/external-dataset-screen-2026-07-23/">Open the full five-source comparison</a></p>
+        </section>
+<!-- external-dataset-screen-2026-07-23:end -->
+<section>
+          <div class="section-kicker">Pipeline impact</div>
+          <h2>How this improves the research frame</h2>
+          <ol class="clean-list">
+            <li>It gives us a clear rule for choosing datasets instead of collecting random battery data.</li>
+            <li>It connects the dataset search directly to the model target: predicting or explaining EIS/DRT behavior from cycling data.</li>
+            <li>It makes every new dataset easier to compare using the same TS/EIS/DRT matching score.</li>
+            <li>It gives a clear weekly task: screen new sources, rank them, and add the best ones to the wiki.</li>
+          </ol>
+        </section>
+
+        <section>
+          <div class="section-kicker">Next weekly task</div>
+          <h2>What to do next</h2>
+          <div class="research-panel">
+            <p>The next task is to create a dataset screening table. For each candidate dataset, we should record: source link, cell chemistry, cell format, time-series availability, EIS availability, DRT readiness, labels available, download status, and whether it can be used in the demo pipeline.</p>
+            <div class="button-row">
+              <a class="primary-button" href="../weekly/2026-07-23/">Back to weekly update</a>
+              <a class="secondary-button" href="../datasets/">Open current dataset map</a>
+              <a class="secondary-button" href="../external-validation/dataset-exploration/">Open dataset screening evidence</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+<script>
+(function () {
+  var key = "battery-drt-site-theme";
+  var sidebarKey = "battery-drt-site-sidebar";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "Menu" : "X";
+  }
+  applyTheme(preferredTheme());
+  applySidebar(preferredSidebar());
+  window.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>

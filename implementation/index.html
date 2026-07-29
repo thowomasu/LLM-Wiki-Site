@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementation Plan | Battery DRT Research Outputs</title>
+  <meta name="description" content="Simple implementation plan for the VM, API, HPC, and local prototype workflow.">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="professional-page">
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">X</span><span data-sidebar-label>Close</span></button>
+  <div class="site-shell">
+
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation">
+      <a class="brand" href="../index.html"><strong>Battery DRT Research Outputs</strong><span>Readable research, code evidence, and weekly progress</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+      <div class="side-section">Overview</div>
+      <a class="side-link" href="../pipeline-handoff/">Research handoff</a>
+      <a class="side-link" href="../weekly/">Weekly progress</a>
+      <a class="side-link" href="../findings/">Research findings</a>
+      <a class="side-link" href="../dataset-targets/">Dataset targets</a>
+      <a class="side-link" href="../implementation/">Implementation plan</a>
+      <div class="side-section">Evidence</div>
+      <a class="side-link" href="../okf/">OKF knowledge bundle</a>
+      <a class="side-link" href="../demo-api-hpc/">API/HPC demo code</a>
+      <a class="side-link" href="../cross-dataset/">Cross-dataset study</a>
+      <a class="side-link" href="../external-validation/">External validation</a>
+      <a class="side-link" href="../datasets/">Dataset map</a>
+      <div class="side-section">Reference</div>
+      <a class="side-link" href="../sources/">Sources and papers</a>
+      <a class="side-link" href="../glossary/">Plain-language glossary</a>
+    </aside>
+
+    <div class="page-content">
+
+      <header>
+        <div class="professional-hero">
+          <div class="eyebrow-row"><span class="eyebrow">Implementation plan</span><span class="eyebrow">VM / API / HPC</span></div>
+          <h1>Practical pipeline plan</h1>
+          <p class="lead">This page explains what should be built next in simple steps. It keeps the work realistic while VM access is still uncertain.</p>
+        </div>
+      </header>
+      <main>
+        <section>
+          <div class="professional-grid">
+            <article class="professional-card">
+              <span class="tag green">Step 1</span>
+              <h3>Local demo first</h3>
+              <p>Run a small API locally. The API accepts a job request and starts a small battery-data processing task.</p>
+            </article>
+            <article class="professional-card">
+              <span class="tag">Step 2</span>
+              <h3>Job status endpoint</h3>
+              <p>Add simple status states: submitted, running, finished, and failed. This proves the workflow before connecting real HPC.</p>
+            </article>
+            <article class="professional-card">
+              <span class="tag warn">Step 3</span>
+              <h3>Replace local job with VM/HPC</h3>
+              <p>When FAU VM access is ready, replace the local job command with the real server or scheduler command.</p>
+            </article>
+          </div>
+        </section>
+        <section>
+          <div class="section-kicker">Dataset frame</div>
+          <h2>The pipeline should start from matched TS/EIS/DRT data</h2>
+          <div class="research-panel">
+            <p>The implementation should not start from a random file format. It should start from the research frame: find datasets where time-series cycling data can be matched to EIS spectra, then prepare those spectra for DRT analysis where quality allows.</p>
+            <a class="secondary-button" href="../dataset-targets/">Open dataset target plan</a>
+          </div>
+        </section>
+        <section>
+          <div class="section-kicker">Minimum demo</div>
+          <h2>What the demo must show</h2>
+          <ol class="clean-list">
+            <li>A request enters the API.</li>
+            <li>The API creates a job ID.</li>
+            <li>A small battery CSV is processed.</li>
+            <li>The result is saved as JSON or CSV.</li>
+            <li>The user can open or download the result.</li>
+          </ol>
+        </section>
+      </main>
+
+    </div>
+  </div>
+
+<script>
+(function () {
+  var key = "battery-drt-site-theme";
+  var sidebarKey = "battery-drt-site-sidebar";
+  function preferredTheme() {
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved === "dark" || saved === "light") return saved;
+    } catch (error) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    var label = document.querySelector("[data-theme-label]");
+    if (label) label.textContent = theme === "dark" ? "On" : "Off";
+  }
+  function preferredSidebar() {
+    if (window.matchMedia && window.matchMedia("(max-width: 850px)").matches) return "collapsed";
+    try {
+      var saved = localStorage.getItem(sidebarKey);
+      if (saved === "collapsed" || saved === "expanded") return saved;
+    } catch (error) {}
+    return "expanded";
+  }
+  function applySidebar(state) {
+    document.documentElement.dataset.sidebar = state;
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var icon = document.querySelector("[data-sidebar-icon]");
+    var label = document.querySelector("[data-sidebar-label]");
+    if (button) {
+      var collapsed = state === "collapsed";
+      button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("title", collapsed ? "Open menu" : "Close menu");
+      button.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+    if (label) label.textContent = state === "collapsed" ? "Menu" : "Close";
+    if (icon) icon.textContent = state === "collapsed" ? "Menu" : "X";
+  }
+  applyTheme(preferredTheme());
+  applySidebar(preferredSidebar());
+  window.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(key, next); } catch (error) {}
+        applyTheme(next);
+      });
+    }
+    var sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", function () {
+        var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed";
+        try { localStorage.setItem(sidebarKey, next); } catch (error) {}
+        applySidebar(next);
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

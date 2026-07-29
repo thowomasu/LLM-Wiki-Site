@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Battery DRT Research Outputs</title>
   <meta name="description" content="Main cross-dataset study predicting limited-frequency measured EIS from time-series features, with CALB kept as a separate internal comparison.">
-  <link rel="canonical" href="https://thowomasu.github.io/LLM-Wiki-Site/">
+  <link rel="canonical" href="https://nayeemfaisal.github.io/LLM-Wiki-Site/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Battery DRT Research Outputs">
   <meta property="og:description" content="Main cross-dataset study predicting limited-frequency measured EIS from time-series features, with CALB kept as a separate internal comparison.">
-  <meta property="og:url" content="https://thowomasu.github.io/LLM-Wiki-Site/">
-  <meta property="og:image" content="https://thowomasu.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
+  <meta property="og:url" content="https://nayeemfaisal.github.io/LLM-Wiki-Site/">
+  <meta property="og:image" content="https://nayeemfaisal.github.io/LLM-Wiki-Site/sources/downloads/plot/40-outputs-experiments-calb-l148n58a-01-graphs-section-11-time-series-vs-eis-2d-comparison-section-11-time-series-vs-eis-2d-comparison-png.png">
   <meta property="og:image:alt" content="CALB time-series and measured EIS DRT comparison figure">
   <style>:root {
   color-scheme: light;
@@ -992,6 +992,11 @@ window.MathJax = {
   <div class="site-shell">
     <aside class="sidebar" id="site-navigation" aria-label="Site navigation"><a class="brand" href="index.html"><strong>Battery DRT Research Outputs</strong><span>Battery studies, results, limits, and sources</span></a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button><div class="side-section">Start here</div>
 <a class="side-link" href="index.html#project-summary">Project summary</a>
+<a class="side-link" href="pipeline-handoff/">Pipeline handoff</a>
+      <a class="side-link" href="weekly/">Weekly progress log</a>
+      <a class="side-link" href="findings/">Research findings</a>
+      <a class="side-link" href="dataset-targets/">Dataset targets</a>
+      <a class="side-link" href="implementation/">Implementation plan</a>
 <div class="side-section">Main study</div>
 <a class="side-link" href="cross-dataset/">Cross-dataset study overview</a>
 <a class="side-link" href="cross-dataset/early-versions/">Versions 1 to 3: early attempts</a>
@@ -1037,9 +1042,22 @@ window.MathJax = {
       <h2>Choose a reader path</h2>
       <div class="start-grid" aria-label="Reader paths">
         <a class="start-card reader-path" href="cross-dataset/"><strong>Project summary</strong><span>Read the main question, the Version 4 to Version 6 progression, and the current controlled-study plan.</span></a>
+        <a class="start-card reader-path" href="pipeline-handoff/"><strong>Pipeline handoff</strong><span>Open the repository, VM, API, HPC demo, and responsibility split for the next work package.</span></a>
         <a class="start-card reader-path" href="cross-dataset/version-comparison/"><strong>Compare the versions</strong><span>See what changed, which rules were met or missed, and why the universal model path stopped.</span></a>
         <a class="start-card reader-path" href="presentations/index.html#cambridge-molicell-eis"><strong>Evidence and figures</strong><span>Open the cross-dataset presentations, plots, methods, and downloadable public files.</span></a>
       </div>
+    </section>
+    <section class="technical-section" aria-labelledby="quick-read-title">
+      <div class="section-kicker">Quick read</div>
+      <h2 id="quick-read-title">The project in six points</h2>
+      <ul class="clean-list">
+        <li><strong>Main goal:</strong> find battery datasets that connect time-series measurements, EIS, and DRT-ready impedance data.</li>
+        <li><strong>What the pipeline uses:</strong> current, voltage, temperature, cycle or SOC labels, and measured impedance spectra.</li>
+        <li><strong>What worked:</strong> Version 4 showed narrow support on one controlled external protocol.</li>
+        <li><strong>What did not work:</strong> the broader universal path did not transfer reliably to new datasets.</li>
+        <li><strong>Current focus:</strong> improve dataset matching and document evidence before fitting new models.</li>
+        <li><strong>How to use this wiki:</strong> start with the handoff, read the findings, then open the evidence pages and downloadable files.</li>
+      </ul>
     </section>
     <section class="evidence-status" aria-labelledby="evidence-status-title">
       <h2 id="evidence-status-title">Evidence status</h2>

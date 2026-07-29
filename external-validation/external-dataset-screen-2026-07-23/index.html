@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>External Dataset Screen 2026-07-23 | Battery DRT Research Outputs</title>
+  <meta name="description" content="Five-source screening pass for time-series, EIS, and DRT dataset matching.">
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="professional-page">
+  <div class="site-shell">
+    <aside class="sidebar" aria-label="Site navigation">
+      <a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Readable research, code evidence, and weekly progress</span></a>
+      <div class="side-section">Overview</div>
+      <a class="side-link" href="../../pipeline-handoff/">Research handoff</a>
+      <a class="side-link" href="../../findings/">Research findings</a>
+      <a class="side-link" href="../../dataset-targets/">Dataset targets</a>
+      <a class="side-link" href="../../datasets/">Dataset map</a>
+      <div class="side-section">Evidence</div>
+      <a class="side-link" href="../dataset-exploration/">Existing dataset exploration</a>
+      <a class="side-link" href="./" aria-current="page">Five-source screen</a>
+    </aside>
+    <div class="page-content">
+      <header>
+        <div class="professional-hero">
+          <div class="eyebrow-row"><span class="eyebrow">Dataset screen</span><span class="eyebrow">23 July 2026</span><span class="eyebrow">TS + EIS + DRT</span></div>
+          <h1>Five external datasets, one matching rule</h1>
+          <p class="lead">A compact screening pass to find which public sources can support a same-cell link between time-series cycling data, EIS, and later DRT analysis.</p>
+        </div>
+      </header>
+      <main>
+        <section class="compact-reader">
+          <div class="section-kicker">Read this first</div>
+          <h2>What was actually checked?</h2>
+          <ul>
+            <li>NASA, CALCE, and Cambridge use local manifest summaries already present in this repository.</li>
+            <li>Battery Archive and the 54-cell Zenodo set are online metadata screens; their raw files were not treated as downloaded.</li>
+            <li>The score is dataset readiness for our pipeline, not model accuracy and not validation.</li>
+          </ul>
+        </section>
+        <section>
+          <div class="section-kicker">Comparison</div>
+          <h2>Screening table</h2>
+          <div class="table-wrap"><table class="evidence-table"><thead><tr><th>Dataset</th><th>TS side</th><th>EIS side</th><th>DRT status</th><th>Join keys</th><th>Score</th><th>Evidence and next step</th></tr></thead><tbody><tr><td><strong>NASA PCoE Li-ion Battery Aging</strong><br><a href="https://data.nasa.gov/dataset/li-ion-battery-aging-datasets" target="_blank" rel="noopener">Official source</a></td><td>charge_discharge_same_cell</td><td>impedance_same_cell</td><td>raw_impedance_fields_present</td><td>cell_id_cycle_temperature</td><td><strong>4/5</strong><br>Strong candidate; not final validation</td><td>34 cells; 38 MAT files with charge, discharge, and impedance; 68 candidate pairing rows<br><strong>Next:</strong> Run a held-out cell-level baseline and inspect frequency coverage before DRT fitting</td></tr>
+<tr><td><strong>CALCE Battery Research Data</strong><br><a href="https://calce.umd.edu/data" target="_blank" rel="noopener">Official source</a></td><td>capacity_and_storage_time_series</td><td>impedance_same_PLN</td><td>impedance_csvs_available</td><td>PLN_id_SOC_temperature_storage_period</td><td><strong>4/5</strong><br>Strong candidate; pulse gate blocked</td><td>282 impedance CSVs; 294 mapped capacity rows; 24 same-PLN pairing rows<br><strong>Next:</strong> Join capacity and impedance by PLN and add a controlled pulse or rest-window test</td></tr>
+<tr><td><strong>Cambridge uneven-usage EIS</strong><br><a href="https://zenodo.org/records/6645536" target="_blank" rel="noopener">Official source</a></td><td>GCPL_current_voltage_capacity</td><td>GEIS_same_cell_before_or_after_cycle</td><td>57_point_complex_impedance_candidate</td><td>cell_id_channel_sequence_temperature_folder</td><td><strong>5/5</strong><br>Best full-bridge candidate; not final validation</td><td>88 cells; 20,896 same-cell GEIS records with preceding GCPL; 57 points from about 0.021 to 9,905 Hz<br><strong>Next:</strong> Freeze a train holdout and test GP-DRT plus a simple reconstruction baseline</td></tr>
+<tr><td><strong>Battery Archive</strong><br><a href="https://batteryarchive.org/index.html" target="_blank" rel="noopener">Official source</a></td><td>cycling_and_capacity_visible</td><td>EIS not confirmed on landing page</td><td>not assessed</td><td>study_or_cell_id_to_confirm</td><td><strong>2/5</strong><br>Partial candidate; not ready for TS-EIS match</td><td>Public filtering and visual comparison are available; complete CSV access requires a request<br><strong>Next:</strong> Request one study CSV and verify whether impedance files exist for the same cells</td></tr>
+<tr><td><strong>EIS data of 54 21700 cells</strong><br><a href="https://zenodo.org/records/15422339" target="_blank" rel="noopener">Official source</a></td><td>not present in record</td><td>EIS-only; 54 cells at 30% SOC</td><td>DRT candidate if complex columns are valid</td><td>cell_id_and_SOC_only</td><td><strong>2/5</strong><br>EIS control; not a TS-EIS match</td><td>54 NMC811 21700 cells; one CSV per ID; machine-readable JSON-LD and CSVW metadata<br><strong>Next:</strong> Download five CSVs and add a time-series source before calling it a bridge dataset</td></tr></tbody></table></div>
+        </section>
+        <section class="compact-reader">
+          <div class="section-kicker">Decision</div>
+          <h2>Best next test</h2>
+          <ul>
+            <li>Use Cambridge as the first full TS + EIS holdout because the local inspection shows same-cell GCPL and GEIS records.</li>
+            <li>Use NASA and CALCE as robustness checks for different cell IDs, temperatures, storage conditions, and impedance formats.</li>
+            <li>Use the 54-cell Zenodo set as an EIS/DRT control, not as a TS-to-EIS bridge.</li>
+            <li>Do not rank Battery Archive higher until a requested CSV confirms same-cell impedance coverage.</li>
+          </ul>
+          <p class="small-note"><a href="external_dataset_screen_2026-07-23.csv">Download the screening CSV</a> · <a href="../../dataset-targets/">Open the dataset matching plan</a></p>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
