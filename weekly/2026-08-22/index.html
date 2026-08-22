@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>August Research Update 2026-08-22 | Battery DRT Research</title>
+  <meta name="description" content="August 2026 battery dataset screening and TS, EIS, and DRT work plan.">
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="professional-page">
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">X</span><span data-sidebar-label>Close</span></button>
+  <div class="site-shell">
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation">
+      <a class="brand" href="../../index.html"><strong>Battery DRT Research Outputs</strong><span>Readable research, code evidence, and weekly progress</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+      <div class="side-section">Overview</div>
+      <a class="side-link" href="../../pipeline-handoff/">Research handoff</a>
+      <a class="side-link" href="../" aria-current="page">Weekly progress</a>
+      <a class="side-link" href="../../findings/">Research findings</a>
+      <a class="side-link" href="../../dataset-targets/">Dataset targets</a>
+      <div class="side-section">Evidence</div>
+      <a class="side-link" href="../../external-validation/">External validation</a>
+      <a class="side-link" href="../../okf/">OKF knowledge bundle</a>
+      <a class="side-link" href="../../sources/">Sources and papers</a>
+    </aside>
+    <div class="page-content">
+      <header>
+        <div class="professional-hero">
+          <div class="eyebrow-row"><span class="eyebrow">August update</span><span class="eyebrow">22 August 2026</span><span class="eyebrow">Dataset screening</span></div>
+          <h1>August dataset work: a focused TS + EIS + DRT queue</h1>
+          <p class="lead">This update records a completed source-level screen and the remaining August work. A candidate is not called a matched dataset until its files prove a common cell, test, cycle, SOC, temperature, or protocol key.</p>
+          <p class="research-owner">Research workspace maintained by <strong>Nayeem Faisal</strong>.</p>
+        </div>
+      </header>
+      <main>
+        <section class="compact-reader">
+          <div class="section-kicker">Completed on 22 August</div>
+          <h2>Four sources were screened against the pipeline requirements</h2>
+          <ul>
+            <li><strong>Time-series evidence:</strong> current, voltage, time, cycling, or pulse records.</li>
+            <li><strong>EIS evidence:</strong> frequency plus real and imaginary impedance, or a documented complex-impedance representation.</li>
+            <li><strong>Join evidence:</strong> a reusable key that can link the time-series state to the EIS state.</li>
+            <li><strong>DRT readiness:</strong> raw or reconstructable impedance, units, and a recorded quality-control step.</li>
+          </ul>
+          <p class="small-note">The compact queue is available as <a href="august_dataset_queue.csv">CSV</a> for review and later ingestion.</p>
+        </section>
+
+        <section>
+          <div class="section-kicker">Priority queue</div>
+          <h2>What to test first</h2>
+          <div class="professional-grid">
+            <article class="professional-card">
+              <span class="tag green">Priority 1</span>
+              <h3>Dynamic pulse to EIS benchmark</h3>
+              <p><strong>Published structure:</strong> 16 batteries, 14 tests per battery, one EIS trajectory and five dynamic-pulse profiles per test.</p>
+              <p><strong>Why it fits:</strong> the source explicitly describes pulse profiles paired with the same EIS trajectory. This is the best immediate benchmark for the TS-to-EIS mapping component.</p>
+              <p><strong>August file check:</strong> inspect the MATLAB structure, units, cell metadata, and licence before building a small adapter.</p>
+              <a href="https://github.com/xtangai/iSCIENCE-D-23-00535" target="_blank" rel="noopener">Open source record</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag green">Priority 2</span>
+              <h3>LiPo EIS, capacity, and current-voltage data</h3>
+              <p><strong>Published structure:</strong> charge/discharge CSV files contain time, current, and voltage; EIS files are organised by cycle and SOC with frequency, Re(Z), and Im(Z).</p>
+              <p><strong>Why it fits:</strong> its naming scheme appears to expose cycle and SOC keys on both sides of the data.</p>
+              <p><strong>August file check:</strong> download a small sample, build a cycle-SOC manifest, and confirm that the EIS spectra can be reconstructed without guessing units.</p>
+              <a href="https://data.mendeley.com/datasets/stcppt2r68/1" target="_blank" rel="noopener">Open source record</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag">Priority 3</span>
+              <h3>RWTH ageing and characterisation data</h3>
+              <p><strong>Published structure:</strong> high-resolution cycling data together with pulse tests, qOCV, capacity tests, and EIS at different temperatures; processed results describe 48 aged cells.</p>
+              <p><strong>Why it fits:</strong> it has broad modality coverage and can support a more realistic ageing-oriented study.</p>
+              <p><strong>August file check:</strong> inspect the raw directory structure and determine whether test-level identifiers link cycling and EIS records.</p>
+              <a href="https://github.com/isea-rwth-aachen/battery-degradation-trajectory-prediction" target="_blank" rel="noopener">Open source record</a>
+            </article>
+            <article class="professional-card">
+              <span class="tag warn">EIS / DRT reference</span>
+              <h3>Samsung INR18650-30Q ageing spectra</h3>
+              <p><strong>Published structure:</strong> eight cells aged under four profiles with capacity-fade and EIS measurements at fixed 25-cycle check-ups.</p>
+              <p><strong>Why it matters:</strong> it is a useful EIS and DRT validation reference with SOC, SOH, OCV, and complex-impedance columns.</p>
+              <p><strong>Limit:</strong> it should not be treated as a direct TS-to-EIS mapping source until a compatible pulse or high-resolution time-series side is confirmed.</p>
+              <a href="https://data.mendeley.com/datasets/g7ncmhrcrz/2" target="_blank" rel="noopener">Open source record</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="compact-reader">
+          <div class="section-kicker">23–31 August plan</div>
+          <h2>Small, reviewable tasks for the rest of the month</h2>
+          <ul>
+            <li><strong>23–24 August:</strong> create file manifests for the pulse-to-EIS and LiPo sources; record field names, units, and join keys.</li>
+            <li><strong>25–26 August:</strong> implement one read-only adapter that converts a tiny sample into the project’s common TS and EIS table format.</li>
+            <li><strong>27 August:</strong> run an EIS quality check and a non-interpretive DRT preparation check on one spectrum; record any failure rather than smoothing it away.</li>
+            <li><strong>28–29 August:</strong> compare the adapter output with the existing NASA/CALCE structure and document incompatibilities.</li>
+            <li><strong>30–31 August:</strong> write the monthly decision note: one source selected for the next controlled experiment, others retained, deferred, or rejected with reasons.</li>
+          </ul>
+        </section>
+
+        <section class="research-panel">
+          <div class="section-kicker">Supervisor summary</div>
+          <h2>August status as of 22 August</h2>
+          <p>August work has started with a source-level screening of four public battery datasets. The pulse-to-EIS benchmark and the LiPo cycle-SOC record are the two immediate file-inspection priorities. The next result will be a reproducible manifest and adapter test, not a premature model-performance claim.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var themeKey = "battery-drt-site-theme";
+    var sidebarKey = "battery-drt-site-sidebar";
+    function setTheme(theme) { document.documentElement.dataset.theme = theme; var label = document.querySelector("[data-theme-label]"); if (label) label.textContent = theme === "dark" ? "On" : "Off"; }
+    function setSidebar(state) { document.documentElement.dataset.sidebar = state; var button = document.querySelector("[data-sidebar-toggle]"); var icon = document.querySelector("[data-sidebar-icon]"); var label = document.querySelector("[data-sidebar-label]"); var collapsed = state === "collapsed"; if (button) { button.setAttribute("aria-expanded", collapsed ? "false" : "true"); button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu"); } if (icon) icon.textContent = collapsed ? "Menu" : "X"; if (label) label.textContent = collapsed ? "Menu" : "Close"; }
+    var savedTheme; var savedSidebar; try { savedTheme = localStorage.getItem(themeKey); savedSidebar = localStorage.getItem(sidebarKey); } catch (error) {}
+    setTheme(savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light");
+    setSidebar(savedSidebar === "collapsed" || savedSidebar === "expanded" ? savedSidebar : (window.matchMedia("(max-width: 850px)").matches ? "collapsed" : "expanded"));
+    window.addEventListener("DOMContentLoaded", function () { document.querySelector("[data-theme-toggle]").addEventListener("click", function () { var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem(themeKey, next); } catch (error) {} setTheme(next); }); document.querySelector("[data-sidebar-toggle]").addEventListener("click", function () { var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed"; try { localStorage.setItem(sidebarKey, next); } catch (error) {} setSidebar(next); }); });
+  })();
+  </script>
+</body>
+</html>

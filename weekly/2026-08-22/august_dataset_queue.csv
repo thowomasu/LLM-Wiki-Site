@@ -1,0 +1,5 @@
+priority,source,modalities,join_evidence,status,next_action,source_url
+1,Dynamic pulse to EIS benchmark,"pulse current-voltage; EIS","test-level pairing stated by source",source-screened,"inspect MAT variables, units, metadata, and licence",https://github.com/xtangai/iSCIENCE-D-23-00535
+2,LiPo LP-503562-IS-3,"time-current-voltage; capacity; EIS","cycle and SOC occur in documented file structure",source-screened,"download sample and build cycle-SOC manifest",https://data.mendeley.com/datasets/stcppt2r68/1
+3,RWTH ageing and characterisation,"high-resolution cycling; pulses; qOCV; EIS","not yet verified at file level",source-screened,"inspect raw directory identifiers",https://github.com/isea-rwth-aachen/battery-degradation-trajectory-prediction
+4,Samsung INR18650-30Q ageing spectra,"EIS; SOC; SOH; OCV; capacity fade","ageing cycle and SOC fields documented",EIS-DRT-reference,"use only after confirming any compatible time-series record",https://data.mendeley.com/datasets/g7ncmhrcrz/2
