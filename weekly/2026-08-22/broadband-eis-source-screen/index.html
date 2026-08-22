@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Samsung Broadband EIS Source Screen | Battery DRT Research</title>
+  <meta name="description" content="August 2026 source screen for a Samsung ICR18650-26J voltage-current and EIS dataset.">
+  <link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body class="professional-page">
+  <button class="sidebar-floating-toggle" type="button" data-sidebar-toggle aria-controls="site-navigation" aria-expanded="true" aria-label="Close menu" title="Close menu"><span data-sidebar-icon aria-hidden="true">X</span><span data-sidebar-label>Close</span></button>
+  <div class="site-shell">
+    <aside class="sidebar" id="site-navigation" aria-label="Site navigation">
+      <a class="brand" href="../../../index.html"><strong>Battery DRT Research Outputs</strong><span>Readable research, code evidence, and weekly progress</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span>Dark mode</span><span class="toggle-state" data-theme-label>Off</span></button>
+      <div class="side-section">Overview</div>
+      <a class="side-link" href="../../../pipeline-handoff/">Research handoff</a>
+      <a class="side-link" href="../../" aria-current="page">Weekly progress</a>
+      <a class="side-link" href="../../../findings/">Research findings</a>
+      <a class="side-link" href="../../../dataset-targets/">Dataset targets</a>
+      <div class="side-section">Evidence</div>
+      <a class="side-link" href="../../../external-validation/">External validation</a>
+      <a class="side-link" href="../../../okf/">OKF knowledge bundle</a>
+      <a class="side-link" href="../../../sources/">Sources and papers</a>
+    </aside>
+    <div class="page-content">
+      <header>
+        <div class="professional-hero">
+          <div class="eyebrow-row"><span class="eyebrow">Separate source screen</span><span class="eyebrow">22 August 2026</span><span class="eyebrow">Candidate only</span></div>
+          <h1>Samsung ICR18650-26J broadband EIS record</h1>
+          <p class="lead">A controlled public record for checking whether raw voltage and current acquisition can be joined to EIS spectra at known state-of-charge points.</p>
+          <p class="research-owner">Research workspace maintained by <strong>Nayeem Faisal</strong>.</p>
+        </div>
+      </header>
+      <main>
+        <section class="compact-reader">
+          <div class="section-kicker">What the source states</div>
+          <h2>Published dataset facts</h2>
+          <ul>
+            <li><strong>Cells:</strong> four Samsung ICR18650-26J cylindrical lithium-ion cells.</li>
+            <li><strong>SOC coverage:</strong> EIS measurements at 100%, 90%, 80%, 70%, 60%, 50%, 40%, 30%, 20%, and 10% SOC.</li>
+            <li><strong>Repeats:</strong> six repeated measurements per cell and SOC point are described on the landing page.</li>
+            <li><strong>Files:</strong> raw voltage and current acquisition files are supplied in MATLAB format; the landing page points to a related dataset for computed EIS.</li>
+            <li><strong>Licence:</strong> CC BY 4.0 is listed by the publisher.</li>
+          </ul>
+          <p class="small-note">Primary record: <a href="https://data.mendeley.com/datasets/zdsgxwksn5/1" target="_blank" rel="noopener">Buchicchio et al., Mendeley Data, DOI 10.17632/zdsgxwksn5.1</a>.</p>
+        </section>
+
+        <section class="compact-reader">
+          <div class="section-kicker">Pipeline fit</div>
+          <h2>Why this is useful, and where it stops</h2>
+          <ul>
+            <li><strong>Useful for:</strong> checking a small adapter from raw voltage/current acquisition to a known SOC and EIS state.</li>
+            <li><strong>Useful for:</strong> testing repeatability across cells and repeated measurements before a DRT workflow is applied.</li>
+            <li><strong>Not yet suitable for:</strong> proving a long-term ageing, capacity-fade, or general cycling time-series to EIS mapping.</li>
+            <li><strong>Reason:</strong> the published description centres on EIS acquisition at fixed SOC points, not on a full run-to-failure cycling experiment.</li>
+            <li><strong>Decision:</strong> retain as a controlled TS/EIS alignment candidate and EIS/DRT quality-control reference.</li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="section-kicker">Acceptance gate</div>
+          <h2>Checks required before importing data</h2>
+          <div class="professional-grid">
+            <article class="professional-card">
+              <h3>1. Verify the join</h3>
+              <p>Confirm that the raw acquisition and computed EIS files share a cell identifier, SOC value, repeat number, and measurement timestamp or unambiguous filename key.</p>
+            </article>
+            <article class="professional-card">
+              <h3>2. Verify impedance fields</h3>
+              <p>Confirm frequency, real impedance, imaginary impedance, sign convention, and units. Do not infer missing columns from a plot.</p>
+            </article>
+            <article class="professional-card">
+              <h3>3. Keep a raw manifest</h3>
+              <p>Record source URL, file name, checksum if available, cell, SOC, repeat, protocol notes, and licence before transformation.</p>
+            </article>
+            <article class="professional-card">
+              <h3>4. Run quality controls</h3>
+              <p>Check duplicate spectra, frequency ordering, plausible impedance signs, and reconstruction residuals before any DRT comparison.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="research-panel">
+          <div class="section-kicker">Next small experiment</div>
+          <h2>One cell, two SOC points, one transparent result</h2>
+          <p>Download the smallest usable subset after reviewing the publisher's files. Create a read-only manifest, reconstruct two spectra from their stored values, and report whether the file-level join works. A failed join is a useful research result and should be recorded rather than repaired by assumption.</p>
+          <p class="small-note"><a href="../">Back to the August dataset queue</a> · <a href="../../">Back to weekly updates</a></p>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var themeKey = "battery-drt-site-theme";
+    var sidebarKey = "battery-drt-site-sidebar";
+    function setTheme(theme) { document.documentElement.dataset.theme = theme; var label = document.querySelector("[data-theme-label]"); if (label) label.textContent = theme === "dark" ? "On" : "Off"; }
+    function setSidebar(state) { document.documentElement.dataset.sidebar = state; var button = document.querySelector("[data-sidebar-toggle]"); var icon = document.querySelector("[data-sidebar-icon]"); var label = document.querySelector("[data-sidebar-label]"); var collapsed = state === "collapsed"; if (button) { button.setAttribute("aria-expanded", collapsed ? "false" : "true"); button.setAttribute("aria-label", collapsed ? "Open menu" : "Close menu"); } if (icon) icon.textContent = collapsed ? "Menu" : "X"; if (label) label.textContent = collapsed ? "Menu" : "Close"; }
+    var savedTheme; var savedSidebar; try { savedTheme = localStorage.getItem(themeKey); savedSidebar = localStorage.getItem(sidebarKey); } catch (error) {}
+    setTheme(savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light");
+    setSidebar(savedSidebar === "collapsed" || savedSidebar === "expanded" ? savedSidebar : (window.matchMedia("(max-width: 850px)").matches ? "collapsed" : "expanded"));
+    window.addEventListener("DOMContentLoaded", function () { document.querySelector("[data-theme-toggle]").addEventListener("click", function () { var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem(themeKey, next); } catch (error) {} setTheme(next); }); document.querySelector("[data-sidebar-toggle]").addEventListener("click", function () { var next = document.documentElement.dataset.sidebar === "collapsed" ? "expanded" : "collapsed"; try { localStorage.setItem(sidebarKey, next); } catch (error) {} setSidebar(next); }); });
+  })();
+  </script>
+</body>
+</html>
